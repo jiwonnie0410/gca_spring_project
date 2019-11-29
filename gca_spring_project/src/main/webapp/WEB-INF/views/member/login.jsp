@@ -69,10 +69,6 @@
 			width: 165px;
 		}
 		
-		body {
-			background-image:url('${pageContext.request.contextPath }/images/#.jpg');
-		}
-		
 	</style>
 </head>
 <body>
