@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardDAO">
+
+	<!-- 전체 조회 -->
+	<select id="getBoardList" resultType="board">
+			SELECT 	seq,
+					title, 
+					writer, 
+					content, 
+					reqdate, 
+					cnt
+			FROM bord
+			ORDER BY seq DESC
+	</select>
+
+	<!-- 삭제 -->
+	<delete id="deleteBoard" parameterType="board">
+			DELETE bord
+			WHERE seq = #{seq}
+	</delete>
+	
+	<!-- 등록 -->
+	<insert id="insertBoard">
+		<!-- sql문 두번 쓰고 싶을 때: 얘를 써서 vo의 seq에다가 담아서 밑의 sql문 실행함 -->
+		<selectKey order="BEFORE" resultType="int" keyProperty="seq">
+				SELECT NVL(MAX(seq), 0)+1 FROM bord
+		</selectKey>
+		
+			INSERT INTO bord( 	seq, 
+								title, 
+								writer, 
+								content, 
+								reqdate, 
+								cnt
+							) 
+					VALUES (	#{seq},
+								#{title}, 
+								#{writer}, 
+								#{content}, 
+								sysdate, 
+								0
+							)
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="updateBoard" parameterType="board"> <!-- parameterType 생략 가능, 그래서 위에 insert에는 생략해봐씀 -->
+			UPDATE bord 
+			SET 	title = #{title}
+					content = #{content}
+			WHERE seq = #{seq}
+	</update>
+	
+	<!-- 단건조회 -->
+	<select id="getBoard" parameterType="board" resultType="board">
+			SELECT 	seq,
+					title, 
+					writer, 
+					content, 
+					reqdate, 
+					cnt
+			FROM bord
+			WHERE seq = #{seq}
+	</select>
+
+</mapper>

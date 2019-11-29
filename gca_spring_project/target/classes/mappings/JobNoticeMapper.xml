@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="JobDAO">
+
+<!-- 등록 -->
+<insert id="insertJobNotice">
+	INSERT INTO JOB_NOTICE (	
+						NOTICE_DATE,
+						NOTICE_IDEN,
+						NOTICE_STATE,
+						PERSON,
+						QUALI_FIELD,
+						LANGUAGE_CODE,
+						CONTENTS,
+						MANAGER,
+						APPLY_DATE,
+						MAGAN_DATE  )
+			VALUES ( 	#{noticeDate},
+						#{noticeIden},
+						#{noticeState},
+						#{person},
+						#{qualiField},
+						#{languageCode},
+						#{contents},
+						#{manager},
+						#{applyDate},
+						#{maganDate}
+				)
+				
+</insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
