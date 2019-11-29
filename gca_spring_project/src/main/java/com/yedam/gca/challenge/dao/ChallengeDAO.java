@@ -9,11 +9,12 @@ import org.springframework.stereotype.Repository;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 
 @Repository
-public class ChallengeDAO {
+public class ChallengeDAO implements ChallengeService {
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
 	//챌린지 전체조회  (사용자별 챌린지 참가여부확인)
+	@Override
 	public List<ChallengeVO> getChallengeList() {
 		return mybatis.selectList("challengeDAO.getChallengeList");
 	}

@@ -1,10 +1,12 @@
 package com.yedam.gca.challenge.service;
 
+import java.util.List;
+
+import com.yedam.gca.challenge.vo.ChallengeVO;
+
 public interface ChallengeService {
-	
-	//기본챌린지조회 - 본인 참가여부확인
-	//스페셜챌린지조회 - 본인참가여부확인
-	
-	//챌린지참가 - 사용자가 참가중이 아닐때만 참여가능
+
+	//챌린지 전체조회  (사용자별 챌린지 참가여부확인)
+	List<ChallengeVO> getChallengeList();
 
 }
