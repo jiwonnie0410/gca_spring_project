@@ -15,5 +15,7 @@ public class AdBoardVO {
 	private Date ad_date;				// 작성 일자
 	private int ad_count;				// 조회수
 	private int ad_origin;				// 부모글
+	private int recnt;			// 게시글 댓글의 수 
+	private String writer;  //m_id를 writer에 저장
 	
 }
