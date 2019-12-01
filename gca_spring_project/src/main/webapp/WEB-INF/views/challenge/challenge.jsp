@@ -27,7 +27,7 @@
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900"
 	rel="stylesheet">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/css/open-iconic-bootstrap.min.css">
+	href="${pageContext.request.contextPath }/resources/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/css/animate.css">
 <link rel="stylesheet"
