@@ -29,27 +29,27 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/css/animate.css">
+	href="${pageContext.request.contextPath }/resources/css/animate.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/css/owl.carousel.min.css">
+	href="${pageContext.request.contextPath }/resources/css/owl.carousel.min.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/css/owl.theme.default.min.css">
+	href="${pageContext.request.contextPath }/resources/css/owl.theme.default.min.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/css/magnific-popup.css">
+	href="${pageContext.request.contextPath }/resources/css/magnific-popup.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/css/aos.css">
+	href="${pageContext.request.contextPath }/resources/css/aos.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/css/ionicons.min.css"> 
+	href="${pageContext.request.contextPath }/resources/css/ionicons.min.css"> 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/css/flaticon.css"> 
+	href="${pageContext.request.contextPath }/resources/css/flaticon.css"> 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/css/icomoon.css">
+	href="${pageContext.request.contextPath }/resources/css/icomoon.css">
 	
 <!-- 개인설정 -->	
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/css/surim/joinButton.css"> 
+	href="${pageContext.request.contextPath }/resources/css/surim/joinButton.css"> 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/css/surim/challengeStyle.css">
+	href="${pageContext.request.contextPath }/resources/css/surim/challengeStyle.css">
 
 </head>
 
@@ -85,7 +85,7 @@
 							<div class="tab-pane fade show active" id="v-pills-8"
 								role="tabpanel" aria-labelledby="day-8-tab">
 								<div class="coach-wrap ftco-animate d-sm-flex">
-								   <img src="${pageContext.request.contextPath }/images/cycling1.jpg" width="100%" height="50">
+								   <img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg" width="100%" height="50">
 									<div class="text pl-md-5">
 										<h6>12월 15일(일) ~ 23일(토) 총7일</h6>
 										<h6>자전거관련 반짝 3번 참여하기</h6>
@@ -102,7 +102,7 @@
 							<div class="tab-pane fade" id="v-pills-9" role="tabpanel"
 								aria-labelledby="v-pills-day-9-tab">
 								<div class="coach-wrap ftco-animate d-sm-flex">
-									<img src="${pageContext.request.contextPath }/images/image_2.jpg" width="100%" height="50">
+									<img src="${pageContext.request.contextPath }/resources/images/image_2.jpg" width="100%" height="50">
 									<div class="text pl-md-5">
 										<h6>12월 25일(수)</h6>
 											<h6>크리스마스에 홈트레이닝하기</h6>
@@ -214,28 +214,28 @@
 
 	<!-- loader -->
 	<script
-		src="${pageContext.request.contextPath }/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="${pageContext.request.contextPath }/js/popper.min.js"></script>
-	<script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
+		src="${pageContext.request.contextPath }/resources/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/popper.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
 	<script
-		src="${pageContext.request.contextPath }/js/jquery.easing.1.3.js"></script>
+		src="${pageContext.request.contextPath }/resources/js/jquery.easing.1.3.js"></script>
 	<script
-		src="${pageContext.request.contextPath }/js/jquery.waypoints.min.js"></script>
+		src="${pageContext.request.contextPath }/resources/js/jquery.waypoints.min.js"></script>
 	<script
-		src="${pageContext.request.contextPath }/js/jquery.stellar.min.js"></script>
+		src="${pageContext.request.contextPath }/resources/js/jquery.stellar.min.js"></script>
 	<script
-		src="${pageContext.request.contextPath }/js/owl.carousel.min.js"></script>
+		src="${pageContext.request.contextPath }/resources/js/owl.carousel.min.js"></script>
 	<script
-		src="${pageContext.request.contextPath }/js/jquery.magnific-popup.min.js"></script>
-	<script src="${pageContext.request.contextPath }/js/aos.js"></script>
+		src="${pageContext.request.contextPath }/resources/js/jquery.magnific-popup.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/aos.js"></script>
 	<script
-		src="${pageContext.request.contextPath }/js/jquery.animateNumber.min.js"></script>
-	<script src="${pageContext.request.contextPath }/js/scrollax.min.js"></script>
-	<script src="${pageContext.request.contextPath }/js/main.js"></script>
-	<script src="${pageContext.request.contextPath }/js/main.js"></script>
+		src="${pageContext.request.contextPath }/resources/js/jquery.animateNumber.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/scrollax.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
 
 	<!-- 참가버튼 클릭시 모달뜨게함 -->
-	<script src="${pageContext.request.contextPath }/js/surim/challenge.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/surim/challenge.js"></script>
 
 
 </body>

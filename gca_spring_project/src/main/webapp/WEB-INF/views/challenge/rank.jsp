@@ -61,31 +61,31 @@ img {
 	  <tbody>
 	    <tr>
 	      <th scope="row">1</th>
-	      <td width="60px"> <img src="${pageContext.request.contextPath }/images/cycling1.jpg"> </td>
+	      <td width="60px"> <img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg"> </td>
 	      <td>헬스왕</td>
 	      <td>25000</td>
 	    </tr>
 	    <tr>
 	      <th scope="row">2</th>
-	      <td width="60px"> <img src="${pageContext.request.contextPath }/images/cycling1.jpg"> </td>
+	      <td width="60px"> <img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg"> </td>
 	      <td>오리사</td>
 	      <td>23420</td>
 	    </tr>
 	    <tr>
 	      <th scope="row">3</th>
-	      <td width="60px"> <img src="${pageContext.request.contextPath }/images/cycling1.jpg"> </td>
+	      <td width="60px"> <img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg"> </td>
 	      <td>메르시</td>
 	      <td>22000</td>
 	    </tr>
 	    <tr>
 	      <th scope="row">4</th>
-	      <td width="60px"> <img src="${pageContext.request.contextPath }/images/cycling1.jpg"> </td>
+	      <td width="60px"> <img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg"> </td>
 	      <td>아나</td>
 	      <td>21000</td>
 	    </tr>
 	    <tr>
 	      <th scope="row">5</th>
-	      <td width="60px"> <img src="${pageContext.request.contextPath }/images/cycling1.jpg"> </td>
+	      <td width="60px"> <img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg"> </td>
 	      <td>윈스턴</td>
 	      <td>20200</td>
 	    </tr>
@@ -94,7 +94,7 @@ img {
 <hr>
 	<div class="myRank" style="text-align:center">
 		<h1>나의 랭킹</h1>
-		<img src="${pageContext.request.contextPath }/images/cycling1.jpg">둠피스트 / 2000점 / 순위권외
+		<img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg">둠피스트 / 2000점 / 순위권외
 	</div>
 
 

@@ -10,16 +10,16 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	
 <!-- 달력(fullcalendar) css/js파일 -->
-<link href='${pageContext.request.contextPath }/fullcalendar/core/main.css' rel='stylesheet' />
-<link href='${pageContext.request.contextPath }/fullcalendar/daygrid/main.css' rel='stylesheet'/>
+<link href='${pageContext.request.contextPath }/resources/fullcalendar/core/main.css' rel='stylesheet' />
+<link href='${pageContext.request.contextPath }/resources/fullcalendar/daygrid/main.css' rel='stylesheet'/>
 
-<script src='${pageContext.request.contextPath }/fullcalendar/core/main.js'></script>
-<script src='${pageContext.request.contextPath }/fullcalendar/daygrid/main.js'></script>
-<script src='${pageContext.request.contextPath }/fullcalendar/interaction/main.js'></script>
-<script src='${pageContext.request.contextPath }/fullcalendar/core/locales/ko.js'></script>
+<script src='${pageContext.request.contextPath }/resources/resources/fullcalendar/core/main.js'></script>
+<script src='${pageContext.request.contextPath }/resources/fullcalendar/daygrid/main.js'></script>
+<script src='${pageContext.request.contextPath }/resources/fullcalendar/interaction/main.js'></script>
+<script src='${pageContext.request.contextPath }/resources/fullcalendar/core/locales/ko.js'></script>
 
 
-<script src='${pageContext.request.contextPath }/js/surim/all_history.js'></script>
+<script src='${pageContext.request.contextPath }/resources/js/surim/all_history.js'></script>
 
 
 <!-- 모달 링크용 modal -->
