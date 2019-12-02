@@ -2,10 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="s_groupDAO">
-	<!-- 방정보 전체조회 -->
-	<!-- <select id="getSgroupInfo" resultType="com.yedam.gca.group_s.vo.SGroupVO">
-		SELECT *
+<mapper namespace="SGroupDAO">
+
+<!-- 은영 -->
+
+	<!-- 방정보 한건 조회 -->
+	<select id="getRoomInfo" resultType="com.yedam.gca.group_s.vo.SGroupVO">
+		SELECT		
 		FROM 
-	</select> -->
+	</select>
+	
+	
+	
+	
+	
+	
+	
+<!-- 미현 -->
+
+
+
+
+
 </mapper>
