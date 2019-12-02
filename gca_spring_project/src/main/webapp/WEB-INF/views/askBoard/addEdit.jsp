@@ -63,8 +63,7 @@
         <input type="hidden" id="board_id" name="board_id" value="${boardView.id}" />
         <div align="center">
         <h1>홍보게시판 작성</h1>
-            </br>
-            </br>
+           <form name="form1" id="form1" method="post" action="${path}/board/insert.do">
             <div class=”table-responsive“>
             <table class="table" style="padding-left: 10%; padding-right: 10%">
                 <tr>
@@ -82,10 +81,10 @@
                 </div>
                 <div align="center">
                     
-                     <button class="btn btn-primary px-5 py-3" id="save" name="save">저장</button>
+                     <button class="btn btn-primary px-5 py-3" id="btnSave" name="btnSave">저장</button>
                         <button class="btn btn-primary px-5 py-3" id="list" name="list">게시판</button>
                   </div>  
-                
+                </form>
             
 
         </div>

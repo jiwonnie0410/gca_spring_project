@@ -11,11 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yedam.gca.board.service.BoardPager;
@@ -24,7 +22,7 @@ import com.yedam.gca.board.service.ReplyService;
 import com.yedam.gca.board.vo.AdBoardVO;
 
 @Controller	// 현재 클래스를 컨트롤러 빈(bean)으로 등록
-@RequestMapping("/board/*")
+@RequestMapping("/board/")
 public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
@@ -32,6 +30,7 @@ public class BoardController {
 	// IoC 의존관계 역전
 	@Inject
 	BoardService boardService;
+
 	@Inject
 	ReplyService replyService;
 	

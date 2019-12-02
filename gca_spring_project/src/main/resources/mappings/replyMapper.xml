@@ -16,11 +16,11 @@
 							#{ad_number}, 
 							#{adr_contents}, 
 							#{m_id}, 
-							#{adr_hidden})
+							#{adr_hidden})    
 	</insert>
 	
 	<!-- 2. 댓글 목록 -->
-	<select id="listReply" resultType="com.example.spring02.model.board.dto.ReplyVO">
+	<select id="listReply" resultType="com.yedam.gca.board.vo.ReplyVO">
 		<include refid="pagingHeader"/>
 			<!-- SELECT ADR_NUMBER, AD_NUMBER, ADR_CONTENTS, M_ID, user_name AS userName, r.ADR_REGDATE, r.updatedate
 			FROM AD_REPLY r, MEMBERS m
@@ -57,7 +57,7 @@
 	</select>
 	
 	<!-- 3. 댓글 상세보기 -->
-	<select id="detailReply" resultType="com.example.spring02.model.board.dto.ReplyVO">
+	<select id="detailReply" resultType="com.yedam.gca.board.vo.ReplyVO">
 		SELECT ADR_NUMBER, 
 			AD_NUMBER, 
 			ADR_CONTENTS,
