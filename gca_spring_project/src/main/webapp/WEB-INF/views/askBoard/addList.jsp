@@ -19,6 +19,27 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/style.css">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script>
+	$(document)
+			.ready(
+					function() {
+						$("#btnWrite")
+								.click(
+										function() {
+											// 페이지 주소 변경(이동)
+											location.href = "${pageContext.request.contextPath}/board/write.do";
+										});
+					});
+	// 원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
+	function list(page) {
+		location.href = "${pageContext.request.contextPath}/board/list.do?curPage="
+				+ page
+				+ "&searchOption-${map.searchOption}"
+				+ "&keyword=${map.keyword}";
+	}
+</script>
+
+
    <style>
     table{
      table-layout:fixed;
@@ -34,7 +55,7 @@
     
     <body>
         <!-- <form class="form-inline" id="frmSearch" action="/board/list"> -->
-        <form  id="frmSearch" action="/board/list">
+        <form class="form-inline" id="frmSearch" method="post" action="${pageContext.request.contextPath}/board/list.do">
             <div align="center">
               <div class="jumbotron">
 				<h2>홍보</h2>
@@ -42,41 +63,126 @@
 			 </div>
 			
 				<div align="center" style="padding-right:3%;padding-left:3%;">
-				 <div align="right"> 
-					<button class="btn btn-primary px-4 py-3" type="button" onclick="location.href='addEdit.jsp' ">Write</button><!-- data-target="#myModal" -->
-				</div>
+				 <!-- 로그인한 사용자만 글쓰기 버튼을 활성화 -->
+		<c:if test="${sessionScope.userId != null}">
+			<div align="right">
+				<button type="button" id="btnWrite" name="write"
+					class="btn btn-primary px-4 py-3" style="margin-right: 10%">Write</button>
+				<!-- data-target="#myModal" -->
+			</div>
+		</c:if>
 				<br>
-				<div class=”table-responsive“>
-                <table class="table" >
-                	<thead>
-	                   <tr>
-							<th ><center>#</center></th>
-							<th ><center>ID</center></th>
-							<th ><center>Title</center></th>
-					 </tr>
-			       </thead>	
-			      <%--  <tbody>		
-			       		 <c:choose>
-                        <c:when test="${fn:length(boardList) == 0}"> 
-                            <tr>
-                                <td colspan="4" align="center">
-                                    	조회결과가 없습니다.
-                                </td>
-                            </tr>
-                     -  </c:when>
-                        <c:otherwise>
-                            <c:forEach var="boardList" items="${boardList}" varStatus="status">  --%>
-                                <tr>
-                                    <td align="center">1</td>
-                                    <td align="center">진뇽</td>
-                                    <td class="autocut" >진뇽이다</td>
-                                </tr>
-                </table>
-                </div>
-                </div>
-                <br>
-            </div>
-        </form>
+			<select name="searchOption">
+			<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
+			<option value="all"
+				<c:out value="${map.searchOption == 'all'?'selected':''}"/>>제목+이름+제목</option>
+			<option value="user_name"
+				<c:out value="${map.searchOption == 'user_name'?'selected':''}"/>>이름</option>
+			<option value="content"
+				<c:out value="${map.searchOption == 'content'?'selected':''}"/>>내용</option>
+			<option value="title"
+				<c:out value="${map.searchOption == 'title'?'selected':''}"/>>제목</option>
+		</select> <input name="keyword" value="${map.keyword}"> <input
+			type="submit" value="조회">
+		
+	</form>
+	<!-- 레코드의 갯수를 출력 -->
+	<table class="table table-hover results" border="1">
+		<thead>
+			<tr>
+				<th width="30"><center>번호</center></th>
+				<th><center>이름</center></th>
+				<th><center>제목</center></th>
+				<th ><center>내용</center></th>
+				<th><center>조회수</center></th>
+			</tr>
+		</thead>
+		<tbody>
+		<!-- db 목록을 가져와서 뿌려주는 곳 -->
+		<c:forEach var="row" items="${map.list}">
+			<c:choose>
+				<c:when test="${fn:length(map.list) == 0}">
+					<tr>
+						<td colspan="3" align="center">조회결과가 없습니다.</td>
+					</tr>
+				</c:when>
+				<c:when test="${row.show == 'y'}">
+					<!-- show 컬럼이 y일때(삭제X 글) -->
+					<tr>
+						<td align="center"  width="10" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;" align="center">${row.bno}</td>
+						<!-- 게시글 상세보기 페이지로 이동시 게시글 목록페이지에 있는 검색조건, 키워드, 현재페이지 값을 유지하기 위해 -->
+						
+						<td align="center" width="10" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;" align="center">
+						<a href="${pageContext.request.contextPath}/board/view.do?bno=${row.bno}&curPage=${map.boardPager.curPage}&searchOption=${map.searchOption}&keyword=${map.keyword}">${row.title}
+								<!-- ** 댓글이 있으면 게시글 이름 옆에 출력하기 --> 
+								<c:if test="${row.recnt > 0}">
+									<span style="color: red;">(${row.recnt}) </span>
+								</c:if>
+						</a></td>
+						
+						<td align="center">${row.userName}</td>
+						
+						<td class="autocut" width="10" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;" align="center">${row.content}
+							
+							<%-- <!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 --> 
+							<fmt:formatDate value ="${row.regdate}" pattern="yyyy-MM-dd" /> --%>
+						</td>
+						
+						<td width="10" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;" align="center">${row.viewcnt}</td>
+					</tr>
+				</c:when>
+				<c:otherwise>
+					<!-- show 컬럼이 n일때(삭제된 글) -->
+					<tr>
+						<td colspan="5" align="left">
+						<c:if test="${row.recnt > 0}">
+								<a href="${pageContext.request.contextPath}/board/view.do?bno=${row.bno}&curPage=${map.boardPager.curPage}&searchOption=${map.searchOption}&keyword=${map.keyword}">
+								삭제된게시물입니다. 
+								<!-- ** 댓글이 있으면 게시글 이름 옆에 출력하기 --> 
+								<span style="color: red;">(${row.recnt}) </span>
+								</a>
+						</c:if> 
+						<c:if test="${row.recnt == 0 }">
+									삭제된 게시물입니다.
+						</c:if></td>
+					</tr>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+
+		<!-- 페이징 -->
+		<tr>
+			<td colspan="5">
+				<!-- 처음페이지로 이동 : 현재 페이지가 1보다 크면  [처음]하이퍼링크를 화면에 출력--> 
+				<c:if test="${map.boardPager.curBlock > 1}">
+					<a href="javascript:list('1')">[처음]</a>
+				</c:if> 
+				<!-- 이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 --> 
+				<c:if test="${map.boardPager.curBlock > 1}">
+					<a href="javascript:list('${map.boardPager.prevPage}')">[이전]</a>
+				</c:if>  
+				<!-- **하나의 블럭 시작페이지부터 끝페이지까지 반복문 실행 --> 
+				<c:forEach var="num" begin="${map.boardPager.blockBegin}" end="${map.boardPager.blockEnd}">
+					<!-- 현재페이지이면 하이퍼링크 제거 -->
+					<c:choose>
+						<c:when test="${num == map.boardPager.curPage}">
+							<span style="color: red">${num}</span>&nbsp;
+						</c:when>
+						<c:otherwise>
+							<a href="javascript:list('${num}')">${num}</a>&nbsp;
+						</c:otherwise>
+					</c:choose>
+				</c:forEach> <!-- 다음페이지 블록으로 이동 : 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 [다음]하이퍼링크를 화면에 출력 -->
+				<c:if test="${map.boardPager.curBlock <= map.boardPager.totBlock}">
+					<a href="javascript:list('${map.boardPager.nextPage}')">[다음]</a>
+				</c:if> <!-- 끝페이지로 이동 : 현재 페이지가 전체 페이지보다 작거나 같으면 [끝]하이퍼링크를 화면에 출력 --> <c:if
+					test="${map.boardPager.curPage <= map.boardPager.totPage}">
+					<a href="javascript:list('${map.boardPager.totPage}')">[끝]</a>
+				</c:if>
+			</td>
+		</tr>
+		<!-- 페이징 -->
+	</table>
         
    <!-- Modal -->
   	<div class="modal fade" id="myModal" role="dialog" >
