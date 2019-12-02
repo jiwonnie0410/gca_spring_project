@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="ChallengeDAO">
+	<select id="getChallengeList" resultType="challenge">
+		SELECT	CL_NUMBER,
+				CL_STATUS,
+				CL_NAME,
+				CL_CONTENTS,
+				CL_SPORTS,
+				CL_COUNT,
+				CL_END,
+				CL_SCORE
+		FROM	CHALLENGE
+	</select>
+
+</mapper>
