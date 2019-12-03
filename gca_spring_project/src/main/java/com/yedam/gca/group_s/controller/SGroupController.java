@@ -12,8 +12,14 @@ public class SGroupController {
 	@Autowired
 	SGroupService service;
 	
+	
+	//은영
 	@RequestMapping("/group_s/getRoomInfo")
 	public String getRoomInfo() {
 		return "group_s/getRoomInfo";
 	}
+	
+	
+	//미현
+	
 }

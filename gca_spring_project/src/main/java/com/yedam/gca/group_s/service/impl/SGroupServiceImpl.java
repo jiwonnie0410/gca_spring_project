@@ -13,9 +13,13 @@ public class SGroupServiceImpl implements SGroupService {
 	@Autowired
 	SGroupDAO sgroupDAO;
 
+	
+	//은영
 	@Override
 	public SGroupVO getRoomInfo(SGroupVO vo) {
 		return null;
 	}
+	
+	//미현
 
 }

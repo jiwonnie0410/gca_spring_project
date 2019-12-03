@@ -12,7 +12,12 @@ public class SGroupDAO {
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
+	//은영	
 	public SGroupVO getRoomInfo(SGroupVO vo) {
 		return mybatis.selectOne("SGroupDAO.getRoomInfo", vo);
 	}
+	
+	
+	//미현
+	
 }
