@@ -23,6 +23,6 @@ public class SGroupController {
 		return "group_s/s_wating_room";
 	}
 	
-	//미현
+	//미현asdf
 	
 }
