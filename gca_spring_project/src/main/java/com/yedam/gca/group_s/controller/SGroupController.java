@@ -19,7 +19,7 @@ public class SGroupController {
 	@RequestMapping("/group_s/getRoomInfo")
 	public String getRoomInfo(Model model, SGroupVO vo) {
 		model.addAttribute("sgroup", service.getRoomInfo(vo));
-		System.out.println(service.getRoomInfo(vo));
+		System.out.println(model);
 		return "group_s/s_wating_room";
 	}
 	
