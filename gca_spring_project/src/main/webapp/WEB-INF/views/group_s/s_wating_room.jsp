@@ -94,6 +94,20 @@
 <script>
 		$(function() { //이 문장이 페이지 로딩 완료 후 실행?
 			
+			//마감날짜 -> 일, 월 만 뽑아내기
+			var strArray = $("#endDate").html().split('-'); //년, 월, 일 순의 배열
+			var endMonth = strArray[1];
+			var endDay = strArray[2];
+			var endDate = (endMonth.concat("/")).concat(endDay);
+			
+			//var endDate = ${sgroup.sg_end_dttm }; 이건 2020 - 01 - 02 빼기로 인식해서 2017로 나옴..
+			
+			console.log(endDate);
+			
+			$("#endDate").html(endDate); //${sgroup.sg_end_dttm } 였던 값을 endDate로 덮어씌움
+			//더좋은방법 찾아보기!!!!!! 2020-01-02 수식으로 나오는 값을 문자로 바꾸는 법 알아보고 처음부터 그 값으로 씌우기..
+			
+				
 			//신고모달에서 신고하기 버튼 눌렀을 때
 			$("body").on("click", "[id^=doReport]", function() {
 
@@ -142,8 +156,8 @@
     
 	<!-- 방제 -->
     	<div style="background-color: #FE9191; text-align: left; padding-left:20px; color: #fff;"> 
-      		<span id="date">${sgroup.sg_end_dttm }</span>
-      		<span id="place">${sgroup.sg_location }</span>
+      		<span id="endDate">${sgroup.sg_end_dttm }</span>
+      		<span id="place">${sgroup.sg_name }</span>
       		<span id="endTime">${sgroup.sg_end_dttm }</span>
       		<span style="padding-left:78%"><button data-toggle="modal" data-target="#room-info"
       					style="background-color:#FFC0C0;" class="button-general">방 정보</button></span>

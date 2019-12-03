@@ -1,5 +1,7 @@
 package com.yedam.gca.group_s.service.impl;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +12,7 @@ import com.yedam.gca.group_s.vo.SGroupVO;
 @Service("sGroupService")
 public class SGroupServiceImpl implements SGroupService {
 	
-	@Autowired
+	@Resource
 	SGroupDAO sgroupDAO;
 
 	
