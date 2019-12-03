@@ -11,17 +11,18 @@
 		<typeAlias type="com.yedam.gca.board.vo.AdBoardVO" alias="adboard" />
 		<typeAlias type="com.yedam.gca.board.vo.QnaBoardVO" alias="qnaboard" />
 		<typeAlias type="com.yedam.gca.challenge.vo.ChallengeVO" alias="challenge" />
-		<typeAlias type="com.yedam.gca.chatting.vo.ChatHistoryVO" alias="chathistory" />
-		<typeAlias type="com.yedam.gca.chatting.vo.ChatRoomVO" alias="chatroom" />
+		<typeAlias type="com.yedam.gca.chatting.vo.ChatHistVO" alias="chathistory" />
+		<typeAlias type="com.yedam.gca.chatting.vo.ChatVO" alias="chatroom" />
 		<typeAlias type="com.yedam.gca.group_b.vo.BGroupVO" alias="bgroup" />
 		<typeAlias type="com.yedam.gca.group_s.vo.SGroupVO" alias="sgroup" />
 		<typeAlias type="com.yedam.gca.group_six.vo.SixmanVO" alias="sixman" />
-		<typeAlias type="com.yedam.gca.history.vo.AllHistoryVO" alias="allhistory" />
-		<typeAlias type="com.yedam.gca.history.vo.ChallengeHistoryVO" alias="challengehistory" />
-		<typeAlias type="com.yedam.gca.history.vo.ScoreHistoryVO" alias="scorehistory" />
-		<typeAlias type="com.yedam.gca.history.vo.SixmanHistoryVO" alias="sixmanhistory" />
-		<typeAlias type="com.yedam.gca.member.vo.LevelsVO" alias="levels" />
+		<typeAlias type="com.yedam.gca.history.vo.ActiveHistVO" alias="allhistory" />
+		<typeAlias type="com.yedam.gca.history.vo.ChallengeHistVO" alias="challengehistory" />
+		<typeAlias type="com.yedam.gca.history.vo.ScoreHistVO" alias="scorehistory" />
+		<typeAlias type="com.yedam.gca.history.vo.SixmanHistVO" alias="sixmanhistory" />
 		<typeAlias type="com.yedam.gca.member.vo.MembersVO" alias="members" />
+		<typeAlias type="com.yedam.gca.member.vo.CodeVO" alias="code" />
+		<typeAlias type="com.yedam.gca.member.vo.AdReplyVO" alias="adreply" />
 	</typeAliases>
 
 </configuration>
