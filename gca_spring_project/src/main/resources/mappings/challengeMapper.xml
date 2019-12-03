@@ -3,15 +3,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ChallengeDAO" >
 	<select id="getChallengeList" resultType="challenge">
-		SELECT	CL_NUMBER,
+		SELECT	CL_NUM,
 				CL_STATUS,
 				CL_NAME,
-				CL_CONTENTS,
-				CL_SPORTS,
-				CL_COUNT,
-				CL_END,
+				CL_CONTENT,
+				SPORTS1_CD,
+				CL_CNT,
+				CL_START_DTTM,
+				CL_END_DTTM,
 				CL_SCORE
 		FROM	CHALLENGE
+		ORDER BY CL_END_DTTM 
 	</select>
 
 </mapper>
