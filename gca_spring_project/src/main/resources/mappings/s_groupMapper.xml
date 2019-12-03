@@ -7,10 +7,11 @@
 <!-- 은영 -->
 
 	<!-- 방정보 한건 조회 -->
-	<!-- <select id="getRoomInfo" resultType="">
-		SELECT		
-		FROM 
-	</select> -->
+	<select id="getRoomInfo" resultType="sgroup">
+		SELECT		*
+		FROM 		SGROUP
+		WHERE		SG_NUM = 1001
+	</select>
 	
 	
 	
