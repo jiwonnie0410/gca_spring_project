@@ -75,11 +75,11 @@
 			<select name="searchOption">
 			<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
 			<option value="all"
-				<c:out value="${map.searchOption == 'all'?'selected':''}"/>>제목+이름+제목</option>
-			<option value="user_name"
-				<c:out value="${map.searchOption == 'user_name'?'selected':''}"/>>이름</option>
-			<option value="content"
-				<c:out value="${map.searchOption == 'content'?'selected':''}"/>>내용</option>
+				<c:out value="${map.searchOption == 'all'?'selected':''}"/>>제목+아이디+제목</option>
+			<option value="m_id"
+				<c:out value="${map.searchOption == 'm_id'?'selected':''}"/>>아이디</option>
+			<option value="ad_contents"
+				<c:out value="${map.searchOption == 'ad_contents'?'selected':''}"/>>내용</option>
 			<option value="title"
 				<c:out value="${map.searchOption == 'title'?'selected':''}"/>>제목</option>
 		</select> <input name="keyword" value="${map.keyword}"> <input
@@ -106,23 +106,23 @@
 						<td colspan="3" align="center">조회결과가 없습니다.</td>
 					</tr>
 				</c:when>
-				<c:when test="${row.show == 'y'}">
+				<%-- <c:when test="${row.show == 'y'}"> --%>
 					<!-- show 컬럼이 y일때(삭제X 글) -->
 					<tr>
 						<td align="center"  width="10" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;" align="center">${row.bno}</td>
 						<!-- 게시글 상세보기 페이지로 이동시 게시글 목록페이지에 있는 검색조건, 키워드, 현재페이지 값을 유지하기 위해 -->
 						
 						<td align="center" width="10" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;" align="center">
-						<a href="${pageContext.request.contextPath}/board/view.do?bno=${row.bno}&curPage=${map.boardPager.curPage}&searchOption=${map.searchOption}&keyword=${map.keyword}">${row.title}
+						<a href="${pageContext.request.contextPath}/board/view.do?bno=${row.ad_number}&curPage=${map.boardPager.curPage}&searchOption=${map.searchOption}&keyword=${map.keyword}">${row.title}
 								<!-- ** 댓글이 있으면 게시글 이름 옆에 출력하기 --> 
 								<c:if test="${row.recnt > 0}">
 									<span style="color: red;">(${row.recnt}) </span>
 								</c:if>
 						</a></td>
 						
-						<td align="center">${row.userName}</td>
+						<td align="center">${row.m_id}</td>
 						
-						<td class="autocut" width="10" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;" align="center">${row.content}
+						<td class="autocut" width="10" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;" align="center">${row.ad_contents}
 							
 							<%-- <!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 --> 
 							<fmt:formatDate value ="${row.regdate}" pattern="yyyy-MM-dd" /> --%>
@@ -130,13 +130,13 @@
 						
 						<td width="10" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;" align="center">${row.viewcnt}</td>
 					</tr>
-				</c:when>
+				<%-- </c:when> --%>
 				<c:otherwise>
 					<!-- show 컬럼이 n일때(삭제된 글) -->
 					<tr>
 						<td colspan="5" align="left">
 						<c:if test="${row.recnt > 0}">
-								<a href="${pageContext.request.contextPath}/board/view.do?bno=${row.bno}&curPage=${map.boardPager.curPage}&searchOption=${map.searchOption}&keyword=${map.keyword}">
+								<a href="${pageContext.request.contextPath}/board/view.do?ad_number=${row.ad_number}&curPage=${map.boardPager.curPage}&searchOption=${map.searchOption}&keyword=${map.keyword}">
 								삭제된게시물입니다. 
 								<!-- ** 댓글이 있으면 게시글 이름 옆에 출력하기 --> 
 								<span style="color: red;">(${row.recnt}) </span>
@@ -188,7 +188,7 @@
   	<div class="modal fade" id="myModal" role="dialog" >
     	<div class="modal-dialog modal-lg">
     
-      	<!-- Modal content-->
+      	<!-- Modal ad_contents-->
       	<div class="modal-content">
 	        <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -217,7 +217,7 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="pwd">내용:</label>
 							<div class="col-sm-10">
-								 <textarea name="content" id="content" rows="10" cols="80">${boardView.content}</textarea>
+								 <textarea name="ad_contents" id="ad_contents" rows="10" cols="80">${boardView.ad_contents}</textarea>
 							</div>
 						</div>
 				

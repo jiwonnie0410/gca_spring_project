@@ -22,13 +22,12 @@
 	<!-- 2. 댓글 목록 -->
 	<select id="listReply" resultType="com.yedam.gca.board.vo.ReplyVO">
 		<include refid="pagingHeader"/>
-			<!-- SELECT ADR_NUMBER, AD_NUMBER, ADR_CONTENTS, M_ID, user_name AS userName, r.ADR_REGDATE, r.updatedate
+			<!-- SELECT ADR_NUMBER, AD_NUMBER, ADR_CONTENTS, M_ID, r.ADR_REGDATE, r.updatedate
 			FROM AD_REPLY r, MEMBERS m
 			WHERE  r.M_ID = m.user_id AND AD_NUMBER=#{ad_number}
 			ORDER BY ADR_NUMBER -->
-			select USER_ID, 
-				USER_PW, 
-				USER_NAME
+			select m_id, 
+				m_password
 		from TBL_USER;
         
         SELECT
