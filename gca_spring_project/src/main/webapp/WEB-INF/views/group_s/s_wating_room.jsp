@@ -141,9 +141,9 @@
     
 	<!-- 방제 -->
     	<div style="background-color: #FE9191; text-align: left; padding-left:20px; color: #fff;"> 
-      		<span id="date">10/28</span>
-      		<span id="place">원화여고운동장</span>
-      		<span id="endTime">14:30</span>
+      		<span id="date">${sgroup.sg_end_dttm }</span>
+      		<span id="place">${sgroup.sg_location }</span>
+      		<span id="endTime">${sgroup.sg_end_dttm }</span>
       		<span style="padding-left:78%"><button data-toggle="modal" data-target="#room-info"
       					style="background-color:#FFC0C0;" class="button-general">방 정보</button></span>
       		
