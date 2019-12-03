@@ -22,10 +22,25 @@
  <link rel="icon" href="data:;base64,iVBORw0KGgo=">   
     <script>
     $(function() {
-		var today = new Date();
-		var endDate = $("[name=end_date]").val();
-		
     	
+    	//챌린지 남은일자 계산
+		var today = new Date(); //오늘일자
+    	   
+		var endDateInput = $("[name=end_date]");
+		for(i = 0; i < endDateInput.length; i++ ){
+			var dataSplit = endDateInput[i].value.split('-');
+
+			var year = dataSplit[0];
+			var month = dataSplit[1] - 1; // 달은 -1 해야 정상적으로 출력
+			var day = dataSplit[2];
+			
+			var endDate = new Date(year, month, day);
+			
+			var gap = endDate.getTime() - today.getTime();
+			gap = Math.floor(gap / (1000 * 60 * 60 * 24 ));
+			console.log( "남은일자: " + gap + " 일 입니다");
+			$("input[name=gapInput]").eq(i).val("(D-"+gap +")");
+		}
 	});
     
     </script>
@@ -85,10 +100,13 @@
       	font-size: 35px;
       }
       
-      .end-date {
+      input {
       	border: none;
       	background: none;
       	width: 100px;
+      }
+      .gapInput {
+      	width: 50px;
       }
       
     </style>
@@ -117,18 +135,21 @@
               <div class="tab-pane fade show active" id="basicChallenges">
               	
               	<c:forEach items="${challengeList}" var="list">
-              	<div class="content-div">
-              		<img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg" width="100%" height="50">
-					<span>${list.cl_start_dttm } ~ <input name="end_date" class="end_date" value="${list.cl_end_dttm }"></span>
-					<span>${list.cl_name }</span>
-					<span>${list.cl_content}</span>
-					<span>리워드: ${list.cl_score }점</span>
-					<span>마감까지 nn일</span>
-					
-					<div class="page">
-						<button type="button" class="join-btn" id="basic-join">참가</button>
-					</div>
-              	</div>
+              	<c:if test="${list.cl_status eq basic }">   
+	              	<div class="content-div">
+	              		<img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg" width="100%" height="50">
+						<span>${list.cl_start_dttm }~<input name="end_date" class="end_date" value="${list.cl_end_dttm }">
+									<input name="gapInput" class="gapInput" ></span>
+						<span>${list.cl_name }</span>
+						<span>${list.cl_content}</span>
+						<span>기간안에 ${list.cl_cnt }회 참여</span>
+						<span>리워드: ${list.cl_score }점</span>
+						
+						<div class="page">
+							<button type="button" class="join-btn" id="basic-join">참가</button>
+						</div>
+	              	</div>
+              	</c:if>
               	</c:forEach>
               </div>
               
@@ -136,18 +157,24 @@
               <!-- 기본 챌린지 내용 div 끝 -->
               
               <!-- 스페셜 챌린지 내용 div 시작 -->
-              <div class="tab-pane fade" id="specialChallenges">
-              	<div class="content-div">
-              		<img src="${pageContext.request.contextPath }/resources/images/image_2.jpg" width="100%" height="50">
-		        	<h6>12월 25일(수)</h6>
-						<h6>크리스마스에 홈트레이닝하기</h6>
-					<h6>점수: 300점</h6>
-					<h6>보증금: 1천원-5천원 (1천원단위)</h6>
-					<h6>마감까지 nn일</h6>
-					<div class="page">
-						<button type="button" class="join-btn" id="special-join">참가</button>
-					</div>
-              	</div>
+               <div class="tab-pane fade" id="specialChallenges">
+              	<c:forEach items="${challengeList}" var="list">
+              	<c:if test="${list.cl_status eq special}">         
+	              	<div class="content-div">
+	              		<img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg" width="100%" height="50">
+						<span>${list.cl_start_dttm }~<input name="end_date" class="end_date" value="${list.cl_end_dttm }">
+									<input name="gapInput" class="gapInput" ></span>
+						<span>${list.cl_name }</span>
+						<span>${list.cl_content}</span>   
+						<span>기간안에 ${list.cl_cnt }회 참여!!!!!!!!!!!!!!</span>
+						<span>리워드: ${list.cl_score }점</span>
+						
+						<div class="page">
+							<button type="button" class="join-btn" id="basic-join">참가</button>
+						</div>
+	              	</div>
+              	</c:if>
+              	</c:forEach>
               </div>
               <!-- 스페셜 챌린지 내용 div 끝 -->
             </div>
