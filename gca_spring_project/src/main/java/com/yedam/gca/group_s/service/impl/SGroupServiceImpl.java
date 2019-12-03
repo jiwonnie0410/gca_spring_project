@@ -17,7 +17,7 @@ public class SGroupServiceImpl implements SGroupService {
 	//은영
 	@Override
 	public SGroupVO getRoomInfo(SGroupVO vo) {
-		return null;
+		return sgroupDAO.getRoomInfo(vo);
 	}
 	
 	//미현
