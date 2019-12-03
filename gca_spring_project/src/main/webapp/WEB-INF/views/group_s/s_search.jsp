@@ -149,7 +149,7 @@ $(document).ready(function(){
 		
 		<td class="td3" align="center">
 			<input type="hidden" id="db_time" value="">
-			<p class="content p6">${sg.sg_end_dttm }19.12.25(수)</p>
+			<p class="content p6">${sg.sg_end_dttm } 19.12.25(수)</p>
 			<p class="content p7">오후10:30</p>
 			<p class="content p8"><span class="badge badge-pill badge-warning mr-1 ml-2"><font color="red">${sg.sg_now_cnt }</font>&nbsp;/&nbsp;${sg.sg_end_cnt }명</span></p>
 		</td>

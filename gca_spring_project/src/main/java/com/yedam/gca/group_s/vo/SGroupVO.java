@@ -1,6 +1,7 @@
 package com.yedam.gca.group_s.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.Data;
 
@@ -10,7 +11,7 @@ public class SGroupVO {
 	private int sg_num;			// *PK* // 반짝 번호
 	private String sg_name;					// 방 이름
 	private Date sg_start_dttm;					// 개설 날짜
-	private Date sg_end_dttm;					// 마감 날짜
+	private Timestamp sg_end_dttm;					// 마감 날짜
 	private int sg_now_cnt;						// 현재 인원
 	private int sg_end_cnt;					// 마감 인원
 	private String sg_xy;					// xy 좌표
