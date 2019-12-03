@@ -14,8 +14,8 @@ public class ChallengeController {
 	//수림 챌린지 목록 조회
 	@RequestMapping("challenge/challengeList")
 	public String getChallengeList(Model model) {
-		model.addAttribute("challenge", challengeService.getChallengeList());
-		return "challenge/challenge";
+		model.addAttribute("challengeList", challengeService.getChallengeList());
+		return "challenge/challenge-new";
 	}
 
 }
