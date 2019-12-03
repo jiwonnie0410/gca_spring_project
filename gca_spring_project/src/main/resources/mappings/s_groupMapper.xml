@@ -7,8 +7,21 @@
 <!-- 은영 -->
 
 	<!-- 방정보 한건 조회 -->
-	<select id="getRoomInfo" resultType="sgroup">
-		SELECT		*
+	<select id="getRoomInfo" parameterType="sgroup" resultType="sgroup">
+		SELECT		SG_NUM,
+					SG_NAME,
+					SG_START_DTTM,
+					SG_END_DTTM,
+					SG_NOW_CNT,
+					SG_END_CNT,
+					SG_LOCATION,
+					SG_XY,
+					SPORTS1_CD,
+					SKILL_CD,
+					AGE_RANGE,
+					GENDER_CD,
+					STATUS_CD,
+					SG_OPTION
 		FROM 		SGROUP
 		WHERE		SG_NUM = 1001
 	</select>
