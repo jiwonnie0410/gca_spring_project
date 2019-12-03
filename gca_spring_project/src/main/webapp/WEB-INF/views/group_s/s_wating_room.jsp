@@ -171,25 +171,25 @@
 
         		<span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
           			<img style="padding-bottom:5px;" width="65px" height="65px"
-          							src="${pageContext.request.contextPath }/images/trainer-1.jpg" class="rounded-circle">
+          							src="${pageContext.request.contextPath }/resources/images/trainer-1.jpg" class="rounded-circle">
         			<br />사람1
         		</span>
         	
           		<span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;">
           			<img style="padding-bottom:5px;" width="65px" height="65px"
-          							src="${pageContext.request.contextPath }/images/trainer-2.jpg" class="rounded-circle">
+          							src="${pageContext.request.contextPath }/resources/images/trainer-2.jpg" class="rounded-circle">
         			<br />사람2
         		</span>
         	
           		<span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;">
           			<img style="padding-bottom:5px;" width="65px" height="65px"
-          							src="${pageContext.request.contextPath }/images/trainer-3.jpg" class="rounded-circle">
+          							src="${pageContext.request.contextPath }/resources/images/trainer-3.jpg" class="rounded-circle">
         			<br />사람3
         		</span>
         	
           		<span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;">
           			<img style="padding-bottom:5px;" width="65px" height="65px"
-          							src="${pageContext.request.contextPath }/images/trainer-1.jpg" class="rounded-circle">
+          							src="${pageContext.request.contextPath }/resources/images/trainer-1.jpg" class="rounded-circle">
         			<br />사람4
         		</span>
 
