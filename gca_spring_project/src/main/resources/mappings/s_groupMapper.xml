@@ -7,10 +7,10 @@
 <!-- 은영 -->
 
 	<!-- 방정보 한건 조회 -->
-	<select id="getRoomInfo" resultType="com.yedam.gca.group_s.vo.SGroupVO">
+	<!-- <select id="getRoomInfo" resultType="">
 		SELECT		
 		FROM 
-	</select>
+	</select> -->
 	
 	
 	
