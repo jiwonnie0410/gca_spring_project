@@ -23,6 +23,11 @@ public class SGroupController {
 		return "group_s/s_wating_room";
 	}
 	
-	//미현asdf
-	
+	//미현
+	@RequestMapping("/sgroup/getSgList")
+	public String search(Model model, SGroupVO vo) {
+		model.addAttribute("list", service.getSgList(vo));
+		System.out.println(service.getSgList(vo));
+		return "group_s/s_search";
+	}
 }

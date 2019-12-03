@@ -1,5 +1,7 @@
 package com.yedam.gca.group_s.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,12 @@ public class SGroupServiceImpl implements SGroupService {
 	public SGroupVO getRoomInfo(SGroupVO vo) {
 		return sgroupDAO.getRoomInfo(vo);
 	}
+
 	
 	//미현
+	@Override
+	public List<SGroupVO> getSgList(SGroupVO vo) {
+		return sgroupDAO.getSgList(vo);
+	}
 
 }

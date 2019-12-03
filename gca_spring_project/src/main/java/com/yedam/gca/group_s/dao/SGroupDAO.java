@@ -1,5 +1,7 @@
 package com.yedam.gca.group_s.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,5 +21,7 @@ public class SGroupDAO {
 	
 	
 	//미현
-	
+	public List<SGroupVO> getSgList(SGroupVO vo) {
+		return mybatis.selectList("SGroupDAO.getSgList", vo);
+	}
 }
