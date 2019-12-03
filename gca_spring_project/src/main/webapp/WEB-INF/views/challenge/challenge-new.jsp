@@ -19,10 +19,16 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ <link rel="icon" href="data:;base64,iVBORw0KGgo=">   
+    <script>
+    $(function() {
+		var today = new Date();
+		var endDate = $("[name=end_date]").val();
+		
+    	
+	});
     
-<!-- 챌린지 참여버튼 css -->	
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/surim/joinButton.css"> 
+    </script>
     
     <style>
       .btn-primary {
@@ -55,6 +61,34 @@
       	border-radius: 3px;
       	padding: 20px;
       	color: black;
+      	margin-top: 20px;
+      }
+      
+      span {
+      	display: block;
+      }
+      
+      .join-btn {
+      	background: #FE9191;
+      	width: 100%;
+      	border: none;
+      	border-radius: 3px;
+      	height: 40px;
+      	font-size: 20px;
+      	font-weight: bold;
+      	color: white;
+      }
+      
+      .join-btn.start-challenge {
+      	background: none;
+      	color: #FE9191;
+      	font-size: 35px;
+      }
+      
+      .end-date {
+      	border: none;
+      	background: none;
+      	width: 100px;
       }
       
     </style>
@@ -81,17 +115,21 @@
             <div class="tab-content">
               <!-- 기본 챌린지 내용 div 시작 -->
               <div class="tab-pane fade show active" id="basicChallenges">
+              	
+              	<c:forEach items="${challengeList}" var="list">
               	<div class="content-div">
               		<img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg" width="100%" height="50">
-					<h6>12월 15일(일) ~ 23일(토) 총7일</h6>
-					<h6>자전거관련 반짝 3번 참여하기</h6>
-					<h6>점수: 100점</h6>
-					<h6>마감까지 nn일</h6>
+					<span>${list.cl_start_dttm } ~ <input name="end_date" class="end_date" value="${list.cl_end_dttm }"></span>
+					<span>${list.cl_name }</span>
+					<span>${list.cl_content}</span>
+					<span>리워드: ${list.cl_score }점</span>
+					<span>마감까지 nn일</span>
 					
 					<div class="page">
 						<button type="button" class="join-btn" id="basic-join">참가</button>
 					</div>
               	</div>
+              	</c:forEach>
               </div>
               
               
@@ -203,7 +241,6 @@
 			 
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   		<!-- 참가버튼 클릭시 모달뜨게함 -->

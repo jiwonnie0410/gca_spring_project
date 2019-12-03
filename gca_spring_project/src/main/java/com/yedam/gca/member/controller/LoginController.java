@@ -19,6 +19,6 @@ public class LoginController {
 	// 지원 로그인 성공 시에 돌아올 페이지 테스트용
 	@RequestMapping("/login/naverCallback")
 	public String naverCallback() {
-		return "/member/callback";
+		return "/member/callbackTest";
 	}
 }
