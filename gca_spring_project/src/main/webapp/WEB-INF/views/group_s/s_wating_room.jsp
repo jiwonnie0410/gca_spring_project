@@ -96,7 +96,7 @@
 <script>
 		$(function() { //이 문장이 페이지 로딩 완료 후 실행?
 			
-			//마감날짜 -> 일, 월 만 뽑아내기
+			/* //마감날짜 -> 일, 월 만 뽑아내기
 			var strArray = $("#endDate").html().split('-'); //년, 월, 일 순의 배열
 			var endMonth = strArray[1];
 			var endDay = strArray[2];
@@ -108,6 +108,9 @@
 			
 			$("#endDate").html(endDate); //${sgroup.sg_end_dttm } 였던 값을 endDate로 덮어씌움
 			//더좋은방법 찾아보기!!!!!! 2020-01-02 수식으로 나오는 값을 문자로 바꾸는 법 알아보고 처음부터 그 값으로 씌우기..
+			
+			//jstl formatDate써서 해결..!!
+			*/
 			
 			
 			
@@ -162,9 +165,9 @@
     
 	<!-- 방제 -->
     	<div style="background-color: #FE9191; text-align: left; padding-left:20px; color: #fff;"> 
-      		<span id="endDate"><fmt:formatDate value="${sgroup.sg_end_dttm }" pattern="a" /></span>
-      		<span id="place">${sgroup.sg_name }</span>
-      		<span id="endTime">${sgroup.sg_end_dttm }</span>
+      		<span id="endDate"><fmt:formatDate value="${sgroup.sg_start_dttm }" pattern="MM/dd" /></span>
+      		<span id="endTime"><fmt:formatDate value="${sgroup.sg_end_dttm }" pattern="a hh:mm" /></span>
+      		<span id="title">${sgroup.sg_name }</span>
       		<span style="padding-left:78%"><button data-toggle="modal" data-target="#room-info"
       					style="background-color:#FFC0C0;" class="button-general">방 정보</button></span>
       		
@@ -267,19 +270,20 @@
       
 <!-- Modal Header -->
 				<div class="modal-header">
-					<h4 class="modal-title">방 정보</h4>
+					<h4 class="modal-title">${sgroup.sg_name}</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
         
 <!-- Modal body -->
-				<div class="modal-body">
-					<해당 방 정보><br /><br />
-					원화여고 운동장<br />
-					날짜<br />
-					시간<br />
-					배드민턴<br />
-					여성<br />
-					4명중 3명 참가<br /> <!-- 0명중 0명참가/반짝 대기?인원꽉참? -->
+				<div align="left" class="modal-body">
+					
+					<%-- ${sgroup.sg_start_dttm}<br />
+					${sgroup.sg_end_dttm}<br />
+					${sgroup.sg_location}<br />
+					${sgroup.sports1_cd}<br />
+					${sgroup.} 명중 ${sgroup.sg_name} 명 참가<br /> <!-- 0명중 0명참가/반짝 대기?인원꽉참? -->
+					${sgroup.sg_name}<br />
+					${sgroup.sg_name}<br /> --%>
 				</div>
         
 <!-- Modal footer -->
