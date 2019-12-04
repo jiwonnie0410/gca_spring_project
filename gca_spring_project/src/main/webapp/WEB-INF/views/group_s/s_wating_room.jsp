@@ -162,7 +162,7 @@
     
 	<!-- 방제 -->
     	<div style="background-color: #FE9191; text-align: left; padding-left:20px; color: #fff;"> 
-      		<span id="endDate"><fmt:formatDate value="${sgroup.sg_end_dttm }" pattern="E" /></span>
+      		<span id="endDate"><fmt:formatDate value="${sgroup.sg_end_dttm }" pattern="a" /></span>
       		<span id="place">${sgroup.sg_name }</span>
       		<span id="endTime">${sgroup.sg_end_dttm }</span>
       		<span style="padding-left:78%"><button data-toggle="modal" data-target="#room-info"
