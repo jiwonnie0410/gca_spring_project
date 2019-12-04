@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -37,7 +38,7 @@ $(document).ready(function(){
 		location.href="s_search_cre.jsp";
 	});
 	
-	var sport_icon = $('.p1').text();
+/* 	var sport_icon = $('.p1').text();
 	console.log(sport_icon);
 	if(sport_icon == 'S01'){
 		$('.p1').html('<i class="fas fa-basketball-ball pr-2"></i>');
@@ -55,12 +56,12 @@ $(document).ready(function(){
 		$('.p1').html('<i class="fas fa-bicycle pr-2"></i>');
 	} else {
 		$('.p1').html('<i class="fas fa-feather-alt pr-2"></i>');
-	}
+	} */
 	
-	var date = $('.p6').text().substring(0,11);
+/* 	var date = $('.p6').text().substring(0,11);
 	var time = $('.p6').text().substring(12);
 	$('.p6').text(date);
-	$('.p7').text(time);
+	$('.p7').text(time); */
 	
 	
 });
@@ -139,10 +140,35 @@ $(document).ready(function(){
 
 <table class="table table-striped">
 	<c:forEach items="${ list }" var="sg">
-	<tr height="100px">
+	<tr height="100px" onclick="location.href='getRoomInfo2?sg_num=${sg.sg_num}'">
 		<td class="td1">
 			<p class="content p1">
-			${sg.sports1_cd }
+			<c:choose>
+				<c:when test="${sg.sports1_cd == 'S01'}">
+					<i class="fas fa-basketball-ball pr-2"></i>
+				</c:when>
+				<c:when test="${sg.sports1_cd == 'S02'}">
+					<i class="fas fa-running pr-2"></i>
+				</c:when>
+				<c:when test="${sg.sports1_cd == 'S03'}">
+					<i class="fas fa-hiking pr-2"></i>
+				</c:when>
+				<c:when test="${sg.sports1_cd == 'S04'}">
+					<img src="../resources/images/badminton-black.png" width="32px">
+				</c:when>
+				<c:when test="${sg.sports1_cd == 'S05'}">
+					<i class="fas fa-bowling-ball pr-2"></i>
+				</c:when>
+				<c:when test="${sg.sports1_cd == 'S06'}">
+					<i class="fas fa-swimmer pr-2"></i>
+				</c:when>
+				<c:when test="${sg.sports1_cd == 'S07'}">
+					<i class="fas fa-bicycle pr-2"></i>
+				</c:when>
+				<c:otherwise>
+					<i class="fas fa-feather-alt pr-2"></i>
+				</c:otherwise>
+			</c:choose>
 			</p>
 			<p class="content p2"><span class="badge badge-dark">${sg.skill_cd }▲</span></p>
 		</td>
@@ -151,13 +177,13 @@ $(document).ready(function(){
 <!-- 			<p class="content p3">마감까지 00일 00시간 00분 00초 남음</p>
  -->			<p class="content p3">${sg.sg_location }</p>
 			<p class="content p4">${sg.sg_name }</p>
-			<p class="content p5"><span class="badge badge-info mr-2">${sg.gender_cd }</span>20 ~ 30대</p>
+			<p class="content p5"><span class="badge badge-info mr-2">${sg.gender_cd }</span>${sg.age_range }</p>
 		</td>
 		
 		<td class="td3" align="center">
 			<input type="hidden" id="db_time" value="">
-			<p class="content p6">${sg.sg_end_dttm }</p>
-			<p class="content p7">${sg.sg_end_dttm }</p>
+			<p class="content p6"><fmt:formatDate value="${sg.sg_end_dttm }" pattern="yy.MM.dd(E)" /></p>
+			<p class="content p7"><fmt:formatDate value="${sg.sg_end_dttm }" pattern="ahh:mm" /></p>
 			<p class="content p8"><span class="badge badge-pill badge-warning mr-1 ml-2"><font color="red">${sg.sg_now_cnt }</font>&nbsp;/&nbsp;${sg.sg_end_cnt }명</span></p>
 		</td>
 	</tr>

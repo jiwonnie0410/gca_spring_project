@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yedam.gca.group_s.service.SGroupService;
 import com.yedam.gca.group_s.vo.SGroupVO;
@@ -24,6 +25,15 @@ public class SGroupController {
 	}
 	
 	//미현
+	@RequestMapping("/sgroup/getRoomInfo2")
+	public String getRoomInfo(@RequestParam(value="sg_num", defaultValue="", required=true) int sg_num,
+			Model model, SGroupVO vo) {
+		vo.setSg_num(sg_num);
+		model.addAttribute("sgroup", service.getRoomInfo(vo));
+		return "group_s/s_wating_room";
+	}
+	
+	
 	@RequestMapping("/sgroup/getSgList")
 	public String search(Model model, SGroupVO vo) {
 		model.addAttribute("list", service.getSgList(vo));
