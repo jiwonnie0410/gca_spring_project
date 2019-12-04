@@ -7,12 +7,18 @@
 				CL_STATUS,
 				CL_NAME,
 				CL_CONTENT,
-				SPORTS1_CD,
+				LOWER(SPORTS1_CD) AS SPORTS1_CD,
 				CL_CNT,
 				CL_START_DTTM,
 				CL_END_DTTM,
-				CL_SCORE
+				CL_SCORE,
+				
+				CASE trunc(CL_END_DTTM) - trunc(sysdate) 
+					WHEN 0 THEN 'DAY'
+				ELSE TO_CHAR(trunc(CL_END_DTTM) - trunc(sysdate))
+				END AS GAP_DAY
 		FROM	CHALLENGE
+		
 		ORDER BY CL_END_DTTM 
 	</select>
 

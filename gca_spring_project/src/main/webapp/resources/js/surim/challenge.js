@@ -1,6 +1,6 @@
 $(function() {
 	//기본 챌린지 버튼 클릭시 모달창 팝업
-	    $("#basic-join").click(function(){
+	    $("[name=basic-btn]").click(function(){
 	    	if ( $(this).attr('class')!='join-btn start-challenge' ) {
 	    		$("#basicModal").modal();
 	    	}
@@ -18,7 +18,7 @@ $(function() {
         });
 	
 	//스페셜 챌린지 버튼 클릭시 모달창 팝업
-	    $("#special-join").click(function(){
+	    $("[name=special-btn]").click(function(){
 	    	if ( $(this).attr('class')!='join-btn start-challenge' ) {
 	       		 $("#specialModal").modal();
 	       }
