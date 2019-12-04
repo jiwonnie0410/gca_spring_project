@@ -26,6 +26,16 @@
 		WHERE		SG_NUM = #{sg_num}
 	</select>
 	
+	<!-- <update id="updateWhenJoin" parameterType="sgroup">
+		UPDATE		SGROUP
+		SET			SG_NOW_CNT = #{sg_now_cnt}
+					<if test="searchCondition == 'title' ">
+					STATUS_CD = ?
+					</if>
+		WHERE		SG_NUM = #{sg_num}
+	
+	</update> -->
+	
 	
 	
 	
