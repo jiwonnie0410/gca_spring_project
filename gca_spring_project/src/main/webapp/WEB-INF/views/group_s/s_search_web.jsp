@@ -55,7 +55,8 @@ $(document).ready(function(){
 		var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
 		var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); 
 		var s = Math.floor((distance % (1000 * 60)) / 1000); 
-		document.getElementById("d-day").innerHTML = "마감 " + d +"일 " + h + "시간 " + m + "분 " + s + "초 남음 "; });
+		document.getElementById("d-day").innerHTML = "마감 " + d +"일 " + h + "시간 " + m + "분 " + s + "초 남음 "; 
+	});
 });
 
 
