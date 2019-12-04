@@ -27,8 +27,10 @@ public class SGroupController {
 	//미현
 	@RequestMapping("/sgroup/getRoomInfo2")
 	public String getRoomInfo(@RequestParam(value="sg_num", defaultValue="", required=true) int sg_num,
+			@RequestParam(value="sg_now_cnt", defaultValue="", required=true) int sg_now_cnt,
 			Model model, SGroupVO vo) {
 		vo.setSg_num(sg_num);
+		vo.setSg_now_cnt(sg_now_cnt+1);
 		model.addAttribute("sgroup", service.getRoomInfo(vo));
 		return "group_s/s_wating_room";
 	}
