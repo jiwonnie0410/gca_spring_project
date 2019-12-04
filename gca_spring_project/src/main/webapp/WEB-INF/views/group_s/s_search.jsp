@@ -143,8 +143,6 @@ $(document).ready(function(){
 		<td class="td1">
 			<p class="content p1">
 			${sg.sports1_cd }
-			<c:choose>
-			</c:choose>
 			</p>
 			<p class="content p2"><span class="badge badge-dark">${sg.skill_cd }▲</span></p>
 		</td>

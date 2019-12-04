@@ -16,7 +16,7 @@ public class SGroupController {
 	
 	
 	//은영
-	@RequestMapping("/group_s/getRoomInfo")
+	@RequestMapping("/sgroup/getRoomInfo")
 	public String getRoomInfo(Model model, SGroupVO vo) {
 		model.addAttribute("sgroup", service.getRoomInfo(vo));
 		System.out.println(model);

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,6 +109,10 @@
 			$("#endDate").html(endDate); //${sgroup.sg_end_dttm } 였던 값을 endDate로 덮어씌움
 			//더좋은방법 찾아보기!!!!!! 2020-01-02 수식으로 나오는 값을 문자로 바꾸는 법 알아보고 처음부터 그 값으로 씌우기..
 			
+			
+			
+
+			
 				
 			//신고모달에서 신고하기 버튼 눌렀을 때
 			$("body").on("click", "[id^=doReport]", function() {
@@ -156,7 +162,7 @@
     
 	<!-- 방제 -->
     	<div style="background-color: #FE9191; text-align: left; padding-left:20px; color: #fff;"> 
-      		<span id="endDate">${sgroup.sg_end_dttm }</span>
+      		<span id="endDate"><fmt:formatDate value="${sgroup.sg_end_dttm }" pattern="E" /></span>
       		<span id="place">${sgroup.sg_name }</span>
       		<span id="endTime">${sgroup.sg_end_dttm }</span>
       		<span style="padding-left:78%"><button data-toggle="modal" data-target="#room-info"
