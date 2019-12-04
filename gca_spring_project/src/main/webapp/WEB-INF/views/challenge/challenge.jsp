@@ -20,7 +20,6 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
- <link rel="icon" href="data:;base64,iVBORw0KGgo=">   
     <script>
     $(function() {
     	
@@ -84,7 +83,8 @@
       	border-radius: 3px;
       	padding: 20px;
       	color: black;
-      	margin-top: 20px;
+      	margin-top: 10px;
+      	margin-bottom: 10px;
       }
       
       span {
@@ -144,20 +144,15 @@
               	<c:forEach items="${challengeList}" var="list">
 	              	<c:if test="${list.cl_status == 'basic' }"> 
 	              	<div class="content-div">
-	              		<img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg" width="100%" height="50">
-	              		
+	              		<img src="${pageContext.request.contextPath }/resources/images/sports/${list.sports1_cd }.jpg" width="100%" height="200px">
 	              		<span><fmt:formatDate value="${list.cl_start_dttm }" type="date" /> ~
 						<fmt:formatDate value="${list.cl_end_dttm }" type="date" />　　　(D-${list.gap_day })</span>
 						<span>${list.cl_name }</span>
-						<span>${list.cl_content}</span>
 						<span>기간안에 ${list.cl_cnt }회 참여</span>
-						<span>리워드: ${list.cl_score }점</span>
-						
-
-						
-						<div class="page">
-							<button type="button" class="join-btn" id="basic-join">참가</button>
-						</div>
+						<span>
+							<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px">
+							${list.cl_score }점
+						</span>
 	              	</div>
 	              	</c:if>
               	</c:forEach>
@@ -171,17 +166,23 @@
               	<c:forEach items="${challengeList}" var="list">
               		<c:if test="${list.cl_status != 'basic' }"> 
 	              	<div class="content-div">
-	              		<img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg" width="100%" height="50">
-<%-- 						<span>${list.cl_start_dttm }~<input name="end_date" class="end_date" value="${list.cl_end_dttm }"> --%>
-									<input name="gapInput" class="gapInput" ></span>
+	              		<img src="${pageContext.request.contextPath }/resources/images/sports/${list.sports1_cd }.jpg" width="100%" height="200px">
+	              		<span><fmt:formatDate value="${list.cl_start_dttm }" type="date" /> ~
+						<fmt:formatDate value="${list.cl_end_dttm }" type="date" />　　　(D-${list.gap_day })</span>
 						<span>${list.cl_name }</span>
-						<span>${list.cl_content}</span>   
 						<span>기간안에 ${list.cl_cnt }회 참여</span>
-						<span>리워드: ${list.cl_score }점</span>
+						<span> 
+							<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px">
+							${list.cl_score }점
+						</span>
+						<span>
+							<img src="${pageContext.request.contextPath }/resources/images/icon/money.png" width="25px">
+							1천원~5천원
+						</span>
 						
-						<div class="page">
-							<button type="button" class="join-btn" id="basic-join">참가</button>
-						</div>
+<!-- 						<div class="page"> -->
+<!-- 							<button type="button" class="join-btn" name="special-btn">참가</button> -->
+<!-- 						</div> -->
 	              	</div>
 	              	</c:if>
               	</c:forEach>
