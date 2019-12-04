@@ -20,37 +20,11 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script>
-    $(function() {
-    	
-/*     	//챌린지 남은일자 계산
-		var today = new Date(); //오늘일자
-    	
-		//마감날짜
-		var endDateInput = $("[name=end_date]");
-		for(i = 0; i < endDateInput.length; i++ ){
-			var dataSplit = endDateInput[i].value.split('-');
 
-			var year = dataSplit[0];
-			var month = dataSplit[1] - 1; // 달은 -1 해야 정상적으로 출력
-			var day = dataSplit[2];
-			
-			var endDate = new Date(year, month, day);
-			
-			var gap = endDate.getTime() - today.getTime();
-			gap = Math.floor(gap / (1000 * 60 * 60 * 24 ))+1; //d-day 계산; 당일은 0
-			
-			if (gap == 0 ) {
-				$("input[name=gapInput]").eq(i).val("(D-Day!!)");      
-			} else {
-				$("input[name=gapInput]").eq(i).val("(D-"+gap +")");
-			}
-			
-		} */
-		
-	});
-    
-    </script>
+<script>
+
+</script>
+
     
     <style>
       .btn-primary {
@@ -143,7 +117,7 @@
               	
               	<c:forEach items="${challengeList}" var="list">
 	              	<c:if test="${list.cl_status == 'basic' }"> 
-	              	<div class="content-div">
+	              	<div class="content-div" onclick="location.href='contents?cl_num=${list.cl_num}'">
 	              		<img src="${pageContext.request.contextPath }/resources/images/sports/${list.sports1_cd }.jpg" width="100%" height="200px">
 	              		<span><fmt:formatDate value="${list.cl_start_dttm }" type="date" /> ~
 						<fmt:formatDate value="${list.cl_end_dttm }" type="date" />　　　(D-${list.gap_day })</span>
@@ -283,6 +257,37 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   		<!-- 참가버튼 클릭시 모달뜨게함 -->
 	<script src="${pageContext.request.contextPath }/resources/js/surim/challenge.js"></script>
+  	
+<!--   	<script>
+    $(function() {
+    	
+     	//챌린지 남은일자 계산
+		var today = new Date(); //오늘일자
+    	
+		//마감날짜
+		var endDateInput = $("[name=end_date]");
+		for(i = 0; i < endDateInput.length; i++ ){
+			var dataSplit = endDateInput[i].value.split('-');
+
+			var year = dataSplit[0];
+			var month = dataSplit[1] - 1; // 달은 -1 해야 정상적으로 출력
+			var day = dataSplit[2];
+			
+			var endDate = new Date(year, month, day);
+			
+			var gap = endDate.getTime() - today.getTime();
+			gap = Math.floor(gap / (1000 * 60 * 60 * 24 ))+1; //d-day 계산; 당일은 0
+			
+			if (gap == 0 ) {
+				$("input[name=gapInput]").eq(i).val("(D-Day!!)");      
+			} else {
+				$("input[name=gapInput]").eq(i).val("(D-"+gap +")");
+			}
+		} 
+	});
+    
+    </script> -->
+  	
   	
   </body>
 </html>

@@ -19,4 +19,9 @@ public class ChallengeServiceImpl implements ChallengeService{
 		return dao.getChallengeList();
 	}
 
+	@Override
+	public ChallengeVO getChallenge(ChallengeVO vo) {
+		return dao.getChallenge(vo);
+	}
+
 }

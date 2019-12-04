@@ -21,5 +21,23 @@
 		
 		ORDER BY CL_END_DTTM 
 	</select>
+	
+	<select id="getChallenge" resultType="challenge">
+			SELECT	CL_NUM,
+					CL_STATUS,
+					CL_NAME,
+					CL_CONTENT,
+					LOWER(SPORTS1_CD) AS SPORTS1_CD,
+					CL_CNT,
+					CL_START_DTTM,
+					CL_END_DTTM,
+					CL_SCORE,
+					CASE trunc(CL_END_DTTM) - trunc(sysdate) 
+					WHEN 0 THEN 'DAY'
+				ELSE TO_CHAR(trunc(CL_END_DTTM) - trunc(sysdate))
+				END AS GAP_DAY
+		FROM	CHALLENGE
+		WHERE 	CL_NUM = #{cl_num}
+	</select>
 
 </mapper>
