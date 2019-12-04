@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yedam.gca.challenge.service.ChallengeService;
+import com.yedam.gca.challenge.vo.ChallengeVO;
 
 @Controller
 public class ChallengeController {
@@ -15,7 +16,8 @@ public class ChallengeController {
 	@RequestMapping("challenge/challengeList")
 	public String getChallengeList(Model model) {
 		model.addAttribute("challengeList", challengeService.getChallengeList());
-		return "challenge/challenge-new";
+		
+		return "challenge/challenge";
 	}
 
 }

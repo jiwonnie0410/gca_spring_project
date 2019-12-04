@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,9 +24,10 @@
     <script>
     $(function() {
     	
-    	//챌린지 남은일자 계산
+/*     	//챌린지 남은일자 계산
 		var today = new Date(); //오늘일자
-    	   
+    	
+		//마감날짜
 		var endDateInput = $("[name=end_date]");
 		for(i = 0; i < endDateInput.length; i++ ){
 			var dataSplit = endDateInput[i].value.split('-');
@@ -45,7 +47,8 @@
 				$("input[name=gapInput]").eq(i).val("(D-"+gap +")");
 			}
 			
-		}
+		} */
+		
 	});
     
     </script>
@@ -142,12 +145,15 @@
 	              	<c:if test="${list.cl_status == 'basic' }"> 
 	              	<div class="content-div">
 	              		<img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg" width="100%" height="50">
-						<span>${list.cl_start_dttm }~<input name="end_date" class="end_date" value="${list.cl_end_dttm }">
-									<input name="gapInput" class="gapInput" ></span>
+	              		
+	              		<span><fmt:formatDate value="${list.cl_start_dttm }" type="date" /> ~
+						<fmt:formatDate value="${list.cl_end_dttm }" type="date" />　　　(D-${list.gap_day })</span>
 						<span>${list.cl_name }</span>
 						<span>${list.cl_content}</span>
 						<span>기간안에 ${list.cl_cnt }회 참여</span>
 						<span>리워드: ${list.cl_score }점</span>
+						
+
 						
 						<div class="page">
 							<button type="button" class="join-btn" id="basic-join">참가</button>
@@ -166,7 +172,7 @@
               		<c:if test="${list.cl_status != 'basic' }"> 
 	              	<div class="content-div">
 	              		<img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg" width="100%" height="50">
-						<span>${list.cl_start_dttm }~<input name="end_date" class="end_date" value="${list.cl_end_dttm }">
+<%-- 						<span>${list.cl_start_dttm }~<input name="end_date" class="end_date" value="${list.cl_end_dttm }"> --%>
 									<input name="gapInput" class="gapInput" ></span>
 						<span>${list.cl_name }</span>
 						<span>${list.cl_content}</span>   
