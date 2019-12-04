@@ -41,13 +41,14 @@
 						naverLogin.reprompt();
 						return;
 					}
-	
-					window.location.replace("../");
+					opener.document.location.href='../sgroup/getSgList' // 메인창을 반짝 리스트로 옮기기
+					close(); // 로그인 하던 팝업창 닫기
 				} else {
 					console.log("callback 처리에 실패하였습니다.");
 				}
 			});
 		});
+		
 	</script>
 </body>
 </html>
