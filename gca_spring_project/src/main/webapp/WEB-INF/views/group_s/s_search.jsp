@@ -38,36 +38,75 @@ $(document).ready(function(){
 		location.href="s_search_cre.jsp";
 	});
 	
-/* 	var now = new Date().getTime();
+	var now = new Date().getTime();
 	console.log(now);
 	for(var i=0; i< $('.dttm').length; i++){
-		console.log($('.dttm').eq(i).val());
-		var dttm = $('.dttm').eq(i).val())
+		//console.log($('.dttm').eq(i).val());
+		var dttm = $('.dttm').eq(i).val();
+		
 		var year = dttm.substring(0,4);
-		var month = dttm.substring(5,7);
+		var month = dttm.substring(5,7)-1;
 		var day = dttm.substring(8,10);
-		var ph = 
-	} */
+		var hour = dttm.substring(11,13);
+		var min = dttm.substring(14,16);
 	
-
-	console.log($('.dttm'));
-	var x = setInterval(function() {
-		var dttm = document.getElementsByClassName('dttm');
-		for(var i=0; i< $('.dttm').length; i++){
-			console.log($('.dttm').eq(i).val()); 
-		}
-		/* var countDownDate = new Date(year, month, day, hour, min, 0, 0).getTime(); 
-		var now = new Date().getTime(); 
-		var distance = countDownDate - now; 
-		var d = Math.floor(distance / (1000 * 60 * 60 * 24)); 
+		var countDownDate = new Date(year, month, day, hour, min, 0, 0).getTime();
+		var distance = countDownDate - now;
+		console.log(distance)
+		var d = Math.floor(distance / (1000 * 60 * 60 * 24));
 		var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
 		var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); 
-		var s = Math.floor((distance % (1000 * 60)) / 1000); 
-		document.getElementById("d-day").innerHTML = "마감 " + d +"일 " + h + "시간 " + m + "분 " + s + "초 남음 "; */ 
-	},1000);
+		var s = Math.floor((distance % (1000 * 60)) / 1000);
+		console.log(d +', ' + h  +', ' + m  +', ' + s);
+		
+		if(d<1 && h<1 && m<1){
+			$('.p8').eq(i).text(s+"초 남음");
+		} else if(d<1 && h<1){
+		 	$('.p8').eq(i).text(m+"분"+s+"초 남음");
+		} else if(d<1){
+			$('.p8').eq(i).text(h+"시간 남음");
+		} else {
+			$('.p8').eq(i).text(d+"일 남음");
+		}
+	}
 	
-});
+	//setInterval(function() {
+		var now = new Date().getTime();
+		console.log(now);
+		for(var i=0; i< $('.dttm').length; i++){
+			//console.log($('.dttm').eq(i).val());
+			var dttm = $('.dttm').eq(i).val();
+			
+			var year = dttm.substring(0,4);
+			var month = dttm.substring(5,7)-1;
+			var day = dttm.substring(8,10);
+			var hour = dttm.substring(11,13);
+			var min = dttm.substring(14,16);
+		
+			var countDownDate = new Date(year, month, day, hour, min, 0, 0).getTime();
+			var distance = countDownDate - now;
+			console.log(distance)
+			var d = Math.floor(distance / (1000 * 60 * 60 * 24));
+			var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
+			var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); 
+			var s = Math.floor((distance % (1000 * 60)) / 1000);
+			console.log(d +', ' + h  +', ' + m  +', ' + s);
+			
+			if(d<0){
+				$('.p8').eq(i).html("<span class='badge badge-pill badge-secondary'><font color='white'><b>마감</b></font></span>");
+			} else if(d<1 && h<1 && m<1){
+				$('.p8').eq(i).html("<span class='badge badge-pill badge-danger'><font color='white'><b>"+s+"초 남음</b></font></span>");
+			} else if(d<1 && h<1){
+				$('.p8').eq(i).html("<span class='badge badge-pill badge-danger'><font color='white'><b>"+m+"분"+s+"초 남음</b></font></span>");
+			} else if(d<1){
+				$('.p8').eq(i).html("<span class='badge badge-pill badge-danger'><font color='white'><b>"+h+"시간 남음</b></font></span>");
+			} else {
+				$('.p8').eq(i).html("<span class='badge badge-pill badge-success'><font color='white'><b>"+d+"일 남음</b></font></span>");
+			}
+		}
+	//},1000);
 
+});
 
 </script>
 
@@ -161,7 +200,7 @@ $(document).ready(function(){
 		
 		<td class="td2">
 			<p class="content p5">
-				<span class="badge badge-pill badge-warning mr-1 ml-2">
+				<span class="badge badge-warning mr-1 ml-2">
 				<font color="red">${sg.sg_now_cnt }</font>
 				&nbsp;/&nbsp;${sg.sg_end_cnt }명</span>
 				<span class="badge badge-info mr-2">${sg.gender_cd }</span>${sg.age_range }
