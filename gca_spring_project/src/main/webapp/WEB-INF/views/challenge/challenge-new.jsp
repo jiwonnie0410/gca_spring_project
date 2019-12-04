@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,9 +24,10 @@
     <script>
     $(function() {
     	
-    	//챌린지 남은일자 계산
+/*     	//챌린지 남은일자 계산
 		var today = new Date(); //오늘일자
-    	   
+    	
+		//마감날짜
 		var endDateInput = $("[name=end_date]");
 		for(i = 0; i < endDateInput.length; i++ ){
 			var dataSplit = endDateInput[i].value.split('-');
@@ -37,10 +39,16 @@
 			var endDate = new Date(year, month, day);
 			
 			var gap = endDate.getTime() - today.getTime();
-			gap = Math.floor(gap / (1000 * 60 * 60 * 24 ));
-			console.log( "남은일자: " + gap + " 일 입니다");
-			$("input[name=gapInput]").eq(i).val("(D-"+gap +")");
-		}
+			gap = Math.floor(gap / (1000 * 60 * 60 * 24 ))+1; //d-day 계산; 당일은 0
+			
+			if (gap == 0 ) {
+				$("input[name=gapInput]").eq(i).val("(D-Day!!)");      
+			} else {
+				$("input[name=gapInput]").eq(i).val("(D-"+gap +")");
+			}
+			
+		} */
+		
 	});
     
     </script>
@@ -103,10 +111,9 @@
       input {
       	border: none;
       	background: none;
-      	width: 100px;
+      	width: 90px;
       }
       .gapInput {
-      	width: 50px;
       }
       
     </style>
@@ -135,13 +142,40 @@
               <div class="tab-pane fade show active" id="basicChallenges">
               	
               	<c:forEach items="${challengeList}" var="list">
-              	<c:if test="${list.cl_status eq basic }">   
+	              	<c:if test="${list.cl_status == 'basic' }"> 
 	              	<div class="content-div">
 	              		<img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg" width="100%" height="50">
-						<span>${list.cl_start_dttm }~<input name="end_date" class="end_date" value="${list.cl_end_dttm }">
-									<input name="gapInput" class="gapInput" ></span>
+	              		
+	              		<span><fmt:formatDate value="${list.cl_start_dttm }" type="date" /> ~
+						<fmt:formatDate value="${list.cl_end_dttm }" type="date" />　　　(D-${list.gap_day })</span>
 						<span>${list.cl_name }</span>
 						<span>${list.cl_content}</span>
+						<span>기간안에 ${list.cl_cnt }회 참여</span>
+						<span>리워드: ${list.cl_score }점</span>
+						
+
+						
+						<div class="page">
+							<button type="button" class="join-btn" id="basic-join">참가</button>
+						</div>
+	              	</div>
+	              	</c:if>
+              	</c:forEach>
+              </div>
+              
+              
+              <!-- 기본 챌린지 내용 div 끝 -->    
+              
+              <!-- 스페셜 챌린지 내용 div 시작 -->
+               <div class="tab-pane fade" id="specialChallenges">
+              	<c:forEach items="${challengeList}" var="list">
+              		<c:if test="${list.cl_status != 'basic' }"> 
+	              	<div class="content-div">
+	              		<img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg" width="100%" height="50">
+<%-- 						<span>${list.cl_start_dttm }~<input name="end_date" class="end_date" value="${list.cl_end_dttm }"> --%>
+									<input name="gapInput" class="gapInput" ></span>
+						<span>${list.cl_name }</span>
+						<span>${list.cl_content}</span>   
 						<span>기간안에 ${list.cl_cnt }회 참여</span>
 						<span>리워드: ${list.cl_score }점</span>
 						
@@ -149,31 +183,7 @@
 							<button type="button" class="join-btn" id="basic-join">참가</button>
 						</div>
 	              	</div>
-              	</c:if>
-              	</c:forEach>
-              </div>
-              
-              
-              <!-- 기본 챌린지 내용 div 끝 -->
-              
-              <!-- 스페셜 챌린지 내용 div 시작 -->
-               <div class="tab-pane fade" id="specialChallenges">
-              	<c:forEach items="${challengeList}" var="list">
-              	<c:if test="${list.cl_status eq special}">         
-	              	<div class="content-div">
-	              		<img src="${pageContext.request.contextPath }/resources/images/cycling1.jpg" width="100%" height="50">
-						<span>${list.cl_start_dttm }~<input name="end_date" class="end_date" value="${list.cl_end_dttm }">
-									<input name="gapInput" class="gapInput" ></span>
-						<span>${list.cl_name }</span>
-						<span>${list.cl_content}</span>   
-						<span>기간안에 ${list.cl_cnt }회 참여!!!!!!!!!!!!!!</span>
-						<span>리워드: ${list.cl_score }점</span>
-						
-						<div class="page">
-							<button type="button" class="join-btn" id="basic-join">참가</button>
-						</div>
-	              	</div>
-              	</c:if>
+	              	</c:if>
               	</c:forEach>
               </div>
               <!-- 스페셜 챌린지 내용 div 끝 -->

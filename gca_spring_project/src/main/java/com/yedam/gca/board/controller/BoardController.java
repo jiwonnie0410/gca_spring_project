@@ -34,7 +34,7 @@ public class BoardController {
 	ReplyService replyService;
 	
 	// 01. 게시글 목록
-	@RequestMapping("list.do")
+	@RequestMapping("adlist")//url에서 실행할때 이름 호출
 	public ModelAndView list(@RequestParam(defaultValue="ad_title") String searchOption,
 							@RequestParam(defaultValue="") String keyword,
 							@RequestParam(defaultValue="1") int curPage) throws Exception{
@@ -56,12 +56,8 @@ public class BoardController {
 		map.put("boardPager", boardPager);
 		// ModelAndView - 모델과 뷰
 		ModelAndView mav = new ModelAndView();
-		/*mav.addObject("list", list); // 데이터를 저장
-		mav.addObject("count", count);
-		mav.addObject("searchOption", searchOption);
-		mav.addObject("keyword", keyword);*/
 		mav.addObject("map", map); // 맵에 저장된 데이터를 mav에 저장
-		mav.setViewName("board/list"); // 뷰를 list.jsp로 설정
+		mav.setViewName("askBoard/list"); // 뷰를 list.jsp로 설정
 		return mav; // list.jsp로 List가 전달된다.
 	}
 	
@@ -72,7 +68,7 @@ public class BoardController {
 	// value="", method="전송방식"
 	@RequestMapping(value="write.do", method=RequestMethod.GET)
 	public String write(){
-		return "board/write"; // write.jsp로 이동
+		return "askBoard/write"; // write.jsp로 이동
 	}
 	
 	// 02_02. 게시글 작성처리
@@ -96,7 +92,7 @@ public class BoardController {
 		// 모델(데이터)+뷰(화면)를 함께 전달하는 객체
 		ModelAndView mav = new ModelAndView();
 		// 뷰의 이름
-		mav.setViewName("board/view");
+		mav.setViewName("askBoard/view");
 		// 뷰에 전달할 데이터
 		// 댓글의 수 : 댓글이 존재하는 게시물의 삭제처리 방지하기 위해
 		mav.addObject("count", replyService.count(ad_num)); 

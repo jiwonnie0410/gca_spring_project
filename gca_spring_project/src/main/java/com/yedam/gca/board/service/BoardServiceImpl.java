@@ -23,21 +23,21 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional // 트랜잭션 처리 메서드로 설정
 	@Override
 	public void create(AdBoardVO vo) throws Exception {
-		String title = vo.getAd_title();
+		String ad_title = vo.getAd_title();
 		String content = vo.getAd_content();
 		String m_id = vo.getM_id();
 		// *태그문자 처리 (< ==> &lt; > ==> &gt;)
 		// replace(A, B) A를 B로 변경
-		title = title.replace("<", "&lt;");
-		title = title.replace("<", "&gt;");
+		ad_title = ad_title.replace("<", "&lt;");
+		ad_title = ad_title.replace("<", "&gt;");
 		m_id = m_id.replace("<", "&lt;");
 		m_id = m_id.replace("<", "&gt;");
 		// *공백문자 처리  
-		title = title.replace("  ",	"&nbsp;&nbsp;");
+		ad_title = ad_title.replace("  ",	"&nbsp;&nbsp;");
 		m_id = m_id.replace("  ",	"&nbsp;&nbsp;");
 		// *줄바꿈 문자처리
 		content = content.replace("\n", "<br>");
-		vo.setAd_title(title);
+		vo.setAd_title(ad_title);
 		vo.setAd_content(content);
 		vo.setM_id(m_id);
 		// 게시물 등록
