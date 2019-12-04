@@ -40,7 +40,7 @@
 				SG_NUM,
 				SG_NAME,
 				SG_START_DTTM,
-				SG_END_DTTM,
+				to_char(SG_END_DTTM, 'yy.MM.dd(dy).amhh:mm:ss') SG_END_DTTM,
 				SG_NOW_CNT,
 				SG_END_CNT,
 				SG_LOCATION,

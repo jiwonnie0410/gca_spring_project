@@ -57,6 +57,11 @@ $(document).ready(function(){
 		$('.p1').html('<i class="fas fa-feather-alt pr-2"></i>');
 	}
 	
+	var date = $('.p6').text().substring(0,11);
+	var time = $('.p6').text().substring(12);
+	$('.p6').text(date);
+	$('.p7').text(time);
+	
 	
 });
 
@@ -136,7 +141,11 @@ $(document).ready(function(){
 	<c:forEach items="${ list }" var="sg">
 	<tr height="100px">
 		<td class="td1">
-			<p class="content p1">${sg.sports1_cd }</p>
+			<p class="content p1">
+			${sg.sports1_cd }
+			<c:choose>
+			</c:choose>
+			</p>
 			<p class="content p2"><span class="badge badge-dark">${sg.skill_cd }▲</span></p>
 		</td>
 		
@@ -149,8 +158,8 @@ $(document).ready(function(){
 		
 		<td class="td3" align="center">
 			<input type="hidden" id="db_time" value="">
-			<p class="content p6">${sg.sg_end_dttm } 19.12.25(수)</p>
-			<p class="content p7">오후10:30</p>
+			<p class="content p6">${sg.sg_end_dttm }</p>
+			<p class="content p7">${sg.sg_end_dttm }</p>
 			<p class="content p8"><span class="badge badge-pill badge-warning mr-1 ml-2"><font color="red">${sg.sg_now_cnt }</font>&nbsp;/&nbsp;${sg.sg_end_cnt }명</span></p>
 		</td>
 	</tr>
