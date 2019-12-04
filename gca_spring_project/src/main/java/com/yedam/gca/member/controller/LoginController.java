@@ -10,15 +10,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginController {
 
-	// 지원 로그인 페이지 (홈페이지 열자마자 보이는 화면)
+	// 지원
+	// 첫 로그인 페이지 (홈페이지 열자마자 보이는 화면)
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		return "/member/login";
 	}
 	
-	// 지원 로그인 성공 시에 돌아올 페이지 테스트용
+	// 네이버 아이디로 로그인 성공 시에 돌아올 페이지 -> 반짝 방 리스트로 감
 	@RequestMapping("/login/naverCallback")
 	public String naverCallback() {
 		return "/member/callback";
+	}
+	
+	// 회원가입
+	@RequestMapping("/join")
+	public String join() {
+		return "/member/join";
 	}
 }

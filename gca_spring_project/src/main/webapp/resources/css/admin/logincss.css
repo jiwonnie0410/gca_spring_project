@@ -1,0 +1,57 @@
+@charset "UTF-8";
+.button-general:hover {
+	  background-color: #FEBABA;
+	  border: 2px solid #FE9191;
+	  border-radius: 7px;
+	  color: white;
+}
+
+.button-general {
+	  background: #FE9191;
+	  border: 3px solid #fff;
+	  border-radius: 7px;
+	  color: white;
+	  font-size: 15px;
+	  font-weight: bold;
+	  padding: 2px 4px;
+	  position: relative;
+	  text-transform: uppercase;
+	  height: 45px;
+	  width: 245px;
+}
+
+.button-title:hover {
+	  background-color: #FEBABA;
+	  border: 2px solid #FE9191;
+	  border-radius: 7px;
+	  color: white;
+}
+
+.button-title {
+	  background: #fff;
+	  border: 2px solid #FE9191;
+	  border-radius: 7px;
+	  color: #FE9191;
+	  font-size: 12px;
+	  margin: 0.3em auto;
+	  padding: 2px 4px;
+	  position: relative;
+	  text-transform: uppercase;
+	  height: 25px;
+	  width: 120px;
+}
+
+.div-login {
+	  background-image: url('../../images/login_border.PNG');
+	  width: 410px;
+	  height: 500px;
+}
+
+.check-box {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #FE9191;
+	background-color: white;
+	cursor: pointer;
+}
