@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MemberDAO">
+
+<!--
+	1. 회원가입
+	2. 아이디 중복 확인
+	3. 회원 리스트 가져오기
+ -->
+
+<!-- 1. 회원가입 -->
+		  	<insert id="insertMember">
+					INSERT INTO members (	M_ID,
+											M_SALT,
+											M_PASSWORD,
+											M_NAME,
+											M_NICK,
+											M_IMAGE_CD,
+											M_XY,
+											M_LOCATION,
+											M_AGE,
+											GENDER_CD,
+											M_GRANT,
+											M_LEVEL_CD,
+											M_STATUS_CD		)
+					VALUES (	#{m_id},
+								#{m_salt},
+								#{m_password},
+								#{m_name},
+								#{m_nick},
+								'jw',
+								'jw',
+								#{m_location},
+								${m_age},
+								#{gender_cd},
+								'U',
+								'jw',
+								'M01'		)
+		  	</insert>
+
+
+<!-- 2. 아이디 중복 확인 -->
+		  	<select id="checkId" resultType="int">
+					SELECT COUNT(*)
+					FROM members
+					WHERE M_ID = #{m_id}
+		  	</select>
+
+
+<!-- 3. 회원 리스트 가져오기 -->
+		  	<select id="getMemberListMap" resultType="map"> <!-- typeAlias members로 MembersVO 가져옴 -->
+		  			SELECT *
+		  			FROM members
+		  	</select>
+
+</mapper>

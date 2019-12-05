@@ -33,7 +33,7 @@
 		<br /><br />
 
 		<!-- 회원가입 폼 -->
-		<form role="form" id="joinfrm" name="joinfrm" action="#" method="post">
+		<form role="form" id="joinfrm" name="joinfrm" action="insertJoin" method="post">
 			<table>
 				<tr>	<!-- 아이디 및 중복확인 버튼 -->
 					<th width="50" align="right"> ID </th>
@@ -82,8 +82,8 @@
 					<td height="50"></td>
 					<td width="50"><input type="text" id="age" name="mAge" class="form-control form-control-sm" placeholder="나이"></td>
 					<td colspan="2"><b>세</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" value="female" name="checkbox1" onclick="oneCheckbox(this)" class="check-box" checked> 여성
-							<input type="checkbox" value="male" name="checkbox1" onclick="oneCheckbox(this)" class="check-box"> 남성 </td>
+							<input type="checkbox" value="G01" name="checkbox1" onclick="oneCheckbox(this)" class="check-box" checked> 여성
+							<input type="checkbox" value="G02" name="checkbox1" onclick="oneCheckbox(this)" class="check-box"> 남성 </td>
 				</tr>
 				
 				<tr>	<!-- 주소 및 주소찾기 버튼 -->

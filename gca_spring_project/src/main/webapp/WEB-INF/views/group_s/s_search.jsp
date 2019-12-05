@@ -35,13 +35,21 @@ $(document).ready(function(){
 	});
 	
 	$('.create_room').on('click', function(){
-		location.href="s_search_cre.jsp";
+		location.href='createRoomForm';
 	});
 	
+	p8();
+	setInterval(p8,1000);
+	
+	$('.table').on('click', '.tr', move_room);
+
+
+});
+
+//남은 시간 계산
+function p8(){
 	var now = new Date().getTime();
-	console.log(now);
 	for(var i=0; i< $('.dttm').length; i++){
-		//console.log($('.dttm').eq(i).val());
 		var dttm = $('.dttm').eq(i).val();
 		
 		var year = dttm.substring(0,4);
@@ -57,56 +65,58 @@ $(document).ready(function(){
 		var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
 		var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); 
 		var s = Math.floor((distance % (1000 * 60)) / 1000);
-		console.log(d +', ' + h  +', ' + m  +', ' + s);
 		
-		if(d<1 && h<1 && m<1){
-			$('.p8').eq(i).text(s+"초 남음");
+		if(d<0){
+			$('.p8').eq(i).html("<span class='badge badge-pill badge-secondary'><font color='white'><b>마감</b></font></span>");
+		} else if(d<1 && h<1 && m<1){
+			$('.p8').eq(i).html("<span class='badge badge-pill badge-danger'><font color='white'><b>"+s+"초 남음</b></font></span>");
 		} else if(d<1 && h<1){
-		 	$('.p8').eq(i).text(m+"분"+s+"초 남음");
+			$('.p8').eq(i).html("<span class='badge badge-pill badge-danger'><font color='white'><b>"+m+"분"+s+"초 남음</b></font></span>");
 		} else if(d<1){
-			$('.p8').eq(i).text(h+"시간 남음");
+			$('.p8').eq(i).html("<span class='badge badge-pill badge-danger'><font color='white'><b>"+h+"시간 남음</b></font></span>");
 		} else {
-			$('.p8').eq(i).text(d+"일 남음");
+			$('.p8').eq(i).html("<span class='badge badge-pill badge-success'><font color='white'><b>"+d+"일 남음</b></font></span>");
 		}
 	}
-	
-	//setInterval(function() {
-		var now = new Date().getTime();
-		console.log(now);
-		for(var i=0; i< $('.dttm').length; i++){
-			//console.log($('.dttm').eq(i).val());
-			var dttm = $('.dttm').eq(i).val();
-			
-			var year = dttm.substring(0,4);
-			var month = dttm.substring(5,7)-1;
-			var day = dttm.substring(8,10);
-			var hour = dttm.substring(11,13);
-			var min = dttm.substring(14,16);
-		
-			var countDownDate = new Date(year, month, day, hour, min, 0, 0).getTime();
-			var distance = countDownDate - now;
-			console.log(distance)
-			var d = Math.floor(distance / (1000 * 60 * 60 * 24));
-			var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
-			var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); 
-			var s = Math.floor((distance % (1000 * 60)) / 1000);
-			console.log(d +', ' + h  +', ' + m  +', ' + s);
-			
-			if(d<0){
-				$('.p8').eq(i).html("<span class='badge badge-pill badge-secondary'><font color='white'><b>마감</b></font></span>");
-			} else if(d<1 && h<1 && m<1){
-				$('.p8').eq(i).html("<span class='badge badge-pill badge-danger'><font color='white'><b>"+s+"초 남음</b></font></span>");
-			} else if(d<1 && h<1){
-				$('.p8').eq(i).html("<span class='badge badge-pill badge-danger'><font color='white'><b>"+m+"분"+s+"초 남음</b></font></span>");
-			} else if(d<1){
-				$('.p8').eq(i).html("<span class='badge badge-pill badge-danger'><font color='white'><b>"+h+"시간 남음</b></font></span>");
-			} else {
-				$('.p8').eq(i).html("<span class='badge badge-pill badge-success'><font color='white'><b>"+d+"일 남음</b></font></span>");
-			}
-		}
-	//},1000);
+}
 
-});
+function move_room(){
+	var sg_num = $(this).attr("class").substring(3);
+	var sg_now_cnt = $(this).find('font.sg_now_cnt').text();
+	var sg_dttm = $(this).find('p.p8').text();
+	//console.log(sg_dttm)
+	
+	if(sg_dttm == "마감"){
+		alert("마감 시간이 초과되어 참여하실 수 없습니다.");
+		return false;
+	}
+	
+ 	if(sg_now_cnt < 4){
+		$.ajax({
+			url: "sgNowCnt/" + sg_num,
+			dataType: "json",
+			contentType : "application/json",
+			success: move_room_handler
+			});
+	} else if(sg_now_cnt == 4){
+		alert("모집 인원이 초과되어 참여하실 수 없습니다. 인원 변동이 발생하면 참여해 주세요.");
+		return false;
+	} else {
+		location.href='getRoomInfo2?sg_num='+sg_num+'&sg_now_cnt='+sg_now_cnt;	
+	}
+}
+
+function move_room_handler(result){
+	if(result.sg_now_cnt == 4){
+		alert("모집 인원이 초과되어 참여하실 수 없습니다. 인원 변동이 발생하면 참여해 주세요.");
+		return false;
+	} else {
+		var con = confirm("선택한 반짝에 참여하시겠습니까?");
+		if(con){
+			location.href='getRoomInfo2?sg_num='+result.sg_num+'&sg_now_cnt='+result.sg_now_cnt;	
+		} else return false;
+	}
+}
 
 </script>
 
@@ -181,7 +191,7 @@ $(document).ready(function(){
 
 <table class="table table-striped">
 	<c:forEach items="${ list }" var="sg">
-	<tr height="100px" onclick="location.href='getRoomInfo2?sg_num=${sg.sg_num}&sg_now_cnt=${sg.sg_now_cnt }'">
+	<tr height="90px" class="tr ${sg.sg_num}">
 		<td class="td1">
 			<p class="content p1">
 			<c:choose>
@@ -201,21 +211,20 @@ $(document).ready(function(){
 		<td class="td2">
 			<p class="content p5">
 				<span class="badge badge-warning mr-1 ml-2">
-				<font color="red">${sg.sg_now_cnt }</font>
-				&nbsp;/&nbsp;${sg.sg_end_cnt }명</span>
+					<font color="red" class="sg_now_cnt">${sg.sg_now_cnt }</font>
+					&nbsp;/&nbsp;${sg.sg_end_cnt }명
+				</span>
 				<span class="badge badge-info mr-2">${sg.gender_cd }</span>${sg.age_range }
 			</p>
-<!-- 			<p class="content p3">마감까지 00일 00시간 00분 00초 남음</p> -->
 			<p class="content p4">${sg.sg_name }</p>
 			<p class="content p3">${sg.sg_location }</p>
 		</td>
 		
 		<td class="td3" align="center">
-		<input type="hidden" class="dttm" value="${sg.sg_end_dttm }">
+			<input type="hidden" class="dttm" value="${sg.sg_end_dttm }">
 			<p class="content p6"><fmt:formatDate value="${sg.sg_end_dttm }" pattern="yy.MM.dd(E)" /></p>
 			<p class="content p7"><fmt:formatDate value="${sg.sg_end_dttm }" pattern="ahh:mm" /></p>
-			<p class="content p8"></span>
-			</p>
+			<p class="content p8"></p>
 		</td>
 	</tr>
 	</c:forEach>
