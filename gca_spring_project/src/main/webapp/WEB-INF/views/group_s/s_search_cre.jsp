@@ -16,10 +16,10 @@
 <!-- private : icon -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/mihy/nouislider.min.css">
-<script src="${pageContext.request.contextPath }/js/mihy/nouislider.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/mihy/nouislider.css">
-<script src="${pageContext.request.contextPath }/js/mihy/nouislider.min.js"></script>
+<link rel="stylesheet" href="../resources/css/mihy/nouislider.min.css">
+<script src="../resources/js/mihy/nouislider.min.js"></script>
+<link rel="stylesheet" href="../resources/css/mihy/nouislider.css">
+<script src="../resources/js/mihy/nouislider.min.js"></script>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9e415eb9e7187154cd9c6308c036f0a6&libraries=services,clusterer"></script>
@@ -27,6 +27,7 @@
 
 <script>
 $(document).ready(function(){
+	
 	
 	//운동종목 드롭다운
 	$('#sg_sport_div .dropdown-menu li').bind('click',function (e) {
@@ -45,21 +46,21 @@ $(document).ready(function(){
 		}
 
 		if(sport_name == "농구"){
-			$('#sg_sport').val('basketball');
+			$('#sg_sport').val('S01');
 		} else if(sport_name == "달리기/산책"){
-			$('#sg_sport').val('running');
+			$('#sg_sport').val('S02');
 		} else if(sport_name.substr(0,1) == "등"){
-			$('#sg_sport').val('hiking');
+			$('#sg_sport').val('S03');
 		} else if(sport_name.substr(0,1) == "배"){
-			$('#sg_sport').val('badminton');
+			$('#sg_sport').val('S04');
 		} else if(sport_name.substr(0,1) == "볼"){
-			$('#sg_sport').val('bowling');
+			$('#sg_sport').val('S05');
 		} else if(sport_name.substr(0,1) == "수"){
-			$('#sg_sport').val('swimming');
+			$('#sg_sport').val('S06');
 		} else if(sport_name.substr(0,1) == "자"){
-			$('#sg_sport').val('bicycle');
+			$('#sg_sport').val('S06');
 		} else if(sport_name.substr(0,1) == "기"){
-			$('#sg_sport').val('etc-sport');
+			$('#sg_sport').val('S08');
 		} else {
 			$('#sg_sport').val();
 		}
