@@ -61,8 +61,8 @@
 								<td colspan="2"><button type="button" onclick="location.href='./join'" class="button-general"> JOIN </button></td>
 							</tr>
 							<tr>
-								<td><button type="button" onclick="location.href='#'" class="button-title"> 아이디 찾기 </button></td>
-								<td><button type="button" onclick="location.href='#'" class="button-title"> 비밀번호 찾기 </button></td>
+								<td><button type="button" onclick="location.href='./forgotId'" class="button-title"> 아이디 찾기 </button></td>
+								<td><button type="button" onclick="location.href='./forgotPassword'" class="button-title"> 비밀번호 찾기 </button></td>
 							</tr>
 						</table>
 					</form>

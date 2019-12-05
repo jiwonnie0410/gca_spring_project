@@ -33,13 +33,13 @@ public class LoginController {
 		return "/member/callback";
 	}
 	
-	// 회원가입 폼 페이지
+	// 회원가입 페이지
 	@RequestMapping("/join")
 	public String join() {
 		return "/member/join";
 	}
 	
-	// 회원가입하기 (디비에 삽입) -> 회원가입 성공 시에 제일 첫 로그인 페이지로 감
+	// 회원가입 하기 (디비에 삽입) -> 회원가입 성공 시에 제일 첫 로그인 페이지로 감
 	@RequestMapping("/insertJoin")
 	public String insertJoin(HttpServletRequest request, MembersVO vo) {
 		System.out.println("회원가입하려는 아이디: " + request.getParameter("mId"));
@@ -60,4 +60,17 @@ public class LoginController {
 	public int checkId(String id) {
 		return memberService.checkId(id);
 	}
+	
+	// 아이디 찾기 페이지
+	@RequestMapping("/forgotId")
+	public String forgotId() {
+		return "/member/forgotId";
+	}
+	
+	// 비밀번호 찾기 페이지
+	@RequestMapping("/forgotPassword")
+	public String forgotPw() {
+		return "/member/forgotPw";
+	}
+	
 }
