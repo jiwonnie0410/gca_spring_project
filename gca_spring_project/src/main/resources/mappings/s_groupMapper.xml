@@ -16,11 +16,11 @@
 					SG_END_CNT,
 					SG_LOCATION,
 					SG_XY,
-					SPORTS1_CD,
-					SKILL_CD,
+					get_code_name(GENDER_CD) SPORTS1_CD,
+					get_code_name(GENDER_CD) SKILL_CD,
 					AGE_RANGE,
-					GENDER_CD,
-					STATUS_CD,
+					get_code_name(GENDER_CD) GENDER_CD,
+					get_code_name(STATUS_CD) STATUS_CD,
 					SG_OPTION
 		FROM 		SGROUP
 		WHERE		SG_NUM = #{sg_num}
