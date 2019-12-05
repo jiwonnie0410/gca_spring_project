@@ -68,7 +68,8 @@
 <script>
 $(function() {
 	$("#back-btn").click(function(){
-		location.href='list';
+		//location.href='list';
+		history.go(-1)();
 	});
 	
 	
