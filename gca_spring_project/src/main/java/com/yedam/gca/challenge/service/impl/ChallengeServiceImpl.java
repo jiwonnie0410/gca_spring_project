@@ -24,4 +24,9 @@ public class ChallengeServiceImpl implements ChallengeService{
 		return dao.getChallenge(vo);
 	}
 
+	@Override
+	public ChallengeVO challengePayment(ChallengeVO vo) {
+		return dao.challengePayment(vo);
+	}
+
 }

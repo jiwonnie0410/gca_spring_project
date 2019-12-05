@@ -12,5 +12,8 @@ public interface ChallengeService {
 	
 	//챌린지 단건조회 
 	ChallengeVO getChallenge(ChallengeVO vo);
+	
+	//스페셜챌린지 결제페이지
+	public ChallengeVO challengePayment(ChallengeVO vo);
 
 }

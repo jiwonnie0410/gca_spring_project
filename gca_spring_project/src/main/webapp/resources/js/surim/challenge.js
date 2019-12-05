@@ -1,43 +1,33 @@
 $(function() {
 	//기본 챌린지 버튼 클릭시 모달창 팝업
-	    $("[name=basic-btn]").click(function(){
+	    $("#basic-btn").click(function(){
 	    	if ( $(this).attr('class')!='join-btn start-challenge' ) {
 	    		$("#basicModal").modal();
 	    	}
 	    });
 		
         $("#basic-join-add").click(function(){
-        	$("#basic-join").toggleClass('start-challenge');
-			  var $page = $('.page');
-			  $page.toggleClass('color-bg-start')
-			    .toggleClass('bg-animate-color');
+        	$("#basic-btn").toggleClass('start-challenge');
 	
-			  $("#basic-join").hasClass('start-challenge') ?
-				  $("#basic-join").text('참가중') :
-				  $("#basic-join").text('참가');
+			  $("#basic-btn").hasClass('start-challenge') ?
+				  $("#basic-btn").text('참가중') :
+				  $("#basic-btn").text('참가');
         });
 	
 	//스페셜 챌린지 버튼 클릭시 모달창 팝업
-	    $("[name=special-btn]").click(function(){
+	    $("#special-btn").click(function(){
 	    	if ( $(this).attr('class')!='join-btn start-challenge' ) {
 	       		 $("#specialModal").modal();
+	       		 console.log("모달출력");
 	       }
 	    });
 	
         $("#special-join-add").click(function(){
-			$("#payModal").modal();
+        	$("#special-btn").toggleClass('start-challenge');
+	
+			$("#special-btn").hasClass('start-challenge') ?
+				$("#special-btn").text('참가중') :
+				$("#special-btn").text('참가');
+			location.href="payment"	
         });
-	
-	
-         $("#paynow").click(function(){
-        	$("#special-join").toggleClass('start-challenge');
-			  var $page = $('.page');
-			  $page.toggleClass('color-bg-start')
-			    .toggleClass('bg-animate-color');
-	
-			  $("#special-join").hasClass('start-challenge') ?
-				  $("#special-join").text('참가중') :
-				  $("#special-join").text('참가');
-        }); 
-
 })//

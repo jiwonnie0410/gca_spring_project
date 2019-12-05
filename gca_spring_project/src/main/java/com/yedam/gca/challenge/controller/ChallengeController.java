@@ -20,6 +20,8 @@ public class ChallengeController {
 		
 		return "challenge/challenge";
 	}
+	
+	//수림 챌린지 단건 조회
 	@RequestMapping("challenge/contents")
 	public String getChallenge(@RequestParam(value="cl_num", defaultValue = "", required = true) 
 			int cl_num, Model model, ChallengeVO vo ) {
@@ -28,5 +30,12 @@ public class ChallengeController {
 		
 		return "challenge/challengeContents";
 	}
-
+	
+	//수림 스페셜챌린지 결제페이지
+	@RequestMapping("challenge/payment")
+	public String challengePayment(ChallengeVO vo, Model model) {
+		model.addAttribute("challenge", service.getChallenge(vo)); 
+		
+	 return "challenge/challengePayment";
+	}
 }
