@@ -41,7 +41,7 @@
 
 			<div class="col-md-6">
 				<h6> 해당 아이디 및 회원정보에 등록된 이름과 이메일을 입력하시면 이메일로 임시 비밀번호를 보내드리고 있습니다. <br>임시 비밀번호로 로그인 해 주세요.  </h6><br />
-				<form role="form" id="forgotPwfrm" name="forgotPwfrm" action="basic_forgotPw.do">
+				<form role="form" id="forgotPwfrm" name="forgotPwfrm" action="getTempPassword">
 					<input type="hidden" id="email" name="mEmail">
 					<table>
 						<tr>

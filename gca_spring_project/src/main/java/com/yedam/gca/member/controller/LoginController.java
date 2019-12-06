@@ -68,6 +68,7 @@ public class LoginController {
 		return "/member/forgotId";
 	}
 	
+	// 이메일로 아이디 보내기
 	@RequestMapping("/getId")
 	public String getId(HttpServletRequest request, Model model) {
 		MembersVO vo = new MembersVO();
@@ -81,6 +82,17 @@ public class LoginController {
 	@RequestMapping("/forgotPassword")
 	public String forgotPw() {
 		return "/member/forgotPw";
+	}
+	
+	// 이메일로 임시 비밀번호 보내기
+	@RequestMapping("/getTempPassword")
+	public String getTempPassword(HttpServletRequest request, Model model) {
+		MembersVO vo = new MembersVO();
+		vo.setM_id(request.getParameter("mId"));
+		vo.setM_name(request.getParameter("mName"));
+		vo.setM_email(request.getParameter("mEmail"));
+		model.addAttribute("pwMessage", memberService.forgotPw(vo));
+		return "/member/login";
 	}
 	
 }

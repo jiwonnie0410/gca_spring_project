@@ -1,6 +1,7 @@
 package com.yedam.gca.member.service.impl;
 
 import java.util.Properties;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.mail.Message;
@@ -94,4 +95,79 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	// 비밀번호 찾기 -> 이메일로 임시 비밀번호 보내고 디비에 정보 업데이트
+	public String forgotPw(MembersVO vo) {
+		String id = vo.getM_id();
+		String name = vo.getM_name();
+		String email = vo.getM_email();
+		
+		// 임시 비밀번호 생성
+		StringBuffer temp = new StringBuffer();
+		Random rnd = new Random();
+		for (int i = 0; i < 20; i++) {
+		    int rIndex = rnd.nextInt(3);
+		    switch (rIndex) {
+		    case 0:
+		        // a-z
+		        temp.append((char) ((int) (rnd.nextInt(26)) + 97));
+		        break;
+		    case 1:
+		        // A-Z
+		        temp.append((char) ((int) (rnd.nextInt(26)) + 65));
+		        break;
+		    case 2:
+		        // 0-9
+		        temp.append((rnd.nextInt(10)));
+		        break;
+		    }
+		}
+		String tempPw = temp.toString(); // 임시 비밀번호
+		vo.setM_password(tempPw);
+		
+		int result = dao.forgotPw(vo); // 정보 확인 후에 임시 비밀번호 업데이트
+		
+		// 입력받은 아이디, 이름, 이메일에 해당하는 정보가 없음
+		if (result == 0) { 
+			return "해당 정보와 일치하는 회원이 없습니다.";
+			
+		// 해당하는 정보를 찾았음
+		} else {
+			// 임시 비밀번호로 디비 업데이트
+			dao.updateTempPw(vo);
+			
+			// 이메일 전송
+			final String user = "undong.master@gmail.com"; 	// 보내는 사람 이메일 주소
+			final String password = "iggezabqphyhqyph"; 	// 비밀번호
+
+			Properties prop = new Properties();
+			prop.put("mail.smtp.host", "smtp.gmail.com");
+			prop.put("mail.smtp.port", "587");
+			prop.put("mail.smtp.auth", "true");
+			prop.put("mail.smtp.starttls.enable", "true");
+
+			Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(user, password);
+				}
+			});
+
+			try {
+				MimeMessage message = new MimeMessage(session);
+				message.setFrom(new InternetAddress(user));
+
+				// 받는 사람의 이메일 주소
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+				// 메일 제목
+				message.setSubject("운동하자에서 알려드립니다.");
+				// 메일 내용
+				message.setText("임시 비밀번호는 '" + tempPw + "'입니다. 이 비밀번호로 로그인 후에 비밀번호 변경을 해 주세요. \n행복한 하루 되세요!");
+				// 전송
+				Transport.send(message);
+				System.out.println("이메일 전송 완료");
+			} catch (AddressException e) {	e.printStackTrace();	} 
+			catch (MessagingException e) {	e.printStackTrace();	}
+
+			return "이메일로 임시 비밀번호를 발송했습니다. 로그인 해 주세요.";
+		}
+	}
 }

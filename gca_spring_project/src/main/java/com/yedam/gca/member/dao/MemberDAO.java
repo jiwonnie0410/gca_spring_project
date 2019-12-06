@@ -26,4 +26,14 @@ public class MemberDAO {
 	public String forgotId(MembersVO vo) {
 		return mybatis.selectOne("MemberDAO.forgotId", vo);
 	}
+	
+	// 4-1. 비밀번호 찾기에 입력 받은 정보로 회원 확인하기
+	public int forgotPw(MembersVO vo) {
+		return mybatis.selectOne("MemberDAO.forgotPw", vo);
+	}
+	
+	// 4-2. 임시 비밀번호로 업데이트 하기
+	public int updateTempPw(MembersVO vo) {
+		return mybatis.update("MemberDAO.updateTempPw", vo);
+	}
 }

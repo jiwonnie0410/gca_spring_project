@@ -1,7 +1,3 @@
-//if('${message}' != ''){
-//	alert('${message}');
-//}
-
 function resetPw() {
 	var form = document.forgotPwfrm;
 	// 필요한 정보가 다 입력되었는지 확인

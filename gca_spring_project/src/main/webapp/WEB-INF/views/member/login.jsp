@@ -32,6 +32,9 @@
 			if('${idMessage}' != ''){
 				alert('${idMessage}');
 			}
+			if('${pwMessage}' != ''){
+				alert('${pwMessage}');
+			}
 	</script>
 
 </head>
