@@ -1,5 +1,7 @@
 package com.yedam.gca.challenge.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.gca.challenge.service.ChallengeService;
 import com.yedam.gca.challenge.vo.ChallengeVO;
+import com.yedam.gca.history.vo.ChallengeHistVO;
 
 @Controller
 public class ChallengeController {
@@ -19,9 +22,13 @@ public class ChallengeController {
 	///////////////////////////////수림 ////////////////////////////
 	//챌린지 목록 조회
 	@RequestMapping("challenge/list")
-	public String getChallengeList(Model model) {
-		model.addAttribute("challengeList", service.getChallengeList());
+	public String getChallengeList(Model model, HttpSession session) {
+		ChallengeHistVO vo = new ChallengeHistVO();
+		vo.setM_id("test");
 		
+		session.setAttribute("id", vo.getM_id());
+		
+		model.addAttribute("challengeList", service.getChallengeList());
 		return "challenge/challenge";
 	}
 	
@@ -36,12 +43,11 @@ public class ChallengeController {
 	}
 	
 	//챌린지 참가등록, (챌린지 히스토리에 내역남김) 
-	@RequestMapping(value="/ajax/insertChallenge.json", consumes ="application/json")
+	@RequestMapping(value="/challenge/ajax/insertChallenge.json", consumes ="application/json")
 	@ResponseBody
-	public void insertChallenge(@RequestBody ChallengeVO vo) {
+	public void insertChallenge(@RequestBody ChallengeHistVO vo) {
 		service.insertChallenge(vo);
 	}
-	
 	
 	//스페셜챌린지 결제페이지
 	@RequestMapping("challenge/payment")

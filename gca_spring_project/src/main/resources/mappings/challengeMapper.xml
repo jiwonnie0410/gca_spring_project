@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ChallengeDAO" >
+
+<!--  *********수림************* -->
 	<select id="getChallengeList" resultType="challenge">
 		SELECT	CL_NUM,
 				CL_STATUS,
@@ -40,5 +42,22 @@
 		FROM	CHALLENGE
 		WHERE 	CL_NUM = #{cl_num}
 	</select>
+	
+	<insert id="insertChallenge">
+		INSERT INTO CHALLENGE_HIST (
+							CL_NUM,
+							M_ID,
+							CLH_START_DTTM,
+							CLH_CNT,
+							CLH_STATUS_CD
+							)
+				VALUES (
+						#{cl_num},
+						#{m_id},
+						sysdate,
+						0,
+						'C01'
+						)			
+	</insert>
 
 </mapper>

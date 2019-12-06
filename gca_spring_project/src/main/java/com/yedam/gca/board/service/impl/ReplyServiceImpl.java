@@ -1,4 +1,4 @@
-package com.yedam.gca.board.service;
+package com.yedam.gca.board.service.impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
 import com.yedam.gca.board.dao.ReplyDAO;
+import com.yedam.gca.board.service.ReplyService;
 import com.yedam.gca.board.vo.AdReplyVO;
 
 @Service
@@ -34,9 +35,9 @@ public class ReplyServiceImpl implements ReplyService {
 					vo.setAdr_content("비밀 댓글입니다.");
 				} else { // 로그인 상태일 경우
 					String writer = vo.getM_id(); // 게시물 작성자 저장
-					String m_id1 = vo.getM_id(); // 댓글 작성자 저장
+					String replyer = vo.getM_id(); // 댓글 작성자 저장
 					// 로그인한 사용자가 게시물의 작성자X 댓글 작성자도 X 비밀댓글로 처리
-					if(!writer.equals(writer) && !m_id1.equals(m_id1)) {
+					if(!m_id.equals(writer) && !m_id.equals(replyer)) {
 						vo.setAdr_content("비밀 댓글입니다.");
 					}
 				}
@@ -46,8 +47,8 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 	// 3. 댓글 상세보기
 	@Override
-	public AdReplyVO detail(Integer adr_number) {
-		return replyDao.detail(adr_number);
+	public AdReplyVO detail(Integer adr_num) {
+		return replyDao.detail(adr_num);
 	}
 	// 4. 댓글 수정
 	@Override
@@ -56,8 +57,8 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 	// 5. 댓글 삭제
 	@Override
-	public void delete(Integer adr_number) {
-		replyDao.delete(adr_number);
+	public void delete(Integer adr_num) {
+		replyDao.delete(adr_num);
 	}
 	// 6. 댓글 갯수
 	@Override
