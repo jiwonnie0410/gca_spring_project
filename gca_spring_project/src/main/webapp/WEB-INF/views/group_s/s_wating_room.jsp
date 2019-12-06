@@ -22,7 +22,7 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-<script src="../resources/js/jey/json.min.js"></script>
+<script src="../resources/scripts/json.min.js"></script>
 
 
 <style>
@@ -91,7 +91,7 @@
 	     white-space:nowrap;
 	   }
 	   
-	div#room-info-div .modal-body{
+	div#room-info-div.modal-body{
 		text-align : left;
 	}
 	
@@ -109,26 +109,14 @@
 
 
 <script>
-		$(function() { //이 문장이 페이지 로딩 완료 후 실행?
+		$(function() { //이 문장이 페이지 로딩 완료 후 실행
 			
-			/* //마감날짜 -> 일, 월 만 뽑아내기
-			var strArray = $("#endDate").html().split('-'); //년, 월, 일 순의 배열
-			var endMonth = strArray[1];
-			var endDay = strArray[2];
-			var endDate = (endMonth.concat("/")).concat(endDay);
-			
-			//var endDate = ${sgroup.sg_end_dttm }; 이건 2020 - 01 - 02 빼기로 인식해서 2017로 나옴..
-			
-			console.log(endDate);
-			
-			$("#endDate").html(endDate); //${sgroup.sg_end_dttm } 였던 값을 endDate로 덮어씌움
-			//더좋은방법 찾아보기!!!!!! 2020-01-02 수식으로 나오는 값을 문자로 바꾸는 법 알아보고 처음부터 그 값으로 씌우기..
-			
-			//jstl formatDate써서 해결..!!
-			*/
-			
-			
-			
+			//채팅 전송버튼 눌렀을때
+			$("body").on("click", "[id^=chat]", function() {
+
+				send();
+
+			});
 
 			
 				
@@ -156,8 +144,6 @@
 						}
 						
 					});
-					
-					console.log("신고했을때 처리할 곳");
 					
 					$('#profile').modal('hide'); //프로필 모달창 까지 닫기
 
@@ -208,14 +194,14 @@
 	<!-- 채팅 -->	
     	<div style="padding-top:0px; padding-bottom:20px">
     		<div>
-      			<textarea style="font-size:15px; background-color:#FE9191;border-radius:5px;border:3px double #FFF;
-      							padding:10px; resize:none; width:80%; height:300px;"><000님이 참가하셨습니다.></textarea>
+      			<textarea id="messageWindow" style="font-size:15px; background-color:#FE9191;border-radius:5px;border:3px double #FFF;
+      							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly"><000님이 참가하셨습니다.></textarea>
       			<div style="padding-top:10px;">
       				<span style="padding-left:5px; padding-right:3px; vertical-align: middle;">
-      					<textarea style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; ">입력하세요</textarea>
+      					<textarea id="inputMessage" style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; ">입력하세요</textarea>
       				</span>
       				<span style="vertical-align:middle;">
-      					<button class="button-general">전송</button>
+      					<button id="chat" class="button-general">전송</button>
       				</span>
       			</div>
     		</div>
@@ -452,6 +438,69 @@
         </div> -->
 
 
+
+
+<!-- 웹소켓 채팅 -->
+<script type="text/javascript">
+
+ var textarea = document.getElementById("messageWindow"); 
+ var webSocket = new WebSocket('ws://localhost/gca/broadcast.do'); 
+ var inputMessage = document.getElementById('inputMessage');
+ 
+ webSocket.onerror = function(event) { onError(event) };
+ webSocket.onopen = function(event) { onOpen(event) };
+ webSocket.onmessage = function(event) { onMessage(event) };
+ 
+ function onMessage(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
+	 var result = JSON.parse(event.data);
+	 if(result.cmd == "msg") {
+		 textarea.value += result.msg + "\n";		 
+	 }
+	 /* else if( result.cmd = "board") {
+		 var list = JSON.parse(result.msg);
+		 for(i=0; i< list.length; i++) {
+			 textarea.value += list[i].CONTENT + "\n";		
+		 }
+	 } */
+	  
+	 chatAreaScroll(); 
+ }
+ 
+ function onOpen(event) { textarea.value += "연결 성공\n"; }
+ function onError(event) { 
+	 console.log(event); 
+ 	alert(event.data); 
+ }
+ function send() { 
+	 msg = {
+		 cmd : "msg",
+		 id : "test",
+		 msg : inputMessage.value
+	 }
+	textarea.value += "나 : " + inputMessage.value + "\n"; 
+	webSocket.send(  JSON.stringify( msg )   ); 
+	inputMessage.value = ""; 
+ } 
+ 
+ /* function getBoard() { 
+	 msg = {
+		 cmd : "board",
+		 id : "",
+		 msg : ""
+	 }
+	webSocket.send(  JSON.stringify( msg )   ); 
+ }  */
+ 
+ function chatAreaScroll() {
+	//using jquery
+	/* var textArea = $('#messageWindow');
+	textArea.scrollTop( textArea[0].scrollHeight - textArea.height() );
+	textArea.scrollTop( textArea[0].scrollHeight); */
+	//using javascript
+	var textarea = document.getElementById('messageWindow');
+	textarea.scrollTop = textarea.scrollHeight;
+}
+</script>
     
 </body>
 </html>

@@ -1,7 +1,7 @@
-package com.yedam.gca.board.service;
+package com.yedam.gca.board.service.impl;
 
 
-
+import java.sql.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yedam.gca.board.dao.BoardDAO;
+import com.yedam.gca.board.service.BoardService;
 import com.yedam.gca.board.vo.AdBoardVO;
 
 @Service
@@ -24,8 +25,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void create(AdBoardVO vo) throws Exception {
 		String ad_title = vo.getAd_title();
-		String content = vo.getAd_content();
+		String ad_content = vo.getAd_content();
 		String m_id = vo.getM_id();
+		String ad_city = vo.getAd_city();
+		int ad_count = vo.getAd_count();
+		Date ad_date = vo.getAd_date();
 		// *태그문자 처리 (< ==> &lt; > ==> &gt;)
 		// replace(A, B) A를 B로 변경
 		ad_title = ad_title.replace("<", "&lt;");
@@ -36,10 +40,15 @@ public class BoardServiceImpl implements BoardService {
 		ad_title = ad_title.replace("  ",	"&nbsp;&nbsp;");
 		m_id = m_id.replace("  ",	"&nbsp;&nbsp;");
 		// *줄바꿈 문자처리
-		content = content.replace("\n", "<br>");
+		ad_content = ad_content.replace("\n", "<br>");
+		
 		vo.setAd_title(ad_title);
-		vo.setAd_content(content);
-		vo.setM_id(m_id);
+		vo.setAd_city(ad_city);
+		vo.setAd_count(ad_count);
+		vo.setAd_date(ad_date);
+		vo.setAd_content(ad_content);
+		/* vo.setM_id(m_id); */ //로그인 완성후 주석풀기
+		vo.setM_id("rr99999");
 		// 게시물 등록
 		boardDao.create(vo);
 	
