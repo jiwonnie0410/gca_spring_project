@@ -72,7 +72,7 @@ public class ReplyController {
 	}
 	
 	// 2_1. 댓글 목록(@Controller방식 : veiw(화면)를 리턴)
-	@RequestMapping("list.do")
+	@RequestMapping("list")
 	public ModelAndView list(@RequestParam int ad_num,	@RequestParam(defaultValue="1") int curPage, ModelAndView mav, HttpSession session){
 		// 페이징 처리 
 		int count = replyService.count(ad_num); // 댓글 갯수
@@ -109,10 +109,10 @@ public class ReplyController {
 	
 	// ** Controller 추가 사항 - Rest방식으로 댓글 목록, 수정, 삭제 처리
 	
-	// 2_3. 댓글 목록(@RestController방식 :  json으로 전달하여 목록생성)
-	// /reply/list/1 => 1번 게시물의 댓글 목록 리턴
-	// /reply/list/2 => 2번 게시물의 댓글 목록 리턴
-	// @PathVariable : url에 입력될 변수값 지정
+//	 2_3. 댓글 목록(@RestController방식 :  json으로 전달하여 목록생성)
+//	 /reply/list/1 => 1번 게시물의 댓글 목록 리턴
+//	 /reply/list/2 => 2번 게시물의 댓글 목록 리턴
+//	 @PathVariable : url에 입력될 변수값 지정
 	@RequestMapping(value="/list/{ad_num}/{curPage}", method=RequestMethod.GET)
 	public ModelAndView replyList(@PathVariable("ad_num") int ad_num, @PathVariable int curPage, ModelAndView mav, HttpSession session){
 		// 페이징 처리

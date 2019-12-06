@@ -74,17 +74,18 @@ public class BoardController {
 	// 02_02. 게시글 작성처리
 	@RequestMapping(value="insert.do", method=RequestMethod.POST)
 	public String insert(@ModelAttribute AdBoardVO vo, HttpSession session) throws Exception{
-		// session에 저장된m_id를 writer에 저장
-		String m_id = (String) session.getAttribute("m_id");
-		vo.setM_id(m_id);
+		// session에 저장된m_id
+		/* String m_id = (String) session.getAttribute("m_id"); */ //로그인 완성하면 주석 풀기
+		//vo.setM_id(m_id); //로그인 완성하면 주석 풀기
+		vo.setM_id("rr99999");
 		boardService.create(vo);
-		return "redirect:list.do";
+		return "redirect:adlist";
 	}
 	
 	// 03. 게시글 상세내용 조회, 게시글 조회수 증가 처리
 	// @RequestParam : get/post방식으로 전달된 변수 1개
 	// HttpSession 세션객체
-	@RequestMapping(value="view.do", method=RequestMethod.GET)
+	@RequestMapping(value="view", method=RequestMethod.GET)
 	public ModelAndView view(@RequestParam int ad_num, @RequestParam int curPage, @RequestParam String searchOption,
 							@RequestParam String keyword, HttpSession session) throws Exception{
 		// 조회수 증가 처리
@@ -109,14 +110,14 @@ public class BoardController {
 	@RequestMapping(value="update.do", method=RequestMethod.POST)
 	public String update(@ModelAttribute AdBoardVO vo) throws Exception{
 		boardService.update(vo);
-		return "redirect:list.do";
+		return "redirect:adlist";
 	}
 	
 	// 05. 게시글 삭제
 	@RequestMapping("delete.do")
 	public String delete(@RequestParam int ad_num) throws Exception{
 		boardService.delete(ad_num);
-		return "redirect:list.do";
+		return "redirect:adlist";
 	}
 	
 	

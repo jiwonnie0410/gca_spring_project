@@ -9,6 +9,9 @@
 		<meta name="author" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		
+		<!-- 제이쿼리 -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		
 		<!-- 부트스트랩 -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -16,13 +19,11 @@
 		<!-- 버튼 css -->
 		<link href="./resources/css/admin/logincss.css" rel="stylesheet">
 		
-		<!-- 제이쿼리 -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		
 		<!-- 자바스크립트 회원가입 및 다음주소API -->
-		<script type="text/javascript" src="./resources/js/admin/joinjs.js"></script>
-		<script type="text/javascript" src="./resources/js/admin/daumAddress.js"></script>
+		<script type="text/javascript" src="./resources/js/member/joinjs.js"></script>
+		<script type="text/javascript" src="./resources/js/member/daumAddress.js"></script>
 		<script	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		
 </head>
 
 <body>
@@ -34,10 +35,11 @@
 
 		<!-- 회원가입 폼 -->
 		<form role="form" id="joinfrm" name="joinfrm" action="insertJoin" method="post">
+			<input type="hidden" id="email" name="mEmail">
 			<table>
 				<tr>	<!-- 아이디 및 중복확인 버튼 -->
 					<th width="50" align="right"> ID </th>
-					<td colspan="2" width="100">
+					<td colspan="2">
 						<input type="text" id="joinId" name="mId" class="form-control form-control-sm" onkeyup="idCondition()" value="${param.mId }" /></td>
 					<td width="10" align="center">
 						<input disabled id="idButton" type="button" class="btn button-title" style="height: 30px;" onclick="idCheck()" value="중복확인" /></td>
@@ -84,6 +86,16 @@
 					<td colspan="2"><b>세</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="checkbox" value="G01" name="checkbox1" onclick="oneCheckbox(this)" class="check-box" checked> 여성
 							<input type="checkbox" value="G02" name="checkbox1" onclick="oneCheckbox(this)" class="check-box"> 남성 </td>
+				</tr>
+				
+				<tr>	<!-- 이메일 -->
+					<th height="50">Email</th>
+					<td align="center" colspan="2">
+						<input type="text" id="email1" name="email1" class="form-control form-control-sm" value="${param.email1 }" /></td>
+					<td>@<select id="email2" name="email2" class="btn btn-secondary btn-sm dropdown-toggle">
+							<option	value="gmail.com" selected>gmail.com</option>
+							<option value="naver.com">naver.com</option>
+							<option value="daum.net">daum.net</option></select></td>
 				</tr>
 				
 				<tr>	<!-- 주소 및 주소찾기 버튼 -->

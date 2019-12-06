@@ -6,18 +6,36 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<!-- 반응형 웹 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
+	<!-- 제이쿼리 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+	<!-- 네이버 아이디로 로그인 -->
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+	
+	<!-- 부트스트랩 -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	
+	<!-- CSS -->
 	<link href="./resources/css/admin/logincss.css" rel="stylesheet">
 	
-	<title> 로그인 페이지</title>
+	<title> 운동하자 로그인 </title>
+	
+	<script>
+			// 확인 메시지 띄우기
+			if('${idMessage}' != ''){
+				alert('${idMessage}');
+			}
+			if('${pwMessage}' != ''){
+				alert('${pwMessage}');
+			}
+	</script>
 
 </head>
 <body>
