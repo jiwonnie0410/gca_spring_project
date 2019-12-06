@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yedam.gca.challenge.vo.ChallengeVO;
+import com.yedam.gca.history.vo.ChallengeHistVO;
 
 @Repository
 public class ChallengeDAO  {
@@ -26,7 +27,7 @@ public class ChallengeDAO  {
 		
 	}
 	//챌린지 참가등록, (챌린지 히스토리에 내역남김) 
-	public void insertChallenge(ChallengeVO vo) {
+	public void insertChallenge(ChallengeHistVO vo) {
 		mybatis.insert("ChallengeDAO.insertChallenge", vo);
 	}
 	

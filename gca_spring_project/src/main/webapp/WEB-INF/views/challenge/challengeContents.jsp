@@ -13,7 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="./resources/scripts/json.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/scripts/json.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	
 <!-- 수림 개인 js/css -->
@@ -25,6 +25,8 @@
 $(function(){
 	insertChallenge(); //챌린지 참여시 디비에 이력남김
 	
+	console.log("${challenge}" + "sdfsdf");
+	
 	function insertChallenge(){
 		//기본 챌린지 참가버튼
 	    $("#basic-btn").click(function(){
@@ -35,10 +37,23 @@ $(function(){
 		
 	    $("#basic-join-add").click(function(){
 	    	$("#basic-btn").toggleClass('start-challenge');
+		    $("#basic-btn").hasClass('start-challenge') ?
+			  $("#basic-btn").text('참가중') :
+			  $("#basic-btn").text('참가'); //버튼 클릭시 참가중으로 변경
+	    	
+			// 아작스 시작
+	    	var param = JSON.stringify($("#frm").serializeObject());; //디비에 넣을값; 해당 챌린지정보
+	    	console.log(param + "sdfsd");
+	    	
+	    	$.ajax({
+	    		url: "ajax/insertChallenge.json",
+	    		method: "post",
+	    		dataType: "json",
+	    		data: param,
+	    		contentType: "application/json"
+	    		//success :  성공시 함수 
+	    	});
 	
-			  $("#basic-btn").hasClass('start-challenge') ?
-				  $("#basic-btn").text('참가중') :
-				  $("#basic-btn").text('참가');
 	    });
 	
 	    //스페셜 챌린지 참가버튼
@@ -178,5 +193,11 @@ $(function(){
 				</div>
 			</div>
 		</div>
+	  <% String id = (String)session.getAttribute("id"); %>	
+		<form id="frm">
+			<input name="cl_num" type="hidden" value="${challenge.cl_num }">
+			<input name="m_id" type="hidden" value="<%=id %>">
+		</form>
+		
 </body>
 </html>

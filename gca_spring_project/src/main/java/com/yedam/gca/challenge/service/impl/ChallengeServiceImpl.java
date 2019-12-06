@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.yedam.gca.challenge.dao.ChallengeDAO;
 import com.yedam.gca.challenge.service.ChallengeService;
 import com.yedam.gca.challenge.vo.ChallengeVO;
+import com.yedam.gca.history.vo.ChallengeHistVO;
 
 @Service
 public class ChallengeServiceImpl implements ChallengeService{
@@ -26,7 +27,7 @@ public class ChallengeServiceImpl implements ChallengeService{
 	}
 	//챌린지 참여입력
 	@Override
-	public void insertChallenge(ChallengeVO vo) {
+	public void insertChallenge(ChallengeHistVO vo) {
 		dao.insertChallenge(vo);
 	}
 	//챌린지 결제페이지 조회

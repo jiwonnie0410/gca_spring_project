@@ -25,6 +25,7 @@
   </head>
   
   <body>
+  
     <div class="container">
       <div style="text-align:center;"><h2><b>챌린지 목록</b></h2></div>
       <div class="row">
