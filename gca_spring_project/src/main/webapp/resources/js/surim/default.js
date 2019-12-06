@@ -1,5 +1,5 @@
 $(function() {
-	//기본 챌린지 버튼 클릭시 모달창 팝업
+		//기본 챌린지 버튼 클릭시 모달창 팝업
 	    $("#basic-btn").click(function(){
 	    	if ( $(this).attr('class')!='join-btn start-challenge' ) {
 	    		$("#basicModal").modal();
@@ -14,7 +14,7 @@ $(function() {
 				  $("#basic-btn").text('참가');
         });
 	
-	//스페셜 챌린지 버튼 클릭시 모달창 팝업
+        //스페셜 챌린지 버튼 클릭시 모달창 팝업
 	    $("#special-btn").click(function(){
 	    	if ( $(this).attr('class')!='join-btn start-challenge' ) {
 	       		 $("#specialModal").modal();
@@ -28,6 +28,13 @@ $(function() {
 			$("#special-btn").hasClass('start-challenge') ?
 				$("#special-btn").text('참가중') :
 				$("#special-btn").text('참가');
-			location.href="payment"	
+				
         });
+        
+        //백버튼 클릭시 뒤로가기
+		$("#back-btn").click(function(){
+			history.back();
+		});
+        
+        
 })//

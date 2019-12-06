@@ -1,0 +1,98 @@
+.nav-link.active {
+	background: #FE9191;
+	color: white;
+}
+
+.nav-link {
+	border-radius: 3px;
+	color: black;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.nav span {
+	display: block;
+	font-size: 14px;
+	border-radius: 3px;
+}
+
+.tab-pane {
+	margin-top: 5px;
+}
+
+.content-div {
+	background: #FAF0F0;
+	border-radius: 3px;
+	padding: 20px;
+	color: black;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.content-div span {
+	display: block;
+}
+
+.content-div hr {
+	border-top: 5px solid rgb(209, 209, 209);
+}
+
+.pinkText {
+	font-weight: bold;
+	color: #FE9191;
+}
+.smallText {
+	font-size: small;
+	color: grey;
+}
+
+/****** 뒤로가기버튼 div **********/
+.back-div {
+	display: flex;
+}
+
+
+/************ 버튼 모음 ***********/
+.pink-btn {
+	background: #FE9191;
+	border: none;
+	border-radius: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 30px;
+	color: white;
+}
+
+.white-btn {
+	background: WHITE;
+	border: none;
+	border-radius: 3px;
+	width: 50px;
+	height: 30px;
+	color: BLACK;
+}
+
+.join-btn {
+	background: #FE9191;
+	position: fixed;
+	bottom: 0px;   
+	left: 4%;    
+	width: 92%;
+	border: none;
+	border-radius: 3px;
+	height: 40px;
+	font-size: 20px;
+	font-weight: bold;
+	color: white;
+} 
+
+.back-btn {
+	background: url(http://localhost/exam/resources/images/icon/back.png) no-repeat;
+	border: none;
+	width: 48px;
+	height: 48px;   
+}
+
+
+}
+

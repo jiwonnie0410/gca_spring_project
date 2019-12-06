@@ -1,27 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>option.jsp</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<!-- range slider JS -->
-<script>
-	$(function() {
-		var slider = document.getElementById("myRange"); 
-		var output = document.getElementById("checkRange");
-		output.innerHTML = slider.value;
-		
-		slider.oninput = function() {
-		output.innerHTML = this.value;
-		}
-	});
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	
+<!-- 수림 개인 js/css -->
+<script src="${pageContext.request.contextPath }/resources/js/surim/default.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/surim/addOption.js"></script>
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/addOption.css">
 	
 <style>
 .optionDiv {
@@ -55,84 +53,6 @@ button {
 	color: white;
 	border: none;
 }
-
-
-/*************toggle switch**********************/
-/** 출처: https://proto.io/freebies/onoff/  ios디자인 **/
-
-.onoffswitch {
-    position: relative; width: 150px;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
-}
-.onoffswitch-checkbox {
-    display: none;
-}
-.onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    height: 67px; padding: 0; line-height: 67px;
-    border: 2px solid #999999; border-radius: 67px;
-    background-color: #c8c8c8;
-    transition: background-color 0.2s ease-in;
-}
-.onoffswitch-label:before {
-    content: "";
-    display: block; width: 67px; margin: 0px;
-    background: #FFFFFF;
-    position: absolute; top: 0; bottom: 0;
-    right: 81px;
-    border: 2px solid #999999; border-radius: 67px;
-    transition: all 0.2s ease-in 0s; 
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label {
-    background-color: #FE9191;
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
-   border-color: #FE9191;
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label:before {
-    right: 0px; 
-}
-
-/***********range slidar************************/
-
-.slidecontainer {
-  width: 100%;
-}
-
-.rangeSlider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 30px;
-  border-radius: 5px;
-  background: #cccccca3; 
-  outline: none;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-}
-
-.rangeSlider:hover {
-  opacity: 1;
-}
-
-.rangeSlider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: #FE9191;
-  box-shadow : 0px 0px 0px 8px #FE9191;
-  cursor: pointer;
-}
-
-.rangeSlider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: #4CAF50;
-  cursor: pointer;
-}
-
 
 </style>	
 

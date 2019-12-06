@@ -3,6 +3,7 @@ package com.yedam.gca.challenge.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,9 +24,9 @@ public class ChallengeController {
 	
 	//수림 챌린지 단건 조회
 	@RequestMapping("challenge/contents")
-	public String getChallenge(@RequestParam(value="cl_num", defaultValue = "", required = true) 
-			int cl_num, Model model, ChallengeVO vo ) {
-		vo.setCl_num(cl_num);
+	public String getChallenge(@RequestParam(value="num", defaultValue = "", required = true) 
+			int num, Model model, ChallengeVO vo ) {
+		vo.setCl_num(num);
 		model.addAttribute("challenge", service.getChallenge(vo)); 
 		
 		return "challenge/challengeContents";
@@ -33,7 +34,9 @@ public class ChallengeController {
 	
 	//수림 스페셜챌린지 결제페이지
 	@RequestMapping("challenge/payment")
-	public String challengePayment(ChallengeVO vo, Model model) {
+	public String challengePayment(@RequestParam(value="num", defaultValue="", required = true) 
+	int num, Model model, ChallengeVO vo) {
+		vo.setCl_num(num);
 		model.addAttribute("challenge", service.getChallenge(vo)); 
 		
 	 return "challenge/challengePayment";
