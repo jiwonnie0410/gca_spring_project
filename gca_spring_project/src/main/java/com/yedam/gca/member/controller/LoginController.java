@@ -41,8 +41,8 @@ public class LoginController {
 	
 	// 회원가입 하기 (디비에 삽입) -> 회원가입 성공 시에 제일 첫 로그인 페이지로 감
 	@RequestMapping("/insertJoin")
-	public String insertJoin(HttpServletRequest request, MembersVO vo) {
-		System.out.println("회원가입하려는 아이디: " + request.getParameter("mId"));
+	public String insertJoin(HttpServletRequest request) {
+		MembersVO vo = new MembersVO();
 		vo.setM_id(request.getParameter("mId"));
 		vo.setM_password(request.getParameter("mPw"));
 		vo.setM_name(request.getParameter("mName"));
@@ -50,6 +50,7 @@ public class LoginController {
 		vo.setM_location(request.getParameter("mAddress"));
 		vo.setM_age(request.getParameter("mAge"));
 		vo.setGender_cd(request.getParameter("checkbox1"));
+		vo.setM_email(request.getParameter("mEmail"));
 		memberService.insertMember(vo);
 		return "/member/login";
 	}
@@ -63,8 +64,17 @@ public class LoginController {
 	
 	// 아이디 찾기 페이지
 	@RequestMapping("/forgotId")
-	public String forgotId() {
+	public String forgotId(HttpServletRequest request) {
 		return "/member/forgotId";
+	}
+	
+	@RequestMapping("/getId")
+	public String getId(HttpServletRequest request, Model model) {
+		MembersVO vo = new MembersVO();
+		vo.setM_name(request.getParameter("mName"));
+		vo.setM_email(request.getParameter("mEmail"));
+		model.addAttribute("idMessage", memberService.forgotId(vo));
+		return "/member/login";
 	}
 	
 	// 비밀번호 찾기 페이지

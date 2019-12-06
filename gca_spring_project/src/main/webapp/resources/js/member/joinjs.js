@@ -89,6 +89,12 @@ function checkForm() {
 		form.age.focus();
 		return false;
 	}
+	
+	if (form.email1.value == "") {
+		alert("이메일을 입력하세요.");
+		form.email1.focus();
+		return false;
+	}
 
 	if (form.address.value == "") {
 		alert("주소를 입력하세요.");
@@ -96,13 +102,9 @@ function checkForm() {
 		return false;
 	}
 
-	// 휴대폰 번호 한 컬럼에 넣으려고 합침
-//	var ph = form.phone1.value + "-" + form.phone2.value + "-" + form.phone3.value;
-//	form.mPhone.value = ph;
-
 	// 이메일 한 컬럼에 넣기 위해 합침
-//	var m = form.email1.value + "@" + form.email2.value;
-//	form.mEmail.value = m;
+	var m = form.email1.value + "@" + form.email2.value;
+	form.mEmail.value = m;
 
 	form.submit();
 }
@@ -123,7 +125,6 @@ function idCheck() {
 		},
 		dataType : 'json',
 		success : function(result) {
-			console.log(result)
 			if (result == 0) { // 아이디 사용 가능할 때
 				alert(document.joinfrm.joinId.value + "는 사용 가능한 ID입니다.");
 				document.joinfrm.joinId.readOnly = true;

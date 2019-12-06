@@ -21,4 +21,9 @@ public class MemberDAO {
 	public int checkId(String id) {
 		return mybatis.selectOne("MemberDAO.checkId", id);
 	}
+	
+	// 3. 이름이랑 이메일로 아이디 찾기
+	public String forgotId(MembersVO vo) {
+		return mybatis.selectOne("MemberDAO.forgotId", vo);
+	}
 }

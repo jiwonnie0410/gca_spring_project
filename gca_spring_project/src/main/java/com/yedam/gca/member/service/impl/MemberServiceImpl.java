@@ -1,6 +1,16 @@
 package com.yedam.gca.member.service.impl;
 
+import java.util.Properties;
+
 import javax.annotation.Resource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.stereotype.Service;
 
@@ -30,6 +40,58 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int checkId(String id) {
 		return dao.checkId(id);
+	}
+
+	// 이름이랑 이메일로 아이디 찾기 -> 이메일 보냄
+	@Override
+	public String forgotId(MembersVO vo) {
+		String name = vo.getM_name();
+		String email = vo.getM_email();
+		String getId = null;
+
+		// 아이디 가져옴
+		getId = dao.forgotId(vo);
+
+		// 입력받은 이름과 이메일에 해당하는 아이디가 없음
+		if (getId == null) { 
+			return "해당 정보에 등록된 아이디가 없습니다.";
+			
+		// 해당하는 아이디를 찾았음
+		} else {
+			// 이메일 전송
+			final String user = "undong.master@gmail.com"; 	// 보내는 사람 이메일 주소
+			final String password = "iggezabqphyhqyph"; 	// 비밀번호
+
+			Properties prop = new Properties();
+			prop.put("mail.smtp.host", "smtp.gmail.com");
+			prop.put("mail.smtp.port", "587");
+			prop.put("mail.smtp.auth", "true");
+			prop.put("mail.smtp.starttls.enable", "true");
+
+			Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(user, password);
+				}
+			});
+
+			try {
+				MimeMessage message = new MimeMessage(session);
+				message.setFrom(new InternetAddress(user));
+
+				// 받는 사람의 이메일 주소
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+				// 메일 제목
+				message.setSubject("운동하자에서 알려드립니다.");
+				// 메일 내용
+				message.setText("잊어버리신 " + name + "님의 아이디는 '" + getId + "'입니다. \n행복한 하루 되세요!");
+				// 전송
+				Transport.send(message);
+				System.out.println("이메일 전송 완료");
+			} catch (AddressException e) {	e.printStackTrace();	} 
+			catch (MessagingException e) {	e.printStackTrace();	}
+
+			return "이메일로 아이디를 발송했습니다. 로그인 해 주세요.";
+		}
 	}
 
 }
