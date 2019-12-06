@@ -42,15 +42,16 @@
 	
 	
 	
-<!-- 미현 -->
-	<!-- 반짝 방 참여 전 인원수 1 증가시키는 맵퍼 -->
+<!-- ************ 미현 ********************* -->
+
+<!-- 반짝 방 참여 전 인원수 1 증가시키는 맵퍼 -->
 	<update id="updateCnt" parameterType="sgroup">
 		UPDATE 	SGROUP
 		SET		SG_NOW_CNT = #{sg_now_cnt}
 		WHERE	SG_NUM = #{sg_num}
 	</update>
 	
-	<!-- SGroup 전체 조회 -->
+<!-- SGroup 전체 조회 -->
 	<select id="getSgList" resultType="sgroup">
 		SELECT 
 				SG_NUM,
@@ -71,5 +72,22 @@
 		ORDER BY 1
 	</select>
 
+<!-- SGroup 방 생성 + 활동 이력 추가 -->
+	<select id="insertSg" statementType="CALLABLE" parameterType="sgroup">
+		{ CALL sg_room_create(
+			#{sg_name}
+			,#{sg_end_dttm}
+			,#{sg_end_cnt}
+			,#{sg_location}
+			,#{sg_xy}
+			,#{sports1_cd}
+			,#{skill_cd}
+			,#{age_range}
+			,#{gender_cd}
+			,#{sg_option}
+			,#{m_id}
+			,#{sg_num, mode=OUT, jdbcType=NUMERIC, javaType=Integer }
+		)}
+	</select>
 
 </mapper>

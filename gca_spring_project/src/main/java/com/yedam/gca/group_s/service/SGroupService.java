@@ -12,4 +12,5 @@ public interface SGroupService {
 	//미현
 	List<SGroupVO> getSgList(SGroupVO vo);
 	int updateCnt(SGroupVO vo);
+	int insertSg(SGroupVO vo);
 }

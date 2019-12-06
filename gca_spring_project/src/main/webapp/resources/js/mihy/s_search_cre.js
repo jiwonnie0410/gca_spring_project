@@ -8,12 +8,15 @@ $(document).ready(function(){
 	$('#sg_location').on('click', sgAddr); //주소 입력
 	$('#btn_cre').on('click', valid); //유효성 검사
 	
+	$('#G03').attr('checked','checked');
+	
 });
 
 //운동종목 드롭다운
 function sport_dropdown(){
 	var html = $(this).html();
 	$('#sg_sport').html(html +'<span class="caret pl-2"></span>');
+	$('#sg_sport_val').val($(this).data("cdid"));
 	var sport_name = $('#sg_sport').text();
 	
 	if(sport_name == "농구" || sport_name == "배드민턴"){
@@ -26,31 +29,13 @@ function sport_dropdown(){
 		$('#sg_option2').attr({'class':'collapse'});
 		$('#sg_option1').attr({'class':'collapse'});
 	}
-
-	if(sport_name == "농구")					$('#sg_sport').val('S01');
-	else if(sport_name == "달리기/산책") 		$('#sg_sport').val('S02');
-	else if(sport_name.substr(0,1) == "등")	$('#sg_sport').val('S03');
-	else if(sport_name.substr(0,1) == "배")	$('#sg_sport').val('S04');
-	else if(sport_name.substr(0,1) == "볼")	$('#sg_sport').val('S05');
-	else if(sport_name.substr(0,1) == "수")	$('#sg_sport').val('S06');
-	else if(sport_name.substr(0,1) == "자")	$('#sg_sport').val('S06');
-	else if(sport_name.substr(0,1) == "기")	$('#sg_sport').val('S08');
-	else									$('#sg_sport').val();
 }
 
 //숙련도 드롭다운
 function skill_dropdown(){
 	var html = $(this).html();
 	$('#sg_skill').html(html +'<span class="caret pl-2"></span>');
-	var skill_name = $('#sg_skill').text();
-	
-	if(skill_name.substring(0,2) == "입문") $('#sg_skill').val('K01')
-	else if(skill_name.substring(0,2) == "입문") $('#sg_skill').val('K01')
-	else if(skill_name.substring(0,2) == "입문") $('#sg_skill').val('K01')
-	else if(skill_name.substring(0,2) == "입문") $('#sg_skill').val('K01')
-	
-	$('#sg_skill').val($('#sg_skill').text().substring(0,2));
-	//console.log($('#sg_skill').val());
+	$('#sg_sport_val').val($(this).data("cdid"));
 }
 
 //마감인원 드롭다운

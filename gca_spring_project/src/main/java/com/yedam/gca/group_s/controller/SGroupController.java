@@ -1,8 +1,11 @@
 package com.yedam.gca.group_s.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -69,5 +72,15 @@ public class SGroupController {
 		vo.setCd_group("GENDER_CD");
 		model.addAttribute("gender_list", codeService.getCodeList(vo));
 		return "group_s/s_search_cre";
+	}
+	
+	//방 생성
+	@RequestMapping(value="sgroup/creRoom", method=RequestMethod.POST)
+	public String createRoom(@ModelAttribute SGroupVO vo, HttpSession session) {
+		String m_id = (String) session.getAttribute("m_id");
+		vo.setM_id("rr99999");
+		int sg_num = sgroupService.insertSg(vo);
+		int sg_now_cnt = 0;
+		return "redirect:getRoomInfo2?sg_num"+sg_num+"&sg_now_cnt="+sg_now_cnt;
 	}
 }
