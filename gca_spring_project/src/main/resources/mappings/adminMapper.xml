@@ -1,17 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="adminDAO">
+<mapper namespace="AdminDAO">
 
 <!--
-	1. 
+	1. 반짝 운동별 통계
+	2. 동호회 매치 운동별 통계
+	3-1. 여성 연령대 및 운동 통계
+	3-2. 남성 연령대 및 운동 통계
+	4. 지역별 통계
  -->
 
-<!-- 1.  -->
-		  	<!-- <select id="" resultType="" >
-					
-		  	</select> -->
+<!-- 1. 반짝 운동별 통계 -->
+		  	<select id="chartSgroup" resultType="map" >
+					SELECT 	COUNT(*), C.CD_NAME
+					FROM 	SGROUP S, CODE C
+					WHERE 	S.SPORTS1_CD = C.CD_ID
+					GROUP BY C.CD_NAME
+		  	</select>
 
 
-<!-- 2. -->
+<!-- 2. 동호회 매치 운동별 통계 -->
+			<select id="chartBgroup" resultType="map">
+					SELECT 	COUNT(*), C.CD_NAME
+					FROM 	BGROUP B, CODE C
+					WHERE 	B.SPORTS2_CD = C.CD_ID
+					GROUP BY C.CD_NAME
+			</select>
+
+
+<!-- 3-1. 여성 연령대 및 운동 통계(반짝만) -->
+			<select id="chartFemale">
+					<!-- 20대만 -->
+					SELECT 	COUNT(*), C.CD_NAME
+					FROM 	ACTIVE_HIST H, MEMBERS M, CODE C, SGROUP S
+					WHERE 	H.M_ID = M.M_ID
+					        AND H.SG_NUM = S.SG_NUM
+					        AND S.SPORTS1_CD = C.CD_ID
+					        AND M.GENDER_CD = 'G01'
+					        AND M.M_AGE BETWEEN 20 AND 29
+					GROUP BY C.CD_NAME
+			</select>
+
+
+<!-- 3-2. 남성 연령대 및 운동 통계 -->
+			<select id="chartMale">
+					<!-- 20대만 -->
+					SELECT 	COUNT(*), C.CD_NAME
+					FROM 	ACTIVE_HIST H, MEMBERS M, CODE C, SGROUP S
+					WHERE 	H.M_ID = M.M_ID
+					        AND H.SG_NUM = S.SG_NUM
+					        AND S.SPORTS1_CD = C.CD_ID
+					        AND M.GENDER_CD = 'G02'
+					        AND M.M_AGE BETWEEN 20 AND 29
+					GROUP BY  C.CD_NAME
+			</select>
+
+
+<!-- 4. 지역별 통계 -->
+			<select id="chartCity">
+					<!-- 대구만 -->
+					SELECT 	COUNT(*)
+					FROM 	MEMBERS
+					WHERE 	M_LOCATION LIKE '대구%'
+			</select>
+
 </mapper>
