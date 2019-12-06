@@ -179,8 +179,8 @@ function move_room_handler(result){
 		<div class="swiper-slide p-2"><i class="fas fa-running pr-2"></i>달리기 &amp; 산책</div>
 		<div class="swiper-slide p-2"><i class="fas fa-hiking pr-2"></i>등산</div>
 		<div class="swiper-slide p-2" id="btn_badminton">
-			<img class="pr-3" id="img_badminton" src="../resources/images/badminton-pink.png" width="33px">
-			<img class="pr-3" id="img_badminton" src="../resources/images/badminton-white.png" width="33px">
+			<img class="pr-3" id="img_badminton" src="../resources/images/mihy/badminton-pink.png" width="33px">
+			<img class="pr-3" id="img_badminton" src="../resources/images/mihy/badminton-white.png" width="33px">
 			배드민턴</div>
 		<div class="swiper-slide p-2"><i class="fas fa-bowling-ball pr-2"></i>볼링</div>
 		<div class="swiper-slide p-2"><i class="fas fa-swimmer pr-2"></i>수영</div>
@@ -198,7 +198,7 @@ function move_room_handler(result){
 				<c:when test="${sg.sports1_cd == 'S01'}"><i class="fas fa-basketball-ball pr-2"></i></c:when>
 				<c:when test="${sg.sports1_cd == 'S02'}"><i class="fas fa-running pr-2"></i></c:when>
 				<c:when test="${sg.sports1_cd == 'S03'}"><i class="fas fa-hiking pr-2"></i></c:when>
-				<c:when test="${sg.sports1_cd == 'S04'}"><img src="../resources/images/badminton-black.png" width="32px"></c:when>
+				<c:when test="${sg.sports1_cd == 'S04'}"><img src="../resources/images/mihy/badminton-black.png" width="32px"></c:when>
 				<c:when test="${sg.sports1_cd == 'S05'}"><i class="fas fa-bowling-ball pr-2"></i></c:when>
 				<c:when test="${sg.sports1_cd == 'S06'}"><i class="fas fa-swimmer pr-2"></i></c:when>
 				<c:when test="${sg.sports1_cd == 'S07'}"><i class="fas fa-bicycle pr-2"></i></c:when>
