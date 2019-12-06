@@ -13,12 +13,55 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="./resources/scripts/json.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	
 <!-- 수림 개인 js/css -->
 <script src="${pageContext.request.contextPath }/resources/js/surim/default.js"></script>
-
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
+
+<script>
+//아작스용
+$(function(){
+	insertChallenge(); //챌린지 참여시 디비에 이력남김
+	
+	function insertChallenge(){
+		//기본 챌린지 참가버튼
+	    $("#basic-btn").click(function(){
+	    	if ( $(this).attr('class')!='join-btn start-challenge' ) {
+	    		$("#basicModal").modal(); //모달 팡법
+	    	}
+	    });
+		
+	    $("#basic-join-add").click(function(){
+	    	$("#basic-btn").toggleClass('start-challenge');
+	
+			  $("#basic-btn").hasClass('start-challenge') ?
+				  $("#basic-btn").text('참가중') :
+				  $("#basic-btn").text('참가');
+	    });
+	
+	    //스페셜 챌린지 참가버튼
+	    $("#special-btn").click(function(){
+	    	if ( $(this).attr('class')!='join-btn start-challenge' ) {
+	       		 $("#specialModal").modal();
+	       		 console.log("모달출력"); //모달 팝업
+	       }
+	    });
+	
+	    $("#special-join-add").click(function(){
+	    	$("#special-btn").toggleClass('start-challenge');
+	
+			$("#special-btn").hasClass('start-challenge') ?
+				$("#special-btn").text('참가중') :
+				$("#special-btn").text('참가');
+				
+	    });	
+	};
+	
+});
+
+</script>
 
 </head>    
 <body>

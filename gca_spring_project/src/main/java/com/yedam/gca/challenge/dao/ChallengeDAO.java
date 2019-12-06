@@ -14,6 +14,7 @@ public class ChallengeDAO  {
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
+	///////////////수림/////////////////
 	//챌린지 목록조회 
 	public List<ChallengeVO> getChallengeList() {
 		return mybatis.selectList("ChallengeDAO.getChallengeList");
@@ -23,6 +24,10 @@ public class ChallengeDAO  {
 	public ChallengeVO getChallenge(ChallengeVO vo) {
 		return mybatis.selectOne("ChallengeDAO.getChallenge", vo);
 		
+	}
+	//챌린지 참가등록, (챌린지 히스토리에 내역남김) 
+	public void insertChallenge(ChallengeVO vo) {
+		mybatis.insert("ChallengeDAO.insertChallenge", vo);
 	}
 	
 	//스페셜챌린지 결제페이지

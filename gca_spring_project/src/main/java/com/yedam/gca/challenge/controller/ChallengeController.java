@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.gca.challenge.service.ChallengeService;
 import com.yedam.gca.challenge.vo.ChallengeVO;
@@ -14,7 +16,8 @@ import com.yedam.gca.challenge.vo.ChallengeVO;
 public class ChallengeController {
 	@Autowired ChallengeService service;
 	
-	//수림 챌린지 목록 조회
+	///////////////////////////////수림 ////////////////////////////
+	//챌린지 목록 조회
 	@RequestMapping("challenge/list")
 	public String getChallengeList(Model model) {
 		model.addAttribute("challengeList", service.getChallengeList());
@@ -22,7 +25,7 @@ public class ChallengeController {
 		return "challenge/challenge";
 	}
 	
-	//수림 챌린지 단건 조회
+	//챌린지 단건 조회
 	@RequestMapping("challenge/contents")
 	public String getChallenge(@RequestParam(value="num", defaultValue = "", required = true) 
 			int num, Model model, ChallengeVO vo ) {
@@ -32,7 +35,15 @@ public class ChallengeController {
 		return "challenge/challengeContents";
 	}
 	
-	//수림 스페셜챌린지 결제페이지
+	//챌린지 참가등록, (챌린지 히스토리에 내역남김) 
+	@RequestMapping(value="/ajax/insertChallenge.json", consumes ="application/json")
+	@ResponseBody
+	public void insertChallenge(@RequestBody ChallengeVO vo) {
+		service.insertChallenge(vo);
+	}
+	
+	
+	//스페셜챌린지 결제페이지
 	@RequestMapping("challenge/payment")
 	public String challengePayment(@RequestParam(value="num", defaultValue="", required = true) 
 	int num, Model model, ChallengeVO vo) {

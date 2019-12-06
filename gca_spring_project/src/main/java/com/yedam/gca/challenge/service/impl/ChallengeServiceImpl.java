@@ -14,19 +14,26 @@ public class ChallengeServiceImpl implements ChallengeService{
 
 	@Autowired ChallengeDAO dao;
 	
+	// 챌린지 전체목록 조회
 	@Override
 	public List<ChallengeVO> getChallengeList() {
 		return dao.getChallengeList();
 	}
-
+	//챌린지 단건 조회
 	@Override
 	public ChallengeVO getChallenge(ChallengeVO vo) {
 		return dao.getChallenge(vo);
 	}
-
+	//챌린지 참여입력
+	@Override
+	public void insertChallenge(ChallengeVO vo) {
+		dao.insertChallenge(vo);
+	}
+	//챌린지 결제페이지 조회
 	@Override
 	public ChallengeVO challengePayment(ChallengeVO vo) {
 		return dao.challengePayment(vo);
 	}
+
 
 }
