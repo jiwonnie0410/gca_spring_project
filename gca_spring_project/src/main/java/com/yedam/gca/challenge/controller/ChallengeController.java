@@ -42,6 +42,13 @@ public class ChallengeController {
 		return "challenge/challengeContents";
 	}
 	
+	@RequestMapping("/challenge/ajax/checkChallengeHistory.json")
+	@ResponseBody
+	// 사용자 챌린지 참가여부 확인 
+	public ChallengeHistVO checkChallengeHistory(ChallengeHistVO vo) {
+		return service.checkChallengeHistory(vo);
+	}
+	
 	//챌린지 참가등록, (챌린지 히스토리에 내역남김) 
 	@RequestMapping(value="/challenge/ajax/insertChallenge.json", consumes ="application/json")
 	@ResponseBody

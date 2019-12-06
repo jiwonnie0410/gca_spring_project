@@ -87,7 +87,7 @@
 } 
 
 .back-btn {
-	background: url(http://localhost/exam/resources/images/icon/back.png) no-repeat;
+	background: url(../../images/icon/back.png) no-repeat;
 	border: none;
 	width: 48px;
 	height: 48px;   

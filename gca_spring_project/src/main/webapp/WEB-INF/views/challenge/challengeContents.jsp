@@ -25,8 +25,6 @@
 $(function(){
 	insertChallenge(); //챌린지 참여시 디비에 이력남김
 	
-	console.log("${challenge}" + "sdfsdf");
-	
 	function insertChallenge(){
 		//기본 챌린지 참가버튼
 	    $("#basic-btn").click(function(){
