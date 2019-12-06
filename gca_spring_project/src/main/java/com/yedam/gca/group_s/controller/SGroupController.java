@@ -9,20 +9,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yedam.gca.common.service.CodeService;
+import com.yedam.gca.common.vo.CodeVO;
 import com.yedam.gca.group_s.service.SGroupService;
 import com.yedam.gca.group_s.vo.SGroupVO;
 
 @Controller
 public class SGroupController {
 	
-	@Autowired
-	SGroupService service;
+	@Autowired	SGroupService sgroupService;
+	@Autowired	CodeService codeService;
 	
 	
 	//은영
 	@RequestMapping("/sgroup/getRoomInfo")
 	public String getRoomInfo(Model model, SGroupVO vo) {
-		model.addAttribute("sgroup", service.getRoomInfo(vo));
+		model.addAttribute("sgroup", sgroupService.getRoomInfo(vo));
 		System.out.println(model);
 		return "group_s/s_wating_room";
 	}
@@ -32,8 +34,8 @@ public class SGroupController {
 	//전체 반짝 리스트 조회
 	@RequestMapping("/sgroup/getSgList")
 	public String search(Model model, SGroupVO vo) {
-		model.addAttribute("list", service.getSgList(vo));
-		System.out.println(service.getSgList(vo));
+		model.addAttribute("list", sgroupService.getSgList(vo));
+		System.out.println(sgroupService.getSgList(vo));
 		return "group_s/s_search";
 	}
 	
@@ -44,8 +46,8 @@ public class SGroupController {
 			Model model, SGroupVO vo) {
 		vo.setSg_num(sg_num);
 		vo.setSg_now_cnt(sg_now_cnt+1);
-		service.updateCnt(vo);
-		model.addAttribute("sgroup", service.getRoomInfo(vo));
+		sgroupService.updateCnt(vo);
+		model.addAttribute("sgroup", sgroupService.getRoomInfo(vo));
 		return "group_s/s_wating_room";
 	}
 	
@@ -54,12 +56,18 @@ public class SGroupController {
 	@RequestMapping(value="sgroup/sgNowCnt/{sg_num}", method = RequestMethod.GET)
 	public SGroupVO sgNowCnt(@PathVariable int sg_num, SGroupVO vo) {
 		vo.setSg_num(sg_num);
-		return service.getRoomInfo(vo);
+		return sgroupService.getRoomInfo(vo);
 	}
 	
 	//반짝 생성 폼으로 이동
 	@RequestMapping("/sgroup/createRoomForm")
-	public String createRoomForm() {
+	public String createRoomForm(Model model, CodeVO vo) {
+		vo.setCd_group("SPORTS1_CD");
+		model.addAttribute("sports_list", codeService.getCodeList(vo));
+		vo.setCd_group("SKILL_CD");
+		model.addAttribute("skill_list", codeService.getCodeList(vo));
+		vo.setCd_group("GENDER_CD");
+		model.addAttribute("gender_list", codeService.getCodeList(vo));
 		return "group_s/s_search_cre";
 	}
 }
