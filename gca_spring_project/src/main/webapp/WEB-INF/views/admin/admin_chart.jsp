@@ -31,161 +31,42 @@
 		<script src="../resources/js/admin/demo/datatables-demo.js"></script>
 		<script src="../resources/js/admin/demo/chart-area-demo.js"></script>
 		
+		<script src="../resources/scripts/json.min.js"></script>
 		
 		<!-- 통계 차트 그리기 -->
 	    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	    <!-- 반짝 운동별 통계 도넛 -->
-	    <script type="text/javascript">
-		      google.charts.load("current", {packages:["corechart"]});
-		      google.charts.setOnLoadCallback(drawChart);
-		      function drawChart() {
-		        var data = google.visualization.arrayToDataTable([
-		          ['Task', 'Hours per Day'],
-		          ['배드민턴',     11],
-		          ['달리기',       2],
-		          ['자전거',  	 2],
-		          ['수영', 		 2],
-		          ['농구',    	 7],
-		          ['볼링', 		 2],
-		          ['등산', 		 2]
-		        ]);
-		
-		        var options = {
-		          title: ' ',
-		          pieHole: 0.4,
-		        };
-		
-		        var chart = new google.visualization.PieChart(document.getElementById('div_sgroup_exercise'));
-		        chart.draw(data, options);
-		      }
-	    </script>
-	    
-	    <!-- 동호회 매치 운동별 통계 도넛 -->
-	    <script type="text/javascript">
-		      google.charts.load("current", {packages:["corechart"]});
-		      google.charts.setOnLoadCallback(drawChart);
-		      function drawChart() {
-		        var data = google.visualization.arrayToDataTable([
-		          ['Task', 'Hours per Day'],
-		          ['축구',     11],
-		          ['야구',      2],
-		          ['농구',  	   2],
-		          ['볼링', 	   2],
-		          ['기타',      7]
-		        ]);
-		
-		        var options = {
-		          title: ' ',
-		          pieHole: 0.4,
-		        };
-		
-		        var chart = new google.visualization.PieChart(document.getElementById('div_bgroup_exercise'));
-		        chart.draw(data, options);
-		      }
-	    </script>
-	    
-	    <!-- 성별 연령대 통계 컬럼 차트 -->
-	    <script type="text/javascript">
-			    google.charts.load('current', {'packages':['bar']});
-			    google.charts.setOnLoadCallback(drawChart);
-		
-			    function drawChart() {
-			        var data = google.visualization.arrayToDataTable([
-			          ['Year', 		'여성',  '남성'],
-			          ['20대', 		1000, 	 400],
-			          ['30대', 		1170, 	 460],
-			          ['40대', 		 660,  	1120],
-			          ['50대 이상', 	1030, 	 540]
-			        ]);
-		
-			        var options = {
-			          chart: {
-			        	  title: ' '
-			          }
-			        };
-		
-			        var chart = new google.charts.Bar(document.getElementById('div_age_gender'));
-		
-			        chart.draw(data, google.charts.Bar.convertOptions(options));
-			      }
+	    <script src="../resources/js/admin/chartjs.js"></script>
+    	<script>
+		    	google.charts.load("current", {packages:["corechart"]});
+		    	google.charts.load('current', {'packages':['bar']});
+		    	google.charts.setOnLoadCallback(drawChart1);
+		    	google.charts.setOnLoadCallback(drawChart2);
+		    	google.charts.setOnLoadCallback(drawChart3);
+		    	google.charts.setOnLoadCallback(drawChart4);
     	</script>
-    
-    	    <!-- 지역별 통계 지도 -->
-		<script type="text/javascript">
-		      google.charts.load('current', {'packages':['corechart']});
-		      google.charts.setOnLoadCallback(drawChart);
-		
-		      function drawChart() {
-		        var data = google.visualization.arrayToDataTable([
-		          ['Year',  	'서울', 	  '부산', 	   '대구', 	   '인천', 	   '광주', 	   '대전', 	   '울산'],
-		          ['2004',  	1000,      400,			430,		490,		390,		230,		590],
-		          ['2005',  	1170,      460,			420,		450,		490,		430,		560],
-		          ['2006',  	660,       1120,		440,		430,		380,		270,		520],
-		          ['2007',  	1030,      540,			430,		460,		320,		430,		390]
-		        ]);
-		
-		        var options = {
-		          title: 'Company Performance', 
-		          curveType: 'function',
-		          legend: { position: 'bottom' }
-		        };
-		
-		        var chart = new google.visualization.LineChart(document.getElementById('div_city'));
-		
-		        chart.draw(data, options);
-		      }
-		</script>
-		      
-		      
-		 <script type="text/javascript">
-		      google.charts.load('current', {'packages':['corechart']});
-		      google.charts.setOnLoadCallback(drawChart);
-		 
-		      // 애니메이션*******************************************************************************
-		      var options = {
-		    	      width: 400,
-		    	      height: 240,
-		    	      vAxis: {minValue:0, maxValue:100},
-		    	      animation: {
-		    	        duration: 1000,
-		    	        easing: 'in'
-		    	      }
-		    	    };
-
-		    	    var chart = new google.visualization.LineChart(
-		    	        document.getElementById('visualization'));
-		    	    var data = new google.visualization.DataTable();
-		    	    data.addColumn('string', 'x');
-		    	    data.addColumn('number', 'y');
-		    	    data.addRow(['100', 123]);
-		    	    data.addRow(['700', 17]);
-		    	    var button = document.getElementById('b1');
-		    	    function drawChart() {
-		    	      // Disabling the button while the chart is drawing.
-		    	      button.disabled = true;
-		    	      google.visualization.events.addListener(chart, 'ready',
-		    	          function() {
-		    	            button.disabled = false;
-		    	          });
-		    	      chart.draw(data, options);
-		    	    }
-
-		    	    button.onclick = function() {
-		    	      if (data.getNumberOfRows() > 5) {
-		    	        data.removeRow(Math.floor(Math.random() * data.getNumberOfRows()));
-		    	      }
-		    	      // Generating a random x, y pair and inserting it so rows are sorted.
-		    	      var x = Math.floor(Math.random() * 1000);
-		    	      var y = Math.floor(Math.random() * 100);
-		    	      var where = 0;
-		    	      while (where < data.getNumberOfRows() && parseInt(data.getValue(where, 0)) < x) {
-		    	        where++;
-		    	      }
-		    	      data.insertRows(where, [[x.toString(), y]]);
-		    	      drawChart();
-		    	    }
-		    	    drawChart();
-	    </script>
+    	
+    	<style>
+    			.button-title:hover {
+					  background-color: #A6A6A6;
+					  border: 2px solid #747474;
+					  border-radius: 7px;
+					  color: white;
+				}
+				
+				.button-title {
+					  background: #fff;
+					  border: 2px solid #747474;
+					  border-radius: 7px;
+					  color: #747474;
+					  font-size: 12px;
+					  margin: 0.3em auto;
+					  padding: 2px 4px;
+					  position: relative;
+					  text-transform: uppercase;
+					  height: 30px;
+					  width: 120px;
+				}
+    	</style>
 </head>
 
 	<!-- 맨 위에 바 부분 -->
@@ -266,16 +147,13 @@
 				</div>
 				<div style="display:inline-block; text-align:center;">
 					<font size="4"><b> 연령대 및 성별 통계 </b></font>
+					&nbsp;&nbsp;&nbsp;&nbsp;<button id="b1" class="button-title"> 성별 변경 </button>
 					<div id="div_age_gender" style="width:700px; height:380px; vertical-align: top;"></div>
 				</div>
 				<div style="display:inline-block; text-align:center;">
 					<font size="4"><b> 지역별 통계 </b></font>
 					<div id="div_city" style="width:800px; height:380px;"></div>
 				</div>
-				
-				
-				<div id="visualization"></div>
-				<button id="b1">버튼</button>
 			</div>
 		</div>
 		

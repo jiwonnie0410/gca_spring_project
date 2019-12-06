@@ -16,8 +16,8 @@
 					SG_END_CNT,
 					SG_LOCATION,
 					SG_XY,
-					get_code_name(GENDER_CD) SPORTS1_CD,
-					get_code_name(GENDER_CD) SKILL_CD,
+					get_code_name(SPORTS1_CD) SPORTS1_CD,
+					get_code_name(SKILL_CD) SKILL_CD,
 					AGE_RANGE,
 					get_code_name(GENDER_CD) GENDER_CD,
 					get_code_name(STATUS_CD) STATUS_CD,
@@ -25,6 +25,30 @@
 		FROM 		SGROUP
 		WHERE		SG_NUM = #{sg_num}
 	</select>
+	
+	<insert id="doReport" parameterType="trouble">
+		<selectKey order="BEFORE" resultType="int" keyProperty="tr_num"> <!-- 시퀀스 구하는 쿼리 실행하여 시퀀스 뽑아내서 담기. -->
+  			<!-- ORDER : 실행순서. BEFORE는 먼저실행.(이 셀렉트가 먼저 실행되어 vo에 담김.) -->
+  			<!-- resultType은 담을 필드명(vo의 필드명) 타입과 맞춰주면 됨 -->
+  			<!-- keyProperty는 필드명이자 밑에 #{?} 이름과 같음. -->
+  			SELECT NVL(MAX(TR_NUM),1000)+1 FROM TROUBLE
+  		</selectKey>
+		INSERT INTO TROUBLE(	
+								TR_DTTM,
+								TR_REASON_CD,
+								TR_MID,
+								M_ID,
+								TR_NUM
+											)
+					VALUES(		
+								sysdate,
+								#{tr_reason_cd},
+								#{tr_mid},
+								'rr99999',
+								#{tr_num}
+											)
+	
+	</insert>
 	
 	<!-- <update id="updateWhenJoin" parameterType="sgroup">
 		UPDATE		SGROUP

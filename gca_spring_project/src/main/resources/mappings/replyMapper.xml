@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="reply">
+	
+	<!-- 1. 댓글 입력 -->
+	<insert id="insertReply">
+	<selectKey order="BEFORE" resultType="int" keyProperty="adr_num">
+		SELECT NVL(MAX(adr_num),0)+1 FROM AD_REPLY		
+	</selectKey>
+<!-- 		INSERT INTO AD_REPLY (ADR_NUM, ADR_CONTENT, M_ID, ADR_HIDDEN) -->
+		VALUES (#{ad_num}, #{adr_content}, #{m_id}, #{adr_hidden})
+	</insert>
+	
+	<!-- 2. 댓글 목록 -->
+	<select id="listReply" resultType="com.yedam.gca.board.vo.AdReplyVO">
+		<include refid="pagingHeader"/>
+			<!-- SELECT ADR_NUM, ad_num, adr_content, m_id, m_name AS userName, r.adr_regdate, r.ADR_UPDATEDATE
+			FROM ad_reply r, tbl_user m
+			WHERE  r.m_id = m.m_id AND ad_num=#{ad_num}
+			ORDER BY ADR_NUM -->
+			 SELECT
+			  R.ADR_NUM, AD_NUM, R.ADR_CONTENT, R.m_id, R.ADR_HIDDEN AS ADR_HIDDEN, R.adr_regdate, R.ADR_UPDATEDATE,
+			  M.m_name, M.m_nick,
+			  (SELECT R.m_id FROM AD_BOARD WHERE AD_NUM = R.AD_NUM)
+			FROM AD_REPLY R, Members M
+			WHERE
+			  R.m_id = M.m_id
+			  AND ad_num = #{ad_num}
+			ORDER BY ADR_NUM
+		<include refid="pagingFooter"/>
+	</select>
+	
+	<!-- 3. 댓글 상세보기 -->
+	<select id="detailReply" resultType="com.yedam.gca.board.vo.AdReplyVO">
+		SELECT ADR_NUM, AD_NUM, ADR_CONTENT, m_id, adr_regdate, ADR_UPDATEDATE, ADR_HIDDEN AS adr_hidden FROM AD_REPLY
+		WHERE ADR_NUM = #{adr_num}
+	</select>
+	
+	<!-- 4. 댓글 수정 -->
+	<select id="updateReply">
+		UPDATE AD_REPLY 
+		SET ADR_CONTENT = #{adr_content}
+		WHERE adr_num = #{adr_num}
+	</select>
+	
+	<!-- 5. 댓글 삭제 -->
+	<delete id="deleteReply">
+		DELETE FROM ad_reply
+		WHERE adr_num = #{adr_num}
+	</delete>
+	
+	<!-- 6 .댓글 갯수(for 페이징처리) -->
+	<select id="countReply" resultType="int">
+		SELECT COUNT(*) FROM ad_reply WHERE adr_num=#{adr_num}
+	</select>
+	
+	<!-- 페이징 sql -->
+	<sql id="pagingHeader">
+		SELECT * FROM (
+			SELECT ROWNUM AS rn, A.* FROM (
+	</sql>
+	<sql id="pagingFooter">
+			) A
+		) WHERE rn BETWEEN #{start} AND #{end}
+	</sql>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

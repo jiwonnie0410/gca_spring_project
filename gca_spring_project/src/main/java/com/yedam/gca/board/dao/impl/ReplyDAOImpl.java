@@ -1,4 +1,4 @@
-package com.yedam.gca.board.dao;
+package com.yedam.gca.board.dao.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.yedam.gca.board.dao.ReplyDAO;
 import com.yedam.gca.board.vo.AdReplyVO;
 
 @Repository
@@ -32,8 +33,8 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 	// 3. 댓글 상세보기
 	@Override
-	public AdReplyVO detail(Integer adr_number) {
-		return sqlSession.selectOne("reply.detailReply", adr_number);
+	public AdReplyVO detail(Integer adr_num) {
+		return sqlSession.selectOne("reply.detailReply", adr_num);
 	}
 	// 4. 댓글 수정
 	@Override
@@ -42,8 +43,8 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 	// 5. 댓글 삭제
 	@Override
-	public void delete(Integer adr_number) {
-		sqlSession.delete("reply.deleteReply", adr_number);
+	public void delete(Integer adr_num) {
+		sqlSession.delete("reply.deleteReply", adr_num);
 	}
 	// 6. 댓글 갯수
 	@Override

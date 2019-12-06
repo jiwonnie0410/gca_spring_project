@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.group_s.vo.SGroupVO;
 
 @Repository("sGroupDAO")
@@ -17,6 +18,10 @@ public class SGroupDAO {
 	//은영	
 	public SGroupVO getRoomInfo(SGroupVO vo) {
 		return mybatis.selectOne("SGroupDAO.getRoomInfo", vo);
+	}
+	
+	public int doReport(TroubleVO vo) {
+		return mybatis.insert("SGroupDAO.doReport", vo);
 	}
 	
 	

@@ -107,7 +107,7 @@ public class BoardController {
 	
 	// 04. 게시글 수정
 	// 폼에서 입력한 내용들은 @ModelAttribute AdBoardVO vo로 전달됨
-	@RequestMapping(value="update.do", method=RequestMethod.POST)
+	@RequestMapping(value="update", method=RequestMethod.POST)
 	public String update(@ModelAttribute AdBoardVO vo) throws Exception{
 		boardService.update(vo);
 		return "redirect:adlist";

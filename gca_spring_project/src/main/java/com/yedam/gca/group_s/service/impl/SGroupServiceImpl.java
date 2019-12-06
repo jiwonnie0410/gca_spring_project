@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.group_s.dao.SGroupDAO;
 import com.yedam.gca.group_s.service.SGroupService;
 import com.yedam.gca.group_s.vo.SGroupVO;
@@ -20,6 +21,9 @@ public class SGroupServiceImpl implements SGroupService {
 	@Override
 	public SGroupVO getRoomInfo(SGroupVO vo) {
 		return sgroupDAO.getRoomInfo(vo);
+	}
+	public int doReport(TroubleVO vo) {
+		return sgroupDAO.doReport(vo);
 	}
 
 	

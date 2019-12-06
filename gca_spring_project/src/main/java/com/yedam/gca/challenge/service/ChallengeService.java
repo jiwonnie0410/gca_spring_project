@@ -3,6 +3,7 @@ package com.yedam.gca.challenge.service;
 import java.util.List;
 
 import com.yedam.gca.challenge.vo.ChallengeVO;
+import com.yedam.gca.history.vo.ChallengeHistVO;
 
 
 public interface ChallengeService {
@@ -12,6 +13,9 @@ public interface ChallengeService {
 	
 	//챌린지 단건조회 
 	ChallengeVO getChallenge(ChallengeVO vo);
+	
+	//챌린지 참가등록, (챌린지 히스토리에 내역남김) 
+	public void insertChallenge(ChallengeHistVO vo); 
 	
 	//스페셜챌린지 결제페이지
 	public ChallengeVO challengePayment(ChallengeVO vo);

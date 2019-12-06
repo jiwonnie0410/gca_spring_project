@@ -9,69 +9,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>challengeContents.jsp</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- 수림 개인 css -->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/challenge.css">
-
-<style>
-.back-btn {
-	background: url(${pageContext.request.contextPath }/resources/images/icon/back.png) no-repeat;
-	border: none;
-	width: 48px;
-	height: 48px;   
-}
-
-.back-div{
-	display: flex;
-}
-
-.content-div hr {
-	border-top: 5px solid rgb(209, 209, 209);
-}
-
-.join-btn {
-}
-
-.join-btn {
-	background: #FE9191;
-	position: fixed;
-	bottom: 0px;   
-	left: 4%;    
-	width: 92%;
-	border: none;
-	border-radius: 3px;
-	height: 40px;
-	font-size: 20px;
-	font-weight: bold;
-	color: white;
-}
-
-.modal-btn {
-	background: #FE9191;
-	border: none;
-	border-radius: 3px;
-	width: 50px;
-	height: 30px;
-	color: white;
-}
-    
-</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/scripts/json.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	
+<!-- 수림 개인 js/css -->
+<script src="${pageContext.request.contextPath }/resources/js/surim/default.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
 
 <script>
-$(function() {
-	$("#back-btn").click(function(){
-		//location.href='list';
-		history.go(-1)();
-	});
+//아작스용
+$(function(){
+	insertChallenge(); //챌린지 참여시 디비에 이력남김
 	
+	console.log("${challenge}" + "sdfsdf");
+	
+	function insertChallenge(){
+		//기본 챌린지 참가버튼
+	    $("#basic-btn").click(function(){
+	    	if ( $(this).attr('class')!='join-btn start-challenge' ) {
+	    		$("#basicModal").modal(); //모달 팡법
+	    	}
+	    });
+		
+	    $("#basic-join-add").click(function(){
+	    	$("#basic-btn").toggleClass('start-challenge');
+		    $("#basic-btn").hasClass('start-challenge') ?
+			  $("#basic-btn").text('참가중') :
+			  $("#basic-btn").text('참가'); //버튼 클릭시 참가중으로 변경
+	    	
+			// 아작스 시작
+	    	var param = JSON.stringify($("#frm").serializeObject());; //디비에 넣을값; 해당 챌린지정보
+	    	console.log(param + "sdfsd");
+	    	
+	    	$.ajax({
+	    		url: "ajax/insertChallenge.json",
+	    		method: "post",
+	    		dataType: "json",
+	    		data: param,
+	    		contentType: "application/json"
+	    		//success :  성공시 함수 
+	    	});
+	
+	    });
+	
+	    //스페셜 챌린지 참가버튼
+	    $("#special-btn").click(function(){
+	    	if ( $(this).attr('class')!='join-btn start-challenge' ) {
+	       		 $("#specialModal").modal();
+	       		 console.log("모달출력"); //모달 팝업
+	       }
+	    });
+	
+	    $("#special-join-add").click(function(){
+	    	$("#special-btn").toggleClass('start-challenge');
+	
+			$("#special-btn").hasClass('start-challenge') ?
+				$("#special-btn").text('참가중') :
+				$("#special-btn").text('참가');
+				
+	    });	
+	};
 	
 });
 
@@ -79,6 +80,7 @@ $(function() {
 
 </head>    
 <body>
+	<!-- 뒤로가기 버튼 -->
 	<div class="back-div">  
 		<input type="button" class="back-btn" id="back-btn">
 		<h3 style="font-weight: bold">챌린지</h3>
@@ -157,9 +159,9 @@ $(function() {
 						<p>참가시 취소가 되지 않습니다</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="modal-btn"
+						<button type="button" class="pink-btn"
 							data-dismiss="modal" id="basic-join-add">Join</button>
-						<button type="button" data-dismiss="modal">Close</button>
+						<button type="button" class="white-btn" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
@@ -183,22 +185,19 @@ $(function() {
 						<p>참가시 소정의 보증금이 필요하며 결제후 취소가 되지 않습니다</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="modal-btn"
-							data-dismiss="modal" id="special-join-add">Join</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="pink-btn"
+							data-dismiss="modal" id="special-join-add"
+							onclick="location.href='payment?num=${challenge.cl_num}'">Join</button>
+						<button type="button" class="white-btn" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
 		</div>
-	  
-
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-	<!-- 참가버튼 클릭시 모달뜨게함 -->
-	<script
-		src="${pageContext.request.contextPath }/resources/js/surim/challenge.js"></script>
-
+	  <% String id = (String)session.getAttribute("id"); %>	
+		<form id="frm">
+			<input name="cl_num" type="hidden" value="${challenge.cl_num }">
+			<input name="m_id" type="hidden" value="<%=id %>">
+		</form>
+		
 </body>
 </html>
