@@ -1,4 +1,4 @@
-package com.yedam.gca.board.dao;
+package com.yedam.gca.board.dao.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.yedam.gca.board.dao.BoardDAO;
 import com.yedam.gca.board.vo.AdBoardVO;
 
 @Repository	// 현재 클래스를 dao bean으로 등록
