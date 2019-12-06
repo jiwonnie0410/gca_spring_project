@@ -10,17 +10,19 @@
 <title>반짝 대기방s</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0, user-scalable=no, target-densitydpi=medium-dpi" />
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script src="../resources/js/jey/json.min.js"></script>
 
 
 <style>
@@ -89,10 +91,19 @@
 	     white-space:nowrap;
 	   }
 	   
-	div .modal-body{
+	div#room-info-div .modal-body{
 		text-align : left;
 	}
+	
+	table#room-info-table th{
+		width: 80px;
+		height: 30px;
+		border-right: 3px solid;
+	}
 
+	table#room-info-table td{
+		padding-left: 15px;
+	}
 
 </style>
 
@@ -128,7 +139,24 @@
 
 				if (confirmStatus) {
 					
-					alert("신고 처리 되었습니다.");
+					var param = JSON.stringify($("#report-frm").serializeObject());
+					
+					$.ajax({
+						url: "doReport",
+						method:'post',
+						dataType: "json",	//결과타입
+						data: param,		//요청파라미터
+						contentType: "application/json",
+						//컨트롤러로 데이타 보낼때 제이슨이라는 것을 알려줘야함. 컨트롤러에는 담을 vo에@RequestBody붙여주고.
+						success: function(){
+							alert("신고 처리 되었습니다.");
+						},
+						error: function(){
+							alert("신고 실패");
+						}
+						
+					});
+					
 					console.log("신고했을때 처리할 곳");
 					
 					$('#profile').modal('hide'); //프로필 모달창 까지 닫기
@@ -199,25 +227,25 @@
 
         		<span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
           			<img style="padding-bottom:5px;" width="65px" height="65px"
-          							src="${pageContext.request.contextPath }/resources/images/trainer-1.jpg" class="rounded-circle">
+          							src="${pageContext.request.contextPath }/resources/images/jey/trainer-1.jpg" class="rounded-circle">
         			<br />사람1
         		</span>
         	
           		<span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;">
           			<img style="padding-bottom:5px;" width="65px" height="65px"
-          							src="${pageContext.request.contextPath }/resources/images/trainer-2.jpg" class="rounded-circle">
+          							src="${pageContext.request.contextPath }/resources/images/jey/trainer-2.jpg" class="rounded-circle">
         			<br />사람2
         		</span>
         	
           		<span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;">
           			<img style="padding-bottom:5px;" width="65px" height="65px"
-          							src="${pageContext.request.contextPath }/resources/images/trainer-3.jpg" class="rounded-circle">
+          							src="${pageContext.request.contextPath }/resources/images/jey/trainer-3.jpg" class="rounded-circle">
         			<br />사람3
         		</span>
         	
           		<span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;">
           			<img style="padding-bottom:5px;" width="65px" height="65px"
-          							src="${pageContext.request.contextPath }/resources/images/trainer-1.jpg" class="rounded-circle">
+          							src="${pageContext.request.contextPath }/resources/images/jey/trainer-4.jpg" class="rounded-circle">
         			<br />사람4
         		</span>
 
@@ -279,16 +307,50 @@
 				</div>
         
 <!-- Modal body -->
-				<div class="modal-body">
+			<!-- 방정보 -->
+				<div id="room-info-div" class="modal-body">
 					
-					운동&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : ${sgroup.sports1_cd}<br />
-					일시&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : ${sgroup.sg_end_dttm}<br />
-					장소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : ${sgroup.sg_location}<br                   />
-					참가정보 : ${sgroup.gender_cd} ${sgroup.age_range}<br />
-					인원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : ${sgroup.sg_end_cnt} 명중 ${sgroup.sg_now_cnt} 명 참가<br /> <!-- 0명중 0명참가/반짝 대기?인원꽉참? -->
-					숙련도&nbsp;&nbsp;&nbsp; : ${sgroup.skill_cd}<br />
-					상태&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 방상태 사람수 계산해서.<br />
-					옵션&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : ${sgroup.sg_option}반려동물, 도구지참.<br />
+					<table id="room-info-table">
+						<tr>
+							<th>운동 </th><td> ${sgroup.sports1_cd}</td>
+						</tr>
+						<tr>
+							<th>일시 </th><td> <fmt:formatDate value="${sgroup.sg_end_dttm }" pattern="yyyy/MM/dd a hh:mm" /></td>
+						</tr>
+						<tr>
+							<th>장소 </th><td> ${sgroup.sg_location}</td>
+						</tr>
+						<tr>
+							<th>참가정보 </th><td> ${sgroup.gender_cd} ${sgroup.age_range}</td>
+						</tr>
+						<tr>
+							<th>인원 </th><td> ${sgroup.sg_end_cnt} 명중 ${sgroup.sg_now_cnt} 명 참가</td>
+						</tr>
+						<tr>
+							<th>숙련도 </th><td> ${sgroup.skill_cd}</td>
+						</tr>
+						<tr>
+							<th>상태 </th>
+							<td>
+								<c:set var="now_cnt" value="${sgroup.sg_now_cnt}" />
+								<c:set var="end_cnt" value="${sgroup.sg_end_cnt}" />
+								<c:set var="sg_option" value="${sgroup.sg_option}" />
+								<c:choose>
+									<c:when test="${now_cnt eq end_cnt}">
+										참가대기
+									</c:when>
+									<c:otherwise>
+										참여가능
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>
+						<c:if test="${not empty sg_option}">
+							<tr>
+								<th>옵션 </th><td> ${sgroup.sg_option}</td>
+							</tr>
+						</c:if>
+					</table>
 				</div>
         
 <!-- Modal footer -->
@@ -315,24 +377,25 @@
 				</div>
         
 <!-- Modal body -->
-				<div class="modal-body">
-					<table>
+				<form id="report-frm">
+				<div id="report-div" class="modal-body">
+					<table id="report-table">
 						<tr align="left">
 							<th width="30px" style="padding-left:20px;">id</th><th>신고사유</th>
 						</tr>
 						<tr>
-							<td width="48%" align="left" style="padding:0 20px;"><input style="font-size:15px; border-radius:5px; width:100%;" type="text"></td>
+							<td width="48%" align="left" style="padding:0 20px;"><input name="tr_mid" style="font-size:15px; border-radius:5px; width:100%;" type="text"></td>
 							<td width="52%">
-								<select style="width:92%" class="form-control">
-								  <option>욕설 및 비방</option>
-								  <option>성희롱</option>
-								  <option>권리 침해</option>
-								  <option>폭력적</option>
-								  <option>테러 조장</option>
+								<select name="tr_reason_cd" style="width:92%" class="form-control">
+								  <option value="T01">욕설 및 비방</option>
+								  <option value="T02">성희롱</option>
+								  <option value="T03">권리 침해</option>
+								  <option value="T04">폭력적</option>
+								  <option value="T05">테러 조장</option>
 								</select>
 							</td>
 						</tr>
-						<tr style="padding-top:20px"><td style="padding-top:20px" colspan="2"><textarea style="font-size:15px; border-radius:5px; padding:10px;
+						<tr style="padding-top:20px"><td style="padding-top:20px; align-content: center;" colspan="2"><textarea style="font-size:15px; border-radius:5px; padding:10px;
       							resize:none; width:90%; height:200px;">신고내용</textarea></td></tr>
 					</table>
 				</div>
@@ -342,6 +405,7 @@
 					<button id="doReport" type="button" class="button-general" data-dismiss="modal">신고하기</button>
 					<button type="button" class="button-general" data-dismiss="modal">취소</button>
 				</div>
+				</form>
         
 			</div>
 		</div>

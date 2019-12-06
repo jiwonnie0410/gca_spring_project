@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.common.service.CodeService;
 import com.yedam.gca.common.vo.CodeVO;
 import com.yedam.gca.group_s.service.SGroupService;
@@ -28,6 +30,15 @@ public class SGroupController {
 		System.out.println(model);
 		return "group_s/s_wating_room";
 	}
+	
+	//신고하기 insert
+		@ResponseBody
+		@RequestMapping(value="/sgroup/doReport", consumes="application/json")
+		public int doReport(@RequestBody TroubleVO vo) {
+//			model.addAttribute("report", service.getRoomInfo(vo));
+			return sgroupService.doReport(vo);
+//			System.out.println(model);
+		}
 	
 //미현
 	
