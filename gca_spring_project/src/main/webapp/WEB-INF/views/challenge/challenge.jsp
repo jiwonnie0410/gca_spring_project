@@ -10,18 +10,17 @@
 
 <title>challenge.jsp</title>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <!-- 수림 개인 css -->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/challenge.css">
+<script src="${pageContext.request.contextPath }/resources/js/surim/default.js"></script>
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
+
 
   </head>
   
@@ -49,7 +48,7 @@
               	
               	<c:forEach items="${challengeList}" var="list">
 	              	<c:if test="${list.cl_status == 'basic' }"> 
-	              	<div class="content-div" onclick="location.href='contents?cl_num=${list.cl_num}'">
+	              	<div class="content-div" onclick="location.href='contents?num=${list.cl_num}'">
 	              		<img src="${pageContext.request.contextPath }/resources/images/sports/${list.sports1_cd }.jpg" width="100%" height="200px">
 	              		<span><fmt:formatDate value="${list.cl_start_dttm }" type="date" /> ~
 						<fmt:formatDate value="${list.cl_end_dttm }" type="date" />　　　(D-${list.gap_day })</span>
@@ -70,7 +69,7 @@
                <div class="tab-pane fade" id="specialChallenges">
               	<c:forEach items="${challengeList}" var="list">
               		<c:if test="${list.cl_status != 'basic' }"> 
-	              	<div class="content-div" onclick="location.href='contents?cl_num=${list.cl_num}'">
+	              	<div class="content-div" onclick="location.href='contents?num=${list.cl_num}'">
 	              		<img src="${pageContext.request.contextPath }/resources/images/sports/${list.sports1_cd }.jpg" width="100%" height="200px">
 	              		<span><fmt:formatDate value="${list.cl_start_dttm }" type="date" /> ~
 						<fmt:formatDate value="${list.cl_end_dttm }" type="date" />　　(D-${list.gap_day })</span>
