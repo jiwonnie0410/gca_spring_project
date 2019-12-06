@@ -1,7 +1,3 @@
-//if('${message}' != ''){
-//	alert('${message}');
-//}
-
 function sendEmail() {
 	// 필요한 정보가 다 입력되었는지 확인
 	if(document.forgotIdfrm.name.value == ""){

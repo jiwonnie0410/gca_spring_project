@@ -20,5 +20,6 @@ public class MembersVO {
 	private String m_status_cd;			// 계정상태 (활동중/활동정지/탈퇴/강퇴)
 	private int m_radius;				// 반짝이나 매치 띄울 위치반경
 	private String m_notice;			// 알림 설정
+	private String m_email;
 
 }

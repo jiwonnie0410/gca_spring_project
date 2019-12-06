@@ -6,7 +6,9 @@
 <!--
 	1. 회원가입
 	2. 아이디 중복 확인
-	3. 회원 리스트 가져오기
+	3. 이름이랑 이메일로 아이디 가져오기
+	4-1. 아이디, 이름, 이메일 정보 확인
+	4-2. 임시 비밀번호 업데이트 하기
  -->
 
 <!-- 1. 회원가입 -->
@@ -23,7 +25,8 @@
 											GENDER_CD,
 											M_GRANT,
 											M_LEVEL_CD,
-											M_STATUS_CD		)
+											M_STATUS_CD,
+											M_EMAIL		)
 					VALUES (	#{m_id},
 								#{m_salt},
 								#{m_password},
@@ -36,7 +39,8 @@
 								#{gender_cd},
 								'U',
 								'jw',
-								'M01'		)
+								'M01',
+								#{m_email}		)
 		  	</insert>
 
 
@@ -48,10 +52,29 @@
 		  	</select>
 
 
-<!-- 3. 회원 리스트 가져오기 -->
-		  	<select id="getMemberListMap" resultType="map"> <!-- typeAlias members로 MembersVO 가져옴 -->
-		  			SELECT *
+<!-- 3. 이름이랑 이메일로 아이디 가져오기 -->
+		  	<select id="forgotId" resultType="string">
+		  			SELECT M_ID
 		  			FROM members
+		  			WHERE M_NAME = #{m_name} AND M_EMAIL = #{m_email}
 		  	</select>
+
+
+<!-- 4-1. 아이디, 이름, 이메일 정보 확인 -->
+			<select id="forgotPw" resultType="int">
+					SELECT COUNT(*)
+					FROM MEMBERS
+					WHERE 		M_ID = #{m_id} 
+							AND M_NAME = #{m_name} 
+							AND M_EMAIL = #{m_email}
+			</select>
+
+
+<!-- 4-2. 임시 비밀번호로 업데이트 하기 -->
+			<update id="updateTempPw">
+					UPDATE MEMBERS
+					SET M_SALT='', M_PASSWORD = #{m_password}
+					WHERE M_ID = #{m_id}
+			</update>
 
 </mapper>

@@ -88,6 +88,10 @@
 	     overflow-x: scroll;
 	     white-space:nowrap;
 	   }
+	   
+	div .modal-body{
+		text-align : left;
+	}
 
 
 </style>
@@ -165,9 +169,9 @@
     
 	<!-- 방제 -->
     	<div style="background-color: #FE9191; text-align: left; padding-left:20px; color: #fff;"> 
-      		<span id="endDate"><fmt:formatDate value="${sgroup.sg_start_dttm }" pattern="MM/dd" /></span>
+      		<span id="title">${sgroup.sg_name }</span><br />
+      		<span id="endDate"><fmt:formatDate value="${sgroup.sg_end_dttm }" pattern="MM/dd" /></span>
       		<span id="endTime"><fmt:formatDate value="${sgroup.sg_end_dttm }" pattern="a hh:mm" /></span>
-      		<span id="title">${sgroup.sg_name }</span>
       		<span style="padding-left:78%"><button data-toggle="modal" data-target="#room-info"
       					style="background-color:#FFC0C0;" class="button-general">방 정보</button></span>
       		
@@ -275,15 +279,16 @@
 				</div>
         
 <!-- Modal body -->
-				<div align="left" class="modal-body">
+				<div class="modal-body">
 					
-					<%-- ${sgroup.sg_start_dttm}<br />
-					${sgroup.sg_end_dttm}<br />
-					${sgroup.sg_location}<br />
-					${sgroup.sports1_cd}<br />
-					${sgroup.} 명중 ${sgroup.sg_name} 명 참가<br /> <!-- 0명중 0명참가/반짝 대기?인원꽉참? -->
-					${sgroup.sg_name}<br />
-					${sgroup.sg_name}<br /> --%>
+					운동&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : ${sgroup.sports1_cd}<br />
+					일시&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : ${sgroup.sg_end_dttm}<br />
+					장소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : ${sgroup.sg_location}<br                   />
+					참가정보 : ${sgroup.gender_cd} ${sgroup.age_range}<br />
+					인원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : ${sgroup.sg_end_cnt} 명중 ${sgroup.sg_now_cnt} 명 참가<br /> <!-- 0명중 0명참가/반짝 대기?인원꽉참? -->
+					숙련도&nbsp;&nbsp;&nbsp; : ${sgroup.skill_cd}<br />
+					상태&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 방상태 사람수 계산해서.<br />
+					옵션&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : ${sgroup.sg_option}반려동물, 도구지참.<br />
 				</div>
         
 <!-- Modal footer -->
