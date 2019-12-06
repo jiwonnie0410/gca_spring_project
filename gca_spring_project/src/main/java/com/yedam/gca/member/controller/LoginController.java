@@ -74,7 +74,7 @@ public class LoginController {
 		MembersVO vo = new MembersVO();
 		vo.setM_name(request.getParameter("mName"));
 		vo.setM_email(request.getParameter("mEmail"));
-		model.addAttribute("idMessage", memberService.forgotId(vo));
+		model.addAttribute("idMessage", memberService.forgotId(vo)); // jsp 페이지에서 alert로 띄울 메시지 넘기기
 		return "/member/login";
 	}
 	
@@ -91,7 +91,7 @@ public class LoginController {
 		vo.setM_id(request.getParameter("mId"));
 		vo.setM_name(request.getParameter("mName"));
 		vo.setM_email(request.getParameter("mEmail"));
-		model.addAttribute("pwMessage", memberService.forgotPw(vo));
+		model.addAttribute("pwMessage", memberService.forgotPw(vo)); // jsp 페이지에서 alert로 띄울 메시지 넘기기
 		return "/member/login";
 	}
 	

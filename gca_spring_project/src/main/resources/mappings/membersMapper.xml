@@ -12,7 +12,7 @@
  -->
 
 <!-- 1. 회원가입 -->
-		  	<insert id="insertMember">
+		  	<insert id="insertMember" parameterType="members">
 					INSERT INTO members (	M_ID,
 											M_SALT,
 											M_PASSWORD,
@@ -45,7 +45,7 @@
 
 
 <!-- 2. 아이디 중복 확인 -->
-		  	<select id="checkId" resultType="int">
+		  	<select id="checkId" resultType="int" parameterType="String">
 					SELECT COUNT(*)
 					FROM members
 					WHERE M_ID = #{m_id}
@@ -53,7 +53,7 @@
 
 
 <!-- 3. 이름이랑 이메일로 아이디 가져오기 -->
-		  	<select id="forgotId" resultType="string">
+		  	<select id="forgotId" resultType="string" parameterType="members">
 		  			SELECT M_ID
 		  			FROM members
 		  			WHERE M_NAME = #{m_name} AND M_EMAIL = #{m_email}
@@ -61,7 +61,7 @@
 
 
 <!-- 4-1. 아이디, 이름, 이메일 정보 확인 -->
-			<select id="forgotPw" resultType="int">
+			<select id="forgotPw" resultType="int" parameterType="members">
 					SELECT COUNT(*)
 					FROM MEMBERS
 					WHERE 		M_ID = #{m_id} 
@@ -71,7 +71,7 @@
 
 
 <!-- 4-2. 임시 비밀번호로 업데이트 하기 -->
-			<update id="updateTempPw">
+			<update id="updateTempPw" parameterType="members">
 					UPDATE MEMBERS
 					SET M_SALT='', M_PASSWORD = #{m_password}
 					WHERE M_ID = #{m_id}
