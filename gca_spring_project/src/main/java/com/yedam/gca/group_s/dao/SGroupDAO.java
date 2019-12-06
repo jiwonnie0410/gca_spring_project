@@ -24,4 +24,8 @@ public class SGroupDAO {
 	public List<SGroupVO> getSgList(SGroupVO vo) {
 		return mybatis.selectList("SGroupDAO.getSgList", vo);
 	}
+	
+	public int updateCnt(SGroupVO vo) {
+		return mybatis.update("SGroupDAO.updateCnt", vo);
+	}
 }

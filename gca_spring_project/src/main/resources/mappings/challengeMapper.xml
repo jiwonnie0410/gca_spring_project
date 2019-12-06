@@ -13,11 +13,12 @@
 				CL_END_DTTM,
 				CL_SCORE,
 				
-				CASE trunc(CL_END_DTTM) - trunc(sysdate) 
+				CASE trunc(CL_END_DTTM) - trunc(SYSDATE) 
 					WHEN 0 THEN 'DAY'
 				ELSE TO_CHAR(trunc(CL_END_DTTM) - trunc(sysdate))
 				END AS GAP_DAY
 		FROM	CHALLENGE
+		WHERE CL_END_DTTM > SYSDATE
 		
 		ORDER BY CL_END_DTTM 
 	</select>

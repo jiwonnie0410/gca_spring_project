@@ -29,4 +29,10 @@ public class SGroupServiceImpl implements SGroupService {
 		return sgroupDAO.getSgList(vo);
 	}
 
+
+	@Override
+	public int updateCnt(SGroupVO vo) {
+		return sgroupDAO.updateCnt(vo);
+	}
+
 }

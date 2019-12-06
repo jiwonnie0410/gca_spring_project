@@ -25,6 +25,9 @@ public class ChallengeDAO  {
 		
 	}
 	
-	//챌린지 참가 (사용자가 챌린지 참가중이 아닐시)
+	//스페셜챌린지 결제페이지
+	public ChallengeVO challengePayment(ChallengeVO vo) {
+		return mybatis.selectOne("ChallengeDAO.challengePayment", vo);
+	}
 
 }

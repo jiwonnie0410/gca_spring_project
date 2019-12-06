@@ -29,21 +29,21 @@ function idCondition() {
 	}
 }
 
+//필요한 정보를 다 넣었는지 확인
 var conPw = 0;
 var chPw = 0;
 function checkForm() {
 	var form = document.joinfrm;
 
-	// 필요한 정보를 다 넣었는지 확인
-	if (form.joinid.value == "") {
+	if (form.joinId.value == "") {
 		alert("아이디를 입력하세요.");
-		form.joinid.focus();
+		form.joinId.focus();
 		return false;
 	}
 
-	if (form.joinid.readOnly != true) {
+	if (form.joinId.readOnly != true) {
 		alert("아이디 중복체크를 해 주세요.");
-		form.joinid.focus();
+		form.joinId.focus();
 		return false;
 	}
 
@@ -70,35 +70,29 @@ function checkForm() {
 		form.name.focus();
 		return false;
 	}
-
-	if (form.phone2.value == "" || form.phone3.value == "") {
-		alert("전화번호를 입력하세요.");
-		form.phone2.focus();
+	
+	if (form.nick.value == "") {
+		alert("닉네임을 입력하세요.");
+		form.nick.focus();
+		return false;
+	}
+	
+	if (form.age.value == "") {
+		alert("나이를 입력하세요.");
+		form.age.focus();
+		return false;
+	}
+	
+	if (isNaN(form.age.value) == true
+			|| isNaN(form.age.value) == true) {
+		alert("나이는 숫자만 입력해 주세요.");
+		form.age.focus();
 		return false;
 	}
 
-	if (isNaN(form.phone2.value) == true
-			|| isNaN(form.phone3.value) == true) {
-		alert("전화번호는 숫자만 입력해 주세요.");
-		form.phone2.focus();
-		return false;
-	}
-
-	if (form.email1.value == "") {
-		alert("이메일을 입력하세요.");
-		form.eamil1.focus();
-		return false;
-	}
-
-	if (form.postcode.value == "") {
+	if (form.address.value == "") {
 		alert("주소를 입력하세요.");
-		form.address2.focus();
-		return false;
-	}
-
-	if (form.address2.value == "") {
-		alert("상세 주소를 입력하세요.");
-		form.address2.focus();
+		form.address.focus();
 		return false;
 	}
 
@@ -115,7 +109,7 @@ function checkForm() {
 
 // 중복되는 아이디인지 체크
 function idCheck() {
-	var chkId = document.joinfrm.joinid;
+	var chkId = document.joinfrm.joinId;
 	if (chkId.value == "") {
 		alert("아이디를 입력하세요.");
 		chkId.focus();
@@ -123,46 +117,22 @@ function idCheck() {
 	}
 
 	$.ajax({
-		url : 'checkId.do',
+		url : 'ajax/checkId',
 		data : {
-			id : document.joinfrm.joinid.value
+			id : document.joinfrm.joinId.value
 		},
 		dataType : 'json',
 		success : function(result) {
-			if (result.flag == true) { // 아이디 사용 가능할 때
-				alert(document.joinfrm.joinid.value + "는 사용 가능한 ID입니다.");
-				document.joinfrm.joinid.readOnly = true;
+			console.log(result)
+			if (result == 0) { // 아이디 사용 가능할 때
+				alert(document.joinfrm.joinId.value + "는 사용 가능한 ID입니다.");
+				document.joinfrm.joinId.readOnly = true;
 				document.joinfrm.password1.focus();
 			} else { // 아이디 사용 불가능 할 때
 				alert("사용할 수 없는 ID입니다.");
 			}
 		}
 	});
-}
-
-// 비밀번호 조건 확인: 숫자, 특수문자 혼합하여 6-8자리
-// 밑에다 합쳐놨음 지금 안 씀: 비밀번호 조건 만족 안 할 때 재확인 완료 후 조건 만족하면 재확인이 제대로 안 되는 문제가 있음
-function pwCondition() {
-	var pattern1 = /[0-9]/;
-	var pattern2 = /[~!@#$%^&*()_+|<>?:{}]/;
-
-	var first = document.joinfrm.password1;
-
-	// 비밀번호 조건 체크
-	if (first.value.length >= 6 && first.value.length <= 8) { // 길이 체크
-		if (pattern1.test(first.value) && pattern2.test(first.value)) { // 숫자, 특수문자 혼합
-			conPw = 1;
-			$("#conditionPw").text("");
-		} else {
-			conPw = 0;
-			$("#conditionPw").text("");
-			$("#conditionPw").append("<font size=\"2\" color=\"red\"> *숫자, 특수문자를 혼합하여 6-8자리 </font>");
-		}
-	} else {
-		conPw = 0;
-		$("#conditionPw").text("");
-		$("#conditionPw").append("<font size=\"2\" color=\"red\"> *숫자, 특수문자를 혼합하여 6-8자리 </font>");
-	}
 }
 
 // 비밀번호 조건 확인: 숫자, 특수문자 혼합하여 6-8자리 // 비밀번호 재확인

@@ -43,6 +43,12 @@
 	
 	
 <!-- 미현 -->
+	<!-- 반짝 방 참여 전 인원수 1 증가시키는 맵퍼 -->
+	<update id="updateCnt" parameterType="sgroup">
+		UPDATE 	SGROUP
+		SET		SG_NOW_CNT = #{sg_now_cnt}
+		WHERE	SG_NUM = #{sg_num}
+	</update>
 	
 	<!-- SGroup 전체 조회 -->
 	<select id="getSgList" resultType="sgroup">
@@ -64,8 +70,6 @@
 		FROM	SGROUP
 		ORDER BY 1
 	</select>
-
-
 
 
 </mapper>
