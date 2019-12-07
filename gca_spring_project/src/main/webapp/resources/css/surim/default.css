@@ -36,6 +36,12 @@
 .content-div hr {
 	border-top: 5px solid rgb(209, 209, 209);
 }
+.title {
+	font-weight: bold;
+	font-size: 1.5em;
+	text-align:center;
+	display: block;
+}
 
 .pinkText {
 	font-weight: bold;

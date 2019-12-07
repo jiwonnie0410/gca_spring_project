@@ -33,15 +33,13 @@ function checkChallengeHistory() {
 	});
 }
 
-
-
 </script>
 
   </head>
   
   <body>
     <div class="container">
-      <div style="text-align:center;"><h2><b>챌린지 목록</b></h2></div>
+    <span class="title">챌린지 목록</span>
       <div class="row">
         <div class="col">
         	<!-- 상단 nav-tabs 시작 -->
