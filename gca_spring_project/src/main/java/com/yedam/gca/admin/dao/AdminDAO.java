@@ -8,11 +8,18 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yedam.gca.challenge.vo.ChallengeVO;
+
 @Repository
 public class AdminDAO {
 
 	@Autowired
 	SqlSessionTemplate mybatis;
+	
+	// 챌린지 생성
+	public int createChallenge(ChallengeVO vo) {
+		return mybatis.insert("AdminDAO.insertChallenge", vo);
+	}
 	
 	// 반짝 운동별 통계
 	public List<Map<String, Object>> chartSgroup(){
@@ -30,4 +37,5 @@ public class AdminDAO {
 	    map.put("city", city);
 	    return mybatis.selectList("AdminDAO.chartCity", map);
 	}
+	
 }
