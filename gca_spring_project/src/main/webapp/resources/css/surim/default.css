@@ -1,26 +1,22 @@
-.nav-link.active {
+.container .nav-link.active {
 	background: #FE9191;
 	color: white;
 }
 
-.nav-link {
+.container .nav-link {
 	border-radius: 3px;
 	color: black;
 	font-size: 22px;
 	font-weight: bold;
 }
 
-.nav span {
+.container .nav span {
 	display: block;
 	font-size: 14px;
 	border-radius: 3px;
 }
 
-.tab-pane {
-	margin-top: 5px;
-}
-
-.content-div {
+.container .content-div {
 	background: #FAF0F0;
 	border-radius: 3px;
 	padding: 20px;
@@ -29,25 +25,25 @@
 	margin-bottom: 10px;
 }
 
-.content-div span {
+.container .content-div span {
 	display: block;
 }
 
-.content-div hr {
+.container .content-div hr {
 	border-top: 5px solid rgb(209, 209, 209);
 }
-.title {
+.container .title {
 	font-weight: bold;
 	font-size: 1.5em;
 	text-align:center;
 	display: block;
 }
 
-.pinkText {
+.container .pinkText {
 	font-weight: bold;
 	color: #FE9191;
 }
-.smallText {
+.container .smallText {
 	font-size: small;
 	color: grey;
 }
@@ -97,8 +93,5 @@
 	border: none;
 	width: 48px;
 	height: 48px;   
-}
-
-
 }
 

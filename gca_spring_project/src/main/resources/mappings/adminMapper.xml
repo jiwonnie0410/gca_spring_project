@@ -6,9 +6,11 @@
 <!--
 	1. 반짝 운동별 통계
 	2. 동호회 매치 운동별 통계
-	3-1. 여성 연령대 및 운동 통계
-	3-2. 남성 연령대 및 운동 통계
+	3. 성별로 연령대 및 운동 통계
 	4. 지역별 통계
+	5. 챌린지 생성
+	6. 챌린지 삭제
+	7. 챌린지 진행 현황
  -->
 
 <!-- 1. 반짝 운동별 통계 -->
@@ -29,40 +31,84 @@
 			</select>
 
 
-<!-- 3-1. 여성 연령대 및 운동 통계(반짝만) -->
-			<select id="chartFemale">
-					<!-- 20대만 -->
+<!-- 3. 성별로 연령대 및 운동 통계(반짝만) -->
+			<select id="chartFemale" parameterType="map">
+					<!-- #{gender}성별의  ${startAge}살부터 ${endAge}살의 사람들이 반짝 한 횟수 -->
+					<!-- 예: 여성 20살부터 29살까지 사람들이 반짝 한 횟수 -->
 					SELECT 	COUNT(*), C.CD_NAME
 					FROM 	ACTIVE_HIST H, MEMBERS M, CODE C, SGROUP S
 					WHERE 	H.M_ID = M.M_ID
 					        AND H.SG_NUM = S.SG_NUM
 					        AND S.SPORTS1_CD = C.CD_ID
-					        AND M.GENDER_CD = 'G01'
-					        AND M.M_AGE BETWEEN 20 AND 29
+					        AND M.GENDER_CD = #{gender}
+					        AND M.M_AGE BETWEEN ${startAge} AND ${endAge}
 					GROUP BY C.CD_NAME
 			</select>
 
 
-<!-- 3-2. 남성 연령대 및 운동 통계 -->
-			<select id="chartMale">
-					<!-- 20대만 -->
-					SELECT 	COUNT(*), C.CD_NAME
-					FROM 	ACTIVE_HIST H, MEMBERS M, CODE C, SGROUP S
-					WHERE 	H.M_ID = M.M_ID
-					        AND H.SG_NUM = S.SG_NUM
-					        AND S.SPORTS1_CD = C.CD_ID
-					        AND M.GENDER_CD = 'G02'
-					        AND M.M_AGE BETWEEN 20 AND 29
-					GROUP BY  C.CD_NAME
-			</select>
-
-
 <!-- 4. 지역별 통계 -->
-			<select id="chartCity">
-					<!-- 대구만 -->
-					SELECT 	COUNT(*)
-					FROM 	MEMBERS
-					WHERE 	M_LOCATION LIKE '대구%'
+			<select id="chartCity" parameterType="map" resultType="map">
+					<!-- ${month}월에  #{city} 사는 사람들이 반짝 한 횟수 -->
+					<!-- 예: 12월에 대구에 사는 사람들이 반짝 한 횟수 -->
+					SELECT  TO_CHAR(SYSDATE, 'MM') AS "월",
+					        COUNT(*) AS "횟수",
+					        SUBSTR(M.M_LOCATION, 1, 2) "지역"
+					        
+					FROM    MEMBERS M, SGROUP S, ACTIVE_HIST H
+					
+					WHERE   	H.M_ID = M.M_ID 
+							AND H.SG_NUM = S.SG_NUM
+					        AND TO_CHAR(S.SG_END_DTTM, 'MM') = ${month}
+					        AND M.M_LOCATION LIKE '#{city}%'
+					        
+					GROUP BY M.M_LOCATION, TO_CHAR(SYSDATE, 'MM')
 			</select>
 
+
+<!-- 5. 챌린지 생성 -->
+			<insert id="insertChallenge" parameterType="challenge">
+			
+					<!-- 챌린지 번호 제일 최근 거 가져오기 -->
+					<selectKey order="BEFORE" resultType="int" keyProperty="cl_num">
+							SELECT MAX(CL_NUM)+1
+							FROM CHALLENGE
+					</selectKey>
+					
+					insert into challenge( 	cl_num, 
+											cl_status, 
+											cl_name, 
+											cl_content, 
+											sports1_cd, 
+											cl_cnt, 
+											cl_start_dttm, 
+											cl_end_dttm, 
+											cl_score
+										 )
+					values( ${cl_num}, 
+							#{cl_status},
+							#{cl_name}, 
+							#{cl_content}, 
+							#{sports1_cd}, 
+							${cl_cnt}, 
+							#{cl_start_dttm}, 
+							#{cl_end_dttm}, 
+							${cl_score}
+						   )
+			</insert>
+			
+
+<!-- 6. 챌린지 삭제??를 하기로 했었나???? -->
+			<delete id="deleteChallenge" parameterType="int">
+					DELETE FROM CHALLENGE 
+					WHERE CL_NUM = ${cl_num}
+			</delete>
+			
+			
+<!-- 7. 챌린지 진행 현황 -->
+			<select id="">
+					SELECT C.CL_NUM, C.CL_STATUS, C.CL_NAME, D.CD_NAME, C.CL_START_DTTM, C.CL_END_DTTM,
+					        H.M_ID, H.CLH_CNT
+					FROM CHALLENGE C, CODE D, CHALLENGE_HIST H
+					WHERE C.SPORTS1_CD = D.CD_ID AND H.CL_NUM = C.CL_NUM
+			</select>
 </mapper>

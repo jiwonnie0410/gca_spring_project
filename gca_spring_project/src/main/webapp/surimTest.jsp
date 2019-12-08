@@ -88,10 +88,6 @@
 </head>
 
 <body>
-<c:forEach items="${ActiveHistList}" var="list">
-	${list.m_id }!!<br>
-</c:forEach>
-
 	<div class="historyDiv">
 	  <br>
 	  <!-- Nav tabs 캘린더/전체보기 버튼 -->

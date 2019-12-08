@@ -477,7 +477,7 @@
 		 id : "test",
 		 msg : inputMessage.value
 	 }
-	textarea.value += "나 : " + inputMessage.value + "\n"; 
+	//textarea.value += "나 : " + inputMessage.value + "\n"; 
 	webSocket.send(  JSON.stringify( msg )   ); 
 	inputMessage.value = ""; 
  } 

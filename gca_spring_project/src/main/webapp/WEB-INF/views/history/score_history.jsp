@@ -49,7 +49,8 @@
 회원포인트: ${list.sch_score } 
 회원랭킹:  ${list.rank}
 
-랭킹 10등 넘어가면 순위권외로 출력됨
+랭킹 10등 넘어가면 순위권외로 출력됨,
+나의 랭킹은 현재 세션의 'id' 받아옴
  -->
 <div class="container">
 	<div class="content-div">
