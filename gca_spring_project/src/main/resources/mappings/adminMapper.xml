@@ -9,6 +9,8 @@
 	3. 성별로 연령대 및 운동 통계
 	4. 지역별 통계
 	5. 챌린지 생성
+	6. 챌린지 삭제
+	7. 챌린지 진행 현황
  -->
 
 <!-- 1. 반짝 운동별 통계 -->
@@ -100,4 +102,13 @@
 					DELETE FROM CHALLENGE 
 					WHERE CL_NUM = ${cl_num}
 			</delete>
+			
+			
+<!-- 7. 챌린지 진행 현황 -->
+			<select id="">
+					SELECT C.CL_NUM, C.CL_STATUS, C.CL_NAME, D.CD_NAME, C.CL_START_DTTM, C.CL_END_DTTM,
+					        H.M_ID, H.CLH_CNT
+					FROM CHALLENGE C, CODE D, CHALLENGE_HIST H
+					WHERE C.SPORTS1_CD = D.CD_ID AND H.CL_NUM = C.CL_NUM
+			</select>
 </mapper>
