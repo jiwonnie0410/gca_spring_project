@@ -1,0 +1,60 @@
+/* 운동종목 메뉴 */
+.swiper-container {
+	width: 100%;
+	height: 40px;
+	margin: 5px 0 10px 0;
+	padding: 5px 15px 5px 15px;
+	border-top: 1px double #FE9191;
+	border-bottom: 1px double #FE9191;
+}
+.swiper-slide {
+	text-align: center;
+	font-size: 15px;
+	color: #FE9191;
+	width: auto;
+	
+	/* Center slide text vertically */
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+}
+.swiper-slide:hover {
+	background-color: #FE7E7E;
+	border-radius: 8px;
+	color: #FFFFFF; }
+
+
+/* 방 생성 버튼 */
+.create_room {
+	border: 2px solid #FE7E7E;
+	background-color: #FE9191;
+	margin: 10px 0 5px 0;
+}
+
+/* 테이블 각 요소 */
+.td1 { width: 50px; float: top; position: relative; }
+.td2 { width: 200px; float: top; position: relative; }
+.td3 { width: 90px;	white-space: nowrap; float: top; position: relative; }
+/* .content { line-height: 0.3; } */
+.p1 { font-size: 23pt; position: absolute; margin: 0 0 0 5px;}
+.p2 { font-size: 8pt; position: absolute; margin: 47px 0 0 0;}
+.p5 { font-size: 10pt; position: absolute; margin: 0 0 0 0;}
+.p4 { font-size: 12pt; font-weight: bold; position: absolute; margin: 21px 0 0 5px; width: 220px; display:block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.p3 { font-size: 10pt; position: absolute; margin: 47px 0 0 5px; width: 220px; display:block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.p6 { font-size: 10pt; position: absolute; margin: 0 0 0 0;}
+.p7 { font-size: 12pt; color: #FE7E7E; font-weight: bold; position: absolute; margin: 19px 0 0 0;}
+.p8 { font-size: 10pt; position: absolute; margin: 47px 0 0 0;}
+.badge {  font-size: 9pt;  }
+
+#btn_badminton img:last-child {	display:none; }
+#btn_badminton:hover img:first-child { display:none }
+#btn_badminton:hover img:last-child { display:inline-block }

@@ -35,14 +35,14 @@ function sport_dropdown(){
 function skill_dropdown(){
 	var html = $(this).html();
 	$('#sg_skill').html(html +'<span class="caret pl-2"></span>');
-	$('#sg_sport_val').val($(this).data("cdid"));
+	$('#sg_skill_val').val($(this).data("cdid"));
 }
 
 //마감인원 드롭다운
 function end_cnt_dropdown(){
 	var html = $(this).html();
 	$('#sg_finish').html(html +'<span class="caret pl-2"></span>');
-	$('#sg_finish').val($('#sg_finish').text().substr(0,1));
+	$('#sg_finish_val').val($('#sg_finish').text().substr(0,1));
 }
 
 //주소 입력
@@ -81,6 +81,7 @@ function sgAddr() {
 					var result = results[0];
 					var coords = new daum.maps.LatLng(result.y, result.x); //좌표값 받음
 					$('#sg_xy').val(coords.Ha + ", " + coords.Ga);
+					console.log($('#sg_xy').val());
 					mapContainer.style.display = "block";
 					map.relayout();
 					map.setCenter(coords);
@@ -131,12 +132,16 @@ function siler(){
 
 //유효성 검증------------------------------------------------------------------------------
 function valid(){
-	name_valid(); //반짝 방 이름 검사
-	sport_valid(); //운동 종목, 숙련도 유효성 검사
-    day_valid(); //마감날짜, 마감시간 유효성 검사
+	if(name_valid() == false) return; //반짝 방 이름 검사
+	if(sport_valid() == false) return; //운동 종목, 숙련도 유효성 검사
+	if(day_valid() == false) return; //마감날짜, 마감시간 유효성 검사
     if(location_valid() == false) return; //장소 유효성 검사
-	cnt_reval(); //인원 val값 변경
-	age_reval(); //연력대 val값 변경
+    if(cnt_reval() == false) return; //인원 val값 변경
+    age_reval(); //연령대 val값 변경
+    //옵션 null값 교정
+    if($("input:checkbox[id='sg_option1_box']").is(":checked")==false && $("input:checkbox[id='sg_option2_box']").is(":checked")==false){
+		$("#sg_option3_box").attr("checked", "checked");
+	}
 	
 	$('#frm').submit();
 }
@@ -173,24 +178,20 @@ function name_valid(){
 //운동종목, 숙련도 유효성 검사
 function sport_valid(){
 	$('#sg_sport_valid').show();
-		if( $('#sg_sport').val() == "" || $('#sg_sport').val().isNull ){
-			if( $('#sg_skill').val() == "" || $('#sg_skill').val().isNull ){
+		if( $('#sg_sport_val').val() == "" || $('#sg_sport_val').val().isNull ){
+			if( $('#sg_skill_val').val() == "" || $('#sg_skill_val').val().isNull ){
 				$('#sg_sport_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>운동 종목과 숙련도를 선택해 주세요.');
 				return false;
 			}
 			$('#sg_sport_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>운동 종목을 선택해 주세요.');
 			return false;
-		} else if( $('#sg_skill').val() == "" || $('#sg_skill').val().isNull ){
-			if( $('#sg_sport').val() == "" || $('#sg_sport').val().isNull ){
+		} else if( $('#sg_skill_val').val() == "" || $('#sg_skill_val').val().isNull ){
+			if( $('#sg_sport_val').val() == "" || $('#sg_sport_val').val().isNull ){
 				$('#sg_sport_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>운동 종목과 숙련도를 선택해 주세요.');
 				return false;
 			}
     	$('#sg_sport_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>숙련도를 선택해 주세요.');
     	return false;
-    } else {
-	    //숙련도 val값 변경(입문 이상 -> 입문)
-    	var skill_rename = $('#sg_skill').val().substring(0,2);
-    	$('#sg_skill').val(skill_rename);
     }
 	$('#sg_sport_valid').hide();
 }
@@ -230,6 +231,7 @@ function day_valid(){
 
 //장소 유효성 검사
 function location_valid(){
+	$('#sg_location_valid').show();
 	if( $('#sg_location').val() == "" || $('#sg_location').val() == null){
 		$('#sg_location_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>만날 장소를 입력해 주세요.');
 		return false;
@@ -239,13 +241,9 @@ function location_valid(){
 
 //인원 유효성 검사
 function cnt_reval(){
-	if( $('#sg_finish').val() == "" || $('#sg_finish').val() == null ){
+	if( $('#sg_finish_val').val() == "" || $('#sg_finish_val').val() == null ){
 		$('#sg_finish_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>모집 인원을 선택해 주세요.');
 		return false;
-	} else {
-		//참여 인원 val값 변경 (2명 -> 2)
-		var finish_rename = $('#sg_finish').val().substring(0,1);
-		$('#sg_finish').val(finish_rename);
 	}
 	$('#sg_finish_valid').hide();
 }
@@ -262,4 +260,5 @@ function age_reval(){
 		age_rename = age_rename.substring(0,3);
 	}
 	$('#sg_age').val(age_rename);
+	
 }

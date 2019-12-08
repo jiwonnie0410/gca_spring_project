@@ -110,7 +110,7 @@
 			,#{gender_cd}
 			,#{sg_option}
 			,#{m_id}
-			,#{sg_num, mode=OUT, jdbcType=NUMERIC, javaType=Integer }
+			,#{sg_num, mode=OUT, jdbcType=INTEGER}
 		)}
 	</select>
 

@@ -89,9 +89,10 @@ public class SGroupController {
 	@RequestMapping(value="sgroup/creRoom", method=RequestMethod.POST)
 	public String createRoom(@ModelAttribute SGroupVO vo, HttpSession session) {
 		String m_id = (String) session.getAttribute("m_id");
+//		vo.setM_id(m_id);
 		vo.setM_id("rr99999");
-		int sg_num = sgroupService.insertSg(vo);
-		int sg_now_cnt = 0;
-		return "redirect:getRoomInfo2?sg_num"+sg_num+"&sg_now_cnt="+sg_now_cnt;
+		sgroupService.insertSg(vo);
+//		int sg_num = vo.getSg_num();
+		return "redirect:getRoomInfo2?sg_num="+vo.getSg_num()+"&sg_now_cnt=0";
 	}
 }

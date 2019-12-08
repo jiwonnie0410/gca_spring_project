@@ -38,7 +38,7 @@ public class SGroupDAO {
 	}
 	 
 	//반짝 방 생성
-	public int insertSg(SGroupVO vo){
+	public SGroupVO insertSg(SGroupVO vo){
 		return mybatis.selectOne("SGroupDAO.insertSg", vo);
 	}
 }

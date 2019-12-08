@@ -40,7 +40,7 @@ public class SGroupServiceImpl implements SGroupService {
 	}
 
 	@Override
-	public int insertSg(SGroupVO vo) {
+	public SGroupVO insertSg(SGroupVO vo) {
 		return sgroupDAO.insertSg(vo);
 	}
 
