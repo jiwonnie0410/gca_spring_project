@@ -1,7 +1,36 @@
 // 반짝 운동별 통계 도넛
 function drawChart1() {
-	var data = google.visualization.arrayToDataTable([ [ 'Task', 'percentage' ] ]);
-	$.ajax({
+	var data = google.visualization.DataTable();
+	
+/*	var array = [];
+	array.push([ '올리브', 1, 5 ]);
+	array.push([ '페퍼로니', 5, 8 ]);
+	array.push([ '루꼴라', 2, 2 ]);
+	array.push([ '치즈', 3, 1 ]);
+	array.push([ '양파', 6, 15 ]);
+	data.addRows(array);*/
+	
+	
+	data.addColumn('string', 'Name');
+  data.addColumn('number', 'Height');
+  data.addRows(3);
+  data.setCell(0, 0, 'Tong Ning mu');
+  data.setCell(1, 0, 'Huang Ang fa');
+  data.setCell(2, 0, 'Teng nu');
+  data.setCell(0, 1, 174);
+  data.setCell(1, 1, 523);
+  data.setCell(2, 1, 86);
+	
+	
+	var options = {
+			title : ' ',
+			pieHole : 0.4,
+	};
+
+	var chart = new google.visualization.PieChart(document.getElementById('div_sgroup_exercise'));
+	chart.draw(data, options);
+	
+	/*$.ajax({
 			url: "",
 			dataType: "json",
 			success: function(result) {
@@ -24,7 +53,7 @@ function drawChart1() {
 					var chart = new google.visualization.PieChart(document.getElementById('div_sgroup_exercise'));
 					chart.draw(data, options);
 			}
-	});
+	});*/
 
 }
 
@@ -41,8 +70,7 @@ function drawChart2() {
 		pieHole : 0.4,
 	};
 
-	var chart = new google.visualization.PieChart(document
-			.getElementById('div_bgroup_exercise'));
+	var chart = new google.visualization.PieChart(document.getElementById('div_bgroup_exercise'));
 	chart.draw(data, options);
 }
 
@@ -53,21 +81,17 @@ function drawChart2() {
 function drawChart3() {
 	// Some raw data (not necessarily accurate)
 	var rowData1 = [
-			[ 'Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua  Guinea',
-					'Rwanda', 'Average' ],
-			[ '2004/05', 165, 938, 522, 998, 450, 114.6 ],
-			[ '2005/06', 135, 1120, 599, 1268, 288, 382 ],
-			[ '2006/07', 157, 1167, 587, 807, 397, 623 ],
-			[ '2007/08', 139, 1110, 615, 968, 215, 409.4 ],
-			[ '2008/09', 136, 691, 629, 1026, 366, 569.6 ] ];
+			[ 'Age', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua  Guinea',	'Rwanda', 'Average' ],
+			[ '20대', 165, 938, 522, 998, 450, 114.6 ],
+			[ '30대', 135, 1120, 599, 1268, 288, 382 ],
+			[ '40대', 157, 1167, 587, 807, 397, 623 ],
+			[ '50대 이상', 139, 1110, 615, 968, 215, 409.4 ] ];
 	var rowData2 = [
-			[ 'Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua  Guinea',
-					'Rwanda', 'Average' ],
-			[ '2004/05', 122, 638, 722, 998, 450, 614.6 ],
-			[ '2005/06', 100, 1120, 899, 1268, 288, 682 ],
-			[ '2006/07', 183, 167, 487, 207, 397, 623 ],
-			[ '2007/08', 200, 510, 315, 1068, 215, 609.4 ],
-			[ '2008/09', 123, 491, 829, 826, 366, 569.6 ] ];
+			[ 'Age', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua  Guinea',	'Rwanda', 'Average' ],
+			[ '20대', 122, 638, 722, 998, 450, 614.6 ],
+			[ '30대', 100, 1120, 899, 1268, 288, 682 ],
+			[ '40대', 183, 167, 487, 207, 397, 623 ],
+			[ '50대 이상', 200, 510, 315, 1068, 215, 609.4 ] ];
 
 	// Create and populate the data tables.
 	var data = [];
@@ -78,10 +102,10 @@ function drawChart3() {
 		width : 700,
 		height : 350,
 		vAxis : {
-			title : "Cups"
+			title : ""
 		},
 		hAxis : {
-			title : "Month"
+			title : "Age"
 		},
 		seriesType : "bars",
 		series : {
@@ -96,18 +120,12 @@ function drawChart3() {
 	};
 	var current = 0;
 	// Create and draw the visualization.
-	var chart = new google.visualization.ComboChart(document
-			.getElementById('div_age_gender'));
+	var chart = new google.visualization.ComboChart(document.getElementById('div_age_gender'));
 	var button = document.getElementById('b1');
 	function drawChart() {
 		// Disabling the button while the chart is drawing.
-		button.disabled = true;
-		google.visualization.events.addListener(chart, 'ready', function() {
-			button.disabled = false;
-			button.value = 'Switch to ' + (current ? 'Tea' : 'Coffee');
-		});
-		options['title'] = 'Monthly ' + (current ? 'Coffee' : 'Tea')
-				+ ' Production by Country';
+		button.disabled = false; // 내가 버튼을 jsp 페이지에 이미 만들어뒀기 때문에 얘는 false로 해야 함
+		options['title'] = (current ? '남성' : '여성') + ' 연령대별 운동 통계';
 
 		chart.draw(data[current], options);
 	}
@@ -125,21 +143,18 @@ function drawChart3() {
 function drawChart4() {
 	var data = google.visualization.arrayToDataTable([
 			[ 'Year', '서울', '부산', '대구', '인천', '광주', '대전', '울산' ],
-			[ '2004', 1000, 400, 430, 490, 390, 230, 590 ],
-			[ '2005', 1170, 460, 420, 450, 490, 430, 560 ],
-			[ '2006', 660, 1120, 440, 430, 380, 270, 520 ],
-			[ '2007', 1030, 540, 430, 460, 320, 430, 390 ] ]);
+			[ '2004', 100, 40, 43, 49, 39, 23, 59 ],
+			[ '2005', 117, 46, 42, 45, 49, 43, 56 ],
+			[ '2006', 66, 112, 44, 43, 38, 27, 52 ],
+			[ '2007', 103, 54, 43, 46, 32, 43, 39 ] ]);
 
 	var options = {
-		title : 'Company Performance',
+		title : '',
 		curveType : 'function',
-		legend : {
-			position : 'bottom'
-		}
+		legend : {	position : 'bottom'  }
 	};
 
-	var chart = new google.visualization.LineChart(document
-			.getElementById('div_city'));
+	var chart = new google.visualization.LineChart(document.getElementById('div_city'));
 
 	chart.draw(data, options);
 }
