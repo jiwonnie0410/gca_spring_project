@@ -56,6 +56,18 @@
     padding: 5px 7px;
 }
 
+.historyDiv .fc-day-header {
+	line-height: 1.5;
+}
+
+.historyDiv .fc-day-header.fc-widget-header.fc-sun {
+    border-top-left-radius: 5px;
+}
+
+.historyDiv .fc-day-header.fc-widget-header.fc-sat {
+    border-top-right-radius: 5px;
+}
+
 .calendar-color {
 	font-weight: bold;
 	font-size: 20px;
