@@ -13,7 +13,7 @@
 <link href='${pageContext.request.contextPath }/resources/fullcalendar/core/main.css' rel='stylesheet' />
 <link href='${pageContext.request.contextPath }/resources/fullcalendar/daygrid/main.css' rel='stylesheet'/>
 
-<script src='${pageContext.request.contextPath }/resources/resources/fullcalendar/core/main.js'></script>
+<script src='${pageContext.request.contextPath }/resources/fullcalendar/core/main.js'></script>
 <script src='${pageContext.request.contextPath }/resources/fullcalendar/daygrid/main.js'></script>
 <script src='${pageContext.request.contextPath }/resources/fullcalendar/interaction/main.js'></script>
 <script src='${pageContext.request.contextPath }/resources/fullcalendar/core/locales/ko.js'></script>
