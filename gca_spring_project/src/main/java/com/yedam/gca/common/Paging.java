@@ -24,32 +24,39 @@ public class Paging {
 	public int getPageUnit() {
 		return pageUnit;
 	}
+	
 	public void setPageUnit(int pageUnit) {
 		this.pageUnit = pageUnit;
 	}
+	
 	public int getPageSize() {
 		return pageSize;
 	}
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
+	
 	public int getLastPage() {
 		lastPage = totalRecord / pageUnit + 
 				   ( totalRecord % pageUnit>0 ? 1 : 0 );
 		return lastPage;
 	}
+	
 	public void setLastPage(int lastPage) {
 		this.lastPage = lastPage;
 	}
+	
 	public int getTotalRecord() {
 		return totalRecord;
 	}
+	
 	public void setTotalRecord(int totalRecord) {
 		this.totalRecord = totalRecord;
 	}
 	public Integer getPage() {
 		return page;
 	}
+	
 	public void setPage(Integer page) {
 		this.page = page;
 	}
@@ -57,15 +64,18 @@ public class Paging {
 		startPage = (page-1)/pageSize * pageSize + 1;
 		return startPage;
 	}
+	
 	public void setStartPage(int startPage) {
 		this.startPage = startPage;
 	}
+	
 	public int getEndPage() {
 		endPage = (page-1)/pageSize  * pageSize  + pageSize ;
 		if ( endPage > getLastPage() )
 			endPage = getLastPage() ;
 		return endPage;
 	}
+	
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
 	}
