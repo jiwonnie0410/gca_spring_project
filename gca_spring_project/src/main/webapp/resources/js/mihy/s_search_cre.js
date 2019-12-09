@@ -252,7 +252,7 @@ function cnt_reval(){
 	$('#sg_finish_valid').hide();
 }
 
-//연력대 val값 변경(20대 이상 모든 연령대 -> 20대~ / 30대만 -> 30대 / 20대 이상 ~ 60대 미만 -> 20대~60대)
+//연령대 val값 변경(20대 이상 모든 연령대 -> 20대~ / 30대만 -> 30대 / 20대 이상 ~ 60대 미만 -> 20대~60대)
 function age_reval(){
 	var age_rename = $('#sg_age').val();
 	if(age_rename.indexOf('~') != -1){
@@ -260,6 +260,8 @@ function age_reval(){
 		var ageAry1 = ageAry[0].substring(0,3);
 		var ageAry2 = ageAry[1].substring(1,4);
 		age_rename = ageAry1 + "~" + ageAry2;
+	} else if(age_rename.indexOf('모든 연령대') != -1) {
+		age_rename = age_rename.substring(0,3) + "~";
 	} else {
 		age_rename = age_rename.substring(0,3);
 	}

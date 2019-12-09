@@ -84,7 +84,7 @@
 	</div>
 	<span id="sg_end_valid" class="sg_valid pl-3"></span>
 
-	<div class="row mr-2 ml-2 mt-3 mb-3 location">
+	<div class="row mr-2 ml-2 mt-3 mb-3 location" style="padding: 0px">
 		<input type="text" class="form-control" id="sg_location" name="sg_location" placeholder="만날 장소를 정해 주세요." readonly>
 		<span id="sg_location_valid" class="sg_valid pl-3"></span>
 	</div>
@@ -116,11 +116,11 @@
 			</label>
 		</c:forEach>
 	</div>
-	<span id="sg_gender_valid" class="sg_valid pl-3" style="display:none;"></span>
+	<span id="sg_gender_valid" class="sg_valid pl-3"></span>
 
 
 	<span class="ml-2" id="age_title"><i class="fas fa-pencil-alt mr-2"></i>연령대를 선택해 주세요.</span><br>
-	<p class="mr-2 ml-2 mt-1" id="age_text" style="text-align:center;">
+	<p class="mr-2 ml-2 mt-1" id="age_text">
 		<span class="age-val mr-1" id="age_lower"></span>
 		<span class="age-val" id="age_upper"></span>
 	</p>
@@ -128,20 +128,20 @@
 	<input type="hidden" id="sg_age" name="age_range">
 	
 	
-	<div id="sg_option1" class="collapse" style="margin: 0 10px 15px 10px;">
+	<div id="sg_option1" class="collapse">
 		<table>
 			<tr>
-				<td><input class="check-box" type="checkbox" id="sg_option1_box" name="sg_option" value="도구지참" style="margin:5px 0 0 0;"></td>
-				<td style="padding:0 0 0 8px;">개인 도구 지참 <span class="badge badge-warning mr-1">예</span><span style="font-size:14px;color:gray;"> 농구공, 라켓, 셔틀콕 등</span></td>
+				<td><input class="check-box" type="checkbox" id="sg_option1_box" name="sg_option" value="도구지참"></td>
+				<td class="check-box-text">개인 도구 지참 <span class="badge badge-warning mr-1 ml-1">예</span><span> 농구공, 라켓, 셔틀콕 등</span></td>
 			</tr>
 		</table>
 	</div>
 	
-	<div id="sg_option2" class="collapse" style="margin: 0 10px 15px 10px;">
+	<div id="sg_option2" class="collapse">
 		<table>
 			<tr>
-				<td><input class="check-box" type="checkbox" id="sg_option2_box" name="sg_option" value="반려동물" style="margin:5px 0 0 0;"></td>
-				<td style="padding:0 0 0 8px;">반려 동물 동반</td>
+				<td><input class="check-box" type="checkbox" id="sg_option2_box" name="sg_option" value="반려동물"></td>
+				<td class="check-box-text">반려 동물 동반</td>
 			</tr>
 		</table>
 	</div>

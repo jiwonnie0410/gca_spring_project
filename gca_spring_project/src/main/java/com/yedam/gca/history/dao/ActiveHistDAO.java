@@ -20,8 +20,6 @@ public class ActiveHistDAO {
 	public List<ActiveHistVO> getActiveHistList() {
 		return mybatis.selectList("ActiveHistDAO.getActiveHistList");
 	}
-<<<<<<< HEAD
-
 
 	
 	//*************** 미현 *******************//
@@ -33,11 +31,12 @@ public class ActiveHistDAO {
 	//SGroup+BGroup+Sixman 방 참여
 	public void roomInsert(ActiveHistVO vo) {
 		mybatis.selectOne("ActiveHistDAO.roomInsert", vo);
-=======
+	}
 	
+	
+	//*************** 은영 *******************//
 	//모달클릭시 반짝 정보 단건 출력
 	public SGroupVO getSgroup(SGroupVO vo) {
 		return mybatis.selectOne("ActiveHistDAO.getSgroup", vo);
->>>>>>> branch 'master' of https://github.com/jiwonnie0410/gca_spring_project.git
 	}
 }

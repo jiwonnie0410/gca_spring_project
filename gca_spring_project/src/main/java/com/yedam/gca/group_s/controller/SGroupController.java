@@ -53,7 +53,10 @@ public class SGroupController {
 			return id;
 		}
 	
-//미현
+
+
+
+//*****************************************미현************************************
 	
 	//전체 반짝 리스트 조회
 	@RequestMapping("/sgroup/getSgList")
@@ -123,7 +126,6 @@ public class SGroupController {
 //		vo.setM_id(m_id);
 		vo.setM_id("test");
 		sgroupService.insertSg(vo);
-//		int sg_num = vo.getSg_num();
-		return "redirect:roomIn?sg_num="+vo.getSg_num()+"&sg_now_cnt=0";
+		return "redirect:alreadyIn?sg_num="+vo.getSg_num();
 	}
 }

@@ -83,6 +83,7 @@ li:hover {	background-color: #FAF0F0 !important;}
 	border-style: dashed;
 	border-color: #FE9191;
 	border-radius: 5px;
+	text-align: center;
 }
 #age_title {
 	color: #FE9191;
@@ -161,3 +162,9 @@ li:hover {	background-color: #FAF0F0 !important;}
 	border-radius: 50%;
 	background: white;
 }
+
+/* 옵션 */
+.collapse { margin: 0 10px 15px 10px; }
+.check-box { margin:7px 0 0 0; }
+.check-box-text { padding:0 0 0 8px; }
+.check-box-text:last-child { font-size:14px; color:gray; }
