@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	  var calendarEl = document.getElementById('calendar');
 
 	  var calendar = new FullCalendar.Calendar(calendarEl, {
+		//한국어 적용
+		//locale: 'kr',
 		
 		  //interaction: 일정 추가등의 이벤트용;  dayGrid:달력 달별로 보기기능
 	    plugins: [ 'interaction', 'dayGrid'], 
@@ -12,28 +14,36 @@ document.addEventListener('DOMContentLoaded', function() {
 	    // 달력 최상단 버튼 옵션
  	    header: {
 	        left: 'title',
-	        center: '',
 	        right: 'today prev,next'
 	      }, 
-	     
+	      
 	    //디비에서 가져오는 일정값  
 	    events: [
 	    	{
 	    		title: 'event1',
  	    		start: '2019-12-07T15:15',   
- 	    		color: '#FE9191',
 	    	},
+	    	
+	    	{
+	    		title: 'event1',
+ 	    		start: '2019-12-07T15:15'   
+	    	},
+	    	
 	    	{
 	    		title: 'event2',
  	    		start: '2019-12-10T05:15',
- 	    		color: '#3bc9e0',
 	    	},
 	    	{
 	    		title: 'event3',
  	    		start: '2019-12-15T10:15',
- 	    		color: 'yellow',
 	    	},
 	    ],
+	    
+	    // 일정 시간 포멧
+	    eventTimeFormat: {
+	    	hour: '2-digit',
+	    	minute: '2-digit'
+	    },
 	    
 	    editable: true, //일정 드래그 등 하여 수정가능
 	    selectable: true, // 날짜클릭하여 이벤트 추가 가능
