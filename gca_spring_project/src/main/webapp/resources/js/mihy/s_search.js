@@ -61,12 +61,12 @@ function p8(){
 
 function move_room(){
 	
-	$.ajax({
+/*	$.ajax({
 		url: "sgIn",
 		dataType: "json",
 		contentType: "application/json",
 		success: function
-	});
+	});*/
 	
 	var sg_num = $(this).attr("class").substring(3);
 	var sg_now_cnt = $(this).find('font.sg_now_cnt').text();

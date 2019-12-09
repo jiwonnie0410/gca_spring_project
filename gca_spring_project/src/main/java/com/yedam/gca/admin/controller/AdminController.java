@@ -53,11 +53,15 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping("/ajax/chart/sgroup")
 	public List<Map<String, Object>> chartSgroup() {
-		System.out.println(adminService.chartSgroup());
 		return adminService.chartSgroup();
 	}
 
 	// 3-3. 통계 -> 동호회 매치 운동별 통계
+	@ResponseBody
+	@RequestMapping("/ajax/chart/bgroup")
+	public List<Map<String, Object>> chartBgroup(){
+		return adminService.chartBgroup();
+	}
 
 	// 3-4. 통계 -> 연령대 및 운동(반짝)성별 통계
 

@@ -1,77 +1,65 @@
 // 반짝 운동별 통계 도넛
 function drawChart1() {
-	var data = google.visualization.DataTable();
-	
-/*	var array = [];
-	array.push([ '올리브', 1, 5 ]);
-	array.push([ '페퍼로니', 5, 8 ]);
-	array.push([ '루꼴라', 2, 2 ]);
-	array.push([ '치즈', 3, 1 ]);
-	array.push([ '양파', 6, 15 ]);
-	data.addRows(array);*/
-	
-	
-	data.addColumn('string', 'Name');
-  data.addColumn('number', 'Height');
-  data.addRows(3);
-  data.setCell(0, 0, 'Tong Ning mu');
-  data.setCell(1, 0, 'Huang Ang fa');
-  data.setCell(2, 0, 'Teng nu');
-  data.setCell(0, 1, 174);
-  data.setCell(1, 1, 523);
-  data.setCell(2, 1, 86);
-	
-	
-	var options = {
-			title : ' ',
-			pieHole : 0.4,
-	};
-
-	var chart = new google.visualization.PieChart(document.getElementById('div_sgroup_exercise'));
-	chart.draw(data, options);
-	
-	/*$.ajax({
-			url: "",
+	var data = new google.visualization.DataTable();
+	$.ajax({
+			url: "../ajax/chart/sgroup",
 			dataType: "json",
 			success: function(result) {
+					// 차트에 컬럼 추가
+					data.addColumn('string', '운동');
+					data.addColumn('number', '횟수')
 					
-					data.addColumn('string', '토핑');
-					data.addColumn('number', '슬라이스');
-					data.addColumn('number', '숫자');
-	
+					// 디비에서 받아온 정보 result를 array 배열에 넣어서 차트 컬럼에 추가
 					var array = [];
-					for (i = 0; i < result.length; i++) {
-						array.push([ result[i].dname, result[i].cnt1, result[i].cnt2 ]);
+					for(i=0; i<result.length; i++) {
+						array.push( [ result[i].exercise, result[i].count ] );
 					}
 					data.addRows(array);
 					
+					// 차트 옵션: 타이틀 없으면 오류 나기 때문에 저렇게라도 넣어줘야 함
 					var options = {
 							title : ' ',
 							pieHole : 0.4,
 					};
 	
+					// jsp파일에서 아이디로 태그 찾아서 차트 그려줌
 					var chart = new google.visualization.PieChart(document.getElementById('div_sgroup_exercise'));
 					chart.draw(data, options);
 			}
-	});*/
-
+	});
 }
 
 // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // 동호회 매치 운동별 통계 도넛
 function drawChart2() {
-	var data = google.visualization.arrayToDataTable([
-			[ 'Task', 'Hours per Day' ], [ '축구', 11 ], [ '야구', 2 ],
-			[ '농구', 2 ], [ '볼링', 2 ], [ '기타', 7 ] ]);
-
-	var options = {
-		title : ' ',
-		pieHole : 0.4,
-	};
-
-	var chart = new google.visualization.PieChart(document.getElementById('div_bgroup_exercise'));
-	chart.draw(data, options);
+	var data = new google.visualization.DataTable();
+	$.ajax({
+			url: "../ajax/chart/bgroup",
+			dataType: "json",
+			success: function(result) {
+					// 차트에 컬럼 추가
+					data.addColumn('string', '운동');
+					data.addColumn('number', '횟수')
+					
+					// 디비에서 받아온 정보 result를 array 배열에 넣어서 차트 컬럼에 추가
+					var array = [];
+					for(i=0; i<result.length; i++) {
+						array.push( [ result[i].exercise, result[i].count ] );
+					}
+					data.addRows(array);
+					
+					// 차트 옵션: 타이틀 없으면 오류 나기 때문에 저렇게라도 넣어줘야 함
+					var options = {
+							title : ' ',
+							pieHole : 0.4,
+					};
+	
+					// jsp파일에서 아이디로 태그 찾아서 차트 그려줌
+					var chart = new google.visualization.PieChart(document.getElementById('div_bgroup_exercise'));
+					chart.draw(data, options);
+			}
+	});
 }
 
 // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

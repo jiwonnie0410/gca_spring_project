@@ -30,13 +30,13 @@ public class LoginController {
 	// 네이버 아이디로 로그인 성공 시에 돌아올 페이지 -> 반짝 방 리스트로 감
 	@RequestMapping("/login/naverCallback")
 	public String naverCallback() {
-		return "/user/member/callback";
+		return "/notiles/member/callback";
 	}
 	
 	// 회원가입 페이지
 	@RequestMapping("/join")
 	public String join() {
-		return "/user/member/join";
+		return "/notiles/member/join";
 	}
 	
 	// 회원가입 하기 (디비에 삽입) -> 회원가입 성공 시에 제일 첫 로그인 페이지로 감
@@ -52,7 +52,7 @@ public class LoginController {
 		vo.setGender_cd(request.getParameter("checkbox1"));
 		vo.setM_email(request.getParameter("mEmail"));
 		memberService.insertMember(vo);
-		return "/user/member/login";
+		return "/notiles/member/login";
 	}
 	
 	// 아이디 중복 확인
@@ -65,7 +65,7 @@ public class LoginController {
 	// 아이디 찾기 페이지
 	@RequestMapping("/forgotId")
 	public String forgotId(HttpServletRequest request) {
-		return "/user/member/forgotId";
+		return "/notiles/member/forgotId";
 	}
 	
 	// 이메일로 아이디 보내기
@@ -75,13 +75,13 @@ public class LoginController {
 		vo.setM_name(request.getParameter("mName"));
 		vo.setM_email(request.getParameter("mEmail"));
 		model.addAttribute("idMessage", memberService.forgotId(vo)); // jsp 페이지에서 alert로 띄울 메시지 넘기기
-		return "/user/member/login";
+		return "/notiles/member/login";
 	}
 	
 	// 비밀번호 찾기 페이지
 	@RequestMapping("/forgotPassword")
 	public String forgotPw() {
-		return "/user/member/forgotPw";
+		return "/notiles/member/forgotPw";
 	}
 	
 	// 이메일로 임시 비밀번호 보내기
@@ -92,7 +92,7 @@ public class LoginController {
 		vo.setM_name(request.getParameter("mName"));
 		vo.setM_email(request.getParameter("mEmail"));
 		model.addAttribute("pwMessage", memberService.forgotPw(vo)); // jsp 페이지에서 alert로 띄울 메시지 넘기기
-		return "/user/member/login";
+		return "/notiles/member/login";
 	}
 	
 }

@@ -29,11 +29,15 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Map<String, Object>> chartSgroup() {
 		System.out.println("차트: " + dao.chartSgroup());
-		return null;
+		return dao.chartSgroup();
 	}
 
 	// 3. 동호회 매치 운동별 통계
-
+	@Override
+	public List<Map<String, Object>> chartBgroup() {
+		return dao.chartBgroup();
+	}
+	
 	// 4. 연령대 및 운동(반짝) 성별 통계
 
 	// 5. 지역별 반짝 운동 통계
@@ -41,5 +45,6 @@ public class AdminServiceImpl implements AdminService {
 	public List<Map<String, Object>> chartCity(int month, String city) {
 		return dao.chartCity(month, city);
 	}
+
 
 }

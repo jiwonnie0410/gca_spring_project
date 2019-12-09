@@ -7,8 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div>
 		<tiles:insertAttribute name="user-content" />
-		
+	</div>
+	
 		<tiles:insertAttribute name="footer-menubar" />
 </body>
 </html>
