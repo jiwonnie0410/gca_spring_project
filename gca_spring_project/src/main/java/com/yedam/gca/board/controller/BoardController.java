@@ -57,7 +57,7 @@ public class BoardController {
 		// ModelAndView - 모델과 뷰
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("map", map); // 맵에 저장된 데이터를 mav에 저장
-		mav.setViewName("askBoard/list"); // 뷰를 list.jsp로 설정
+		mav.setViewName("/user/askBoard/list"); // 뷰를 list.jsp로 설정
 		return mav; // list.jsp로 List가 전달된다.
 	}
 	
@@ -68,7 +68,7 @@ public class BoardController {
 	// value="", method="전송방식"
 	@RequestMapping(value="write.do", method=RequestMethod.GET)
 	public String write(){
-		return "askBoard/write"; // write.jsp로 이동
+		return "/user/askBoard/write"; // write.jsp로 이동
 	}
 	
 	// 02_02. 게시글 작성처리
@@ -93,7 +93,7 @@ public class BoardController {
 		// 모델(데이터)+뷰(화면)를 함께 전달하는 객체
 		ModelAndView mav = new ModelAndView();
 		// 뷰의 이름
-		mav.setViewName("askBoard/view");
+		mav.setViewName("/user/askBoard/view");
 		// 뷰에 전달할 데이터
 		// 댓글의 수 : 댓글이 존재하는 게시물의 삭제처리 방지하기 위해
 		mav.addObject("count", replyService.count(ad_num)); 

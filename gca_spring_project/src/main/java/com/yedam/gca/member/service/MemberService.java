@@ -15,4 +15,5 @@ public interface MemberService {
 	
 	// 4. 임시 비밀번호 보내고 디비에 정보 업데이트
 	public String forgotPw(MembersVO vo);
+
 }

@@ -114,7 +114,7 @@ select b.*  from ( select a.*, rownum rn  from(
 						  )
 			   VALUES(  #{qb_id},
 				        #{qb_title},
-				        #{m_id},
+				        'test',<!--로그인후 수정  -->
 				        #{qb_content},
 					    0)		
 </insert>
