@@ -24,7 +24,7 @@ public class LoginController {
 	// 첫 로그인 페이지 (홈페이지 열자마자 보이는 화면)
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		return "/member/login";
+		return "/notiles/member/login";
 	}
 	
 	// 네이버 아이디로 로그인 성공 시에 돌아올 페이지 -> 반짝 방 리스트로 감
