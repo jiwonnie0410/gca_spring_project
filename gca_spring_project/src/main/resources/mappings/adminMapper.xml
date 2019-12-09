@@ -15,7 +15,7 @@
 
 <!-- 1. 반짝 운동별 통계 -->
 		  	<select id="chartSgroup" resultType="map" >
-					SELECT 	COUNT(*), C.CD_NAME
+					SELECT 	COUNT(*) "count", C.CD_NAME "exercise"
 					FROM 	SGROUP S, CODE C
 					WHERE 	S.SPORTS1_CD = C.CD_ID
 					GROUP BY C.CD_NAME
@@ -24,7 +24,7 @@
 
 <!-- 2. 동호회 매치 운동별 통계 -->
 			<select id="chartBgroup" resultType="map">
-					SELECT 	COUNT(*), C.CD_NAME
+					SELECT 	COUNT(*) "count", C.CD_NAME "exercise"
 					FROM 	BGROUP B, CODE C
 					WHERE 	B.SPORTS2_CD = C.CD_ID
 					GROUP BY C.CD_NAME

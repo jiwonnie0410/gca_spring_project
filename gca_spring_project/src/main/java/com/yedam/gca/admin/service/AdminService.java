@@ -14,6 +14,7 @@ public interface AdminService {
 	public List<Map<String, Object>> chartSgroup();
 	
 	// 3. 동호회 매치 운동별 통계
+	public List<Map<String, Object>> chartBgroup();
 	
 	// 4. 연령대 및 운동(반짝) 성별 통계
 

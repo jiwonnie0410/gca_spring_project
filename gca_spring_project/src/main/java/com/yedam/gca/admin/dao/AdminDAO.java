@@ -27,6 +27,9 @@ public class AdminDAO {
 	}
 	
 	// 동호회 매치 운동별 통계
+	public List<Map<String, Object>> chartBgroup(){
+		return mybatis.selectList("AdminDAO.chartBgroup");
+	}
 	
 	// 연령대 및 운동(반짝) 성별 통계
 	
