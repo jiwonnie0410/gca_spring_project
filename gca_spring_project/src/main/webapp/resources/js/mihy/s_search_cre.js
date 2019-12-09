@@ -143,7 +143,10 @@ function valid(){
 		$("#sg_option3_box").attr("checked", "checked");
 	}
 	
-	$('#frm').submit();
+    var con=confirm("입력한 내용으로 반짝 방을 생성하시겠습니까?");
+    if(con){
+    	$('#frm').submit();
+    }
 }
 
 //반짝 방 이름 유효성 검사
@@ -241,6 +244,7 @@ function location_valid(){
 
 //인원 유효성 검사
 function cnt_reval(){
+	$('#sg_finish_valid').show();
 	if( $('#sg_finish_val').val() == "" || $('#sg_finish_val').val() == null ){
 		$('#sg_finish_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>모집 인원을 선택해 주세요.');
 		return false;

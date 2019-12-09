@@ -60,6 +60,14 @@ function p8(){
 }
 
 function move_room(){
+	
+	$.ajax({
+		url: "sgIn",
+		dataType: "json",
+		contentType: "application/json",
+		success: function
+	});
+	
 	var sg_num = $(this).attr("class").substring(3);
 	var sg_now_cnt = $(this).find('font.sg_now_cnt').text();
 	var sg_end_cnt = $(this).find('font.sg_end_cnt').text().substring(0,1);
@@ -84,6 +92,7 @@ function move_room(){
 		return false;
 	}
 }
+
 
 function move_room_handler(result){
 	if(result.sg_now_cnt >= result.sg_end_cnt){
