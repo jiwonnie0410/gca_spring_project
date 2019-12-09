@@ -39,4 +39,9 @@ public class SGroupServiceImpl implements SGroupService {
 		return sgroupDAO.updateCnt(vo);
 	}
 
+	@Override
+	public SGroupVO insertSg(SGroupVO vo) {
+		return sgroupDAO.insertSg(vo);
+	}
+
 }

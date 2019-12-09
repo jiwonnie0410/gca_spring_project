@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ChallengeHistDAO" >
+
+<!--  ************** 수림 **************** -->
+
+	<select id="getScoreList" resultType="scorehistory">
+        SELECT      CASE 
+                    WHEN RANK() OVER (ORDER BY SUM (SCH_SCORE) DESC) > 10 THEN '순위권외'
+                    ELSE TO_CHAR(RANK() OVER (ORDER BY SUM (SCH_SCORE) DESC))||'등'
+                    END AS RANK,
+					M_ID, 
+					SUM(SCH_SCORE) AS SCH_SCORE
+		FROM		SCORE_HIST
+		GROUP BY	M_ID
+		ORDER BY	SCH_SCORE DESC
+					
+	</select>
+</mapper>

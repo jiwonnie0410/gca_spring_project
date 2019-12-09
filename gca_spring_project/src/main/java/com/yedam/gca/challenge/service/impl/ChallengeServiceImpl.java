@@ -25,6 +25,10 @@ public class ChallengeServiceImpl implements ChallengeService{
 	public ChallengeVO getChallenge(ChallengeVO vo) {
 		return dao.getChallenge(vo);
 	}
+	@Override
+	public ChallengeHistVO checkChallengeHistory(ChallengeHistVO vo) {
+		return dao.checkChallengeHistory(vo);
+	}
 	//챌린지 참여입력
 	@Override
 	public void insertChallenge(ChallengeHistVO vo) {

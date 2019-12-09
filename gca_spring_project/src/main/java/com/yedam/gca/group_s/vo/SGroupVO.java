@@ -27,5 +27,6 @@ public class SGroupVO {
 	
 	
 	//미현
-
+	private String m_id;	//회원 ID
+	
 }

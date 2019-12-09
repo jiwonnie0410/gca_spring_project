@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ActiveHistDAO" >
+
+	<!--  *********수림************* -->
+	<select id="getActiveHistList" resultType="allhistory">
+		SELECT  ACH_NUM,
+		        M_ID,
+		        ACH_DTTM,
+		        ACH_GRANT,
+		        ACH_CONFIRM,
+		        BG_NUM,
+		        SIX_NUM,
+		        SG_NUM
+		FROM    active_hist
+		WHERE   M_ID = 'test'
+		ORDER BY ACH_CONFIRM
+	</select>
+	
+	
+</mapper>

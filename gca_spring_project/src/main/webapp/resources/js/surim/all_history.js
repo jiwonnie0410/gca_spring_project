@@ -20,17 +20,17 @@ document.addEventListener('DOMContentLoaded', function() {
 	    events: [
 	    	{
 	    		title: 'event1',
- 	    		start: '2019-11-07T15:15',
+ 	    		start: '2019-12-07T15:15',   
  	    		color: '#FE9191',
 	    	},
 	    	{
 	    		title: 'event2',
- 	    		start: '2019-11-10T05:15',
+ 	    		start: '2019-12-10T05:15',
  	    		color: '#3bc9e0',
 	    	},
 	    	{
 	    		title: 'event3',
- 	    		start: '2019-11-15T10:15',
+ 	    		start: '2019-12-15T10:15',
  	    		color: 'yellow',
 	    	},
 	    ],
@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	    //이벤트 클릭시 모달열기
 	    eventClick: function(info) {
 	    	var eventDate = info.event.start;
-	    	
 	    	var arrDate = eventDate.toString().split(":00 GMT");
 	    	
 	    	$("#eventModal").modal();
