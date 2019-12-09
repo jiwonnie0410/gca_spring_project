@@ -65,10 +65,12 @@ public class SGroupController {
 		return "group_s/s_wating_room";
 	}
 	
-	//반짝 방 참여 전에 실 참여인원 수 조회하기
+	//반짝 방 참여 전에 참여 여부와 실 참여인원 수 조회하기
 	@ResponseBody
 	@RequestMapping(value="sgroup/sgNowCnt/{sg_num}", method = RequestMethod.GET)
-	public SGroupVO sgNowCnt(@PathVariable int sg_num, SGroupVO vo) {
+	public SGroupVO sgNowCnt(@PathVariable int sg_num, SGroupVO vo, HttpSession session) {
+		String m_id = (String) session.getAttribute("m_id");
+		vo.setM_id(m_id);
 		vo.setSg_num(sg_num);
 		return sgroupService.getRoomInfo(vo);
 	}
@@ -90,7 +92,7 @@ public class SGroupController {
 	public String createRoom(@ModelAttribute SGroupVO vo, HttpSession session) {
 		String m_id = (String) session.getAttribute("m_id");
 //		vo.setM_id(m_id);
-		vo.setM_id("rr99999");
+		vo.setM_id("test");
 		sgroupService.insertSg(vo);
 //		int sg_num = vo.getSg_num();
 		return "redirect:getRoomInfo2?sg_num="+vo.getSg_num()+"&sg_now_cnt=0";
