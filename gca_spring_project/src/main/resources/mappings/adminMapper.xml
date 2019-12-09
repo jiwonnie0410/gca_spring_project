@@ -30,7 +30,7 @@
 
 
 <!-- 3-1. 여성 연령대 및 운동 통계(반짝만) -->
-			<select id="chartFemale">
+			<select id="chartFemale" resultType="map">
 					<!-- 20대만 -->
 					SELECT 	COUNT(*), C.CD_NAME
 					FROM 	ACTIVE_HIST H, MEMBERS M, CODE C, SGROUP S
@@ -44,7 +44,7 @@
 
 
 <!-- 3-2. 남성 연령대 및 운동 통계 -->
-			<select id="chartMale">
+			<select id="chartMale" resultType="map">
 					<!-- 20대만 -->
 					SELECT 	COUNT(*), C.CD_NAME
 					FROM 	ACTIVE_HIST H, MEMBERS M, CODE C, SGROUP S
@@ -58,7 +58,7 @@
 
 
 <!-- 4. 지역별 통계 -->
-			<select id="chartCity">
+			<select id="chartCity" resultType="int">
 					<!-- 대구만 -->
 					SELECT 	COUNT(*)
 					FROM 	MEMBERS
