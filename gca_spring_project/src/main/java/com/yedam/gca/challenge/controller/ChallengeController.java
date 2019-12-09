@@ -28,7 +28,7 @@ public class ChallengeController {
 		session.setAttribute("id", vo.getM_id());
 		
 		model.addAttribute("challengeList", service.getChallengeList());
-		return "challenge/challenge";
+		return "/user/challenge/challenge";
 	}
 	
 	//챌린지 단건 조회
@@ -38,7 +38,7 @@ public class ChallengeController {
 		vo.setCl_num(num);
 		model.addAttribute("challenge", service.getChallenge(vo)); 
 		
-		return "challenge/challengeContents";
+		return "/user/challenge/challengeContents";
 	}
 	
 	@RequestMapping("/challenge/ajax/checkChallengeHistory.json")  ///수정필요
@@ -62,6 +62,6 @@ public class ChallengeController {
 		vo.setCl_num(num);
 		model.addAttribute("challenge", service.getChallenge(vo)); 
 		
-	 return "challenge/challengePayment";
+	 return "/user/challenge/challengePayment";
 	}
 }

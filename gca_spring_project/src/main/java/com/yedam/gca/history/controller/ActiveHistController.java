@@ -15,17 +15,17 @@ public class ActiveHistController {
 	@Autowired ActiveHistService service;
 	
 	//*************** 수림 *******************//
-	// 스코어 목록 조회(랭킹)
+	// 유저별 활동히스토리 목록 조회
 	@RequestMapping("history/activeHistory")
 	public String getActiveHistList(Model model, HttpSession session) {
 		
 		// 임시아이디 세션에 담음
 		ActiveHistVO vo = new ActiveHistVO();
-		vo.setM_id("test");
+		vo.setM_id("test2");
 		session.setAttribute("id", vo.getM_id());
 		
 		model.addAttribute("ActiveHistList", service.getActiveHistList());
-		return "history/all_history";
+		return "/user/history/active_history";
 	}
 
 }

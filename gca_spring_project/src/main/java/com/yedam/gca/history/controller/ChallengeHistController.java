@@ -18,7 +18,7 @@ public class ChallengeHistController {
 	
 	///////////////// 수림 ///////////////////////////
 	
-	//스코어 목록 조회(랭킹)
+	//스코어 목록 조회(유저 랭킹 페이지)
 	@RequestMapping("history/rank")
 	public String getScoreList(Model model, HttpSession session) {
 		
@@ -28,6 +28,6 @@ public class ChallengeHistController {
 		session.setAttribute("id", vo.getM_id());
 		
 		model.addAttribute("scoreList", service.getScoreList());
-		return "history/rank";
+		return "/user/history/rank";
 	}
 }
