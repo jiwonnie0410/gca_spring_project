@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.group_s.vo.SGroupVO;
+import com.yedam.gca.history.vo.ActiveHistVO;
 
 @Repository("sGroupDAO")
 public class SGroupDAO {
@@ -38,7 +39,9 @@ public class SGroupDAO {
 	}
 	 
 	//반짝 방 생성
-	public SGroupVO insertSg(SGroupVO vo){
-		return mybatis.selectOne("SGroupDAO.insertSg", vo);
+	public void insertSg(SGroupVO vo){
+		mybatis.selectOne("SGroupDAO.insertSg", vo);
 	}
+	
+
 }

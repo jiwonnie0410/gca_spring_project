@@ -14,4 +14,10 @@ public class ActiveHistVO {
 	private int bg_num;					// 매치 번호
 	private int six_num;				// 용병 번호
 	private int sg_num;					// 반짝 번호
+	
+	//미현
+	private String result_msg;			//프로시저 out 요소
+	private String in_type;				//프로시저 in 요소
+	private int pk_num;				//프로시저 in 요소
+	
 }

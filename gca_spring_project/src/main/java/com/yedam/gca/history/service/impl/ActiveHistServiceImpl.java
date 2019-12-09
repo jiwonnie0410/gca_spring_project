@@ -20,4 +20,19 @@ public class ActiveHistServiceImpl implements ActiveHistService{
 		return dao.getActiveHistList();
 	}
 
+	
+	
+	//***************** 미현 *******************//
+	//SGroup+BGroup+Sixman 참여 전 참여 여부 확인 + 마감 인원 파악
+	@Override
+	public void validIn(ActiveHistVO vo) {
+		dao.validIn(vo);
+	}
+
+	//SGroup+BGroup+Sixman 방 참여
+	@Override
+	public void roomInsert(ActiveHistVO vo) {
+		dao.roomInsert(vo);
+	}
+	
 }

@@ -18,12 +18,15 @@ import com.yedam.gca.common.service.CodeService;
 import com.yedam.gca.common.vo.CodeVO;
 import com.yedam.gca.group_s.service.SGroupService;
 import com.yedam.gca.group_s.vo.SGroupVO;
+import com.yedam.gca.history.service.ActiveHistService;
+import com.yedam.gca.history.vo.ActiveHistVO;
 
 @Controller
 public class SGroupController {
 	
 	@Autowired	SGroupService sgroupService;
 	@Autowired	CodeService codeService;
+	@Autowired	ActiveHistService actService;
 	
 	
 	//은영
@@ -53,27 +56,46 @@ public class SGroupController {
 		return "/user/group_s/s_search";
 	}
 	
-	//선택한 방에 참여
-	@RequestMapping("/sgroup/getRoomInfo2")
-	public String getRoomInfo(@RequestParam(value="sg_num", defaultValue="", required=true) int sg_num,
-			@RequestParam(value="sg_now_cnt", defaultValue="", required=true) int sg_now_cnt,
+	
+	//반짝 방 참여 전에  참여 여부 확인 + 마감 인원 파악
+	@ResponseBody
+	@RequestMapping(value="sgroup/sgValidIn/{sg_num}", method = RequestMethod.GET)
+	public ActiveHistVO sgValidIn(@PathVariable int sg_num, ActiveHistVO vo, HttpSession session) {
+		String m_id = (String) session.getAttribute("m_id");
+		vo.setIn_type("sg");
+//		vo.setM_id(m_id);
+		vo.setM_id("test10");
+		vo.setPk_num(sg_num);
+		actService.validIn(vo);
+		return vo;
+	}
+	
+	//선택한 방에 참여 - 이미 참여되어 있는 방에 참여
+	@RequestMapping("/sgroup/alreadyIn")
+	public String alreadyIn(
+			@RequestParam(value="sg_num", defaultValue="", required=true) int sg_num,
 			Model model, SGroupVO vo) {
 		vo.setSg_num(sg_num);
-		vo.setSg_now_cnt(sg_now_cnt+1);
-		sgroupService.updateCnt(vo);
 		model.addAttribute("sgroup", sgroupService.getRoomInfo(vo));
 		return "/user/group_s/s_wating_room";
 	}
 	
-	//반짝 방 참여 전에 참여 여부와 실 참여인원 수 조회하기
-	@ResponseBody
-	@RequestMapping(value="sgroup/sgNowCnt/{sg_num}", method = RequestMethod.GET)
-	public SGroupVO sgNowCnt(@PathVariable int sg_num, SGroupVO vo, HttpSession session) {
+	//선택한 방에 참여 - 참여되어 있지 않은 방에 참여
+	@RequestMapping("/sgroup/roomIn")
+	public String roomIn(
+			@RequestParam(value="sg_num", defaultValue="", required=true) int sg_num,
+			Model model, SGroupVO svo, ActiveHistVO avo, HttpSession session) {
 		String m_id = (String) session.getAttribute("m_id");
-		vo.setM_id(m_id);
-		vo.setSg_num(sg_num);
-		return sgroupService.getRoomInfo(vo);
+//		avo.setM_id(m_id);
+		avo.setM_id("test10");
+		avo.setIn_type("sg");
+		avo.setPk_num(sg_num);
+		actService.roomInsert(avo);
+		svo.setSg_num(sg_num);
+		model.addAttribute("sgroup", sgroupService.getRoomInfo(svo));
+		return "/user/group_s/s_wating_room";
 	}
+
 	
 	//반짝 생성 폼으로 이동
 	@RequestMapping("/sgroup/createRoomForm")
@@ -95,6 +117,6 @@ public class SGroupController {
 		vo.setM_id("test");
 		sgroupService.insertSg(vo);
 //		int sg_num = vo.getSg_num();
-		return "redirect:getRoomInfo2?sg_num="+vo.getSg_num()+"&sg_now_cnt=0";
+		return "redirect:roomIn?sg_num="+vo.getSg_num()+"&sg_now_cnt=0";
 	}
 }
