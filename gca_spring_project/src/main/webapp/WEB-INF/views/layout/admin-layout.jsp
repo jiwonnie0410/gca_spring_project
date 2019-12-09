@@ -34,6 +34,28 @@
 		
 		<script src="../resources/scripts/json.min.js"></script>
 		
+		<style>
+    			.button-title:hover {
+					  background-color: #A6A6A6;
+					  border: 2px solid #747474;
+					  border-radius: 7px;
+					  color: white;
+				}
+				
+				.button-title {
+					  background: #fff;
+					  border: 2px solid #747474;
+					  border-radius: 7px;
+					  color: #747474;
+					  font-size: 12px;
+					  margin: 0.3em auto;
+					  padding: 2px 4px;
+					  position: relative;
+					  text-transform: uppercase;
+					  height: 30px;
+					  width: 120px;
+				}
+    	</style>
 </head>
 
 	<!-- 맨 위에 바 부분 -->
