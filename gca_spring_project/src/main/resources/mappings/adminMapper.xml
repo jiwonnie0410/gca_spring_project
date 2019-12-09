@@ -32,7 +32,7 @@
 
 
 <!-- 3. 성별로 연령대 및 운동 통계(반짝만) -->
-			<select id="chartFemale" parameterType="map">
+			<select id="chartGender" parameterType="map">
 					<!-- #{gender}성별의  ${startAge}살부터 ${endAge}살의 사람들이 반짝 한 횟수 -->
 					<!-- 예: 여성 20살부터 29살까지 사람들이 반짝 한 횟수 -->
 					SELECT 	COUNT(*), C.CD_NAME
@@ -51,13 +51,20 @@
 					<!-- ${month}월에  #{city} 사는 사람들이 반짝 한 횟수 -->
 					<!-- 예: 12월에 대구에 사는 사람들이 반짝 한 횟수 -->
 					SELECT  TO_CHAR(SYSDATE, 'MM') AS "month",
-					        COUNT(*) AS "count",
+					        COUNT( decode(SUBSTR(M.M_LOCATION, 1, 2), '서울',1,0)    ) AS "count1",
+					        COUNT( decode(SUBSTR(M.M_LOCATION, 1, 2), '대구',1,0)    ) AS "count2",
+					        COUNT( decode(SUBSTR(M.M_LOCATION, 1, 2), '부산',1,0)    ) AS "count3",
+					        COUNT( decode(SUBSTR(M.M_LOCATION, 1, 2), '광주',1,0)    ) AS "count4",
+					        COUNT( decode(SUBSTR(M.M_LOCATION, 1, 2), '인천',1,0)    ) AS "count5",
+					        COUNT( decode(SUBSTR(M.M_LOCATION, 1, 2), '대전',1,0)    ) AS "count6",
+					        COUNT( decode(SUBSTR(M.M_LOCATION, 1, 2), '울산',1,0)    ) AS "count7",
 					        SUBSTR(M.M_LOCATION, 1, 2) "city"
+					        
 					FROM    MEMBERS M, SGROUP S, ACTIVE_HIST H
 					WHERE   	H.M_ID = M.M_ID 
 							AND H.SG_NUM = S.SG_NUM
-					        AND TO_CHAR(S.SG_END_DTTM, 'MM') = ${month}
-					        AND M.M_LOCATION LIKE '#{city}%'
+					        AND TO_CHAR(S.SG_END_DTTM, 'M') = #{month}
+					        AND M.M_LOCATION LIKE '${city}%'
 					GROUP BY M.M_LOCATION, TO_CHAR(SYSDATE, 'MM')
 			</select>
 
