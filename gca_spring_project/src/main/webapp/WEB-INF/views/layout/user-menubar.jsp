@@ -112,12 +112,12 @@
 <body>
 
 	<div class="navbar pr-2 pl-2">
-	  <a class="nav_sgroup" href="#"><img src="./resources/images/menubar/sgroup.png" alt="반짝" style="width:40px;"></a>
-	  <a class="nav_bgroup" href="#"><img src="./resources/images/menubar/bgroup.png" alt="동호회" style="width:40px;"></a>
-	  <a class="nav_challenge" href="#"><img src="./resources/images/menubar/trophy.png" alt="챌린지" style="width:40px;"></a>
-	  <a class="nav_board" href="#"><img src="./resources/images/menubar/board.png" alt="문의 게시판" style="width:40px;"></a>
-	  <a class="nav_history" href="#"><img src="./resources/images/menubar/history.png" alt="이력" style="width:40px;"></a>
-	  <a class="" href="#"><img src="./resources/images/menubar/profile.png" alt="프로필" style="width:40px;"></a>
+	  <a class="nav_sgroup" href="#"><img src="${pageContext.request.contextPath }/resources/images/menubar/sgroup.png" alt="반짝" style="width:40px;"></a>
+	  <a class="nav_bgroup" href="#"><img src="${pageContext.request.contextPath }/resources/images/menubar/bgroup.png" alt="동호회" style="width:40px;"></a>
+	  <a class="nav_challenge" href="#"><img src="${pageContext.request.contextPath }/resources/images/menubar/trophy.png" alt="챌린지" style="width:40px;"></a>
+	  <a class="nav_board" href="#"><img src="${pageContext.request.contextPath }/resources/images/menubar/board.png" alt="문의 게시판" style="width:40px;"></a>
+	  <a class="nav_history" href="#"><img src="${pageContext.request.contextPath }/resources/images/menubar/history.png" alt="이력" style="width:40px;"></a>
+	  <a class="" href="#"><img src="${pageContext.request.contextPath }/resources/images/menubar/profile.png" alt="프로필" style="width:40px;"></a>
 	</div>
 
 <!--   <div class="dropdown sgroup">

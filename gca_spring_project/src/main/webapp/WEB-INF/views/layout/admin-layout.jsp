@@ -12,27 +12,27 @@
 		<title> 운동하자 관리자 페이지 </title>
 		
 		<!-- Custom fonts for this template-->
-		<link href="../resources/css/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"	type="text/css">
+		<link href="${pageContext.request.contextPath }/resources/css/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"	type="text/css">
 		<!-- Page level plugin CSS-->
-		<link href="../resources/css/admin/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath }/resources/css/admin/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 		<!-- Custom styles for this template-->
-		<link href="../resources/css/admin/sb-admin.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath }/resources/css/admin/sb-admin.css" rel="stylesheet">
 		<!-- Bootstrap core JavaScript-->
-		<script src="../resources/css/admin/vendor/jquery/jquery.min.js"></script>
-		<script src="../resources/css/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="${pageContext.request.contextPath }/resources/css/admin/vendor/jquery/jquery.min.js"></script>
+		<script src="${pageContext.request.contextPath }/resources/css/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<!-- Core plugin JavaScript-->
-		<script src="../resources/css/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+		<script src="${pageContext.request.contextPath }/resources/css/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 		<!-- Page level plugin JavaScript-->
-		<script src="../resources/css/admin/vendor/chart.js/Chart.min.js"></script>
-		<script src="../resources/css/admin/vendor/datatables/jquery.dataTables.js"></script>
-		<script src="../resources/css/admin/vendor/datatables/dataTables.bootstrap4.js"></script>
+		<script src="${pageContext.request.contextPath }/resources/css/admin/vendor/chart.js/Chart.min.js"></script>
+		<script src="${pageContext.request.contextPath }/resources/css/admin/vendor/datatables/jquery.dataTables.js"></script>
+		<script src="${pageContext.request.contextPath }/resources/css/admin/vendor/datatables/dataTables.bootstrap4.js"></script>
 		<!-- Custom scripts for all pages-->
-		<script src="../resources/js/admin/sb-admin.min.js"></script>
+		<script src="${pageContext.request.contextPath }/resources/js/admin/sb-admin.min.js"></script>
 		<!-- Demo scripts for this page-->
-		<script src="../resources/js/admin/demo/datatables-demo.js"></script>
-		<script src="../resources/js/admin/demo/chart-area-demo.js"></script>
+		<script src="${pageContext.request.contextPath }/resources/js/admin/demo/datatables-demo.js"></script>
+		<script src="${pageContext.request.contextPath }/resources/js/admin/demo/chart-area-demo.js"></script>
 		
-		<script src="../resources/scripts/json.min.js"></script>
+		<script src="${pageContext.request.contextPath }/resources/scripts/json.min.js"></script>
 		
 		<style>
     			.button-title:hover {
