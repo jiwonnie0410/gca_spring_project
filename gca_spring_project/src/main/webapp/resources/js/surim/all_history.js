@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	    	$("#modalDate").html(arrDate[0]);
 	    	
 	    	console.log(eventDate + "date");
+	    	console.log(info)
 	    	
 	    }//
 	  });

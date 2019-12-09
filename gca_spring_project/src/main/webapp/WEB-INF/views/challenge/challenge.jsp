@@ -22,13 +22,13 @@
 
 <script>
 $(function(){
-	checkChallengeHistory(); //챌린지 참가여부확인 (챌린지히스토리체크)
+	//checkChallengeHistory(); //챌린지 참가여부확인 (챌린지히스토리체크)
 });
 
 //챌린지 참가여부확인
 function checkChallengeHistory() {
 	$.ajax({
-		url: "challenge/ajax/checkChallengeHistory.json",
+		url: "/ajax/checkChallengeHistory.json",
 		dataType: "json",
 	});
 }
