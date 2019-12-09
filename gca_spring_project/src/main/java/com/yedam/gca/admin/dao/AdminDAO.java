@@ -35,6 +35,7 @@ public class AdminDAO {
 	
 	// 지역별 반짝 운동 통계
 	public List<Map<String, Object>> chartCity(int month, String city){
+		// 통계를 보기 원하는 월과 지역 이름을 map에 넣어서 mapper 쿼리에 동적으로 넘김
 		Map<String, Object> map = new HashMap<String, Object>();
 	    map.put("month", month);
 	    map.put("city", city);

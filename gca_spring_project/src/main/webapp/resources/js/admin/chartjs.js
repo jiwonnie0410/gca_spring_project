@@ -145,4 +145,32 @@ function drawChart4() {
 	var chart = new google.visualization.LineChart(document.getElementById('div_city'));
 
 	chart.draw(data, options);
+	
+	var data = new google.visualization.DataTable();
+	$.ajax({
+			url: "../ajax/chart/bgroup",
+			dataType: "json",
+			success: function(result) {
+					// 차트에 컬럼 추가
+					data.addColumn('string', '운동');
+					data.addColumn('number', '횟수')
+					
+					// 디비에서 받아온 정보 result를 array 배열에 넣어서 차트 컬럼에 추가
+					var array = [];
+					for(i=0; i<result.length; i++) {
+						array.push( [ result[i].exercise, result[i].count ] );
+					}
+					data.addRows(array);
+					
+					// 차트 옵션: 타이틀 없으면 오류 나기 때문에 저렇게라도 넣어줘야 함
+					var options = {
+							title : ' ',
+							pieHole : 0.4,
+					};
+	
+					// jsp파일에서 아이디로 태그 찾아서 차트 그려줌
+					var chart = new google.visualization.PieChart(document.getElementById('div_bgroup_exercise'));
+					chart.draw(data, options);
+			}
+	});
 }
