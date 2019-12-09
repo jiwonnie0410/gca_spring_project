@@ -50,7 +50,7 @@ public class SGroupController {
 	public String search(Model model, SGroupVO vo) {
 		model.addAttribute("list", sgroupService.getSgList(vo));
 		System.out.println(sgroupService.getSgList(vo));
-		return "group_s/s_search";
+		return "/user/group_s/s_search";
 	}
 	
 	//선택한 방에 참여
@@ -62,7 +62,7 @@ public class SGroupController {
 		vo.setSg_now_cnt(sg_now_cnt+1);
 		sgroupService.updateCnt(vo);
 		model.addAttribute("sgroup", sgroupService.getRoomInfo(vo));
-		return "group_s/s_wating_room";
+		return "/user/group_s/s_wating_room";
 	}
 	
 	//반짝 방 참여 전에 참여 여부와 실 참여인원 수 조회하기
@@ -84,7 +84,7 @@ public class SGroupController {
 		model.addAttribute("skill_list", codeService.getCodeList(vo));
 		vo.setCd_group("GENDER_CD");
 		model.addAttribute("gender_list", codeService.getCodeList(vo));
-		return "group_s/s_search_cre";
+		return "/user/group_s/s_search_cre";
 	}
 	
 	//방 생성
