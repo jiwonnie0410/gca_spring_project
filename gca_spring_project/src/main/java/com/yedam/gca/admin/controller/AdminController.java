@@ -67,7 +67,7 @@ public class AdminController {
 
 	// 3-5. 통계 -> 지역별 반짝 운동 통계
 	@ResponseBody
-	@RequestMapping("")
+	@RequestMapping("/ajax/chart/city")
 	public List<Map<String, Object>> chartCity(){
 		System.out.println("대구 12월: " + adminService.chartCity(12, "대구"));
 		System.out.println("대구 11월: " + adminService.chartCity(11, "대구"));

@@ -13,6 +13,7 @@
 		  bottom: 0;
 		  width: 100%;
 		  text-align: center;
+		  z-index: 10;
 		}
 		
 		.navbar a {
