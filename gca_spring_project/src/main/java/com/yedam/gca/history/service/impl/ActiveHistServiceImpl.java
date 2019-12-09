@@ -14,7 +14,7 @@ public class ActiveHistServiceImpl implements ActiveHistService{
 	@Autowired	ActiveHistDAO dao;
 	
 	//*************** 수림 *******************//
-	// 스코어 목록 조회(랭킹)
+	// 유저별 활동히스토리 목록 조회
 	@Override
 	public List<ActiveHistVO> getActiveHistList() {
 		return dao.getActiveHistList();

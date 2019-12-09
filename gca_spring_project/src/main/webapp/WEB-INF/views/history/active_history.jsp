@@ -88,9 +88,9 @@
 </head>
 
 <body>
-<c:forEach items="${ActiveHistList}" var="list">
-	${list.m_id }!!<br>
-</c:forEach>
+<%-- <c:forEach items="${ActiveHistList}" var="list"> --%>
+<%-- 	${list.m_id }!!<br> --%>
+<%-- </c:forEach> --%>
 
 	<div class="historyDiv">
 	  <br>

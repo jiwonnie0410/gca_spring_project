@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<!-- 기본 모바일 화면용 레이아웃 상세 -->
+	<definition name="mainTemplate"	template="/WEB-INF/views/layout/user-layout.jsp">
+		<put-attribute name="user-content" value="/WEB-INF/views/layout/user-content.jsp" />
+		<put-attribute name="footer-menubar" value="/WEB-INF/views/layout/user-menubar.jsp" />
+	</definition>
+	
+	<!-- 관리자 웹페이지용 레이아웃 상세 -->
+	<definition name="adminTemplate" template="/WEB-INF/views/layout/admin-layout.jsp">
+		<put-attribute name="admin-content" value="/WEB-INF/views/layout/admin-content.jsp" />
+	</definition>
+	
+	<!-- 모바일용 사용자 화면 레이아웃 적용 -->
+	<definition name="/user/*/*" extends="mainTemplate"> 							<!-- 컨트롤러의 리턴값 -->
+		<put-attribute name="user-content" value="/WEB-INF/views/{1}/{2}.jsp" /> 	<!-- {1}은 폴더명 {2}는 jsp파일명 -->
+	</definition>
+	
+	<!-- 웹용 관리자 화면 레이아웃 적용 -->
+	<definition name="/admin/*" extends="adminTemplate"> 								<!-- 컨트롤러의 리턴값 -->
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/{1}.jsp" /> 	<!-- {1}은 폴더명 {2}는 jsp파일명 -->
+	</definition>
+	
+	<!-- no tiles: 아무런 레이아웃도 적용 받고 싶지 않을 때 -->
+	<definition name="/notiles/*/*" template="/WEB-INF/views/layout/notiles.jsp">
+		<put-attribute name="notiles-content" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
+	</definition>
+
+</tiles-definitions>

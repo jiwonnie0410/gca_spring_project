@@ -111,7 +111,7 @@
 			</insert>
 			
 
-<!-- 6. 챌린지 삭제??를 하기로 했었나???? -->
+<!-- 6. 챌린지 삭제??를 안 하는 걸로 -->
 			<delete id="deleteChallenge" parameterType="int">
 					DELETE FROM CHALLENGE 
 					WHERE CL_NUM = ${cl_num}

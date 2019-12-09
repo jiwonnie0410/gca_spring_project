@@ -7,6 +7,6 @@ import com.yedam.gca.history.vo.ActiveHistVO;
 public interface ActiveHistService {
 	
 	//*************** 수림 *******************//
-	// 스코어 목록 조회(랭킹)
+	// 유저별 활동히스토리 목록 조회
 	public List<ActiveHistVO> getActiveHistList();
 }
