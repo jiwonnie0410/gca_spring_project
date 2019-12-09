@@ -31,16 +31,10 @@
 			</select>
 
 
-<<<<<<< HEAD
-<!-- 3-1. 여성 연령대 및 운동 통계(반짝만) -->
-			<select id="chartFemale" resultType="map">
-					<!-- 20대만 -->
-=======
 <!-- 3. 성별로 연령대 및 운동 통계(반짝만) -->
 			<select id="chartFemale" parameterType="map">
 					<!-- #{gender}성별의  ${startAge}살부터 ${endAge}살의 사람들이 반짝 한 횟수 -->
 					<!-- 예: 여성 20살부터 29살까지 사람들이 반짝 한 횟수 -->
->>>>>>> branch 'master' of https://github.com/jiwonnie0410/gca_spring_project
 					SELECT 	COUNT(*), C.CD_NAME
 					FROM 	ACTIVE_HIST H, MEMBERS M, CODE C, SGROUP S
 					WHERE 	H.M_ID = M.M_ID
@@ -52,7 +46,6 @@
 			</select>
 
 
-<<<<<<< HEAD
 <!-- 3-2. 남성 연령대 및 운동 통계 -->
 			<select id="chartMale" resultType="map">
 					<!-- 20대만 -->
@@ -67,16 +60,7 @@
 			</select>
 
 
-=======
->>>>>>> branch 'master' of https://github.com/jiwonnie0410/gca_spring_project
 <!-- 4. 지역별 통계 -->
-<<<<<<< HEAD
-			<select id="chartCity" resultType="int">
-					<!-- 대구만 -->
-					SELECT 	COUNT(*)
-					FROM 	MEMBERS
-					WHERE 	M_LOCATION LIKE '대구%'
-=======
 			<select id="chartCity" parameterType="map" resultType="map">
 					<!-- ${month}월에  #{city} 사는 사람들이 반짝 한 횟수 -->
 					<!-- 예: 12월에 대구에 사는 사람들이 반짝 한 횟수 -->
@@ -92,7 +76,6 @@
 					        AND M.M_LOCATION LIKE '#{city}%'
 					        
 					GROUP BY M.M_LOCATION, TO_CHAR(SYSDATE, 'MM')
->>>>>>> branch 'master' of https://github.com/jiwonnie0410/gca_spring_project
 			</select>
 
 
