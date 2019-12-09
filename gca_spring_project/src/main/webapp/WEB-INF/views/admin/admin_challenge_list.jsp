@@ -5,6 +5,7 @@
 		
 </head>
 <body>
+<div id="content-wrapper">
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8" align="center" style="padding-top:30px;">
@@ -62,11 +63,10 @@
 			<div class="col-md-2"></div>
 	</div>
 
-	
+	</div>
 	
 	
 <!-- 챌린지 생성 모달 시작 -->
-<div class="container">
 	<div class="modal fade" id="challenge-create">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -133,11 +133,9 @@
 			</div>
 		</div>
 	</div>
-</div>
 <!-- 모달 끝 -->
 
 <!-- 챌린지 현황 보여주는 모달 시작 -->
-<div class="container">
 	<div class="modal fade" id="challenge-going">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -162,7 +160,6 @@
 			</div>
 		</div>
 	</div>
-</div>
 <!-- 모달 끝 -->
 
 </body>

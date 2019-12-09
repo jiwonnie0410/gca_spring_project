@@ -39,10 +39,14 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	// 4. 연령대 및 운동(반짝) 성별 통계
+	@Override
+	public List<Map<String, Object>> chartGender(String gender, int startAge, int endAge) {
+		return dao.chartGender(gender, startAge, endAge);
+	}
 
 	// 5. 지역별 반짝 운동 통계
 	@Override
-	public List<Map<String, Object>> chartCity(int month, String city) {
+	public List<Map<String, Object>> chartCity(String month, String city) {
 		return dao.chartCity(month, city);
 	}
 

@@ -32,9 +32,16 @@ public class AdminDAO {
 	}
 	
 	// 연령대 및 운동(반짝) 성별 통계
+	public List<Map<String, Object>> chartGender(String gender, int startAge, int endAge){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("gender", gender);
+		map.put("startAge", startAge);
+		map.put("endAge", endAge);
+		return mybatis.selectList("AdminDAO.chartGender", map);
+	}
 	
 	// 지역별 반짝 운동 통계
-	public List<Map<String, Object>> chartCity(int month, String city){
+	public List<Map<String, Object>> chartCity(String month, String city){
 		// 통계를 보기 원하는 월과 지역 이름을 map에 넣어서 mapper 쿼리에 동적으로 넘김
 		Map<String, Object> map = new HashMap<String, Object>();
 	    map.put("month", month);

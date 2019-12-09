@@ -14,11 +14,26 @@
 		        SIX_NUM,
 		        SG_NUM
 		FROM    active_hist
-		WHERE   M_ID = 'test'
+		WHERE   M_ID = 'test2'
 		ORDER BY ACH_CONFIRM
 	</select>
 	
+	<select id="getSgroup" resultType="sgroup">
+		SELECT	SG_NUM,
+	      		SG_NAME,
+		        SG_START_DTTM,
+		        SG_END_DTTM,
+		        SG_LOCATION,
+		        SPORTS1_CD,
+		        SKILL_CD,
+		        AGE_RANGE,
+		        GENDER_CD,
+		        STATUS_CD,
+		        SG_OPTION
+	FROM   		SGROUP
+	WHERE   	SG_NUM = #{sg_num}
 	
+	</select>
 	
 	
 	
