@@ -111,6 +111,22 @@
 <script>
 		$(function() { //이 문장이 페이지 로딩 완료 후 실행
 			
+			//로딩되자마자(이때하는게 맞을까?) 아이디 입력받고 아작스로 세션에 저장.
+			var id={ "id" : prompt("세션에 저장할 id 입력 : ")};
+			
+			$.ajax({
+				url: "saveId",
+				type:'GET',
+				data: id,		//요청파라미터
+				
+				//컨트롤러로 데이타 보낼때 제이슨이라는 것을 알려줘야함. 컨트롤러에는 담을 vo에@RequestBody붙여주고.
+				success: function(){
+					alert("아이디 세션에 저장 완료.");
+				},
+				error: function(){
+					alert("아이디 저장 실패!");
+				}
+			
 			//채팅 전송버튼 눌렀을때
 			$("body").on("click", "[id^=chat]", function() {
 
@@ -173,6 +189,15 @@
 			});
 			
 			
+			//참가취소 버튼 눌렀을때
+			$("body").on("click", "[id^=cancelJoin]", function() {
+
+				//방에 남아있는 사람들을 위해 아작스로 현재인원 -1 후 본인은 목록으로 돌아가게.
+				//그리고 방장이 빠져나가면 방 삭제되게.
+
+			});
+			
+			
 		});
 </script>
 
@@ -195,7 +220,7 @@
     	<div style="padding-top:0px; padding-bottom:20px">
     		<div>
       			<textarea id="messageWindow" style="font-size:15px; background-color:#FE9191;border-radius:5px;border:3px double #FFF;
-      							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly"><000님이 참가하셨습니다.></textarea>
+      							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly"></textarea>
       			<div style="padding-top:10px;">
       				<span style="padding-left:5px; padding-right:3px; vertical-align: middle;">
       					<textarea id="inputMessage" style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; ">입력하세요</textarea>
@@ -242,7 +267,7 @@
 
 <!-- 버튼영역 시작(아직 아무 기능 없음) -->														
     <div style="padding-bottom:30px">
-      	<button class="button-general">참가인증</button>&nbsp;<button class="button-general">참가취소</button>&nbsp;
+      	<button class="button-general">참가인증</button>&nbsp;<button id="cancelJoin" class="button-general">참가취소</button>&nbsp;
       	<button class="button-general">공유</button>&nbsp;<button class="button-general">목록</button>
     </div>
 <!-- 버튼영역 끝 -->
@@ -466,11 +491,20 @@
 	 chatAreaScroll(); 
  }
  
- function onOpen(event) { textarea.value += "연결 성공\n"; }
+ function onOpen(event) { 
+	 msg = {
+		 cmd : "msg",
+		 id : "test",
+		 msg : "<000님이 참가하셨습니다.>" //여기에 아이디 붙여서 추가하면 될듯. 근데 새로고침해도 이게 뜨는것은 막아야함.
+	 }
+	 webSocket.send(  JSON.stringify( msg )   );
+ }
  function onError(event) { 
 	 console.log(event); 
  	alert(event.data); 
  }
+ 
+ //메세지 전송
  function send() { 
 	 msg = {
 		 cmd : "msg",
@@ -491,6 +525,8 @@
 	webSocket.send(  JSON.stringify( msg )   ); 
  }  */
  
+ 
+ //채팅치면 스크롤바 내려가게 하기.
  function chatAreaScroll() {
 	//using jquery
 	/* var textArea = $('#messageWindow');
