@@ -55,6 +55,27 @@
 					  height: 30px;
 					  width: 120px;
 				}
+				
+				.button-general:hover {
+					  background-color: #FEBABA;
+					  border: 2px solid #FE9191;
+					  border-radius: 7px;
+					  color: white;
+				}
+				
+				.button-general {
+					  background: #FE9191;
+					  border: 3px solid #fff;
+					  border-radius: 7px;
+					  color: white;
+					  font-size: 15px;
+					  font-weight: bold;
+					  padding: 2px 4px;
+					  position: relative;
+					  text-transform: uppercase;
+					  height: 45px;
+					  width: 245px;
+				}
     	</style>
 </head>
 
@@ -123,7 +144,8 @@
 		
 		<!-- 각 메뉴마다 안에 들어가는 내용 부분 -->
 		<tiles:insertAttribute name="admin-content" />
-		
+	</div>
+	<div>
 	</div>
 
 	<!-- FOOTER (스티키) -->

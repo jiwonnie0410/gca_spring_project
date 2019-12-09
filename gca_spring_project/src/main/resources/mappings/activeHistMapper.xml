@@ -14,11 +14,26 @@
 		        SIX_NUM,
 		        SG_NUM
 		FROM    active_hist
-		WHERE   M_ID = 'test'
+		WHERE   M_ID = 'test2'
 		ORDER BY ACH_CONFIRM
 	</select>
 	
+	<select id="getSgroup" resultType="sgroup">
+		SELECT	SG_NUM,
+	      		SG_NAME,
+		        SG_START_DTTM,
+		        SG_END_DTTM,
+		        SG_LOCATION,
+		        SPORTS1_CD,
+		        SKILL_CD,
+		        AGE_RANGE,
+		        GENDER_CD,
+		        STATUS_CD,
+		        SG_OPTION
+	FROM   		SGROUP
+	WHERE   	SG_NUM = #{sg_num}
 	
+<<<<<<< HEAD
 
 	<!--  *********************** 미현  ***********************  -->
 	
@@ -43,4 +58,19 @@
 	</select>
 	
 	
+=======
+	</select>
+	
+	
+	
+	
+	
+<!--  *********은영************* -->
+	<!-- 반짝방 참가취소 시 활동이력 delete -->
+	<delete id="">
+	
+	</delete>
+	
+				
+>>>>>>> branch 'master' of https://github.com/jiwonnie0410/gca_spring_project.git
 </mapper>

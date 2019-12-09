@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>
+	<div style="padding-bottom: 80px;">
 		<tiles:insertAttribute name="user-content" />
 	</div>
 	

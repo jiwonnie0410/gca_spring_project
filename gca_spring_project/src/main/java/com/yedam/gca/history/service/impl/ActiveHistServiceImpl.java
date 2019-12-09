@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yedam.gca.group_s.vo.SGroupVO;
 import com.yedam.gca.history.dao.ActiveHistDAO;
 import com.yedam.gca.history.service.ActiveHistService;
 import com.yedam.gca.history.vo.ActiveHistVO;
@@ -20,6 +21,7 @@ public class ActiveHistServiceImpl implements ActiveHistService{
 		return dao.getActiveHistList();
 	}
 
+<<<<<<< HEAD
 	
 	
 	//***************** 미현 *******************//
@@ -35,4 +37,12 @@ public class ActiveHistServiceImpl implements ActiveHistService{
 		dao.roomInsert(vo);
 	}
 	
+=======
+	//모달클릭시 반짝 정보 단건 출력
+	@Override
+	public SGroupVO getSgroup(SGroupVO vo) {
+		return dao.getSgroup(vo);
+	}
+
+>>>>>>> branch 'master' of https://github.com/jiwonnie0410/gca_spring_project.git
 }

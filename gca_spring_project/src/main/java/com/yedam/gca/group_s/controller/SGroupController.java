@@ -45,6 +45,13 @@ public class SGroupController {
 			return sgroupService.doReport(vo);
 //			System.out.println(model);
 		}
+		
+	//방에 들어갔을때 id입력받아 세션에 저장(임시)
+		@RequestMapping("/sgroup/saveId")
+		public String saveId(@RequestParam String id, HttpSession session) {
+			session.setAttribute("id", id);
+			return id;
+		}
 	
 //미현
 	
