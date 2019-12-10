@@ -1,6 +1,7 @@
 package com.yedam.gca.history.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,8 @@ public class ActiveHistServiceImpl implements ActiveHistService{
 	//*************** 수림 *******************//
 	// 유저별 활동히스토리 목록 조회
 	@Override
-	public List<ActiveHistVO> getActiveHistList() {
-		return dao.getActiveHistList();
+	public List<Map> getActiveHistList(ActiveHistVO vo) {
+		return dao.getActiveHistList(vo);
 	}
 	
 	//반짝 단건 받아옴

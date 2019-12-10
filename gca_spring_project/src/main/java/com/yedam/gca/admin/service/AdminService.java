@@ -23,7 +23,8 @@ public interface AdminService {
 	// 5. 지역별 반짝 운동 통계
 	public List<Map<String, Object>> chartCity(String month, String city);
 	
-	
+	// 6. 챌린지 목록
+	public List<ChallengeVO> challengeList();
 	
 	
 	
