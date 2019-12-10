@@ -28,5 +28,6 @@ public class SGroupVO {
 	
 	//미현
 	private String m_id;	//회원 ID
-	
+	private String m_xy;	//세션에 담기는 회원의 xy좌효
+	private Integer scroll_page;	//스크롤 조회 시 마지막 rownum
 }

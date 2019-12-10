@@ -72,7 +72,15 @@ public class SGroupController {
 	
 	//전체 반짝 리스트 조회
 	@RequestMapping("/sgroup/getSgList")
-	public String search(Model model, SGroupVO vo) {
+	public String search(Model model, SGroupVO vo, HttpSession session,
+			@RequestParam(value="scroll_page", defaultValue="", required=false) Integer scroll_page) {
+//		String m_xy = (String) session.getAttribute("m_xy");
+//		vo.setM_xy(m_xy);
+		vo.setM_xy("37.56628868272894, 127.0555535312866");
+		if(scroll_page == null || scroll_page.equals("")) {
+			scroll_page = 0;
+		}
+		vo.setScroll_page(scroll_page); //마지막 조회된 rownum
 		model.addAttribute("list", sgroupService.getSgList(vo));
 		System.out.println(sgroupService.getSgList(vo));
 		return "/user/group_s/s_search";

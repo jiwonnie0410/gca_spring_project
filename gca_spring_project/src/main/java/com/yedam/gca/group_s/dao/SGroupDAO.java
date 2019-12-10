@@ -49,6 +49,5 @@ public class SGroupDAO {
 	public void insertSg(SGroupVO vo){
 		mybatis.selectOne("SGroupDAO.insertSg", vo);
 	}
-	
 
 }

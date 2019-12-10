@@ -97,9 +97,9 @@
              			ORDER BY DIS
              			) A
     			WHERE 
-    				ROWNUM <![CDATA[ < ]]> #{end_scroll_page}
+    				ROWNUM <![CDATA[ <= ]]> #{scroll_page} + 1
     			)
-		WHERE R >= #{start_scroll_page}
+		WHERE R <![CDATA[ > ]]> #{scroll_page} + 15
 	</select>
 
 <!-- SGroup 방 생성 + 활동 이력 추가 -->
