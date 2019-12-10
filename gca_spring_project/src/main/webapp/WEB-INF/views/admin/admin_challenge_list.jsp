@@ -12,6 +12,11 @@
 					background-color: white;
 					cursor: pointer;
 				}
+				
+				#newTr:hover {
+					background-color: #FAF0F0;
+					cursor: pointer
+				}
 		</style>
 		
 		<!-- 챌린지 자바스크립트 -->
