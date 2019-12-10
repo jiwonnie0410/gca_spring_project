@@ -176,7 +176,7 @@
           user_regdate AS userUpdatedate -->
         FROM MEMBERS
        <!--  WHERE m_id = #{m_id} -->
-        WHERE m_id ='test6'
+        WHERE m_id =#{m_id}
     </select>
 	<!--2.전체조회  -->
 	<select id="getUserList" resultType="members" parameterType="members">

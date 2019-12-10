@@ -36,7 +36,7 @@
 	crossorigin="anonymous">
 <script type="text/javascript">
 	// 사용할 앱의 JavaScript 키를 설정해 주세요.
-	Kakao.init('앱키');
+	Kakao.init('745baffb91878f4a9b947f9134484a4d');
 
 	// 카카오톡 공유하기
 	function sendKakaoTalk() {

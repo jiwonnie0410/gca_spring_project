@@ -47,7 +47,7 @@
 		$('body').on('click','#btnSelect',function(){
 			var m_id = $(this).closest('tr').find('#hidden_m_id').val();
 			//특정 사용자 조회
-			window.open('${pageContext.request.contextPath }/member/admin_member_view.do?m_id=${m_id}' , '회원싱세보기' , 'width=500,height=500, menubar=no, status=no, toolbar=no'); 
+			window.open('${pageContext.request.contextPath }/member/admin_member_view.do?m_id='+m_id , '회원싱세보기' , 'width=500,height=500, menubar=no, status=no, toolbar=no'); 
 		}); //조회 버튼 클릭
 	}//userSelect
 		
