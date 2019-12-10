@@ -4,18 +4,57 @@
 <mapper namespace="ActiveHistDAO" >
 
 	<!--  *********수림************* -->
-	<select id="getActiveHistList" resultType="allhistory">
-		SELECT  ACH_NUM,
-		        M_ID,
-		        ACH_DTTM,
-		        ACH_GRANT,
-		        ACH_CONFIRM,
-		        BG_NUM,
-		        SIX_NUM,
-		        SG_NUM
-		FROM    active_hist
-		WHERE   M_ID = 'test2'
-		ORDER BY ACH_CONFIRM
+	<select id="getActiveHistList" resultType="map">    
+		SELECT 					A.ACH_NUM AS "ach_num", 
+								A.M_ID AS "m_id", 
+								A.ACH_DTTM AS "ach_dttm" , 
+								A.SG_NUM AS "sg_num", 
+								A.BG_NUM AS "bg_num", 
+								A.SIX_NUM AS "six_num", 
+								A.ACH_CONFIRM AS "ch_confirm", 
+								S.SG_NAME AS "sg_name", 
+								S.SG_END_DTTM AS "sg_end_dttm", 
+								S.SG_NOW_CNT AS "sg_now_cnt", 
+								S.SG_END_CNT AS "sg_end_cnt", 
+								S.SG_LOCATION  AS "sg_location", 
+								S.SG_XY AS "sg_xy", 
+		     					S.SPORTS1_CD AS "sports1_cd", 
+		     					S.SKILL_CD AS "skill_cd", 
+		     					S.AGE_RANGE AS "age_range", 
+		     					S.GENDER_CD AS "gender_cd", 
+		     					S.SG_OPTION AS "sg_option", 
+		       					SIX.STATUS_CD AS "status_cd",
+		       					SIX.SIX_NAME AS "six_name", 
+		       					SIX.SIX_END_DTTM AS "six_end_dttm", 
+						        SIX.SIX_END_CNT AS "six_end_cnt", 
+						        SIX.SIX_NOW_CNT AS "six_now_cnt", 
+						        SIX.SIX_LOCATION AS "six_location", 
+						        SIX.SIX_XY AS "six_xy", 
+						        SIX.SPORTS2_CD AS "sports2_cd", 
+						        SIX.SKILL_CD AS "skill_cd", 
+						        SIX.AGE_RANGE AS "age_range", 
+						        SIX.GENDER_CD AS "gender_cd",
+						        B.BG_NAME AS "bg_name", 
+						        B.BG_END_DTTM AS "bg_end_dttm", 
+						        B.BG_TEAM_CNT AS "bg_team_cnt", 
+						        B.BG_NOW_CNT AS "bg_now_cnt", 
+						        B.BG_LOCATION AS "bg_location", 
+						        B.BG_XY AS "bg_xy", 
+						        B.SPORTS2_CD AS "sports2_cd", 
+						        B.SKILL_CD AS "skill_cd",
+						        B.AGE_RANGE AS "age_range", 
+						        B.GENDER_CD AS "gender_cd", 
+						        B.STATUS_CD AS "status_cd"
+		        
+		FROM 					ACTIVE_HIST A 
+		FULL OUTER JOIN 		SGROUP S 
+		ON 						A.SG_NUM = S.SG_NUM
+		FULL OUTER JOIN 		BGROUP B 
+		ON 						A.BG_NUM = B.BG_NUM
+		FULL OUTER JOIN 		SIXMAN SIX
+		ON 						A.SIX_NUM = SIX.SIX_NUM
+		WHERE					A.M_ID = #{m_id}
+		ORDER BY			 	A.ACH_DTTM DESC
 	</select>
 	
 

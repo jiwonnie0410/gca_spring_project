@@ -32,19 +32,25 @@
 .container .content-div hr {
 	border-top: 5px solid rgb(209, 209, 209);
 }
-.container .title {
+.title {
 	font-weight: bold;
 	font-size: 1.5em;
 	text-align:center;
 	display: block;
 }
 
-.container .pinkText {
+.pinkText {
+	font-size: larger;
 	font-weight: bold;
 	color: #FE9191;
 }
-.container .smallText {
+.smallText {
 	font-size: small;
+	color: grey;
+}
+
+.mediumText {
+	font-size: medium;
 	color: grey;
 }
 
