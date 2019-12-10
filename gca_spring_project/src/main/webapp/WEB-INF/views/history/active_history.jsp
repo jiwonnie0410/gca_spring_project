@@ -137,19 +137,20 @@
 				    </li>
 			  </ul>
 			  <!-- Nav tabs 반짝/용병/동아리매치 끝 -->
-			  <!-- Tab panes 내용 넣는곳 -->
+			  <!-- Tab panes 내용 넣는곳 -->  
 			  <div class="tab-content">
 			  	<!-- 반짝 테이블 시작 -->
 			    <div id="sgroup" class="container tab-pane active"><br>
 					<c:forEach items="${activeHistList}" var="list">
 						<c:if test="${list.sg_num != null }">
 						<div class="content-div">
-							<span class="pinkText">${list.sg_name}</span>
-							<span class="mediumText">${list.sg_end_dttm }</span>
+							<span class="pinkText">${list.name}</span>
+							<span class="mediumText">${list.end }</span>
 							<span class="mediumText">${list.sports_cd }</span>
 							<span class="mediumText">${list.age_range }</span>
 							<span class="mediumText">${list.gender_cd }</span>
 							<span class="mediumText">${list.sg_option }</span>
+							<span class="mediumText">${list.location }</span>
 						</div>
 						</c:if>
 					</c:forEach>
@@ -157,12 +158,35 @@
 			    <!-- 반짝 테이블 끝 -->
 			    <!-- 용병 테이블 시작 -->
 			    <div id="sixmin" class="container tab-pane fade"><br>
-					 2222222  
+			    	<c:forEach items="${activeHistList}" var="list">
+						<c:if test="${list.six_num != null }">
+						<div class="content-div">
+							<span class="pinkText">${list.name}</span>
+							<span class="mediumText">${list.end }</span>
+							<span class="mediumText">${list.sports_cd }</span>
+							<span class="mediumText">${list.age_range }</span>
+							<span class="mediumText">${list.gender_cd }</span>
+							<span class="mediumText">${list.location }</span>
+						</div>
+						</c:if>
+					</c:forEach>
+			    
 			    </div>
 			    <!-- 용병 테이블 끝 -->
 		        <!-- 동아리매치 테이블 시작 -->
 		        <div id="bgroup" class="container tab-pane fade">
-		       	 333333
+		        	<c:forEach items="${activeHistList}" var="list">
+						<c:if test="${list.bg_num != null }">
+						<div class="content-div">
+							<span class="pinkText">${list.name}</span>
+							<span class="mediumText">${list.end }</span>
+							<span class="mediumText">${list.sports_cd }</span>
+							<span class="mediumText">${list.age_range }</span>
+							<span class="mediumText">${list.gender_cd }</span>
+							<span class="mediumText">${list.location }</span>
+						</div>
+						</c:if>
+					</c:forEach>
 		        </div>
 			    <!-- 동아리매치 테이블 끝 -->
 			  </div>
