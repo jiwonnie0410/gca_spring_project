@@ -109,23 +109,28 @@
 
 
 <script>
-		$(function() { //이 문장이 페이지 로딩 완료 후 실행
+		$(function() { //페이지 로딩 완료 후 실행
+
+			//로딩되자마자 아이디 입력받고 아작스로 세션에 저장.
+			var usrId = "${sessionScope.id}";
 			
-			//로딩되자마자(이때하는게 맞을까?) 아이디 입력받고 아작스로 세션에 저장.
-			var id={ "id" : prompt("세션에 저장할 id 입력 : ")};
-			
-			$.ajax({
-				url: "saveId",
-				type:'GET',
-				data: id,		//요청파라미터
+			if(usrId==""){ //만약 세션에 id가 없으면 입력받아라.
+				var id={ "id" : prompt("세션에 저장할 id 입력 : ")};
 				
-				//컨트롤러로 데이타 보낼때 제이슨이라는 것을 알려줘야함. 컨트롤러에는 담을 vo에@RequestBody붙여주고.
-				success: function(){
-					alert("아이디 세션에 저장 완료.");
-				},
-				error: function(){
-					alert("아이디 저장 실패!");
-				}
+				$.ajax({
+					url: "saveId",
+					type:'GET',
+					data: id,
+					
+					success: function(){
+						alert("아이디 세션에 저장 완료.");
+					},
+					error: function(){
+						alert("아이디 저장 실패!");
+					}
+					
+				});
+			}
 			
 			//채팅 전송버튼 눌렀을때
 			$("body").on("click", "[id^=chat]", function() {
@@ -192,7 +197,18 @@
 			//참가취소 버튼 눌렀을때
 			$("body").on("click", "[id^=cancelJoin]", function() {
 
-				//방에 남아있는 사람들을 위해 아작스로 현재인원 -1 후 본인은 목록으로 돌아가게.
+				//웹소켓으로 방정보 업데이트(인원수,방상태), 본인프로필 화면에서 삭제, 활동히스토리 DELETE, 본인은 목록으로 돌아가게.
+				var confirmStatus = confirm("정말로 반짝 참여를 취소 하시겠습니까?");
+
+				if (confirmStatus) {
+					
+					
+					
+					alert("참가 취소 완료.");
+					
+				} else {
+					console.log("참가취소 취소함");
+				}
 				//그리고 방장이 빠져나가면 방 삭제되게.
 
 			});
@@ -205,6 +221,7 @@
 <body>
 <!-- 버튼영역 위(프로필까지)의 div 시작 -->
     <div style="padding-top:0px;">
+    <input type="hidden" id="id" value="">
     
 	<!-- 방제 -->
     	<div style="background-color: #FE9191; text-align: left; padding-left:20px; color: #fff;"> 
@@ -481,7 +498,7 @@
 	 if(result.cmd == "msg") {
 		 textarea.value += result.msg + "\n";		 
 	 }
-	 /* else if( result.cmd = "board") {
+	 /* else if( result.cmd = "cancel") {
 		 var list = JSON.parse(result.msg);
 		 for(i=0; i< list.length; i++) {
 			 textarea.value += list[i].CONTENT + "\n";		
@@ -523,6 +540,18 @@
 		 msg : ""
 	 }
 	webSocket.send(  JSON.stringify( msg )   ); 
+ }  */
+ 
+//화면에서 프로필삭제
+ /* function deleteProfile() { 
+	 msg = {
+		 cmd : "msg",
+		 id : "test",
+		 msg : inputMessage.value
+	 }
+	//textarea.value += "나 : " + inputMessage.value + "\n"; 
+	webSocket.send(  JSON.stringify( msg )   ); 
+	inputMessage.value = ""; 
  }  */
  
  
