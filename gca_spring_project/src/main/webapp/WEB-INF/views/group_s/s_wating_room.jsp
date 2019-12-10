@@ -123,7 +123,7 @@
 					data: id,
 					
 					success: function(){
-						alert("아이디 세션에 저장 완료.");
+						alert("아이디 저장!");
 					},
 					error: function(){
 						alert("아이디 저장 실패!");
@@ -132,6 +132,7 @@
 				});
 			}
 			
+			console.log(usrId);
 			//채팅 전송버튼 눌렀을때
 			$("body").on("click", "[id^=chat]", function() {
 
@@ -202,7 +203,7 @@
 
 				if (confirmStatus) {
 					
-					
+					deleteProfile();
 					
 					alert("참가 취소 완료.");
 					
@@ -253,7 +254,7 @@
 	<!-- 참여자 프로필 -->
      	<div style="border-top: thick double #FE9191; border-bottom: thick double #FE9191; padding-top:15px; padding-bottom:15px;">
 
-        		<span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
+        		<span id="cancel" data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
           			<img style="padding-bottom:5px;" width="65px" height="65px"
           							src="${pageContext.request.contextPath }/resources/images/jey/trainer-1.jpg" class="rounded-circle">
         			<br />사람1
@@ -498,12 +499,13 @@
 	 if(result.cmd == "msg") {
 		 textarea.value += result.msg + "\n";		 
 	 }
-	 /* else if( result.cmd = "cancel") {
-		 var list = JSON.parse(result.msg);
-		 for(i=0; i< list.length; i++) {
-			 textarea.value += list[i].CONTENT + "\n";		
-		 }
-	 } */
+	 else if( result.cmd = "cancelJoin") { //참가취소 누르고 웹소켓 거쳐왔을때.
+		 var person1 = document.getElementById("cancel");
+		 var result = JSON.parse(event.data);
+		 console.log(person1); //프로필 삭제(할 예정)
+		 $("#cancel").remove();
+		 textarea.value += result.msg + "\n"; //채팅방에 나갔다고 표시.
+	 }
 	  
 	 chatAreaScroll(); 
  }
@@ -533,14 +535,16 @@
 	inputMessage.value = ""; 
  } 
  
- /* function getBoard() { 
+ function deleteProfile() { 
 	 msg = {
-		 cmd : "board",
-		 id : "",
-		 msg : ""
+		 cmd : "cancelJoin",
+		 id : "${sessionScope.id}",
+		 msg : "<000님이 나가셨습니다.>"
 	 }
-	webSocket.send(  JSON.stringify( msg )   ); 
- }  */
+	webSocket.send(  JSON.stringify( msg )   );
+	
+	
+ }
  
 //화면에서 프로필삭제
  /* function deleteProfile() { 
