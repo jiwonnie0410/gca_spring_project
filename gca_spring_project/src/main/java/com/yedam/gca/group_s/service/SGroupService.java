@@ -11,7 +11,7 @@ public interface SGroupService {
 	//은영
 	SGroupVO getRoomInfo(SGroupVO vo);
 	int doReport(TroubleVO vo);
-	void cancelJoin(String id);
+	void cancelJoin(ActiveHistVO vo);
 	
 	//미현
 	List<SGroupVO> getSgList(SGroupVO vo);

@@ -26,6 +26,7 @@
 		WHERE		SG_NUM = #{sg_num}
 	</select>
 	
+	<!-- 신고 시 trouble 테이블에 insert -->
 	<insert id="doReport" parameterType="trouble">
 		<selectKey order="BEFORE" resultType="int" keyProperty="tr_num"> <!-- 시퀀스 구하는 쿼리 실행하여 시퀀스 뽑아내서 담기. -->
   			<!-- ORDER : 실행순서. BEFORE는 먼저실행.(이 셀렉트가 먼저 실행되어 vo에 담김.) -->
@@ -50,15 +51,12 @@
 	
 	</insert>
 	
-	<!-- <update id="updateWhenJoin" parameterType="sgroup">
-		UPDATE		SGROUP
-		SET			SG_NOW_CNT = #{sg_now_cnt}
-					<if test="searchCondition == 'title' ">
-					STATUS_CD = ?
-					</if>
-		WHERE		SG_NUM = #{sg_num}
-	
-	</update> -->
+	<!-- 참가 취소 시 sgroup테이블 sg_now_cnt -1 -->
+	<update id="minusNowCnt" parameterType="allhistory">
+		UPDATE	SGROUP
+		SET		SG_NOW_CNT = SG_NOW_CNT-1
+		WHERE	SG_NUM = ${sg_num}   <!-- $는 값, #은 따옴표 붙음. int값 하나 받아왔을때는 value로 쓰면 됨.-->
+	</update>
 	
 	
 	
