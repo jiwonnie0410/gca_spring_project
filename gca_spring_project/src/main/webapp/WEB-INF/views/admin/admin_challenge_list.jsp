@@ -86,18 +86,18 @@
 							<tr height="50">
 								<th width="60"> 구분 </th>
 								<td>
-									<input type="checkbox" value="basic" name="checkbox1" onclick="oneCheckbox(this)" class="check-box"> 기본
-									<input type="checkbox" value="special" name="checkbox1" onclick="oneCheckbox(this)" class="check-box"> 스페셜
+									<input type="checkbox" value="basic" name="cl_status" onclick="oneCheckbox(this)" class="check-box"> 기본
+									<input type="checkbox" value="special" name="cl_status" onclick="oneCheckbox(this)" class="check-box"> 스페셜
 								</td>
 							</tr>
 							<tr height="50">
 								<th> 기간 </th>
-								<td> 시작 <input type="date" id="startDate" name="startDate">
-									  마감 <input type="date" id="endDate" name="endDate"></td>
+								<td> 시작 <input type="date" id="startDate" name="cl_start_dttm">
+									  마감 <input type="date" id="endDate" name="cl_end_dttm"></td>
 							</tr>
 							<tr height="50">
 								<th> 점수 </th>
-								<td><select id="selectScore" name="selectScore" class="btn btn-outline-secondary btn-sm dropdown-toggle">
+								<td><select id="selectScore" name="cl_score" class="btn btn-outline-secondary btn-sm dropdown-toggle">
 										<option	selected> 점수 선택 </option>
 										<option	value="300"> 300 </option>
 										<option	value="500"> 500 </option>

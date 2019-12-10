@@ -1,6 +1,6 @@
 // 체크박스 하나만 선택 되게 하기 (복수 선택 방지)
 function oneCheckbox(a){
-    var obj = document.getElementsByName("checkbox1");
+    var obj = document.getElementsByName("cl_status");
     for(var i=0; i<obj.length; i++){
         if(obj[i] != a){
             obj[i].checked = false;
@@ -25,7 +25,7 @@ $(function(){
 		// ㅁㅁ 종목 반짝 n번 참여
 		else if(type == 'mKind_nTime'){
 			$('#addType').text('');
-			$('#addType').append('<select id="selectSports" name="selectSports" class="btn btn-outline-secondary btn-sm dropdown-toggle"> '  
+			$('#addType').append('<select id="selectSports" name="sports1_cd" class="btn btn-outline-secondary btn-sm dropdown-toggle"> '  
 									+'<option selected> 운동 선택 </option> '
 									+'<option value="S01"> 농구 </option> '
 									+'<option value="S02"> 달리기/산책 </option> '

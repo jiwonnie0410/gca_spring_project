@@ -9,8 +9,7 @@
 	3. 성별로 연령대 및 운동 통계
 	4. 지역별 통계
 	5. 챌린지 생성
-	6. 챌린지 삭제
-	7. 챌린지 진행 현황
+	6. 챌린지 진행 현황
  -->
 
 <!-- 1. 반짝 운동별 통계 -->
@@ -72,7 +71,7 @@
 <!-- 5. 챌린지 생성 -->
 			<insert id="insertChallenge" parameterType="challenge">
 			
-					<!-- 챌린지 번호 제일 최근 거 가져오기 -->
+					<!-- 챌린지 번호 제일 최근 거 가져오기 -> ChallengeVO(별칭 challenge)의 cl_num 필드에 담은 후 두번째 쿼리에 적용  -->
 					<selectKey order="BEFORE" resultType="int" keyProperty="cl_num">
 							SELECT MAX(CL_NUM)+1
 							FROM CHALLENGE
@@ -101,14 +100,7 @@
 			</insert>
 			
 
-<!-- 6. 챌린지 삭제??를 안 하는 걸로 -->
-			<delete id="deleteChallenge" parameterType="int">
-					DELETE FROM CHALLENGE 
-					WHERE CL_NUM = ${cl_num}
-			</delete>
-			
-			
-<!-- 7. 챌린지 진행 현황 -->
+<!-- 6. 챌린지 진행 현황 -->
 			<select id="">
 					SELECT C.CL_NUM, C.CL_STATUS, C.CL_NAME, D.CD_NAME, C.CL_START_DTTM, C.CL_END_DTTM,
 					        H.M_ID, H.CLH_CNT
