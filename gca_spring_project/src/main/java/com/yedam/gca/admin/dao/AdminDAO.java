@@ -20,6 +20,11 @@ public class AdminDAO {
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
+	// 챌린지 목록
+	public List<ChallengeVO> challengeList() {
+		return mybatis.selectList("AdminDAO.challengeList");
+	}
+
 	// 챌린지 생성
 	public int createChallenge(ChallengeVO vo) {
 		return mybatis.insert("AdminDAO.insertChallenge", vo);

@@ -3,8 +3,6 @@ package com.yedam.gca.admin.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yedam.gca.admin.service.AdminService;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.member.controller.MembersController;
-import com.yedam.gca.member.service.MemberService;
 import com.yedam.gca.member.vo.MembersVO;
 
 @Controller
@@ -40,11 +37,17 @@ public class AdminController {
 		return "/admin/admin_challenge_list";
 	}
 
-	// 1-2. 챌린지 등록
+	// 1-2. 챌린지 목록
 	@ResponseBody
-	@RequestMapping("/ajax/createChallenge")
-	public String createChallenge(HttpServletRequest request, ChallengeVO vo) {
-		request.getParameter(""); // 이런 식으로 vo에다 담기 -> 그러려면 jsp에 name 바꿔야 함
+	@RequestMapping("ajax/challengeList")
+	public List<ChallengeVO> challengeList() {
+		return adminService.challengeList();
+	}
+
+	// 1-3. 챌린지 등록
+	@ResponseBody
+	@RequestMapping(value="ajax/createChallenge", consumes="application/json")
+	public String createChallenge(@RequestBody ChallengeVO vo){
 		return adminService.createChallenge(vo);
 	}
 

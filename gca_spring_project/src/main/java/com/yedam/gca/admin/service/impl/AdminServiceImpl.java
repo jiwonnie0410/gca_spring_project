@@ -17,7 +17,13 @@ public class AdminServiceImpl implements AdminService {
 
 	@Resource AdminDAO dao;
 
-	// 1. 챌린지 생성
+	// 1. 챌린지 목록
+	@Override
+	public List<ChallengeVO> challengeList() {
+		return dao.challengeList();
+	}
+
+	// 2. 챌린지 생성
 	@Override
 	public String createChallenge(ChallengeVO vo) {
 		dao.createChallenge(vo);
@@ -26,26 +32,26 @@ public class AdminServiceImpl implements AdminService {
 		return null;
 	}
 
-	// 2. 반짝 운동별 통계
+	// 3. 반짝 운동별 통계
 	@Override
 	public List<Map<String, Object>> chartSgroup() {
 		System.out.println("차트: " + dao.chartSgroup());
 		return dao.chartSgroup();
 	}
 
-	// 3. 동호회 매치 운동별 통계
+	// 4. 동호회 매치 운동별 통계
 	@Override
 	public List<Map<String, Object>> chartBgroup() {
 		return dao.chartBgroup();
 	}
 	
-	// 4. 연령대 및 운동(반짝) 성별 통계
+	// 5. 연령대 및 운동(반짝) 성별 통계
 	@Override
 	public List<Map<String, Object>> chartGender(String gender, int startAge, int endAge) {
 		return dao.chartGender(gender, startAge, endAge);
 	}
 
-	// 5. 지역별 반짝 운동 통계
+	// 6. 지역별 반짝 운동 통계
 	@Override
 	public List<Map<String, Object>> chartCity(String month, String city) {
 		return dao.chartCity(month, city);

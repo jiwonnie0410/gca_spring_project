@@ -52,6 +52,12 @@ $(function(){
 function createChallengeButton(){
 	var frm = document.createChallengeForm;
 	
+	// 인풋값 다 들어왔는지 확인
+	if (!document.getElementsByName("cl_status")[0].checked || !document.getElementsByName("cl_status")[1].checked) {
+		alert("챌린지 구분을 선택해 주세요.");
+		return false;
+	}
+	
 	// 기본인지 스페셜인지 구분
 	var checkBox = document.getElementsByName("cl_status");
 	if(checkBox[0].checked)
@@ -111,7 +117,7 @@ function getChallengeList() {
 						  .append("<td align='center'>"+ datas[i].CL_NUM +"</td>")
 						  .append("<td align='center'>"+ status +"</td>")
 						  .append("<td>"+ datas[i].CL_NAME +"</td>")
-						  .append("<td align='center'> <fmt:formatDate value='"+ datas[i].CL_START_DTTM +"' pattern='yyyy/MM/dd' /></td>")
+						  .append("<td align='center'>"+ datas[i].CL_START_DTTM +"</td>")
 						  .append("<td align='center'>"+ datas[i].CL_END_DTTM +"</td>")
 						  .append("<td align='center'>"+ datas[i].CL_SCORE +"점 </td>")
 						  .appendTo($("#challenge-table"));
