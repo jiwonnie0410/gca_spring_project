@@ -23,7 +23,7 @@
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
 <!--json할때 필요  -->
 <script
@@ -116,8 +116,8 @@
 							<!--이모티콘이로 대체  -->
 							<span aria-hidden="true" class="li_settings fs1"></span> <span
 								aria-hidden="true" class="li_lock fs1"></span>
-							<!-- 	<i class="fas fa-user-edit"  aria-hidden="true" style="color:black; font-size:100px;" ></i> -->
-							<!-- <i class="fa fa-lock fa-2x" aria-hidden="true" style="color:black; font-size:100px;"></i> -->
+							<i class="fas fa-user-edit"  aria-hidden="true" style="color:black; font-size:100px;" ></i> 
+							 <i class="fa fa-lock fa-2x" aria-hidden="true" style="color:black; font-size:100px;"></i> 
 						</div>
 					</form>
 				</div>
