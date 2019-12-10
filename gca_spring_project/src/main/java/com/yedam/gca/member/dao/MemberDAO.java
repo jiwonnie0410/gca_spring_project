@@ -36,4 +36,44 @@ public class MemberDAO {
 	public int updateTempPw(MembersVO vo) {
 		return mybatis.update("MemberDAO.updateTempPw", vo);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//진영
 }
