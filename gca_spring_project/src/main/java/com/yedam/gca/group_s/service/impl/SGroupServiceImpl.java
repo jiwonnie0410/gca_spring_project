@@ -9,6 +9,7 @@ import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.group_s.dao.SGroupDAO;
 import com.yedam.gca.group_s.service.SGroupService;
 import com.yedam.gca.group_s.vo.SGroupVO;
+import com.yedam.gca.history.vo.ActiveHistVO;
 
 @Service("sGroupService")
 public class SGroupServiceImpl implements SGroupService {
@@ -33,15 +34,14 @@ public class SGroupServiceImpl implements SGroupService {
 		return sgroupDAO.getSgList(vo);
 	}
 
-
 	@Override
 	public int updateCnt(SGroupVO vo) {
 		return sgroupDAO.updateCnt(vo);
 	}
 
 	@Override
-	public SGroupVO insertSg(SGroupVO vo) {
-		return sgroupDAO.insertSg(vo);
+	public void insertSg(SGroupVO vo) {
+		sgroupDAO.insertSg(vo);
 	}
 
 }

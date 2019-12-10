@@ -18,32 +18,34 @@
 		ORDER BY ACH_CONFIRM
 	</select>
 	
-	<select id="getSgroup" resultType="sgroup">
-		SELECT	SG_NUM,
-	      		SG_NAME,
-		        SG_START_DTTM,
-		        SG_END_DTTM,
-		        SG_LOCATION,
-		        SPORTS1_CD,
-		        SKILL_CD,
-		        AGE_RANGE,
-		        GENDER_CD,
-		        STATUS_CD,
-		        SG_OPTION
-	FROM   		SGROUP
-	WHERE   	SG_NUM = #{sg_num}
+
+	<!--  *********************** 미현  ***********************  -->
 	
+	<!-- SGroup+BGroup+Sixman 참여 전 참여 여부 확인 + 마감 인원 파악 -->
+	<select id="validIn" statementType="CALLABLE" parameterType="allhistory">
+		{ CALL valid_in(
+			#{in_type}
+			,#{pk_num}
+			,#{m_id}
+			,#{result_msg, mode=OUT, jdbcType=VARCHAR}
+		)}
 	</select>
 	
-	
-	
-	
+	<!-- SGroup+BGroup+Sixman 방 참여 -->
+	<select id="roomInsert" statementType="CALLABLE" parameterType="allhistory">
+		{ CALL room_insert(
+			#{in_type}
+			,#{pk_num}
+			,#{m_id}
+			,#{result_msg, mode=OUT, jdbcType=VARCHAR}
+		)}
+	</select>
+
 	
 <!--  *********은영************* -->
 	<!-- 반짝방 참가취소 시 활동이력 delete -->
 	<delete id="">
 	
 	</delete>
-	
-				
+
 </mapper>

@@ -66,14 +66,7 @@
 	
 	
 	
-<!-- ************ 미현 ********************* -->
-
-<!-- 반짝 방 참여 전 인원수 1 증가시키는 맵퍼 -->
-	<update id="updateCnt" parameterType="sgroup">
-		UPDATE 	SGROUP
-		SET		SG_NOW_CNT = #{sg_now_cnt}
-		WHERE	SG_NUM = #{sg_num}
-	</update>
+<!-- ******************* 미현 ********************* -->
 	
 <!-- SGroup 전체 조회 -->
 	<select id="getSgList" resultType="sgroup">
@@ -114,4 +107,14 @@
 		)}
 	</select>
 
+
 </mapper>
+
+<!-- ******************** 안 쓰는 맵퍼 갈무리 *********************** -->
+
+<!-- 반짝 방 참여 전 인원수 1 증가시키는 맵퍼 -->
+<!-- 	<update id="updateCnt" parameterType="sgroup">
+		UPDATE 	SGROUP
+		SET		SG_NOW_CNT = #{sg_now_cnt}
+		WHERE	SG_NUM = #{sg_num}
+	</update> -->
