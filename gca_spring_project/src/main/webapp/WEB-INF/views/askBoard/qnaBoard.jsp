@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@page import="java.net.URLDecoder"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@taglib prefix="my" tagdir="/WEB-INF/tags" %>
+<%-- <%@taglib prefix="my" tagdir="/WEB-INF/tags" %> --%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
