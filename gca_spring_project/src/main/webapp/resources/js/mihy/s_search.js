@@ -35,8 +35,6 @@ $(document).ready(function(){
 			} 
 		});
 	});
-
-
 });
 
 //남은 시간 계산

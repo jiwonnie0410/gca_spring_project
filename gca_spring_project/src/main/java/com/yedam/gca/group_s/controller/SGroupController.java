@@ -78,7 +78,7 @@ public class SGroupController {
 		String m_id = (String) session.getAttribute("m_id");
 		vo.setIn_type("sg");
 //		vo.setM_id(m_id);
-		vo.setM_id("test10");
+		vo.setM_id("test8");
 		vo.setPk_num(sg_num);
 		actService.validIn(vo);
 		return vo;
@@ -101,10 +101,14 @@ public class SGroupController {
 			Model model, SGroupVO svo, ActiveHistVO avo, HttpSession session) {
 		String m_id = (String) session.getAttribute("m_id");
 //		avo.setM_id(m_id);
-		avo.setM_id("test10");
+		
+		//활동 이력 추가
+		avo.setM_id("test8");
 		avo.setIn_type("sg");
 		avo.setPk_num(sg_num);
 		actService.roomInsert(avo);
+		
+		//반짝 정보를 채팅방으로 넘김 
 		svo.setSg_num(sg_num);
 		model.addAttribute("sgroup", sgroupService.getRoomInfo(svo));
 		return "/user/group_s/s_wating_room";
@@ -128,7 +132,7 @@ public class SGroupController {
 	public String createRoom(@ModelAttribute SGroupVO vo, HttpSession session) {
 		String m_id = (String) session.getAttribute("m_id");
 //		vo.setM_id(m_id);
-		vo.setM_id("test");
+		vo.setM_id("test8");
 		sgroupService.insertSg(vo);
 		return "redirect:alreadyIn?sg_num="+vo.getSg_num();
 	}
