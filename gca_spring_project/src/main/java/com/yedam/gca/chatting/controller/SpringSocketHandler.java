@@ -50,7 +50,7 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception { super.handleMessage(session, message);
 		System.out.println(session.getAttributes());
 		this.logger.info("receive message:"+message.toString()); //json string을 vo로 변환
-		ObjectMapper mapper = new ObjectMapper(); //잭슨?에서 제공해주는 객체.
+		ObjectMapper mapper = new ObjectMapper(); //제이슨?에서 제공해주는 객체.
 		ChatVO2 chatvo = mapper.readValue((String) message.getPayload(), ChatVO2.class);//메세지 전송을 위한 VO
 		
 		
@@ -62,13 +62,10 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 			msg = (String) message.getPayload();
 			System.out.println("-+++++++++++++++---------+++++++++++"+msg);
 		}
-//			else if(chatvo.getCmd().equals("board")) { //board라고 치면?(board를 submit 받으면?) 게시글 내용 갖고오는 명령어.
-//										//명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(jsp에도 같이 추가)
-//			String board = mapper.writeValueAsString(boardService.getBoardListMap()) ;
-//			result.setCmd("board");
-//			result.setMsg(board);
-//			msg = mapper.writeValueAsString(result) ;			
-//		}
+		else if(chatvo.getCmd().equals("cancelJoin")) {
+										//명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(jsp에도 같이 추가)
+			msg = (String) message.getPayload();			
+		}
 		sendMessage(msg);
 	}
 
