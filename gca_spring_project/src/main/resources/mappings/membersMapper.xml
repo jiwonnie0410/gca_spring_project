@@ -73,7 +73,7 @@
 <!-- 4-2. 임시 비밀번호로 업데이트 하기 -->
 			<update id="updateTempPw" parameterType="members">
 					UPDATE MEMBERS
-					SET M_SALT='', M_PASSWORD = #{m_password}
+					SET M_SALT = #{m_salt}, M_PASSWORD = #{m_password}
 					WHERE M_ID = #{m_id}
 			</update>
 			

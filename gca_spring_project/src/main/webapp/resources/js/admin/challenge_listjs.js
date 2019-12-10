@@ -120,7 +120,7 @@ function getChallengeList() {
 					status = '기본';
 				else
 					status = '스페셜';
-				$("<tr data-toggle='modal' data-target='#challenge-going' style='cursor:pointer;'>")
+				$("<tr data-toggle='modal' data-target='#challenge-going' id='newTr'>")
 						  .append("<td align='center'>"+ datas[i].CL_NUM +"</td>")
 						  .append("<td align='center'>"+ status +"</td>")
 						  .append("<td>"+ datas[i].CL_NAME +"</td>")

@@ -122,7 +122,12 @@ public class MemberServiceImpl implements MemberService {
 		    }
 		}
 		String tempPw = temp.toString(); // 임시 비밀번호
-		vo.setM_password(tempPw);
+		
+		// 비밀번호 암호화
+		String salt = SHA256Util.generateSalt();						// 1. 암호화 키 생성
+		String newPassword = SHA256Util.getEncrypt(tempPw, salt);		// 2. 비밀번호 암호화
+		vo.setM_salt(salt);												// 3. vo에 암호화 키 넣기
+		vo.setM_password(newPassword);									// 4. vo에 암호화된 비밀번호 넣기
 		
 		int result = dao.forgotPw(vo); // 입력 받은 정보로 회원 있는지 확인
 		
