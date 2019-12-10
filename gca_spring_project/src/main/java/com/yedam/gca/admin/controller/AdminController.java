@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.gca.admin.service.AdminService;
-import com.yedam.gca.admin.service.MembersService;
 import com.yedam.gca.challenge.vo.ChallengeVO;
+import com.yedam.gca.member.controller.MembersController;
+import com.yedam.gca.member.service.MemberService;
 import com.yedam.gca.member.vo.MembersVO;
 
 @Controller
@@ -28,8 +32,6 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 
-	@Autowired
-	MembersService membersService;
 
 	// 지원
 	// 1-1. 챌린지 관리 페이지
@@ -174,54 +176,43 @@ public class AdminController {
 	
 	
 	// 진영
-
-	@RequestMapping("getUserList.do")
+	 private static final Logger logger = LoggerFactory.getLogger(MembersController.class);
+	 // **전체조회
+		@RequestMapping("getUserList.do")
 	public String getUserList1(Model model, MembersVO vo) {
-		model.addAttribute("userList", membersService.getUserList(vo));
+		model.addAttribute("userList", adminService.getUserList(vo));
 		return "/admin/userList";
 	}
 
-	@RequestMapping("getUser.do")
-	public String getUser(Model model, MembersVO vo) {
-		model.addAttribute("userSelect", membersService.getUser(vo));
-		return "admin/user";
-	}
+	//03 회원 상세정보 조회
+    @RequestMapping("member/admin_member_view.do")
+    public String memberView(@RequestParam String m_id, Model model){
+        // 회원 정보를 model에 저장
+        model.addAttribute("dto", adminService.viewMember(m_id));
+       //System.out.println("클릭한 아이디 확인 : "+userId);
+        logger.info("클릭한 아이디 : "+m_id);
+       // member_view.jsp로 포워드
+       return "/notiles/member/member_view";
+    }
 
-	// 전체조회
+    
+	// **전체조회
 	@ResponseBody
 	@RequestMapping(value = "/members", method = RequestMethod.GET)
 	public List<MembersVO> getUserList(Model model, MembersVO vo) {
-		return membersService.getUserList(vo);
+		return adminService.getUserList(vo);
 	}
 
-	// 단건조회
-	@ResponseBody
-	@RequestMapping(value = "/members/{m_id}", method = RequestMethod.GET)
-	public MembersVO getUser(@PathVariable String m_id, MembersVO vo, Model model) {
-		vo.setM_id(m_id);
-		return membersService.getUser(vo);
-	}
+	
 
-	// 관리자 유저 삭제
+	//**관리자 유저 삭제
 	@ResponseBody
 	@RequestMapping(value = "/members/{m_id}", method = RequestMethod.DELETE)
 	public String deleteUser(@PathVariable String m_id, MembersVO vo) {
 		vo.setM_id(m_id);
-		membersService.deleteUser(vo);
+		adminService.deleteUser(vo);
 		return m_id;
 	}
 
-	// 수정
-//	@ResponseBody
-//	@RequestMapping(value="/members"
-//			,method=RequestMethod.PUT
-//	//		,produces="application/json"      //응답헤더
-//	 		,consumes="application/json"      //요청헤더
-//     //       ,headers = {"Content-type=application/json" }
-//	)
-//	public MembersVO updateUser(@RequestBody MembersVO vo, Model model) {
-//		membersService.updateUser(vo);
-//		return  vo;
-//	}
 
 }
