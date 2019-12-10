@@ -19,7 +19,7 @@ parameterType : 조회결과 Object -->
 			</if>
 		</where>
 	</select>
-
+<!--단건조회  -->
 	<select id="getUser" parameterType="members" resultType="members">
 		select M_ID, M_PASSWORD, M_NAME, M_NICK,M_IMAGE_CD,
 			M_XY,M_LOCATION,M_AGE,GENDER_CD,M_GRANT,
@@ -35,24 +35,16 @@ parameterType : 조회결과 Object -->
 		from MEMBERS
 	</select>
 
-	<!-- 등록 -->
-	<!-- <insert id="insertUser" parameterType="members">
-		insert into MEMBERS (M_ID, M_PASSWORD, M_NAME, M_NICK,M_IMAGE_CD,
-			M_XY,M_LOCATION,M_AGE,GENDER_CD,M_GRANT,
-			M_LEVEL_CD,M_STATUS_CD,M_RADIUS,M_NOTICE,M_EMAIL)
-		values ( #{m_id},
-		#{m_password},
-		#{m_name} )
-	</insert> -->
+<!-- 
 
-	<!-- 수정 -->
+	수정
 	<update id="updateUser" parameterType="members">
 		update MEMBERS set
 		m_password = #{m_password},
 		m_name = #{m_name}
 		M_LOCATION = #{m_location}
 		where m_id = #m_{id}
-	</update>
+	</update> -->
 
 	<!-- 삭제 -->
 	<delete id="deleteUser" parameterType="members">
