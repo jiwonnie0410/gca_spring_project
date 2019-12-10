@@ -1,8 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
+		<style>
+				.check-box {
+					display: inline-block;
+					width: 20px;
+					height: 20px;
+					border: 2px solid #FE9191;
+					background-color: white;
+					cursor: pointer;
+				}
+		</style>
 		
+		<!-- 챌린지 자바스크립트 -->
+		<script src="${pageContext.request.contextPath }/resources/js/admin/challenge_listjs.js"></script>
 </head>
 <body>
 <div id="content-wrapper">
@@ -24,22 +37,18 @@
 							</form>
 						</div>
 							
-					<table class="table">
+					<table class="table" id="challenge-table">
 						<tr id='tr' align="center" style="background-color:#FEBABA;">
 							<th width="5%"> NO </th>
 							<th width="10%"> 구분 </th>
 							<th width="45%"> 챌린지 이름 </th>
 							<th width="12%"> 시작 날짜 </th>
 							<th width="12%"> 마감 날짜 </th>
-							<th width="10%"> 참여인원 </th>
+							<th width="10%"> 리워드 </th>
 						</tr>
 						<tr class="table-tr" data-toggle="modal" data-target="#challenge-going">
-							<td align="center"> 1 </td>
-							<td align="center"> 스페셜 </td>
-							<td> 돈 내고 돈 먹기 </td>
-							<td align="center"> 2019-11-13 </td>
-							<td align="center"> 2019-12-02 </td>
-							<td align="center"> 30명 </td>
+							<!-- Ajax로 챌린지 목록 여기에 띄움 -->
+						</tr>
 					</table>
 						
 						<!-- 페이징 -->
@@ -58,7 +67,7 @@
 						    </li>
 						  </ul>
 						</nav>
-					<button class="button-general" data-toggle="modal" data-target="#challenge-create"> 챌린지 생성 </button>
+					<button class="button-general" data-toggle="modal" data-target="#challenge-create"> 챌린지 생성 </button><p>
 			</div>
 			<div class="col-md-2"></div>
 	</div>
@@ -81,7 +90,8 @@
 				<div class="modal-body">
 					<div>
 <!-- ***************************************************************************************************************************************** -->
-					<form role="form" id="createChallengeForm" name="createChallengeForm" action="#" method="post">
+					<form role="form" id="createChallengeForm" name="createChallengeForm" action="../ajax/createChallenge" method="post">
+						<input type="hidden" id="cl_name" name="cl_name">
 						<table>
 							<tr height="50">
 								<th width="60"> 구분 </th>
@@ -120,6 +130,10 @@
 								<th></th>
 								<td id="addType"></td>
 							</tr>
+							<tr height="50">
+								<th> 내용 </th>
+								<td> <textarea cols="50" rows="3" id="challengeContent" name="cl_content"></textarea></td>
+							</tr>
 						</table>
 					</form>
 <!-- ***************************************************************************************************************************************** -->
@@ -127,7 +141,7 @@
 				</div>
 <!-- Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="button-general" onclick="createChallengeButton()"> 생성 </button>
+					<button type="button" class="button-general" style="width:500px;" onclick="createChallengeButton()"> 생성 </button>
 				</div>
         
 			</div>
