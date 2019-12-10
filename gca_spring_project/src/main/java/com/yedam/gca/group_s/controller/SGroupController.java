@@ -56,8 +56,12 @@ public class SGroupController {
 		
 	//참가취소 시 
 		@RequestMapping("/sgroup/cancelJoin")
-		public String cancelJoin(@RequestParam(value="m_id", defaultValue="", required=true) String id) {
-			sgroupService.cancelJoin(id);
+		public String cancelJoin(@RequestParam(value="m_id") String id,
+				@RequestParam(value="sg_num") int sg_num, ActiveHistVO vo) {
+			vo.setM_id(id);
+			vo.setSg_num(sg_num);
+			sgroupService.cancelJoin(vo);
+			//sgroupService.minusNowCnt(sgNum);
 			return "redirect:getSgList";
 		}
 	

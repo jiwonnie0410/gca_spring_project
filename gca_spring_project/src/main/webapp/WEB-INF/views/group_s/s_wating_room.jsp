@@ -203,10 +203,14 @@
 
 				if (confirmStatus) {
 					var usrId = "${sessionScope.id}";
+					var sgNum = ${sgroup.sg_num};
+					var sgCnt = ${sgroup.sg_now_cnt};
 					
 					deleteProfile();
 					
-					location.href='cancelJoin?m_id='+usrId;
+					if(sgCnt>1){ //일단 sgCnt가 1이상인 방만 카운트 - 되게 여기다 해놓음.
+						location.href='cancelJoin?m_id='+usrId+'&sg_num='+sgNum;
+					}
 					
 					alert("참가 취소 완료.");
 					

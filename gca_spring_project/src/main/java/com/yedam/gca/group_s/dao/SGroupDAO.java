@@ -25,8 +25,11 @@ public class SGroupDAO {
 		return mybatis.insert("SGroupDAO.doReport", vo);
 	}
 	
-	public void cancelJoin(String id) {
-		mybatis.delete("ActiveHistDAO.cancelJoin", id);
+	public void cancelJoin(ActiveHistVO vo) {
+		mybatis.delete("ActiveHistDAO.cancelJoin", vo);
+	}
+	public void minusNowCnt(ActiveHistVO vo) {
+		mybatis.update("SGroupDAO.minusNowCnt", vo);
 	}
 	
 	
