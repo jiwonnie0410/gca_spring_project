@@ -40,7 +40,6 @@
 
 .historyDiv .nav-link {
     font-weight: bold;
-    font-size: 20px;
     color: black;
 }
 
@@ -69,9 +68,10 @@
 }
 
 .calendar-color {
+	position: absolute;
+	top: 23px;
+	right: 10px;
 	font-weight: bold;
-	font-size: 20px;
-	padding-top: 5px;
 	text-align: center;
 }
 
@@ -110,7 +110,6 @@
 	    <div id="calendarDiv" class="container tab-pane active"><br>
 	      		<div id="calendar" class="calendar"></div>
 	      		<div class="calendar-color">
-	      			<span>정보:</span>
 		      		<span style="background:#FE9191">반짝</span>
 		      		<span style="background:yellow">용병</span>
 		      		<span style="background:#3bc9e0">동아리매치</span>

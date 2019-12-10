@@ -1,8 +1,6 @@
 package com.yedam.gca.board.controller;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,13 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.gca.board.service.QnaBoardService;
 import com.yedam.gca.board.vo.BoardSearchVO;
 import com.yedam.gca.board.vo.QnaBoardVO;
 import com.yedam.gca.common.Paging;
+import com.yedam.gca.member.vo.MembersVO;
 
 //ajax 요청 처리 컨트롤러
   
@@ -33,30 +31,31 @@ import com.yedam.gca.common.Paging;
   public String getBoardList(Model model, BoardSearchVO svo, Paging paging)  { 
 	  model.addAttribute("boardList",boardService.getBoardList(svo, paging)); 
 	  model.addAttribute("paging", paging); 
-	  return "askBoard/qnaBoard"; 
+	  return "/user/askBoard/qnaBoard"; 
 	  }
   
   // 관리지목록
-	  @RequestMapping(value = "/admin_qnaboard")
+	  @RequestMapping(value = "admin_qnaboard")
 	  public String getBoardList2(Model model, BoardSearchVO svo, Paging paging) {
-		  model.addAttribute("boardList",boardService.getBoardList(svo, paging));
+		  model.addAttribute("board",boardService.getBoardList2(svo, paging));
 		  model.addAttribute("paging",paging);
-	  return "admin/admin_qnaBoard"; 
+	  return "/admin/admin_qnaBoard"; 
 	  }
 	 
 
-  
+	  ///사용자  게시판상세조회
+	  @RequestMapping("getboard")
+		public String getBoard(Model model, QnaBoardVO vo) {
+			model.addAttribute("userList", boardService.getBoard(vo));
+			return "/user/askBoard/qna_view/";
+		}
+	  
+	  
+	  
+	  
   
   /////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////
-  
-  
-	/*
-	 * @RequestMapping("/ajax/getBoardList.json") public
-	 * List<Map<String,Object>>getBoardList(){ return
-	 * boardService.getBoardListMap();
-	 */
-  
   
   // 목록
   
@@ -67,7 +66,6 @@ import com.yedam.gca.common.Paging;
   
   
   // 관리자목록
-  
   @ResponseBody
   @RequestMapping("/ajax/getBoardList2.json") 
   public List<QnaBoardVO>getBoardList2(BoardSearchVO svo, Paging paging) {

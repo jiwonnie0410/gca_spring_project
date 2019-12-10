@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yedam.gca.group_s.vo.SGroupVO;
 import com.yedam.gca.history.service.ActiveHistService;
 import com.yedam.gca.history.vo.ActiveHistVO;
 
@@ -27,5 +29,16 @@ public class ActiveHistController {
 		model.addAttribute("ActiveHistList", service.getActiveHistList());
 		return "/user/history/active_history";
 	}
+	
+	@RequestMapping("/ajax/getSGroup.json")
+	@ResponseBody
+	public SGroupVO getSgroup(SGroupVO vo) {
+		vo.setSg_num(1);
+		service.getSgroup(vo);
+		
+		return vo;
+	}
+	
+	// *************  수림 끝 **********************//
 
 }

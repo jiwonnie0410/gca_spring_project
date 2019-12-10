@@ -61,47 +61,33 @@ function p8(){
 
 function move_room(){
 	
-/*	$.ajax({
-		url: "sgIn",
-		dataType: "json",
-		contentType: "application/json",
-		success: function
-	});*/
-	
 	var sg_num = $(this).attr("class").substring(3);
-	var sg_now_cnt = $(this).find('font.sg_now_cnt').text();
-	var sg_end_cnt = $(this).find('font.sg_end_cnt').text().substring(0,1);
-	console.log(sg_end_cnt)
-	var sg_dttm = $(this).find('p.p8').text();
-	//console.log(sg_dttm)
-	
-	if(sg_dttm == "마감"){
-		alert("마감 시간이 초과되어 참여하실 수 없습니다.");
-		return false;
-	}
-	
- 	if(sg_now_cnt < sg_end_cnt){
-		$.ajax({
-			url: "sgNowCnt/" + sg_num,
-			dataType: "json",
-			contentType : "application/json",
-			success: move_room_handler
-			});
-	} else if(sg_now_cnt >= sg_end_cnt){
-		alert("모집 인원이 초과되어 참여하실 수 없습니다. 인원 변동이 발생하면 참여해 주세요.");
-		return false;
-	}
+
+	$.ajax({
+		url: "sgValidIn/" + sg_num,
+		dataType: "json",
+		contentType : "application/json",
+		success: move_room_handler
+	});
 }
 
 
 function move_room_handler(result){
-	if(result.sg_now_cnt >= result.sg_end_cnt){
-		alert("모집 인원이 초과되어 참여하실 수 없습니다. 인원 변동이 발생하면 참여해 주세요.");
-		return false;
-	} else {
-		var con = confirm("선택한 반짝에 참여하시겠습니까?");
-		if(con){
-			location.href='getRoomInfo2?sg_num='+result.sg_num+'&sg_now_cnt='+result.sg_now_cnt;	
-		} else return false;
-	}
+	
+	var sg_dttm = $(this).find('p.p8').text();
+	console.log(result.result_msg);
+//	if(result.result_msg == 'already'){ //마감이든 아니든 already면 참여
+//		location.href='alreadyIn?sg_num='+result.pk_num;
+//	} else if(sg_dttm == "마감"){ //마감이면 무조건(full이나 yes나 모두)
+//		alert("마감 시간이 초과되어 참여하실 수 없습니다.");
+//		return false;
+//	} else if(sg_dttm != "마감" && result.result_msg == 'full'){
+//		alert("모집 인원이 초과되어 참여하실 수 없습니다. 인원 변동이 발생하면 참여해 주세요.");
+//		return false;
+//	} else if(sg_dttm != "마감" && result.result_msg == 'yes'){
+//		var con = confirm("선택한 반짝에 참여하시겠습니까?");
+//		if(con){
+//			location.href='roomIn?sg_num='+result.pk_num;
+//		}
+//	}
 }

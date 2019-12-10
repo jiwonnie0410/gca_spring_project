@@ -29,19 +29,23 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	@Override
 	public List<QnaBoardVO> getBoardList(BoardSearchVO svo, Paging paging) {
 		// 출력건수
-		paging.setPageUnit(3);
+		paging.setPageUnit(10);
+		
 		// 페이지번호가 없으면 1로 초기화
 		if (paging.getPage() == null) {
 			paging.setPage(1);
 		}
+		
 		// 시작/마지막 레코드 번호
 		svo.setStart(paging.getFirst());
 		svo.setEnd(paging.getLast());
+		
 		// 전체 건수
 		paging.setTotalRecord(dao.getBoardCount(svo));
-
 		return dao.getBoardList(svo);
 	}
+	
+	
 	//관리자 조회
 	@Override
 	public List<QnaBoardVO> getBoardList2(BoardSearchVO svo, Paging paging) {

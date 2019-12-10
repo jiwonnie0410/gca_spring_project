@@ -2,41 +2,21 @@
     pageEncoding="UTF-8"%>
 <!doctype html>
 <html><head>
-    <meta charset="utf-8">
-    <title>BLOCKS - Bootstrap Dashboard Theme</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Le styles -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" />
-    <link href="${pageContext.request.contextPath}/css/font-style.css" rel="stylesheet"> <!-- 아이콘  -->
-    <link href="${pageContext.request.contextPath}/css/register.css" rel="stylesheet">
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.js"></script>    
-    <script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900" rel="stylesheet">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/open-iconic-bootstrap.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/animate.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/owl.theme.default.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/magnific-popup.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/aos.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/ionicons.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/flaticon.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/icomoon.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/style.css">
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
-
- 
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    
-  	<!-- Google Fonts call. Font Used Open Sans & Raleway -->
-	<link href="http://fonts.googleapis.com/css?family=Raleway:400,300" rel="stylesheet" type="text/css">
-  	<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!--json할때 필요  -->
+<script src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
 	</head>
   <body>
   <br><br>

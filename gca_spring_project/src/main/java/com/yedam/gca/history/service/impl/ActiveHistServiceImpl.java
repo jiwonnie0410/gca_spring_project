@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yedam.gca.group_s.vo.SGroupVO;
 import com.yedam.gca.history.dao.ActiveHistDAO;
 import com.yedam.gca.history.service.ActiveHistService;
 import com.yedam.gca.history.vo.ActiveHistVO;
 
-@Service
+@Service("actService")
 public class ActiveHistServiceImpl implements ActiveHistService{
 	@Autowired	ActiveHistDAO dao;
 	
@@ -19,5 +20,28 @@ public class ActiveHistServiceImpl implements ActiveHistService{
 	public List<ActiveHistVO> getActiveHistList() {
 		return dao.getActiveHistList();
 	}
+	
+	//반짝 단건 받아옴
+	@Override
+	public SGroupVO getSgroup(SGroupVO vo) {
+		return dao.getSgroup(vo);
+	}
+	
+	
+	//***************** 미현 *******************//
+	//SGroup+BGroup+Sixman 참여 전 참여 여부 확인 + 마감 인원 파악
+	@Override
+	public void validIn(ActiveHistVO vo) {
+		dao.validIn(vo);
+	}
+
+	//SGroup+BGroup+Sixman 방 참여
+	@Override
+	public void roomInsert(ActiveHistVO vo) {
+		dao.roomInsert(vo);
+	}
+
+
+	//***************** 은영 *******************//
 
 }
