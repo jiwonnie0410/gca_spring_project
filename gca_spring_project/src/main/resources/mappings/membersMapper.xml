@@ -76,5 +76,76 @@
 					SET M_SALT='', M_PASSWORD = #{m_password}
 					WHERE M_ID = #{m_id}
 			</update>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+<!--진영  -->
 
+
+ <!-- 01. 회원정보 상세조회 -->
+    <select id="viewMember" resultType="members">
+        SELECT 
+          m_id AS m_id, 
+          m_name AS m_name,
+          m_email AS m_email
+          <!-- user_regdate AS userRegdate,
+          user_regdate AS userUpdatedate -->
+        FROM MEMBERS
+       <!--  WHERE m_id = #{m_id} -->
+        WHERE m_id ='test6'
+    </select>
+    
+    <!-- 02. 회원정보 수정처리 -->
+    <update id="updateMember">
+        UPDATE MEMBERS
+        SET
+            user_pw = #{m_password},
+            m_name = #{m_name},
+            m_email = #{m_email}
+          <!--   user_updatedate = SYSDATE -->
+        WHERE
+            user_id = #{userId}    
+    </update>
+    
+    <!-- 03. 회원정보 삭제 처리 -->
+    <delete id="deleteMember">
+        DELETE FROM MEMBERS
+        WHERE m_id = #{m_id}
+    </delete>
+   
+  <!-- 04. 비밀번호 체크 -->
+    <select id="checkPw" resultType="int">
+        SELECT 
+            COUNT(*) 
+        FROM MEMBERS
+        WHERE m_id = #{m_id} AND M_PASSWORD = #{m_password}
+    </select>
 </mapper>
+

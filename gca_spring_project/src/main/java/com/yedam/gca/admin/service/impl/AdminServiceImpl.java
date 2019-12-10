@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.yedam.gca.admin.dao.AdminDAO;
 import com.yedam.gca.admin.service.AdminService;
 import com.yedam.gca.challenge.vo.ChallengeVO;
+import com.yedam.gca.member.vo.MembersVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -51,4 +52,30 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//진영
+		 // 01. 회원 정보 상세 조회 
+	    @Override
+	    public MembersVO viewMember(String m_id) {
+	        return dao.viewMember(m_id);
+	    }
+		//전체조회
+		@Override
+		public List<MembersVO> getUserList(MembersVO vo) {
+			return dao.getUserList(vo);
+		}
+		//회원삭제
+		public int deleteUser(MembersVO dto) {
+			return dao.deleteUser(dto);
+		}
 }

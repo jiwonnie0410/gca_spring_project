@@ -25,6 +25,10 @@ public class SGroupDAO {
 		return mybatis.insert("SGroupDAO.doReport", vo);
 	}
 	
+	public void cancelJoin(String id) {
+		mybatis.delete("ActiveHistDAO.cancelJoin", id);
+	}
+	
 	
 //-------------미현
 	

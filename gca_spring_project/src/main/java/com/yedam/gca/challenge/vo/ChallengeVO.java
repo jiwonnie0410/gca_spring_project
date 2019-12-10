@@ -1,7 +1,6 @@
 package com.yedam.gca.challenge.vo;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 import lombok.Data;
 

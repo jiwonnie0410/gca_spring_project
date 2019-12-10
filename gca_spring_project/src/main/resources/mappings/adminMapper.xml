@@ -107,4 +107,76 @@
 					FROM CHALLENGE C, CODE D, CHALLENGE_HIST H
 					WHERE C.SPORTS1_CD = D.CD_ID AND H.CL_NUM = C.CL_NUM
 			</select>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--진영  -->
+	<!-- 01. 회원정보 상세조회 -->
+    <select id="viewMember" resultType="members">
+        SELECT 
+          m_id AS m_id, 
+          m_name AS m_name,
+          m_email AS m_email
+          <!-- user_regdate AS userRegdate,
+          user_regdate AS userUpdatedate -->
+        FROM MEMBERS
+       <!--  WHERE m_id = #{m_id} -->
+        WHERE m_id ='test6'
+    </select>
+	<!--2.전체조회  -->
+	<select id="getUserList" resultType="members" parameterType="members">
+		select M_ID, M_PASSWORD, M_NAME, M_NICK,M_IMAGE_CD,
+			M_XY,M_LOCATION,M_AGE,GENDER_CD,M_GRANT,
+			M_LEVEL_CD,M_STATUS_CD,M_RADIUS,M_NOTICE,M_EMAIL
+		from MEMBERS
+		<where>
+			<if test="m_id != null and m_id != '' ">
+				m_id like '%' || #{m_id} || '%'
+			</if>
+			<if test="m_name != null and m_name != '' ">
+				and m_name like '%' || #{m_name} || '%'
+			</if>
+		</where>
+	</select>
+	<!-- 3.삭제 -->
+	<delete id="deleteUser" parameterType="members">
+		delete from MEMBERS 
+		where m_id = #{m_id}
+	</delete>		
+			
 </mapper>

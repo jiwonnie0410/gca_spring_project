@@ -29,7 +29,7 @@ public class SGroupController {
 	@Autowired	ActiveHistService actService;
 	
 	
-	//은영
+//*****************************************은영************************************
 	@RequestMapping("/sgroup/getRoomInfo")
 	public String getRoomInfo(Model model, SGroupVO vo) {
 		model.addAttribute("sgroup", sgroupService.getRoomInfo(vo));
@@ -47,13 +47,21 @@ public class SGroupController {
 		}
 		
 	//방에 들어갔을때 id입력받아 세션에 저장(임시)
+		@ResponseBody //얘가 있어야 페이지 리턴을 안한다.(이거 없으면 밑에 mapping된 jsp페이지로 자동으로 찾아감.)
 		@RequestMapping("/sgroup/saveId")
 		public String saveId(@RequestParam String id, HttpSession session) {
 			session.setAttribute("id", id);
 			return id;
 		}
+		
+	//참가취소 시 
+		@RequestMapping("/sgroup/cancelJoin")
+		public String cancelJoin(@RequestParam(value="m_id", defaultValue="", required=true) String id) {
+			sgroupService.cancelJoin(id);
+			return "redirect:getSgList";
+		}
 	
-
+	//
 
 
 //*****************************************미현************************************
