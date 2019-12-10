@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,6 +83,14 @@
 	padding: 2px;
 }
 
+#allMenu .nav-link.active {
+	background: white;
+	border: none;
+}
+
+#allMenu .nav-tabs {
+	border: none;
+}
 
 
 </style>
@@ -88,10 +98,6 @@
 </head>
 
 <body>
-<%-- <c:forEach items="${ActiveHistList}" var="list"> --%>
-<%-- 	${list.m_id }!!<br> --%>
-<%-- </c:forEach> --%>
-
 	<div class="historyDiv">
 	  <br>
 	  <!-- Nav tabs 캘린더/전체보기 버튼 -->
@@ -116,41 +122,50 @@
 	      		</div>
 	    </div>
 	    <!-- 캘린더 div 끝 -->
-	    <!-- 전체히스토리 div 끝 -->
+	    <!-- 전체히스토리 div 시작 -->
 	    <div id="allMenu" class="container tab-pane fade"><br>
-			<table class="historyTable">
-				<thead>
-					<tr>
-						<td colspan="2" style="text-align:center;"><p></p></td>
-					</tr>
-				</thead>
-				
-				<tbody>
-					<tr>
-						<th>순서</th>
-						<th>내용</th>
-					</tr>
-					<tr>
-						<td width="50">1</td>
-						<td>
-							일시: 11/05 18:00<br>
-							장소: 대구 228공원<br>
-							디테일: 배드민턴(초급이상)<br>
-							성공여부: 성공
-						</td>
-					</tr>
-					
-					<tr>
-						<td>2</td>
-						<td>
-							일시: 11/05 18:00<br>
-							장소: 대구 228공원<br>
-							디테일: 배드민턴(초급이상)<br>
-							성공여부: 실패
-						</td>
-					</tr>
-				</tbody>
-			</table>    
+	    	  <!-- Nav tabs 시작 반짝/용병/동아리매치 -->
+			  <ul class="nav nav-tabs">
+				    <li class="nav-item">
+				      <a class="nav-link active" data-toggle="tab" href="#sgroup">반짝</a>
+				    </li>
+				    <li class="nav-item">
+				      <a class="nav-link" data-toggle="tab" href="#sixmin">용병</a>
+				    </li>
+		            <li class="nav-item">
+				      <a class="nav-link" data-toggle="tab" href="#bgroup">동아리매치</a>
+				    </li>
+			  </ul>
+			  <!-- Nav tabs 반짝/용병/동아리매치 끝 -->
+			  <!-- Tab panes 내용 넣는곳 -->
+			  <div class="tab-content">
+			  	<!-- 반짝 테이블 시작 -->
+			    <div id="sgroup" class="container tab-pane active"><br>
+					<c:forEach items="${activeHistList}" var="list">
+						<c:if test="${list.sg_num != null }">
+						<div class="content-div">
+							<span class="pinkText">${list.sg_name}</span>
+							<span class="mediumText">${list.sg_end_dttm }</span>
+							<span class="mediumText">${list.sports_cd }</span>
+							<span class="mediumText">${list.age_range }</span>
+							<span class="mediumText">${list.gender_cd }</span>
+							<span class="mediumText">${list.sg_option }</span>
+						</div>
+						</c:if>
+					</c:forEach>
+			    </div>
+			    <!-- 반짝 테이블 끝 -->
+			    <!-- 용병 테이블 시작 -->
+			    <div id="sixmin" class="container tab-pane fade"><br>
+					 2222222  
+			    </div>
+			    <!-- 용병 테이블 끝 -->
+		        <!-- 동아리매치 테이블 시작 -->
+		        <div id="bgroup" class="container tab-pane fade">
+		       	 333333
+		        </div>
+			    <!-- 동아리매치 테이블 끝 -->
+			  </div>
 	    </div>
 	    <!-- 전체 히스토리 div 끝 -->
 	  </div>

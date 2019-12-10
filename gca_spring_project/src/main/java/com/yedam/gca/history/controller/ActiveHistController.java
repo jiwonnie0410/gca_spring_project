@@ -23,10 +23,10 @@ public class ActiveHistController {
 		
 		// 임시아이디 세션에 담음
 		ActiveHistVO vo = new ActiveHistVO();
-		vo.setM_id("test2");
+		vo.setM_id("test");
 		session.setAttribute("id", vo.getM_id());
 		
-		model.addAttribute("ActiveHistList", service.getActiveHistList());
+		model.addAttribute("activeHistList", service.getActiveHistList(vo));   
 		return "/user/history/active_history";
 	}
 	
