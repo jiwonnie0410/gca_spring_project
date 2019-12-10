@@ -26,6 +26,11 @@ public class SGroupServiceImpl implements SGroupService {
 	public int doReport(TroubleVO vo) {
 		return sgroupDAO.doReport(vo);
 	}
+	public void cancelJoin(ActiveHistVO vo) {
+		sgroupDAO.cancelJoin(vo);
+		sgroupDAO.minusNowCnt(vo);
+	}
+	
 
 	
 	//미현

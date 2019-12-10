@@ -4,12 +4,14 @@
 <mapper namespace="AdminDAO">
 
 <!--
+	지원
 	1. 반짝 운동별 통계
 	2. 동호회 매치 운동별 통계
 	3. 성별로 연령대 및 운동 통계
 	4. 지역별 통계
-	5. 챌린지 생성
-	6. 챌린지 진행 현황
+	5. 챌린지 목록
+	6. 챌린지 생성
+	7. 챌린지 진행 현황
  -->
 
 <!-- 1. 반짝 운동별 통계 -->
@@ -66,9 +68,23 @@
 					        AND M.M_LOCATION LIKE '${city}%'
 					GROUP BY M.M_LOCATION, TO_CHAR(SYSDATE, 'MM')
 			</select>
+			
+			
+<!-- 5. 챌린지 목록 -->
+			<select id="challengeList" resultType="map">
+					SELECT 	CL_NUM, 
+							CL_STATUS, 
+							CL_NAME, 
+							CL_CONTENT, 
+							TO_CHAR(CL_START_DTTM, 'yyyy/mm/dd') CL_START_DTTM, 
+							TO_CHAR(CL_END_DTTM, 'yyyy/mm/dd') CL_END_DTTM, 
+							CL_SCORE
+					FROM CHALLENGE
+					ORDER BY CL_NUM
+			</select>
 
 
-<!-- 5. 챌린지 생성 -->
+<!-- 6. 챌린지 생성 -->
 			<insert id="insertChallenge" parameterType="challenge">
 			
 					<!-- 챌린지 번호 제일 최근 거 가져오기 -> ChallengeVO(별칭 challenge)의 cl_num 필드에 담은 후 두번째 쿼리에 적용  -->
@@ -80,8 +96,10 @@
 					insert into challenge( 	cl_num, 
 											cl_status, 
 											cl_name, 
-											cl_content, 
-											sports1_cd, 
+											cl_content,
+											<if test="sports1_cd != null and sports1_cd != ''">
+												sports1_cd,
+											</if>
 											cl_cnt, 
 											cl_start_dttm, 
 											cl_end_dttm, 
@@ -90,8 +108,10 @@
 					values( ${cl_num}, 
 							#{cl_status},
 							#{cl_name}, 
-							#{cl_content}, 
-							#{sports1_cd}, 
+							#{cl_content},
+							<if test="sports1_cd != null and sports1_cd != ''">
+								#{sports1_cd}, 
+							</if>
 							${cl_cnt}, 
 							#{cl_start_dttm}, 
 							#{cl_end_dttm}, 
@@ -100,11 +120,83 @@
 			</insert>
 			
 
-<!-- 6. 챌린지 진행 현황 -->
+<!-- 7. 챌린지 진행 현황 -->
 			<select id="">
 					SELECT C.CL_NUM, C.CL_STATUS, C.CL_NAME, D.CD_NAME, C.CL_START_DTTM, C.CL_END_DTTM,
 					        H.M_ID, H.CLH_CNT
 					FROM CHALLENGE C, CODE D, CHALLENGE_HIST H
 					WHERE C.SPORTS1_CD = D.CD_ID AND H.CL_NUM = C.CL_NUM
 			</select>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--진영  -->
+	<!-- 01. 회원정보 상세조회 -->
+    <select id="viewMember" resultType="members">
+        SELECT 
+          m_id AS m_id, 
+          m_name AS m_name,
+          m_email AS m_email
+          <!-- user_regdate AS userRegdate,
+          user_regdate AS userUpdatedate -->
+        FROM MEMBERS
+       <!--  WHERE m_id = #{m_id} -->
+        WHERE m_id =#{m_id}
+    </select>
+	<!--2.전체조회  -->
+	<select id="getUserList" resultType="members" parameterType="members">
+		select M_ID, M_PASSWORD, M_NAME, M_NICK,M_IMAGE_CD,
+			M_XY,M_LOCATION,M_AGE,GENDER_CD,M_GRANT,
+			M_LEVEL_CD,M_STATUS_CD,M_RADIUS,M_NOTICE,M_EMAIL
+		from MEMBERS
+		<where>
+			<if test="m_id != null and m_id != '' ">
+				m_id like '%' || #{m_id} || '%'
+			</if>
+			<if test="m_name != null and m_name != '' ">
+				and m_name like '%' || #{m_name} || '%'
+			</if>
+		</where>
+	</select>
+	<!-- 3.삭제 -->
+	<delete id="deleteUser" parameterType="members">
+		delete from MEMBERS 
+		where m_id = #{m_id}
+	</delete>		
+			
 </mapper>

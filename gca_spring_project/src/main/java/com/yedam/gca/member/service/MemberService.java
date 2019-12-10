@@ -19,28 +19,16 @@ public interface MemberService {
 	
 	
 	
-//	
-//	//진영
-//	 // 01. 회원 정보 상세 조회 
-//    @Override
-//    public MemberVO viewMember(String userId) {
-//        return memberDao.viewMember(userId);
-//    }
-//    // 02. 회원 정보 수정 처리
-//    @Override
-//    public void deleteMember(String userId) {
-//        memberDao.deleteMember(userId);
-//    }
-//    // 03. 회원 정보 삭제 처리
-//    @Override
-//    public void updateMember(MemberVO vo) {
-//        memberDao.updateMember(vo);
-//    }
-//    // 04. 회원 정보 수정 및 삭제를 위한 비밀번호 체크
-//    @Override
-//    public boolean checkPw(String userId, String userPw) {
-//        return memberDao.checkPw(userId, userPw);
-//    }
-// 
+	
+	//진영
+	 // 1.회원 정보 상세보기
+    public MembersVO viewMember(String m_id);
+    //2. 회원삭제
+    public void deleteMember(String m_id);
+    // 3.회원정보 수정
+    public void updateMember(MembersVO vo);
 
+	boolean checkPw(String m_id, String m_password);
 }
+ 
+

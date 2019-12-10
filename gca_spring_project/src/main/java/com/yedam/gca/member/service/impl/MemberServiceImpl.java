@@ -122,7 +122,12 @@ public class MemberServiceImpl implements MemberService {
 		    }
 		}
 		String tempPw = temp.toString(); // 임시 비밀번호
-		vo.setM_password(tempPw);
+		
+		// 비밀번호 암호화
+		String salt = SHA256Util.generateSalt();						// 1. 암호화 키 생성
+		String newPassword = SHA256Util.getEncrypt(tempPw, salt);		// 2. 비밀번호 암호화
+		vo.setM_salt(salt);												// 3. vo에 암호화 키 넣기
+		vo.setM_password(newPassword);									// 4. vo에 암호화된 비밀번호 넣기
 		
 		int result = dao.forgotPw(vo); // 입력 받은 정보로 회원 있는지 확인
 		
@@ -199,17 +204,25 @@ public class MemberServiceImpl implements MemberService {
 	
 	//진영
 	 // 01. 회원 정보 상세 조회 
-	/*
-	 * @Override public MembersVO viewMember(String userId) { return
-	 * memberDao.viewMember(userId); } // 02. 회원 정보 수정 처리
-	 * 
-	 * @Override public void deleteMember(String userId) {
-	 * memberDao.deleteMember(userId); } // 03. 회원 정보 삭제 처리
-	 * 
-	 * @Override public void updateMember(MembersVO vo) {
-	 * memberDao.updateMember(vo); } // 04. 회원 정보 수정 및 삭제를 위한 비밀번호 체크
-	 * 
-	 * @Override public boolean checkPw(String userId, String userPw) { return
-	 * memberDao.checkPw(userId, userPw); }
-	 */
+    @Override
+    public MembersVO viewMember(String m_id) {
+        return dao.viewMember(m_id);
+    }
+    // 02. 회원 정보 수정 처리
+    @Override
+    public void deleteMember(String m_id) {
+    	dao.deleteMember(m_id);
+    }
+    // 03. 회원 정보 삭제 처리
+    @Override
+    public void updateMember(MembersVO vo) {
+    	dao.updateMember(vo);
+    }
+    // 04. 회원 정보 수정 및 삭제를 위한 비밀번호 체크
+    @Override
+    public boolean checkPw(String m_id, String m_password) {
+        return dao.checkPw(m_id, m_password);
+    }
+
+ 
 }

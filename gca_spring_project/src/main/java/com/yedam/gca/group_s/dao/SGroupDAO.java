@@ -25,6 +25,13 @@ public class SGroupDAO {
 		return mybatis.insert("SGroupDAO.doReport", vo);
 	}
 	
+	public void cancelJoin(ActiveHistVO vo) {
+		mybatis.delete("ActiveHistDAO.cancelJoin", vo);
+	}
+	public void minusNowCnt(ActiveHistVO vo) {
+		mybatis.update("SGroupDAO.minusNowCnt", vo);
+	}
+	
 	
 //-------------미현
 	
