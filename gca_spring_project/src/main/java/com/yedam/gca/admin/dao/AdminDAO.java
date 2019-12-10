@@ -4,11 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yedam.gca.challenge.vo.ChallengeVO;
+import com.yedam.gca.member.vo.MembersVO;
 
 @Repository
 public class AdminDAO {
@@ -49,4 +53,66 @@ public class AdminDAO {
 	    return mybatis.selectList("AdminDAO.chartCity", map);
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//진영
+	@Inject
+    // Inject애노테이션이 없으면 sqlSession은 null상태이지만
+    // Inject애노테이션이 있으면 외부에서 객체를 주입시켜주게 된다. 
+    // try catch문, finally문, 객체를 close할 필요가 없어졌다.
+    SqlSession sqlSession;
+	
+	  // 회원 정보 상세보기
+	  // 03. 회원 정보 상세 조회
+    public MembersVO viewMember(String m_id) {
+        return sqlSession.selectOne("AdminDAO.viewMember", m_id);
+    }
+    //2.전체조회
+	public List<MembersVO> getUserList(MembersVO user) {
+		return mybatis.selectList("AdminDAO.getUserList", user);
+	}
+
+	// 삭제
+	public int deleteUser(MembersVO dto) {
+		System.out.println("mybatis 사용자 삭제");
+		return mybatis.delete("AdminDAO.deleteUser", dto);
+	}
+	
+	
+	
+	
+	
 }
+
+

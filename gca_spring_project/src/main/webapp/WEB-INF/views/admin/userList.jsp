@@ -47,31 +47,10 @@
 		$('body').on('click','#btnSelect',function(){
 			var m_id = $(this).closest('tr').find('#hidden_m_id').val();
 			//특정 사용자 조회
-			window.open('${pageContext.request.contextPath }/views/member/user.jsp' , '회원싱세보기' , 'width=500,height=500, menubar=no, status=no, toolbar=no'); 
-		
-			/* 	$.ajax({
-				url:'members/'+m_id,
-				type:'GET',
-				contentType:'application/json;charset=utf-8',
-				dataType:'json',
-				error:function(xhr,status,msg){
-					alert("상태값 :" + status + " Http에러메시지 :"+msg);
-				},
-				success:userSelectResult
-			}); */
+			window.open('${pageContext.request.contextPath }/member/admin_member_view.do?m_id=${m_id}' , '회원싱세보기' , 'width=500,height=500, menubar=no, status=no, toolbar=no'); 
 		}); //조회 버튼 클릭
 	}//userSelect
-	
-	//사용자 조회 응답
-	function userSelectResult(members) {
-		$('input:text[name="m_id"]').val(members.m_id);
-		$('input:text[name="m_name"]').val(members.m_name);
-		$('input:text[name="m_password"]').val(members.m_password);
-		$('select[name="role"]').val(members.role).attr("selected", "selected");
-	}//userSelectResult
-	
-	
-	
+		
 	
 	//사용자 목록 조회 요청
 	function userList() {
