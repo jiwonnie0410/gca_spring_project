@@ -53,29 +53,38 @@ function createChallengeButton(){
 	var frm = document.createChallengeForm;
 	
 	// 인풋값 다 들어왔는지 확인
-	if (!document.getElementsByName("cl_status")[0].checked || !document.getElementsByName("cl_status")[1].checked) {
+	if (!document.getElementsByName("cl_status")[0].checked && !document.getElementsByName("cl_status")[1].checked) {
 		alert("챌린지 구분을 선택해 주세요.");
 		return false;
 	}
-	
-	// 기본인지 스페셜인지 구분
-	var checkBox = document.getElementsByName("cl_status");
-	if(checkBox[0].checked)
-		console.log('basic')
-	else if(checkBox[1].checked)
-		console.log('special')
-	
-	// 시작-마감 날짜 받아오기
-	console.log($('#startDate').val())
-	console.log($('#endDate').val())
-	
-	// 점수 받아오기
-	console.log($('#selectScore').val())
-	
-	// 타입 받아오기
-	console.log($('#challengeType').val())
-	console.log($('#selectSports').val())
-	console.log('몇번 ' + $('#howMany').val())
+	if ($('#startDate').val() == ''){
+		alert("챌린지 시작 날짜를 선택해 주세요.");
+		return false;
+	}
+	if ($('#endDate').val() == ''){
+		alert("챌린지 마감 날짜를 선택해 주세요.");
+		return false;
+	}
+	if ($('#selectScore').val() == '점수 선택'){
+		alert("챌린지 리워드 점수를 선택해 주세요.");
+		return false;
+	}
+	if ($('#challengeType').val() == 'nothing'){
+		alert("챌린지 타입을 선택하고 성공 기준을 입력해 주세요.");
+		return false;
+	}
+	if ($('#challengeType').val() != '타입 선택' && $('#howMany').val() == ''){
+		alert("챌린지 성공 기준을 입력해 주세요.");
+		return false;
+	}
+	if ($('#challengeType').val() == 'mKind_nTime' && $('#selectSports').val() == ''){
+		alert("챌린지 종목을 선택해 주세요.");
+		return false;
+	}
+	if ($('#challengeContent').val() == ''){
+		alert("사용자에게 보여줄 챌린지 내용을 입력해 주세요.");
+		return false;
+	}
 	
 	// 챌린지 이름을 위해 컬럼 값 합침
 	var clName;
@@ -105,8 +114,6 @@ function getChallengeList() {
 		url : "../ajax/challengeList",
 		dataType : "json",
 		success : function(datas) {
-			console.log("첫번째 챌린지 이름: " + datas[0].CL_NAME);
-			
 			for(i=0; i<datas.length; i++) {
 				var status;
 				if(datas[i].CL_STATUS == 'basic')
