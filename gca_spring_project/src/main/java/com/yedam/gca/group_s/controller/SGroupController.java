@@ -55,7 +55,11 @@ public class SGroupController {
 		}
 		
 	//참가취소 시 
-		
+		@RequestMapping("/sgroup/cancelJoin")
+		public String cancelJoin(@RequestParam(value="m_id", defaultValue="", required=true) String id) {
+			sgroupService.cancelJoin(id);
+			return "redirect:getSgList";
+		}
 	
 	//
 

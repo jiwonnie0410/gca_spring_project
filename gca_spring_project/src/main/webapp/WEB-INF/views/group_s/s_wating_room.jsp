@@ -202,8 +202,11 @@
 				var confirmStatus = confirm("정말로 반짝 참여를 취소 하시겠습니까?");
 
 				if (confirmStatus) {
+					var usrId = "${sessionScope.id}";
 					
 					deleteProfile();
+					
+					location.href='cancelJoin?m_id='+usrId;
 					
 					alert("참가 취소 완료.");
 					

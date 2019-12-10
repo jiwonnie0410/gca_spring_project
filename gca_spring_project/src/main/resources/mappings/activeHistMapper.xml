@@ -44,9 +44,8 @@
 	
 <!--  *********은영************* -->
 	<!-- 반짝방 참가취소 시 활동이력 delete -->
-	<delete id="cancelJoin">
-		
+	<delete id="cancelJoin" parameterType="String">
+		DELETE FROM active_hist
+				WHERE M_ID = #{id} AND SG_NUM=1
 	</delete>
-
-
 </mapper>
