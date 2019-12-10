@@ -44,8 +44,8 @@
 	
 <!--  *********은영************* -->
 	<!-- 반짝방 참가취소 시 활동이력 delete -->
-	<delete id="">
-	
+	<delete id="cancelJoin">
+		
 	</delete>
 
 
