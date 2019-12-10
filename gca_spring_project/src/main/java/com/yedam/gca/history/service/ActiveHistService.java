@@ -10,6 +10,9 @@ public interface ActiveHistService {
 	//*************** 수림 *******************//
 	// 유저별 활동히스토리 목록 조회
 	public List<ActiveHistVO> getActiveHistList();
+	
+	//반짝 단건 받아옴
+	public SGroupVO getSgroup(SGroupVO vo);
 
 
 
@@ -23,5 +26,4 @@ public interface ActiveHistService {
 	
 	
 	//***************** 은영 *******************//
-	SGroupVO getSgroup(SGroupVO vo);
 }
