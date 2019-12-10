@@ -260,7 +260,7 @@
     	
 	<!-- 참여자 프로필 -->
      	<div style="border-top: thick double #FE9191; border-bottom: thick double #FE9191; padding-top:15px; padding-bottom:15px;">
-
+				<!-- foreach로 프로필 읽어와서 붙이기(memlist.어쩌구) -->
         		<span id="cancel" data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
           			<img style="padding-bottom:5px;" width="65px" height="65px"
           							src="${pageContext.request.contextPath }/resources/images/jey/trainer-1.jpg" class="rounded-circle">

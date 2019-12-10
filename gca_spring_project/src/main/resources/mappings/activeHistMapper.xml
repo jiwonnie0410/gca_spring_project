@@ -79,12 +79,44 @@
 			,#{result_msg, mode=OUT, jdbcType=VARCHAR}
 		)}
 	</select>
+	
+	<!-- 참여하면서 SGroup+BGroup+Sixman 방에 참여한 인물의 정보 가져오기 -->
+	<select id="getActMemList" resultType="members" parameterType="allhistory">
+		SELECT 		a.M_ID,
+					M_EMAIL,
+					M_NAME,
+					M_NICK,
+					M_IMAGE_CD,
+					M_LOCATION,
+					M_XY,
+					M_AGE,
+					GENDER_CD,
+					M_GRANT,
+					M_STATUS_CD,
+					M_RADIUS,
+					M_NOTICE,
+					M_LEVEL_CD
+		FROM 		MEMBERS M 
+				JOIN 
+					ACTIVE_HIST A 
+				ON (M.M_ID = A.M_ID) 
+		<if test="sg_num != null and sg_num != ''">
+		WHERE 		A.SG_NUM	=	#{sg_num}
+		</if>
+		<if test="bg_num != null and bg_num != ''">
+		WHERE 		A.BG_NUM	=	#{bg_num}
+		</if>
+		<if test="six_num != null and six_num != ''">
+		WHERE 		A.SIX_NUM	=	#{six_num}
+		</if>
+		ORDER BY 	A.ACH_DTTM
+	</select>
 
 	
 <!--  *********은영************* -->
 	<!-- 반짝방 참가취소 시 활동이력 delete -->
 	<delete id="cancelJoin" parameterType="allhistory">
 		DELETE FROM active_hist
-				WHERE M_ID = #{m_id} AND SG_NUM=#{sg_num} 
+				WHERE M_ID = #{m_id} AND SG_NUM=#{sg_num}
 	</delete>
 </mapper>

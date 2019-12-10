@@ -83,8 +83,23 @@
 				get_code_name(GENDER_CD) GENDER_CD,
 				get_code_name(STATUS_CD) STATUS_CD,
 				SG_OPTION
-		FROM	SGROUP
-		ORDER BY 1
+		FROM
+			 	(
+			 	SELECT ROWNUM R, A.* 
+				FROM 	(
+						SELECT S.*, DISTANCE_WGS84(
+             							SUBSTR(SG_XY, 0, INSTR(SG_XY, ',', 1, 1)-1),
+             							SUBSTR(SG_XY, INSTR(SG_XY, ',', 1, 1)+2, LENGTH(SG_XY)),
+             							SUBSTR(#{m_xy}, 0, INSTR(SG_XY, ',', 1, 1)-1),
+             							SUBSTR(#{m_xy}, INSTR(SG_XY, ',', 1, 1)+2, LENGTH(#{m_xy}))
+             						 ) DIS
+             			FROM SGROUP S 
+             			ORDER BY DIS
+             			) A
+    			WHERE 
+    				ROWNUM <![CDATA[ < ]]> #{end_scroll_page}
+    			)
+		WHERE R >= #{start_scroll_page}
 	</select>
 
 <!-- SGroup 방 생성 + 활동 이력 추가 -->
