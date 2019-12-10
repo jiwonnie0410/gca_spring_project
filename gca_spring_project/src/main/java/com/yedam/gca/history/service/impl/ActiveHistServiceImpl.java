@@ -9,6 +9,7 @@ import com.yedam.gca.group_s.vo.SGroupVO;
 import com.yedam.gca.history.dao.ActiveHistDAO;
 import com.yedam.gca.history.service.ActiveHistService;
 import com.yedam.gca.history.vo.ActiveHistVO;
+import com.yedam.gca.member.vo.MembersVO;
 
 @Service("actService")
 public class ActiveHistServiceImpl implements ActiveHistService{
@@ -39,6 +40,11 @@ public class ActiveHistServiceImpl implements ActiveHistService{
 	@Override
 	public void roomInsert(ActiveHistVO vo) {
 		dao.roomInsert(vo);
+	}
+	
+	//참여하면서 SGroup+BGroup+Sixman 방에 참여한 인물의 정보 가져오기
+	public List<MembersVO> getActMemList(ActiveHistVO vo){
+		return dao.getActMemList(vo);
 	}
 
 

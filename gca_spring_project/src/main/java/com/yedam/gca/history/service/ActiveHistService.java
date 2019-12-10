@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.yedam.gca.group_s.vo.SGroupVO;
 import com.yedam.gca.history.vo.ActiveHistVO;
+import com.yedam.gca.member.vo.MembersVO;
 
 public interface ActiveHistService {
 	
@@ -23,6 +24,9 @@ public interface ActiveHistService {
 	
 	//SGroup+BGroup+Sixman 방 참여
 	void roomInsert(ActiveHistVO vo);
+	
+	//참여하면서 SGroup+BGroup+Sixman 방에 참여한 인물의 정보 가져오기
+	List<MembersVO> getActMemList(ActiveHistVO vo);
 	
 	
 	//***************** 은영 *******************//

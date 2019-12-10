@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yedam.gca.group_s.vo.SGroupVO;
 import com.yedam.gca.history.vo.ActiveHistVO;
+import com.yedam.gca.member.vo.MembersVO;
 
 @Repository
 public class ActiveHistDAO {
@@ -35,6 +36,11 @@ public class ActiveHistDAO {
 	//SGroup+BGroup+Sixman 방 참여
 	public void roomInsert(ActiveHistVO vo) {
 		mybatis.selectOne("ActiveHistDAO.roomInsert", vo);
+	}
+	
+	//참여하면서 SGroup+BGroup+Sixman 방에 참여한 인물의 정보 가져오기
+	public List<MembersVO> getActMemList(ActiveHistVO vo) {
+		return mybatis.selectList("ActiveHistDAO.getActMemList", vo);
 	}
 	
 	
