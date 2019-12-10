@@ -85,6 +85,6 @@
 	<!-- 반짝방 참가취소 시 활동이력 delete -->
 	<delete id="cancelJoin" parameterType="allhistory">
 		DELETE FROM active_hist
-				WHERE M_ID = #{m_id} AND SG_NUM=#{sg_num} 
+				WHERE M_ID = #{m_id} AND SG_NUM=#{sg_num}
 	</delete>
 </mapper>
