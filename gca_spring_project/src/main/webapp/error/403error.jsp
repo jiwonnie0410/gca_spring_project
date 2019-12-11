@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> 500 Error! </title>
+<title> 403 Error! </title>
 		<style>
 				@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700');
 				@import url('https://fonts.googleapis.com/css?family=Catamaran:400,800');
@@ -141,12 +141,12 @@
 		</style>
 </head>
 <body>
-		<h1> 500 Error Page </h1>
-		<p class="zoom-area"><b></b> 관리자에게 문의하세요. </p>
+		<h1> 403 Error Page </h1>
+		<p class="zoom-area"><b></b> Permission Denied </p>
 		<section class="error-container">
-			  <span><span>5</span></span>
+			  <span><span>4</span></span>
 			  <span>0</span>
-			  <span><span>0</span></span>
+			  <span><span>3</span></span>
 		</section>
 </body>
 </html>
