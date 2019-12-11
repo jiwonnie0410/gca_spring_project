@@ -82,7 +82,60 @@
 				AGE_RANGE,
 				get_code_name(GENDER_CD) GENDER_CD,
 				get_code_name(STATUS_CD) STATUS_CD,
-				SG_OPTION
+				SG_OPTION,
+				DIS
+		FROM
+			 	(
+			 	SELECT ROWNUM R, A.* 
+				FROM 	(
+						SELECT S.*, DISTANCE_WGS84(
+             							SUBSTR(SG_XY, 0, INSTR(SG_XY, ',', 1, 1)-1),
+             							SUBSTR(SG_XY, INSTR(SG_XY, ',', 1, 1)+2, LENGTH(SG_XY)),
+             							SUBSTR(#{m_xy}, 0, INSTR(#{m_xy}, ',', 1, 1)-1),
+             							SUBSTR(#{m_xy}, INSTR(#{m_xy}, ',', 1, 1)+2, LENGTH(#{m_xy}))
+             						 ) DIS
+             			FROM SGROUP S
+             			ORDER BY DIS, SG_END_DTTM, SG_NUM
+             			) A
+					<where>
+			            <if test="keyval != null and keyval !=''">
+							<if test="key == 'sports'">
+								and SPORTS1_CD like '%'||#{keyval}||'%'
+							</if>
+					 	</if>
+					 	<if test="end_dis != null and end_dis != 0">
+					 		AND DIS <![CDATA[ > ]]> #{end_dis} 
+					 	</if>
+					 	<if test="end_dttm != null">
+             				AND SG_END_DTTM <![CDATA[ > ]]> #{end_dttm} 
+					 	</if>
+					 	<if test="end_num != null and end_num !=''">
+             				AND SG_NUM <![CDATA[ > ]]> #{end_num}
+					 	</if>
+					 </where>
+    			)
+		WHERE R <![CDATA[ <= ]]> 3
+
+	</select>
+	
+<!-- SGroup 전체 조회2:스크롤 -->
+	<select id="getSgList2" resultType="sgroup">
+		SELECT 
+				SG_NUM,
+				SG_NAME,
+				SG_START_DTTM,
+				SG_END_DTTM,
+				SG_NOW_CNT,
+				SG_END_CNT,
+				SG_LOCATION,
+				SG_XY,
+				SPORTS1_CD,
+				get_code_name(SKILL_CD) SKILL_CD,
+				AGE_RANGE,
+				get_code_name(GENDER_CD) GENDER_CD,
+				get_code_name(STATUS_CD) STATUS_CD,
+				SG_OPTION,
+				DIS
 		FROM
 			 	(
 			 	SELECT ROWNUM R, A.* 
@@ -94,23 +147,22 @@
              							SUBSTR(#{m_xy}, INSTR(#{m_xy}, ',', 1, 1)+2, LENGTH(#{m_xy}))
              						 ) DIS
              			FROM SGROUP S 
-             			ORDER BY DIS
+             			WHERE DIS <![CDATA[ > ]]> #{end_dis} 
+             				AND SG_END_DTTM <![CDATA[ > ]]> #{end_dttm} 
+             				AND SG_NUM <![CDATA[ > ]]> #{end_num}
+             			<if test="keyval != null and keyval !=''">
+							<if test="key == 'sports'">
+								and SPORTS1_CD like '%'||#{keyval}||'%'
+							</if>
+					 	</if>
+             			ORDER BY DIS, SG_END_DTTM, SG_NUM
              			) A
     			WHERE 
-    				ROWNUM <![CDATA[ <= ]]> #{scroll_page} + 15
+    				ROWNUM <![CDATA[ <= ]]>  #{scroll_page}
     			)
-		WHERE R <![CDATA[ > ]]> #{scroll_page} + 1
-		<!-- <where>
-		 	<if test="keyword != null and keyword !=''">
-				<if test="searchCondition == 'title'">
-					and title like '%'||#{keyword}||'%'
-				</if>
-				<if test="searchCondition == 'content'">
-					and content like '%'||#{keyword}||'%'
-				</if>
-		 	</if>
-		 </where> -->
+		WHERE R <![CDATA[ > ]]> 1
 	</select>
+	
 
 <!-- SGroup 방 생성 + 활동 이력 추가 -->
 	<select id="insertSg" statementType="CALLABLE" parameterType="sgroup">

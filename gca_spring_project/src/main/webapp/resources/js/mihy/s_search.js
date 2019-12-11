@@ -3,16 +3,25 @@ $(document).ready(function(){
 	$(window).scroll(function(){
 		if(Math.floor($(window).scrollTop()) == $(document).height() - $(window).height()){
 			
-			var scroll_page = $('#scroll_page').val();
-			console.log(scroll_page)
+			var end_dis = $('.tr').last().find('.dis').val();
+			var end_dttm =  $('.tr').last().find('.dttm').val();
+			var end_num = $('.tr').last().attr('class').substring(3);
+			var form = {
+					end_dis: end_dis,
+					end_dttm: end_dttm,
+					end_num: end_num
+			}
+//			console.log(end_dis);
+//			console.log(end_dttm);
+//			console.log(end_num);
 			$.ajax({
-				url: "getSgList/" + scroll_page,
-				dataType:"json",
-				contentType: "application/json",
+				url: "getSgListPlus/",
+				type: "POST",
+				dataType:"html",
+				data : form,
+//				contentType: "application/json",
 				success: function(result){
-					console.log( $('.tr').last() )
-					
-//					$('.tr').last().append()
+					$('#tb1 tbody').append(result);
 				}
 			});
 		}
@@ -35,7 +44,6 @@ $(document).ready(function(){
 	$('.table').on('click', '.tr', function(){
 		var sg_num = $(this).attr("class").substring(3);
 		var sg_dttm = $(this).find('p.p8').text();
-		console.log(sg_dttm);
 		
 		//선택한 방에 참여하기 전 참여 인원 파악하고 참여 여부 묻기
 		$.ajax({
@@ -47,6 +55,14 @@ $(document).ready(function(){
 			} 
 		});
 	});
+	
+	$('.swiper-wrapper').on('click','.swiper-slide', function(){
+		$('#key').val("sports");
+		$('#keyval').val($(this).data("sports"));
+		console.log($('#keyval').val())
+		searchSport.submit();
+	});
+	
 });
 
 //남은 시간 계산

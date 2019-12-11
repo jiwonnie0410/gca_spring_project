@@ -29,29 +29,33 @@
 
 </head>
 
+
 <body>
 
 <button class="btn btn-info create_room mt-3 ml-3 mr-3" style="width:90%;">반짝 방 생성하기</button>
 
+<form action="getSgList" name="searchSport" id="searchSport" method="post">
 <div class="swiper-container">
 	<div class="swiper-wrapper">
 		<div class="swiper-slide p-2"><i class="fas fa-star-of-david pr-2"></i>전체</div>
-		<div class="swiper-slide p-2"><i class="fas fa-basketball-ball pr-2"></i>농구</div>
-		<div class="swiper-slide p-2"><i class="fas fa-running pr-2"></i>달리기 &amp; 산책</div>
-		<div class="swiper-slide p-2"><i class="fas fa-hiking pr-2"></i>등산</div>
-		<div class="swiper-slide p-2" id="btn_badminton">
+		<div class="swiper-slide p-2" data-sports="S01"><i class="fas fa-basketball-ball pr-2"></i>농구</div>
+		<div class="swiper-slide p-2" data-sports="S02"><i class="fas fa-running pr-2"></i>달리기 &amp; 산책</div>
+		<div class="swiper-slide p-2" data-sports="S03"><i class="fas fa-hiking pr-2"></i>등산</div>
+		<div class="swiper-slide p-2" id="btn_badminton" data-sports="S04">
 			<img class="pr-3" id="img_badminton" src="../resources/images/mihy/badminton-pink.png" width="33px">
 			<img class="pr-3" id="img_badminton" src="../resources/images/mihy/badminton-white.png" width="33px">
 			배드민턴</div>
-		<div class="swiper-slide p-2"><i class="fas fa-bowling-ball pr-2"></i>볼링</div>
-		<div class="swiper-slide p-2"><i class="fas fa-swimmer pr-2"></i>수영</div>
-		<div class="swiper-slide p-2"><i class="fas fa-bicycle pr-2"></i>자전거</div>
-		<div class="swiper-slide p-2"><i class="fas fa-feather-alt pr-2"></i>기타</div>
+		<div class="swiper-slide p-2" data-sports="S05"><i class="fas fa-bowling-ball pr-2"></i>볼링</div>
+		<div class="swiper-slide p-2" data-sports="S06"><i class="fas fa-swimmer pr-2"></i>수영</div>
+		<div class="swiper-slide p-2" data-sports="S07"><i class="fas fa-bicycle pr-2"></i>자전거</div>
+		<div class="swiper-slide p-2" data-sports="S08"><i class="fas fa-feather-alt pr-2"></i>기타</div>
 	</div>
 </div>
+<input type="hidden" name="key" id="key">
+<input type="hidden" name="keyval" id="keyval">
+</form>
 
 <table class="table table-striped" id="tb1">
-	<input type="hidden" id="scroll_page" value="${sgroup.scroll_page }">
 	<c:forEach items="${ list }" var="sg">
 	<tr class="tr ${sg.sg_num}">
 		<td class="td1">
@@ -80,6 +84,7 @@
 			</p>
 			<p class="content p4">${sg.sg_name }</p>
 			<p class="content p3">${sg.sg_location }</p>
+			<input type="hidden" class="dis" value="${sg.dis }">
 		</td>
 		
 		<td class="td3" align="center">
@@ -91,7 +96,5 @@
 	</tr>
 	</c:forEach>
 </table>
-
-
 </body>
 </html>

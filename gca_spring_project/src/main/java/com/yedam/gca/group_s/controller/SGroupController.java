@@ -74,33 +74,27 @@ public class SGroupController {
 	
 	//전체 반짝 리스트 조회
 	@RequestMapping("/sgroup/getSgList")
-	public String search(Model model, SGroupVO vo, HttpSession session,
-			@RequestParam(value="scroll_page", defaultValue="", required=false) Integer scroll_page) {
+	public String search(Model model, SGroupVO vo, HttpSession session) {
 //		String m_xy = (String) session.getAttribute("m_xy");
 //		vo.setM_xy(m_xy);
 		vo.setM_xy("37.56628868272894, 127.0555535312866");
-		vo.setScroll_page(0);
+		vo.setScroll_rec(3);
 		model.addAttribute("sgroup", vo);
 		model.addAttribute("list", sgroupService.getSgList(vo));
 		return "/user/group_s/s_search";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="/sgroup/getSgList/{scroll_page}", method = RequestMethod.GET)
-	public List<SGroupVO> search(@PathVariable Integer scroll_page
-			, SGroupVO vo, HttpSession session, Model model) {
+	//반짝 리스트 추가 조회
+	@RequestMapping(value="/sgroup/getSgListPlus", method = RequestMethod.POST)
+	public String search(SGroupVO vo, HttpSession session, Model model) {
 //		String m_xy = (String) session.getAttribute("m_xy");
 //		vo.setM_xy(m_xy);
 		vo.setM_xy("37.56628868272894, 127.0555535312866");
-		if(scroll_page == null || scroll_page.equals("")) {
-			scroll_page = 0;
-		}
-		vo.setScroll_page(scroll_page); //마지막 조회된 rownum
+		vo.setScroll_rec(3);
 		model.addAttribute("sgroup", vo);
-		return sgroupService.getSgList(vo);
+		model.addAttribute("list", sgroupService.getSgList(vo));
+		return "/notiles/group_s/s_search_temp";
 	}
-	
-	
 	
 	//반짝 방 참여 전에  참여 여부 확인 + 마감 인원 파악
 	@ResponseBody
