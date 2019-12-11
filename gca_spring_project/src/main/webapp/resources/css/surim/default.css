@@ -43,15 +43,18 @@
 	font-size: larger;
 	font-weight: bold;
 	color: #FE9191;
+	display: block;
 }
 .smallText {
 	font-size: small;
 	color: grey;
+	display: block;
 }
 
 .mediumText {
-	font-size: medium;
+	font-size: medium;  
 	color: grey;
+	display: block;
 }
 
 /****** 뒤로가기버튼 div **********/
