@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.yedam.gca.board.vo.AdBoardVO;
 
 public interface BoardService {
@@ -20,6 +22,6 @@ public interface BoardService {
 	// 06. 게시글 조회
 	public void increaseViewcnt(int ad_num, HttpSession session) throws Exception;
 	// 07. 게시글 레코드 갯수
-	public int countArticle(String searchOption, String keyword) throws Exception;
+	public int countArticle(String searchOption, String keyword ) throws Exception;
 	
 }

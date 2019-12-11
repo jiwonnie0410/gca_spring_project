@@ -3,10 +3,11 @@ package com.yedam.gca.board.controller;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,25 +40,26 @@ public class ReplyController {
 	
 	// 1_1. 댓글 입력(@Controller방식으로 댓글 입력)
 	@RequestMapping("insert")
-	public void insert(@ModelAttribute AdReplyVO vo, HttpSession session){
+	public void insert(@ModelAttribute AdReplyVO vo, @AuthenticationPrincipal UserDetails user){
 		// 세션에 저장된 회원아이디를 댓글작성자에 세팅
-		String m_id = (String) session.getAttribute("m_id");
-		vo.setM_id(m_id);
+	//	String m_id = (String) user.getAttribute("m_id");
+		vo.setM_id(user.getUsername()); 
 		// 댓글 입력 메서드 호출
 		replyService.create(vo);
 	}
+	
+	
 	
 	// 1_2. 댓글입력 (@RestController방식으로 json전달하여 댓글입력)
 	// @ResponseEntity : 데이터 + http status code
 	// @ResponseBody : 객체를 json으로 (json - String)
 	// @RequestBody : json을 객체로
-	@RequestMapping(value="insertRest", method=RequestMethod.POST)
-	public ResponseEntity<String> insertRest(@RequestBody AdReplyVO vo, HttpSession session){
+	@RequestMapping(value="insertRest", method=RequestMethod.POST ,headers = {"Content-type=application/json" })
+	public ResponseEntity<String> insertRest(@RequestBody AdReplyVO vo, @AuthenticationPrincipal UserDetails user){
 		ResponseEntity<String> entity = null;
 		try {
 			// 세션에 저장된 회원아이디를 댓글작성자에 세팅
-			/* String m_id = (String) session.getAttribute("m_id");  
-			vo.setM_id(m_id);*///로그인완성후 주석해제
+			vo.setM_id(user.getUsername());                                            //로그인완성후 주석해제
 			vo.setM_id("rr99999");
 			// 댓글입력 메서드 호출
 			replyService.create(vo);
@@ -74,7 +76,7 @@ public class ReplyController {
 	
 	// 2_1. 댓글 목록(@Controller방식 : veiw(화면)를 리턴)
 	@RequestMapping("list")
-	public ModelAndView list(@RequestParam int ad_num,	@RequestParam(defaultValue="1") int curPage, ModelAndView mav, HttpSession session){
+	public ModelAndView list(@RequestParam int ad_num,	@RequestParam(defaultValue="1") int curPage, ModelAndView mav, @AuthenticationPrincipal UserDetails user){
 		// 페이징 처리 
 		int count = replyService.count(ad_num); 
 		// 댓글 갯수
@@ -83,9 +85,9 @@ public class ReplyController {
 		int start = replyPager.getPageBegin();
 		// 현재 페이지의 페이징  끝 번호
 		int end = replyPager.getPageEnd();
-		List<AdReplyVO> list = replyService.list(ad_num, start, end, session);
+		List<AdReplyVO> list = replyService.list(ad_num, start, end, user);
 		// 뷰이름 지정
-		mav.setViewName("askBoard/replyList");
+		mav.setViewName("/notiles/askBoard/replyList");
 		// 뷰에 전달할 데이터 지정
 		mav.addObject("list", list);
 		mav.addObject("replyPager", replyPager);
@@ -96,7 +98,7 @@ public class ReplyController {
 	// 2_2. 댓글 목록(@RestController방식 : Json으로 데이터를 리턴)
 	@RequestMapping("listJson.do")
 	@ResponseBody // 리턴데이터를 json으로 변환(RestController사용시 @ResponseBody생략가능)
-	public List<AdReplyVO> listJson(@RequestParam int ad_num, @RequestParam(defaultValue="1") int curPage, HttpSession session){
+	public List<AdReplyVO> listJson(@RequestParam int ad_num, @RequestParam(defaultValue="1") int curPage, @AuthenticationPrincipal UserDetails user){
 		// 페이징 처리
 		int count = replyService.count(ad_num); // 댓글 갯수
 		ReplyPager pager = new ReplyPager(count, curPage);
@@ -104,7 +106,7 @@ public class ReplyController {
 		int start = pager.getPageBegin();
 		// 현재 페이지의 페이징  끝 번호
 		int end = pager.getPageEnd();
-		List<AdReplyVO> list = replyService.list(ad_num, start, end, session);
+		List<AdReplyVO> list = replyService.list(ad_num, start, end, user);
 		// list를 리턴
 		return list;
 	}
@@ -116,7 +118,7 @@ public class ReplyController {
 //	 /reply/list/2 => 2번 게시물의 댓글 목록 리턴
 //	 @PathVariable : url에 입력될 변수값 지정
 	@RequestMapping(value="/list/{ad_num}/{curPage}", method=RequestMethod.GET)
-	public ModelAndView replyList(@PathVariable("ad_num") int ad_num, @PathVariable int curPage, ModelAndView mav, HttpSession session){
+	public ModelAndView replyList(@PathVariable("ad_num") int ad_num, @PathVariable int curPage, ModelAndView mav, @AuthenticationPrincipal UserDetails user){
 		// 페이징 처리
 		int count = replyService.count(ad_num); // 댓글 갯수
 		ReplyPager replyPager = new ReplyPager(count, curPage);
@@ -124,9 +126,9 @@ public class ReplyController {
 		int start = replyPager.getPageBegin();
 		// 현재 페이지의 페이징  끝 번호
 		int end = replyPager.getPageEnd();
-		List<AdReplyVO> list = replyService.list(ad_num, start, end, session);
+		List<AdReplyVO> list = replyService.list(ad_num, start, end, user);
 		// 뷰이름 지정
-		mav.setViewName("askBoard/replyList");
+		mav.setViewName("/notiles/askBoard/replyList");
 		// 뷰에 전달할 데이터 지정
 		mav.addObject("list", list);
 		mav.addObject("replyPager", replyPager);
@@ -142,7 +144,7 @@ public class ReplyController {
 	public ModelAndView replyDetail(@PathVariable("adr_num") Integer adr_num, ModelAndView mav){
 		AdReplyVO vo = replyService.detail(adr_num);
 		// 뷰이름 지정
-		mav.setViewName("askBoard/replyDetail");
+		mav.setViewName("/notiles/askBoard/replyDetail");
 		// 뷰에 전달할 데이터 지정
 		mav.addObject("vo", vo);
 		// replyDetail.jsp로 포워딩

@@ -5,28 +5,29 @@
 
 	<!--  *********수림************* 
 		VIEW_ACTIVE_HIST 뷰를 사용합니다. 컬럼 조회시에 큰따옴표 필수! 없으면 에러남! 아래 셀렉 예시 확인바람	
-	-->
+	-->        	
 	<select id="getActiveHistList" resultType="map"> 
 		SELECT 		"ach_num",
-					"m_id",
+ 					"m_id", 
 					"start",
 					"end",
-					"sg_num",
+ 					"sg_num",
 					"six_num",
 					"bg_num",
 					"ach_confirm",
-					"name",
+					"title",
 					"now_cnt",
 					"end_cnt",
 					"location",
 					"xy",
-					"sports_code",
+					"sports_cd",
 					"skill_cd",
 					"age_range",
 					"gender_cd",
 					"status_cd",
 					"sg_option",
-					"bg_team_cnt"				
+					"bg_team_cnt",
+					"color"
 
 		FROM 		V_ACTIVE_HIST 
 		WHERE 		"m_id" = #{m_id}

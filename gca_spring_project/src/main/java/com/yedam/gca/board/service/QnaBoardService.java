@@ -3,6 +3,8 @@ package com.yedam.gca.board.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.yedam.gca.board.vo.BoardSearchVO;
 import com.yedam.gca.board.vo.QnaBoardVO;
@@ -35,6 +37,13 @@ public interface QnaBoardService {
 
 	// 게시글 상세보기
 	QnaBoardVO getBoard(QnaBoardVO vo);
+
+	/*
+	 * Object read(int qb_num);
+	 * 
+	 * void increaseViewcnt(int qb_num, @AuthenticationPrincipal UserDetails user);
+	 */
+
 
 	
 	//test

@@ -48,22 +48,27 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 	@Override
 	//onMessage 
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception { super.handleMessage(session, message);
-		System.out.println(session.getAttributes());
-		this.logger.info("receive message:"+message.toString()); //json string을 vo로 변환
+//		System.out.println(session.getAttributes());
+//		this.logger.info("receive message:"+message.toString()); //json string을 vo로 변환
 		ObjectMapper mapper = new ObjectMapper(); //제이슨?에서 제공해주는 객체.
 		ChatVO2 chatvo = mapper.readValue((String) message.getPayload(), ChatVO2.class);//메세지 전송을 위한 VO
 		
 		
 		//sendMessage((String) message.getPayload()); // message.getPayload() : 클라이언트에서 보내온 메세지 값
 		
-		String msg = "";
+		String msg = "join";
 //		ChatVO2 result = new ChatVO2();
-		if(chatvo.getCmd().equals("msg")) {
+		if(chatvo.getCmd().equals("join")) {
 			msg = (String) message.getPayload();
 			System.out.println("-+++++++++++++++---------+++++++++++"+msg);
 		}
+		//명령어에따라 다른 동작이 되도록 else if문으로 명령어 더 추가해서 할 수 있음.(jsp에도 같이 추가)
+		else if(chatvo.getCmd().equals("msg")) {
+			msg = (String) message.getPayload();			
+		}
 		else if(chatvo.getCmd().equals("cancelJoin")) {
-										//명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(jsp에도 같이 추가)
+										
+			System.out.println(chatvo.getId());
 			msg = (String) message.getPayload();			
 		}
 		sendMessage(msg);

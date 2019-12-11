@@ -5,6 +5,7 @@ import java.util.List;
 import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.group_s.vo.SGroupVO;
 import com.yedam.gca.history.vo.ActiveHistVO;
+import com.yedam.gca.member.vo.MembersVO;
 
 public interface SGroupService {
 	
@@ -12,6 +13,7 @@ public interface SGroupService {
 	SGroupVO getRoomInfo(SGroupVO vo);
 	int doReport(TroubleVO vo);
 	void cancelJoin(ActiveHistVO vo);
+	String returnImage(MembersVO vo);
 	
 	//미현
 	List<SGroupVO> getSgList(SGroupVO vo);

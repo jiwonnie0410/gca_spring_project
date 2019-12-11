@@ -10,17 +10,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	
 <!-- 달력(fullcalendar) css/js파일 -->
 <link href='${pageContext.request.contextPath }/resources/fullcalendar/core/main.css' rel='stylesheet' />
 <link href='${pageContext.request.contextPath }/resources/fullcalendar/daygrid/main.css' rel='stylesheet'/>
-
 <script src='${pageContext.request.contextPath }/resources/fullcalendar/core/main.js'></script>
 <script src='${pageContext.request.contextPath }/resources/fullcalendar/daygrid/main.js'></script>
 <script src='${pageContext.request.contextPath }/resources/fullcalendar/interaction/main.js'></script>
 <script src='${pageContext.request.contextPath }/resources/fullcalendar/core/locales/ko.js'></script>
-
-
+<script src='${pageContext.request.contextPath }/resources/fullcalendar/moment/main.js'></script>
+<script src='${pageContext.request.contextPath }/resources/fullcalendar/moment-timezone/main.js'></script>
 
 <!-- 부트스트랩 링크 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -29,6 +27,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <!-- 수림 개인 js/css -->
+<script src='${pageContext.request.contextPath }/resources/fullcalendar/moment.js'></script>
+<script src='${pageContext.request.contextPath }/resources/fullcalendar/moment_timezone.js'></script>
 <script src="${pageContext.request.contextPath }/resources/js/surim/default.js"></script>
 <script src='${pageContext.request.contextPath }/resources/js/surim/all_history.js'></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
@@ -91,7 +91,16 @@
 	border: none;
 }
 
-
+.status_cd {
+    display: inline-block;
+    font-size: 30px;
+    width: 100%;
+    text-align: center;
+    color: #FE9191;
+    font-weight: bold;
+    padding: 20px;
+}
+}
 </style>
 
 </head>
@@ -142,14 +151,17 @@
 			    <div id="sgroup" class="container tab-pane active"><br>
 					<c:forEach items="${activeHistList}" var="list">
 						<c:if test="${list.sg_num != null }">
-						<div class="content-div">
-							<span class="pinkText">${list.name}</span>
-							<span class="mediumText">${list.end }</span>
-							<span class="mediumText">${list.sports_cd }</span>
-							<span class="mediumText">${list.age_range }</span>
-							<span class="mediumText">${list.gender_cd }</span>
-							<span class="mediumText">${list.sg_option }</span>
-							<span class="mediumText">${list.location }</span>
+						<div class="content-div">   
+							<span class="pinkText">${list.title}</span>
+							<br>
+							<span class="mediumText">마감일자: ${list.end }</span>
+							<span class="mediumText">주소: ${list.location }</span>
+							<span class="mediumText">종목: ${list.sports_cd }</span>
+							<span class="mediumText">숙련도: ${list.skill_cd }</span>
+							<span class="mediumText">나이: ${list.age_range }</span>
+							<span class="mediumText">성별: ${list.gender_cd }</span>
+							<span class="mediumText">옵션: ${list.sg_option }</span>
+							<span class="status_cd">${list.status_cd }</span>
 						</div>
 						</c:if>
 					</c:forEach>
@@ -160,12 +172,15 @@
 			    	<c:forEach items="${activeHistList}" var="list">
 						<c:if test="${list.six_num != null }">
 						<div class="content-div">
-							<span class="pinkText">${list.name}</span>
-							<span class="mediumText">${list.end }</span>
-							<span class="mediumText">${list.sports_cd }</span>
-							<span class="mediumText">${list.age_range }</span>
-							<span class="mediumText">${list.gender_cd }</span>
-							<span class="mediumText">${list.location }</span>
+							<span class="pinkText">${list.title}</span>
+							<br>
+							<span class="mediumText">마감일자: ${list.end }</span>
+							<span class="mediumText">장소: ${list.location }</span>
+							<span class="mediumText">종목: ${list.sports_cd }</span>
+							<span class="mediumText">숙련도: ${list.skill_cd }</span>
+							<span class="mediumText">나이: ${list.age_range }</span>
+							<span class="mediumText">성별: ${list.gender_cd }</span>
+							<span class="status_cd">${list.status_cd }</span>
 						</div>
 						</c:if>
 					</c:forEach>
@@ -177,12 +192,16 @@
 		        	<c:forEach items="${activeHistList}" var="list">
 						<c:if test="${list.bg_num != null }">
 						<div class="content-div">
-							<span class="pinkText">${list.name}</span>
-							<span class="mediumText">${list.end }</span>
-							<span class="mediumText">${list.sports_cd }</span>
-							<span class="mediumText">${list.age_range }</span>
-							<span class="mediumText">${list.gender_cd }</span>
-							<span class="mediumText">${list.location }</span>
+							<span class="pinkText">${list.title}</span>
+							<br>
+							<span class="mediumText">마감일자: ${list.end }</span>
+							<span class="mediumText">장소: ${list.location }</span>
+							<span class="mediumText">종목: ${list.sports_cd }</span>
+							<span class="mediumText">숙련도: ${list.skill_cd }</span>
+							<span class="mediumText">나이: ${list.age_range }</span>
+							<span class="mediumText">성별: ${list.gender_cd }</span>
+							<span class="mediumText">팀인원: ${list.bg_team_cnt }</span>
+							<span class="status_cd">${list.status_cd }</span>
 						</div>
 						</c:if>
 					</c:forEach>
@@ -201,13 +220,20 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">이벤트 모달</h4>
+					<span id="title" class="pinkText"></span>
 					<button type="button" class="close" data-dismiss="modal">×</button>
-				</div>
-				<div id="modal-body" class="modal-body">
-					<p>날짜: <span id="modalDate"></span></p> 
-					<p>종목: 자전거</p>
-					<p>상태: 반짝</p>
+				</div>    
+				<div id="modal-body" class="modal-body">     
+					<span id="date" class="mediumText"></span> 
+					<span id="location" class="mediumText"></span>
+					<span id="end_cnt" class="mediumText"></span>
+					<span id="sports_cd" class="mediumText"></span>
+					<span id="skill_cd" class="mediumText"></span>
+					<span id="age_range" class="mediumText"></span>
+					<span id="gender_cd" class="mediumText"></span>
+					<span id="sg_option" class="mediumText"></span>
+					<span id="status_cd" class="status_cd"></span>
+					
 				</div>
 				<div class="modal-footer">
 					<button type="button" data-dismiss="modal" class="pink-btn">Close</button>

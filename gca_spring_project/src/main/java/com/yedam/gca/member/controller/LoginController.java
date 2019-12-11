@@ -33,6 +33,16 @@ public class LoginController {
 		return "/notiles/member/callback";
 	}
 	
+	// security에서 로그인 후 유저와 관리자가 돌아갈 페이지 따로 설정
+	@RequestMapping("/login/callback")
+	public String callback(HttpServletRequest request) {
+		if(request.isUserInRole("ROLE_Admin")) { // 관리자가 로그인 하면 차트 페이지로 넘어감
+			return "redirect:/admin/chart";
+		} else { // 일반 사용자가 로그인 하면 반짝 목록 페이지로 넘어감
+			return "redirect:/sgroup/getSgList";
+		}
+	}
+	
 	// 회원가입 페이지
 	@RequestMapping("/join")
 	public String join() {

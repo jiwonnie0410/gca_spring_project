@@ -20,12 +20,12 @@ function idCondition() {
 		} else {
 			document.joinfrm.idButton.disabled = true;
 			$("#idConfirmMsg").text("");
-			$("#idConfirmMsg").append("<font size=\"2\" color=\"red\"> *영문자, 숫자를 혼합하여 6-8자리 </font>");
+			$("#idConfirmMsg").append("<font size=\"2\" color=\"red\"> *영문자, 숫자를 혼합하여 6-12자리 </font>");
 		}
 	} else {
 		document.joinfrm.idButton.disabled = true;
 		$("#idConfirmMsg").text("");
-		$("#idConfirmMsg").append("<font size=\"2\" color=\"red\"> *영문자, 숫자를 혼합하여 6-8자리 </font>");
+		$("#idConfirmMsg").append("<font size=\"2\" color=\"red\"> *영문자, 숫자를 혼합하여 6-12자리 </font>");
 	}
 }
 
@@ -136,7 +136,7 @@ function idCheck() {
 	});
 }
 
-// 비밀번호 조건 확인: 숫자, 특수문자 혼합하여 6-8자리 // 비밀번호 재확인
+// 비밀번호 조건 확인: 숫자, 특수문자 혼합하여 6-10자리 // 비밀번호 재확인
 function pwCheck() {
 	var first = $("#password1").val();
 	var second = $("#password2").val();
@@ -145,19 +145,19 @@ function pwCheck() {
 	var pattern2 = /[~!@#$%^&*()_+|<>?:{}]/;
 
 	// 비밀번호 조건 체크
-	if (first.length >= 6 && first.length <= 8) { // 길이 체크
+	if (first.length >= 6 && first.length <= 10) { // 길이 체크
 		if (pattern1.test(first) && pattern2.test(first)) { // 숫자, 특수문자 혼합
 			conPw = 1;
 			$("#conditionPw").text("");
 		} else {
 			conPw = 0;
 			$("#conditionPw").text("");
-			$("#conditionPw").append("<font size=\"2\" color=\"red\"> *숫자, 특수문자를 혼합하여 6-8자리 </font>");
+			$("#conditionPw").append("<font size=\"2\" color=\"red\"> *숫자, 특수문자를 혼합하여 6-10자리 </font>");
 		}
 	} else {
 		conPw = 0;
 		$("#conditionPw").text("");
-		$("#conditionPw").append("<font size=\"2\" color=\"red\"> *숫자, 특수문자를 혼합하여 6-8자리 </font>");
+		$("#conditionPw").append("<font size=\"2\" color=\"red\"> *숫자, 특수문자를 혼합하여 6-10자리 </font>");
 	}
 
 	// 비밀번호 재확인 체크
