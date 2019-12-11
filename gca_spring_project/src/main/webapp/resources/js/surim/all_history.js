@@ -60,15 +60,15 @@ document.addEventListener('DOMContentLoaded', function() {
 	    	$("#eventModal").modal();   
 	    	
 	    	$("#title").html(infoArr.title)
-	    	$("#date").html(eventDate[0]); //시간을 모달 input에 주입, 분단위까지 출력됨
-	    	$("#location").html(dbArr.location);
-	    	$("#sports_cd").html(dbArr.sports_cd);
-	    	$("#skill_cd").html(dbArr.skill_cd);
-	    	$("#age_range").html(dbArr.age_range);
-	    	$("#gender_cd").html(dbArr.gender_cd);
+	    	$("#date").html("마감일자: "+eventDate[0]); //시간을 모달 input에 주입, 분단위까지 출력됨
+	    	$("#location").html("주소:" +dbArr.location);
+	    	$("#end_cnt").html("필요인원: "+dbArr.end_cnt+"명");
+	    	$("#sports_cd").html("종목: "+dbArr.sports_cd);
+	    	$("#skill_cd").html("숙련도: "+dbArr.skill_cd);
+	    	$("#age_range").html("나이: "+dbArr.age_range);
+	    	$("#gender_cd").html("성별: "+dbArr.gender_cd);
 	    	$("#status_cd").html(dbArr.status_cd);
-	    	$("#sg_option").html(dbArr.sg_option);
-	    	$("#bg_team_cnt").html(dbArr.bg_team_cnt);
+	    	$("#sg_option").html("옵션: "+dbArr.sg_option);
 	    	
 	    	
 	    	console.log(info.event._def.extendedProps);
