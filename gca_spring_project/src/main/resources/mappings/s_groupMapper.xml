@@ -58,6 +58,12 @@
 		WHERE	SG_NUM = ${sg_num}   <!-- $는 값, #은 따옴표 붙음. int값 하나 받아왔을때는 value로 쓰면 됨.-->
 	</update>
 	
+	<!-- <원래 membersMapper에 있어야 할 쿼리>방에 들어갈때 웹소켓으로 뿌릴 이미지 조회-id로 본인 프로필 이미지 불러오는 쿼리- -->
+	<select id="returnImage" parameterType="members" resultType="String">
+		SELECT	get_code_name(M_IMAGE_CD) M_IMAGE_CD
+		FROM	MEMBERS
+		WHERE	M_ID = #{m_id}
+	</select>
 	
 	
 	

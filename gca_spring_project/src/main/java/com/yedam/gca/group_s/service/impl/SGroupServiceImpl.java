@@ -10,6 +10,7 @@ import com.yedam.gca.group_s.dao.SGroupDAO;
 import com.yedam.gca.group_s.service.SGroupService;
 import com.yedam.gca.group_s.vo.SGroupVO;
 import com.yedam.gca.history.vo.ActiveHistVO;
+import com.yedam.gca.member.vo.MembersVO;
 
 @Service("sGroupService")
 public class SGroupServiceImpl implements SGroupService {
@@ -29,6 +30,9 @@ public class SGroupServiceImpl implements SGroupService {
 	public void cancelJoin(ActiveHistVO vo) {
 		sgroupDAO.cancelJoin(vo);
 		sgroupDAO.minusNowCnt(vo);
+	}
+	public String returnImage(MembersVO vo) {
+		return sgroupDAO.returnImage(vo);
 	}
 	
 

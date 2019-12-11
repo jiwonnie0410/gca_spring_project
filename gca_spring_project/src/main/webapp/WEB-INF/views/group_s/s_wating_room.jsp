@@ -206,6 +206,8 @@
 					var sgNum = ${sgroup.sg_num};
 					var sgCnt = ${sgroup.sg_now_cnt};
 					
+					alert(usrId);
+					
 					deleteProfile();
 					
 					if(sgCnt>1){ //일단 sgCnt가 1이상인 방만 카운트 - 되게 여기다 해놓음.
@@ -259,41 +261,22 @@
     	
     	
 	<!-- 참여자 프로필 -->
-     	<div style="border-top: thick double #FE9191; border-bottom: thick double #FE9191; padding-top:15px; padding-bottom:15px;">
+     	<div id="profileList" style="border-top: thick double #FE9191; border-bottom: thick double #FE9191; padding-top:15px; padding-bottom:15px;">
 				<!-- foreach로 프로필 읽어와서 붙이기(memlist.어쩌구) -->
         		<%-- <span id="cancel" data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
           			<img style="padding-bottom:5px;" width="65px" height="65px"
           							src="${pageContext.request.contextPath }/resources/images/jey/trainer-1.jpg" class="rounded-circle">
         			<br />사람1
         		</span> --%>
-        		
+        		<!-- 참여 멤버 프로필사진 불러오기(캐릭터, 닉네임) -->
         		<c:forEach var="member" items="${memlist}">
 				    <span id="${member.m_id}" data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
 	          			<img style="padding-bottom:5px;" width="65px" height="65px"
 	          							src="${pageContext.request.contextPath }/resources/images/Characters/${member.m_image_cd}.gif" class="rounded-circle">
-	        			<br /><c:out value="${member.m_nick}" />
+	        			<br />${member.m_nick}
         			</span>
 				
 				</c:forEach>
-
-        		
-          		<%-- <span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;">
-          			<img style="padding-bottom:5px;" width="65px" height="65px"
-          							src="${pageContext.request.contextPath }/resources/images/jey/trainer-2.jpg" class="rounded-circle">
-        			<br />사람2
-        		</span>
-        	
-          		<span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;">
-          			<img style="padding-bottom:5px;" width="65px" height="65px"
-          							src="${pageContext.request.contextPath }/resources/images/jey/trainer-3.jpg" class="rounded-circle">
-        			<br />사람3
-        		</span>
-        	
-          		<span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;">
-          			<img style="padding-bottom:5px;" width="65px" height="65px"
-          							src="${pageContext.request.contextPath }/resources/images/jey/trainer-4.jpg" class="rounded-circle">
-        			<br />사람4
-        		</span> --%>
 
     	</div>
     			
@@ -512,31 +495,75 @@
  webSocket.onmessage = function(event) { onMessage(event) };
  
  function onMessage(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
-	 var result = JSON.parse(event.data);
-	 if(result.cmd == "msg") {
-		 textarea.value += result.msg + "\n";		 
-	 }
-	 else if( result.cmd = "cancelJoin") { //참가취소 누르고 웹소켓 거쳐왔을때.
-		 var person1 = document.getElementById("cancel");
-		 var result = JSON.parse(event.data);
-		 console.log(person1); //프로필 삭제(할 예정)
-		 $("#cancel").remove();
-		 textarea.value += result.msg + "\n"; //채팅방에 나갔다고 표시.
-	 }
+	var result = JSON.parse(event.data);
+	if(result.cmd == "join") { //방에 들어온경우(웹소켓 연결된 경우)
+		var img = "";
+		//var id = "${sessionScope.id}";
+		var param = {"id":result.id};
+		console.log("returnImage함수 들어가기 전 param 값 확인111111111111 : "+param.id);
+		
+		$.ajax({
+			url: "returnImage",
+			type:'GET',
+			async:false,
+			data: param,
+			//dataType: "Json",
+			
+			success: function(data){
+				console.log(data);
+				img=data;
+			},
+			error: function(){
+				
+			}
+			
+		});
+		
+		console.log(img);
+		
+		
+		$span = $("<span data-toggle='modal' data-target='#profile' style='font-size:13px; padding:10px; display:inline-block;'>");
+		$span.attr("id","${sessionScope.id}");
+		$img = $("<img style='padding-bottom:5px;' width='65px' height='65px'>");
+		$img.attr({"src": "${pageContext.request.contextPath }/resources/images/Characters/"+img+".gif", "class": "rounded-circle"});
+		$span.append($img);
+		
+		/* <span id="${member.m_id}" data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
+	          			<img style="padding-bottom:5px;" width="65px" height="65px"
+	          							src="${pageContext.request.contextPath }/resources/images/Characters/${member.m_image_cd}.gif" class="rounded-circle">
+	        			<br />${member.m_nick}
+        			</span> */
+		
+		textarea.value += result.msg + "\n";
+		$('#profileList').append($span);
+		$('#profileList').append("<br />${member.m_nick}");
+	 	
+	}
+	else if( result.cmd = "msg") { //메세지 전송하는 경우
+		textarea.value += result.msg + "\n";
+	}
+	else if( result.cmd = "cancelJoin") { //참가취소 누르고 웹소켓 거쳐왔을때.
+		var person = result.id;
+		var result = JSON.parse(event.data);
+		console.log(person);
+		//프로필 삭제
+		$('#'+person).remove();
+		textarea.value += result.msg + "\n"; //채팅방에 나갔다고 표시.
+	}
 	  
-	 chatAreaScroll(); 
+	chatAreaScroll(); 
  }
  
  function onOpen(event) { 
-	 msg = {
-		 cmd : "msg",
-		 id : "test",
-		 msg : "<000님이 참가하셨습니다.>" //여기에 아이디 붙여서 추가하면 될듯. 근데 새로고침해도 이게 뜨는것은 막아야함.
-	 }
-	 webSocket.send(  JSON.stringify( msg )   );
+	msg = {
+		cmd : "join",
+		id : "${sessionScope.id}",
+		msg : "<"+"${sessionScope.id}"+"님이 참가하셨습니다.>" //여기에 아이디 붙여서 추가하면 될듯. 근데 새로고침해도 이게 뜨는것은 막아야함.
+	}				//msg의 id 넣는 부분을 ${sessionScope.id}말고 json의 id로 가져오는 방법은 없을까
+	webSocket.send(  JSON.stringify( msg )   );
  }
  function onError(event) { 
-	 console.log(event); 
+	console.log(event); 
  	alert(event.data); 
  }
  
@@ -544,7 +571,7 @@
  function send() { 
 	 msg = {
 		 cmd : "msg",
-		 id : "test",
+		 id : "${sessionScope.id}",
 		 msg : inputMessage.value
 	 }
 	//textarea.value += "나 : " + inputMessage.value + "\n"; 
@@ -552,6 +579,7 @@
 	inputMessage.value = ""; 
  } 
  
+ //나갔을때 참여자 칸에서 프로필 삭제
  function deleteProfile() { 
 	 msg = {
 		 cmd : "cancelJoin",
@@ -562,19 +590,7 @@
 	
 	
  }
- 
-//화면에서 프로필삭제
- /* function deleteProfile() { 
-	 msg = {
-		 cmd : "msg",
-		 id : "test",
-		 msg : inputMessage.value
-	 }
-	//textarea.value += "나 : " + inputMessage.value + "\n"; 
-	webSocket.send(  JSON.stringify( msg )   ); 
-	inputMessage.value = ""; 
- }  */
- 
+
  
  //채팅치면 스크롤바 내려가게 하기.
  function chatAreaScroll() {

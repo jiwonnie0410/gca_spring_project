@@ -22,6 +22,7 @@ import com.yedam.gca.group_s.service.SGroupService;
 import com.yedam.gca.group_s.vo.SGroupVO;
 import com.yedam.gca.history.service.ActiveHistService;
 import com.yedam.gca.history.vo.ActiveHistVO;
+import com.yedam.gca.member.vo.MembersVO;
 
 @Controller
 public class SGroupController {
@@ -56,7 +57,7 @@ public class SGroupController {
 			return id;
 		}
 		
-	//참가취소 시 
+	//참가취소 시 활동이력에서 빠지고 카운트 -1
 		@RequestMapping("/sgroup/cancelJoin")
 		public String cancelJoin(@RequestParam(value="m_id") String id,
 				@RequestParam(value="sg_num") int sg_num, ActiveHistVO vo) {
@@ -67,7 +68,15 @@ public class SGroupController {
 			return "redirect:getSgList";
 		}
 	
-	//
+	//웹소켓 연결 시(방에 들어갈 시) ajax로 본인 프로필 이미지 가져온다(웹소켓으로 다른사람 화면에도 뿌리기 위해.)
+		@ResponseBody //얘가 있어야 페이지 리턴을 안한다.(이거 없으면 밑에 mapping된 jsp페이지로 자동으로 찾아감.)
+		@RequestMapping("/sgroup/returnImage")
+		public String returnImage(@RequestParam String id, MembersVO vo) {
+			vo.setM_id(id);
+			String data = sgroupService.returnImage(vo);
+			System.out.println("이미지:"+data);
+			return data;
+		}
 
 
 //*****************************************미현************************************
