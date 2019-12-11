@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.gca.admin.vo.TroubleVO;
-import com.yedam.gca.common.service.CodeService;
-import com.yedam.gca.common.vo.CodeVO;
+import com.yedam.gca.common.code.service.CodeService;
+import com.yedam.gca.common.code.vo.CodeVO;
 import com.yedam.gca.group_s.service.SGroupService;
 import com.yedam.gca.group_s.vo.SGroupVO;
 import com.yedam.gca.history.service.ActiveHistService;
