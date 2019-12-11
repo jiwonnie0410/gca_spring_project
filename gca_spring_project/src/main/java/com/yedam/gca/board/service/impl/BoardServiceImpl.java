@@ -7,6 +7,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -99,9 +101,10 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 	// 07. 게시글 레코드 갯수
-	@Override
-	public int countArticle(String searchOption, String keyword) throws Exception {
-		return boardDao.countArticle(searchOption, keyword);
-	}
+	// 07. 게시글 레코드 갯수
+		@Override
+		public int countArticle(String searchOption, String keyword) throws Exception {
+			return boardDao.countArticle(searchOption, keyword);
+		}
 
-}
+	}

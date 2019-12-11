@@ -16,9 +16,26 @@
 		getBoardList2(); //목록조회
 		insertBoard(); //등록 이벤트 클릭 이벤트 지정
 		deleteBoard();//삭제
+		
+		
+	/* 	$("body").on("click", "[id^=write]", function() {
+			var qb_id = $(this).closest("tr").find("td").eq(0).html();// closest ==조상검색
+			console.log(qb_id);
+		}); */
+		
+		 
+		$("#Modalread").on('show.bs.modal', function(){
+			var qb_id = $(this).closest("tr").find("td").eq(0).html();// closest ==조상검색
+			console.log(qb_id);
+			}); 
+		
+		
 
 	});
 
+	
+	
+	
 	//목록 조회요청
 	function getBoardList2() {
 		$.ajax({
