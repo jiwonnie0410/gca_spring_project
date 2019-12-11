@@ -1,5 +1,7 @@
 package com.yedam.gca.group_s.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,23 +79,36 @@ public class SGroupController {
 //		String m_xy = (String) session.getAttribute("m_xy");
 //		vo.setM_xy(m_xy);
 		vo.setM_xy("37.56628868272894, 127.0555535312866");
+		vo.setScroll_page(0);
+		model.addAttribute("sgroup", vo);
+		model.addAttribute("list", sgroupService.getSgList(vo));
+		return "/user/group_s/s_search";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/sgroup/getSgList/{scroll_page}", method = RequestMethod.GET)
+	public List<SGroupVO> search(@PathVariable Integer scroll_page
+			, SGroupVO vo, HttpSession session, Model model) {
+//		String m_xy = (String) session.getAttribute("m_xy");
+//		vo.setM_xy(m_xy);
+		vo.setM_xy("37.56628868272894, 127.0555535312866");
 		if(scroll_page == null || scroll_page.equals("")) {
 			scroll_page = 0;
 		}
 		vo.setScroll_page(scroll_page); //마지막 조회된 rownum
-		model.addAttribute("list", sgroupService.getSgList(vo));
-		System.out.println(sgroupService.getSgList(vo));
-		return "/user/group_s/s_search";
+		model.addAttribute("sgroup", vo);
+		return sgroupService.getSgList(vo);
 	}
+	
 	
 	
 	//반짝 방 참여 전에  참여 여부 확인 + 마감 인원 파악
 	@ResponseBody
 	@RequestMapping(value="sgroup/sgValidIn/{sg_num}", method = RequestMethod.GET)
 	public ActiveHistVO sgValidIn(@PathVariable int sg_num, ActiveHistVO vo, HttpSession session) {
-		String m_id = (String) session.getAttribute("m_id");
-		vo.setIn_type("sg");
+//		String m_id = (String) session.getAttribute("m_id");
 //		vo.setM_id(m_id);
+		vo.setIn_type("sg");
 		vo.setM_id("test10");
 		vo.setPk_num(sg_num);
 		actService.validIn(vo);
@@ -104,9 +119,13 @@ public class SGroupController {
 	@RequestMapping("/sgroup/alreadyIn")
 	public String alreadyIn(
 			@RequestParam(value="sg_num", defaultValue="", required=true) int sg_num,
-			Model model, SGroupVO vo) {
+			Model model, SGroupVO vo, ActiveHistVO avo) {
 		vo.setSg_num(sg_num);
 		model.addAttribute("sgroup", sgroupService.getRoomInfo(vo));
+		
+		//참여 인원 정보를 채팅방으로 넘김
+		avo.setSg_num(sg_num);
+		model.addAttribute("memlist", actService.getActMemList(avo));
 		return "/user/group_s/s_wating_room";
 	}
 	
