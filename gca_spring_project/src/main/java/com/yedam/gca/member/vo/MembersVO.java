@@ -1,9 +1,17 @@
 package com.yedam.gca.member.vo;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import lombok.Data;
 
 @Data
-public class MembersVO {
+public class MembersVO implements UserDetails {
 
 	private String m_id;		// *PK* // 회원 ID
 	private String m_salt;				// 비밀번호 암호화 키
@@ -21,5 +29,37 @@ public class MembersVO {
 	private int m_radius;				// 반짝이나 매치 띄울 위치반경
 	private String m_notice;			// 알림 설정
 	private String m_email;
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// 인가
+		List<GrantedAuthority> auth = new ArrayList<>();
+		auth.add(new SimpleGrantedAuthority(this.getM_grant()));
+		return auth;
+	}
+	@Override
+	public String getPassword() {
+		return m_password;
+	}
+	@Override
+	public String getUsername() {
+		return m_id;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 
 }

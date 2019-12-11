@@ -38,17 +38,4 @@
 			</websocket:handshake-interceptors>
 		</websocket:handlers>
 	
-	
-	<!-- 로그인 인터셉터 생성 -->
-	<beans:bean id="loginInterceptor" class="" />
-	<!-- <interceptors>
-		<interceptor>
-			<mapping path="/insertBoardForm" />
-			<mapping path="/insertBoard" />
-			<exclude-mapping path="/getBoardList" />
-			<exclude-mapping path="/user/*" />
-			<beans:ref bean="loginInterceptor" />
-		</interceptor>		
-	</interceptors> -->
-	
 </beans:beans>

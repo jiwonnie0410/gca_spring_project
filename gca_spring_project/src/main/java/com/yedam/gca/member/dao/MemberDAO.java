@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import com.yedam.gca.member.vo.MembersVO;
 
-
 @Repository
 public class MemberDAO {
 
@@ -44,7 +43,10 @@ public class MemberDAO {
 		return mybatis.update("MemberDAO.updateTempPw", vo);
 	}
 	
-	
+	// 5. 로그인 체크 (회원 한명 조회)
+	public MembersVO loginCheck(MembersVO vo) {
+		return mybatis.selectOne("MemberDAO.loginCheck", vo);
+	}
 	
 	
 	
