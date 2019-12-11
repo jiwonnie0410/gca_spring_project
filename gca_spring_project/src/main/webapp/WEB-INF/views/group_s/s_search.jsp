@@ -50,7 +50,8 @@
 	</div>
 </div>
 
-<table class="table table-striped">
+<table class="table table-striped" id="tb1">
+	<input type="hidden" id="scroll_page" value="${sgroup.scroll_page }">
 	<c:forEach items="${ list }" var="sg">
 	<tr height="90px" class="tr ${sg.sg_num}">
 		<td class="td1">
