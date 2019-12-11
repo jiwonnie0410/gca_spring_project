@@ -1,8 +1,8 @@
-package com.yedam.gca.common.service;
+package com.yedam.gca.common.code.service;
 
 import java.util.List;
 
-import com.yedam.gca.common.vo.CodeVO;
+import com.yedam.gca.common.code.vo.CodeVO;
 
 public interface CodeService {
 

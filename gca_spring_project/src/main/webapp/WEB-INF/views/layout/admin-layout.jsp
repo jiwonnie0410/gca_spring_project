@@ -76,6 +76,7 @@
 				}
     	</style>
 </head>
+<body>
 
 	<!-- 맨 위에 바 부분 -->
 	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">

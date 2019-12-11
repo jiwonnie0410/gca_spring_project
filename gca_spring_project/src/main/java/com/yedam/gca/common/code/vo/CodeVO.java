@@ -1,4 +1,4 @@
-package com.yedam.gca.common.vo;
+package com.yedam.gca.common.code.vo;
 
 import lombok.Data;
 
