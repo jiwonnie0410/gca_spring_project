@@ -3,9 +3,33 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ActiveHistDAO" >
 
-	<!--  *********수림************* -->
+	<!--  *********수림************* 
+		VIEW_ACTIVE_HIST 뷰를 사용합니다. 컬럼 조회시에 큰따옴표 필수! 없으면 에러남! 아래 셀렉 예시 확인바람	
+	-->
 	<select id="getActiveHistList" resultType="map"> 
-		select * from view_active_hist where "m_id" = #{m_id}
+		SELECT 		"ach_num",
+					"m_id",
+					"start",
+					"end",
+					"sg_num",
+					"six_num",
+					"bg_num",
+					"ach_confirm",
+					"name",
+					"now_cnt",
+					"end_cnt",
+					"location",
+					"xy",
+					"sports_code",
+					"skill_cd",
+					"age_range",
+					"gender_cd",
+					"status_cd",
+					"sg_option",
+					"bg_team_cnt"				
+
+		FROM 		V_ACTIVE_HIST 
+		WHERE 		"m_id" = #{m_id}
 	</select>
 	
 

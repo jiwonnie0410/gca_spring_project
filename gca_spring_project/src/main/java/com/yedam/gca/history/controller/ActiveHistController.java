@@ -1,5 +1,8 @@
 package com.yedam.gca.history.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,15 @@ public class ActiveHistController {
 		
 		model.addAttribute("activeHistList", service.getActiveHistList(vo));   
 		return "/user/history/active_history";
+	}
+	
+	@RequestMapping("/ajax/getActiveHistList.json")
+	@ResponseBody
+	public List<Map> getActiveHistList(ActiveHistVO vo, HttpSession session) {
+		vo.setM_id("test");
+		session.setAttribute("id", vo.getM_id());
+		
+		return service.getActiveHistList(vo);
 	}
 	
 	@RequestMapping("/ajax/getSGroup.json")

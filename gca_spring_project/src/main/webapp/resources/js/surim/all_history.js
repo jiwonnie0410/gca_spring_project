@@ -17,27 +17,14 @@ document.addEventListener('DOMContentLoaded', function() {
 	        right: 'today prev,next'
 	      }, 
 	      
-	    //디비에서 가져오는 일정값  
-	    events: [
-	    	{
-	    		title: 'event1',
- 	    		start: '2019-12-07T15:15',   
-	    	},
-	    	
-	    	{
-	    		title: 'event1',
- 	    		start: '2019-12-07T15:15'   
-	    	},
-	    	
-	    	{
-	    		title: 'event2',
- 	    		start: '2019-12-10T05:15',
-	    	},
-	    	{
-	    		title: 'event3',
- 	    		start: '2019-12-15T10:15',
-	    	},
-	    ],
+	    //디비에서 가져오는 일정값  	      
+	     eventSources: [{
+	    				url: "../ajax/getActiveHistList.json",
+	    				dataType: "json",
+	    				color: 'blue'
+	    		
+	    	 }
+	     ],
 	    
 	    // 일정 시간 포멧
 	    eventTimeFormat: {

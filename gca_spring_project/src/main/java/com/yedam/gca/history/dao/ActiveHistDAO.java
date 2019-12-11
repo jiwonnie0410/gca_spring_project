@@ -21,7 +21,9 @@ public class ActiveHistDAO {
 	// 유저별 활동히스토리 목록 조회
 	public List<Map> getActiveHistList(ActiveHistVO vo) {
 		return mybatis.selectList("ActiveHistDAO.getActiveHistList", vo);
-	}		
+	}
+	
+	//아작스
 
 	//모달클릭시 반짝 정보 단건 출력
 	public SGroupVO getSgroup(SGroupVO vo) {
