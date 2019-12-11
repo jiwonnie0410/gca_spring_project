@@ -38,7 +38,7 @@
 								#{m_location},
 								${m_age},
 								#{gender_cd},
-								'U',
+								'ROLE_User',
 								'jw',
 								'M01',
 								#{m_email}		)

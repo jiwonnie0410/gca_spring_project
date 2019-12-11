@@ -148,5 +148,8 @@
 			  <span>0</span>
 			  <span><span>3</span></span>
 		</section>
+		<div class="link-container">
+			<a href="javascript:history.back();" class="more-link"> 이전 페이지로! </a>
+		</div>
 </body>
 </html>
