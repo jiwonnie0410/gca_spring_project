@@ -5,6 +5,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!--json할때 필요  -->
+<script src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -19,13 +30,15 @@
 				${row.adr_content}
 				<br>
 				<!-- 본인 댓글만 수정버튼 생성되도록 처리 -->
-				<c:if test="${sessionScope.m_id == row.m_id}">
+				 <c:if test="${sessionScope.m_id == row.m_id}">
 					<input type="button" id="btnModify" value="댓글수정" onclick="showReplyModify('${row.adr_number}')">
-				</c:if>
+				</c:if> 
 				<hr>
 			</td>
 		</tr>
 		</c:forEach>
+		
+		
 		
 		
 		<!-- 페이징 -->
@@ -61,6 +74,8 @@
 			</td>
 		</tr>
 	</table>
+	
+	
 	
 	<!-- 댓글 수정 영역-->
 	<div id="modifyReply"></div>

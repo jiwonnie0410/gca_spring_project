@@ -20,7 +20,7 @@
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+<!-- 꼭있어야함 -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
@@ -117,7 +117,9 @@
 							<span aria-hidden="true" class="li_settings fs1"></span> <span
 								aria-hidden="true" class="li_lock fs1"></span>
 							<i class="fas fa-user-edit"  aria-hidden="true" style="color:black; font-size:100px;" ></i> 
-							 <i class="fa fa-lock fa-2x" aria-hidden="true" style="color:black; font-size:100px;"></i> 
+							 <i class="fa fa-lock fa-2x" aria-hidden="true" style="color:black; font-size:100px;"> </i> 
+							 
+							 <a href="changePassword"> 비밀번호 변경 </a>
 						</div>
 					</form>
 				</div>

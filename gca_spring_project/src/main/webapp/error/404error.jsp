@@ -142,11 +142,14 @@
 </head>
 <body>
 		<h1> 404 Error Page </h1>
-		<p class="zoom-area"><b></b> 관리자에게 문의하세요. </p>
+		<p class="zoom-area"><b></b> undong.master@gmail.com </p>
 		<section class="error-container">
 			  <span><span>4</span></span>
 			  <span>0</span>
 			  <span><span>4</span></span>
 		</section>
+		<div class="link-container">
+			<a href="javascript:history.back();" class="more-link"> 이전 페이지로! </a>
+		</div>
 </body>
 </html>

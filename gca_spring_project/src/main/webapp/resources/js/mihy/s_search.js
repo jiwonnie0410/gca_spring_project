@@ -2,7 +2,19 @@ $(document).ready(function(){
 	
 	$(window).scroll(function(){
 		if(Math.floor($(window).scrollTop()) == $(document).height() - $(window).height()){
-			alert("페이지 끝");
+			
+			var scroll_page = $('#scroll_page').val();
+			console.log(scroll_page)
+			$.ajax({
+				url: "getSgList/" + scroll_page,
+				dataType:"json",
+				contentType: "application/json",
+				success: function(result){
+					console.log( $('.tr').last() )
+					
+//					$('.tr').last().append()
+				}
+			});
 		}
 	});
 	

@@ -111,14 +111,19 @@
 						</div>
 						<br>
 						<div class="info-user2">
-							<input type="button" value="수정" id="btnUpdate"> <input
+							<input type="button" value="정" id="btnUpdate"> <input
 								type="button" value="삭제" id="btnDelete">
 							<div style="color: red;">${message}</div>
 							<!--이모티콘이로 대체  -->
 							<span aria-hidden="true" class="li_settings fs1"></span> <span
 								aria-hidden="true" class="li_lock fs1"></span>
 							<i class="fas fa-user-edit"></i>
-							 <i class="fa fa-lock fa-2x" aria-hidden="true" style="color:black; font-size:100px;"></i> 
+							 <i class="fa fa-lock fa-2x" aria-hidden="true" style="color:black; font-size:100px;">
+							 		
+							 </i> 
+							 
+							 <!-- 비밀번호 변경 -->
+							 <a href="/member/changePassword">비밀번호 변경</a>
 						</div>
 					</form>
 				</div>

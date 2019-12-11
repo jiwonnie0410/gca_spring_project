@@ -70,4 +70,29 @@ public class MembersController {
     }
 	
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // 지원
+    // 비밀번호 변경 페이지
+    @RequestMapping("/member/changePassword")
+    public String changePassword() {
+    	return "/notiles/member/changePassword";
+    }
 }

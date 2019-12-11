@@ -11,6 +11,11 @@
 	<result column="CNT" property="cnt"/>
 </resultMap> -->
 
+
+
+
+
+
 <!--  map.put(key, value)  -->
 <select id="getBoardListMap"  resultType="map" >
  SELECT  qb_id     "qb_id" ,
@@ -22,9 +27,6 @@
    FROM  qna_board
   ORDER  BY qb_id DESC
 </select>
-
-
-
 
 
 <select id="getBoardList"  resultType="qnaboard" >
@@ -51,6 +53,49 @@ select b.*  from ( select a.*, rownum rn  from(
 </select>
 
 
+<!-- dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd -->
+
+
+<select id="getBoardReRef" parameterType="qnaboard" resultType="int">
+	
+		SELECT IFNULL(MAX(qb_origin), 0) + 1
+		FROM qna_board
+	
+	</select>
+
+
+<insert id="insertBoardReply" parameterType="qnaboard">
+	
+		INSERT 
+		INTO qna_board 
+		(
+		<if test="qb_origin != null and qb_origin != ''">
+		  	  qb_origin,
+		</if>  	  
+		  	 m_id
+		  	, qb_title
+		  	, qb_content
+		) 
+		VALUES 
+		(	<if test="qb_origin != null and qb_origin != ''">
+			  #{qb_origin}, 
+			</if>  
+			  #{m_id}
+			, #{qb_title}
+			, #{qb_content}
+		)
+	</insert>
+
+
+<!-- dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd -->
+
+
+
+
+
+
+
+<!--관리자  -->
 <select id="getBoardList2"  resultType="qnaboard" >
 select b.*  from ( select a.*, rownum rn  from(
 	 select
@@ -110,7 +155,8 @@ select b.*  from ( select a.*, rownum rn  from(
 						qb_title,
 						m_id,
 						qb_content,
-						qb_hit
+						qb_hit,
+						
 						  )
 			   VALUES(  #{qb_id},
 				        #{qb_title},

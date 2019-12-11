@@ -62,7 +62,7 @@
 					M_EMAIL,
 					M_NAME,
 					M_NICK,
-					get_code_name(M_IMAGE_CD),
+					get_code_name(M_IMAGE_CD) "m_image_cd",
 					M_LOCATION,
 					M_XY,
 					M_AGE,
@@ -71,7 +71,7 @@
 					M_STATUS_CD,
 					M_RADIUS,
 					M_NOTICE,
-					get_code_name(M_LEVEL_CD)
+					get_code_name(M_LEVEL_CD) "m_level_cd"
 		FROM 		MEMBERS M 
 				JOIN 
 					ACTIVE_HIST A 

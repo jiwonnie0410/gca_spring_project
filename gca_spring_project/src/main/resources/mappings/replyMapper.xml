@@ -9,9 +9,13 @@
 	<selectKey order="BEFORE" resultType="int" keyProperty="adr_num">
 		SELECT NVL(MAX(adr_num),0)+1 FROM AD_REPLY		
 	</selectKey>
-<!-- 		INSERT INTO AD_REPLY (ADR_NUM, ADR_CONTENT, M_ID, ADR_HIDDEN) -->
-		VALUES (#{ad_num}, #{adr_content}, #{m_id}, #{adr_hidden})
+ 		INSERT INTO AD_REPLY (ADR_NUM, Ad_num, ADR_CONTENT, M_ID, ADR_HIDDEN) 
+		VALUES (#{adr_num},#{ad_num}, #{adr_content},  #{m_id}, #{adr_hidden})<!--로그인 완성후 수정  -->
 	</insert>
+	
+	
+	
+	
 	
 	<!-- 2. 댓글 목록 -->
 	<select id="listReply" resultType="com.yedam.gca.board.vo.AdReplyVO">

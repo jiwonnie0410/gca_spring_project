@@ -10,6 +10,7 @@
 	4-1. 아이디, 이름, 이메일 정보 확인
 	4-2. 임시 비밀번호 업데이트 하기
 	5. 로그인 체크 (회원 한명 조회)
+	6. 비밀번호 변경
  -->
 
 <!-- 1. 회원가입 -->
@@ -38,7 +39,7 @@
 								#{m_location},
 								${m_age},
 								#{gender_cd},
-								'U',
+								'ROLE_User',
 								'jw',
 								'M01',
 								#{m_email}		)
@@ -81,14 +82,18 @@
 			
 <!-- 5. 로그인 체크 (회원 한명 조회) -->
 			<select id="loginCheck" parameterType="members" resultType="members">
-					SELECT M_ID, M_PASSWORD, M_SALT, M_GRANT
+					SELECT M_ID, M_PASSWORD, M_GRANT
 					FROM MEMBERS
 					WHERE M_ID = #{m_id}
 			</select>
 			
 			
-			
-			
+<!-- 6. 비밀번호 변경 -->
+			<update id="changePassword" parameterType="members">
+					UPDATE MEMBERS
+					SET M_SALT = #{m_salt}, M_PASSWORD = #{m_password}
+					WHERE M_ID = #{m_id}
+			</update>
 			
 			
 			
