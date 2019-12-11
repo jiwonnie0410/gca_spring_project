@@ -121,6 +121,7 @@
 									<!-- 게시글 상세보기 페이지로 이동시 게시글 목록페이지에 있는 검색조건, 키워드, 현재페이지 값을 유지하기 위해 -->
 									<td align="center" width="10" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" align="center">
 										<a href="${pageContext.request.contextPath}/board/view?ad_num=${row.ad_num}&curPage=${map.boardPager.curPage}&searchOption=${map.searchOption}&keyword=${map.keyword}">${row.ad_title}
+												
 												<!-- ** 댓글이 있으면 게시글 이름 옆에 출력하기 --> 
 												<c:if test="${row.recnt > 0}">
 													<span style="color: red;">(${row.recnt}) </span>

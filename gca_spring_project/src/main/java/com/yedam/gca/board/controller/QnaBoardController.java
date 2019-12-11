@@ -80,17 +80,20 @@ import com.yedam.gca.member.vo.MembersVO;
 	  return vo; }
   
   // 삭제
-  
   @ResponseBody
   @RequestMapping(value = "board/{qb_id}", method = RequestMethod.DELETE)
   public int deleteBoard(@PathVariable int qb_id, QnaBoardVO vo) {
-  vo.setQb_id(qb_id); boardService.deleteBoard(vo); return qb_id; }
+	  vo.setQb_id(qb_id);
+	  boardService.deleteBoard(vo); 
+	  return qb_id; 
+	  }
   
   // 단건조회
   
   @ResponseBody  
   @RequestMapping(value = "board/{qb_id}", method = RequestMethod.GET) public
   QnaBoardVO getBoard(@PathVariable int qb_id, QnaBoardVO vo) {
-  vo.setQb_id(qb_id); return boardService.getBoard(vo); }
+	  vo.setQb_id(qb_id); 
+	  return boardService.getBoard(vo); }
   
   }

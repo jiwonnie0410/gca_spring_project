@@ -47,17 +47,19 @@ public class ReplyController {
 		replyService.create(vo);
 	}
 	
+	
+	
 	// 1_2. 댓글입력 (@RestController방식으로 json전달하여 댓글입력)
 	// @ResponseEntity : 데이터 + http status code
 	// @ResponseBody : 객체를 json으로 (json - String)
 	// @RequestBody : json을 객체로
-	@RequestMapping(value="insertRest", method=RequestMethod.POST)
+	@RequestMapping(value="insertRest", method=RequestMethod.POST ,headers = {"Content-type=application/json" })
 	public ResponseEntity<String> insertRest(@RequestBody AdReplyVO vo, HttpSession session){
 		ResponseEntity<String> entity = null;
 		try {
 			// 세션에 저장된 회원아이디를 댓글작성자에 세팅
 			/* String m_id = (String) session.getAttribute("m_id");  
-			vo.setM_id(m_id);*///로그인완성후 주석해제
+			vo.setM_id(m_id);*/                                            //로그인완성후 주석해제
 			vo.setM_id("rr99999");
 			// 댓글입력 메서드 호출
 			replyService.create(vo);
@@ -85,7 +87,7 @@ public class ReplyController {
 		int end = replyPager.getPageEnd();
 		List<AdReplyVO> list = replyService.list(ad_num, start, end, session);
 		// 뷰이름 지정
-		mav.setViewName("askBoard/replyList");
+		mav.setViewName("/notiles/askBoard/replyList");
 		// 뷰에 전달할 데이터 지정
 		mav.addObject("list", list);
 		mav.addObject("replyPager", replyPager);
@@ -126,7 +128,7 @@ public class ReplyController {
 		int end = replyPager.getPageEnd();
 		List<AdReplyVO> list = replyService.list(ad_num, start, end, session);
 		// 뷰이름 지정
-		mav.setViewName("askBoard/replyList");
+		mav.setViewName("/notiles/askBoard/replyList");
 		// 뷰에 전달할 데이터 지정
 		mav.addObject("list", list);
 		mav.addObject("replyPager", replyPager);
@@ -142,7 +144,7 @@ public class ReplyController {
 	public ModelAndView replyDetail(@PathVariable("adr_num") Integer adr_num, ModelAndView mav){
 		AdReplyVO vo = replyService.detail(adr_num);
 		// 뷰이름 지정
-		mav.setViewName("askBoard/replyDetail");
+		mav.setViewName("/notiles/askBoard/replyDetail");
 		// 뷰에 전달할 데이터 지정
 		mav.addObject("vo", vo);
 		// replyDetail.jsp로 포워딩
