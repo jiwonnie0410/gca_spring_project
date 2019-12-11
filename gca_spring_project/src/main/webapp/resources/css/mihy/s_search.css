@@ -41,6 +41,7 @@
 }
 
 /* 테이블 각 요소 */
+.tr { height: 90px;}
 .td1 { width: 50px; float: top; position: relative; }
 .td2 { width: 200px; float: top; position: relative; }
 .td3 { width: 90px;	white-space: nowrap; float: top; position: relative; }

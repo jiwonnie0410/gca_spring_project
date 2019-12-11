@@ -10,9 +10,9 @@ $(document).ready(function(){
 				dataType:"json",
 				contentType: "application/json",
 				success: function(result){
-					console.log( $('#tb1').children().last() )
+					console.log( $('.tr').last() )
 					
-//					$('#tb1').children().last().append()
+//					$('.tr').last().append()
 				}
 			});
 		}
