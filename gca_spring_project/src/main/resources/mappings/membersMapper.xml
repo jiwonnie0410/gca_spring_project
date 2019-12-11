@@ -82,7 +82,9 @@
 			
 <!-- 5. 로그인 체크 (회원 한명 조회) -->
 			<select id="loginCheck" parameterType="members" resultType="members">
-					SELECT M_ID, M_PASSWORD, M_GRANT
+					SELECT 	M_ID, M_PASSWORD, M_GRANT,
+							M_NAME, M_NICK, M_IMAGE_CD, M_XY, M_LOCATION, M_AGE, GENDER_CD, M_LEVEL_CD,
+							M_RADIUS, M_NOTICE, M_EMAIL
 					FROM MEMBERS
 					WHERE M_ID = #{m_id}
 			</select>

@@ -48,6 +48,11 @@ public class MemberDAO {
 		return mybatis.selectOne("MemberDAO.loginCheck", vo);
 	}
 	
+	// 6. 비밀번호 변경
+	public int changePassword(MembersVO vo) {
+		return mybatis.update("MemberDAO.changePassword", vo);
+	}
+	
 	
 	
 	

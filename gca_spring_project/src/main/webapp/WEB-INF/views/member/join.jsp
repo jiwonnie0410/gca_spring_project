@@ -47,7 +47,7 @@
 
 				<tr>
 					<td height="30"></td>
-					<td colspan="3" id="idConfirmMsg"><font size="2">*아이디는 영문자, 숫자를 혼합하여 6-8자리 </font></td>
+					<td colspan="3" id="idConfirmMsg"><font size="2">*아이디는 영문자, 숫자를 혼합하여 6-12자리 </font></td>
 				</tr>
 
 				<tr>	<!-- 비밀번호 -->
@@ -57,7 +57,7 @@
 
 				<tr>
 					<td></td>
-					<td colspan="3" id="conditionPw"><font size="2">*비밀번호는 숫자, 특수문자를 혼합하여 6-8자리</font></td>
+					<td colspan="3" id="conditionPw"><font size="2">*비밀번호는 숫자, 특수문자를 혼합하여 6-10자리</font></td>
 				</tr>
 
 				<tr>

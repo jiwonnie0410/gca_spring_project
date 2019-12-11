@@ -176,6 +176,23 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 	
+	// 비밀번호 변경
+	@Override
+	public String changePw(MembersVO vo) {
+		// 비밀번호 암호화
+		String salt = SHA256Util.generateSalt();						// 1. 암호화 키 생성
+		String newPassword = SHA256Util.getEncrypt(vo.getM_password(), salt);		// 2. 비밀번호 암호화
+		vo.setM_salt(salt);												// 3. vo에 암호화 키 넣기
+		vo.setM_password(newPassword);									// 4. vo에 암호화된 비밀번호 넣기
+		
+		int result = dao.changePassword(vo);
+		if(result == 0) {
+			return "비밀번호 변경에 실패했습니다. 다시 시도해 주세요.";
+		} else {
+			return "비밀번호 변경 완료!";
+		}
+	}
+	
 	
 	
 	
@@ -223,6 +240,8 @@ public class MemberServiceImpl implements MemberService {
     public boolean checkPw(String m_id, String m_password) {
         return dao.checkPw(m_id, m_password);
     }
+
+	
 
  
 }
