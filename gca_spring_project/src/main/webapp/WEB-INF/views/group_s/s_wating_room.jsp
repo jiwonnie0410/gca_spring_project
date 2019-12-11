@@ -261,13 +261,23 @@
 	<!-- 참여자 프로필 -->
      	<div style="border-top: thick double #FE9191; border-bottom: thick double #FE9191; padding-top:15px; padding-bottom:15px;">
 				<!-- foreach로 프로필 읽어와서 붙이기(memlist.어쩌구) -->
-        		<span id="cancel" data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
+        		<%-- <span id="cancel" data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
           			<img style="padding-bottom:5px;" width="65px" height="65px"
           							src="${pageContext.request.contextPath }/resources/images/jey/trainer-1.jpg" class="rounded-circle">
         			<br />사람1
-        		</span>
-        	
-          		<span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;">
+        		</span> --%>
+        		
+        		<c:forEach var="member" items="${memlist}">
+				    <span id="${member.m_id}" data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
+	          			<img style="padding-bottom:5px;" width="65px" height="65px"
+	          							src="${pageContext.request.contextPath }/resources/images/Characters/${member.m_image_cd}.gif" class="rounded-circle">
+	        			<br /><c:out value="${member.m_nick}" />
+        			</span>
+				
+				</c:forEach>
+
+        		
+          		<%-- <span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;">
           			<img style="padding-bottom:5px;" width="65px" height="65px"
           							src="${pageContext.request.contextPath }/resources/images/jey/trainer-2.jpg" class="rounded-circle">
         			<br />사람2
@@ -283,7 +293,7 @@
           			<img style="padding-bottom:5px;" width="65px" height="65px"
           							src="${pageContext.request.contextPath }/resources/images/jey/trainer-4.jpg" class="rounded-circle">
         			<br />사람4
-        		</span>
+        		</span> --%>
 
     	</div>
     			
