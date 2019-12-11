@@ -34,12 +34,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	    				 },
 	    	    		 success: function(info) {
 	    	    			 successCallback(info); 
-	    	    			 console.log(info);
-	    	    		 }
-	    			 })
+	    	    		 },  
+	    			 })    
 	    		 },   
-	    		 color: '#FE9191',
-	    		 textColor: 'white',
+	    		 textColor: 'black'
 	    	 }],
 	    	  
 	    
@@ -50,18 +48,30 @@ document.addEventListener('DOMContentLoaded', function() {
 	    },
 	    
 	    editable: true, //일정 드래그 등 하여 수정가능
-	    selectable: true, // 날짜클릭하여 이벤트 추가 가능
+	    selectable: true, // 날짜클릭하여 이벤트 추가 가능(모달)
 	    
 	    //이벤트 클릭시 모달열기
 	    eventClick: function(info) {
-	    	var eventDate = info.event.start;
-	    	var arrDate = eventDate.toString().split(":00 GMT");
+	    	var dbArr = info.event._def.extendedProps; //디비에서 가져온 배열선언	    	
+	    	var infoArr = info.event // fullcalendar에서 예약어로 적용된건 이쪽 배열에 저장됨 (ex: title, start, end등...)
+	    	var eventDate = infoArr.start.toString().split(":00 GMT"); //시간을 배열로 자름
+	    	console.log(infoArr);
 	    	
-	    	$("#eventModal").modal();
-	    	$("#modalDate").html(arrDate[0]);
+	    	$("#eventModal").modal();   
 	    	
-	    	console.log(eventDate + "date");
-	    	console.log(info)
+	    	$("#title").html(infoArr.title)
+	    	$("#date").html(eventDate[0]); //시간을 모달 input에 주입, 분단위까지 출력됨
+	    	$("#location").html(dbArr.location);
+	    	$("#sports_cd").html(dbArr.sports_cd);
+	    	$("#skill_cd").html(dbArr.skill_cd);
+	    	$("#age_range").html(dbArr.age_range);
+	    	$("#gender_cd").html(dbArr.gender_cd);
+	    	$("#status_cd").html(dbArr.status_cd);
+	    	$("#sg_option").html(dbArr.sg_option);
+	    	$("#bg_team_cnt").html(dbArr.bg_team_cnt);
+	    	
+	    	
+	    	console.log(info.event._def.extendedProps);
 	    	
 	    }//
 	  });
