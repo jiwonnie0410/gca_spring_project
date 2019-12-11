@@ -7,10 +7,11 @@
 		VIEW_ACTIVE_HIST 뷰를 사용합니다. 컬럼 조회시에 큰따옴표 필수! 없으면 에러남! 아래 셀렉 예시 확인바람	
 	-->        	
 	<select id="getActiveHistList" resultType="map"> 
+		<![CDATA[
 		SELECT 		"ach_num",
  					"m_id", 
+ 					"real_start"
 					"start",
-					"end",
  					"sg_num",
 					"six_num",
 					"bg_num",
@@ -24,13 +25,20 @@
 					"skill_cd",
 					"age_range",
 					"gender_cd",
-					"status_cd",
 					"sg_option",
 					"bg_team_cnt",
-					"color"
+					"color",
+					(case
+					when "start" > SYSDATE then '진행중'
+					when "start" <= SYSDATE and "now_cnt" >= "end_cnt" then '성공'
+					when "start" <= SYSDATE and "now_cnt" < "end_cnt" then '실패'
+					end) as "status"
+
 
 		FROM 		V_ACTIVE_HIST 
 		WHERE 		"m_id" = #{m_id}
+		]]>
+	
 	</select>
 	
 

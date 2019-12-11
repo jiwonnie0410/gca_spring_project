@@ -91,7 +91,7 @@
 	border: none;
 }
 
-.status_cd {
+.status {
     display: inline-block;
     font-size: 30px;
     width: 100%;
@@ -100,7 +100,8 @@
     font-weight: bold;
     padding: 20px;
 }
-}
+ 
+
 </style>
 
 </head>
@@ -151,17 +152,26 @@
 			    <div id="sgroup" class="container tab-pane active"><br>
 					<c:forEach items="${activeHistList}" var="list">
 						<c:if test="${list.sg_num != null }">
-						<div class="content-div">   
+							<div class="content-div">
 							<span class="pinkText">${list.title}</span>
 							<br>
-							<span class="mediumText">마감일자: ${list.end }</span>
+							<span class="pinkText">마감일자: ${list.start }</span>
 							<span class="mediumText">주소: ${list.location }</span>
 							<span class="mediumText">종목: ${list.sports_cd }</span>
 							<span class="mediumText">숙련도: ${list.skill_cd }</span>
 							<span class="mediumText">나이: ${list.age_range }</span>
 							<span class="mediumText">성별: ${list.gender_cd }</span>
 							<span class="mediumText">옵션: ${list.sg_option }</span>
-							<span class="status_cd">${list.status_cd }</span>
+							<c:if test="${list.status == '실패'}">
+								<span class="status" style="color: grey">${list.status }</span>
+							</c:if>
+							<c:if test="${list.status == '진행중'}">
+								<span class="status">${list.status }</span>
+							</c:if>
+							<c:if test="${list.status == '성공'}">   
+								<span class="status" style="color: red" >${list.status }</span>
+							</c:if>
+							
 						</div>
 						</c:if>
 					</c:forEach>
@@ -174,13 +184,13 @@
 						<div class="content-div">
 							<span class="pinkText">${list.title}</span>
 							<br>
-							<span class="mediumText">마감일자: ${list.end }</span>
+							<span class="pinkText">마감일자: ${list.start }</span>
 							<span class="mediumText">장소: ${list.location }</span>
 							<span class="mediumText">종목: ${list.sports_cd }</span>
 							<span class="mediumText">숙련도: ${list.skill_cd }</span>
 							<span class="mediumText">나이: ${list.age_range }</span>
 							<span class="mediumText">성별: ${list.gender_cd }</span>
-							<span class="status_cd">${list.status_cd }</span>
+							<span class="status">${list.status }</span>
 						</div>
 						</c:if>
 					</c:forEach>
@@ -194,14 +204,14 @@
 						<div class="content-div">
 							<span class="pinkText">${list.title}</span>
 							<br>
-							<span class="mediumText">마감일자: ${list.end }</span>
+							<span class="pinkText">마감일자: ${list.start }</span>
 							<span class="mediumText">장소: ${list.location }</span>
 							<span class="mediumText">종목: ${list.sports_cd }</span>
 							<span class="mediumText">숙련도: ${list.skill_cd }</span>
 							<span class="mediumText">나이: ${list.age_range }</span>
 							<span class="mediumText">성별: ${list.gender_cd }</span>
 							<span class="mediumText">팀인원: ${list.bg_team_cnt }</span>
-							<span class="status_cd">${list.status_cd }</span>
+							<span class="status">${list.status }</span>
 						</div>
 						</c:if>
 					</c:forEach>
@@ -224,7 +234,7 @@
 					<button type="button" class="close" data-dismiss="modal">×</button>
 				</div>    
 				<div id="modal-body" class="modal-body">     
-					<span id="date" class="mediumText"></span> 
+					<span id="date" class="pinkText"></span> 
 					<span id="location" class="mediumText"></span>
 					<span id="end_cnt" class="mediumText"></span>
 					<span id="sports_cd" class="mediumText"></span>
@@ -232,7 +242,7 @@
 					<span id="age_range" class="mediumText"></span>
 					<span id="gender_cd" class="mediumText"></span>
 					<span id="sg_option" class="mediumText"></span>
-					<span id="status_cd" class="status_cd"></span>
+					<span id="status" class="status"></span>
 					
 				</div>
 				<div class="modal-footer">

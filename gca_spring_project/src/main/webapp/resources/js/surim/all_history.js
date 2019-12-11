@@ -17,16 +17,23 @@ document.addEventListener('DOMContentLoaded', function() {
 	      }, 
 	      
 	    //디비에서 가져오는 일정값  	      
-  
 	    	 eventSources: [{  
 	    		 events: function(info, successCallback, failureCallback  ) {
 	    			 $.ajax({
-	    				 url: "../ajax/getActiveHistList.json",
+	    				 url: "../ajax/getActiveHistList.json", //디비값 제이슨으로 받음
 	    				 type: "GET",
 	    				 dataType: "json",
 	    				 data: {  
-	    					 start: moment(info.startStr).format('YYYY-MM-DD'),
-	    					 end: moment(info.endStr).format('YYYY-MM-DD')
+	    					 start: moment(info.startStr).format('YYYY-MM-DD'), //일정시작날
+	    					 end: moment(info.endStr).format('YYYY-MM-DD')		//일정 마지막날 
+	    					 
+	    					 /* 만약 end값이 있으면 start-end까지 일정을 그려준다, 
+	    					  * 현재 활동이력은 이벤트 마감날을 기준으로 하루만 그려줄 예정으로
+	    					  * 일정 마감일을 start에 매핑하였다
+	    					  * 
+	    					  * 일정생성일(sg_start_dttn) = real_start
+	    					  * 일정마감일(sg_end_dttn) = start
+	    					  */
 	    					 
 	    				 },
 	    				 error: function(data){
@@ -54,8 +61,18 @@ document.addEventListener('DOMContentLoaded', function() {
 	    eventClick: function(info) {
 	    	var dbArr = info.event._def.extendedProps; //디비에서 가져온 배열선언	    	
 	    	var infoArr = info.event // fullcalendar에서 예약어로 적용된건 이쪽 배열에 저장됨 (ex: title, start, end등...)
-	    	var eventDate = infoArr.start.toString().split(":00 GMT"); //시간을 배열로 자름
-	    	console.log(infoArr);
+	    	//var eventDate = infoArr.start.toString().split(":00 GMT"); //시간을 배열로 자름
+	    	
+	    	var format = calendar.formatDate(infoArr.start , {
+	    		year: 'numeric',
+	    		 month: 'numeric',
+	    		 day: 'numeric',
+	    		 timeZoneName: 'short',
+	    		 timeZone: 'UTC',
+	    		 locale: 'kr'
+	    	});  
+	    	
+	    	var eventDate = format.toString().split("GMT")
 	    	
 	    	$("#eventModal").modal();   
 	    	
@@ -67,17 +84,17 @@ document.addEventListener('DOMContentLoaded', function() {
 	    	$("#skill_cd").html("숙련도: "+dbArr.skill_cd);
 	    	$("#age_range").html("나이: "+dbArr.age_range);
 	    	$("#gender_cd").html("성별: "+dbArr.gender_cd);
-	    	$("#status_cd").html(dbArr.status_cd);
+	    	$("#status").html(dbArr.status);
 	    	$("#sg_option").html("옵션: "+dbArr.sg_option);
 	    	
-	    	
-	    	console.log(info.event._def.extendedProps);
 	    	
 	    }//
 	  });
 	  
 	 // 캘린더 가로세로 비율, 세로: 1 가로의 비율 조정가능, 세로:가로=1:0.8 
+	  //calendar.setOption('contentHeight', 450);
 	  calendar.setOption('aspectRatio', 0.8);
 	  calendar.render();
+	  
 	});
 
