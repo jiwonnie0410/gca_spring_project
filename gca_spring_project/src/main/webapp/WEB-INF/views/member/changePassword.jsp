@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,28 +16,40 @@
 		<!-- Latest compiled JavaScript -->
 		<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 		
-		<!-- JS -->
+		<!-- JS & CSS -->
 		<script	src="${pageContext.request.contextPath }/resources/js/member/changePasswordJs.js"></script>
+		<link href="${pageContext.request.contextPath }/resources/css/admin/logincss.css" rel="stylesheet">
 		<title> 비밀번호 변경 </title>
 </head>
 <body>
   <div class="row">
         <div class="col-4">
           <div class="card">
-            <div class="card-header" style="background-color: #FEBABA;"> 비밀번호 변경 </div>
-            <div class="card-body">
-					<form name="form1" method="post">
-						
-						<div align="center">
-							<h2>Choose Your Option</h2>
-						</div>
+            <div class="card-header" style="background-color: #FEBABA;"><b> 비밀번호 변경 </b></div>
+            <div class="card-body" align="center">
+            <br /><br />
+					<form name="pwfrm" method="post" action="updatePassword">
+							<input type="hidden" name="m_id" value='<sec:authentication property="principal.username" />'>
+							
+							<table>
+								<tr>
+									<td><input type="password" id="password1" name="m_password" class="form-control form-control-sm" onkeyup="pwCheck()" placeholder="비밀번호" /></td>
+								</tr>
+								<tr>
+									<td id="conditionPw"><font size="2">*비밀번호는 숫자, 특수문자를 혼합하여 6-8자리</font></td>
+								</tr>
+								<tr>
+									<td><input type="password" id="password2" class="form-control form-control-sm" onkeyup="pwCheck()" placeholder="비밀번호 확인" /></td>
+								</tr>
+								<tr>
+									<td id="confirmPw"><font size="2">*비밀번호 재확인을 해 주세요.</font></td>
+								</tr>
+								<tr height="80">
+									<td align="center"><button type="submit" class="button-title" style="width:200px; height:30px;"> 변경 </button></td>
+								</tr>
+							</table>
 						<br>
-							<input type="button" value="정" id="btnUpdate"> <input type="button" value="삭제" id="btnDelete">
-							<div style="color: red;"></div>
-							<!--이모티콘이로 대체  -->
 							 
-							 <!-- 비밀번호 변경 -->
-							 <a href="/member/changePassword">비밀번호 변경</a>
 					</form>
 				</div>
 			</div>

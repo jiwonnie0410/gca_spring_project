@@ -95,4 +95,11 @@ public class MembersController {
     public String changePassword() {
     	return "/notiles/member/changePassword";
     }
+    // 비밀번호 변경
+    @RequestMapping("/member/updatePassword")
+    public String updatePassword(MembersVO vo, Model model) {
+    	model.addAttribute("pwChangeMessage", memberService.changePw(vo)); // jsp 페이지에서 alert로 띄울 메시지 넘기기
+		return "/notiles/member/member_view";
+    	
+    }
 }
