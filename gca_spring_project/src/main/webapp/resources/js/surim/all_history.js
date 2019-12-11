@@ -76,8 +76,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	    }//
 	  });
 	  
-	 // 캘린더 날짜부분의 높이 450px보다 작으면 스크롤생김
-	  calendar.setOption('contentHeight', 450);
+	 // 캘린더 가로세로 비율, 세로: 1 가로의 비율 조정가능, 세로:가로=1:0.8 
+	  calendar.setOption('aspectRatio', 0.8);
 	  calendar.render();
 	});
 
