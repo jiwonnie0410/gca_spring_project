@@ -8,10 +8,10 @@
 	-->
 	<select id="getActiveHistList" resultType="map"> 
 		SELECT 		"ach_num",
-					"m_id",
+ 					"m_id", 
 					"start",
 					"end",
-					"sg_num",
+ 					"sg_num",
 					"six_num",
 					"bg_num",
 					"ach_confirm",
@@ -26,7 +26,7 @@
 					"gender_cd",
 					"status_cd",
 					"sg_option",
-					"bg_team_cnt"				
+					"bg_team_cnt"		 		
 
 		FROM 		V_ACTIVE_HIST 
 		WHERE 		"m_id" = #{m_id}

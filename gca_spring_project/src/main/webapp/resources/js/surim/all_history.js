@@ -1,15 +1,14 @@
- //달력 JS 옵션 제이쿼리 사용X 자바스크립트로만!
 // https://fullcalendar.io/docs#toc
-
+     
 document.addEventListener('DOMContentLoaded', function() {
 	  var calendarEl = document.getElementById('calendar');
 
 	  var calendar = new FullCalendar.Calendar(calendarEl, {
 		//한국어 적용
-		//locale: 'kr',
+		//locale: 'kr',   
 		
-		  //interaction: 일정 추가등의 이벤트용;  dayGrid:달력 달별로 보기기능
-	    plugins: [ 'interaction', 'dayGrid'], 
+		//interaction: 일정 추가등의 이벤트용;  dayGrid:달력 달별로 보기기능
+	    plugins: [ 'interaction', 'dayGrid', 'moment'], 
 	   
 	    // 달력 최상단 버튼 옵션
  	    header: {
@@ -18,13 +17,31 @@ document.addEventListener('DOMContentLoaded', function() {
 	      }, 
 	      
 	    //디비에서 가져오는 일정값  	      
-	     eventSources: [{
-	    				url: "../ajax/getActiveHistList.json",
-	    				dataType: "json",
-	    				color: 'blue'
-	    		
-	    	 }
-	     ],
+  
+	    	 eventSources: [{  
+	    		 events: function(info, successCallback, failureCallback  ) {
+	    			 $.ajax({
+	    				 url: "../ajax/getActiveHistList.json",
+	    				 type: "GET",
+	    				 dataType: "json",
+	    				 data: {  
+	    					 start: moment(info.startStr).format('YYYY-MM-DD'),
+	    					 end: moment(info.endStr).format('YYYY-MM-DD')
+	    					 
+	    				 },
+	    				 error: function(data){
+	    					 console.log("false");
+	    				 },
+	    	    		 success: function(info) {
+	    	    			 successCallback(info); 
+	    	    			 console.log(info);
+	    	    		 }
+	    			 })
+	    		 },   
+	    		 color: '#FE9191',
+	    		 textColor: 'white',
+	    	 }],
+	    	  
 	    
 	    // 일정 시간 포멧
 	    eventTimeFormat: {

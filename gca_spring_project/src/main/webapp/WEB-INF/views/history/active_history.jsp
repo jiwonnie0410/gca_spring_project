@@ -10,17 +10,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	
 <!-- 달력(fullcalendar) css/js파일 -->
 <link href='${pageContext.request.contextPath }/resources/fullcalendar/core/main.css' rel='stylesheet' />
 <link href='${pageContext.request.contextPath }/resources/fullcalendar/daygrid/main.css' rel='stylesheet'/>
-
 <script src='${pageContext.request.contextPath }/resources/fullcalendar/core/main.js'></script>
 <script src='${pageContext.request.contextPath }/resources/fullcalendar/daygrid/main.js'></script>
 <script src='${pageContext.request.contextPath }/resources/fullcalendar/interaction/main.js'></script>
 <script src='${pageContext.request.contextPath }/resources/fullcalendar/core/locales/ko.js'></script>
-
-
+<script src='${pageContext.request.contextPath }/resources/fullcalendar/moment/main.js'></script>
+<script src='${pageContext.request.contextPath }/resources/fullcalendar/moment-timezone/main.js'></script>
 
 <!-- 부트스트랩 링크 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -29,6 +27,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <!-- 수림 개인 js/css -->
+<script src='${pageContext.request.contextPath }/resources/fullcalendar/moment.js'></script>
+<script src='${pageContext.request.contextPath }/resources/fullcalendar/moment_timezone.js'></script>
 <script src="${pageContext.request.contextPath }/resources/js/surim/default.js"></script>
 <script src='${pageContext.request.contextPath }/resources/js/surim/all_history.js'></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
