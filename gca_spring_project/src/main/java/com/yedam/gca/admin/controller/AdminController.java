@@ -181,7 +181,7 @@ public class AdminController {
 	// 진영
 	 private static final Logger logger = LoggerFactory.getLogger(MembersController.class);
 	 // **전체조회
-		@RequestMapping("getUserList.do")
+		@RequestMapping("/admin/getUserList")
 	public String getUserList1(Model model, MembersVO vo) {
 		model.addAttribute("userList", adminService.getUserList(vo));
 		return "/admin/userList";
