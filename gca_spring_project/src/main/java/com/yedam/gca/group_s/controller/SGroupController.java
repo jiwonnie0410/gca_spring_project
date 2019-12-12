@@ -70,8 +70,8 @@ public class SGroupController {
 	//웹소켓 연결 시(방에 들어갈 시) ajax로 본인 프로필 이미지 가져온다(웹소켓으로 다른사람 화면에도 뿌리기 위해.)
 		@ResponseBody //얘가 있어야 페이지 리턴을 안한다.(이거 없으면 밑에 mapping된 jsp페이지로 자동으로 찾아감.)
 		@RequestMapping("/sgroup/returnImage")
-		public String returnImage(@RequestParam String id, MembersVO vo) {
-			vo.setM_id(id);
+		public String returnImage(@RequestParam String img, CodeVO vo) {
+			vo.setCd_id(img);
 			String data = sgroupService.returnImage(vo);
 			System.out.println("이미지:"+data);
 			return data;
@@ -168,4 +168,27 @@ public class SGroupController {
 		sgroupService.insertSg(vo);
 		return "redirect:alreadyIn?sg_num="+vo.getSg_num();
 	}
+	
+	//마감 방 리스트 조회
+	@RequestMapping("/sgroup/getSgEndList")
+	public String searchEnd(Model model, SGroupVO vo, HttpSession session) {
+		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
+		vo.setM_xy(memInfo.getM_xy());
+		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
+		model.addAttribute("sgroup", vo);
+		model.addAttribute("list", sgroupService.getSgEndList(vo));
+		return "/user/group_s/s_end_room";
+	}
+	
+	//마감 방 리스트 추가 조회
+	@RequestMapping(value="/sgroup/getSgListEndPlus", method = RequestMethod.POST)
+	public String searchEnd(SGroupVO vo, HttpSession session, Model model) {
+		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
+		vo.setM_xy(memInfo.getM_xy());
+		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
+		model.addAttribute("sgroup", vo);
+		model.addAttribute("list", sgroupService.getSgEndList(vo));
+		return "/notiles/group_s/s_search_temp";
+	}
+	
 }

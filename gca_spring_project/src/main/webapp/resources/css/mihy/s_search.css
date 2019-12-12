@@ -1,3 +1,5 @@
+nav { background-color: white;}
+
 /* 운동종목 메뉴 */
 .swiper-container {
 	width: 100%;
@@ -41,7 +43,7 @@
 }
 
 /* 테이블 각 요소 */
-.tr { height: 90px;}
+.tr { height: 90px; margin-top:130px}
 .td1 { width: 50px; float: top; position: relative; }
 .td2 { width: 200px; float: top; position: relative; }
 .td3 { width: 90px;	white-space: nowrap; float: top; position: relative; }

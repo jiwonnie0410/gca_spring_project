@@ -108,6 +108,10 @@
 
 </style>
 
+<!-- 로그인한사람의 id,닉네임,캐릭터코드 저장 -->
+<sec:authentication property="principal.username" var="id"/>
+<sec:authentication property="principal.m_nick" var="nick"/>
+<sec:authentication property="principal.m_image_cd" var="image"/>
 
 <script>
 		$(function() { //페이지 로딩 완료 후 실행
@@ -233,9 +237,7 @@
 <body>
 <!-- 버튼영역 위(프로필까지)의 div 시작 -->
     <div style="padding-top:0px;">
-    <sec:authentication property="principal.username" var="id"/>
-    <sec:authentication property="principal.m_nick" var="nick"/>
-    <sec:authentication property="principal.m_image_cd" var="image"/>
+    
     <input type="hidden" id="s_id" value='${id}'>
     <input type="hidden" id="s_nick" value='${nick}'>
     <input type="hidden" id="s_character" value='${image}'>
@@ -462,19 +464,21 @@
  function onMessage(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
 	var result = JSON.parse(event.data);
 	if(result.cmd == "join") { //방에 들어온경우(웹소켓 연결된 경우)
-		var img = document.getElementById('s_character').value;
-		var nick = document.getElementById('s_nick').value;
-		var id = document.getElementById('s_id').value;
-		var img = ${img};
-		var nick = ${nick};
-		var id = ${id};
-		//var param = {"id":result.id};
+		//var img = document.getElementById('s_character').value;
+		//var nick = document.getElementById('s_nick').value;
+		//var id = document.getElementById('s_id').value;
+		var img = "${image}";
+		var nick = "${nick}";
+		var id = "${id}";
+		
+		var param = {"img":img};
 		
 		console.log("id : "+id);
 		console.log("nick : "+nick);
 		console.log("img : "+img);
 		
-		/* $.ajax({
+		//이미지 영어이름 갖고오는 ajax(웹소켓에서 처리하는 방향 알아보기.)
+		$.ajax({
 			url: "returnImage",
 			type:'GET',
 			async:false,
@@ -489,11 +493,11 @@
 				
 			}
 			
-		}); */
+		});
 		
 		//프로필 붙여주기~~
 		$span = $("<span data-toggle='modal' data-target='#profile' style='font-size:13px; padding:10px; display:inline-block;'>");
-		$span.attr("id","${sessionScope.id}");
+		$span.attr("id","${id}");
 		$img = $("<img style='padding-bottom:5px;' width='65px' height='65px'>");
 		$img.attr({"src": "${pageContext.request.contextPath }/resources/images/Characters/"+img+".gif"});
 		$text = "${nick}";
@@ -525,7 +529,8 @@
 	msg = {
 		cmd : "join",
 		id : "${id}",
-		msg : "<"+"${id}"+"님이 참가하셨습니다.>" //여기에 아이디 붙여서 추가하면 될듯. 근데 새로고침해도 이게 뜨는것은 막아야함.
+		msg : "<"+"${id}"+"님이 참가하셨습니다.>"
+		//여기에 아이디 붙여서 추가하면 될듯. 근데 새로고침해도 이게 뜨는것은 막아야함.
 	}				//msg의 id 넣는 부분을 ${sessionScope.id}말고 json의 id로 가져오는 방법은 없을까
 	webSocket.send(  JSON.stringify( msg )   );
  }

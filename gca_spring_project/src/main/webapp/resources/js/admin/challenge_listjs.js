@@ -161,19 +161,36 @@ function getKey(cl_num) {
 			data: num_data,
 			success: function(result) {
 					console.log(result);
-//					var status;
-//					if(result.CL_STATUS == 'basic')
-//						status = '기본';
-//					else
-//						status = '스페셜';
-//					$("<tr data-toggle='modal' data-target='#challenge-going' id='newTr'>")
-//							  .append("<td align='center'>"+ result.cl_num +"</td>")
-//							  .append("<td align='center'>"+ status +"</td>")
-//							  .append("<td>"+ result.cl_name +"</td>")
-//							  .append("<td align='center'>"+ result.cl_start_dttm +"</td>")
-//							  .append("<td align='center'>"+ result.cl_end_dttm +"</td>")
-//							  .append("<td align='center'>"+ result.cl_score +"점 </td>")
-//							  .appendTo($("#challenge-table"));
+					var status;
+					if(result.detail.CL_STATUS == 'basic')
+						status = '기본 챌린지';
+					else
+						status = '스페셜 챌린지';
+					// 챌린지 상세 정보 띄우기
+					$("<tr>").append("<td align='center' width='13%'><b> No."+ result.detail.CL_NUM +"</b></td>")
+							 .append("<td align='center' width='25%'><b>"+ status +"</b></td>")
+							 .append("<td width='100%'><b>"+ result.detail.CL_NAME +"</b></td>")
+							 .appendTo($("#chGoing"));
+					
+					$("<tr>").append("<td></td>")
+							 .append("<td align='center'><b>"+ result.detail.CL_SCORE +"점</b></td>")
+							 .append("<td><b>"+ result.detail.CL_START_DTTM + " ~ " + result.detail.CL_END_DTTM +"</b></td>")
+							 .appendTo($("#chGoing"));
+					
+					$("<tr>").append("<td></td>")
+							 .append("<td colspan='2'><b> 내용: "+ result.detail.CL_CONTENT +"</b></td>")
+							 .appendTo($("#chGoing"));
+					
+					// 챌린지에 참여 중인 사람들 띄우기
+					for(i=0; i<result.people.length; i++) {
+							$("<tr>").append("<td align='center'>"+ result.people[i].M_ID +"</td>")
+									 .append("<td align='center'>"+ result.people[i].M_NAME +"</td>")
+									 .append("<td align='center'>"+ result.people[i].M_AGE +"</td>")
+									 .append("<td align='center'>"+ result.people[i].CD_NAME +"</td>")
+    								 .append("<td align='center'>"+ result.people[i].M_LOCATION +"</td>")
+									 .append("<td align='center'>"+ result.people[i].CLH_CNT +"</td>")
+									 .appendTo($("#chPeople"));
+					}
 			}
 	});
 

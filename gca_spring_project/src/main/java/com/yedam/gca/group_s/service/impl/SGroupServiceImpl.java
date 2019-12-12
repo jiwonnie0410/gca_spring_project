@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.yedam.gca.admin.vo.TroubleVO;
+import com.yedam.gca.common.code.vo.CodeVO;
 import com.yedam.gca.group_s.dao.SGroupDAO;
 import com.yedam.gca.group_s.service.SGroupService;
 import com.yedam.gca.group_s.vo.SGroupVO;
@@ -31,7 +32,7 @@ public class SGroupServiceImpl implements SGroupService {
 		sgroupDAO.cancelJoin(vo);
 		sgroupDAO.minusNowCnt(vo);
 	}
-	public String returnImage(MembersVO vo) {
+	public String returnImage(CodeVO vo) {
 		return sgroupDAO.returnImage(vo);
 	}
 	
@@ -51,6 +52,10 @@ public class SGroupServiceImpl implements SGroupService {
 	@Override
 	public void insertSg(SGroupVO vo) {
 		sgroupDAO.insertSg(vo);
+	}
+	@Override
+	public List<SGroupVO> getSgEndList(SGroupVO vo) {
+		return sgroupDAO.getSgEndList(vo);
 	}
 
 }

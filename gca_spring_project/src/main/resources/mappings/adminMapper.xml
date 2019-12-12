@@ -123,8 +123,10 @@
 			
 
 <!-- 7. 챌린지 참여 중인 인원 -->
-			<select id="challenegeCount" resultType="map" parameterType="int">
-					SELECT C.CL_NUM, C.CL_STATUS, C.CL_NAME, C.CL_CONTENT, D.CD_NAME, C.CL_START_DTTM, C.CL_END_DTTM,
+			<select id="challenegeCount" resultType="map" parameterType="map">
+					SELECT C.CL_NUM, C.CL_STATUS, C.CL_NAME, C.CL_CONTENT, D.CD_NAME, 
+							TO_CHAR(C.CL_START_DTTM, 'yyyy/mm/dd') "CL_START_DTTM", 
+							TO_CHAR(C.CL_END_DTTM, 'yyyy/mm/dd') "CL_END_DTTM",
 					        H.M_ID, H.CLH_CNT
 					FROM CHALLENGE C, CODE D, CHALLENGE_HIST H
 					WHERE C.SPORTS1_CD = D.CD_ID AND H.CL_NUM = C.CL_NUM
@@ -140,12 +142,12 @@
 							C.CL_CONTENT, 
 							D.CD_NAME, 
 							C.CL_CNT, 
-							C.CL_START_DTTM,
-					        C.CL_END_DTTM, 
+							TO_CHAR(C.CL_START_DTTM, 'yyyy/mm/dd') "CL_START_DTTM", 
+							TO_CHAR(C.CL_END_DTTM, 'yyyy/mm/dd') "CL_END_DTTM",
 					        C.CL_SCORE
 					FROM CHALLENGE C, CODE D
 					WHERE C.SPORTS1_CD = D.CD_ID
-							AND C.CL_NUM = ${cl_num}
+							AND C.CL_NUM = #{value}
 			</select>
 			
 
@@ -154,13 +156,14 @@
 					SELECT 	M.M_ID, 
 							M.M_NAME,
 							M.M_AGE, 
-							D.CD_NAME, 
-							SUBSTR(M.M_LOCATION, 1, 2) "M_LOCATION"
+							D.CD_NAME,
+							SUBSTR(M.M_LOCATION, 1, 2) "M_LOCATION",
+							H.CLH_CNT
 					FROM CHALLENGE C, CHALLENGE_HIST H, MEMBERS M, CODE D
 					WHERE C.CL_NUM = H.CL_NUM 
 							AND M.M_ID = H.M_ID 
 							AND M.GENDER_CD = D.CD_ID
-							AND C.CL_NUM = ${cl_num}
+							AND C.CL_NUM = #{value}
 			</select>
 			
 			

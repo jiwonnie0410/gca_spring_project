@@ -59,10 +59,10 @@
 	</update>
 	
 	<!-- <원래 membersMapper에 있어야 할 쿼리>방에 들어갈때 웹소켓으로 뿌릴 이미지 조회-id로 본인 프로필 이미지 불러오는 쿼리- -->
-	<select id="returnImage" parameterType="members" resultType="String">
-		SELECT	get_code_name(M_IMAGE_CD) M_IMAGE_CD
-		FROM	MEMBERS
-		WHERE	M_ID = #{m_id}
+	<select id="returnImage" parameterType="code" resultType="String">
+		SELECT	CD_NAME
+		FROM	CODE
+		WHERE	CD_ID = #{cd_id}
 	</select>
 	
 	
@@ -101,13 +101,12 @@
              							SUBSTR(#{m_xy}, INSTR(#{m_xy}, ',', 1, 1)+2, LENGTH(#{m_xy}))
              						 ) DIS
              			FROM SGROUP S
-             			<where>
-				            <if test="keyval != null and keyval !=''">
-								<if test="key == 'sports'">
-									and SPORTS1_CD like '%'||#{keyval}||'%'
-								</if>
-						 	</if>
-             			</where>
+             			WHERE SG_END_DTTM <![CDATA[ > ]]> SYSDATE
+			            <if test="keyval != null and keyval !=''">
+							<if test="key == 'sports'">
+								and SPORTS1_CD like '%'||#{keyval}||'%'
+							</if>
+					 	</if>
              			ORDER BY DIS, SG_END_DTTM, SG_NUM
              			) A
 					<where>
@@ -138,6 +137,53 @@
 			,#{m_id}
 			,#{sg_num, mode=OUT, jdbcType=INTEGER}
 		)}
+	</select>
+	
+<!-- SGroup 마감 방 조회 -->
+	<select id="getSgEndList" resultType="sgroup">
+		SELECT 
+				SG_NUM,
+				SG_NAME,
+				SG_START_DTTM,
+				SG_END_DTTM,
+				SG_NOW_CNT,
+				SG_END_CNT,
+				SG_LOCATION,
+				SG_XY,
+				SPORTS1_CD,
+				get_code_name(SKILL_CD) SKILL_CD,
+				AGE_RANGE,
+				get_code_name(GENDER_CD) GENDER_CD,
+				get_code_name(STATUS_CD) STATUS_CD,
+				SG_OPTION,
+				DIS
+		FROM
+			 	(
+			 	SELECT ROWNUM R, A.* 
+				FROM 	(
+						SELECT S.*, DISTANCE_WGS84(
+             							SUBSTR(SG_XY, 0, INSTR(SG_XY, ',', 1, 1)-1),
+             							SUBSTR(SG_XY, INSTR(SG_XY, ',', 1, 1)+2, LENGTH(SG_XY)),
+             							SUBSTR(#{m_xy}, 0, INSTR(#{m_xy}, ',', 1, 1)-1),
+             							SUBSTR(#{m_xy}, INSTR(#{m_xy}, ',', 1, 1)+2, LENGTH(#{m_xy}))
+             						 ) DIS
+             			FROM SGROUP S
+						WHERE SG_END_DTTM <![CDATA[ <= ]]> SYSDATE
+			            <if test="keyval != null and keyval !=''">
+							<if test="key == 'sports'">
+								and SPORTS1_CD like '%'||#{keyval}||'%'
+							</if>
+					 	</if>
+             			ORDER BY DIS, SG_END_DTTM, SG_NUM
+             			) A
+					<where>
+					 	<if test="end_dis != null and end_dis != 0">
+					 		AND LPAD(round(DIS, 3), 8, '0') || to_char(SG_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(SG_NUM, 6, '0')
+					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3), 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
+					 	</if>
+					 </where>
+    			)
+		WHERE R <![CDATA[ <= ]]> #{scroll_rec} 
 	</select>
 
 
