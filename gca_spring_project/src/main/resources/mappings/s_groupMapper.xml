@@ -59,10 +59,10 @@
 	</update>
 	
 	<!-- <원래 membersMapper에 있어야 할 쿼리>방에 들어갈때 웹소켓으로 뿌릴 이미지 조회-id로 본인 프로필 이미지 불러오는 쿼리- -->
-	<select id="returnImage" parameterType="members" resultType="String">
-		SELECT	get_code_name(M_IMAGE_CD) M_IMAGE_CD
-		FROM	MEMBERS
-		WHERE	M_ID = #{m_id}
+	<select id="returnImage" parameterType="code" resultType="String">
+		SELECT	CD_NAME
+		FROM	CODE
+		WHERE	CD_ID = #{cd_id}
 	</select>
 	
 	
