@@ -52,6 +52,8 @@ public class AdminController {
 	}
 	
 	// 1-4. 챌린지 진행 현황
+//	@RequestMapping("ajax/challenge/going")
+//	public 
 
 	// 2. 매출 페이지
 	@RequestMapping("/admin/sale")
