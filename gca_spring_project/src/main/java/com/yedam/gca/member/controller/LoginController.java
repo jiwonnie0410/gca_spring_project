@@ -106,20 +106,5 @@ public class LoginController {
 	}
 	// 지원 끝
 	
-
-	// **************** 수림 ***************** //
-	
-	// 1. 환경설정 페이지 이동
-	@RequestMapping("member/option")
-	public String getAlarmInfo() {
-		return "/user/member/option";
-	}
-	
-	@RequestMapping("/ajax/option.json")
-	@ResponseBody
-	public MembersVO getAlarmInfo(MembersVO vo) {
-		//임시 아이디
-		vo.setM_id("test");
-		return memberService.getAlarmInfo(vo);
-	}
+	// 수림
 }
