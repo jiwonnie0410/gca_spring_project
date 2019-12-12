@@ -166,22 +166,22 @@
 				</div>
         
 <!-- Modal body -->
-				<div class="modal-body">
+				<div class="modal-body" align="center">
 					<table id="chGoing">
 							<!-- 챌린지 상세 내용이 보여질 부분 -->
 					</table><br /><br />
 					
 					<table id="chPeople">
 							<tr id='tr' align="center" style="background-color:#FEBABA;">
-							<th width="15%"> ID </th>
-							<th width="15%"> 이름 </th>
-							<th width="10%"> 나이 </th>
-							<th width="10%"> 성별 </th>
-							<th width="45%"> 지역 </th>
-							<th width="12%"> 진행 횟수 </th>
-						</tr>
+								<th width="20%"> ID </th>
+								<th width="19%"> 이름 </th>
+								<th width="13%"> 나이 </th>
+								<th width="15%"> 성별 </th>
+								<th width="15%"> 지역 </th>
+								<th width="20%"> 진행 횟수 </th>
+							</tr>
 					</table>
-				</div>
+				</div> 
 <!-- Modal footer -->
 				<div class="modal-footer">
 					

@@ -32,12 +32,15 @@ public class AdminDAO {
 	
 	// 챌린지 진행 현황 / 참여 인원
 	public List<ChallengeVO> challengeCount(int cl_num) {
-		return mybatis.selectList("AdminDAO.challenegeCount", cl_num);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cl_num", cl_num);
+		System.out.println("여기는 DAO 1 : " + cl_num);
+		return mybatis.selectList("AdminDAO.challenegeCount", map);
 	}
 	
 	// 챌린지 진행 현황 / 챌린지 상세 내용
 	public Map<String, Object> challengeDetail(int cl_num) {
-		System.out.println("여기는 DAO: " + cl_num);
+		System.out.println("여기는 DAO 2 : " + cl_num);
 		return mybatis.selectOne("AdminDAO.challengeDetail", cl_num);
 	}
 	
