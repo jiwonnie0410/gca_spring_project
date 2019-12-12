@@ -26,7 +26,8 @@ public interface AdminService {
 	// 6. 챌린지 목록
 	public List<ChallengeVO> challengeList();
 	
-	
+	// 7. 챌린지 진행 현황
+	public Map<String, Object> challengeGoing(int cl_id);
 	
 	
 	//진영

@@ -46,8 +46,9 @@ $(function(){
 			$('#addType').text();
 		}
 	});
+	
 });
-				
+
 // 챌린지 생성 버튼
 function createChallengeButton(){
 	var frm = document.createChallengeForm;
@@ -138,7 +139,7 @@ function getChallengeList() {
 					status = '기본';
 				else
 					status = '스페셜';
-				$("<tr data-toggle='modal' data-target='#challenge-going' id='newTr'>")
+				$("<tr data-toggle='modal' data-target='#challenge-going' id='newTr' onclick='getKey("+datas[i].CL_NUM+")'>")
 						  .append("<td align='center'>"+ datas[i].CL_NUM +"</td>")
 						  .append("<td align='center'>"+ status +"</td>")
 						  .append("<td>"+ datas[i].CL_NAME +"</td>")
@@ -149,4 +150,30 @@ function getChallengeList() {
 			}
 		}
 	});
+}
+
+function getKey(cl_num) {
+	console.log("챌린지 번호:: " + cl_num);
+	// 챌린지 진행 현황
+	$.ajax({
+			url: "../ajax/challenge/going",
+			data: "cl_num",
+			success: function(result) {
+					console.log(result);
+//					var status;
+//					if(result.CL_STATUS == 'basic')
+//						status = '기본';
+//					else
+//						status = '스페셜';
+//					$("<tr data-toggle='modal' data-target='#challenge-going' id='newTr'>")
+//							  .append("<td align='center'>"+ result.cl_num +"</td>")
+//							  .append("<td align='center'>"+ status +"</td>")
+//							  .append("<td>"+ result.cl_name +"</td>")
+//							  .append("<td align='center'>"+ result.cl_start_dttm +"</td>")
+//							  .append("<td align='center'>"+ result.cl_end_dttm +"</td>")
+//							  .append("<td align='center'>"+ result.cl_score +"점 </td>")
+//							  .appendTo($("#challenge-table"));
+			}
+	});
+
 }

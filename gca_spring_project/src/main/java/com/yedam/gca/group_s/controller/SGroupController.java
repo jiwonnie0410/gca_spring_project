@@ -85,7 +85,6 @@ public class SGroupController {
 	public String search(Model model, SGroupVO vo, HttpSession session) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
 		vo.setM_xy(memInfo.getM_xy());
-//		vo.setM_xy("37.56628868272894, 127.0555535312866");
 		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
 		model.addAttribute("sgroup", vo);
 		model.addAttribute("list", sgroupService.getSgList(vo));
@@ -97,7 +96,6 @@ public class SGroupController {
 	public String search(SGroupVO vo, HttpSession session, Model model) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
 		vo.setM_xy(memInfo.getM_xy());
-//		vo.setM_xy("37.56628868272894, 127.0555535312866");
 		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
 		model.addAttribute("sgroup", vo);
 		model.addAttribute("list", sgroupService.getSgList(vo));

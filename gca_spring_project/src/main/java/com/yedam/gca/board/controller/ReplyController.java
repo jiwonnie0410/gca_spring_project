@@ -60,7 +60,6 @@ public class ReplyController {
 		try {
 			// 세션에 저장된 회원아이디를 댓글작성자에 세팅
 			vo.setM_id(user.getUsername());                                            //로그인완성후 주석해제
-			vo.setM_id("rr99999");
 			// 댓글입력 메서드 호출
 			replyService.create(vo);
 			// 댓글입력이 성공하면 성공메시지 저장

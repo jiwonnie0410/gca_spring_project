@@ -49,8 +49,7 @@ public class BoardServiceImpl implements BoardService {
 		vo.setAd_count(ad_count);
 		vo.setAd_date(ad_date);
 		vo.setAd_content(ad_content);
-		/* vo.setM_id(m_id); */ //로그인 완성후 주석풀기
-		vo.setM_id("rr99999");
+		vo.setM_id(m_id); //로그인 완성후 주석풀기
 		// 게시물 등록
 		boardDao.create(vo);
 	

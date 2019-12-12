@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yedam.gca.board.vo.AdBoardVO;
 import com.yedam.gca.board.vo.BoardSearchVO;
 import com.yedam.gca.board.vo.QnaBoardVO;
 @Repository  //빈등록
@@ -46,19 +47,12 @@ public class QnaBoardDao  {
 	public int updateBoard(QnaBoardVO vo) {
 		return mybatis.update("BoardDAO.updateBoard", vo);
 	}
+	
 	//단건조회
-	public  QnaBoardVO getBoard(QnaBoardVO vo) {
-		return mybatis.selectOne("BoardDAO.getBoard", vo);
+	public  QnaBoardVO read(int qb_id)throws Exception {
+		return mybatis.selectOne("BoardDAO.view", qb_id);
 	}
 
-	///test
-	/*
-	 * @Override public List<QnaBoardVO> getContentList(Map<String, Object>
-	 * paramMap) { return sqlSession.selectList("selectContent", paramMap); }
-	 * 
-	 * @Override public int getContentCnt(Map<String, Object> paramMap) { return
-	 * sqlSession.selectOne("selectContentCnt", paramMap); }
-	 */
-	
+	// 02. 게시글 상세보기
 	
 }
