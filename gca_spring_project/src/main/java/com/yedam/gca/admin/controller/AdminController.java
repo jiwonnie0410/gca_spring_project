@@ -50,6 +50,8 @@ public class AdminController {
 		adminService.createChallenge(vo);
 		return vo;
 	}
+	
+	// 1-4. 챌린지 진행 현황
 
 	// 2. 매출 페이지
 	@RequestMapping("/admin/sale")
