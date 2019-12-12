@@ -151,16 +151,25 @@ select b.*  from ( select a.*, rownum rn  from(
 	<selectKey order="BEFORE" resultType="int" keyProperty="qb_id">
 		SELECT NVL(MAX(qb_id),0)+1 FROM qna_board		
 	</selectKey>
-	INSERT INTO qna_board(  qb_id,
+	INSERT INTO qna_board( 
+						qb_id,
+					  <if test="qb_origin != null and qb_origin != ''">
+						  	  qb_origin,
+					 </if>
 						qb_title,
 						m_id,
 						qb_content,
-						qb_hit,
+						qb_hit
 						
 						  )
-			   VALUES(  #{qb_id},
+			   VALUES(  
+			   			#{qb_id},
+			   			<if test="qb_origin != null and qb_origin != ''">
+					  		#{qb_origin}, 
+						</if> 
 				        #{qb_title},
-				        'test',<!--로그인후 수정  -->
+				        <!-- 'test',로그인후 수정  -->
+				        #{m_id},
 				        #{qb_content},
 					    0)		
 </insert>
@@ -178,7 +187,7 @@ select b.*  from ( select a.*, rownum rn  from(
 
 
 <!-- 단건조회 -->
-<select id="getBoard" parameterType="qnaboard"  resultType="qnaboard" >
+<select id="view" parameterType="qnaboard"  resultType="qnaboard" >
  SELECT  qb_id,
 		 qb_title,
 		 m_id,
