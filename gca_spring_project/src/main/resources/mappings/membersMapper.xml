@@ -30,7 +30,9 @@
 											M_STATUS_CD,
 											M_EMAIL,
 											M_RADIUS,
-											M_NOTICE
+											M_NOTICE1,
+											M_NOTICE2,
+											M_NOTICE3
 										)
 					VALUES (	#{m_id},
 								#{m_salt},
@@ -47,7 +49,9 @@
 								'M01',
 								#{m_email},
 								10,
-								'on/on'
+								1,
+								1,
+								1
 							)
 		  	</insert>
 
@@ -90,7 +94,7 @@
 			<select id="loginCheck" parameterType="members" resultType="members">
 					SELECT 	M_ID, M_PASSWORD, M_GRANT,
 							M_NAME, M_NICK, M_IMAGE_CD, M_XY, M_LOCATION, M_AGE, GENDER_CD, M_LEVEL_CD,
-							M_RADIUS, M_NOTICE, M_EMAIL
+							M_RADIUS, M_NOTICE1, M_NOTICE2, M_NOTICE3 M_EMAIL
 					FROM MEMBERS
 					WHERE M_ID = #{m_id}
 			</select>
@@ -177,7 +181,9 @@
 	<select id="getAlarmInfo" resultType="members">   
 		SELECT		M_ID, 
 					M_RADIUS, 
-					M_NOTICE
+					M_NOTICE1,
+					M_NOTICE2,
+					M_NOTICE3
 		FROM 		MEMBERS
 		WHERE M_ID = #{m_id}    
 	</select>

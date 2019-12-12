@@ -78,7 +78,9 @@
 					M_GRANT,
 					M_STATUS_CD,
 					M_RADIUS,
-					M_NOTICE,
+					M_NOTICE1,
+					M_NOTICE2,
+					M_NOTICE3,
 					get_code_name(M_LEVEL_CD) "m_level_cd"
 		FROM 		MEMBERS M 
 				JOIN 
