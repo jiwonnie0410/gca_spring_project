@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -31,6 +33,7 @@ public class MembersVO implements UserDetails {
 	private String m_email;
 	
 	@Override
+	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// 인가
 		List<GrantedAuthority> auth = new ArrayList<>();
@@ -46,18 +49,22 @@ public class MembersVO implements UserDetails {
 		return m_id;
 	}
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonExpired() {
 		return true;
 	}
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 	@Override
+	@JsonIgnore
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 	@Override
+	@JsonIgnore
 	public boolean isEnabled() {
 		return true;
 	}

@@ -62,7 +62,7 @@ $(function() {
 			</thead>
 			<tbody>
 				<tr>   
-					<td><span class="mediumText">참가한 반짝 인원모집 완료시 알람</span></td>
+					<td><span class="mediumText">참가중 반짝, 인원모집 완료시 알람</span></td>
 					<td>
 						<div class="onoffswitch">
 						    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch1" checked>

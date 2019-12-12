@@ -47,7 +47,7 @@
 								'M01',
 								#{m_email},
 								10,
-								'on/on'
+								'on/on/on'
 							)
 		  	</insert>
 
@@ -167,5 +167,39 @@
         FROM MEMBERS
         WHERE m_id = #{m_id} AND M_PASSWORD = #{m_password}
     </select>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    	
+	
+	
+	<!-- ************  수림    ****************** 
+	1. 유저별 알람 정보 불러오기
+	-->
+	
+	<!-- 1. 유저별 알람 정보 불러오기 -->      
+	<select id="getAlarmInfo" resultType="members">   
+		SELECT		M_ID, 
+					M_RADIUS, 
+					M_NOTICE
+		FROM 		MEMBERS
+		WHERE M_ID = #{m_id}    
+	</select>
+    
+    
+    
+    
+    
+    
+    
+    
 </mapper>
 

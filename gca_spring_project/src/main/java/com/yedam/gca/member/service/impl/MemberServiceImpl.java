@@ -243,5 +243,13 @@ public class MemberServiceImpl implements MemberService {
 
 	
 
+    
+    // ***************** 수림 *********************** //
+    
+    //1. 1. 유저별 알람 정보 가져오기 
+    @Override
+    public MembersVO getAlarmInfo(MembersVO vo) {
+    	return dao.getAlarmInfo(vo);
+    }
  
 }
