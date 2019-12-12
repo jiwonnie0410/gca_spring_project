@@ -88,15 +88,15 @@ $(function() {
 						</div>
 					</td>
 				</tr>
-				<tr>   
-					<td><span class="mediumText">범위내 등록된 동아리매치 알람</span></td>
-					<td>
-						<div class="onoffswitch">
-						    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch4" checked>
-						    <label class="onoffswitch-label" for="myonoffswitch4"></label>
-						</div>
-					</td>
-				</tr>
+<!-- 				<tr>    -->
+<!-- 					<td><span class="mediumText">범위내 등록된 동아리매치 알람</span></td> -->
+<!-- 					<td> -->
+<!-- 						<div class="onoffswitch"> -->
+<!-- 						    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch4" checked> -->
+<!-- 						    <label class="onoffswitch-label" for="myonoffswitch4"></label> -->
+<!-- 						</div> -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
 				
 				
 			</tbody>
@@ -112,12 +112,12 @@ $(function() {
 				<tr>
 					<td colspan="2">
 						<div class="slidecontainer">
-						  <input type="range" min="1" max="15" value="5" class="rangeSlider" id="myRange">
+						  <input type="range" min="1" max="30" value="10" class="rangeSlider" id="myRange">
 						</div>
 					</td>
 				</tr>
 				<tr>   
-					<td class="pinkText" style="padding-top: 20px">반경범위: <span id="checkRange"></span>km</td>
+					<td class="pinkText" style="padding-top: 20px; width: 200px;">반경범위: <span id="checkRange"></span>km</td>
 					<td style="text-align: center; padding-top: 20px;"><button class="pink-btn">적용</button></td>
 				</tr>   
 			</tbody>
