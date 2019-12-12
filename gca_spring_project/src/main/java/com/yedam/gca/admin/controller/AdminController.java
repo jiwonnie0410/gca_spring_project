@@ -29,7 +29,6 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 
-
 	// 지원
 	// 1-1. 챌린지 관리 페이지
 	@RequestMapping("/admin/challenge")
@@ -47,8 +46,9 @@ public class AdminController {
 	// 1-3. 챌린지 등록
 	@ResponseBody
 	@RequestMapping(value="ajax/createChallenge", consumes="application/json")
-	public String createChallenge(@RequestBody ChallengeVO vo){
-		return adminService.createChallenge(vo);
+	public ChallengeVO createChallenge(@RequestBody ChallengeVO vo){
+		adminService.createChallenge(vo);
+		return vo;
 	}
 
 	// 2. 매출 페이지
@@ -60,7 +60,6 @@ public class AdminController {
 	// 3-1. 통계 페이지
 	@RequestMapping("/admin/chart")
 	public String adminChart() {
-
 		return "/admin/admin_chart";
 	}
 

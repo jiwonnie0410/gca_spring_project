@@ -25,11 +25,9 @@ public class AdminServiceImpl implements AdminService {
 
 	// 2. 챌린지 생성
 	@Override
-	public String createChallenge(ChallengeVO vo) {
-		dao.createChallenge(vo);
-
-		// 챌린지 생성되면 생성됐다고 메시지 날리기
-		return null;
+	public int createChallenge(ChallengeVO vo) {
+		int result = dao.createChallenge(vo);
+		return result;
 	}
 
 	// 3. 반짝 운동별 통계

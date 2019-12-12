@@ -9,7 +9,7 @@ import com.yedam.gca.member.vo.MembersVO;
 public interface AdminService {
 
 	// 1. 챌린지 생성
-	public String createChallenge(ChallengeVO vo);
+	public int createChallenge(ChallengeVO vo);
 	
 	// 2. 반짝 운동별 통계
 	public List<Map<String, Object>> chartSgroup();
