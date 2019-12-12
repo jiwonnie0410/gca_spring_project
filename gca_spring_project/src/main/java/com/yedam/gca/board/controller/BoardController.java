@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -75,9 +76,9 @@ public class BoardController {
 	
 	// 02_02. 게시글 작성처리
 	@RequestMapping(value="insert.do", method=RequestMethod.POST)
-	public String insert(@ModelAttribute AdBoardVO vo, @AuthenticationPrincipal UserDetails user) throws Exception{
+	public String insert(@ModelAttribute AdBoardVO vo) throws Exception{
+		UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		vo.setM_id(user.getUsername()); 
-		//vo.setM_id("rr99999");
 		boardService.create(vo);
 		return "redirect:adlist";
 	}

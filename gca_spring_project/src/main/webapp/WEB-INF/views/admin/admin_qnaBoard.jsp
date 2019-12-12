@@ -8,7 +8,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script>
+<script src="${pageContext.request.contextPath }/resources/js/admin/admin_Qna.js"></script>
+<!-- <script>
 	//페이지맵 이벤트
 
 	//ready이벤트 작성
@@ -116,7 +117,7 @@
 	/* $("#btnList").click(function(){
 		location.href="${pageContext.request.contextPath}/admin_qnaBoard.?curPage=${curPage}&searchOption=${searchOption}&keyword=${keyword}";
 	}); */
-</script>
+</script> -->
 <title>boardList_json.jsp</title>
 </head>
 <body>
@@ -228,7 +229,7 @@
 								style="background-color: pink; color: black">문의 사항</div>
 							<div class="panel-body">
 								<%-- form --%>
-								<form action="insertBoard" id="frm" method="post">
+								<form action="view?pb_id=${dto.qb_id}" id="frm" method="GET" >
 									<input type="hidden" value="${dto.qb_id}">
 									<div class="form-group">
 										<div>

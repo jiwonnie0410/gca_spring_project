@@ -40,6 +40,8 @@ import com.yedam.gca.common.Paging;
 	  return "/user/askBoard/qnaBoard"; 
 	  }
   
+  
+  
   // 관리지목록
 	  @RequestMapping(value = "/admin/admin_qnaboard")
 	  public String getBoardList2(Model model, BoardSearchVO svo, Paging paging) {
@@ -47,25 +49,28 @@ import com.yedam.gca.common.Paging;
 		  model.addAttribute("paging",paging);
 	  return "/admin/admin_qnaBoard"; 
 	  }
-	 
-
-	// 03. 게시글 상세내용 조회, 게시글 조회수 증가 처리
-		// @RequestParam : get/post방식으로 전달된 변수 1개
-		// HttpSession 세션객체
-	/*
-	 * @RequestMapping(value="view", method=RequestMethod.GET) public ModelAndView
-	 * view(@RequestParam int qb_num, @RequestParam int curPage, @RequestParam
-	 * String searchOption,
-	 * 
-	 * @RequestParam String keyword, @AuthenticationPrincipal UserDetails user)
-	 * throws Exception{ // 조회수 증가 처리 boardService.increaseViewcnt(qb_num, user); //
-	 * 모델(데이터)+뷰(화면)를 함께 전달하는 객체 ModelAndView mav = new ModelAndView(); // 뷰의 이름
-	 * mav.setViewName("/user/askBoard/view"); // 뷰에 전달할 데이터 mav.addObject("dto",
-	 * boardService.read(qb_num)); mav.addObject("curPage", curPage);
-	 * mav.addObject("searchOption", searchOption); mav.addObject("keyword",
-	 * keyword); logger.info("mav:", mav); return mav; }
-	 */
 	  
+	  // 관리자목록
+	  @ResponseBody
+	  @RequestMapping("/ajax/getBoardList2") 
+	  public List<QnaBoardVO>getBoardList2(BoardSearchVO svo, Paging paging) {
+		  return boardService.getBoardList2(svo, paging); }  
+	  
+	 
+	  
+	  //상세보기
+	  @RequestMapping(value="view", method=RequestMethod.GET)
+			public ModelAndView view(@RequestParam int qb_id, Paging paging) throws Exception{
+				// 모델(데이터)+뷰(화면)를 함께 전달하는 객체
+				ModelAndView mav = new ModelAndView();
+				// 뷰에 전달할 데이터
+				mav.addObject("dto", boardService.read(qb_id));
+				// 뷰의 이름
+				mav.setViewName("/admin/admin_qnaBoard");
+				logger.info("mav:", mav);
+				return mav;
+			}
+		
 	  
 	  
 	  
@@ -81,11 +86,7 @@ import com.yedam.gca.common.Paging;
 	  return boardService.getBoardList(svo, paging); }
   
   
-  // 관리자목록
-  @ResponseBody
-  @RequestMapping("/ajax/getBoardList2.json") 
-  public List<QnaBoardVO>getBoardList2(BoardSearchVO svo, Paging paging) {
-	  return boardService.getBoardList2(svo, paging); }
+ 
   
   // 작성
   //@ResponseBody를 사용해주면 view를 생성해주는것이 아니라, JSON 혹은 Object 형태로 데이터를 넘겨준다.
@@ -97,7 +98,7 @@ import com.yedam.gca.common.Paging;
   
   // 삭제
   @ResponseBody
-  @RequestMapping(value = "board/{qb_id}", method = RequestMethod.DELETE)
+  @RequestMapping(value = "ajax/board/{qb_id}", method = RequestMethod.DELETE)
   public int deleteBoard(@PathVariable int qb_id, QnaBoardVO vo) {
 	  vo.setQb_id(qb_id);
 	  boardService.deleteBoard(vo); 
@@ -105,11 +106,10 @@ import com.yedam.gca.common.Paging;
 	  }
   
   // 단건조회
-  
   @ResponseBody  
   @RequestMapping(value = "board/{qb_id}", method = RequestMethod.GET) public
-  QnaBoardVO getBoard(@PathVariable int qb_id, QnaBoardVO vo) {
+  QnaBoardVO getBoard(@PathVariable int qb_id, QnaBoardVO vo) throws Exception {
 	  vo.setQb_id(qb_id); 
-	  return boardService.getBoard(vo); }
+	  return boardService.read(qb_id); }
   
   }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.yedam.gca.board.dao.QnaBoardDao;
 import com.yedam.gca.board.service.QnaBoardService;
+import com.yedam.gca.board.vo.AdBoardVO;
 import com.yedam.gca.board.vo.BoardSearchVO;
 import com.yedam.gca.board.vo.QnaBoardVO;
 import com.yedam.gca.common.Paging;
@@ -84,18 +85,11 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 		return dao.updateBoard(vo);
 	}
 
+	//단건조회
 	@Override
-	public QnaBoardVO getBoard(QnaBoardVO vo) {
-		return dao.getBoard(vo);
+	public QnaBoardVO read(int qb_id) throws Exception {
+		return dao.read(qb_id);
 	}
-//test
-	/*
-	 * @Override public int getContentCnt(Map<String, Object> paramMap) { return
-	 * dao.getContentCnt(paramMap); }
-	 * 
-	 * @Override public List<QnaBoardVO> getContentList2(Map<String, Object>
-	 * paramMap) { return dao.getContentList(paramMap); }
-	 */
 
 	
 }
