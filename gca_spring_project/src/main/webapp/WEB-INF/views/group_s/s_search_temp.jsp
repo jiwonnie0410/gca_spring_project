@@ -31,7 +31,7 @@
 			</p>
 			<p class="content p4">${sg.sg_name }</p>
 			<p class="content p3">${sg.sg_location }</p>
-			<input type="hidden" id="dis" value="${sg.dis }">
+			<input type="hidden" class="dis" value="${sg.dis }">
 		</td>
 		
 		<td class="td3" align="center">

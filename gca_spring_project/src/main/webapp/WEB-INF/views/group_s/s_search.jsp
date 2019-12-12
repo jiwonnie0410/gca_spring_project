@@ -51,8 +51,8 @@
 		<div class="swiper-slide p-2" data-sports="S08"><i class="fas fa-feather-alt pr-2"></i>기타</div>
 	</div>
 </div>
-<input type="hidden" name="key" id="key">
-<input type="hidden" name="keyval" id="keyval">
+<input type="hidden" name="key" id="key" value="${sgroup.key}">
+<input type="hidden" name="keyval" id="keyval" value="${sgroup.keyval}">
 </form>
 
 <table class="table table-striped" id="tb1">
