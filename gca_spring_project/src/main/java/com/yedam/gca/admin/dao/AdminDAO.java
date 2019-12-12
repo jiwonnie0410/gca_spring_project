@@ -34,13 +34,11 @@ public class AdminDAO {
 	public List<ChallengeVO> challengeCount(int cl_num) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("cl_num", cl_num);
-		System.out.println("여기는 DAO 1 : " + cl_num);
 		return mybatis.selectList("AdminDAO.challenegeCount", map);
 	}
 	
 	// 챌린지 진행 현황 / 챌린지 상세 내용
 	public Map<String, Object> challengeDetail(int cl_num) {
-		System.out.println("여기는 DAO 2 : " + cl_num);
 		return mybatis.selectOne("AdminDAO.challengeDetail", cl_num);
 	}
 	
@@ -69,11 +67,11 @@ public class AdminDAO {
 	}
 	
 	// 지역별 반짝 운동 통계
-	public List<Map<String, Object>> chartCity(String month, String city){
-		// 통계를 보기 원하는 월과 지역 이름을 map에 넣어서 mapper 쿼리에 동적으로 넘김
+	public List<Map<String, Object>> chartCity(int start, int end){
+		// 통계를 보기 원하는 기간을 map에 넣어서 mapper 쿼리에 동적으로 넘김
 		Map<String, Object> map = new HashMap<String, Object>();
-	    map.put("month", month);
-	    map.put("city", city);
+		map.put("start", start);
+	    map.put("end", end);
 	    return mybatis.selectList("AdminDAO.chartCity", map);
 	}
 	

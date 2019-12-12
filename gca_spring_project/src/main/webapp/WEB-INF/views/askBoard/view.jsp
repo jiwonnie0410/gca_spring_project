@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
-	
+	<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +22,7 @@
 
 <!--json할때 필요  -->
 <script src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
-
+<sec:authentication property="principal.m_id" var="m_id"/>
 <title>게시글 작성</title>
 
 <script>
@@ -292,7 +292,7 @@ textarea {
 			<!-- 게시물번호를 hidden으로 처리 -->
 			<input type="hidden" name="ad_num" value="${dto.ad_num}">
 			<!-- 본인이 쓴 게시물만 수정, 삭제가 가능하도록 처리 -->
-			<c:if test="${sessionScope.m_id == dto.m_id}"> 
+			<c:if test="${m_id == dto.m_id}"> 
 				<button type="button" class="btn btn-primary px-5 py-3 mt-3" id="btnUpdete">수정</button>
 				<button type="button" class="btn btn-primary px-5 py-3 mt-3" id="btnDelete">삭제</button>
 			</c:if> 
