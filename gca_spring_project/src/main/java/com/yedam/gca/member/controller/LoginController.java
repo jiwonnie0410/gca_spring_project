@@ -107,9 +107,7 @@ public class LoginController {
 	}
 	// 지원 끝
 	
-	// 수림
-	
-	
+
 	
 	// **************** 수림 ***************** // 컨트롤러
 	
@@ -120,7 +118,7 @@ public class LoginController {
 	}
 	
 	// 2. 사용자 알람관련 정보 출력
-	@RequestMapping("/ajax/option.json")
+	@RequestMapping("/ajax/getOption.json")
 	@ResponseBody
 	public MembersVO getAlarmInfo(MembersVO vo) {
 		//임시 아이디

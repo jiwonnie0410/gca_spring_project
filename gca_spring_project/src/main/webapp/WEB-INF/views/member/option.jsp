@@ -23,48 +23,70 @@
 
 <script>
 $(function() {
-	getOption(); //유저 알람관련 정보조회; m_id, m_radius, m_notice1, m_notice2, m_notice3
+	getOption(); //1. 유저 알람관련 정보조회; m_id, m_radius, m_notice1, m_notice2, m_notice3
+	//updateOption(); //2. 스위치,버튼 클릭시 옵션 업데이트
+
 });
 
-// 유저 알람관련 정보조회
+//1. 유저 알람관련 정보조회
 function getOption() {
 	$.ajax({
-		url: "../ajax/option.json",
+		url: "../ajax/getOption.json",
 		dataType: "json",
 		success: getOptionHandler
 	});
 }
 
-// 정보조회후 결과처리
+//1-1 정보조회후 결과처리
 function getOptionHandler(data) {
 	rangeSlider(data.m_radius); //레인지 슬라이더에 디비값 세팅
-	toggleSwitch(data);
-	//toggleSwitch2(data.m_notice2);
-	//toggleSwitch3(data.m_notice3);
+	toggleSwitch(data);  // 알람 on/off 설정에 따라 스위치에 디비값 세팅
 }
 
+//1-2 디비값이 1이면 스위치 on; 0이면 스위치 off
 function toggleSwitch(data) {
 	if(data.m_notice1 == 1) {
-		$('#switch1').prop('checked', true);
-		console.log(data + " on");
-	} else {
+		$('#switch1').prop('checked', true);		//스위치1
+	} else if (data.m_notice1 == 0) {
 		$('#switch1').prop('checked', false);
-		console.log(data + ' off');
-  }
+	} else if (data.m_notice2 == 1) {
+		$('#switch2').prop('checked', true);		//스위치2
+	} else if (data.m_notice2 == 0) {
+		$('#switch2').prop('checked', false);
+	} else if (data.m_notice3 == 1) {
+		$('#switch3').prop('checked', true);		//스위치3
+	} else if (data.m_notice3 == 0) {
+		$('#switch3').prop('checked', false);
+	}
 }
 
 
-
-//레인지 슬라이더 기본세팅
+//1-3 레인지 슬라이더 기본세팅
 function rangeSlider(range) {
 	$("#myRange").val(range); // 슬라이더 값 지정
 	$("#checkRange").text(range); // 범위 출력부분 값 지정
 }
 
-//레인지 슬라이더 옮기면 값 변경
+//1-4 레인지 슬라이더 옮기면 값 변경
 function changeRange(range) {
 	document.getElementById("checkRange").innerHTML = range; // 범위 출력부분 값 지정
-}	         
+}	
+
+
+//2. 스위치,버튼 클릭시 옵션 업데이트
+// function updateOption() {
+// 	// 버튼클릭시 펑션
+	
+// 	$.ajax({
+// 		url: "../ajax/updateOption.json",
+// 		method: "put",
+// 		dataType: "json",
+		
+// 	});
+// }
+
+
+
 </script>
 
 <style>
@@ -153,7 +175,7 @@ function changeRange(range) {
 				</tr>
 				<tr>   
 					<td class="pinkText" style="padding-top: 20px; width: 200px;">반경범위: <span id="checkRange"></span>km</td>
-					<td style="text-align: center; padding-top: 20px;"><button class="pink-btn">적용</button></td>
+					<td style="text-align: center; padding-top: 20px;"><button class="pink-btn" style="font-weight: bold;">범위적용</button></td>
 				</tr>   
 			</tbody>
 		</table>
