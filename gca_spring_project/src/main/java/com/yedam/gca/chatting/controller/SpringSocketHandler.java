@@ -14,7 +14,9 @@ import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
 import com.yedam.gca.chatting.vo.ChatVO;
 import com.yedam.gca.chatting.vo.ChatVO2;
 
@@ -53,6 +55,7 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 		ObjectMapper mapper = new ObjectMapper(); //제이슨?에서 제공해주는 객체.
 		ChatVO2 chatvo = mapper.readValue((String) message.getPayload(), ChatVO2.class);//메세지 전송을 위한 VO
 		
+		System.out.println("message.getPayload() : "+message.getPayload());
 		
 		//sendMessage((String) message.getPayload()); // message.getPayload() : 클라이언트에서 보내온 메세지 값
 		
@@ -60,18 +63,18 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 //		ChatVO2 result = new ChatVO2();
 		if(chatvo.getCmd().equals("join")) {
 			msg = (String) message.getPayload();
-			System.out.println("-+++++++++++++++---------+++++++++++"+msg);
 		}
 		//명령어에따라 다른 동작이 되도록 else if문으로 명령어 더 추가해서 할 수 있음.(jsp에도 같이 추가)
 		else if(chatvo.getCmd().equals("msg")) {
-			msg = (String) message.getPayload();			
+			msg = (String) message.getPayload();
+			System.out.println("보내는 메세지 : "+msg);
 		}
 		else if(chatvo.getCmd().equals("cancelJoin")) {
 										
 			System.out.println(chatvo.getId());
-			msg = (String) message.getPayload();			
+			msg = (String) message.getPayload();
 		}
-		sendMessage(msg);
+		sendMessage(msg, session, chatvo);
 	}
 
 	@Override
@@ -85,11 +88,13 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 		return super.supportsPartialMessages();
 	}
 
-	public void sendMessage(String message) {
+	public void sendMessage(String message, WebSocketSession mySession, ChatVO2 vo) {
 		for (WebSocketSession session : this.sessionSet) {
-			if (session.isOpen()) {
+			if (session.isOpen()) { //session is Open이고 내 세션이 아닌것들한테만 응답을 보내준다.
 				try {
-					session.sendMessage(new TextMessage(message));
+					if(!(vo.getCmd().equals("join") && mySession==session)) {
+						session.sendMessage(new TextMessage(message));
+					}
 				} catch (Exception ignored) {
 					this.logger.error("fail to send message!", ignored);
 				}
@@ -99,22 +104,6 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		Thread thread = new Thread() {
-			int i = 0;
-
-			@Override
-			public void run() {
-				while (true) {
-					try {
-						sendMessage("send message index " + i++);
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-						break;
-					}
-				}
-			}
-		};
-		//thread.start();
+		
 	}
 }

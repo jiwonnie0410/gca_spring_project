@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -112,9 +113,9 @@
 		$(function() { //페이지 로딩 완료 후 실행
 
 			//로딩되자마자 아이디 입력받고 아작스로 세션에 저장.
-			var usrId = "${sessionScope.id}";
+			var usrId = "${id}";
 			
-			if(usrId==""){ //만약 세션에 id가 없으면 입력받아라.
+			/* if(usrId==""){ //만약 세션에 id가 없으면 입력받아라.
 				var id={ "id" : prompt("세션에 저장할 id 입력 : ")};
 				
 				$.ajax({
@@ -130,9 +131,10 @@
 					}
 					
 				});
-			}
+			} */
 			
-			console.log(usrId);
+			console.log("usrId : "+usrId);
+			
 			//채팅 전송버튼 눌렀을때
 			$("body").on("click", "[id^=chat]", function() {
 
@@ -202,7 +204,7 @@
 				var confirmStatus = confirm("정말로 반짝 참여를 취소 하시겠습니까?");
 
 				if (confirmStatus) {
-					var usrId = "${sessionScope.id}";
+					
 					var sgNum = ${sgroup.sg_num};
 					var sgCnt = ${sgroup.sg_now_cnt};
 					
@@ -231,7 +233,12 @@
 <body>
 <!-- 버튼영역 위(프로필까지)의 div 시작 -->
     <div style="padding-top:0px;">
-    <input type="hidden" id="id" value="">
+    <sec:authentication property="principal.username" var="id"/>
+    <sec:authentication property="principal.m_nick" var="nick"/>
+    <sec:authentication property="principal.m_image_cd" var="image"/>
+    <input type="hidden" id="s_id" value='${id}'>
+    <input type="hidden" id="s_nick" value='${nick}'>
+    <input type="hidden" id="s_character" value='${image}'>
     
 	<!-- 방제 -->
     	<div style="background-color: #FE9191; text-align: left; padding-left:20px; color: #fff;"> 
@@ -314,7 +321,7 @@
 <!-- Modal footer -->
 				<div class="modal-footer">
 					<button type="button" class="button-general" data-toggle="modal" data-target="#report-user">신고</button>
-					<button id="kickOut" type="button" class="button-general">강퇴</button> <!-- 얘는 방장만 보이게 -->
+					<button style="background: crimson;" id="kickOut" type="button" class="button-general">강퇴</button> <!-- 얘는 방장만 보이게 -->
 				</div>
         
 			</div>
@@ -441,48 +448,6 @@
 	</div>
 </div>
 
-
-
-<!-- 옆으로 슬라이드 되는 모달 쓰고싶은ㄷ데 안써짐 ㅠ -->
-        <!-- <a href="#costumModal21" role="button" class="btn btn-default" data-toggle="modal">
-            slideLeftBigIn
-        </a> -->
-        <!-- <div id="costumModal21" class="modal" data-easein="slideLeftBigIn"  tabindex="-1" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            ×
-                        </button>
-                        <h4 class="modal-title">
-                            Modal Header
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">
-                            Close
-                        </button>
-                        <button class="btn btn-primary">
-                            Save changes
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-
-
-
 <!-- 웹소켓 채팅 -->
 <script type="text/javascript">
 
@@ -497,12 +462,19 @@
  function onMessage(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
 	var result = JSON.parse(event.data);
 	if(result.cmd == "join") { //방에 들어온경우(웹소켓 연결된 경우)
-		var img = "";
-		//var id = "${sessionScope.id}";
-		var param = {"id":result.id};
-		console.log("returnImage함수 들어가기 전 param 값 확인111111111111 : "+param.id);
+		var img = document.getElementById('s_character').value;
+		var nick = document.getElementById('s_nick').value;
+		var id = document.getElementById('s_id').value;
+		var img = ${img};
+		var nick = ${nick};
+		var id = ${id};
+		//var param = {"id":result.id};
 		
-		$.ajax({
+		console.log("id : "+id);
+		console.log("nick : "+nick);
+		console.log("img : "+img);
+		
+		/* $.ajax({
 			url: "returnImage",
 			type:'GET',
 			async:false,
@@ -517,26 +489,21 @@
 				
 			}
 			
-		});
+		}); */
 		
-		console.log(img);
-		
-		
+		//프로필 붙여주기~~
 		$span = $("<span data-toggle='modal' data-target='#profile' style='font-size:13px; padding:10px; display:inline-block;'>");
 		$span.attr("id","${sessionScope.id}");
 		$img = $("<img style='padding-bottom:5px;' width='65px' height='65px'>");
-		$img.attr({"src": "${pageContext.request.contextPath }/resources/images/Characters/"+img+".gif", "class": "rounded-circle"});
-		$span.append($img);
+		$img.attr({"src": "${pageContext.request.contextPath }/resources/images/Characters/"+img+".gif"});
+		$text = "${nick}";
 		
-		/* <span id="${member.m_id}" data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
-	          			<img style="padding-bottom:5px;" width="65px" height="65px"
-	          							src="${pageContext.request.contextPath }/resources/images/Characters/${member.m_image_cd}.gif" class="rounded-circle">
-	        			<br />${member.m_nick}
-        			</span> */
+		$span.append($img);
+		$span.append('<br />');
+		$span.append($text);
 		
 		textarea.value += result.msg + "\n";
 		$('#profileList').append($span);
-		$('#profileList').append("<br />${member.m_nick}");
 	 	
 	}
 	else if( result.cmd = "msg") { //메세지 전송하는 경우
@@ -545,7 +512,7 @@
 	else if( result.cmd = "cancelJoin") { //참가취소 누르고 웹소켓 거쳐왔을때.
 		var person = result.id;
 		var result = JSON.parse(event.data);
-		console.log(person);
+		console.log("person:"+person);
 		//프로필 삭제
 		$('#'+person).remove();
 		textarea.value += result.msg + "\n"; //채팅방에 나갔다고 표시.
@@ -554,11 +521,11 @@
 	chatAreaScroll(); 
  }
  
- function onOpen(event) { 
+ function onOpen(event) { //이미 참여된방에 참여인지 새로 참여인지 구분해서 새로참여만 참가하셨습니다 띄우고 프로필 붙이기.
 	msg = {
 		cmd : "join",
-		id : "${sessionScope.id}",
-		msg : "<"+"${sessionScope.id}"+"님이 참가하셨습니다.>" //여기에 아이디 붙여서 추가하면 될듯. 근데 새로고침해도 이게 뜨는것은 막아야함.
+		id : "${id}",
+		msg : "<"+"${id}"+"님이 참가하셨습니다.>" //여기에 아이디 붙여서 추가하면 될듯. 근데 새로고침해도 이게 뜨는것은 막아야함.
 	}				//msg의 id 넣는 부분을 ${sessionScope.id}말고 json의 id로 가져오는 방법은 없을까
 	webSocket.send(  JSON.stringify( msg )   );
  }
@@ -571,7 +538,7 @@
  function send() { 
 	 msg = {
 		 cmd : "msg",
-		 id : "${sessionScope.id}",
+		 id : "${id}",
 		 msg : inputMessage.value
 	 }
 	//textarea.value += "나 : " + inputMessage.value + "\n"; 
@@ -583,8 +550,8 @@
  function deleteProfile() { 
 	 msg = {
 		 cmd : "cancelJoin",
-		 id : "${sessionScope.id}",
-		 msg : "<000님이 나가셨습니다.>"
+		 id : "${id}",
+		 msg : "<"+"${id}"+"님이 나가셨습니다.>"
 	 }
 	webSocket.send(  JSON.stringify( msg )   );
 	
