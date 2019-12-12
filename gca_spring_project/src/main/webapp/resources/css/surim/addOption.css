@@ -3,7 +3,7 @@
 /** 출처: https://proto.io/freebies/onoff/  ios디자인 **/
 
 .onoffswitch {
-    position: relative; width: 150px;
+    position: relative; width: 50px;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
 .onoffswitch-checkbox {
@@ -11,18 +11,18 @@
 }
 .onoffswitch-label {
     display: block; overflow: hidden; cursor: pointer;
-    height: 67px; padding: 0; line-height: 67px;
+    height: 25px; padding: 0; line-height: 25px;
     border: 2px solid #999999; border-radius: 67px;
     background-color: #c8c8c8;
     transition: background-color 0.2s ease-in;
 }
 .onoffswitch-label:before {
     content: "";
-    display: block; width: 67px; margin: 0px;
+    display: block; width: 25px; margin: 0px;
     background: #FFFFFF;
     position: absolute; top: 0; bottom: 0;
-    right: 81px;
-    border: 2px solid #999999; border-radius: 67px;
+    right: 25px;
+    border: 2px solid #999999; border-radius: 25px;
     transition: all 0.2s ease-in 0s; 
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label {

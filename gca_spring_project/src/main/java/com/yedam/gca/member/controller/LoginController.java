@@ -61,6 +61,7 @@ public class LoginController {
 		vo.setM_age(request.getParameter("mAge"));
 		vo.setGender_cd(request.getParameter("checkbox1"));
 		vo.setM_email(request.getParameter("mEmail"));
+		vo.setM_xy(request.getParameter("mXy"));
 		memberService.insertMember(vo);
 		return "/notiles/member/login";
 	}
@@ -104,4 +105,7 @@ public class LoginController {
 		model.addAttribute("pwMessage", memberService.forgotPw(vo)); // jsp 페이지에서 alert로 띄울 메시지 넘기기
 		return "/notiles/member/login";
 	}
+	// 지원 끝
+	
+	// 수림
 }
