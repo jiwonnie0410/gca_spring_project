@@ -52,8 +52,11 @@ public class AdminController {
 	}
 	
 	// 1-4. 챌린지 진행 현황
-//	@RequestMapping("ajax/challenge/going")
-//	public 
+	@ResponseBody
+	@RequestMapping("/ajax/challenge/going")
+	public Map<String, Object> challengeGoing(int cl_id) {
+		return adminService.challengeGoing(cl_id);
+	}
 
 	// 2. 매출 페이지
 	@RequestMapping("/admin/sale")

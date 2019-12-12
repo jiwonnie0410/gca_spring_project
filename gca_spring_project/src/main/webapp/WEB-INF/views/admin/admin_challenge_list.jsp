@@ -167,9 +167,20 @@
         
 <!-- Modal body -->
 				<div class="modal-body">
-				
-					엳다가 챌린지 현황을 보여 주세요
-
+					<table id="chGoing">
+							<!-- 챌린지 상세 내용이 보여질 부분 -->
+					</table><br /><br />
+					
+					<table id="chPeople">
+							<tr id='tr' align="center" style="background-color:#FEBABA;">
+							<th width="15%"> ID </th>
+							<th width="15%"> 이름 </th>
+							<th width="10%"> 나이 </th>
+							<th width="10%"> 성별 </th>
+							<th width="45%"> 지역 </th>
+							<th width="12%"> 진행 횟수 </th>
+						</tr>
+					</table>
 				</div>
 <!-- Modal footer -->
 				<div class="modal-footer">
