@@ -32,8 +32,8 @@
 
 <body>
 
-<!-- <nav class="fixed-top">
-<div align="center" class="mt-2 mb-2"><h4>함께 할 반짝 찾기</h4></div> -->
+<nav class="fixed-top">
+<div align="center" class="mt-2 mb-2"><h4>함께 할 반짝 찾기</h4></div>
 
 <button class="btn btn-info create_room mt-3 ml-3 mr-3" style="width:90%;">반짝 방 생성하기</button>
 
@@ -57,9 +57,9 @@
 <input type="hidden" name="key" id="key" value="${sgroup.key}">
 <input type="hidden" name="keyval" id="keyval" value="${sgroup.keyval}">
 </form>
-<!-- </nav> -->
+</nav>
 
-<table class="table table-striped" id="tb1">
+<table class="table table-striped" id="tb1"  style="margin-top:160px">
 	<c:forEach items="${ list }" var="sg">
 	<tr class="tr ${sg.sg_num}">
 		<td class="td1">

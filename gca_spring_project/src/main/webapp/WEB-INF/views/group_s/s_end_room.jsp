@@ -40,17 +40,22 @@
 <div class="swiper-container sticky-top">
 	<div class="swiper-wrapper">
 		<div class="swiper-slide p-2"><i class="fas fa-star-of-david pr-2"></i>전체</div>
-		<div class="swiper-slide p-2" data-sports="S01"><i class="fas fa-basketball-ball pr-2"></i>농구</div>
+		<c:forEach items="${sports_list }" var="list">
+			<div class="swiper-slide p-2" data-sports="${list.cd_id }">${list.cd_etc}${list.cd_name }</div>
+		</c:forEach>
+		
+<!-- 		<div class="swiper-slide p-2" data-sports="S01"><i class="fas fa-basketball-ball pr-2"></i>농구</div>
 		<div class="swiper-slide p-2" data-sports="S02"><i class="fas fa-running pr-2"></i>달리기 &amp; 산책</div>
 		<div class="swiper-slide p-2" data-sports="S03"><i class="fas fa-hiking pr-2"></i>등산</div>
 		<div class="swiper-slide p-2" id="btn_badminton" data-sports="S04">
 			<img class="pr-3" id="img_badminton" src="../resources/images/mihy/badminton-pink.png" width="33px">
 			<img class="pr-3" id="img_badminton" src="../resources/images/mihy/badminton-white.png" width="33px">
 			배드민턴</div>
+			
 		<div class="swiper-slide p-2" data-sports="S05"><i class="fas fa-bowling-ball pr-2"></i>볼링</div>
 		<div class="swiper-slide p-2" data-sports="S06"><i class="fas fa-swimmer pr-2"></i>수영</div>
 		<div class="swiper-slide p-2" data-sports="S07"><i class="fas fa-bicycle pr-2"></i>자전거</div>
-		<div class="swiper-slide p-2" data-sports="S08"><i class="fas fa-feather-alt pr-2"></i>기타</div>
+		<div class="swiper-slide p-2" data-sports="S08"><i class="fas fa-feather-alt pr-2"></i>기타</div> -->
 	</div>
 </div>
 <input type="hidden" name="key" id="key" value="${sgroup.key}">
@@ -58,7 +63,7 @@
 </form>
 </nav>
 
-<table class="table table-striped" id="tb1">
+<table class="table table-striped" id="tb1" style="margin-top:130px">
 	<c:forEach items="${ list }" var="sg">
 	<tr class="tr ${sg.sg_num}">
 		<td class="td1">
