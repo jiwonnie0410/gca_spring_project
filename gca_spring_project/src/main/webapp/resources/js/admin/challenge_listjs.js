@@ -154,10 +154,11 @@ function getChallengeList() {
 
 function getKey(cl_num) {
 	console.log("챌린지 번호:: " + cl_num);
+	var num_data = {"cl_num":cl_num};
 	// 챌린지 진행 현황
 	$.ajax({
 			url: "../ajax/challenge/going",
-			data: "cl_num",
+			data: num_data,
 			success: function(result) {
 					console.log(result);
 //					var status;

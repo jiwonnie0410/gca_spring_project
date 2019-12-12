@@ -94,7 +94,7 @@
 			<select id="loginCheck" parameterType="members" resultType="members">
 					SELECT 	M_ID, M_PASSWORD, M_GRANT,
 							M_NAME, M_NICK, M_IMAGE_CD, M_XY, M_LOCATION, M_AGE, GENDER_CD, M_LEVEL_CD,
-							M_RADIUS, M_NOTICE1, M_NOTICE2, M_NOTICE3 M_EMAIL
+							M_RADIUS, M_NOTICE1, M_NOTICE2, M_NOTICE3, M_EMAIL
 					FROM MEMBERS
 					WHERE M_ID = #{m_id}
 			</select>

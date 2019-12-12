@@ -54,8 +54,13 @@ public class AdminController {
 	// 1-4. 챌린지 진행 현황
 	@ResponseBody
 	@RequestMapping("/ajax/challenge/going")
-	public Map<String, Object> challengeGoing(int cl_id) {
-		return adminService.challengeGoing(cl_id);
+	public Map<String, Object> challengeGoing(@RequestParam String cl_num) {
+		
+		System.out.println("번호 넘어왔남?: " + cl_num);
+		
+		
+		int num = Integer.parseInt(cl_num);
+		return adminService.challengeGoing(num);
 	}
 
 	// 2. 매출 페이지
