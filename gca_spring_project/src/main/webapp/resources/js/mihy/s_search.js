@@ -1,37 +1,6 @@
 $(document).ready(function(){
 	
-	$(window).scroll(function(){
-		if(Math.floor($(window).scrollTop()) == $(document).height() - $(window).height()){
-			
-			var end_dis = $('.tr').last().find('.dis').val();
-			var end_dttm =  $('.tr').last().find('.dttm').val();
-			var end_num = $('.tr').last().attr('class').substring(3);
-			var key = $('#key').val();
-			var keyval = $('#keyval').val();
-			var form = {
-					end_dis: end_dis,
-					end_dttm: end_dttm,
-					end_num: end_num,
-					key: key,
-					keyval: keyval
-			}
-			console.log(end_dis);
-			console.log(end_dttm);
-			console.log(end_num);
-			console.log(key);
-			console.log(keyval);
-			$.ajax({
-				url: "getSgListPlus/",
-				type: "POST",
-				dataType:"html",
-				data : form,
-//				contentType: "application/json",
-				success: function(result){
-					$('#tb1 tbody').append(result);
-				}
-			});
-		}
-	});
+	$(window).scroll(scroll);
 	
 	var swiper = new Swiper('.swiper-container', {
 		slidesPerView: 'auto',
@@ -70,6 +39,39 @@ $(document).ready(function(){
 	});
 	
 });
+
+//마지막 페이지에서 다음 정보 로딩
+function scroll(){
+	if(Math.floor($(window).scrollTop()) == $(document).height() - $(window).height()){
+		
+		var end_dis = $('.tr').last().find('.dis').val();
+		var end_dttm =  $('.tr').last().find('.dttm').val();
+		var end_num = $('.tr').last().attr('class').substring(3);
+		var key = $('#key').val();
+		var keyval = $('#keyval').val();
+		var form = {
+				end_dis: end_dis,
+				end_dttm: end_dttm,
+				end_num: end_num,
+				key: key,
+				keyval: keyval
+		}
+//		console.log(end_dis);
+//		console.log(end_dttm);
+//		console.log(end_num);
+//		console.log(key);
+//		console.log(keyval);
+		$.ajax({
+			url: "getSgListPlus/",
+			type: "POST",
+			dataType:"html",
+			data : form,
+			success: function(result){
+				$('#tb1 tbody').append(result);
+			}
+		});
+	}
+}
 
 //남은 시간 계산
 function p8(){

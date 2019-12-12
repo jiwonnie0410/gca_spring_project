@@ -1,10 +1,9 @@
 package com.yedam.gca.group_s.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -84,10 +83,10 @@ public class SGroupController {
 	//전체 반짝 리스트 조회
 	@RequestMapping("/sgroup/getSgList")
 	public String search(Model model, SGroupVO vo, HttpSession session) {
-//		String m_xy = (String) session.getAttribute("m_xy");
-//		vo.setM_xy(m_xy);
-		vo.setM_xy("37.56628868272894, 127.0555535312866");
-		vo.setScroll_rec(3);
+		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
+		vo.setM_xy(memInfo.getM_xy());
+//		vo.setM_xy("37.56628868272894, 127.0555535312866");
+		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
 		model.addAttribute("sgroup", vo);
 		model.addAttribute("list", sgroupService.getSgList(vo));
 		return "/user/group_s/s_search";
@@ -96,10 +95,10 @@ public class SGroupController {
 	//반짝 리스트 추가 조회
 	@RequestMapping(value="/sgroup/getSgListPlus", method = RequestMethod.POST)
 	public String search(SGroupVO vo, HttpSession session, Model model) {
-//		String m_xy = (String) session.getAttribute("m_xy");
-//		vo.setM_xy(m_xy);
-		vo.setM_xy("37.56628868272894, 127.0555535312866");
-		vo.setScroll_rec(3);
+		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
+		vo.setM_xy(memInfo.getM_xy());
+//		vo.setM_xy("37.56628868272894, 127.0555535312866");
+		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
 		model.addAttribute("sgroup", vo);
 		model.addAttribute("list", sgroupService.getSgList(vo));
 		return "/notiles/group_s/s_search_temp";
@@ -109,10 +108,9 @@ public class SGroupController {
 	@ResponseBody
 	@RequestMapping(value="sgroup/sgValidIn/{sg_num}", method = RequestMethod.GET)
 	public ActiveHistVO sgValidIn(@PathVariable int sg_num, ActiveHistVO vo, HttpSession session) {
-//		String m_id = (String) session.getAttribute("m_id");
-//		vo.setM_id(m_id);
-		vo.setIn_type("sg");
-		vo.setM_id("test10");
+		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션 정보 갖고 오기
+		vo.setM_id(memInfo.getM_id());
+		vo.setIn_type("sg"); //sg:반짝방, bg:매치방, six:용병방(직접 입력)
 		vo.setPk_num(sg_num);
 		actService.validIn(vo);
 		return vo;
@@ -137,10 +135,9 @@ public class SGroupController {
 	public String roomIn(
 			@RequestParam(value="sg_num", defaultValue="", required=true) int sg_num,
 			Model model, SGroupVO svo, ActiveHistVO avo, HttpSession session) {
-		String m_id = (String) session.getAttribute("m_id");
-//		avo.setM_id(m_id);
-		avo.setM_id("test10");
-		avo.setIn_type("sg");
+		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션 정보 갖고 오기
+		svo.setM_id(memInfo.getM_id());
+		avo.setIn_type("sg"); //sg:반짝방, bg:매치방, six:용병방(직접 입력)
 		avo.setPk_num(sg_num);
 		actService.roomInsert(avo);
 		svo.setSg_num(sg_num);
@@ -168,9 +165,8 @@ public class SGroupController {
 	//방 생성
 	@RequestMapping(value="sgroup/creRoom", method=RequestMethod.POST)
 	public String createRoom(@ModelAttribute SGroupVO vo, HttpSession session) {
-		String m_id = (String) session.getAttribute("m_id");
-//		vo.setM_id(m_id);
-		vo.setM_id("test");
+		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션 정보 갖고 오기
+		vo.setM_id(memInfo.getM_id());
 		sgroupService.insertSg(vo);
 		return "redirect:alreadyIn?sg_num="+vo.getSg_num();
 	}
