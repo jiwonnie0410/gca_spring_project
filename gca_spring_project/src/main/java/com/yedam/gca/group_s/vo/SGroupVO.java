@@ -29,8 +29,8 @@ public class SGroupVO {
 	//미현
 	private String m_id;	//회원 ID
 	private String m_xy;	//세션에 담기는 회원의 xy좌효
-	private double dis;		//거리
-	private double end_dis;
+	private Double dis;		//거리
+	private Double end_dis;
 	private Timestamp end_dttm;
 	private int end_num;
 	private int scroll_rec;	//스크롤 조회 시 가져올 레코드 건 수

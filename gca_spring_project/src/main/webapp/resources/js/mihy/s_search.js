@@ -56,11 +56,11 @@ function scroll(){
 				key: key,
 				keyval: keyval
 		}
-//		console.log(end_dis);
-//		console.log(end_dttm);
-//		console.log(end_num);
-//		console.log(key);
-//		console.log(keyval);
+		console.log(end_dis);
+		console.log(end_dttm);
+		console.log(end_num);
+		console.log(key);
+		console.log(keyval);
 		$.ajax({
 			url: "getSgListPlus/",
 			type: "POST",
