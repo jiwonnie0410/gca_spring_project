@@ -61,7 +61,12 @@ public class MemberDAO {
 		return mybatis.selectOne("MemberDAO.getAlarmInfo", vo);
 	}
 	
+	// 2. 토글스위치 클릭시 알람 on/off 업데이트
+	public int updateSwitch(MembersVO vo) {
+		return mybatis.update("MemberDAO.updateSwitch", vo);
+	}
 	
+	// 3. 범위슬라이더 변경시 범위 업데이트
 	
 	
 	

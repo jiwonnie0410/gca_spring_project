@@ -109,7 +109,7 @@ public class LoginController {
 	
 
 	
-	// **************** 수림 ***************** // 컨트롤러
+	// **************** 수림 ***************** 
 	
 	// 1. 환경설정 페이지 이동
 	@RequestMapping("member/option")
@@ -125,4 +125,12 @@ public class LoginController {
 		vo.setM_id("test");
 		return memberService.getAlarmInfo(vo);
 	}
+	// 3. 스위치 클릭시 정보 업데이트
+	@RequestMapping(value = "/ajax/updateSwitch.json", method = RequestMethod.PUT)
+	@ResponseBody
+	public void updateSwitch(MembersVO vo) {
+		memberService.updateMember(vo);
+	}
+	
+	// 3. 범위슬라이더 변경시 범위 업데이트
 }

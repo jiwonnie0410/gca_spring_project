@@ -251,5 +251,10 @@ public class MemberServiceImpl implements MemberService {
     public MembersVO getAlarmInfo(MembersVO vo) {
     	return dao.getAlarmInfo(vo);
     }
- 
+    
+    @Override
+ // 2. 토글스위치 클릭시 알람 on/off 업데이트
+ 	public int updateSwitch(MembersVO vo) {
+    	return dao.updateSwitch(vo);
+    }
 }
