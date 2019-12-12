@@ -168,4 +168,27 @@ public class SGroupController {
 		sgroupService.insertSg(vo);
 		return "redirect:alreadyIn?sg_num="+vo.getSg_num();
 	}
+	
+	//마감 방 리스트 조회
+	@RequestMapping("/sgroup/getSgEndList")
+	public String searchEnd(Model model, SGroupVO vo, HttpSession session) {
+		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
+		vo.setM_xy(memInfo.getM_xy());
+		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
+		model.addAttribute("sgroup", vo);
+		model.addAttribute("list", sgroupService.getSgEndList(vo));
+		return "/user/group_s/s_end_room";
+	}
+	
+	//마감 방 리스트 추가 조회
+	@RequestMapping(value="/sgroup/getSgListEndPlus", method = RequestMethod.POST)
+	public String searchEnd(SGroupVO vo, HttpSession session, Model model) {
+		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
+		vo.setM_xy(memInfo.getM_xy());
+		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
+		model.addAttribute("sgroup", vo);
+		model.addAttribute("list", sgroupService.getSgEndList(vo));
+		return "/notiles/group_s/s_search_temp";
+	}
+	
 }
