@@ -6,14 +6,20 @@ $(document).ready(function(){
 			var end_dis = $('.tr').last().find('.dis').val();
 			var end_dttm =  $('.tr').last().find('.dttm').val();
 			var end_num = $('.tr').last().attr('class').substring(3);
+			var key = $('#key').val();
+			var keyval = $('#keyval').val();
 			var form = {
 					end_dis: end_dis,
 					end_dttm: end_dttm,
-					end_num: end_num
+					end_num: end_num,
+					key: key,
+					keyval: keyval
 			}
-//			console.log(end_dis);
-//			console.log(end_dttm);
-//			console.log(end_num);
+			console.log(end_dis);
+			console.log(end_dttm);
+			console.log(end_num);
+			console.log(key);
+			console.log(keyval);
 			$.ajax({
 				url: "getSgListPlus/",
 				type: "POST",

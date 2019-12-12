@@ -101,22 +101,19 @@
              							SUBSTR(#{m_xy}, INSTR(#{m_xy}, ',', 1, 1)+2, LENGTH(#{m_xy}))
              						 ) DIS
              			FROM SGROUP S
+             			<where>
+				            <if test="keyval != null and keyval !=''">
+								<if test="key == 'sports'">
+									and SPORTS1_CD like '%'||#{keyval}||'%'
+								</if>
+						 	</if>
+             			</where>
              			ORDER BY DIS, SG_END_DTTM, SG_NUM
              			) A
 					<where>
-			            <if test="keyval != null and keyval !=''">
-							<if test="key == 'sports'">
-								and SPORTS1_CD like '%'||#{keyval}||'%'
-							</if>
-					 	</if>
 					 	<if test="end_dis != null and end_dis != 0">
-					 		AND DIS <![CDATA[ > ]]> #{end_dis} 
-					 	</if>
-					 	<if test="end_dttm != null">
-             				AND SG_END_DTTM <![CDATA[ > ]]> #{end_dttm} 
-					 	</if>
-					 	<if test="end_num != null and end_num !=''">
-             				AND SG_NUM <![CDATA[ > ]]> #{end_num}
+					 		AND LPAD(round(DIS, 3), 8, '0') || to_char(SG_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(SG_NUM, 6, '0')
+					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3), 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
 					 	</if>
 					 </where>
     			)
