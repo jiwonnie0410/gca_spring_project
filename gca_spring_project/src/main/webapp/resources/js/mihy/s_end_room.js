@@ -9,10 +9,6 @@ $(document).ready(function(){
 		grabCursor: true
 	});
 	
-	$('.create_room').on('click', function(){
-		location.href='createRoomForm';
-	});
-	
 	p8();
 	setInterval(p8,1000);
 	
@@ -34,7 +30,6 @@ $(document).ready(function(){
 	$('.swiper-wrapper').on('click','.swiper-slide', function(){
 		$('#key').val("sports");
 		$('#keyval').val($(this).data("sports"));
-		console.log($('#keyval').val())
 		searchSport.submit();
 	});
 	
@@ -56,13 +51,13 @@ function scroll(){
 				key: key,
 				keyval: keyval
 		}
-		console.log(end_dis);
-		console.log(end_dttm);
-		console.log(end_num);
-		console.log(key);
-		console.log(keyval);
+//		console.log(end_dis);
+//		console.log(end_dttm);
+//		console.log(end_num);
+//		console.log(key);
+//		console.log(keyval);
 		$.ajax({
-			url: "getSgListPlus/",
+			url: "getSgListEndPlus/",
 			type: "POST",
 			dataType:"html",
 			data : form,

@@ -77,7 +77,8 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 
 	@Override
 	public int insertBoard(QnaBoardVO vo) {
-		return dao.insertBoard(vo);
+		int result = dao.insertBoard(vo);
+		return result;
 	}
 
 	@Override

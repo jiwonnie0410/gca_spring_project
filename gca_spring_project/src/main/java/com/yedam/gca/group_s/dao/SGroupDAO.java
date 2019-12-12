@@ -57,5 +57,10 @@ public class SGroupDAO {
 	public void insertSg(SGroupVO vo){
 		mybatis.selectOne("SGroupDAO.insertSg", vo);
 	}
+	
+	//마감 방 조회
+	public List<SGroupVO> getSgEndList(SGroupVO vo) {
+		return mybatis.selectList("SGroupDAO.getSgEndList", vo);
+	}
 
 }

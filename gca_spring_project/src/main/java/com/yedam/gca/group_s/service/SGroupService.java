@@ -20,5 +20,6 @@ public interface SGroupService {
 	List<SGroupVO> getSgList(SGroupVO vo);
 	int updateCnt(SGroupVO vo);
 	void insertSg(SGroupVO vo);
+	List<SGroupVO> getSgEndList(SGroupVO vo);
 
 }

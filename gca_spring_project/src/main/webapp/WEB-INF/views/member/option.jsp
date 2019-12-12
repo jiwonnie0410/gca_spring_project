@@ -21,6 +21,52 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/addOption.css">
 
+<script>
+$(function() {
+	getOption(); //유저 알람관련 정보조회; m_id, m_radius, m_notice1, m_notice2, m_notice3
+});
+
+// 유저 알람관련 정보조회
+function getOption() {
+	$.ajax({
+		url: "../ajax/option.json",
+		dataType: "json",
+		success: getOptionHandler
+	});
+}
+
+// 정보조회후 결과처리
+function getOptionHandler(data) {
+	rangeSlider(data.m_radius); //레인지 슬라이더에 디비값 세팅
+	toggleSwitch(data);
+	//toggleSwitch2(data.m_notice2);
+	//toggleSwitch3(data.m_notice3);
+}
+
+function toggleSwitch(data) {
+	if(data.m_notice1 == 1) {
+		$('#switch1').prop('checked', true);
+		console.log(data + " on");
+	} else {
+		$('#switch1').prop('checked', false);
+		console.log(data + ' off');
+  }
+}
+
+
+
+//레인지 슬라이더 기본세팅
+function rangeSlider(range) {
+	$("#myRange").val(range); // 슬라이더 값 지정
+	$("#checkRange").text(range); // 범위 출력부분 값 지정
+}
+
+//레인지 슬라이더 옮기면 값 변경
+function changeRange(range) {
+	document.getElementById("checkRange").innerHTML = range; // 범위 출력부분 값 지정
+}	         
+</script>
+
 <style>
 .optionDiv {
 	max-whdth: 500px;
@@ -35,21 +81,8 @@
 
 </style>
 
-<script>
-$(function() {
-	//레인지 슬라이드 옵션
-	var slider = document.getElementById("myRange"); 
-	var output = document.getElementById("checkRange"); //보증금선택쪽의 출력값
-	output.innerHTML = slider.value;
-	
-	slider.oninput = function() {
-		output.innerHTML = this.value;
-	}
-});
 
-</script>
 </head>
-
 
 <body>
 <div class="container">     
@@ -67,8 +100,8 @@ $(function() {
 					<td><span class="mediumText">참가중 반짝, 인원모집 완료시 알람</span></td>
 					<td>
 						<div class="onoffswitch">
-						    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch1" checked>
-						    <label class="onoffswitch-label" for="myonoffswitch1"></label>
+						    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch1" checked>
+						    <label class="onoffswitch-label" for="switch1"></label>
 						</div>
 					</td>
 				</tr>
@@ -76,8 +109,8 @@ $(function() {
 					<td><span class="mediumText">범위내 등록된 반짝 알람</span></td>
 					<td>
 						<div class="onoffswitch">
-						    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch2" checked>
-						    <label class="onoffswitch-label" for="myonoffswitch2"></label>
+						    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch2" checked>
+						    <label class="onoffswitch-label" for="switch2"></label>
 						</div>
 					</td>
 				</tr>
@@ -85,8 +118,8 @@ $(function() {
 					<td><span class="mediumText">범위내 등록된 용병 알람</span></td>
 					<td>
 						<div class="onoffswitch">
-						    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch3" checked>
-						    <label class="onoffswitch-label" for="myonoffswitch3"></label>
+						    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch3" checked>
+						    <label class="onoffswitch-label" for="switch3"></label>
 						</div>
 					</td>
 				</tr>
@@ -114,7 +147,7 @@ $(function() {
 				<tr>
 					<td colspan="2">
 						<div class="slidecontainer">
-						  <input type="range" min="1" max="30" value="10" class="rangeSlider" id="myRange">
+						  <input type="range" min="1" max="30" value="10" class="rangeSlider" id="myRange" oninput="changeRange(this.value)">
 						</div>
 					</td>
 				</tr>
