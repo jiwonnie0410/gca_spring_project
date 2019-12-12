@@ -70,8 +70,8 @@ public class SGroupController {
 	//웹소켓 연결 시(방에 들어갈 시) ajax로 본인 프로필 이미지 가져온다(웹소켓으로 다른사람 화면에도 뿌리기 위해.)
 		@ResponseBody //얘가 있어야 페이지 리턴을 안한다.(이거 없으면 밑에 mapping된 jsp페이지로 자동으로 찾아감.)
 		@RequestMapping("/sgroup/returnImage")
-		public String returnImage(@RequestParam String id, MembersVO vo) {
-			vo.setM_id(id);
+		public String returnImage(@RequestParam String img, CodeVO vo) {
+			vo.setCd_id(img);
 			String data = sgroupService.returnImage(vo);
 			System.out.println("이미지:"+data);
 			return data;
