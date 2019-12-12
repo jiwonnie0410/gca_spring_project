@@ -23,12 +23,16 @@
 		<!-- Core plugin JavaScript-->
 		<script src="${pageContext.request.contextPath }/resources/css/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 		<!-- Page level plugin JavaScript-->
+		<%-- <script src="${pageContext.request.contextPath }/resources/css/admin/vendor/chart.js/Chart.min.js"></script> --%>
 		<script src="${pageContext.request.contextPath }/resources/css/admin/vendor/datatables/jquery.dataTables.js"></script>
 		<script src="${pageContext.request.contextPath }/resources/css/admin/vendor/datatables/dataTables.bootstrap4.js"></script>
 		<!-- Custom scripts for all pages-->
 		<script src="${pageContext.request.contextPath }/resources/js/admin/sb-admin.min.js"></script>
 		<!-- Demo scripts for this page-->
 		<script src="${pageContext.request.contextPath }/resources/js/admin/demo/datatables-demo.js"></script>
+		<%-- <script src="${pageContext.request.contextPath }/resources/js/admin/demo/chart-area-demo.js"></script> --%>
+		<!-- Popper JS -->
+		<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 		
 		<script src="${pageContext.request.contextPath }/resources/scripts/json.min.js"></script>
 		
@@ -106,38 +110,38 @@
 				<i class="fas fa-fw fa-tachometer-alt"></i><span>&nbsp; MENU </span></a>
 			</li>
 			
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<li class="nav-item">
+				<a class="nav-link" href="../admin/getUserList">
 					<i class="fas fa-fw fa-folder"></i> <span> 회원 관리 </span>
 				</a>
-				<!-- 여기는 일단 그냥 달아놨음 
-				<div class="dropdown-menu" aria-labelledby="pagesDropdown">
-					<a class="dropdown-item" href="#"> 회원 목록 </a>
-					<a class="dropdown-item" href="#"> 신고 관리 </a>
-				</div>
-				 -->
 			</li>
 			
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="pagesDropdown"	role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<li class="nav-item">
+				<a class="nav-link" href="../admin/admin_qnaboard">
 					<i class="fas fa-fw fa-folder"></i> <span> 게시판 관리 </span>
 				</a>
 			</li>
 			
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="pagesDropdown"	role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<li class="nav-item">
+				<a class="nav-link" href="../admin/challenge">
 					<i class="fas fa-fw fa-folder"></i> <span> 챌린지 관리 </span>
 				</a>
 			</li>
 			
 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="pagesDropdown"	role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<a class="nav-link dropdown-toggle" href="../admin/chart" id="pagesDropdown"	role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<i class="fas fa-fw fa-folder"></i> <span> 통계 관리 </span>
 				</a>
 				<div class="dropdown-menu" aria-labelledby="pagesDropdown">
 					<a class="dropdown-item" href="#"> 매출 </a>
-					<a class="dropdown-item" href="#"> 통계 </a>
+					<a class="dropdown-item" href="chart"> 통계 </a>
 				</div>	
+			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link" href="../sgroup/getSgList">
+					<i class="fas fa-fw fa-chart-area"></i> <span> 운동하자 바로가기 </span>
+				</a>
 			</li>
 		</ul>
 		

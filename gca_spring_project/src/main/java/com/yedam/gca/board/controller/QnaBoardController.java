@@ -41,7 +41,7 @@ import com.yedam.gca.common.Paging;
 	  }
   
   // 관리지목록
-	  @RequestMapping(value = "admin_qnaboard")
+	  @RequestMapping(value = "/admin/admin_qnaboard")
 	  public String getBoardList2(Model model, BoardSearchVO svo, Paging paging) {
 		  model.addAttribute("board",boardService.getBoardList2(svo, paging));
 		  model.addAttribute("paging",paging);
