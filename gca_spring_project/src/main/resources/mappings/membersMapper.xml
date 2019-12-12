@@ -28,7 +28,10 @@
 											M_GRANT,
 											M_LEVEL_CD,
 											M_STATUS_CD,
-											M_EMAIL		)
+											M_EMAIL,
+											M_RADIUS,
+											M_NOTICE
+										)
 					VALUES (	#{m_id},
 								#{m_salt},
 								#{m_password},
@@ -42,7 +45,10 @@
 								'ROLE_User',
 								'jw',
 								'M01',
-								#{m_email}		)
+								#{m_email},
+								8,
+								'on/on'
+							)
 		  	</insert>
 
 
