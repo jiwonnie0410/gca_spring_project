@@ -134,7 +134,7 @@ public class SGroupController {
 			@RequestParam(value="sg_num", defaultValue="", required=true) int sg_num,
 			Model model, SGroupVO svo, ActiveHistVO avo, HttpSession session) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션 정보 갖고 오기
-		svo.setM_id(memInfo.getM_id());
+		avo.setM_id(memInfo.getM_id());
 		avo.setIn_type("sg"); //sg:반짝방, bg:매치방, six:용병방(직접 입력)
 		avo.setPk_num(sg_num);
 		actService.roomInsert(avo);
