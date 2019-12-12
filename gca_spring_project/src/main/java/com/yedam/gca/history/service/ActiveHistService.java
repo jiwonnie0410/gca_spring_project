@@ -13,10 +13,6 @@ public interface ActiveHistService {
 	// 유저별 활동히스토리 목록 조회
 	public List<Map> getActiveHistList(ActiveHistVO vo);
 	
-	//반짝 단건 받아옴
-	public SGroupVO getSgroup(SGroupVO vo);
-
-
 
 
 	//***************** 미현 *******************//

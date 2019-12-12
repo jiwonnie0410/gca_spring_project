@@ -22,6 +22,7 @@
 		<security:intercept-url pattern="/forgotPassword" access="permitAll()" />
 		<security:intercept-url pattern="/getTempPassword" access="permitAll()" />
 		
+		
 		<!-- 관리자에게만 허용 -->
 		<security:intercept-url pattern="/admin/**"	access="hasAuthority('ROLE_Admin')" />
 		

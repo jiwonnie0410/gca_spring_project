@@ -23,13 +23,6 @@ public class ActiveHistDAO {
 		return mybatis.selectList("ActiveHistDAO.getActiveHistList", vo);
 	}
 	
-	//아작스
-
-	//모달클릭시 반짝 정보 단건 출력
-	public SGroupVO getSgroup(SGroupVO vo) {
-		return mybatis.selectOne("ActiveHistDAO.getSgroup", vo);
-	}
-	
 	//*************** 미현 *******************//
 	//SGroup+BGroup+Sixman 참여 전 참여 여부 확인 + 마감 인원 파악
 	public void validIn(ActiveHistVO vo) {

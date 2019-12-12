@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--ContextPath 선언 --%>
 <%String cp = request.getContextPath();%>
 <!DOCTYPE html>
@@ -68,7 +69,7 @@
 				<h2>홍보</h2>
 				<p>* 홍보.</p>
 			 </div>
-
+			 <sec:authentication property="principal.m_id"/> 
 			<div align="center" style="padding-right: 3%; padding-left: 3%;">
 				<!-- 로그인한 사용자만 글쓰기 버튼을 활성화 -->
 				<%-- <c:if test="${sessionScope.userId != null}"> --%>

@@ -30,6 +30,21 @@ public class AdminDAO {
 		return mybatis.insert("AdminDAO.insertChallenge", vo);
 	}
 	
+	// 챌린지 진행 현황 / 참여 인원
+	public List<ChallengeVO> challengeCount(int cl_id) {
+		return mybatis.selectList("AdminDAO.challenegeCount", cl_id);
+	}
+	
+	// 챌린지 진행 현황 / 챌린지 상세 내용
+	public Map<String, Object> challengeDetail(int cl_id) {
+		return mybatis.selectOne("AdminDAO.challengeDetail", cl_id);
+	}
+	
+	// 챌린지 진행 현황 / 챌린지 참여한 사람들 목록
+	public List<Map<String, Object>> challengePeople(int cl_id) {
+		return mybatis.selectList("AdminDAO.challengePeople", cl_id);
+	}
+	
 	// 반짝 운동별 통계
 	public List<Map<String, Object>> chartSgroup(){
 		return mybatis.selectList("AdminDAO.chartSgroup");

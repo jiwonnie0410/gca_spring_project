@@ -20,7 +20,7 @@ public class ActiveHistController {
 	@Autowired ActiveHistService service;
 	
 	//*************** 수림 *******************//
-	// 유저별 활동히스토리 목록 조회
+	// 1. 유저별 활동히스토리 전체목록 탭용
 	@RequestMapping("history/activeHistory")
 	public String getActiveHistList(Model model, HttpSession session) {
 		
@@ -33,6 +33,7 @@ public class ActiveHistController {
 		return "/user/history/active_history";
 	}
 	
+	// 2. 유저별 활동 히스토리 달력에 뿌릴 JSON
 	@RequestMapping("/ajax/getActiveHistList.json")
 	@ResponseBody
 	public List<Map> getActiveHistList(ActiveHistVO vo, HttpSession session) {
@@ -40,15 +41,6 @@ public class ActiveHistController {
 		session.setAttribute("id", vo.getM_id());
 		
 		return service.getActiveHistList(vo);
-	}
-	
-	@RequestMapping("/ajax/getSGroup.json")
-	@ResponseBody
-	public SGroupVO getSgroup(SGroupVO vo) {
-		vo.setSg_num(1);
-		service.getSgroup(vo);
-		
-		return vo;
 	}
 	
 	// *************  수림 끝 **********************//

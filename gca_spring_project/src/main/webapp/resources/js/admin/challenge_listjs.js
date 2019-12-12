@@ -46,8 +46,9 @@ $(function(){
 			$('#addType').text();
 		}
 	});
+	
 });
-				
+
 // 챌린지 생성 버튼
 function createChallengeButton(){
 	var frm = document.createChallengeForm;
@@ -90,7 +91,12 @@ function createChallengeButton(){
 	var clName;
 	if($('#challengeType').val() == 'nTime') { clName = "반짝 " + $('#howMany').val() + "번 참여"; }
 	if($('#challengeType').val() == 'nKinds') { clName = "반짝 " + $('#howMany').val() + "가지 종목 참여"; }
-	if($('#challengeType').val() == 'mKind_nTime') { clName = $('#selectSports') + " 종목 반짝 " + $('#howMany').val() + "번 참여"; }
+	if($('#challengeType').val() == 'mKind_nTime') {
+		// 선택한 운동종목의 value값이 아닌 텍스트 가져오기
+		var target = document.getElementById("selectSports");
+		var sportsText = target.options[target.selectedIndex].text;
+		clName = sportsText + " 종목 반짝 " + $('#howMany').val() + "번 참여"; 
+	}
 	frm.cl_name.value = clName;
 	
 	// 챌린지 등록
@@ -102,10 +108,23 @@ function createChallengeButton(){
 			data: param,
 			contentType: "application/json",
 			success: function(result) {
-					console.log(result)
+					var status;
+					if(result.CL_STATUS == 'basic')
+						status = '기본';
+					else
+						status = '스페셜';
+					$("<tr data-toggle='modal' data-target='#challenge-going' id='newTr'>")
+							  .append("<td align='center'>"+ result.cl_num +"</td>")
+							  .append("<td align='center'>"+ status +"</td>")
+							  .append("<td>"+ result.cl_name +"</td>")
+							  .append("<td align='center'>"+ result.cl_start_dttm +"</td>")
+							  .append("<td align='center'>"+ result.cl_end_dttm +"</td>")
+							  .append("<td align='center'>"+ result.cl_score +"점 </td>")
+							  .appendTo($("#challenge-table"));
 			}
 	});
 	
+	$('#challenge-create').modal('hide');
 }
 
 // 챌린지 목록 띄우기
@@ -120,7 +139,7 @@ function getChallengeList() {
 					status = '기본';
 				else
 					status = '스페셜';
-				$("<tr data-toggle='modal' data-target='#challenge-going' id='newTr'>")
+				$("<tr data-toggle='modal' data-target='#challenge-going' id='newTr' onclick='getKey("+datas[i].CL_NUM+")'>")
 						  .append("<td align='center'>"+ datas[i].CL_NUM +"</td>")
 						  .append("<td align='center'>"+ status +"</td>")
 						  .append("<td>"+ datas[i].CL_NAME +"</td>")
@@ -131,4 +150,30 @@ function getChallengeList() {
 			}
 		}
 	});
+}
+
+function getKey(cl_num) {
+	console.log("챌린지 번호:: " + cl_num);
+	// 챌린지 진행 현황
+	$.ajax({
+			url: "../ajax/challenge/going",
+			data: "cl_num",
+			success: function(result) {
+					console.log(result);
+//					var status;
+//					if(result.CL_STATUS == 'basic')
+//						status = '기본';
+//					else
+//						status = '스페셜';
+//					$("<tr data-toggle='modal' data-target='#challenge-going' id='newTr'>")
+//							  .append("<td align='center'>"+ result.cl_num +"</td>")
+//							  .append("<td align='center'>"+ status +"</td>")
+//							  .append("<td>"+ result.cl_name +"</td>")
+//							  .append("<td align='center'>"+ result.cl_start_dttm +"</td>")
+//							  .append("<td align='center'>"+ result.cl_end_dttm +"</td>")
+//							  .append("<td align='center'>"+ result.cl_score +"점 </td>")
+//							  .appendTo($("#challenge-table"));
+			}
+	});
+
 }

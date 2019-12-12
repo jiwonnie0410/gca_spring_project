@@ -28,21 +28,31 @@
 											M_GRANT,
 											M_LEVEL_CD,
 											M_STATUS_CD,
-											M_EMAIL		)
+											M_EMAIL,
+											M_RADIUS,
+											M_NOTICE1,
+											M_NOTICE2,
+											M_NOTICE3
+										)
 					VALUES (	#{m_id},
 								#{m_salt},
 								#{m_password},
 								#{m_name},
 								#{m_nick},
 								'jw',
-								'jw',
+								#{m_xy},
 								#{m_location},
 								${m_age},
 								#{gender_cd},
 								'ROLE_User',
 								'jw',
 								'M01',
-								#{m_email}		)
+								#{m_email},
+								10,
+								1,
+								1,
+								1
+							)
 		  	</insert>
 
 
@@ -84,7 +94,7 @@
 			<select id="loginCheck" parameterType="members" resultType="members">
 					SELECT 	M_ID, M_PASSWORD, M_GRANT,
 							M_NAME, M_NICK, M_IMAGE_CD, M_XY, M_LOCATION, M_AGE, GENDER_CD, M_LEVEL_CD,
-							M_RADIUS, M_NOTICE, M_EMAIL
+							M_RADIUS, M_NOTICE1, M_NOTICE2, M_NOTICE3 M_EMAIL
 					FROM MEMBERS
 					WHERE M_ID = #{m_id}
 			</select>
@@ -161,5 +171,25 @@
         FROM MEMBERS
         WHERE m_id = #{m_id} AND M_PASSWORD = #{m_password}
     </select>
+    
+    
+<!-- ************  수림    ****************** 
+		1. 유저별 알람 정보 불러오기
+-->
+	
+	<!-- 1. 유저별 알람 정보 불러오기 -->      
+	<select id="getAlarmInfo" resultType="members">   
+		SELECT		M_ID, 
+					M_RADIUS, 
+					M_NOTICE1,
+					M_NOTICE2,
+					M_NOTICE3
+		FROM 		MEMBERS
+		WHERE M_ID = #{m_id}    
+	</select>
+    
+    
+    
+    
 </mapper>
 

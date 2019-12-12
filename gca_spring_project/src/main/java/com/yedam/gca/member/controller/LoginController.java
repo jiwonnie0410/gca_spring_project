@@ -61,6 +61,7 @@ public class LoginController {
 		vo.setM_age(request.getParameter("mAge"));
 		vo.setGender_cd(request.getParameter("checkbox1"));
 		vo.setM_email(request.getParameter("mEmail"));
+		vo.setM_xy(request.getParameter("mXy"));
 		memberService.insertMember(vo);
 		return "/notiles/member/login";
 	}
@@ -103,5 +104,27 @@ public class LoginController {
 		vo.setM_email(request.getParameter("mEmail"));
 		model.addAttribute("pwMessage", memberService.forgotPw(vo)); // jsp 페이지에서 alert로 띄울 메시지 넘기기
 		return "/notiles/member/login";
+	}
+	// 지원 끝
+	
+	// 수림
+	
+	
+	
+	// **************** 수림 ***************** // 컨트롤러
+	
+	// 1. 환경설정 페이지 이동
+	@RequestMapping("member/option")
+	public String getAlarmInfo() {
+		return "/user/member/option";
+	}
+	
+	// 2. 사용자 알람관련 정보 출력
+	@RequestMapping("/ajax/option.json")
+	@ResponseBody
+	public MembersVO getAlarmInfo(MembersVO vo) {
+		//임시 아이디
+		vo.setM_id("test");
+		return memberService.getAlarmInfo(vo);
 	}
 }

@@ -16,123 +16,114 @@
 	
 <!-- 수림 개인 js/css -->
 <script src="${pageContext.request.contextPath }/resources/js/surim/default.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/surim/addOption.js"></script>
-
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/addOption.css">
-	
+
 <style>
 .optionDiv {
-	padding: 15px;
+	max-whdth: 500px;
 }
 
-.title {
-	text-align: center;
-	font-size: 50px;
-	font-weight: bold;
-}
+.rangeTable {
+	width: 100%;
+} 
+.alarmTable {
+	width: 100%;
+}   
 
+</style>
 
-thead {
-	font-size: 50px;
-	font-weight: bold;
-}
-
-td {
-	font-size: 50px;
-	height : 150px;
-}
-
-button {
-	width: 200px;
-	height: 100px;
-	font-size: 50px;
-	font-weight: bold;
-	background: #FE9191;
-	border-radius: 30px;
-	color: white;
-	border: none;
-}
-
-</style>	
-
+<script>
+$(function() {
+	//레인지 슬라이드 옵션
+	var slider = document.getElementById("myRange"); 
+	var output = document.getElementById("checkRange"); //보증금선택쪽의 출력값
+	output.innerHTML = slider.value;
 	
+	slider.oninput = function() {
+		output.innerHTML = this.value;
+	}
+});
+
+</script>
 </head>
 
-<body>
-<div class="optionDiv">
-  <div class="title" style="height: 100px;">환경설정</div>
-  <hr>
-	<table class="alarmTable">
-		<thead>
-			<tr>
-				<td>알람설정</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td width="1050">반짝 풀방시 알람</td>
-				<td width="200">
-					<div class="onoffswitch">
-					    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch1" checked>
-					    <label class="onoffswitch-label" for="myonoffswitch1"></label>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>범위내 등록된 반짝 알람</td>
-				<td>
-					<div class="onoffswitch">
-					    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch2" checked>
-					    <label class="onoffswitch-label" for="myonoffswitch2"></label>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>범위내 등록된 용병 알람</td>
-				<td>
-					<div class="onoffswitch">
-					    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch3" checked>
-					    <label class="onoffswitch-label" for="myonoffswitch3"></label>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>범위내 등록된 동아리매치 알람</td>
-				<td>
-					<div class="onoffswitch">
-					    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch4" checked>
-					    <label class="onoffswitch-label" for="myonoffswitch4"></label>
-					</div>
-				</td>
-			</tr>
-			
-			
-		</tbody>
-	</table>
-	<br>
-	<table class="rangeTable">
-		<thead>
-			<tr>
-				<td>범위설정 </td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td colspan="2">
-					<div class="slidecontainer">
-					  <input type="range" min="1" max="15" value="5" class="rangeSlider" id="myRange">
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td width="800">　　　반경범위: <span id="checkRange"></span>km</td>
-				<td width="400"><button>적용</button></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
 
+<body>
+<div class="container">     
+	<div class="optionDiv">
+	  <div class="title">환경설정</div>
+	  <hr>
+		<table class="alarmTable">
+			<thead>
+				<tr>
+					<td><span class="pinkText">알람설정</span></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>   
+					<td><span class="mediumText">참가중 반짝, 인원모집 완료시 알람</span></td>
+					<td>
+						<div class="onoffswitch">
+						    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch1" checked>
+						    <label class="onoffswitch-label" for="myonoffswitch1"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="mediumText">범위내 등록된 반짝 알람</span></td>
+					<td>
+						<div class="onoffswitch">
+						    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch2" checked>
+						    <label class="onoffswitch-label" for="myonoffswitch2"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="mediumText">범위내 등록된 용병 알람</span></td>
+					<td>
+						<div class="onoffswitch">
+						    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch3" checked>
+						    <label class="onoffswitch-label" for="myonoffswitch3"></label>
+						</div>
+					</td>
+				</tr>
+<!-- 				<tr>    -->
+<!-- 					<td><span class="mediumText">범위내 등록된 동아리매치 알람</span></td> -->
+<!-- 					<td> -->
+<!-- 						<div class="onoffswitch"> -->
+<!-- 						    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch4" checked> -->
+<!-- 						    <label class="onoffswitch-label" for="myonoffswitch4"></label> -->
+<!-- 						</div> -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
+				
+				
+			</tbody>
+		</table>
+		<br>
+		<table class="rangeTable">
+			<thead>
+				<tr>
+					<td><span class="pinkText">범위설정</span></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="2">
+						<div class="slidecontainer">
+						  <input type="range" min="1" max="30" value="10" class="rangeSlider" id="myRange">
+						</div>
+					</td>
+				</tr>
+				<tr>   
+					<td class="pinkText" style="padding-top: 20px; width: 200px;">반경범위: <span id="checkRange"></span>km</td>
+					<td style="text-align: center; padding-top: 20px;"><button class="pink-btn">적용</button></td>
+				</tr>   
+			</tbody>
+		</table>
+	</div>
+</div>
 
 </body>
 </html>

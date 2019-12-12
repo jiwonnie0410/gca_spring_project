@@ -23,11 +23,6 @@ public class ActiveHistServiceImpl implements ActiveHistService{
 		return dao.getActiveHistList(vo);
 	}
 	
-	//반짝 단건 받아옴
-	@Override
-	public SGroupVO getSgroup(SGroupVO vo) {
-		return dao.getSgroup(vo);
-	}
 	
 	
 	//***************** 미현 *******************//

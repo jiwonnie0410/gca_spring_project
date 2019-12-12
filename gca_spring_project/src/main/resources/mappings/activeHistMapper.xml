@@ -6,7 +6,7 @@
 	<!--  *********수림************* 
 		VIEW_ACTIVE_HIST 뷰를 사용합니다. 컬럼 조회시에 큰따옴표 필수! 없으면 에러남! 아래 셀렉 예시 확인바람	
 	-->        	
-	<select id="getActiveHistList" resultType="map"> 
+	<select id="getActiveHistList" resultType="map">   
 		<![CDATA[
 		SELECT 		"ach_num",
  					"m_id", 
@@ -78,7 +78,9 @@
 					M_GRANT,
 					M_STATUS_CD,
 					M_RADIUS,
-					M_NOTICE,
+					M_NOTICE1,
+					M_NOTICE2,
+					M_NOTICE3,
 					get_code_name(M_LEVEL_CD) "m_level_cd"
 		FROM 		MEMBERS M 
 				JOIN 

@@ -55,7 +55,11 @@ public class MemberDAO {
 	
 	
 	
-	
+	// **************** 수림 *******************//
+	// 1. 유저별 알람 정보 가져오기
+	public MembersVO getAlarmInfo(MembersVO vo) {
+		return mybatis.selectOne("MemberDAO.getAlarmInfo", vo);
+	}
 	
 	
 	

@@ -32,6 +32,14 @@ public interface MemberService {
     public void updateMember(MembersVO vo);
 
 	boolean checkPw(String m_id, String m_password);
+	
+	
+	
+	// ************* 수림 ***************** //
+	
+	// 1. 유저별 알람 정보 가져오기 
+	public MembersVO getAlarmInfo(MembersVO vo);
+	
 }
  
 
