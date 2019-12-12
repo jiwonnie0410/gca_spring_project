@@ -15,124 +15,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script src="${pageContext.request.contextPath }/resources/js/board/user_Qna.js"></script>
 <!--json할때 필요  -->
 <script src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
 
-<script>
-//페이지맵 이벤트
-//ready이벤트 작성
 
-	
-
-	$(function(){
-		getBoardList(); //목록조회
-		insertBoard(); //등록 이벤트 클릭 이벤트 지정
-		deleteBoard();//삭제
-		
-	});
-	
-	//목록 조회요청
-	function getBoardList() {
-		$.ajax({
-			url:"ajax/getBoardList.json",
-			dataType:"json",
-			success: getBoardListHandler
-		});
-	}
-	
-	//목록 조회 결과처리
-	  function getBoardListHandler(datas) {
-			$("#asktb").empty();
-		for (var i = 0; i < datas.length; i++) {
-				$("<tr id='"+datas[i].qb_id+"'>").append($('<td>').html(datas[i].qb_id))
-						 .append($('<td>').html(datas[i].m_id)) 
-						 .append($('<td>').html(datas[i].qb_title))
-						 .append($('<td>').html(datas[i].qb_content))
-						 .appendTo('#asktb')
-						 .attr("data",datas[i].bno);
-				}//for
-			}//  getBoardListHandler
-			
-			
-			//등록 요청
-			//폼의 파라미터를 넘기기 위해 serialize() 함수를 사용한다.필요한 로직 처리를 하고 마찬가지로 @ResponseBody Annotation을 사용하여  Object형태로 넘김
-	function insertBoard() {
-		$("#btnIns").click(function() {
-			var param = JSON.stringify($("#frm").serializeObject());// form의 입력데이터를 쿼리스트링으로 만들어준다. 
-			$.ajax({
-				url:"ajax/insertBoard.json",
-				method:'post',
-				dataType:"json",
-				data: param,
-				contentType:"application/json",
-				success:	insertBoardtHandler,
-				error: function() {
-					alert("tlf");
-				}
-			});	//ajax	
-		});//function
-	}//insertBoard
-			
-	//등록 요청 결과처리
-		function insertBoardtHandler(data) {
-			$('<tr>').append($('<td>').html(data.qb_id))
-					 .append($('<td>').html(data.m_id))
-					 .append($('<td>').html(data.qb_title))
-					 .append($('<td>').html(data.qb_content))
-					 .appendTo('#asktb');
-			$('#myModal').modal("hide"); //닫기 
-		}
-	
-					 
-	//삭제 요청(rest방식)
-	function deleteBoard() {
-		$("#asktb").on("click","#btnDel", function() {
-			var bno = $(this).parent().find("span").eq(0).html();
-			console.log(bno);
-			$.ajax({
-				url:"board/"+qb_id,
-				method:"delete",	
-				success: deleteBoardHandler
-			});
-		});
-	}
-	
-		//삭제 요청 결과처리
-		function deleteBoardHandler(bno) {
-			console.log( qb_id);
-			$("[data = '" + qb_id+ "' ]" ).remove();
-		}
-		
-		
-		
-		
-		//상세조회 요청
-		function getBoard() {
-			$("#asktb").on("click","#tr", function() {
-				var qb_id = $(this).parent().find("span").eq(0).html();
-				console.log(bno);
-				$.ajax({
-					url:"board/"+qb_id,
-					method:"get",	
-					success: getBoardHandler
-				});
-			});
-		}
-		
-		//상세조회 요청 결과처리
-		function getBoardHandler(bno) {
-			console.log( qb_id);
-		}
-		
-		
-		
-		function go_page(paging){
-			document.boardForm.page.value = paging;
-			document.boardForm.submit();
-		}
-		
-
-</script>
 <title>boardList_json.jsp</title>
 </head>
 <body>
@@ -150,6 +38,8 @@
 	</form>
 </div>
 <!-- -----------------------------------------------------검색폼 끝------------------------------------ -->
+
+
 
 <!------------------------------------------------------- 목록 시작 ----------------------------------->
 <h3>게시판 목록</h3>
@@ -169,9 +59,14 @@
 	<button id="write" class="btn btn-primary px-5 py-3" type="button" data-toggle="modal" data-target="#myModal">Write</button>
 <!------------------------------------------------------- 목록  끝 ----------------------------------->
 
+
+
+
 <!-- ---------------------------------------페이징 시작------------------------------------------------- -->
 	<my:paging paging="${paging}"></my:paging> 
 <!-- --------------------------------------------------페이징 끝 ------------------------------------>	
+
+
 
 
 
@@ -191,7 +86,7 @@
 					<div class="panel-heading" style="background-color: pink; color: black">문의 사항</div>
 					<div class="panel-body">
 						<%-- form --%>
-						<form action="insertBoard" id="frm" name="frm">
+						<form role="form" action="../ajax/insertBoard"  id="ad_boardWriteForm" name="ad_boardWriteForm">
 						<!-- <input type="hidden" id="qb_id" name="qb_id" value="${qb_id}" /> -->
 							
 							
@@ -229,6 +124,32 @@
 	</div>	
 	</div>
 	</div>
+	
+	
+	
+<!-- -------------------------------------게시글 읽기------------------------------  -->	
+<!-- Modal 읽기-->
+	<!-- 게시물 상세보기 영역 -->
+	<div class="modal fade" id="UserModalread" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					문의게시판 관리
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-primary px-5 py-3 mt-3"
+							id="btnUpdete" data-toggle='modal' data-target='#myModal'>답글</button>
+						<button type="button" class="btn btn-primary px-5 py-3 mt-3"
+							id="btnDelete">삭제</button>
+					<button type="button" class="btn btn-primary px-4 py-2"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>	
 </body>
 
 </html>

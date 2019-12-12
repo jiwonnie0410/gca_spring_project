@@ -36,7 +36,7 @@ public interface QnaBoardService {
 		public QnaBoardVO read(int qb_id) throws Exception;
 	
 	// 게시글 작성
-	int insertBoard(QnaBoardVO vo);
+	public int insertBoard(QnaBoardVO vo);
 
 	//  게시글 수정
 	int updateBoard(QnaBoardVO vo);

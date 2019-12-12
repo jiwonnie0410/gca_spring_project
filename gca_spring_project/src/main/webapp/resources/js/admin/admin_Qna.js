@@ -6,15 +6,20 @@ $(function() {
 	insertBoard(); // 등록 이벤트 클릭 이벤트 지정
 	deleteBoard();// 삭제
 
-	/*
-	 * $("body").on("click", "[id^=write]", function() { var qb_id =
-	 * $(this).closest("tr").find("td").eq(0).html();// closest ==조상검색
-	 * console.log(qb_id); });
-	 */
+//	 $("body").on("click", "[id^=write]", function() { var qb_id =
+//	  $(this).closest("tr").find("td").eq(0).html();// closest ==조상검색
+//	  console.log(qb_id); });
+	 
 
 	$("#Modalread").on('show.bs.modal', function() {
-		var qb_id = $(this).closest("tr").find("td").eq(0).html();// closest
-		// ==조상검색
+		var qb_id = $(event.target).closest("tr").find("td").eq(0).html();// closest
+		$(".modal-body").load("adminQnView?qb_id="+qb_id)
+		console.log(qb_id);
+	});
+	
+	$("#UserModalread").on('show.bs.modal', function() {
+		var qb_id = $(event.target).closest("tr").find("td").eq(0).html();// closest
+		$(".modal-body").load("adminQnView?qb_id="+qb_id)
 		console.log(qb_id);
 	});
 
@@ -32,7 +37,6 @@ function getBoardList2() {
 	});
 }
 // 목록 조회 결과처리
-
 function getBoardListHandler(datas) {
 	$("#asktb").empty();
 	for (var i = 0; i < datas.length; i++) {
@@ -41,11 +45,13 @@ function getBoardListHandler(datas) {
 				.append($('<td>').html(datas[i].qb_title))
 				.append($('<td>').html(datas[i].qb_content))
 				.append($('<td>').html(
-								"<button id='write' data-toggle='modal' data-target='#Modalread' >답글</button>"))
+								"<button id='write' data-toggle='modal' data-target='#Modalread' ) >답글</button>"))
 				.append($('<td>').html('<button id=\'btnDel\'>삭제</button>'))
 				.appendTo('#asktb').attr("data", datas[i].qb_id);
 	}
 }//  
+
+
 
 function insertBoard() {
 	$("#btnIns").click(function() {
@@ -74,6 +80,8 @@ function insertBoardtHandler(data) {
 	$('#myModal').modal("hide"); // 닫기
 }
 
+
+
 // 삭제 요청
 function deleteBoard() {
 	$('#asktb').on("click", "#btnDel", function() {
@@ -87,6 +95,9 @@ function deleteBoard() {
 	});
 }
 
+
+
+
 // 삭제 요청 결과처리
 function deleteBoardHandler(qb_id) {
 	$("[data = '" + qb_id + "' ]").remove();
@@ -96,3 +107,5 @@ function go_page(paging) {
 	document.boardForm.page.value = paging;
 	document.boardForm.submit();
 }
+
+

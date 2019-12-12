@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.yedam.gca.board.service.QnaBoardService;
 import com.yedam.gca.board.vo.BoardSearchVO;
 import com.yedam.gca.board.vo.QnaBoardVO;
+import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.common.Paging;
 
 //ajax 요청 처리 컨트롤러
@@ -50,23 +52,34 @@ import com.yedam.gca.common.Paging;
 	  return "/admin/admin_qnaBoard"; 
 	  }
 	  
-	  // 관리자목록
+	  // 사용자목록
 	  @ResponseBody
 	  @RequestMapping("/ajax/getBoardList2") 
 	  public List<QnaBoardVO>getBoardList2(BoardSearchVO svo, Paging paging) {
 		  return boardService.getBoardList2(svo, paging); }  
 	  
-	 
 	  
-	  //상세보기
-	  @RequestMapping(value="view", method=RequestMethod.GET)
+	  
+	  // 작성
+	  //@ResponseBody를 사용해주면 view를 생성해주는것이 아니라, JSON 혹은 Object 형태로 데이터를 넘겨준다.
+	  @ResponseBody
+		@RequestMapping(value="/ajax/insertBoard", consumes="application/json")
+		public QnaBoardVO insertBoard(@RequestBody QnaBoardVO vo) throws Exception{
+			UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			vo.setM_id(user.getUsername()); 
+		  boardService.insertBoard(vo);
+			return vo;
+		}
+	  
+	  //관리자 상세보기
+	  @RequestMapping(value="/admin/adminQnView", method=RequestMethod.GET)
 			public ModelAndView view(@RequestParam int qb_id, Paging paging) throws Exception{
 				// 모델(데이터)+뷰(화면)를 함께 전달하는 객체
 				ModelAndView mav = new ModelAndView();
 				// 뷰에 전달할 데이터
 				mav.addObject("dto", boardService.read(qb_id));
 				// 뷰의 이름
-				mav.setViewName("/admin/admin_qnaBoard");
+				mav.setViewName("/notiles/admin/adminQnView");
 				logger.info("mav:", mav);
 				return mav;
 			}
@@ -88,13 +101,8 @@ import com.yedam.gca.common.Paging;
   
  
   
-  // 작성
-  //@ResponseBody를 사용해주면 view를 생성해주는것이 아니라, JSON 혹은 Object 형태로 데이터를 넘겨준다.
-  @ResponseBody 
-  @RequestMapping(value = "/ajax/insertBoard.json", consumes ="application/json")
-  	public QnaBoardVO insertBoard(@RequestBody QnaBoardVO vo){
-	  boardService.insertBoard(vo);
-	  return vo; }
+ 
+  
   
   // 삭제
   @ResponseBody
@@ -104,6 +112,7 @@ import com.yedam.gca.common.Paging;
 	  boardService.deleteBoard(vo); 
 	  return qb_id; 
 	  }
+  
   
   // 단건조회
   @ResponseBody  
