@@ -105,4 +105,7 @@ public class LoginController {
 		model.addAttribute("pwMessage", memberService.forgotPw(vo)); // jsp 페이지에서 alert로 띄울 메시지 넘기기
 		return "/notiles/member/login";
 	}
+	// 지원 끝
+	
+	// 수림
 }

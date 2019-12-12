@@ -46,7 +46,7 @@
 								'jw',
 								'M01',
 								#{m_email},
-								8,
+								10,
 								'on/on'
 							)
 		  	</insert>
