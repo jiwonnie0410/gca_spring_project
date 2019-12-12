@@ -1,6 +1,9 @@
 package com.yedam.gca.admin.controller;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -55,10 +58,6 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping("/ajax/challenge/going")
 	public Map<String, Object> challengeGoing(@RequestParam String cl_num) {
-		
-		System.out.println("번호 넘어왔남?: " + cl_num);
-		
-		
 		int num = Integer.parseInt(cl_num);
 		return adminService.challengeGoing(num);
 	}
@@ -100,29 +99,10 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping("/ajax/chart/city")
 	public List<Map<String, Object>> chartCity() {
-//		Calendar calendar = new GregorianCalendar(Locale.KOREA);
-//		String nowMonth = Integer.toString(calendar.get(Calendar.MONTH) + 1); 	// 현재 달
-//		String oneMonth, twoMonth, threeMonth;									// 한달전, 두달전, 세달전
-//		
-//		// 만약 구하려는 달이 10월 전이라면 쿼리에는 09 08 07월로 들어가야 하기 때문에 문자열로 앞에 0을 붙여줌
-//		// 현재 달
-//		if((calendar.get(Calendar.MONTH)+1) < 10) {	nowMonth = "0".concat(Integer.toString(calendar.get(Calendar.MONTH) + 1)); }
-//		else nowMonth = Integer.toString(calendar.get(Calendar.MONTH) + 1);
-//		// 한달 전
-//		if((calendar.get(Calendar.MONTH)) < 10) {	oneMonth = "0".concat(Integer.toString(calendar.get(Calendar.MONTH))); }
-//		else oneMonth = Integer.toString(calendar.get(Calendar.MONTH));
-//		// 두 달 전
-//		if((calendar.get(Calendar.MONTH)-1) < 10) {	twoMonth = "0".concat(Integer.toString(calendar.get(Calendar.MONTH) - 1)); }
-//		else twoMonth = Integer.toString(calendar.get(Calendar.MONTH) - 1);
-//		// 세 달 전
-//		if((calendar.get(Calendar.MONTH)-2) < 10) {	threeMonth = "0".concat(Integer.toString(calendar.get(Calendar.MONTH) - 2)); }
-//		else threeMonth = Integer.toString(calendar.get(Calendar.MONTH) - 2);
-
-//		for(int i=(Integer.parseInt(startMonth)); i<=Integer.parseInt(nowMonth); i++) {
-//			adminService.chartCity(startMonth, "대구");
-//		}
-
-		return adminService.chartCity("12", "대구");
+		Calendar calendar = new GregorianCalendar(Locale.KOREA);
+		int endMonth = calendar.get(Calendar.MONTH) + 1; 	// 현재 달   	12월
+		int startMonth = endMonth - 3;						// 3개월 전  	9월
+		return adminService.chartCity(startMonth, endMonth);
 	}
 
 	

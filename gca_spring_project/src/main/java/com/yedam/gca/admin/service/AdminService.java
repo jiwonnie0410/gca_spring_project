@@ -21,7 +21,7 @@ public interface AdminService {
 	public List<Map<String, Object>> chartGender(String gender, int startAge, int endAge);
 
 	// 5. 지역별 반짝 운동 통계
-	public List<Map<String, Object>> chartCity(String month, String city);
+	public List<Map<String, Object>> chartCity(int startMonth, int endMonth);
 	
 	// 6. 챌린지 목록
 	public List<ChallengeVO> challengeList();
