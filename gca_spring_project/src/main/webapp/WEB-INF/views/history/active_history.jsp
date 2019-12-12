@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -155,7 +156,7 @@
 							<div class="content-div">
 							<span class="pinkText">${list.title}</span>
 							<br>
-							<span class="pinkText">마감일자: ${list.start }</span>
+							<span class="pinkText">마감일자: <fmt:formatDate value="${list.start }" pattern="YYYY-MM-dd HH:mm"/></span>
 							<span class="mediumText">주소: ${list.location }</span>
 							<span class="mediumText">종목: ${list.sports_cd }</span>
 							<span class="mediumText">숙련도: ${list.skill_cd }</span>
@@ -184,7 +185,7 @@
 						<div class="content-div">
 							<span class="pinkText">${list.title}</span>
 							<br>
-							<span class="pinkText">마감일자: ${list.start }</span>
+							<span class="pinkText">마감일자: <fmt:formatDate value="${list.start }" pattern="YYYY-MM-dd HH:mm"/></span>
 							<span class="mediumText">장소: ${list.location }</span>
 							<span class="mediumText">종목: ${list.sports_cd }</span>
 							<span class="mediumText">숙련도: ${list.skill_cd }</span>
@@ -204,7 +205,7 @@
 						<div class="content-div">
 							<span class="pinkText">${list.title}</span>
 							<br>
-							<span class="pinkText">마감일자: ${list.start }</span>
+							<span class="pinkText">마감일자: <fmt:formatDate value="${list.start }" pattern="YYYY-MM-dd HH:mm"/></span>
 							<span class="mediumText">장소: ${list.location }</span>
 							<span class="mediumText">종목: ${list.sports_cd }</span>
 							<span class="mediumText">숙련도: ${list.skill_cd }</span>
