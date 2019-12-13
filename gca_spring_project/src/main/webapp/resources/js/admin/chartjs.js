@@ -93,9 +93,9 @@ function drawChart3() {
 			success: function(result) {
 					var rowData1 = new google.visualization.DataTable();
 					// 여성 차트에 컬럼 추가
-					rowData1.addColumn('number', '연령대');
+					rowData1.addColumn('string', '연령대');
 					rowData1.addColumn('number', '농구');
-					rowData1.addColumn('number', '달리기/산책');
+					rowData1.addColumn('number', '달리기');
 					rowData1.addColumn('number', '등산');
 					rowData1.addColumn('number', '배드민턴');
 					rowData1.addColumn('number', '볼링');
@@ -105,15 +105,20 @@ function drawChart3() {
 					// 디비에서 받아온 여성 연령대별 정보 result를 array1 배열에 넣어서 차트 컬럼에 추가
 					var array1 = [];
 					for(i=0; i<result.female.length; i++) {
-						array1.push( [ result.female[i].AGE, result.female[i].BASKETBALL, result.female[i].RUNNING, result.female[i].HIKING, result.female[i].BADMINTON, result.female[i].BOWLING, result.female[i].SWIMMING, result.female[i].BICYCLE ] );
+						var age = result.female[i].AGE;
+						if(age == 40)
+							age = age + '대 이상';
+						else
+							age = age + '대'
+						array1.push( [ age, result.female[i].BASKETBALL, result.female[i].RUNNING, result.female[i].HIKING, result.female[i].BADMINTON, result.female[i].BOWLING, result.female[i].SWIMMING, result.female[i].BICYCLE ] );
 					}
 					rowData1.addRows(array1);
 					
 					var rowData2 = new google.visualization.DataTable();
 					// 남성 차트에 컬럼 추가
-					rowData2.addColumn('number', '연령대');
+					rowData2.addColumn('string', '연령대');
 					rowData2.addColumn('number', '농구');
-					rowData2.addColumn('number', '달리기/산책');
+					rowData2.addColumn('number', '달리기');
 					rowData2.addColumn('number', '등산');
 					rowData2.addColumn('number', '배드민턴');
 					rowData2.addColumn('number', '볼링');
@@ -123,7 +128,12 @@ function drawChart3() {
 					// 디비에서 받아온 남성 연령대별 정보 result를 array1 배열에 넣어서 차트 컬럼에 추가
 					var array2 = [];
 					for(i=0; i<result.male.length; i++) {
-						array2.push( [ result.male[i].AGE, result.male[i].BASKETBALL, result.male[i].RUNNING, result.male[i].HIKING, result.male[i].BADMINTON, result.male[i].BOWLING, result.male[i].SWIMMING, result.male[i].BICYCLE ] );
+						var age = result.female[i].AGE;
+						if(age == 40)
+							age = age + '대 이상';
+						else
+							age = age + '대'
+						array2.push( [ age, result.male[i].BASKETBALL, result.male[i].RUNNING, result.male[i].HIKING, result.male[i].BADMINTON, result.male[i].BOWLING, result.male[i].SWIMMING, result.male[i].BICYCLE ] );
 					}
 					rowData2.addRows(array2);
 					
@@ -154,7 +164,7 @@ function drawChart3() {
 					// 차트 옵션: 타이틀 없으면 오류 나기 때문에 저렇게라도 넣어줘야 함
 					var options = {
 							width : 700,
-							height : 350,
+							height : 380,
 							vAxis : { title : "" },
 							hAxis : { title : "Age" },
 							seriesType : "bars",
