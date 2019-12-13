@@ -15,16 +15,23 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="../resources/scripts/json.min.js"></script>
 	
 <!-- 수림 개인 js/css -->
 <script src="${pageContext.request.contextPath }/resources/js/surim/default.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/addOption.css">
 
+<!-- 로그인한사람의 id,닉네임,캐릭터코드 저장 -->
+<sec:authentication property="principal.username" var="id"/>
+<sec:authentication property="principal.m_nick" var="nick"/>
+<sec:authentication property="principal.m_image_cd" var="image"/>
+
+
 <script>
 $(function() {
 	getOption(); //1. 유저 알람관련 정보조회; m_id, m_radius, m_notice1, m_notice2, m_notice3
-	//updateOption(); //2. 스위치,버튼 클릭시 옵션 업데이트
+	updateOption(); //2. 스위치,버튼 클릭시 옵션 업데이트
 
 });
 
@@ -47,18 +54,24 @@ function getOptionHandler(data) {
 function toggleSwitch(data) {
 	if(data.m_notice1 == 1) {
 		$('#switch1').prop('checked', true);		//스위치1
+		$('#m_notice1').val(1);
 	} else if (data.m_notice1 == 0) {
 		$('#switch1').prop('checked', false);
-	} else if (data.m_notice2 == 1) {
+		$('#m_notice1').val(0);
+	} if (data.m_notice2 == 1) {
 		$('#switch2').prop('checked', true);		//스위치2
+		$('#m_notice2').val(1);
 	} else if (data.m_notice2 == 0) {
 		$('#switch2').prop('checked', false);
-	} else if (data.m_notice3 == 1) {
+		$('#m_notice2').val(0);
+	} if (data.m_notice3 == 1) {
 		$('#switch3').prop('checked', true);		//스위치3
+		$('#m_notice3').val(1);
 	} else if (data.m_notice3 == 0) {
 		$('#switch3').prop('checked', false);
+		$('#m_notice3').val(0);
 	}
-}
+}    
 
 
 //1-3 레인지 슬라이더 기본세팅
@@ -74,18 +87,35 @@ function changeRange(range) {
 
 
 //2. 스위치,버튼 클릭시 옵션 업데이트
-// function updateOption() {
-// 	// 버튼클릭시 펑션
+function updateOption() {
+		updateSwitch();			//토글스위치 클릭시 업뎃
+		//updaetRangeBtn();		// 범위버튼 클릭시 업뎃
+}
+
+function updateSwitch() {                  
+	var switches = $('input:checkbox'); //스위치
+	switches.on('click', function() {
+		var index = (switches.index(this) +1 ); //스위치의 순서, 배열이라서 +1 
+		if($(this).is(':checked')) {
+			$("#m_notice" + index).val(1); //클릭한 버튼이 on일시 스위치폼에 1을 담는다
+		} else {
+			$("#m_notice" + index).val(0); // 클릭한 버튼이 off일시 스위치폼에 0을 담는다
+		}
+				
+			var param = JSON.stringify($("#switchForm").serializeObject()); //스위치폼 정보
+			console.log(param + "param");
+			$.ajax({
+				url: "../ajax/updateOption.json",
+				method: "PUT",
+				dataType: "json",
+				data: param, //서버로 보낼 파라미터 
+				contentType: 'application/json',
+
+			});
+	});
+}
+
 	
-// 	$.ajax({
-// 		url: "../ajax/updateOption.json",
-// 		method: "put",
-// 		dataType: "json",
-		
-// 	});
-// }
-
-
 
 </script>
 
@@ -106,7 +136,7 @@ function changeRange(range) {
 
 </head>
 
-<body>
+<body> 
 <div class="container">     
 	<div class="optionDiv">
 	  <div class="title">환경설정</div>
@@ -145,17 +175,6 @@ function changeRange(range) {
 						</div>
 					</td>
 				</tr>
-<!-- 				<tr>    -->
-<!-- 					<td><span class="mediumText">범위내 등록된 동아리매치 알람</span></td> -->
-<!-- 					<td> -->
-<!-- 						<div class="onoffswitch"> -->
-<!-- 						    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch4" checked> -->
-<!-- 						    <label class="onoffswitch-label" for="myonoffswitch4"></label> -->
-<!-- 						</div> -->
-<!-- 					</td> -->
-<!-- 				</tr> -->
-				
-				
 			</tbody>
 		</table>
 		<br>
@@ -182,5 +201,11 @@ function changeRange(range) {
 	</div>
 </div>
 
+	<form id="switchForm">
+		버튼1 <input id="m_notice1" name="m_notice1"><br>
+		버튼2 <input id="m_notice2" name="m_notice2"><br>
+		버튼3 <input id="m_notice3" name="m_notice3"><br>
+		유저아이디 <input id ="m_id" name="m_id" value="${id }">
+	</form>
 </body>
 </html>

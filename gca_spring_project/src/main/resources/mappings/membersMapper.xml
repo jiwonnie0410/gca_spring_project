@@ -175,6 +175,7 @@
     
 <!-- ************  수림    ****************** 
 		1. 유저별 알람 정보 불러오기
+		2. 스위치 클릭시 알람값 업데이트
 -->
 	
 	<!-- 1. 유저별 알람 정보 불러오기 -->      
@@ -185,11 +186,17 @@
 					M_NOTICE2,
 					M_NOTICE3
 		FROM 		MEMBERS
-		WHERE M_ID = #{m_id}    
+		WHERE		M_ID = #{m_id}    
 	</select>
     
     
-    
+    <update id="updateSwitch" parameterType="members">
+		UPDATE		MEMBERS 
+		SET 		M_NOTICE1 = #{m_notice1}, 
+					M_NOTICE2 = #{m_notice2}, 
+					M_NOTICE3 = #{m_notice3}   
+		WHERE 		M_ID = #{m_id}
+    </update>
     
 
 
