@@ -32,8 +32,11 @@ public class SGroupServiceImpl implements SGroupService {
 		sgroupDAO.cancelJoin(vo);
 		sgroupDAO.minusNowCnt(vo);
 	}
-	public String returnImage(String id) {
-		return sgroupDAO.returnImage(id);
+	public String returnImage(MembersVO vo) {
+		return sgroupDAO.returnImage(vo);
+	}
+	public MembersVO getOneMem(MembersVO vo) {
+		return sgroupDAO.getOneMem(vo);
 	}
 	
 
