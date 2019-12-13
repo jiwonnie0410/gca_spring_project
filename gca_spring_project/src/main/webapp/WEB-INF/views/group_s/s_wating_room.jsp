@@ -388,7 +388,14 @@
 								<th>옵션 </th><td> ${sgroup.sg_option}</td>
 							</tr>
 						</c:if>
+				<!-- 미현언니 지도부분 -->
+						<tr style="text-align: center">
+							<td>
+								<div id="meetLocation">지도</div>
+							</td>
+						</tr>
 					</table>
+					
 				</div>
         
 <!-- Modal footer -->
@@ -454,12 +461,9 @@
 <script type="text/javascript">
 
  var textarea = document.getElementById("messageWindow"); 
- var webSocket = new WebSocket('ws://localhost/gca/broadcast.do'); 
+ 
  var inputMessage = document.getElementById('inputMessage');
  
- webSocket.onerror = function(event) { onError(event) };
- webSocket.onopen = function(event) { onOpen(event) };
- webSocket.onmessage = function(event) { onMessage(event) };
  
  function onMessage(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
 	var result = JSON.parse(event.data);
@@ -522,19 +526,20 @@
 	chatAreaScroll(); 
  }
  
- function onOpen(event) { //이미 참여된방에 참여인지 새로 참여인지 구분해서 새로참여만 참가하셨습니다 띄우고 프로필 붙이기.
-	msg = {
-		cmd : "join",
-		id : "${id}",
-		msg : "<"+"${id}"+"님이 참가하셨습니다.>"
-		//여기에 아이디 붙여서 추가하면 될듯. 근데 새로고침해도 이게 뜨는것은 막아야함.
-	}				//msg의 id 넣는 부분을 ${sessionScope.id}말고 json의 id로 가져오는 방법은 없을까
-	webSocket.send(  JSON.stringify( msg )   );
- }
- function onError(event) { 
-	console.log(event); 
- 	alert(event.data); 
- }
+ //function onOpen(event) { //이미 참여된방에 참여인지 새로 참여인지 구분해서 새로참여만 참가하셨습니다 띄우고 프로필 붙이기.
+	 //console.log("first_in : "+"${param.first_in}");
+ 
+	 /* if("${param.first_in}" == "first_in"){
+		msg = {
+			cmd : "join",
+			id : "${id}",
+			msg : "<"+"${id}"+"님이 참가하셨습니다.>"
+			//여기에 아이디 붙여서 추가하면 될듯. 근데 새로고침해도 이게 뜨는것은 막아야함.
+		}
+		webSocket.send(  JSON.stringify( msg )   );
+	 } */
+ //}
+
  
  //메세지 전송
  function send() { 

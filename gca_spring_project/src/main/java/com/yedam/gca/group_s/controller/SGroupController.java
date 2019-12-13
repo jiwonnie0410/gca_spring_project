@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.gca.admin.vo.TroubleVO;
+import com.yedam.gca.chatting.controller.SpringSocketHandler;
+import com.yedam.gca.chatting.vo.SocketVO;
 import com.yedam.gca.common.code.service.CodeService;
 import com.yedam.gca.common.code.vo.CodeVO;
 import com.yedam.gca.group_s.service.SGroupService;
@@ -150,6 +152,18 @@ public class SGroupController {
 		avo.setIn_type("sg"); //sg:반짝방, bg:매치방, six:용병방(직접 입력)
 		avo.setPk_num(sg_num);
 		actService.roomInsert(avo);
+		
+		
+		//은영 컨트롤러단에서 socket sendMessage
+//		SocketVO socketVO = new SocketVO();
+//		socketVO.setCmd("join");
+//		socketVO.setId(memInfo.getM_id());
+//		socketVO.setMsg("<"+memInfo.getM_id()+"님이 참가하셨습니다>");
+//		socketVO.setCharacter(sgroupService.returnImage(memInfo));
+//		socketVO.setNick(memInfo.getM_nick());
+		
+//		SpringSocketHandler socket = new SpringSocketHandler();
+//		socket.sendMessage(socketVO);
 		
 		return "redirect:alreadyIn?sg_num="+avo.getSg_num() + "&first_in=first_in";//새로 참여하는 경우임을 구분하기 위해 보내는 잉여값
 	}

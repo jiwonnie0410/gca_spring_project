@@ -118,6 +118,25 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 			}
 		}
 	}
+	
+	public void sendMessage(SocketVO vo) {
+		for (WebSocketSession session : this.sessionSet) {
+			if (session.isOpen()) {
+				try {
+					//{"cmd":"join","id":"test","msg":"<test님이 참가하셨습니다.>","character":"foreigner","nick":"개발왕"}
+						String message = "{\"cmd\":\"join\", \"id\":\""+vo.getId()+"\", \"msg\":\""+vo.getMsg()+"\","
+								+ "\"character\":\""+vo.getCharacter()+"\", \"nick\":\""+vo.getNick()+"\"}";
+						
+						System.out.println("메세지 : "+message);
+						
+						session.sendMessage(new TextMessage(message));
+						
+				} catch (Exception ignored) {
+					this.logger.error("fail to send message!", ignored);
+				}
+			}
+		}
+	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {

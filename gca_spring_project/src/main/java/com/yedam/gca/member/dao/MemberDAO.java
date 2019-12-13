@@ -73,6 +73,9 @@ public class MemberDAO {
 	}
 	
 	// 3. 범위슬라이더 변경시 범위 업데이트
+	public void updateRange(MembersVO vo) {
+		mybatis.update("MemberDAO.updateRange",vo);
+	}
 	
 	
 	
