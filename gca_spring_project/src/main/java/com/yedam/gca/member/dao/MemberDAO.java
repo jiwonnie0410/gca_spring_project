@@ -18,6 +18,12 @@ public class MemberDAO {
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
+	@Inject
+    // Inject애노테이션이 없으면 sqlSession은 null상태이지만
+    // Inject애노테이션이 있으면 외부에서 객체를 주입시켜주게 된다. 
+    // try catch문, finally문, 객체를 close할 필요가 없어졌다.
+    SqlSession sqlSession;
+	
 	// 1. 회원가입
 	public int insertMember(MembersVO vo) {
 		return mybatis.insert("MemberDAO.insertMember", vo);
@@ -61,30 +67,12 @@ public class MemberDAO {
 		return mybatis.selectOne("MemberDAO.getAlarmInfo", vo);
 	}
 	
+	// 2. 토글스위치 클릭시 알람 on/off 업데이트
+	public int updateSwitch(MembersVO vo) {
+		return mybatis.update("MemberDAO.updateSwitch", vo);
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// 3. 범위슬라이더 변경시 범위 업데이트
 	
 	
 	
@@ -94,11 +82,7 @@ public class MemberDAO {
 	
 	
 	//진영
-	@Inject
-    // Inject애노테이션이 없으면 sqlSession은 null상태이지만
-    // Inject애노테이션이 있으면 외부에서 객체를 주입시켜주게 된다. 
-    // try catch문, finally문, 객체를 close할 필요가 없어졌다.
-    SqlSession sqlSession;
+	
 	
 	  // 회원 정보 상세보기
 	  // 03. 회원 정보 상세 조회

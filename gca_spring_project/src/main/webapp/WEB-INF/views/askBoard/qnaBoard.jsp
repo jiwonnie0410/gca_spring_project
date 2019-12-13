@@ -140,8 +140,6 @@
 				<div class="modal-body">
 				</div>
 				<div class="modal-footer">
-				<button type="button" class="btn btn-primary px-5 py-3 mt-3"
-							id="btnUpdete" data-toggle='modal' data-target='#myModal'>답글</button>
 						<button type="button" class="btn btn-primary px-5 py-3 mt-3"
 							id="btnDelete">삭제</button>
 					<button type="button" class="btn btn-primary px-4 py-2"

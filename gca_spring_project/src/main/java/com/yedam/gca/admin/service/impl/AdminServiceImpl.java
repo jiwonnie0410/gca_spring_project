@@ -52,14 +52,13 @@ public class AdminServiceImpl implements AdminService {
 
 	// 6. 지역별 반짝 운동 통계
 	@Override
-	public List<Map<String, Object>> chartCity(String month, String city) {
-		return dao.chartCity(month, city);
+	public List<Map<String, Object>> chartCity(int startMonth, int endMonth) {
+		return dao.chartCity(startMonth, endMonth);
 	}
 
 	// 7. 챌린지 진행 현황
 	@Override
 	public Map<String, Object> challengeGoing(int cl_id) {
-		System.out.println("여기는 서비스: " + cl_id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("count", dao.challengeCount(cl_id));
 		map.put("detail", dao.challengeDetail(cl_id));

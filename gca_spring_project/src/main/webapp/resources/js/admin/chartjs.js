@@ -123,53 +123,80 @@ function drawChart3() {
 		current = 1 - current;
 		drawChart();
 	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	var data = new google.visualization.DataTable();
+	$.ajax({
+			url: "../ajax/chart/city",
+			dataType: "json",
+			success: function(result) {
+					console.log(result);
+					// 차트에 컬럼 추가
+					data.addColumn('string', '월');
+					data.addColumn('number', '서울');
+					data.addColumn('number', '부산');
+					data.addColumn('number', '대구');
+					data.addColumn('number', '인천');
+					data.addColumn('number', '광주');
+					data.addColumn('number', '대전');
+					data.addColumn('number', '울산');
+					
+					// 디비에서 받아온 정보 result를 array 배열에 넣어서 차트 컬럼에 추가
+					var array = [];
+					for(i=0; i<result.length; i++) {
+						array.push( [ result[i].MONTH, result[i].Seoul, result[i].Busan, result[i].Daegu, result[i].Incheon, result[i].Gwangju, result[i].Daejeon, result[i].Ulsan ] );
+					}
+					data.addRows(array);
+					
+					// 차트 옵션: 타이틀 없으면 오류 나기 때문에 저렇게라도 넣어줘야 함
+					var options = {
+						title : '',
+						curveType : 'function',
+						legend : {	position : 'bottom'  }
+					};
+	
+					// jsp파일에서 아이디로 태그 찾아서 차트 그려줌
+					var chart = new google.visualization.ComboChart(document.getElementById('div_age_gender'));
+					chart.draw(data, options);
+			}
+	});
 }
 
 // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // 지역별 통계 지도
 function drawChart4() {
-	var data = google.visualization.arrayToDataTable([
-			[ 'Month', '서울', '부산', '대구', '인천', '광주', '대전', '울산' ],
-			[ '9월', 100, 40, 43, 49, 39, 23, 59 ],
-			[ '10월', 117, 46, 42, 45, 49, 43, 56 ],
-			[ '11월', 66, 112, 44, 43, 38, 27, 52 ],
-			[ '12월', 103, 54, 43, 46, 32, 43, 39 ] ]);
-
-	var options = {
-		title : '',
-		curveType : 'function',
-		legend : {	position : 'bottom'  }
-	};
-
-	var chart = new google.visualization.LineChart(document.getElementById('div_city'));
-
-	chart.draw(data, options);
-	
 	var data = new google.visualization.DataTable();
 	$.ajax({
-			url: "../ajax/chart/bgroup",
+			url: "../ajax/chart/city",
 			dataType: "json",
 			success: function(result) {
+					console.log(result);
 					// 차트에 컬럼 추가
-					data.addColumn('string', '운동');
-					data.addColumn('number', '횟수')
+					data.addColumn('string', '월');
+					data.addColumn('number', '서울');
+					data.addColumn('number', '부산');
+					data.addColumn('number', '대구');
+					data.addColumn('number', '인천');
+					data.addColumn('number', '광주');
+					data.addColumn('number', '대전');
+					data.addColumn('number', '울산');
 					
 					// 디비에서 받아온 정보 result를 array 배열에 넣어서 차트 컬럼에 추가
 					var array = [];
 					for(i=0; i<result.length; i++) {
-						array.push( [ result[i].exercise, result[i].count ] );
+						array.push( [ result[i].MONTH, result[i].Seoul, result[i].Busan, result[i].Daegu, result[i].Incheon, result[i].Gwangju, result[i].Daejeon, result[i].Ulsan ] );
 					}
 					data.addRows(array);
 					
 					// 차트 옵션: 타이틀 없으면 오류 나기 때문에 저렇게라도 넣어줘야 함
 					var options = {
-							title : ' ',
-							pieHole : 0.4,
+						title : '',
+						curveType : 'function',
+						legend : {	position : 'bottom'  }
 					};
 	
 					// jsp파일에서 아이디로 태그 찾아서 차트 그려줌
-					var chart = new google.visualization.PieChart(document.getElementById('div_bgroup_exercise'));
+					var chart = new google.visualization.LineChart(document.getElementById('div_city'));
 					chart.draw(data, options);
 			}
 	});

@@ -107,11 +107,9 @@ public class LoginController {
 	}
 	// 지원 끝
 	
-	// 수림
+
 	
-	
-	
-	// **************** 수림 ***************** // 컨트롤러
+	// **************** 수림 ***************** 
 	
 	// 1. 환경설정 페이지 이동
 	@RequestMapping("member/option")
@@ -120,11 +118,19 @@ public class LoginController {
 	}
 	
 	// 2. 사용자 알람관련 정보 출력
-	@RequestMapping("/ajax/option.json")
+	@RequestMapping("/ajax/getOption.json")
 	@ResponseBody
 	public MembersVO getAlarmInfo(MembersVO vo) {
 		//임시 아이디
 		vo.setM_id("test");
 		return memberService.getAlarmInfo(vo);
 	}
+	// 3. 스위치 클릭시 정보 업데이트
+	@RequestMapping(value = "/ajax/updateSwitch.json", method = RequestMethod.PUT)
+	@ResponseBody
+	public void updateSwitch(MembersVO vo) {
+		memberService.updateMember(vo);
+	}
+	
+	// 3. 범위슬라이더 변경시 범위 업데이트
 }
