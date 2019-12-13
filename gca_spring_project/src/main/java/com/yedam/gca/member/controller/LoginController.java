@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -132,9 +134,10 @@ public class LoginController {
 	// 2. 사용자 알람관련 정보 출력
 	@RequestMapping("/ajax/getOption.json")
 	@ResponseBody
-	public MembersVO getAlarmInfo(MembersVO vo) {
-		//임시 아이디
-		vo.setM_id("test");
+	public MembersVO getAlarmInfo(MembersVO vo, Authentication auth) {
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();
+		String id = userDetails.getUsername();
+		vo.setM_id(id);
 		return memberService.getAlarmInfo(vo);
 	}
 	// 3. 스위치 클릭시 정보 업데이트

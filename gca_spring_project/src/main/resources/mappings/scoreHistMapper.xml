@@ -6,6 +6,7 @@
 <!--  ************** 수림 **************** -->
 
 	<select id="getScoreList" resultType="scorehistory">
+	<![CDATA[     
         SELECT      CASE 
                     WHEN RANK() OVER (ORDER BY SUM (SCH_SCORE) DESC) > 10 THEN '순위권외'
                     ELSE TO_CHAR(RANK() OVER (ORDER BY SUM (SCH_SCORE) DESC))||'등'
@@ -15,6 +16,6 @@
 		FROM		SCORE_HIST
 		GROUP BY	M_ID
 		ORDER BY	SCH_SCORE DESC
-					
+	]]>
 	</select>
 </mapper>

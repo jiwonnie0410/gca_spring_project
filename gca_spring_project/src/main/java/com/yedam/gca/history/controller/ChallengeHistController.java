@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -28,13 +29,10 @@ public class ChallengeHistController {
 	
 	//스코어 목록 조회(유저 랭킹 페이지)
 	@RequestMapping("history/rank")
-	public String getScoreList(Model model, HttpSession session) {
-		
-		// 임시아이디 세션에 담음
-		ChallengeHistVO vo = new ChallengeHistVO();
-		vo.setM_id("test");
-		session.setAttribute("id", vo.getM_id());
-		
+	public String getScoreList(ChallengeHistVO vo, Model model, Authentication auth) {
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();	//로그인한 유저 정보 담음
+		String id = userDetails.getUsername(); 	//로그인한 유저 id 담음
+		vo.setM_id(id);
 		model.addAttribute("scoreList", service.getScoreList());
 		return "/user/history/rank";
 	}
