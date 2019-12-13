@@ -72,6 +72,7 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 			
 			svo.setCharacter(sgroupService.returnImage(mvo));
 			svo.setNick(mvo.getM_nick());
+
 		}
 		//명령어에따라 다른 동작이 되도록 else if문으로 명령어 더 추가해서 할 수 있음.(jsp에도 같이 추가)
 		else if(svo.getCmd().equals("msg")) {
