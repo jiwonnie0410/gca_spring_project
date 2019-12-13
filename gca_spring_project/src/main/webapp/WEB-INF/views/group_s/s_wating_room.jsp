@@ -469,7 +469,8 @@
  
  function onMessage(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
 	var result = JSON.parse(event.data);
-	if(result.cmd == "join" && (${sgroup.sg_num} == result.sg_num) ) { //해당 방에 들어온경우
+ 	var sg_num = ${sgroup.sg_num};
+	if(result.cmd == "join" && ( sg_num == result.sg_num )) { //해당 방에 들어온경우
 		
 		var img = result.character;
 		var nick = result.nick;
@@ -514,10 +515,10 @@
 		$('#profileList').append($span);
 	 	
 	}
-	else if( result.cmd == "msg") { //메세지 전송하는 경우
+	else if( result.cmd == "msg" && ( sg_num == result.sg_num )) { //메세지 전송하는 경우
 		textarea.value += result.id + " : " + result.msg + "\n";
 	}
-	else if( result.cmd == "cancelJoin") { //참가취소 누르고 웹소켓 거쳐왔을때.
+	else if( result.cmd == "cancelJoin" && ( sg_num == result.sg_num )) { //참가취소 누르고 웹소켓 거쳐왔을때.
 		var person = result.id;
 		console.log("person:"+result.id);
 		//프로필 삭제
@@ -545,10 +546,12 @@
  
  //메세지 전송
  function send() { 
+	 var sg_num = ${sgroup.sg_num};
 	 msg = {
 		 cmd : "msg",
 		 id : "${id}",
-		 msg : inputMessage.value
+		 msg : inputMessage.value,
+		 sg_num : sg_num
 	 }
 	//textarea.value += "나 : " + inputMessage.value + "\n"; 
 	webSocket.send(  JSON.stringify( msg )   ); 
@@ -557,10 +560,12 @@
  
  //나갔을때 참여자 칸에서 프로필 삭제
  function deleteProfile() { 
+	 var sg_num = ${sgroup.sg_num};
 	 msg = {
 		 cmd : "cancelJoin",
 		 id : "${id}",
-		 msg : "<"+"${id}"+"님이 나가셨습니다.>"
+		 msg : "<"+"${id}"+"님이 나가셨습니다.>",
+		 sg_num : sg_num
 	 }
 	webSocket.send(  JSON.stringify( msg )   );
 	

@@ -3,8 +3,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ChallengeDAO">
 
-	<!-- *********수림************* 1. 챌린지 목록 전체 불러오기 2. 챌린지 참가시 챌린지 히스토리에 정보 
-		저장 -->
+	<!-- *********수림************* 
+		1. 챌린지 목록 전체 불러오기 
+		2. 챌린지 1건 상세정보 불러오기
+		3. 로그인 유저의 챌린지 히스토리 목록 불러오기
+		4. 챌린지 참가시 챌린지 히스토리에 정보 저장 
+		-->
 
 	<!-- 1. 챌린지 목록 전체 불러오기 -->
 	<select id="getChallengeList" resultType="challenge">
@@ -27,7 +31,8 @@
 
 		ORDER BY CL_END_DTTM
 	</select>
-
+	
+	<!-- 2. 챌린지 1건 상세정보 불러오기 -->
 	<select id="getChallenge" resultType="challenge">
 		SELECT CL_NUM,
 		CL_STATUS,
@@ -45,8 +50,20 @@
 		FROM CHALLENGE
 		WHERE CL_NUM = #{cl_num}
 	</select>
+	
+	<!-- 3. 로그인 유저의 챌린지 히스토리 목록 불러오기 -->
+	<select id="checkChallengeHistory" resultType="challengehistory">
+		SELECT		CL_NUM, 
+					M_ID, 
+					CLH_START_DTTM,
+					CLH_CNT, 
+					GET_CODE_NAME(CLH_STATUS_CD) AS "clh_status_cd"
+		FROM 		CHALLENGE_HIST 
+		WHERE 		M_ID = #{m_id}
+	
+	</select>
 
-	<!-- 2. 챌린지 참가시 챌린지 히스토리에 정보 저장 -->
+	<!-- 4. 챌린지 참가시 챌린지 히스토리에 정보 저장 -->
 	<insert id="insertChallenge">
 		INSERT INTO CHALLENGE_HIST (
 		CL_NUM,
