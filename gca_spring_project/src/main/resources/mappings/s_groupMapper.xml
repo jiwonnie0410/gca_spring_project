@@ -89,7 +89,7 @@
 			 	(
 			 	SELECT ROWNUM R, A.* 
 				FROM 	(
-						SELECT S.*, DISTANCE_WGS84(
+						SELECT S.*, CALC_DISTANCE(
              							SUBSTR(SG_XY, 0, INSTR(SG_XY, ',', 1, 1)-1),
              							SUBSTR(SG_XY, INSTR(SG_XY, ',', 1, 1)+2, LENGTH(SG_XY)),
              							SUBSTR(#{m_xy}, 0, INSTR(#{m_xy}, ',', 1, 1)-1),
@@ -156,7 +156,7 @@
 			 	(
 			 	SELECT ROWNUM R, A.* 
 				FROM 	(
-						SELECT S.*, DISTANCE_WGS84(
+						SELECT S.*, CALC_DISTANCE(
              							SUBSTR(SG_XY, 0, INSTR(SG_XY, ',', 1, 1)-1),
              							SUBSTR(SG_XY, INSTR(SG_XY, ',', 1, 1)+2, LENGTH(SG_XY)),
              							SUBSTR(#{m_xy}, 0, INSTR(#{m_xy}, ',', 1, 1)-1),
@@ -179,6 +179,15 @@
 					 </where>
     			)
 		WHERE R <![CDATA[ <= ]]> #{scroll_rec} 
+	</select>
+
+<!-- SGroup 참여 인증 -->
+	<select id="getSgCert" parameterType="sgroup" resultType="string">
+		SELECT GEO_CERT(	${m_id}, 
+							${sg_num}, 
+							${cert_x}, 
+							${cert_y} )
+		 FROM DUAL
 	</select>
 
 

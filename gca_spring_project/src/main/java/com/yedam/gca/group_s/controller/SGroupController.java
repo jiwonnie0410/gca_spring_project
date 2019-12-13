@@ -224,11 +224,14 @@ public class SGroupController {
 	}
 	
 	//참여 인증
-//	@ResponseBody
-//	@RequestMapping(value="sgroup/sgCert" method = RequestMethod.POST)
-//	public String part_cert(SGroupVO vo) { //"success"를 받아와야 함.
-//		
-//	}
+	@ResponseBody
+	@RequestMapping(value="sgroup/sgCert", method = RequestMethod.POST)
+	public String part_cert(SGroupVO vo) { //"success"를 받아와야 함.
+		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
+		vo.setM_id(memInfo.getM_id());
+		String msg = sgroupService.getSgCert(vo);
+		return msg;
+	}
 	
 	
 }

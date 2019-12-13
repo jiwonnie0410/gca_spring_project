@@ -21,7 +21,7 @@ function showPosition(position) {
 	var form = { 
 		cert_x: position.coords.latitude,
 		cert_y: position.coords.longitude,
-		
+		sg_num: 17
 	}
 	$.ajax({
 		url: "sgCert",
@@ -31,15 +31,13 @@ function showPosition(position) {
 		success: function(result){
 			if(result == "success"){
 				alert("참가 인증이 완료되었습니다. 즐겁게 운동하시고 건강한 하루 보내세요!");
+			} else if(result == "nobody in this room"){
+				alert("해당 방에 참여한 사람이 없습니다. 다시 확인해 주세요");
 			} else {
-				alert("참가 인증에 실패했습니다");
+				alert("모임 지점에서 거리가 멀어(" + result + "km) 참여 인증을 할 수 없습니다. 더 가까운 위치에서 인증해 주세요.")
 			}
 		}
 	});
-	
-	
-	x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
-	
 }
 
 //showError() : 사용자의 위치를 얻지 못하면 실행
