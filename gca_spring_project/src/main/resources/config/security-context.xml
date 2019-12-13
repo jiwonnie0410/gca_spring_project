@@ -57,7 +57,7 @@
 	<bean id="memberService" class="com.yedam.gca.member.service.CustomUserDetailsService" />
 	<security:authentication-manager>
 		<security:authentication-provider user-service-ref="memberService" >
- 			<!-- <security:password-encoder hash="sha-256" /> --> <!-- 암호화된 비밀번호 체크 -->
+ 			<security:password-encoder hash="bcrypt" /> <!-- 암호화된 비밀번호 체크 -->
 		</security:authentication-provider>
 		
 	</security:authentication-manager>

@@ -16,7 +16,6 @@
 <!-- 1. 회원가입 -->
 		  	<insert id="insertMember" parameterType="members">
 					INSERT INTO members (	M_ID,
-											M_SALT,
 											M_PASSWORD,
 											M_NAME,
 											M_NICK,
@@ -35,7 +34,6 @@
 											M_NOTICE3
 										)
 					VALUES (	#{m_id},
-								#{m_salt},
 								#{m_password},
 								#{m_name},
 								#{m_nick},

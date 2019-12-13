@@ -33,7 +33,7 @@
 		<%-- <script src="${pageContext.request.contextPath }/resources/js/admin/demo/chart-area-demo.js"></script> --%>
 		<!-- Popper JS -->
 		<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-		
+
 		<script src="${pageContext.request.contextPath }/resources/scripts/json.min.js"></script>
 		
 		<style>
