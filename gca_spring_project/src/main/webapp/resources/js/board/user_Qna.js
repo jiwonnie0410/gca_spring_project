@@ -11,16 +11,16 @@ $(function() {
 //	  console.log(qb_id); });
 //	 
 //
-	$("#Modalread").on('show.bs.modal', function() {
-		var qb_id =  $(this).closest("tr").find("td").eq(0).html();// closest
-		$(".modal-body").load("adminQnView?qb_id="+qb_id)
-		console.log(qb_id);
-	});
-	
-	
-		
 });
 
+//상세보기
+function getQb_id(qb_id) {
+	$("#UserModalread").on('show.bs.modal', function() {
+		console.log(qb_id);
+		/*var qb_id =  $(this).closest("tr").find("td").eq(0).html();// closest
+*/		$(".modal-body").load("qnView?qb_id="+qb_id)
+	});
+}
 
 
 //목록 조회요청
@@ -36,7 +36,8 @@ function getBoardList() {
   function getBoardListHandler(datas) {
 		$("#asktb").empty();
 	for (var i = 0; i < datas.length; i++) {
-			$("<tr id='"+datas[i].qb_id+"' onclick='location.href='${pageContext.request.contextPath}/board/view?ad_num=${row.ad_num}'>").append($('<td>').html(datas[i].qb_id))
+					$("<tr data-toggle='modal' data-target='#UserModalread' id='newTr' onclick='getQb_id("+datas[i].qb_id+")'>")	
+					.append($('<td>').html(datas[i].qb_id))
 					 .append($('<td>').html(datas[i].m_id)) 
 					 .append($('<td>').html(datas[i].qb_title))
 					 .append($('<td>').html(datas[i].qb_content))
@@ -69,7 +70,7 @@ $("#btnIns").click(function() {
 	
 //등록 요청 결과처리
 function insertBoardtHandler(data) {
-	$('<tr>').append($('<td>').html(data.qb_id))
+	$('<tr>').append($("<td id='newTr'>").html(data.qb_id))
 			 .append($('<td>').html(data.m_id))
 			 .append($('<td>').html(data.qb_title))
 			 .append($('<td>').html(data.qb_content))
