@@ -151,9 +151,7 @@ public class SGroupController {
 		avo.setPk_num(sg_num);
 		actService.roomInsert(avo);
 		
-		//새로 참여하는 경우임을 구분하기 위해 보내는 잉여값
-		model.addAttribute("aa", "aa");
-		return "redirect:alreadyIn?sg_num="+avo.getSg_num();
+		return "redirect:alreadyIn?sg_num="+avo.getSg_num() + "&first_in=first_in";//새로 참여하는 경우임을 구분하기 위해 보내는 잉여값
 	}
 
 	
