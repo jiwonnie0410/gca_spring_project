@@ -28,7 +28,7 @@ public class SGroupVO {
 	
 	//미현
 	private String m_id;	//회원 ID
-	private String m_xy;	//세션에 담기는 회원의 xy좌효
+	private String m_xy;	//세션에 담기는 회원의 xy좌표
 	private Double dis;		//거리
 	private Double end_dis;	//조회 시 마지막 출력된 거리값
 	private Timestamp end_dttm;	//조회 시 마지막 출력된 마감시간

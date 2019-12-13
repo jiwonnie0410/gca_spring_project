@@ -150,12 +150,9 @@ public class SGroupController {
 		avo.setIn_type("sg"); //sg:반짝방, bg:매치방, six:용병방(직접 입력)
 		avo.setPk_num(sg_num);
 		actService.roomInsert(avo);
-//		svo.setSg_num(sg_num);
-//		model.addAttribute("sgroup", sgroupService.getRoomInfo(svo));
-//		
-//		//참여 인원 정보를 채팅방으로 넘김
-//		avo.setSg_num(sg_num);
-//		model.addAttribute("memlist", actService.getActMemList(avo));
+		
+		//새로 참여하는 경우임을 구분하기 위해 보내는 잉여값
+		model.addAttribute("aa", "aa");
 		return "redirect:alreadyIn?sg_num="+avo.getSg_num();
 	}
 
