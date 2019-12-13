@@ -1,10 +1,16 @@
 
 $(function(){
-		userList();
+		userList();   
 
-		userSelect();
+		/*userSelect();*/
 		
 		userDelete();
+		
+		$("#Modalread").on('show.bs.modal', function() {
+			var m_id = $(event.target).closest("tr").find("td").eq(0).html();// closest
+			$(".modal-body").load("viewMember?m_id="+m_id)
+			console.log(m_id);
+		});
 
 	});
 
@@ -30,7 +36,7 @@ $(function(){
 			.append($('<td>').html(item.m_id))
 			.append($('<td>').html(item.m_name))
 			.append($('<td>').html(item.m_password))
-			.append($('<td>').html('<button id=\'btnSelect\'>조회</button>'))
+			.append($('<td>').html("<button id='btnSelect'  data-toggle='modal' data-target='#Modalread' >조회</button>"))
 			.append($('<td>').html('<button id=\'btnDelete\'>삭제</button>'))
 			.append($('<input type=\'hidden\' id=\'hidden_m_id\'>').val(item.m_id))
 			.appendTo('tbody');
@@ -65,7 +71,7 @@ $(function(){
 	}//userDelete
 	
 	
-	//사용자 조회 요청
+/*	//사용자 조회 요청
 	function userSelect() {
 		//조회 버튼 클릭
 		$('body').on('click','#btnSelect',function(){
@@ -73,4 +79,4 @@ $(function(){
 			//특정 사용자 조회
 			window.open('${pageContext.request.contextPath }/member/admin_member_view.do?m_id='+m_id , '회원싱세보기' , 'width=500,height=500, menubar=no, status=no, toolbar=no'); 
 		}); //조회 버튼 클릭
-	}//userSelect
+	}//userSelect*/

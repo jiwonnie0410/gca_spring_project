@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.yedam.gca.admin.service.AdminService;
+import com.yedam.gca.board.vo.QnaBoardVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
+import com.yedam.gca.common.Paging;
 import com.yedam.gca.member.controller.MembersController;
 import com.yedam.gca.member.vo.MembersVO;
 
@@ -171,31 +174,49 @@ public class AdminController {
 		model.addAttribute("userList", adminService.getUserList(vo));
 		return "/admin/userList";
 	}
+		
+		
 
 	//03 회원 상세정보 조회
-    @RequestMapping("member/admin_member_view.do")
-    public String memberView(@RequestParam String m_id, Model model){
+		  @RequestMapping(value="/admin/viewMember", method=RequestMethod.GET)
+    public ModelAndView viewMember(@RequestParam String m_id)throws Exception{
+    	// 모델(데이터)+뷰(화면)를 함께 전달하는 객체
+		ModelAndView mav = new ModelAndView();
         // 회원 정보를 model에 저장
-        model.addAttribute("dto", adminService.viewMember(m_id));
-       //System.out.println("클릭한 아이디 확인 : "+userId);
-        logger.info("클릭한 아이디 : "+m_id);
+		mav.addObject("dto", adminService.viewMember(m_id));
+       /// 뷰의 이름
+		mav.setViewName("/notiles/admin/admin_user_view");
+		logger.info("mav:", mav);
        // member_view.jsp로 포워드
-       return "/notiles/member/member_view";
+		return mav;
     }
+		  
+		  
+		  
+		// 단건조회
+		  @ResponseBody  
+		  @RequestMapping(value = "member/{m_id}", method = RequestMethod.GET) public
+		  MembersVO viewMember(@PathVariable String m_id, MembersVO vo) throws Exception {
+			  vo.setM_id(m_id);
+			  return adminService.viewMember(m_id); }
+		  
+    
 
     
+
 	// **전체조회
 	@ResponseBody
-	@RequestMapping(value = "/members", method = RequestMethod.GET)
+	@RequestMapping(value = "/ajax/getUserList")
 	public List<MembersVO> getUserList(Model model, MembersVO vo) {
 		return adminService.getUserList(vo);
 	}
+
 
 	
 
 	//**관리자 유저 삭제
 	@ResponseBody
-	@RequestMapping(value = "/members/{m_id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/ajax/members/{m_id}", method = RequestMethod.DELETE)
 	public String deleteUser(@PathVariable String m_id, MembersVO vo) {
 		vo.setM_id(m_id);
 		adminService.deleteUser(vo);

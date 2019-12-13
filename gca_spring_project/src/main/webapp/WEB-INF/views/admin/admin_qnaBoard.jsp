@@ -44,15 +44,16 @@
 	<!-- <button id="write" class="btn btn-primary px-5 py-3" type="button" data-toggle="modal" data-target="#myModal">Write</button> -->
 
 
-	<!-- Modal content-->
+	<!-- Modal 쓰기--><!-- Modal 쓰기--><!-- Modal 쓰기--><!-- Modal 쓰기--><!-- Modal 쓰기--><!-- Modal 쓰기-->
 	<div class="modal fade" id="myModal" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
+<!-- Modal Header -->			
 				<div class="modal-header">
-				문의 답변
+				문의 답변=====================
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
-
+<!-- Modal body -->
 				<div class="modal-body">
 
 					<div class="panel-group">
@@ -105,7 +106,7 @@
 
 
 
-	<!-- Modal 읽기-->
+	<!-- Modal 읽기-->	<!-- Modal 읽기-->	<!-- Modal 읽기-->	<!-- Modal 읽기-->	<!-- Modal 읽기-->	<!-- Modal 읽기-->
 	<!-- 게시물 상세보기 영역 -->
 	<div class="modal fade" id="Modalread" role="dialog">
 		<div class="modal-dialog modal-lg">
@@ -118,7 +119,7 @@
 				</div>
 				<div class="modal-footer">
 				<button type="button" class="btn btn-primary px-5 py-3 mt-3"
-							id="btnUpdete" data-toggle='modal' data-target='#myModal'>답글</button>
+							id="btnUpdete" data-toggle="modal" data-target="#myModal">답글</button>
 						<button type="button" class="btn btn-primary px-5 py-3 mt-3"
 							id="btnDelete">삭제</button>
 					<button type="button" class="btn btn-primary px-4 py-2"

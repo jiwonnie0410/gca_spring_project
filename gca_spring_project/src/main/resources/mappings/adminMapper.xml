@@ -226,6 +226,8 @@
        <!--  WHERE m_id = #{m_id} -->
         WHERE m_id =#{m_id}
     </select>
+    
+    
 	<!--2.전체조회  -->
 	<select id="getUserList" resultType="members" parameterType="members">
 		select M_ID, M_PASSWORD, M_NAME, M_NICK,M_IMAGE_CD,
@@ -241,6 +243,9 @@
 			</if>
 		</where>
 	</select>
+	
+	
+	
 	<!-- 3.삭제 -->
 	<delete id="deleteUser" parameterType="members">
 		delete from MEMBERS 

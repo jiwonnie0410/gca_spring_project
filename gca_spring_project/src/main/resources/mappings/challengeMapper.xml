@@ -18,9 +18,11 @@
 		CL_END_DTTM,
 		CL_SCORE,
 
-		CASE trunc(CL_END_DTTM) - trunc(SYSDATE)
+		CASE trunc(CL_END_DTTM) -
+		trunc(SYSDATE)
 		WHEN 0 THEN 'DAY'
-		ELSE TO_CHAR(trunc(CL_END_DTTM) - trunc(sysdate))
+		ELSE TO_CHAR(trunc(CL_END_DTTM) -
+		trunc(sysdate))
 		END AS GAP_DAY
 		FROM CHALLENGE
 		WHERE CL_END_DTTM > SYSDATE
@@ -38,9 +40,11 @@
 		CL_START_DTTM,
 		CL_END_DTTM,
 		CL_SCORE,
-		CASE trunc(CL_END_DTTM) - trunc(sysdate)
+		CASE trunc(CL_END_DTTM) -
+		trunc(sysdate)
 		WHEN 0 THEN 'DAY'
-		ELSE TO_CHAR(trunc(CL_END_DTTM) - trunc(sysdate))
+		ELSE TO_CHAR(trunc(CL_END_DTTM) -
+		trunc(sysdate))
 		END AS GAP_DAY
 		FROM CHALLENGE
 		WHERE CL_NUM = #{cl_num}
@@ -82,18 +86,23 @@
 	<!-- //진영 -->
 
 	<!-- 1. 챌린지 목록 전체 불러오기 -->
+	<!-- <select id="getChallengehtList" resultType="challenge"> SELECT cl_num, 
+		c.clh_cnt, c.clh_start_dttm, c.m_id FROM challenge_hist c, members m WHERE 
+		c.m_id = m.m_id </select> -->
+
+
+
+
+
+
+
 	<select id="getChallengehtList" resultType="challenge">
-		SELECT
-		cl_num,
-		c.clh_cnt,
-		c.clh_start_dttm,
-		c.m_id
-
-		FROM
-		challenge_hist c,
-		members m
-		WHERE
-		c.m_id = m.m_id
+		select get_code_name(ch.clh_status_cd),
+		c.cl_name ,
+		ch.m_id ,
+		c.cl_status ,
+		c.cl_score 
+		from challenge_hist ch, challenge c, members m
+		where ch.cl_num = c.cl_num and m.m_id = ch.m_id;
 	</select>
-
 </mapper>

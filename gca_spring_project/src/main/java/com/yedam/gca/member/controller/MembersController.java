@@ -3,6 +3,8 @@ package com.yedam.gca.member.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,11 +25,10 @@ public class MembersController {
 	
 // 03 회원 상세정보 조회
     @RequestMapping("member/member_view.do")
-    public String memberView(@RequestParam String m_id, Model model){
+    public String memberView(Model model)throws Exception{
+		UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         // 회원 정보를 model에 저장
-        model.addAttribute("dto", memberService.viewMember(m_id));
-       //System.out.println("클릭한 아이디 확인 : "+userId);
-        logger.info("클릭한 아이디 : "+m_id);
+        model.addAttribute("dto", memberService.viewMember(user.getUsername()));
        // member_view.jsp로 포워드
        return "/notiles/member/member_view";
     }

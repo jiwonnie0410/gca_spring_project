@@ -118,7 +118,7 @@
 	  <a class="nav_challenge" href="#"><img src="${pageContext.request.contextPath }/resources/images/menubar/trophy.png" alt="챌린지" style="width:40px;"></a>
 	  <a class="nav_board" href="#"><img src="${pageContext.request.contextPath }/resources/images/menubar/board.png" alt="문의 게시판" style="width:40px;"></a>
 	  <a class="nav_history" href="#"><img src="${pageContext.request.contextPath }/resources/images/menubar/history.png" alt="이력" style="width:40px;"></a>
-	  <a class="" href="${pageContext.request.contextPath }/member/member_view.do?m_id=${m_id}"><img src="${pageContext.request.contextPath }/resources/images/menubar/profile.png" alt="프로필" style="width:40px;"></a>
+	  <a class="" href="${pageContext.request.contextPath }/member/member_view.do"><img src="${pageContext.request.contextPath }/resources/images/menubar/profile.png" alt="프로필" style="width:40px;"></a>
 	</div>
 <!--   <div class="dropdown sgroup">
     <button class="dropbtn"> 반짝 </button>

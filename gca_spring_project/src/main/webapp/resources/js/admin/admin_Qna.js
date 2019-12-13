@@ -13,15 +13,19 @@ $(function() {
 
 	$("#Modalread").on('show.bs.modal', function() {
 		var qb_id = $(event.target).closest("tr").find("td").eq(0).html();// closest
-		$(".modal-body").load("adminQnView?qb_id="+qb_id)
+		$("#Modalread .modal-body").load("adminQnView?qb_id="+qb_id)
 		console.log(qb_id);
 	});
 	
 	$("#UserModalread").on('show.bs.modal', function() {
 		var qb_id = $(event.target).closest("tr").find("td").eq(0).html();// closest
-		$(".modal-body").load("adminQnView?qb_id="+qb_id)
+		$("#UserModalread .modal-body").load("adminQnView?qb_id="+qb_id)
 		console.log(qb_id);
 	});
+	
+	  $(document).click(function() {
+          $("#Modalread").hide();
+     }) 
 
 });
 
