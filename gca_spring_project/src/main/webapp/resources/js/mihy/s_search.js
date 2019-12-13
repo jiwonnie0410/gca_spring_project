@@ -124,8 +124,8 @@ function move_room(result, sg_dttm){
 			msg = {
 					cmd : "join",
 					id : result.m_id,
-					msg : "<"+result.m_id+"님이 참가하셨습니다.>"
-					//여기에 아이디 붙여서 추가하면 될듯. 근데 새로고침해도 이게 뜨는것은 막아야함.
+					msg : "<"+result.m_id+"님이 참가하셨습니다.>",
+					sg_num : result.pk_num
 				}
 				webSocket.send(  JSON.stringify( msg )   );
 			location.href='roomIn?sg_num='+result.pk_num;
