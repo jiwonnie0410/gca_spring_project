@@ -38,6 +38,9 @@
 			if('${pwMessage}' != ''){
 				alert('${pwMessage}');
 			}
+			if('${joinMessage}' != ''){
+				alert('${joinMessage}');
+			}
 	</script>
 
 </head>

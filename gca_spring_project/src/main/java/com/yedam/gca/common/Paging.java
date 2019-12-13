@@ -20,7 +20,6 @@ public class Paging {
 		return last;
 	}
 
-	
 	public int getPageUnit() {
 		return pageUnit;
 	}

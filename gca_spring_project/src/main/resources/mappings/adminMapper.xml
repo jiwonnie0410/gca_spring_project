@@ -14,6 +14,7 @@
 	7. 챌린지 참여 중인 인원
 	8. 챌린지 상세 내용
 	9. 챌린지 참여한 사람들 목록
+	10. 챌린지 총 건수
  -->
 
 <!-- 1. 반짝 운동별 통계 -->
@@ -88,16 +89,30 @@
 			
 			
 <!-- 5. 챌린지 목록 -->
-			<select id="challengeList" resultType="map">
-					SELECT 	CL_NUM, 
-							CL_STATUS, 
-							CL_NAME, 
-							CL_CONTENT, 
-							TO_CHAR(CL_START_DTTM, 'yyyy/mm/dd') CL_START_DTTM, 
-							TO_CHAR(CL_END_DTTM, 'yyyy/mm/dd') CL_END_DTTM, 
-							CL_SCORE
-					FROM CHALLENGE
-					ORDER BY CL_NUM
+			<select id="challengeList" resultType="challenge">
+					SELECT B.* FROM( SELECT A.*, ROWNUM RN FROM(
+					
+								SELECT 	CL_NUM, 
+										CL_STATUS, 
+										CL_NAME, 
+										CL_CONTENT, 
+										CL_START_DTTM, 
+										CL_END_DTTM, 
+										CL_SCORE
+								FROM CHALLENGE
+								<where>
+									<if test="keyword != null and keyword != '' ">
+										<if test="searchCondition == 'title' ">
+											CL_NAME LIKE '%' || #{keyword} || '%'
+										</if>
+										<if test="searchCondition == 'content' ">
+											CL_CONTENT LIKE '%' || #{keyword} || '%'
+										</if>
+									</if>
+								</where>
+								ORDER BY CL_NUM
+								
+					)A )B WHERE RN BETWEEN #{start} AND #{end}
 			</select>
 
 
@@ -182,6 +197,23 @@
 			</select>
 			
 			
+<!-- 10. 챌린지 총 건수 -->
+			<select id="challengeCount" resultType="int">
+			  		SELECT 	COUNT(*)
+			  		FROM	CHALLENGE
+			  		
+			  		<where>
+						<if test="keyword != null and keyword != '' ">
+							<if test="searchCondition == 'title' ">
+								CL_NAME LIKE '%' || #{keyword} || '%'
+							</if>
+							<if test="searchCondition == 'content' ">
+								CL_CONTENT LIKE '%' || #{keyword} || '%'
+							</if>
+						</if>
+					</where>
+		  		
+		  	</select>
 			
 			
 			

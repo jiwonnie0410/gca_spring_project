@@ -3,13 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-    
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>option.jsp</title>
+<!-- 로그인한사람의 id,닉네임,캐릭터코드 저장 -->
+<sec:authentication property="principal.username" var="id"/>
+<sec:authentication property="principal.m_nick" var="nick"/>
+<sec:authentication property="principal.m_image_cd" var="image"/>
 
 <!-- jquery js -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -25,10 +29,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/addOption.css">
 
-<!-- 로그인한사람의 id,닉네임,캐릭터코드 저장 -->
-<sec:authentication property="principal.username" var="id"/>
-<sec:authentication property="principal.m_nick" var="nick"/>
-<sec:authentication property="principal.m_image_cd" var="image"/>
 
 
 <script>
@@ -138,8 +138,6 @@ function updateRangeBtn() {
 		});
 	});
 }
-
-	
 
 </script>
 

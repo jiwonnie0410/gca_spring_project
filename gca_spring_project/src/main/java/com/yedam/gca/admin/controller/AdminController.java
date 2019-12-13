@@ -1,5 +1,6 @@
 package com.yedam.gca.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.gca.admin.service.AdminService;
+import com.yedam.gca.admin.vo.ChallengeSearchVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
+import com.yedam.gca.common.Paging;
 import com.yedam.gca.member.controller.MembersController;
 import com.yedam.gca.member.vo.MembersVO;
 
@@ -39,8 +42,11 @@ public class AdminController {
 	// 1-2. 챌린지 목록
 	@ResponseBody
 	@RequestMapping("ajax/challengeList")
-	public List<ChallengeVO> challengeList() {
-		return adminService.challengeList();
+	public Map<String, Object> challengeList(Model model, Paging p, ChallengeSearchVO svo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", adminService.challengeList(svo, p));
+		map.put("paging", p);
+		return map;
 	}
 
 	// 1-3. 챌린지 등록
