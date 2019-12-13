@@ -32,7 +32,7 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 
-	// 지원
+	// 지원 1-3번
 	// 1-1. 챌린지 관리 페이지
 	@RequestMapping("/admin/challenge")
 	public String adminChallenge() {
@@ -91,18 +91,15 @@ public class AdminController {
 	// 3-4. 통계 -> 연령대 및 운동(반짝)성별 통계
 	@ResponseBody
 	@RequestMapping("/ajax/chart/gender")
-	public List<Map<String, Object>> chartGender() {
-		return adminService.chartGender("G01", 20, 29);
+	public Map<String, List<Map<String, Object>>> chartGender() {
+		return adminService.chartGender();
 	}
 
 	// 3-5. 통계 -> 지역별 반짝 운동 통계
 	@ResponseBody
 	@RequestMapping("/ajax/chart/city")
 	public List<Map<String, Object>> chartCity() {
-		Calendar calendar = new GregorianCalendar(Locale.KOREA);
-		int endMonth = calendar.get(Calendar.MONTH) + 1; 	// 현재 달   	12월
-		int startMonth = endMonth - 3;						// 3개월 전  	9월
-		return adminService.chartCity(startMonth, endMonth);
+		return adminService.chartCity();
 	}
 
 	

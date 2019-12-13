@@ -2,8 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-		<script src="../resources/scripts/json.min.js"></script>
-		
 		<!-- 통계 차트 그리기 -->
 	    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	    <script src="../resources/js/admin/chartjs.js"></script>
