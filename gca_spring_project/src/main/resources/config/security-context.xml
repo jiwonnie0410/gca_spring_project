@@ -44,7 +44,7 @@
 						      password-parameter="paramPassword"/>
 						      
 		<!-- 로그아웃 -->
-		<!-- <security:logout logout-url="/logout" logout-success-url="/top.jsp" /> -->
+		<security:logout logout-url="/logout" logout-success-url="/" />
 		
 		<!-- csrf 보안 사용 안 하기 -->
 		<security:csrf disabled="true" />
