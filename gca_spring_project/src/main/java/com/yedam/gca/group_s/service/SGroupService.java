@@ -14,7 +14,7 @@ public interface SGroupService {
 	SGroupVO getRoomInfo(SGroupVO vo);
 	int doReport(TroubleVO vo);
 	void cancelJoin(ActiveHistVO vo);
-	String returnImage(CodeVO vo);
+	String returnImage(String id);
 	
 	//미현
 	List<SGroupVO> getSgList(SGroupVO vo);

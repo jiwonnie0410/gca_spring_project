@@ -36,8 +36,8 @@ public class SGroupDAO {
 		mybatis.update("SGroupDAO.minusNowCnt", vo);
 	}
 	//방 입장 시 웹소켓으로 프로필 코드 반환(입장할때 다른사람들에게 뿌려주기 위해.)
-	public String returnImage(CodeVO vo) {
-		return mybatis.selectOne("SGroupDAO.returnImage", vo);
+	public String returnImage(String id) {
+		return mybatis.selectOne("SGroupDAO.returnImage", id);
 	}
 	
 	

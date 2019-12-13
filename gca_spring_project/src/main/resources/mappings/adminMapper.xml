@@ -38,37 +38,47 @@
 			<select id="chartGender" parameterType="map">
 					<!-- #{gender}성별의  ${startAge}살부터 ${endAge}살의 사람들이 반짝 한 횟수 -->
 					<!-- 예: 여성 20살부터 29살까지 사람들이 반짝 한 횟수 -->
-					SELECT 	COUNT(*), C.CD_NAME
-					FROM 	ACTIVE_HIST H, MEMBERS M, CODE C, SGROUP S
-					WHERE 	H.M_ID = M.M_ID
-					        AND H.SG_NUM = S.SG_NUM
-					        AND S.SPORTS1_CD = C.CD_ID
-					        AND M.GENDER_CD = #{gender}
-					        AND M.M_AGE BETWEEN ${startAge} AND ${endAge}
-					GROUP BY C.CD_NAME
+					SELECT DECODE(SUBSTR(M.M_AGE, 1, 1),  1, 10,
+					                                      2, 20,
+					                                      3, 30,
+					                                      4, 40,
+					                                      5, 40) "AGE",
+					        COUNT( DECODE(GET_CODE_NAME(S.SPORTS1_CD), '농구', 1, NULL) ) AS "BASKETBALL",
+					        COUNT( DECODE(GET_CODE_NAME(S.SPORTS1_CD), '달리기/산책', 1, NULL) ) AS "RUNNING",
+					        COUNT( DECODE(GET_CODE_NAME(S.SPORTS1_CD), '등산', 1, NULL) ) AS "HIKING",
+					        COUNT( DECODE(GET_CODE_NAME(S.SPORTS1_CD), '배드민턴', 1, NULL) ) AS "BADMINTON",
+					        COUNT( DECODE(GET_CODE_NAME(S.SPORTS1_CD), '볼링', 1, NULL) ) AS "BOWLING",
+					        COUNT( DECODE(GET_CODE_NAME(S.SPORTS1_CD), '수영', 1, NULL) ) AS "SWIMMING",
+					        COUNT( DECODE(GET_CODE_NAME(S.SPORTS1_CD), '자전거', 1, NULL) ) AS "BICYCLE",
+					        COUNT( DECODE(GET_CODE_NAME(S.SPORTS1_CD), '기타', 1, NULL) ) AS "ETC-SPORT"
+					        
+					FROM MEMBERS M, SGROUP S, ACTIVE_HIST H
+					
+					WHERE M.M_ID = H.M_ID AND S.SG_NUM = H.SG_NUM AND M.GENDER_CD = #{gender}
+					
+					GROUP BY DECODE(SUBSTR(M.M_AGE, 1, 1),  1, 10,
+					                                   		2, 20,
+					                                    	3, 30,
+					                                    	4, 40,
+					                                    	5, 40)
 			</select>
 
 
 <!-- 4. 지역별 통계 -->
 			<select id="chartCity" parameterType="map" resultType="map">
-					<!-- ${month}월에  #{city} 사는 사람들이 반짝 한 횟수 -->
-					<!-- 예: 12월에 대구에 사는 사람들이 반짝 한 횟수 -->
-					SELECT  TO_CHAR(SYSDATE, 'MM') AS "month",
-					        COUNT( decode(SUBSTR(M.M_LOCATION, 1, 2), '서울',1,0)    ) AS "count1",
-					        COUNT( decode(SUBSTR(M.M_LOCATION, 1, 2), '대구',1,0)    ) AS "count2",
-					        COUNT( decode(SUBSTR(M.M_LOCATION, 1, 2), '부산',1,0)    ) AS "count3",
-					        COUNT( decode(SUBSTR(M.M_LOCATION, 1, 2), '광주',1,0)    ) AS "count4",
-					        COUNT( decode(SUBSTR(M.M_LOCATION, 1, 2), '인천',1,0)    ) AS "count5",
-					        COUNT( decode(SUBSTR(M.M_LOCATION, 1, 2), '대전',1,0)    ) AS "count6",
-					        COUNT( decode(SUBSTR(M.M_LOCATION, 1, 2), '울산',1,0)    ) AS "count7",
-					        SUBSTR(M.M_LOCATION, 1, 2) "city"
-					        
+					<!-- ${start}월부터 ${end}월까지 지역별 사람들이 반짝 한 횟수 -->
+					SELECT  TO_CHAR(S.SG_END_DTTM, 'MM') "MONTH",
+					        COUNT( DECODE(SUBSTR(M.M_LOCATION, 1, 2), '서울', 1, NULL) ) AS "Seoul",
+							COUNT( DECODE(SUBSTR(M.M_LOCATION, 1, 2), '대구', 1, NULL) ) AS "Daegu",
+							COUNT( DECODE(SUBSTR(M.M_LOCATION, 1, 2), '부산', 1, NULL) ) AS "Busan",
+							COUNT( DECODE(SUBSTR(M.M_LOCATION, 1, 2), '광주', 1, NULL) ) AS "Gwangju",
+							COUNT( DECODE(SUBSTR(M.M_LOCATION, 1, 2), '인천', 1, NULL) ) AS "Incheon",
+							COUNT( DECODE(SUBSTR(M.M_LOCATION, 1, 2), '대전', 1, NULL) ) AS "Daejeon",
+							COUNT( DECODE(SUBSTR(M.M_LOCATION, 1, 2), '울산', 1, NULL) ) AS "Ulsan"
 					FROM    MEMBERS M, SGROUP S, ACTIVE_HIST H
-					WHERE   	H.M_ID = M.M_ID 
-							AND H.SG_NUM = S.SG_NUM
-					        AND TO_CHAR(S.SG_END_DTTM, 'M') = #{month}
-					        AND M.M_LOCATION LIKE '${city}%'
-					GROUP BY M.M_LOCATION, TO_CHAR(SYSDATE, 'MM')
+					WHERE   H.M_ID = M.M_ID AND H.SG_NUM = S.SG_NUM AND TO_CHAR(S.SG_END_DTTM, 'MM') BETWEEN ${start} AND ${end}
+					GROUP BY TO_CHAR(S.SG_END_DTTM, 'MM')
+					ORDER BY TO_CHAR(S.SG_END_DTTM, 'MM')
 			</select>
 			
 			

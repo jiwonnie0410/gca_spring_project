@@ -35,7 +35,11 @@
 
 <body>
 
-<form action="creRoom" method="post" id="frm">
+<nav class="fixed-top">
+	<div align="center" class="mt-2 mb-2"><h4>반짝방 만들기</h4></div>
+</nav>
+
+<form action="creRoom" method="post" id="frm" style="margin-top:40px">
 
 	<div class="row mr-2 ml-2 mt-3 mb-3">
 		<input type="text" class="form-control sg_name" id="sg_name" placeholder="반짝 방 이름" name="sg_name">

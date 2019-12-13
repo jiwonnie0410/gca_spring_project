@@ -467,7 +467,7 @@
 		//var img = document.getElementById('s_character').value;
 		//var nick = document.getElementById('s_nick').value;
 		//var id = document.getElementById('s_id').value;
-		var img = "${image}";
+		var img = "${image}"; //이거갖고 뿌려줄려면 result로 받은 값으로 해야함,........
 		var nick = "${nick}";
 		var id = "${id}";
 		
@@ -478,7 +478,7 @@
 		console.log("img : "+img);
 		
 		//이미지 영어이름 갖고오는 ajax(웹소켓에서 처리하는 방향 알아보기.)
-		$.ajax({
+		/* $.ajax({
 			url: "returnImage",
 			type:'GET',
 			async:false,
@@ -493,7 +493,7 @@
 				
 			}
 			
-		});
+		}); */
 		
 		//프로필 붙여주기~~
 		$span = $("<span data-toggle='modal' data-target='#profile' style='font-size:13px; padding:10px; display:inline-block;'>");

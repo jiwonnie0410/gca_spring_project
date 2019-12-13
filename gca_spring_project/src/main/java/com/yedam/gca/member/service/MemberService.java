@@ -35,11 +35,15 @@ public interface MemberService {
 	
 	
 	
+	
+	
+	
 	// ************* 수림 ***************** //
 	
 	// 1. 유저별 알람 정보 가져오기 
 	public MembersVO getAlarmInfo(MembersVO vo);
-	
+	//2. 토글스위치 클릭시 알람 on/off 업데이트	
+	public int updateSwitch(MembersVO vo);
 }
  
 
