@@ -32,7 +32,7 @@
 	<script type="text/javascript" src="../resources/js/mihy/s_search_cre.js"></script>
 	<link rel="stylesheet" href="../resources/css/mihy/s_search_cre.css">
 	
-	<script type="text/javascript" src="../resources/js/mihy/part_cert.js"></script>
+
 	
 </head>
 
@@ -160,8 +160,6 @@
 	<input type="button" class="btn btn-default btn2 mt-2" id="btn_cre" value="방 생성">
 	
 </form>
-
-<button class="button-general" id="btn_cert">참가인증</button>
 
 </body>
 </html>
