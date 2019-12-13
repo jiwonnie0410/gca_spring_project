@@ -176,6 +176,7 @@
 <!-- ************  수림    ****************** 
 		1. 유저별 알람 정보 불러오기
 		2. 스위치 클릭시 알람값 업데이트
+		3. 범위버튼 클릭시 범위값 업데이트
 -->
 	
 	<!-- 1. 유저별 알람 정보 불러오기 -->      
@@ -189,7 +190,7 @@
 		WHERE		M_ID = #{m_id}    
 	</select>
     
-    
+    <!-- 2. 스위치 클릭시 알람값 업데이트 -->
     <update id="updateSwitch" parameterType="members">
 		UPDATE		MEMBERS 
 		SET 		M_NOTICE1 = #{m_notice1}, 
@@ -198,7 +199,12 @@
 		WHERE 		M_ID = #{m_id}
     </update>
     
-
+	<!-- 3. 범위버튼 클릭시 범위값 업데이트 -->
+	<update id = "updateRange" parameterType="members">
+		UPDATE		MEMBERS
+		SET			M_RADIUS = #{m_radius}
+		WHERE		M_ID = #{m_id}
+	</update>
 
 
 

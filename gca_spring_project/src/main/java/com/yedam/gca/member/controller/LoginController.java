@@ -136,4 +136,11 @@ public class LoginController {
 	}
 	
 	// 3. 범위슬라이더 변경시 범위 업데이트
+	@RequestMapping(value = "/ajax/updateRange.json"
+			, method = RequestMethod.PUT
+			, consumes="application/json")
+	@ResponseBody
+	public void updateRange(@RequestBody MembersVO vo) {
+		memberService.updateRange(vo);
+	}
 }
