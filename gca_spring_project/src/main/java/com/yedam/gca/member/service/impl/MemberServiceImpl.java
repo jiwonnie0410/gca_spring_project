@@ -40,7 +40,7 @@ public class MemberServiceImpl implements MemberService {
 		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 		String password = scpwd.encode(vo.getM_password());
 		vo.setM_password(password);
-		System.out.println(password);
+		
 		return dao.insertMember(vo);
 	}
 
@@ -130,10 +130,9 @@ public class MemberServiceImpl implements MemberService {
 		String tempPw = temp.toString(); // 임시 비밀번호
 		
 		// 비밀번호 암호화
-		String salt = SHA256Util.generateSalt();						// 1. 암호화 키 생성
-		String newPassword = SHA256Util.getEncrypt(tempPw, salt);		// 2. 비밀번호 암호화
-		vo.setM_salt(salt);												// 3. vo에 암호화 키 넣기
-		vo.setM_password(newPassword);									// 4. vo에 암호화된 비밀번호 넣기
+		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
+		String pw = scpwd.encode(tempPw);
+		vo.setM_password(pw);
 		
 		int result = dao.forgotPw(vo); // 입력 받은 정보로 회원 있는지 확인
 		
@@ -186,10 +185,9 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String changePw(MembersVO vo) {
 		// 비밀번호 암호화
-		String salt = SHA256Util.generateSalt();						// 1. 암호화 키 생성
-		String newPassword = SHA256Util.getEncrypt(vo.getM_password(), salt);		// 2. 비밀번호 암호화
-		vo.setM_salt(salt);												// 3. vo에 암호화 키 넣기
-		vo.setM_password(newPassword);									// 4. vo에 암호화된 비밀번호 넣기
+		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
+		String password = scpwd.encode(vo.getM_password());
+		vo.setM_password(password);
 		
 		int result = dao.changePassword(vo);
 		if(result == 0) {
