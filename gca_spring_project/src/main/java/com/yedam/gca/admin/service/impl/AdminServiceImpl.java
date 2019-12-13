@@ -1,7 +1,10 @@
 package com.yedam.gca.admin.service.impl;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -19,6 +22,7 @@ public class AdminServiceImpl implements AdminService {
 	@Resource
 	AdminDAO dao;
 
+	// 지원 1-7번
 	// 1. 챌린지 목록
 	@Override
 	public List<ChallengeVO> challengeList() {
@@ -46,13 +50,19 @@ public class AdminServiceImpl implements AdminService {
 
 	// 5. 연령대 및 운동(반짝) 성별 통계
 	@Override
-	public List<Map<String, Object>> chartGender(String gender, int startAge, int endAge) {
-		return dao.chartGender(gender, startAge, endAge);
+	public Map<String, List<Map<String, Object>>> chartGender() {
+		Map<String, List<Map<String, Object>>> map = new HashMap<String, List<Map<String, Object>>>();
+		map.put("female", dao.chartGender("G01"));
+		map.put("male", dao.chartGender("G02"));
+		return map;
 	}
 
 	// 6. 지역별 반짝 운동 통계
 	@Override
-	public List<Map<String, Object>> chartCity(int startMonth, int endMonth) {
+	public List<Map<String, Object>> chartCity() {
+		Calendar calendar = new GregorianCalendar(Locale.KOREA);
+		int endMonth = calendar.get(Calendar.MONTH) + 1; 	// 현재 달   	12월
+		int startMonth = endMonth - 3;						// 3개월 전  	9월
 		return dao.chartCity(startMonth, endMonth);
 	}
 

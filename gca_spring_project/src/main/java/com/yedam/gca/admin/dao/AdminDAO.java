@@ -58,12 +58,8 @@ public class AdminDAO {
 	}
 	
 	// 연령대 및 운동(반짝) 성별 통계
-	public List<Map<String, Object>> chartGender(String gender, int startAge, int endAge){
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("gender", gender);
-		map.put("startAge", startAge);
-		map.put("endAge", endAge);
-		return mybatis.selectList("AdminDAO.chartGender", map);
+	public List<Map<String, Object>> chartGender(String gender){
+		return mybatis.selectList("AdminDAO.chartGender", gender);
 	}
 	
 	// 지역별 반짝 운동 통계
