@@ -72,6 +72,7 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 			
 			svo.setCharacter(sgroupService.returnImage(mvo));
 			svo.setNick(mvo.getM_nick());
+
 		}
 		//명령어에따라 다른 동작이 되도록 else if문으로 명령어 더 추가해서 할 수 있음.(jsp에도 같이 추가)
 		else if(svo.getCmd().equals("msg")) {
@@ -112,6 +113,25 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 						session.sendMessage(new TextMessage(message));
 						
 					}
+				} catch (Exception ignored) {
+					this.logger.error("fail to send message!", ignored);
+				}
+			}
+		}
+	}
+	
+	public void sendMessage(SocketVO vo) {
+		for (WebSocketSession session : this.sessionSet) {
+			if (session.isOpen()) {
+				try {
+					//{"cmd":"join","id":"test","msg":"<test님이 참가하셨습니다.>","character":"foreigner","nick":"개발왕"}
+						String message = "{\"cmd\":\"join\", \"id\":\""+vo.getId()+"\", \"msg\":\""+vo.getMsg()+"\","
+								+ "\"character\":\""+vo.getCharacter()+"\", \"nick\":\""+vo.getNick()+"\"}";
+						
+						System.out.println("메세지 : "+message);
+						
+						session.sendMessage(new TextMessage(message));
+						
 				} catch (Exception ignored) {
 					this.logger.error("fail to send message!", ignored);
 				}

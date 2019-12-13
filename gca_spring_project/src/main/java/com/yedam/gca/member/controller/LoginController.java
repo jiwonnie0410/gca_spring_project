@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -126,11 +127,20 @@ public class LoginController {
 		return memberService.getAlarmInfo(vo);
 	}
 	// 3. 스위치 클릭시 정보 업데이트
-	@RequestMapping(value = "/ajax/updateSwitch.json", method = RequestMethod.PUT)
+	@RequestMapping(value = "/ajax/updateOption.json"
+					, method = RequestMethod.PUT
+					, consumes="application/json") //요청헤더 jsp에서 보낸걸 읽음
 	@ResponseBody
-	public void updateSwitch(MembersVO vo) {
-		memberService.updateMember(vo);
+	public void updateSwitch(@RequestBody MembersVO vo) {
+		memberService.updateSwitch(vo);
 	}
 	
 	// 3. 범위슬라이더 변경시 범위 업데이트
+	@RequestMapping(value = "/ajax/updateRange.json"
+			, method = RequestMethod.PUT
+			, consumes="application/json")
+	@ResponseBody
+	public void updateRange(@RequestBody MembersVO vo) {
+		memberService.updateRange(vo);
+	}
 }

@@ -28,8 +28,11 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9e415eb9e7187154cd9c6308c036f0a6&libraries=services,clusterer"></script>
 	
 	<!-- private : Description Action -->
+	<script type="text/javascript" src="../resources/js/mihy/kakao_map.js"></script>
 	<script type="text/javascript" src="../resources/js/mihy/s_search_cre.js"></script>
 	<link rel="stylesheet" href="../resources/css/mihy/s_search_cre.css">
+	
+
 	
 </head>
 
@@ -157,11 +160,6 @@
 	<input type="button" class="btn btn-default btn2 mt-2" id="btn_cre" value="방 생성">
 	
 </form>
-
-<script>
-
-
-</script>
 
 </body>
 </html>

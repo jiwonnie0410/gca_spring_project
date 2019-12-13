@@ -20,4 +20,13 @@ public class ChallengeHistDAO {
 	public List<ChallengeHistVO> getScoreList() {
 		return mybatis.selectList("ChallengeHistDAO.getScoreList");
 	}
+	
+	
+	
+	//진영
+		// 챌린지 히스로리 목록 출력
+	
+	public List<ChallengeHistVO> getChallengehtList(ChallengeHistVO vo) {
+		return mybatis.selectList("ChallengeDAO.getChallengehtList");
+	}
 }

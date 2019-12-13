@@ -44,6 +44,26 @@
 					<!-- 상세보기 화면에서 게시글 목록화면으로 이동 -->
 					<!-- 	<button type="button" class="btn btn-primary px-5 py-3  mt-3" id="btnList">목록</button> -->
 				</div>
+				
+				
+				
+				
+				
+				<c:if test="${dto.qb_origin}!= null and ${dto.qb_origin} != '' ">
+					<div align="center">
+						<table class="table table-striped"
+							style="text-align: center; border: 1px solid #dddddd">
+							<tr>
+								<th style="background-color: #eeeeee; text-align: center;">답변제목</th>
+								<td colspan="5" width="800" align="center">${dto.qb_title}</td>
+							</tr>
+							<tr>
+								<th style="background-color: #eeeeee; text-align: center;">답변내용</th>
+								<td colspan="5" width="800" align="center">${dto.qb_content }</td>
+							</tr>
+						</table>
+					</div>
+				</c:if>
 			</form>
 		</div>
 	</div>

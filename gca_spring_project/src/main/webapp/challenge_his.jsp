@@ -5,24 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>게시글 목록</title>
-<meta name="description" content="">
-<meta name="author" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<!--json할때 필요  -->
-<script src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
 <!-- 챌린지 자바스크립트 -->
-<script src="${pageContext.request.contextPath }/resources/js/board/challenge_list.js"></script>
+<script
+	src="${pageContext.request.contextPath }/resources/js/board/challenge_list.js"></script>
 </head>
 <body>
 <div id="content-wrapper">

@@ -258,9 +258,15 @@ public class MemberServiceImpl implements MemberService {
     	return dao.getAlarmInfo(vo);
     }
     
+    // 2. 토글스위치 클릭시 알람 on/off 업데이트
     @Override
- // 2. 토글스위치 클릭시 알람 on/off 업데이트
  	public int updateSwitch(MembersVO vo) {
     	return dao.updateSwitch(vo);
+    }
+    
+    // 3. 범위슬라이더 변경시 범위 업데이트
+    @Override
+	public void updateRange(MembersVO vo) {
+    	dao.updateRange(vo);
     }
 }

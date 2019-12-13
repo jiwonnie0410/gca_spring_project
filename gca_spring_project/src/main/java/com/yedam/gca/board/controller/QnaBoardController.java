@@ -34,14 +34,13 @@ import com.yedam.gca.common.Paging;
   /*ajax로 넘겨 주는것은 데이터만 주면됨 처음에만 view 연결*/
   @Autowired QnaBoardService boardService;
   
-  // 목록
+  // 사용자목록
   @RequestMapping(value = "qnaboard") 
   public String getBoardList(Model model, BoardSearchVO svo, Paging paging)  { 
 	  model.addAttribute("boardList",boardService.getBoardList(svo, paging)); 
 	  model.addAttribute("paging", paging); 
 	  return "/user/askBoard/qnaBoard"; 
 	  }
-  
   
   
   // 관리지목록
@@ -52,11 +51,14 @@ import com.yedam.gca.common.Paging;
 	  return "/admin/admin_qnaBoard"; 
 	  }
 	  
-	  // 사용자목록
+	  // ajax목록
 	  @ResponseBody
 	  @RequestMapping("/ajax/getBoardList2") 
 	  public List<QnaBoardVO>getBoardList2(BoardSearchVO svo, Paging paging) {
 		  return boardService.getBoardList2(svo, paging); }  
+	  
+	  
+	  
 	  
 	  
 	  
@@ -71,6 +73,25 @@ import com.yedam.gca.common.Paging;
 			return vo;
 		}
 	  
+	  
+	  
+	  
+	  //사용자 상세보기
+	  @RequestMapping(value="qnView", method=RequestMethod.GET)
+			public ModelAndView view2(@RequestParam int qb_id, Paging paging) throws Exception{
+				// 모델(데이터)+뷰(화면)를 함께 전달하는 객체
+				ModelAndView mav = new ModelAndView();
+				// 뷰에 전달할 데이터
+				mav.addObject("dto", boardService.read(qb_id));
+				// 뷰의 이름
+				mav.setViewName("/notiles/askBoard/qnView");
+				logger.info("mav:", mav);
+				return mav;
+			}
+		
+	  
+	  
+	  
 	  //관리자 상세보기
 	  @RequestMapping(value="/admin/adminQnView", method=RequestMethod.GET)
 			public ModelAndView view(@RequestParam int qb_id, Paging paging) throws Exception{
@@ -83,9 +104,6 @@ import com.yedam.gca.common.Paging;
 				logger.info("mav:", mav);
 				return mav;
 			}
-		
-	  
-	  
 	  
   
   /////////////////////////////////////////////////////////////////////////////
