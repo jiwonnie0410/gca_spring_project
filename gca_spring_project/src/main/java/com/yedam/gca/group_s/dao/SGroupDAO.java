@@ -68,7 +68,7 @@ public class SGroupDAO {
 	}
 	
 	//참여 조회
-	public String getSgCert(SGroupVO vo) {
+	public SGroupVO getSgCert(SGroupVO vo) {
 		return mybatis.selectOne("SGroupDAO.getSgCert", vo);
 	}
 

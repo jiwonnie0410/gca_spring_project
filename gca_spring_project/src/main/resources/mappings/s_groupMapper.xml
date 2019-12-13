@@ -182,12 +182,14 @@
 	</select>
 
 <!-- SGroup 참여 인증 -->
-	<select id="getSgCert" parameterType="sgroup" resultType="string">
-		SELECT GEO_CERT(	#{m_id}, 
+	<select id="getSgCert" statementType="CALLABLE" parameterType="sgroup">
+			{ CALL GEO_CERT(
+							#{m_id}, 
 							#{sg_num}, 
 							#{cert_x}, 
-							#{cert_y} )
-		 FROM DUAL
+							#{cert_y},
+							#{msg, mode=OUT, jdbcType=VARCHAR}
+		)}
 	</select>
 
 

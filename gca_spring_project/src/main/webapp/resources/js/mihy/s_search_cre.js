@@ -10,7 +10,7 @@ $(document).ready(function(){
 	$('#btn_cre').on('click', valid); //유효성 검사
 	$('#G03').attr('checked','checked'); //옵션 null값 기본 전송
 	
-	$('#btn_cert').on('click', getLocation); //참가인증
+	
 	
 });
 

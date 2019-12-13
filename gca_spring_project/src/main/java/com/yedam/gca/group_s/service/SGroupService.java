@@ -23,6 +23,6 @@ public interface SGroupService {
 	int updateCnt(SGroupVO vo);
 	void insertSg(SGroupVO vo);
 	List<SGroupVO> getSgEndList(SGroupVO vo);
-	String getSgCert(SGroupVO vo);
+	SGroupVO getSgCert(SGroupVO vo);
 
 }

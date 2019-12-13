@@ -231,6 +231,7 @@
 
 			});
 			
+			$('#btn_cert').on('click', getLocation); //참가인증
 			
 		});
 </script>
@@ -243,6 +244,7 @@
     <input type="hidden" id="s_id" value='${id}'>
     <input type="hidden" id="s_nick" value='${nick}'>
     <input type="hidden" id="s_character" value='${image}'>
+    <input type="hidden" id="sg_num_search" value="${sgroup.sg_num }">
     
 	<!-- 방제 -->
     	<div style="background-color: #FE9191; text-align: left; padding-left:20px; color: #fff;"> 
