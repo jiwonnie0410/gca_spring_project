@@ -11,6 +11,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yedam.gca.admin.vo.ChallengeSearchVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.member.vo.MembersVO;
 
@@ -21,8 +22,13 @@ public class AdminDAO {
 	SqlSessionTemplate mybatis;
 	
 	// 챌린지 목록
-	public List<ChallengeVO> challengeList() {
-		return mybatis.selectList("AdminDAO.challengeList");
+	public List<ChallengeVO> challengeList(ChallengeSearchVO svo) {
+		return mybatis.selectList("AdminDAO.challengeList", svo);
+	}
+	
+	// 챌린지 건수
+	public int challengeCount(ChallengeSearchVO svo) {
+		return mybatis.selectOne("AdminDAO.challengeCount", svo);
 	}
 
 	// 챌린지 생성

@@ -16,7 +16,6 @@
 <!-- 1. 회원가입 -->
 		  	<insert id="insertMember" parameterType="members">
 					INSERT INTO members (	M_ID,
-											M_SALT,
 											M_PASSWORD,
 											M_NAME,
 											M_NICK,
@@ -35,7 +34,6 @@
 											M_NOTICE3
 										)
 					VALUES (	#{m_id},
-								#{m_salt},
 								#{m_password},
 								#{m_name},
 								#{m_nick},
@@ -85,7 +83,7 @@
 <!-- 4-2. 임시 비밀번호로 업데이트 하기 -->
 			<update id="updateTempPw" parameterType="members">
 					UPDATE MEMBERS
-					SET M_SALT = #{m_salt}, M_PASSWORD = #{m_password}
+					SET M_PASSWORD = #{m_password}
 					WHERE M_ID = #{m_id}
 			</update>
 			
@@ -103,7 +101,7 @@
 <!-- 6. 비밀번호 변경 -->
 			<update id="changePassword" parameterType="members">
 					UPDATE MEMBERS
-					SET M_SALT = #{m_salt}, M_PASSWORD = #{m_password}
+					SET M_PASSWORD = #{m_password}
 					WHERE M_ID = #{m_id}
 			</update>
 			

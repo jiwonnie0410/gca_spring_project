@@ -25,6 +25,8 @@
 
 <script src="../resources/scripts/json.min.js"></script>
 
+<!-- 미현 : 인증 참여 스크립트 추가 -->
+<script type="text/javascript" src="../resources/js/mihy/part_cert.js"></script>
 
 <style>
 
@@ -294,7 +296,7 @@
 
 <!-- 버튼영역 시작(아직 아무 기능 없음) -->														
     <div style="padding-bottom:30px">
-      	<button class="button-general">참가인증</button>&nbsp;<button id="cancelJoin" class="button-general">참가취소</button>&nbsp;
+      	<button id="btn_cert" class="button-general">참가인증</button>&nbsp;<button id="cancelJoin" class="button-general">참가취소</button>&nbsp;
       	<button class="button-general">공유</button>&nbsp;<button class="button-general">목록</button>
     </div>
 <!-- 버튼영역 끝 -->
