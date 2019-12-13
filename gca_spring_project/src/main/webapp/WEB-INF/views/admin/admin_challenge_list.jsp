@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="paging" tagdir="/WEB-INF/tags" %> <!-- 페이징을 위한 라이브러리 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,49 +31,42 @@
 			<div class="col-md-8" align="center" style="padding-top:30px;">
 					<font size="4"><b> 현재 진행 중인 챌린지 목록 </b></font><br /><br /><br />
 						<div align="right">
-							<form role="form" id="searchfrm" name="searchfrm" action="admin_deliverListForm.do" method="post">
-								<input type="hidden" name="p" value="1">
-								<input type="hidden" name="status" value="${param.status }">
+							<!-- 검색폼 -->
+							<form name="challengeSearchForm">
+								<input type="hidden" name="page" value="1" />
 								<table>
-									<tr><td><select id="selectKey" name="selectKey" class="btn btn-outline-warning btn-sm dropdown-toggle">
-											<option	value="o_id" selected> 챌린지 이름 </option></select></td>
-									<td width="300"><input type="text" id='keyword' name='keyword' class="form-control"></td>
-									<td><button id='searchBtn' name='searchBtn' onclick='searchBtn' class="btn btn-outline-warning btn-sm">검색</button></td>
-									</tr>
-								</table><br />
+										<tr>
+											<td><select id="searchCondition" name="searchCondition" class="btn btn-outline-warning btn-sm dropdown-toggle">
+													<option value=""> 키워드 </option>
+													<option value="title" <c:if test="${ChallengeSearchVO.searchCondition == 'title' }" >selected</c:if> > 제목 </option>
+													<option value="content" <c:if test="${ChallengeSearchVO.searchCondition == 'content' }" >selected</c:if> > 내용 </option>
+												</select></td>
+											<td width="200"><input type="text" id="keyword" name="keyword" value="${ChallengeSearchVO.keyword }" class="form-control"></td>
+											<td><button type="button" class="btn btn-outline-warning btn-sm" onclick="getChallengeList()">검색</button></td>
+								</table>
 							</form>
-						</div>
+						</div><br />
 							
 					<table class="table" id="challenge-table">
-						<tr id='tr' align="center" style="background-color:#FEBABA;">
-							<th width="5%"> NO </th>
-							<th width="10%"> 구분 </th>
-							<th width="45%"> 챌린지 이름 </th>
-							<th width="12%"> 시작 날짜 </th>
-							<th width="12%"> 마감 날짜 </th>
-							<th width="10%"> 리워드 </th>
-						</tr>
-						<tr class="table-tr" data-toggle="modal" data-target="#challenge-going">
-							<!-- Ajax로 챌린지 목록 여기에 띄움 -->
-						</tr>
+							<!-- 챌린지 목록 들어오는 부분 -->
 					</table>
-						
-						<!-- 페이징 -->
-						<nav aria-label="Page navigation example">
-						  <ul class="pagination justify-content-center">
-						    <li class="page-item">
-						      <a class="page-link" href="#" aria-label="Previous" style="color:#FE9191;">
-						        <span aria-hidden="true">&laquo;</span>
-						      </a>
-						    </li>
-						    	
-						    <li class="page-item">
-						      <a class="page-link" href="#" aria-label="Next" style="color:#FE9191;">
-						        <span aria-hidden="true">&raquo;</span>
-						      </a>
-						    </li>
-						  </ul>
-						</nav>
+							<!-- 페이징 -->
+							<nav aria-label="Page navigation example">
+							  <ul class="pagination justify-content-center" id="pageButton">
+								    <li class="page-item">
+								      <a class="page-link" href="javascript:getChallengeList()" aria-label="Previous" style="color:#FE9191;">
+								        <span aria-hidden="true">&laquo;</span>
+								      </a>
+								    </li>
+											<!-- 페이지 번호 들어오는 곳 -->
+								    <li class="page-item">
+								      <a class="page-link" href="javascript:getChallengeList()" aria-label="Next" style="color:#FE9191;">
+								        <span aria-hidden="true">&raquo;</span>
+								      </a>
+								    </li>
+							  </ul>
+							</nav>
+							
 					<button class="button-general" data-toggle="modal" data-target="#challenge-create"> 챌린지 생성 </button><p>
 			</div>
 			<div class="col-md-2"></div>
@@ -172,14 +167,7 @@
 					</table><br /><br />
 					
 					<table id="chPeople">
-							<tr id='tr' align="center" style="background-color:#FEBABA;">
-								<th width="20%"> ID </th>
-								<th width="19%"> 이름 </th>
-								<th width="13%"> 나이 </th>
-								<th width="15%"> 성별 </th>
-								<th width="15%"> 지역 </th>
-								<th width="20%"> 진행 횟수 </th>
-							</tr>
+							<!-- 챌린지 참여 중인 사람들이 보여질 부분 -->
 					</table>
 				</div> 
 <!-- Modal footer -->

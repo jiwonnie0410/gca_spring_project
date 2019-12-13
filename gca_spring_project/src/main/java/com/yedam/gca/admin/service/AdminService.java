@@ -3,7 +3,9 @@ package com.yedam.gca.admin.service;
 import java.util.List;
 import java.util.Map;
 
+import com.yedam.gca.admin.vo.ChallengeSearchVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
+import com.yedam.gca.common.Paging;
 import com.yedam.gca.member.vo.MembersVO;
 
 public interface AdminService {
@@ -25,7 +27,7 @@ public interface AdminService {
 	public List<Map<String, Object>> chartCity();
 	
 	// 6. 챌린지 목록
-	public List<ChallengeVO> challengeList();
+	public List<ChallengeVO> challengeList(ChallengeSearchVO svo, Paging p);
 	
 	// 7. 챌린지 진행 현황
 	public Map<String, Object> challengeGoing(int cl_id);

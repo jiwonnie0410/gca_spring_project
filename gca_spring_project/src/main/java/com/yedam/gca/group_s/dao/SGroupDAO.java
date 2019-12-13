@@ -66,5 +66,10 @@ public class SGroupDAO {
 	public List<SGroupVO> getSgEndList(SGroupVO vo) {
 		return mybatis.selectList("SGroupDAO.getSgEndList", vo);
 	}
+	
+	//참여 조회
+	public String getSgCert(SGroupVO vo) {
+		return mybatis.selectOne("SGroupDAO.getSgCert", vo);
+	}
 
 }

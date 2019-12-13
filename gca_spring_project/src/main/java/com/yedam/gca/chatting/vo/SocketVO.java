@@ -9,4 +9,5 @@ public class SocketVO {
 	private String msg;
 	private String character;
 	private String nick;
+	private int sg_num;
 }

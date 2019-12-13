@@ -1,8 +1,17 @@
+/*
+ * 지원
+ * 1. 체크박스 하나만 선택 되게 하기 (복수 선택 방지)
+ * 2. 챌린지 생성 모달에 챌린지 타입 선택하면 나오는 부분
+ * 3. 챌린지 생성 버튼
+ * 4. 챌린지 목록 띄우기
+ * 5. 챌린지 진행 현황 (챌린지 번호 받아와서)
+ */
+
 $(function() {
-	getChallengeList();
+	getChallengeList(1);
 });
 
-// 체크박스 하나만 선택 되게 하기 (복수 선택 방지)
+// 1. 체크박스 하나만 선택 되게 하기 (복수 선택 방지)
 function oneCheckbox(a){
     var obj = document.getElementsByName("cl_status");
     for(var i=0; i<obj.length; i++){
@@ -12,7 +21,7 @@ function oneCheckbox(a){
     }
 }
 
-// 챌린지 생성 모달에 챌린지 타입 선택하면 나오는 부분
+// 2. 챌린지 생성 모달에 챌린지 타입 선택하면 나오는 부분
 $(function(){
 	$('#challengeType').change(function(){
 		var type = $('#challengeType option:selected').val();
@@ -49,7 +58,7 @@ $(function(){
 	
 });
 
-// 챌린지 생성 버튼
+// 3. 챌린지 생성 버튼
 function createChallengeButton(){
 	var frm = document.createChallengeForm;
 	
@@ -127,40 +136,74 @@ function createChallengeButton(){
 	$('#challenge-create').modal('hide');
 }
 
-// 챌린지 목록 띄우기
-function getChallengeList() {
+// 4. 챌린지 목록 띄우기
+function getChallengeList(p) {
 	$.ajax({
 		url : "../ajax/challengeList",
 		dataType : "json",
-		success : function(datas) {
+		data: {page:p, searchCondition:$('#searchCondition').val(), keyword:$('#keyword').val()},
+		success : function(dataes) {
+			var datas = dataes.list;
+			// 테이블 내용 한번 비우기 (이렇게 하지 않으면 내용이 누적돼서 나옴)
+			$("#challenge-table").empty();
+			$("<tr id='tr' align='center' style='background-color:#FEBABA;'>")
+						  .append("<th width='5%'> NO </th>")
+						  .append("<th width='10%'> 구분 </th>")
+						  .append("<th width='45%'> 챌린지 이름 </th>")
+						  .append("<th width='12%'> 시작 날짜 </th>")
+						  .append("<th width='12%'> 마감 날짜 </th>")
+						  .append("<th width='10%'> 리워드 </th>")
+						  .appendTo($("#challenge-table"));
+			// 챌린지 목록 테이블에 붙이기
 			for(i=0; i<datas.length; i++) {
 				var status;
-				if(datas[i].CL_STATUS == 'basic')
+				if(datas[i].cl_status == 'basic')
 					status = '기본';
 				else
 					status = '스페셜';
-				$("<tr data-toggle='modal' data-target='#challenge-going' id='newTr' onclick='getKey("+datas[i].CL_NUM+")'>")
-						  .append("<td align='center'>"+ datas[i].CL_NUM +"</td>")
+				$("<tr data-toggle='modal' data-target='#challenge-going' id='newTr' onclick='getKey("+datas[i].cl_num+")'>")
+						  .append("<td align='center'>"+ datas[i].cl_num +"</td>")
 						  .append("<td align='center'>"+ status +"</td>")
-						  .append("<td>"+ datas[i].CL_NAME +"</td>")
-						  .append("<td align='center'>"+ datas[i].CL_START_DTTM +"</td>")
-						  .append("<td align='center'>"+ datas[i].CL_END_DTTM +"</td>")
-						  .append("<td align='center'>"+ datas[i].CL_SCORE +"점 </td>")
+						  .append("<td>"+ datas[i].cl_name +"</td>")
+						  .append("<td align='center'>"+ datas[i].cl_start_dttm +"</td>")
+						  .append("<td align='center'>"+ datas[i].cl_end_dttm +"</td>")
+						  .append("<td align='center'>"+ datas[i].cl_score +"점 </td>")
 						  .appendTo($("#challenge-table"));
+			}
+			
+			// 시작하는 페이지가 1보다 크면 이전페이지로 갈 때 -1, 아니면 그냥 1페이지로 남아있음
+			var num = dataes.paging.startPage
+			if(dataes.paging.startPage > 1){
+				num = num - 1;
+			} else{
+				num = 1;
+			}
+			$('.page-link').first().attr('href', 'javascript:getChallengeList('+ num +')') // 이전 페이지
+			$('.page-link').last().attr('href', 'javascript:getChallengeList('+ (dataes.paging.startPage + 1) +')') // 다음 페이지
+			
+			// 페이지 번호 비우기 (누적 방지)
+			$('.page-link:not(:first(), :last())').remove();
+			
+			// 페이지 번호 매기기
+			var page = dataes.paging;
+			for(i=1; i<=page.endPage; i++){
+				$("<li class='page-item'><a class='page-link' href='#' onclick='getChallengeList("+ i +")'>"+i+"</a></li>").insertBefore($('.page-item').last());
 			}
 		}
 	});
 }
 
+// 5. 챌린지 진행 현황 (챌린지 번호 받아와서)
 function getKey(cl_num) {
-	console.log("챌린지 번호:: " + cl_num);
 	var num_data = {"cl_num":cl_num};
 	// 챌린지 진행 현황
 	$.ajax({
 			url: "../ajax/challenge/going",
 			data: num_data,
 			success: function(result) {
-					console.log(result);
+					$("#chGoing").empty();
+					$("#chPeople").empty();
+				
 					var status;
 					if(result.detail.CL_STATUS == 'basic')
 						status = '기본 챌린지';
@@ -182,6 +225,16 @@ function getKey(cl_num) {
 							 .appendTo($("#chGoing"));
 					
 					// 챌린지에 참여 중인 사람들 띄우기
+					// 인덱스를 여기다 달아주는 이유는 모달이 띄워질 때마다 테이블 내용이 비워지기 때문, 그래서 항상 새로 만들어 줘야 함
+					$("<tr id='tr' align='center' style='background-color:#FEBABA;'>")
+							 .append("<th width='20%'> ID </td>")
+							 .append("<th width='19%'> 이름 </td>")
+							 .append("<th width='13%'> 나이 </td>")
+							 .append("<th width='15%'> 성별 </td>")
+							 .append("<th width='15%'> 지역 </td>")
+							 .append("<th width='20%'> 진행 횟수 </td>")
+							 .appendTo($("#chPeople"));
+					
 					for(i=0; i<result.people.length; i++) {
 							$("<tr>").append("<td align='center'>"+ result.people[i].M_ID +"</td>")
 									 .append("<td align='center'>"+ result.people[i].M_NAME +"</td>")

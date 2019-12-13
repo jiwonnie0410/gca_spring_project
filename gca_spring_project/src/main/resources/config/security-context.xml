@@ -44,7 +44,7 @@
 						      password-parameter="paramPassword"/>
 						      
 		<!-- 로그아웃 -->
-		<!-- <security:logout logout-url="/logout" logout-success-url="/top.jsp" /> -->
+		<security:logout logout-url="/logout" logout-success-url="/" />
 		
 		<!-- csrf 보안 사용 안 하기 -->
 		<security:csrf disabled="true" />
@@ -57,7 +57,7 @@
 	<bean id="memberService" class="com.yedam.gca.member.service.CustomUserDetailsService" />
 	<security:authentication-manager>
 		<security:authentication-provider user-service-ref="memberService" >
- 			<!-- <security:password-encoder hash="sha-256" /> --> <!-- 암호화된 비밀번호 체크 -->
+ 			<security:password-encoder hash="bcrypt" /> <!-- 암호화된 비밀번호 체크 -->
 		</security:authentication-provider>
 		
 	</security:authentication-manager>
