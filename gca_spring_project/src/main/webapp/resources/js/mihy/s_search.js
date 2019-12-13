@@ -44,12 +44,18 @@ $(document).ready(function(){
 function scroll(){
 	if(Math.floor($(window).scrollTop()) == $(document).height() - $(window).height()){
 
+		var end_dis = $('.tr').last().find('.dis').val();
+		var end_dttm = $('.tr').last().find('.dttm').val();
+		var end_num = $('.tr').last().attr('class').substring(3);
+		var key = $('#key').val();
+		var keyval = $('#keyval').val();
+		
 		var form = {
-				end_dis: $('.tr').last().find('.dis').val(),
-				end_dttm: $('.tr').last().find('.dttm').val(),
-				end_num: $('.tr').last().attr('class').substring(3),
-				key: $('#key').val(),
-				keyval: $('#keyval').val()
+				end_dis: end_dis,
+				end_dttm: end_dttm,
+				end_num: end_num,
+				key: key,
+				keyval: keyval
 		}
 		console.log(end_dis);
 		console.log(end_dttm);
@@ -115,6 +121,13 @@ function move_room(result, sg_dttm){
 	} else if(sg_dttm != "마감" && result.result_msg == 'yes'){
 		var con = confirm("선택한 반짝에 참여하시겠습니까?");
 		if(con){
+			msg = {
+					cmd : "join",
+					id : result.m_id,
+					msg : "<"+result.m_id+"님이 참가하셨습니다.>",
+					sg_num : result.pk_num
+				}
+				webSocket.send(  JSON.stringify( msg )   );
 			location.href='roomIn?sg_num='+result.pk_num;
 		}
 	}

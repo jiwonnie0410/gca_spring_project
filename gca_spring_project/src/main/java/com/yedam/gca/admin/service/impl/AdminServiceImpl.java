@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import com.yedam.gca.admin.dao.AdminDAO;
 import com.yedam.gca.admin.service.AdminService;
+import com.yedam.gca.admin.vo.ChallengeSearchVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
+import com.yedam.gca.common.Paging;
 import com.yedam.gca.member.vo.MembersVO;
 
 @Service
@@ -23,10 +25,21 @@ public class AdminServiceImpl implements AdminService {
 	AdminDAO dao;
 
 	// 지원 1-7번
-	// 1. 챌린지 목록
+	// 1. 페이징 처리를 한 챌린지 목록
 	@Override
-	public List<ChallengeVO> challengeList() {
-		return dao.challengeList();
+	public List<ChallengeVO> challengeList(ChallengeSearchVO svo, Paging paging) {
+		//출력건수
+		paging.setPageUnit(5);
+		// 페이지번호 파라미터
+		if( paging.getPage() == null) {
+			paging.setPage(1); 
+		}		
+		// 시작/마지막 레코드 번호
+		svo.setStart(paging.getFirst());
+		svo.setEnd(paging.getLast());		
+		// 전체 건수
+		paging.setTotalRecord(dao.challengeCount(svo));
+		return dao.challengeList(svo);
 	}
 
 	// 2. 챌린지 생성

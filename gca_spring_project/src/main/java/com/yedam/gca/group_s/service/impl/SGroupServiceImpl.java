@@ -60,5 +60,9 @@ public class SGroupServiceImpl implements SGroupService {
 	public List<SGroupVO> getSgEndList(SGroupVO vo) {
 		return sgroupDAO.getSgEndList(vo);
 	}
+	@Override
+	public SGroupVO getSgCert(SGroupVO vo) {
+		return sgroupDAO.getSgCert(vo);
+	}
 
 }

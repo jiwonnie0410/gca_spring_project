@@ -122,8 +122,12 @@
 							 <i class="fa fa-lock fa-2x" aria-hidden="true" style="color:black; font-size:100px;"> </i> 
 							 
 							 <a href="changePassword"> 비밀번호 변경 </a>
+							 
 						</div>
 					</form>
+							 <form action="../logout" method="post">
+							  <button>로그아웃</button>
+							</form>
 				</div>
 			</div>
 		</div>

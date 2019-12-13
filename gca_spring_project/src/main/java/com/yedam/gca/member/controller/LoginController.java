@@ -1,6 +1,7 @@
 package com.yedam.gca.member.controller;
 
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -52,7 +53,7 @@ public class LoginController {
 	
 	// 회원가입 하기 (디비에 삽입) -> 회원가입 성공 시에 제일 첫 로그인 페이지로 감
 	@RequestMapping("/insertJoin")
-	public String insertJoin(HttpServletRequest request) {
+	public String insertJoin(HttpServletRequest request, Model model) {
 		MembersVO vo = new MembersVO();
 		vo.setM_id(request.getParameter("mId"));
 		vo.setM_password(request.getParameter("mPw"));
@@ -63,8 +64,18 @@ public class LoginController {
 		vo.setGender_cd(request.getParameter("checkbox1"));
 		vo.setM_email(request.getParameter("mEmail"));
 		vo.setM_xy(request.getParameter("mXy"));
-		memberService.insertMember(vo);
-		return "/notiles/member/login";
+		
+		// 회원가입 후에 성공 및 실패에 따라 각각 다른 페이지로 리턴
+		Map<String, Object> map = memberService.insertMember(vo);
+		boolean flag = (boolean) map.get("flag");
+		if(flag == false) {
+			model.addAttribute("joinMessage", map.get("message"));
+			return "../notiles/member/join";
+		}
+		else {
+			model.addAttribute("joinMessage", map.get("message"));
+			return "/notiles/member/login";
+		}
 	}
 	
 	// 아이디 중복 확인
@@ -136,4 +147,11 @@ public class LoginController {
 	}
 	
 	// 3. 범위슬라이더 변경시 범위 업데이트
+	@RequestMapping(value = "/ajax/updateRange.json"
+			, method = RequestMethod.PUT
+			, consumes="application/json")
+	@ResponseBody
+	public void updateRange(@RequestBody MembersVO vo) {
+		memberService.updateRange(vo);
+	}
 }

@@ -26,6 +26,12 @@
 		<!-- <script type="text/javascript" src="./resources/js/member/daumAddress.js"></script> -->
 		<!-- <script	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
 		
+		<script>
+			// 확인 메시지 띄우기
+			if('${joinMessage}' != ''){
+				alert('${joinMessage}');
+			}
+	</script>
 </head>
 
 <body>

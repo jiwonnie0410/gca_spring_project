@@ -1,11 +1,13 @@
 package com.yedam.gca.member.service;
 
+import java.util.Map;
+
 import com.yedam.gca.member.vo.MembersVO;
 
 public interface MemberService {
 	
 	// 1. 회원가입
-	public int insertMember(MembersVO vo);
+	public Map<String, Object> insertMember(MembersVO vo);
 	
 	// 2. 아이디 중복 확인
 	public int checkId(String id);
@@ -42,8 +44,12 @@ public interface MemberService {
 	
 	// 1. 유저별 알람 정보 가져오기 
 	public MembersVO getAlarmInfo(MembersVO vo);
+	
 	//2. 토글스위치 클릭시 알람 on/off 업데이트	
 	public int updateSwitch(MembersVO vo);
+	
+	// 3. 범위슬라이더 변경시 범위 업데이트
+	public void updateRange(MembersVO vo);
 }
  
 

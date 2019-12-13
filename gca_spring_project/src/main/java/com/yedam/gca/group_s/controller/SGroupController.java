@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.gca.admin.vo.TroubleVO;
+import com.yedam.gca.chatting.controller.SpringSocketHandler;
+import com.yedam.gca.chatting.vo.SocketVO;
 import com.yedam.gca.common.code.service.CodeService;
 import com.yedam.gca.common.code.vo.CodeVO;
 import com.yedam.gca.group_s.service.SGroupService;
@@ -151,9 +153,19 @@ public class SGroupController {
 		avo.setPk_num(sg_num);
 		actService.roomInsert(avo);
 		
-		//새로 참여하는 경우임을 구분하기 위해 보내는 잉여값
-		model.addAttribute("aa", "aa");
-		return "redirect:alreadyIn?sg_num="+avo.getSg_num();
+		
+		//은영 컨트롤러단에서 socket sendMessage
+//		SocketVO socketVO = new SocketVO();
+//		socketVO.setCmd("join");
+//		socketVO.setId(memInfo.getM_id());
+//		socketVO.setMsg("<"+memInfo.getM_id()+"님이 참가하셨습니다>");
+//		socketVO.setCharacter(sgroupService.returnImage(memInfo));
+//		socketVO.setNick(memInfo.getM_nick());
+		
+//		SpringSocketHandler socket = new SpringSocketHandler();
+//		socket.sendMessage(socketVO);
+		
+		return "redirect:alreadyIn?sg_num="+avo.getSg_num() + "&first_in=first_in";//새로 참여하는 경우임을 구분하기 위해 보내는 잉여값
 	}
 
 	
@@ -212,11 +224,14 @@ public class SGroupController {
 	}
 	
 	//참여 인증
-//	@ResponseBody
-//	@RequestMapping(value="sgroup/sgCert" method = RequestMethod.POST)
-//	public String part_cert(SGroupVO vo) { //"success"를 받아와야 함.
-//		
-//	}
+	@ResponseBody
+	@RequestMapping(value="sgroup/sgCert", method = RequestMethod.POST)
+	public SGroupVO part_cert(SGroupVO vo) { //"success"를 받아와야 함.
+		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
+		vo.setM_id(memInfo.getM_id());
+		sgroupService.getSgCert(vo);
+		return vo;
+	}
 	
 	
 }

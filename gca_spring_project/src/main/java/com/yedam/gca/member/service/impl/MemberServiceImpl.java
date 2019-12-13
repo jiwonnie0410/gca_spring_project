@@ -1,5 +1,7 @@
 package com.yedam.gca.member.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 
@@ -13,11 +15,11 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.yedam.gca.member.dao.MemberDAO;
 import com.yedam.gca.member.service.MemberService;
-import com.yedam.gca.member.service.SHA256Util;
 import com.yedam.gca.member.vo.MembersVO;
 
 @Service
@@ -28,14 +30,25 @@ public class MemberServiceImpl implements MemberService {
 
 	// 1. 회원가입
 	@Override
-	public int insertMember(MembersVO vo) {
+	public Map<String, Object> insertMember(MembersVO vo) {
 		// 비밀번호 암호화
-		String salt = SHA256Util.generateSalt();								// 1. 암호화 키 생성
-		String newPassword = SHA256Util.getEncrypt(vo.getM_password(), salt);	// 2. 비밀번호 암호화
-		vo.setM_salt(salt);														// 3. vo에 암호화 키 넣기
-		vo.setM_password(newPassword);											// 4. vo에 암호화된 비밀번호 넣기
+		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
+		String password = scpwd.encode(vo.getM_password());
+		vo.setM_password(password);
 		
-		return dao.insertMember(vo);
+		// 회원 테이블에 insert 후에 성공 및 실패에 따라 메시지와 리턴 페이지 다르게 넘김
+		Map<String, Object> map = new HashMap<String, Object>();
+		int result = dao.insertMember(vo);
+		if(result == 0) {
+			map.put("flag", false);
+			map.put("message", "회원가입에 실패했습니다. 다시 시도해 주세요.");
+			return map;
+		}
+		else {
+			map.put("flag", true);
+			map.put("message", "회원가입이 되신 것을 축하드립니다! 로그인 후 서비스를 이용해 주세요.");
+			return map;
+		}
 	}
 
 	// 2. 아이디 중복 확인
@@ -124,10 +137,9 @@ public class MemberServiceImpl implements MemberService {
 		String tempPw = temp.toString(); // 임시 비밀번호
 		
 		// 비밀번호 암호화
-		String salt = SHA256Util.generateSalt();						// 1. 암호화 키 생성
-		String newPassword = SHA256Util.getEncrypt(tempPw, salt);		// 2. 비밀번호 암호화
-		vo.setM_salt(salt);												// 3. vo에 암호화 키 넣기
-		vo.setM_password(newPassword);									// 4. vo에 암호화된 비밀번호 넣기
+		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
+		String pw = scpwd.encode(tempPw);
+		vo.setM_password(pw);
 		
 		int result = dao.forgotPw(vo); // 입력 받은 정보로 회원 있는지 확인
 		
@@ -180,10 +192,9 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String changePw(MembersVO vo) {
 		// 비밀번호 암호화
-		String salt = SHA256Util.generateSalt();						// 1. 암호화 키 생성
-		String newPassword = SHA256Util.getEncrypt(vo.getM_password(), salt);		// 2. 비밀번호 암호화
-		vo.setM_salt(salt);												// 3. vo에 암호화 키 넣기
-		vo.setM_password(newPassword);									// 4. vo에 암호화된 비밀번호 넣기
+		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
+		String password = scpwd.encode(vo.getM_password());
+		vo.setM_password(password);
 		
 		int result = dao.changePassword(vo);
 		if(result == 0) {
@@ -252,9 +263,15 @@ public class MemberServiceImpl implements MemberService {
     	return dao.getAlarmInfo(vo);
     }
     
+    // 2. 토글스위치 클릭시 알람 on/off 업데이트
     @Override
- // 2. 토글스위치 클릭시 알람 on/off 업데이트
  	public int updateSwitch(MembersVO vo) {
     	return dao.updateSwitch(vo);
+    }
+    
+    // 3. 범위슬라이더 변경시 범위 업데이트
+    @Override
+	public void updateRange(MembersVO vo) {
+    	dao.updateRange(vo);
     }
 }

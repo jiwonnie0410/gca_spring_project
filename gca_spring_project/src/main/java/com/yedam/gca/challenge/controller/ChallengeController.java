@@ -1,11 +1,10 @@
 package com.yedam.gca.challenge.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,11 +21,7 @@ public class ChallengeController {
 	///////////////////////////////수림 ////////////////////////////
 	//챌린지 목록 조회
 	@RequestMapping("challenge/list")
-	public String getChallengeList(Model model, HttpSession session) {
-		ChallengeHistVO vo = new ChallengeHistVO();
-		vo.setM_id("test");
-		session.setAttribute("id", vo.getM_id());
-		
+	public String getChallengeList(Model model) {		
 		model.addAttribute("challengeList", service.getChallengeList());
 		return "/user/challenge/challenge";
 	}
@@ -41,10 +36,13 @@ public class ChallengeController {
 		return "/user/challenge/challengeContents";
 	}
 	
-	@RequestMapping("/ajax/checkChallengeHistory.json")  ///수정필요
+	@RequestMapping("/ajax/checkChallengeHistory.json")  
 	@ResponseBody
 	// 사용자 챌린지 참가여부 확인 
-	public ChallengeHistVO checkChallengeHistory(ChallengeHistVO vo) {
+	public ChallengeHistVO checkChallengeHistory(ChallengeHistVO vo, Authentication auth) {
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();	//로그인한 유저 정보 담음
+		String id = userDetails.getUsername(); 	//로그인한 유저 id 담음
+		vo.setM_id(id);
 		return service.checkChallengeHistory(vo);
 	}
 	
