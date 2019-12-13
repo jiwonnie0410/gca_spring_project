@@ -85,6 +85,7 @@ public class SGroupController {
 	public String search(Model model, SGroupVO vo, CodeVO cvo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
 		vo.setM_xy(memInfo.getM_xy());
+		
 		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
 		model.addAttribute("sgroup", vo);
 		model.addAttribute("list", sgroupService.getSgList(vo));
@@ -100,6 +101,7 @@ public class SGroupController {
 	public String search(SGroupVO vo, CodeVO cvo, Model model) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
 		vo.setM_xy(memInfo.getM_xy());
+		
 		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
 		model.addAttribute("sgroup", vo);
 		model.addAttribute("list", sgroupService.getSgList(vo));
@@ -116,6 +118,7 @@ public class SGroupController {
 	public ActiveHistVO sgValidIn(@PathVariable int sg_num, ActiveHistVO vo, CodeVO cvo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션 정보 갖고 오기
 		vo.setM_id(memInfo.getM_id());
+		
 		vo.setIn_type("sg"); //sg:반짝방, bg:매치방, six:용병방(직접 입력)
 		vo.setPk_num(sg_num);
 		actService.validIn(vo);
@@ -143,16 +146,17 @@ public class SGroupController {
 			Model model, SGroupVO svo, ActiveHistVO avo, CodeVO cvo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션 정보 갖고 오기
 		avo.setM_id(memInfo.getM_id());
+		
 		avo.setIn_type("sg"); //sg:반짝방, bg:매치방, six:용병방(직접 입력)
 		avo.setPk_num(sg_num);
 		actService.roomInsert(avo);
-		svo.setSg_num(sg_num);
-		model.addAttribute("sgroup", sgroupService.getRoomInfo(svo));
-		
-		//참여 인원 정보를 채팅방으로 넘김
-		avo.setSg_num(sg_num);
-		model.addAttribute("memlist", actService.getActMemList(avo));
-		return "/user/group_s/s_wating_room";
+//		svo.setSg_num(sg_num);
+//		model.addAttribute("sgroup", sgroupService.getRoomInfo(svo));
+//		
+//		//참여 인원 정보를 채팅방으로 넘김
+//		avo.setSg_num(sg_num);
+//		model.addAttribute("memlist", actService.getActMemList(avo));
+		return "redirect:alreadyIn?sg_num="+avo.getSg_num();
 	}
 
 	
@@ -173,6 +177,7 @@ public class SGroupController {
 	public String createRoom(@ModelAttribute SGroupVO vo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션 정보 갖고 오기
 		vo.setM_id(memInfo.getM_id());
+		
 		sgroupService.insertSg(vo);
 		return "redirect:alreadyIn?sg_num="+vo.getSg_num();
 	}
@@ -182,6 +187,7 @@ public class SGroupController {
 	public String searchEnd(Model model, SGroupVO vo, CodeVO cvo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
 		vo.setM_xy(memInfo.getM_xy());
+		
 		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
 		model.addAttribute("sgroup", vo);
 		model.addAttribute("list", sgroupService.getSgEndList(vo));
@@ -197,6 +203,7 @@ public class SGroupController {
 	public String searchEnd(SGroupVO vo, CodeVO cvo, Model model) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
 		vo.setM_xy(memInfo.getM_xy());
+		
 		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
 		model.addAttribute("sgroup", vo);
 		model.addAttribute("list", sgroupService.getSgEndList(vo));
@@ -206,5 +213,13 @@ public class SGroupController {
 		model.addAttribute("sports_list", codeService.getCodeList(cvo));
 		return "/notiles/group_s/s_search_temp";
 	}
+	
+	//참여 인증
+//	@ResponseBody
+//	@RequestMapping(value="sgroup/sgCert" method = RequestMethod.POST)
+//	public String part_cert(SGroupVO vo) { //"success"를 받아와야 함.
+//		
+//	}
+	
 	
 }

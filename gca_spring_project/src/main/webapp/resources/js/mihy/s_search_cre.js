@@ -6,11 +6,14 @@ $(document).ready(function(){
 	$('#sg_skill_div .dropdown-menu li').bind('click', skill_dropdown); //숙련도 드롭다운
 	$('#sg_finish_div .dropdown-menu li').bind('click', end_cnt_dropdown); //마감인원 드롭다운
 	$('#sg_location').on('click', sgAddr); //주소 입력
-	$('#btn_cre').on('click', valid); //유효성 검사
 	
-	$('#G03').attr('checked','checked');
+	$('#btn_cre').on('click', valid); //유효성 검사
+	$('#G03').attr('checked','checked'); //옵션 null값 기본 전송
+	
+	$('#btn_cert').on('click', getLocation); //참가인증
 	
 });
+
 
 //운동종목 드롭다운
 function sport_dropdown(){
@@ -43,53 +46,6 @@ function end_cnt_dropdown(){
 	var html = $(this).html();
 	$('#sg_finish').html(html +'<span class="caret pl-2"></span>');
 	$('#sg_finish_val').val($('#sg_finish').text().substr(0,1));
-}
-
-//주소 입력
-function sgAddr() {
-	
-	//카카오맵 API로 변수 만들기
-	var geo = new kakao.maps.services.Geocoder();
-	var mapContainer = document.getElementById('map');
-	var mapOption = {
-		center : new daum.maps.LatLng(37.537187, 127.005476),
-		level : 5
-	};
-	var map = new daum.maps.Map(mapContainer, mapOption);
-	var marker = new daum.maps.Marker({
-		position : new daum.maps.LatLng(37.537187, 127.005476),
-		map : map
-	});
-	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-		var latlng = mouseEvent.latLng;
-		marker.setPosition(latlng);
-		$('#sg_xy').val(latlng.getLat() + ", " + latlng.getLng());
-		geo.coord2Address(latlng.getLng(), latlng.getLat(), callAddr);
-	});
-	var callAddr = function(result, status) {
-		if (status === kakao.maps.services.Status.OK)
-			$('#sg_location').val(result[0].address.address_name);
-	}
-	
-	//다음 주소 API로 주소 받아 주소 입력
-	new daum.Postcode({
-		oncomplete : function(data) {
-			var addr = data.address;
-			document.getElementById("sg_location").value = addr;
-			geo.addressSearch(data.address, function(results, status) {
-				if (status === daum.maps.services.Status.OK) {
-					var result = results[0];
-					var coords = new daum.maps.LatLng(result.y, result.x); //좌표값 받음
-					$('#sg_xy').val(coords.Ha + ", " + coords.Ga);
-					console.log($('#sg_xy').val());
-					mapContainer.style.display = "block";
-					map.relayout();
-					map.setCenter(coords);
-					marker.setPosition(coords);
-				}
-			});
-		}
-	}).open();
 }
 
 //이중 슬라이더
