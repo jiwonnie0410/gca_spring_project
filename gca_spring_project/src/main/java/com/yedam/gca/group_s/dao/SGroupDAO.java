@@ -35,9 +35,13 @@ public class SGroupDAO {
 	public void minusNowCnt(ActiveHistVO vo) {
 		mybatis.update("SGroupDAO.minusNowCnt", vo);
 	}
-	//방 입장 시 웹소켓으로 프로필 코드 반환(입장할때 다른사람들에게 뿌려주기 위해.)
-	public String returnImage(String id) {
-		return mybatis.selectOne("SGroupDAO.returnImage", id);
+	//방 입장 시 웹소켓으로 프로필 이름 반환(입장할때 다른사람들에게 뿌려주기 위해.)
+	public String returnImage(MembersVO vo) {
+		return mybatis.selectOne("MemberDAO.returnImage", vo);
+	}
+	//id로 멤버 한명 조회
+	public MembersVO getOneMem(MembersVO vo) {
+		return mybatis.selectOne("MemberDAO.getOneMem", vo);
 	}
 	
 	

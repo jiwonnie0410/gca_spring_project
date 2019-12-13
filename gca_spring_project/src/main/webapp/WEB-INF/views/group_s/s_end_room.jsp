@@ -41,7 +41,7 @@
 	<div class="swiper-wrapper">
 		<div class="swiper-slide p-2"><i class="fas fa-star-of-david pr-2"></i>전체</div>
 		<c:forEach items="${sports_list }" var="list">
-			<div class="swiper-slide p-2" data-sports="${list.cd_id }">${list.cd_etc}${list.cd_name }</div>
+			<div class="swiper-slide p-2" id="${list.cd_id }" data-sports="${list.cd_id }">${list.cd_etc}${list.cd_name }</div>
 		</c:forEach>
 		
 <!-- 		<div class="swiper-slide p-2" data-sports="S01"><i class="fas fa-basketball-ball pr-2"></i>농구</div>

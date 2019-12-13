@@ -8,6 +8,7 @@ import com.yedam.gca.member.vo.MembersVO;
 
 public interface AdminService {
 
+	// 지원 1-7번
 	// 1. 챌린지 생성
 	public int createChallenge(ChallengeVO vo);
 	
@@ -18,17 +19,16 @@ public interface AdminService {
 	public List<Map<String, Object>> chartBgroup();
 	
 	// 4. 연령대 및 운동(반짝) 성별 통계
-	public List<Map<String, Object>> chartGender(String gender, int startAge, int endAge);
+	public Map<String, List<Map<String, Object>>> chartGender();
 
 	// 5. 지역별 반짝 운동 통계
-	public List<Map<String, Object>> chartCity(int startMonth, int endMonth);
+	public List<Map<String, Object>> chartCity();
 	
 	// 6. 챌린지 목록
 	public List<ChallengeVO> challengeList();
 	
 	// 7. 챌린지 진행 현황
 	public Map<String, Object> challengeGoing(int cl_id);
-	
 	
 	//진영
 	 // 1.회원 정보 상세보기

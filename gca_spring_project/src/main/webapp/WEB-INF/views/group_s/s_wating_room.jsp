@@ -216,9 +216,9 @@
 					
 					deleteProfile();
 					
-					if(sgCnt>1){ //일단 sgCnt가 1이상인 방만 카운트 - 되게 여기다 해놓음.
+					//if(sgCnt>1){ //일단 sgCnt가 1이상인 방만 카운트 - 되게 여기다 해놓음.
 						location.href='cancelJoin?m_id='+usrId+'&sg_num='+sgNum;
-					}
+					//}
 					
 					alert("참가 취소 완료.");
 					
@@ -464,14 +464,12 @@
  function onMessage(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
 	var result = JSON.parse(event.data);
 	if(result.cmd == "join") { //방에 들어온경우(웹소켓 연결된 경우)
-		//var img = document.getElementById('s_character').value;
-		//var nick = document.getElementById('s_nick').value;
-		//var id = document.getElementById('s_id').value;
-		var img = "${image}"; //이거갖고 뿌려줄려면 result로 받은 값으로 해야함,........
-		var nick = "${nick}";
-		var id = "${id}";
 		
-		var param = {"img":img};
+		var img = result.character;
+		var nick = result.nick;
+		var id = result.id;
+		
+		//var param = {"img":img};
 		
 		console.log("id : "+id);
 		console.log("nick : "+nick);
@@ -497,10 +495,10 @@
 		
 		//프로필 붙여주기~~
 		$span = $("<span data-toggle='modal' data-target='#profile' style='font-size:13px; padding:10px; display:inline-block;'>");
-		$span.attr("id","${id}");
+		$span.attr("id",id);
 		$img = $("<img style='padding-bottom:5px;' width='65px' height='65px'>");
 		$img.attr({"src": "${pageContext.request.contextPath }/resources/images/Characters/"+img+".gif"});
-		$text = "${nick}";
+		$text = nick;
 		
 		$span.append($img);
 		$span.append('<br />');
@@ -510,13 +508,12 @@
 		$('#profileList').append($span);
 	 	
 	}
-	else if( result.cmd = "msg") { //메세지 전송하는 경우
-		textarea.value += result.msg + "\n";
+	else if( result.cmd == "msg") { //메세지 전송하는 경우
+		textarea.value += result.id + " : " + result.msg + "\n";
 	}
-	else if( result.cmd = "cancelJoin") { //참가취소 누르고 웹소켓 거쳐왔을때.
+	else if( result.cmd == "cancelJoin") { //참가취소 누르고 웹소켓 거쳐왔을때.
 		var person = result.id;
-		var result = JSON.parse(event.data);
-		console.log("person:"+person);
+		console.log("person:"+result.id);
 		//프로필 삭제
 		$('#'+person).remove();
 		textarea.value += result.msg + "\n"; //채팅방에 나갔다고 표시.

@@ -43,18 +43,13 @@ $(document).ready(function(){
 //마지막 페이지에서 다음 정보 로딩
 function scroll(){
 	if(Math.floor($(window).scrollTop()) == $(document).height() - $(window).height()){
-		
-		var end_dis = $('.tr').last().find('.dis').val();
-		var end_dttm =  $('.tr').last().find('.dttm').val();
-		var end_num = $('.tr').last().attr('class').substring(3);
-		var key = $('#key').val();
-		var keyval = $('#keyval').val();
+
 		var form = {
-				end_dis: end_dis,
-				end_dttm: end_dttm,
-				end_num: end_num,
-				key: key,
-				keyval: keyval
+				end_dis: $('.tr').last().find('.dis').val(),
+				end_dttm: $('.tr').last().find('.dttm').val(),
+				end_num: $('.tr').last().attr('class').substring(3),
+				key: $('#key').val(),
+				keyval: $('#keyval').val()
 		}
 		console.log(end_dis);
 		console.log(end_dttm);
