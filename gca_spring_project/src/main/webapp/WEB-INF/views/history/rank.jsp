@@ -80,7 +80,7 @@
 				    <tr>
 				      <th style="text-align: center">${list.rank }</th>
 				      <td style="width: 40px"><img src="${pageContext.request.contextPath }/resources/images/icon/profile1.png"></td>
-				      <td>${list.m_id}</td>
+				      <td>${list.m_nick}</td>
 				      <td><img src="${pageContext.request.contextPath }/resources/images/icon/heart.png">${list.sch_score }</td>
 				    </tr>
 				</c:forEach>

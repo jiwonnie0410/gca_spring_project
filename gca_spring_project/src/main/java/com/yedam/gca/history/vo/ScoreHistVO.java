@@ -10,5 +10,9 @@ public class ScoreHistVO {
 	private Date sch_dttm;					// 득점 날짜
 	private String sch_part;				// 득점 구분 (반짝/챌린지)
 	private int sch_num;			// *PK* // 점수 이력 번호
-	private String rank;						// 랭킹순위  !DB에 없음    + 수림 추가
+	
+	
+	// 수림추가
+	private String rank;						// 랭킹순위  !DB에 없음    
+	private String m_nick;						// 랭킹순위  !DB에 없음    
 }
