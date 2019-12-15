@@ -7,16 +7,16 @@
 	<tr class="tr ${sg.sg_num}">
 		<td class="td1">
 			<p class="content p1">
-				<c:forEach items="${sports_list }" var="list">
-				<c:choose>
-				<c:when test="${sg.sports1_cd == list.cd_id}">
-					<c:if test="${list.cd_etc != null}">${list.cd_etc}</c:if>
-					<c:if test="${list.cd_etc == null}">
-						<img src="../resources/images/mihy/badminton-black.png" width="32px">
-					</c:if>
-				</c:when>
-				</c:choose>
-				</c:forEach>
+			<c:choose>
+				<c:when test="${sg.sports1_cd == 'S01'}"><i class="fas fa-basketball-ball pr-2"></i></c:when>
+				<c:when test="${sg.sports1_cd == 'S02'}"><i class="fas fa-running pr-2"></i></c:when>
+				<c:when test="${sg.sports1_cd == 'S03'}"><i class="fas fa-hiking pr-2"></i></c:when>
+				<c:when test="${sg.sports1_cd == 'S04'}"><img src="../resources/images/mihy/badminton-black.png" width="32px"></c:when>
+				<c:when test="${sg.sports1_cd == 'S05'}"><i class="fas fa-bowling-ball pr-2"></i></c:when>
+				<c:when test="${sg.sports1_cd == 'S06'}"><i class="fas fa-swimmer pr-2"></i></c:when>
+				<c:when test="${sg.sports1_cd == 'S07'}"><i class="fas fa-bicycle pr-2"></i></c:when>
+				<c:otherwise><i class="fas fa-feather-alt pr-2"></i></c:otherwise>
+			</c:choose>
 			</p>
 			<p class="content p2"><span class="badge badge-dark">${sg.skill_cd }▲</span></p>
 		</td>

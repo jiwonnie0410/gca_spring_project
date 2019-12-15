@@ -8,7 +8,10 @@ $(document).ready(function(){
 		spaceBetween: 30,
 		grabCursor: true
 	});
+	$('.swiper-wrapper').on('click','.swiper-slide', condition);
+	badminton();
 	
+	//이 조건을 제외하면 s_end_room.js와 똑같음.
 	$('.create_room').on('click', function(){
 		location.href='createRoomForm';
 	});
@@ -16,6 +19,7 @@ $(document).ready(function(){
 	p8();
 	setInterval(p8,1000);
 	
+	//방 참여
 	$('.table').on('click', '.tr', function(){
 		var sg_num = $(this).attr("class").substring(3);
 		var sg_dttm = $(this).find('p.p8').text();
@@ -30,15 +34,27 @@ $(document).ready(function(){
 			} 
 		});
 	});
-	
-	$('.swiper-wrapper').on('click','.swiper-slide', function(){
-		$('#key').val("sports");
-		$('#keyval').val($(this).data("sports"));
-		console.log($('#keyval').val())
-		searchSport.submit();
-	});
+
 	
 });
+
+//배드민턴 이미지 삽입
+function badminton(){
+	$('#S04').prepend( $('<img>').attr({ class:'pr-3', src:'../resources/images/mihy/badminton-pink.png', style:'width:33px'}) );
+	$('#S04').hover(function(){
+		$(this).children().eq(0).attr({src:'../resources/images/mihy/badminton-white.png'}); 
+	}, function(){
+		$(this).children().eq(0).attr({src:'../resources/images/mihy/badminton-pink.png'}); 
+	});
+}
+
+//검색 조건(운동 종목별)
+function condition(){
+	$('#key').val("sports");
+	$('#keyval').val($(this).data("sports"));
+//	console.log($('#keyval').val())
+	searchSport.submit();
+}
 
 //마지막 페이지에서 다음 정보 로딩
 function scroll(){
@@ -56,6 +72,7 @@ function scroll(){
 				end_num: end_num,
 				key: key,
 				keyval: keyval
+				
 		}
 		console.log(end_dis);
 		console.log(end_dttm);
@@ -63,7 +80,7 @@ function scroll(){
 		console.log(key);
 		console.log(keyval);
 		$.ajax({
-			url: "getSgListPlus/",
+			url: "getSgList/",
 			type: "POST",
 			dataType:"html",
 			data : form,
@@ -108,6 +125,7 @@ function p8(){
 	}
 }
 
+//방 참여
 function move_room(result, sg_dttm){
 
 	if(result.result_msg == 'already'){ //마감이든 아니든 already면 참여

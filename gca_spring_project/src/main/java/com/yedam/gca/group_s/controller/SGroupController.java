@@ -83,7 +83,7 @@ public class SGroupController {
 //*****************************************미현************************************
 	
 	//전체 반짝 리스트 조회
-	@RequestMapping("/sgroup/getSgList")
+	@RequestMapping(value="/sgroup/getSgList")
 	public String search(Model model, SGroupVO vo, CodeVO cvo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
 		vo.setM_xy(memInfo.getM_xy());
@@ -95,28 +95,38 @@ public class SGroupController {
 		//sports1과 관련된 code정보 모두 보내기
 		cvo.setCd_group("SPORTS1_CD");
 		model.addAttribute("sports_list", codeService.getCodeList(cvo));
-		return "/user/group_s/s_search";
+		
+		if(vo.getEnd_dis() == null) {
+			return "/user/group_s/s_search";			
+		} else {
+			return "/notiles/group_s/s_search_temp";
+		}
 	}
 	
-	//반짝 리스트 추가 조회
-	@RequestMapping(value="/sgroup/getSgListPlus", method = RequestMethod.POST)
-	public String search(SGroupVO vo, CodeVO cvo, Model model) {
+	//마감 반짝 리스트 조회
+	@RequestMapping(value="/sgroup/getSgListEnd")
+	public String searchEnd(SGroupVO vo, CodeVO cvo, Model model) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
 		vo.setM_xy(memInfo.getM_xy());
 		
 		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
 		model.addAttribute("sgroup", vo);
-		model.addAttribute("list", sgroupService.getSgList(vo));
+		model.addAttribute("list", sgroupService.getSgEndList(vo));
 		
 		//sports1과 관련된 code정보 모두 보내기
 		cvo.setCd_group("SPORTS1_CD");
 		model.addAttribute("sports_list", codeService.getCodeList(cvo));
-		return "/notiles/group_s/s_search_temp";
+		
+		if(vo.getEnd_dis() == null) {
+			return "/user/group_s/s_end_room";
+		} else {
+			return "/notiles/group_s/s_end_temp";
+		}
 	}
 	
 	//반짝 방 참여 전에  참여 여부 확인 + 마감 인원 파악
 	@ResponseBody
-	@RequestMapping(value="sgroup/sgValidIn/{sg_num}", method = RequestMethod.GET)
+	@RequestMapping(value="/sgroup/sgValidIn/{sg_num}", method = RequestMethod.GET)
 	public ActiveHistVO sgValidIn(@PathVariable int sg_num, ActiveHistVO vo, CodeVO cvo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션 정보 갖고 오기
 		vo.setM_id(memInfo.getM_id());
@@ -127,7 +137,7 @@ public class SGroupController {
 		return vo;
 	}
 	
-	//선택한 방에 참여 - 이미 참여되어 있는 방에 참여
+	//선택한 방에 참여1) - 이미 참여되어 있는 방에 참여
 	@RequestMapping("/sgroup/alreadyIn")
 	public String alreadyIn(
 			@RequestParam(value="sg_num", defaultValue="", required=true) int sg_num,
@@ -141,7 +151,7 @@ public class SGroupController {
 		return "/user/group_s/s_wating_room";
 	}
 	
-	//선택한 방에 참여 - 참여되어 있지 않은 방에 참여
+	//선택한 방에 참여2)- 참여되어 있지 않은 방에 참여
 	@RequestMapping("/sgroup/roomIn")
 	public String roomIn(
 			@RequestParam(value="sg_num", defaultValue="", required=true) int sg_num,
@@ -165,7 +175,9 @@ public class SGroupController {
 //		SpringSocketHandler socket = new SpringSocketHandler();
 //		socket.sendMessage(socketVO);
 		
-		return "redirect:alreadyIn?sg_num="+avo.getSg_num() + "&first_in=first_in";//새로 참여하는 경우임을 구분하기 위해 보내는 잉여값
+		return "redirect:alreadyIn?sg_num="+avo.getSg_num()
+								+ "&first_in=first_in"; //새로 참여하는 경우임을 구분하기 위해 보내는 잉여값. 
+									//alreadyIn에서 다른 처리작업을 할 필요 없이 값이 그대로 넘어감
 	}
 
 	
@@ -178,11 +190,11 @@ public class SGroupController {
 		model.addAttribute("skill_list", codeService.getCodeList(vo));
 		vo.setCd_group("GENDER_CD");
 		model.addAttribute("gender_list", codeService.getCodeList(vo));
-		return "/user/group_s/s_search_cre";
+		return "/user/group_s/s_room_cre";
 	}
 	
 	//방 생성
-	@RequestMapping(value="sgroup/creRoom", method=RequestMethod.POST)
+	@RequestMapping(value="/sgroup/creRoom", method=RequestMethod.POST)
 	public String createRoom(@ModelAttribute SGroupVO vo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션 정보 갖고 오기
 		vo.setM_id(memInfo.getM_id());
@@ -190,42 +202,11 @@ public class SGroupController {
 		sgroupService.insertSg(vo);
 		return "redirect:alreadyIn?sg_num="+vo.getSg_num();
 	}
-	
-	//마감 방 리스트 조회
-	@RequestMapping("/sgroup/getSgEndList")
-	public String searchEnd(Model model, SGroupVO vo, CodeVO cvo) {
-		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
-		vo.setM_xy(memInfo.getM_xy());
-		
-		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
-		model.addAttribute("sgroup", vo);
-		model.addAttribute("list", sgroupService.getSgEndList(vo));
-		
-		//sports1과 관련된 code정보 모두 보내기
-		cvo.setCd_group("SPORTS1_CD");
-		model.addAttribute("sports_list", codeService.getCodeList(cvo));
-		return "/user/group_s/s_end_room";
-	}
-	
-	//마감 방 리스트 추가 조회
-	@RequestMapping(value="/sgroup/getSgListEndPlus", method = RequestMethod.POST)
-	public String searchEnd(SGroupVO vo, CodeVO cvo, Model model) {
-		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
-		vo.setM_xy(memInfo.getM_xy());
-		
-		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
-		model.addAttribute("sgroup", vo);
-		model.addAttribute("list", sgroupService.getSgEndList(vo));
-		
-		//sports1과 관련된 code정보 모두 보내기
-		cvo.setCd_group("SPORTS1_CD");
-		model.addAttribute("sports_list", codeService.getCodeList(cvo));
-		return "/notiles/group_s/s_search_temp";
-	}
+
 	
 	//참여 인증
 	@ResponseBody
-	@RequestMapping(value="sgroup/sgCert", method = RequestMethod.POST)
+	@RequestMapping(value="/sgroup/sgCert", method = RequestMethod.POST)
 	public SGroupVO part_cert(SGroupVO vo) { //"success"를 받아와야 함.
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
 		vo.setM_id(memInfo.getM_id());
@@ -233,5 +214,33 @@ public class SGroupController {
 		return vo;
 	}
 	
+	//전체 반짝+마감 반짝 리스트 조회(미사용중)
+	@RequestMapping(value="/sgroup/getSgList/{whatroom}")
+		//모든 getSgList 호출 주소 변경 필요. default는 전체 반짝, end는 마감 반짝
+		//s_search, s_end_room jsp, js getSg로 검색하여 getSgList/default(end) 로 변경
+		//getSgList를 변경하지 않고 전체메서드와 마감메서드를 구분할 다른 방법은 없을까..
+	public String search(@PathVariable String whatroom, Model model, SGroupVO vo, CodeVO cvo) {
+		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
+		vo.setM_xy(memInfo.getM_xy());
+		
+		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
+		model.addAttribute("sgroup", vo);
+		if(whatroom == "default") 	model.addAttribute("list", sgroupService.getSgList(vo));
+		else if(whatroom == "end") 	model.addAttribute("list", sgroupService.getSgEndList(vo));
+		
+		//sports1과 관련된 code정보 모두 보내기
+		cvo.setCd_group("SPORTS1_CD");
+		model.addAttribute("sports_list", codeService.getCodeList(cvo));
+		
+		String viewsrc = null;
+		if(whatroom == "default") {
+			if(vo.getEnd_dis() == null) viewsrc = "/user/group_s/s_search";
+			else viewsrc = "/notiles/group_s/s_search_temp";
+		} else if(whatroom == "end") {
+			if(vo.getEnd_dis() == null) viewsrc = "/user/group_s/s_end_room";
+			else viewsrc = "/notiles/group_s/s_end_temp";
+		}
+		return viewsrc;
+	}
 	
 }

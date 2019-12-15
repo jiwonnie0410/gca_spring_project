@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="SixmanDAO">
+
+<!-- 은영 -->
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+<!-- ******************* 미현 ********************* -->
+
+<!-- 방정보 한건 조회 -->
+	<select id="getRoomInfo" parameterType="sixman" resultType="sixman">
+		SELECT		SIX_NUM,
+					SIX_NAME,
+					SIX_START_DTTM,
+					SIX_END_DTTM,
+					SIX_NOW_CNT,
+					SIX_END_CNT,
+					SIX_LOCATION,
+					SIX_XY,
+					get_code_name(SPORTS2_CD) SPORTS2_CD,
+					get_code_name(SKILL_CD) SKILL_CD,
+					AGE_RANGE,
+					get_code_name(GENDER_CD) GENDER_CD,
+					get_code_name(STATUS_CD) STATUS_CD
+		FROM 		SIXMAN
+		WHERE		SIX_NUM = #{six_num}
+	</select>
+	
+<!-- SIXMAN 전체 조회 -->
+	<select id="getSixList" resultType="sixman">
+		SELECT 
+				SIX_NUM,
+				SIX_NAME,
+				SIX_START_DTTM,
+				SIX_END_DTTM,
+				SIX_NOW_CNT,
+				SIX_END_CNT,
+				SIX_LOCATION,
+				SIX_XY,
+				SPORTS2_CD,
+				get_code_name(SKILL_CD) SKILL_CD,
+				AGE_RANGE,
+				get_code_name(GENDER_CD) GENDER_CD,
+				get_code_name(STATUS_CD) STATUS_CD
+				DIS
+		FROM
+			 	(
+			 	SELECT ROWNUM R, A.* 
+				FROM 	(
+						SELECT B.*, CALC_DISTANCE(
+             							SUBSTR(SIX_XY, 0, INSTR(SIX_XY, ',', 1, 1)-1),
+             							SUBSTR(SIX_XY, INSTR(SIX_XY, ',', 1, 1)+2, LENGTH(SIX_XY)),
+             							SUBSTR(#{m_xy}, 0, INSTR(#{m_xy}, ',', 1, 1)-1),
+             							SUBSTR(#{m_xy}, INSTR(#{m_xy}, ',', 1, 1)+2, LENGTH(#{m_xy}))
+             						 ) DIS
+             			FROM SIXMAN B
+             			WHERE SIX_END_DTTM <![CDATA[ > ]]> SYSDATE
+			            <if test="keyval != null and keyval !=''">
+							<if test="key == 'sports'">
+								and SPORTS2_CD like '%'||#{keyval}||'%'
+							</if>
+					 	</if>
+             			ORDER BY DIS, SIX_END_DTTM, SIX_NUM
+             			) A
+					<where>
+					 	<if test="end_dis != null">
+					 		AND LPAD(round(DIS, 3), 8, '0') || to_char(SIX_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(SIX_NUM, 6, '0')
+					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3), 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
+					 	</if>
+					 </where>
+    			)
+		WHERE R <![CDATA[ <= ]]> #{scroll_rec}
+
+	</select>
+	
+
+<!-- SIXMAN 방 생성 + 활동 이력 추가 -->
+	<select id="insertSix" statementType="CALLABLE" parameterType="sixman">
+		{ CALL six_room_create(
+			#{six_name}
+			,#{six_end_dttm}
+			,#{six_end_cnt}
+			,#{six_location}
+			,#{six_xy}
+			,#{sports2_cd}
+			,#{skill_cd}
+			,#{age_range}
+			,#{gender_cd}
+			,#{m_id}
+			,#{six_num, mode=OUT, jdbcType=INTEGER}
+		)}
+	</select>
+	
+<!-- SIXMAN 마감 방 조회 -->
+	<select id="getSixEndList" resultType="sixman">
+		SELECT 
+				SIX_NUM,
+				SIX_NAME,
+				SIX_START_DTTM,
+				SIX_END_DTTM,
+				SIX_NOW_CNT,
+				SIX_END_CNT,
+				SIX_LOCATION,
+				SIX_XY,
+				SPORTS2_CD,
+				get_code_name(SKILL_CD) SKILL_CD,
+				AGE_RANGE,
+				get_code_name(GENDER_CD) GENDER_CD,
+				get_code_name(STATUS_CD) STATUS_CD
+				DIS
+		FROM
+			 	(
+			 	SELECT ROWNUM R, A.* 
+				FROM 	(
+						SELECT B.*, CALC_DISTANCE(
+             							SUBSTR(SIX_XY, 0, INSTR(SIX_XY, ',', 1, 1)-1),
+             							SUBSTR(SIX_XY, INSTR(SIX_XY, ',', 1, 1)+2, SIXNGTH(SIX_XY)),
+             							SUBSTR(#{m_xy}, 0, INSTR(#{m_xy}, ',', 1, 1)-1),
+             							SUBSTR(#{m_xy}, INSTR(#{m_xy}, ',', 1, 1)+2, LENGTH(#{m_xy}))
+             						 ) DIS
+             			FROM SIXMAN B
+						WHERE SIX_END_DTTM <![CDATA[ <= ]]> SYSDATE
+			            <if test="keyval != null and keyval !=''">
+							<if test="key == 'sports'">
+								and SPORTS2_CD like '%'||#{keyval}||'%'
+							</if>
+					 	</if>
+             			ORDER BY DIS, SIX_END_DTTM, SIX_NUM
+             			) A
+					<where>
+					 	<if test="end_dis != null and end_dis != 0">
+					 		AND LPAD(round(DIS, 3), 8, '0') || to_char(SIX_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(SIX_NUM, 6, '0')
+					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3), 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
+					 	</if>
+					 </where>
+    			)
+		WHERE R <![CDATA[ <= ]]> #{scroll_rec} 
+	</select>
+
+
+</mapper>
+
+<!-- ******************** 안 쓰는 맵퍼 갈무리 *********************** -->
+

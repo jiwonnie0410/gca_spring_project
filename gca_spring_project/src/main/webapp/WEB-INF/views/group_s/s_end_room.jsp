@@ -36,26 +36,13 @@
 <div align="center" class="mt-2 mb-2"><h4>마감된 반짝방</h4></div>
 
 <!-- <nav class="sticky-top"> -->
-<form action="getSgEndList" name="searchSport" id="searchSport" method="post">
+<form action="getSgListEnd" name="searchSport" id="searchSport" method="post">
 <div class="swiper-container sticky-top">
 	<div class="swiper-wrapper">
 		<div class="swiper-slide p-2"><i class="fas fa-star-of-david pr-2"></i>전체</div>
 		<c:forEach items="${sports_list }" var="list">
 			<div class="swiper-slide p-2" id="${list.cd_id }" data-sports="${list.cd_id }">${list.cd_etc}${list.cd_name }</div>
 		</c:forEach>
-		
-<!-- 		<div class="swiper-slide p-2" data-sports="S01"><i class="fas fa-basketball-ball pr-2"></i>농구</div>
-		<div class="swiper-slide p-2" data-sports="S02"><i class="fas fa-running pr-2"></i>달리기 &amp; 산책</div>
-		<div class="swiper-slide p-2" data-sports="S03"><i class="fas fa-hiking pr-2"></i>등산</div>
-		<div class="swiper-slide p-2" id="btn_badminton" data-sports="S04">
-			<img class="pr-3" id="img_badminton" src="../resources/images/mihy/badminton-pink.png" width="33px">
-			<img class="pr-3" id="img_badminton" src="../resources/images/mihy/badminton-white.png" width="33px">
-			배드민턴</div>
-			
-		<div class="swiper-slide p-2" data-sports="S05"><i class="fas fa-bowling-ball pr-2"></i>볼링</div>
-		<div class="swiper-slide p-2" data-sports="S06"><i class="fas fa-swimmer pr-2"></i>수영</div>
-		<div class="swiper-slide p-2" data-sports="S07"><i class="fas fa-bicycle pr-2"></i>자전거</div>
-		<div class="swiper-slide p-2" data-sports="S08"><i class="fas fa-feather-alt pr-2"></i>기타</div> -->
 	</div>
 </div>
 <input type="hidden" name="key" id="key" value="${sgroup.key}">
@@ -63,42 +50,42 @@
 </form>
 </nav>
 
-<table class="table table-striped" id="tb1" style="margin-top:130px">
+<table class="table table-striped" id="tb1" style="margin-top:95px">
 	<c:forEach items="${ list }" var="sg">
 	<tr class="tr ${sg.sg_num}">
 		<td class="td1">
 			<p class="content p1">
-			<c:choose>
-				<c:when test="${sg.sports1_cd == 'S01'}"><i class="fas fa-basketball-ball pr-2"></i></c:when>
-				<c:when test="${sg.sports1_cd == 'S02'}"><i class="fas fa-running pr-2"></i></c:when>
-				<c:when test="${sg.sports1_cd == 'S03'}"><i class="fas fa-hiking pr-2"></i></c:when>
-				<c:when test="${sg.sports1_cd == 'S04'}"><img src="../resources/images/mihy/badminton-black.png" width="32px"></c:when>
-				<c:when test="${sg.sports1_cd == 'S05'}"><i class="fas fa-bowling-ball pr-2"></i></c:when>
-				<c:when test="${sg.sports1_cd == 'S06'}"><i class="fas fa-swimmer pr-2"></i></c:when>
-				<c:when test="${sg.sports1_cd == 'S07'}"><i class="fas fa-bicycle pr-2"></i></c:when>
-				<c:otherwise><i class="fas fa-feather-alt pr-2"></i></c:otherwise>
-			</c:choose>
+				<c:forEach items="${sports_list }" var="list">
+				<c:choose>
+				<c:when test="${sg.sports1_cd == list.cd_id}">
+					<c:if test="${list.cd_etc != null}">${list.cd_etc}</c:if>
+					<c:if test="${list.cd_etc == null}">
+						<img src="../resources/images/mihy/badminton-black.png" width="32px">
+					</c:if>
+				</c:when>
+				</c:choose>
+				</c:forEach>
 			</p>
 			<p class="content p2"><span class="badge badge-dark">${sg.skill_cd }▲</span></p>
 		</td>
 		
 		<td class="td2">
-			<p class="content p5">
-				<span class="badge badge-warning mr-1 ml-2">
-					<font color="red" class="sg_now_cnt">${sg.sg_now_cnt }</font>
-					&nbsp;/&nbsp;<font color="gray" class="sg_end_cnt">${sg.sg_end_cnt }명</font>
+			<p class="content p5 end">
+				<span class="badge badge-secondary mr-1 ml-2">
+					<font color="#D8D8D8" class="sg_now_cnt">${sg.sg_now_cnt }</font>
+					&nbsp;/&nbsp;<font color="#D8D8D8" class="sg_end_cnt">${sg.sg_end_cnt }명</font>
 				</span>
-				<span class="badge badge-info mr-2">${sg.gender_cd }</span>${sg.age_range }
+				<span class="badge badge-secondary mr-2" style="color:#D8D8D8;">${sg.gender_cd }</span>${sg.age_range }
 			</p>
-			<p class="content p4">${sg.sg_name }</p>
+			<p class="content p4 end">${sg.sg_name }</p>
 			<p class="content p3">${sg.sg_location }</p>
 			<input type="hidden" class="dis" value="${sg.dis }">
 		</td>
 		
 		<td class="td3" align="center">
 			<input type="hidden" class="dttm" value="${sg.sg_end_dttm }">
-			<p class="content p6"><fmt:formatDate value="${sg.sg_end_dttm }" pattern="yy.MM.dd(E)" /></p>
-			<p class="content p7"><fmt:formatDate value="${sg.sg_end_dttm }" pattern="ahh:mm" /></p>
+			<p class="content p6 end"><fmt:formatDate value="${sg.sg_end_dttm }" pattern="yy.MM.dd(E)" /></p>
+			<p class="content p7 end"><fmt:formatDate value="${sg.sg_end_dttm }" pattern="ahh:mm" /></p>
 			<p class="content p8"></p>
 		</td>
 	</tr>

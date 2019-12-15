@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -7,108 +8,89 @@
 <meta charset="UTF-8">
 <title>매치할 동호회를 찾아보세요!</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- private : icon 1 & slide 2 -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+	<link rel="stylesheet" href="../resources/css/mihy/swiper.min.css">
+	<script src="../resources/js/mihy/swiper.min.js"></script>
 
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<!-- private : Description Action -->
+	<script type="text/javascript" src="../resources/js/mihy/s_search.js"></script>
+	<link rel="stylesheet" href="../resources/css/mihy/s_search.css">
 
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
-<script>
-
-</script>
-
-<style>
-
-.sportsbar_p {
-	border: 1px solid #FEE9E9;
-	color: #FE9191;
-}
-
-.sportsbar_p:hover {
-	border: 1px solid #FE9191;
-}
-
-.card {
-    border: 5px solid #FEE9E9;
-    border-radius: 8px;
-	line-height: 0.5;
-}
-
-.card:hover {
-	border: 5px solid #FE9191;
-}
-
-.card-img-top {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-}
-
-.card-img-overlay {
-	border-radius: 8px;
-	background-color: rgba( 255, 255, 255, 0.8 );
-}
-
-.section_1 {
-	border-left: 5px solid #FEBABA;
-}
-
-.section_2 {
-	border-radius: 8px;
-	border: 1px solid #CBC1C1;
-}
-
-.btn {
-	border: 2px solid #FEBABA;
-	background-color: #FE9191;
-}
-
-</style>
 </head>
+
 
 <body>
 
-<div class="container pt-3">
+<nav class="fixed-top">
+<div align="center" class="mt-2 mb-2"><h4>함께 시합할 동호회 찾기</h4></div>
 
-<div class="d-md-flex justify-content-center flex-md-row mb-3 p-2 sportsbar">
-	<div class="m-2 p-2 rounded sportsbar_p"><i class="fas fa-cloud pr-3"></i>전체</div>
-	<div class="m-2 p-2 rounded sportsbar_p"><i class="fas fa-basketball-ball pr-3"></i>농구</div>
-	<div class="m-2 p-2 rounded sportsbar_p"><i class="fas fa-running pr-3"></i>달리기 &amp; 산책</div>
-	<div class="m-2 p-2 rounded sportsbar_p"><i class="fas fa-hiking pr-3"></i>등산</div>
-	<div class="m-2 p-2 rounded sportsbar_p"><img class="pr-3" src="${pageContext.request.contextPath }/images/badminton-pink.png" width="35px">배드민턴</div>
-	<div class="m-2 p-2 rounded sportsbar_p"><i class="fas fa-bowling-ball pr-3"></i>볼링</div>
-	<div class="m-2 p-2 rounded sportsbar_p"><i class="fas fa-swimmer pr-3"></i>수영</div>
-	<div class="m-2 p-2 rounded sportsbar_p"><i class="fas fa-bicycle pr-3"></i>자전거</div>
+<button class="btn btn-info create_room mt-3 ml-3 mr-3" style="width:90%;">동호회 매치 방 생성하기</button>
+
+<form action="getSgList" name="searchSport" id="searchSport" method="post">
+<div class="swiper-container">
+	<div class="swiper-wrapper">
+		<div class="swiper-slide p-2"><i class="fas fa-star-of-david pr-2"></i>전체</div>
+		<c:forEach items="${sports_list }" var="list">
+			<div class="swiper-slide p-2" id="${list.cd_id }" data-sports="${list.cd_id }">${list.cd_etc}${list.cd_name }</div>
+		</c:forEach>
+	</div>
 </div>
+<input type="hidden" name="key" id="key" value="${sgroup.key}">
+<input type="hidden" name="keyval" id="keyval" value="${sgroup.keyval}">
+</form>
+</nav>
 
-
-<div class="card shadow" style="width:500px;">
-  <img class="card-img-top" src="${pageContext.request.contextPath }/images/bg_1.jpg" alt="Card image">
-  <div class="row card-img-overlay m-4">
-  	<p><span class="badge badge-pill badge-primary">4명</span></p>
-    <h4 class="card-title font-weight-bold pl-2">같이 달리기 하실 분!</h4>
-  	<div class="section_1 col-md-8 pt-2">
-	    <p class="card-text">달리기(중급 이상)</p>
-	    <p class="card-text font-weight-bold">진성 초등학교 운동장</p>
-	    <p class="card-text">여성 20대</p>
-  	
-  	</div>
-  	<div class="section_2 col-md-4 text-center pt-3 shadow-sm">
-	    <p class="card-text font-weight-bold">12.25 (수)</p>
-	    <p class="card-text font-weight-bold">10:30</p>
-	    <a href="#" class="btn btn-info">참여하기</a>
-    </div>
-  </div>
-</div>
-
-</div>
+<table class="table table-striped" id="tb1"  style="margin-top:160px">
+	<c:forEach items="${ list }" var="sg">
+	<tr class="tr ${sg.sg_num}">
+		<td class="td1">
+			<p class="content p1">
+			<c:forEach items="${sports_list }" var="list">
+				<c:choose>
+				<c:when test="${sg.sports1_cd == list.cd_id}">
+					<c:if test="${list.cd_etc != null}">${list.cd_etc}</c:if>
+					<c:if test="${list.cd_etc == null}">
+						<img src="../resources/images/mihy/badminton-black.png" width="32px">
+					</c:if>
+				</c:when>
+				</c:choose>
+				</c:forEach>
+			</p>
+			<p class="content p2"><span class="badge badge-dark">${sg.skill_cd }▲</span></p>
+		</td>
+		
+		<td class="td2">
+			<p class="content p5">
+				<span class="badge badge-warning mr-1 ml-2">
+					<font color="red" class="sg_now_cnt">${sg.sg_now_cnt }</font>
+					&nbsp;/&nbsp;<font color="gray" class="sg_end_cnt">${sg.sg_end_cnt }명</font>
+				</span>
+				<span class="badge badge-info mr-2">${sg.gender_cd }</span>${sg.age_range }
+			</p>
+			<p class="content p4">${sg.sg_name }</p>
+			<p class="content p3">${sg.sg_location }</p>
+			<input type="hidden" class="dis" value="${sg.dis }">
+		</td>
+		
+		<td class="td3" align="center">
+			<input type="hidden" class="dttm" value="${sg.sg_end_dttm }">
+			<p class="content p6"><fmt:formatDate value="${sg.sg_end_dttm }" pattern="yy.MM.dd(E)" /></p>
+			<p class="content p7"><fmt:formatDate value="${sg.sg_end_dttm }" pattern="ahh:mm" /></p>
+			<p class="content p8"></p>
+		</td>
+	</tr>
+	</c:forEach>
+</table>
 </body>
 </html>

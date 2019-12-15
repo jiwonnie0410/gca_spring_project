@@ -41,17 +41,9 @@
 <div class="swiper-container">
 	<div class="swiper-wrapper">
 		<div class="swiper-slide p-2"><i class="fas fa-star-of-david pr-2"></i>전체</div>
-		<div class="swiper-slide p-2" data-sports="S01"><i class="fas fa-basketball-ball pr-2"></i>농구</div>
-		<div class="swiper-slide p-2" data-sports="S02"><i class="fas fa-running pr-2"></i>달리기 &amp; 산책</div>
-		<div class="swiper-slide p-2" data-sports="S03"><i class="fas fa-hiking pr-2"></i>등산</div>
-		<div class="swiper-slide p-2" id="btn_badminton" data-sports="S04">
-			<img class="pr-3" id="img_badminton" src="../resources/images/mihy/badminton-pink.png" width="33px">
-			<img class="pr-3" id="img_badminton" src="../resources/images/mihy/badminton-white.png" width="33px">
-			배드민턴</div>
-		<div class="swiper-slide p-2" data-sports="S05"><i class="fas fa-bowling-ball pr-2"></i>볼링</div>
-		<div class="swiper-slide p-2" data-sports="S06"><i class="fas fa-swimmer pr-2"></i>수영</div>
-		<div class="swiper-slide p-2" data-sports="S07"><i class="fas fa-bicycle pr-2"></i>자전거</div>
-		<div class="swiper-slide p-2" data-sports="S08"><i class="fas fa-feather-alt pr-2"></i>기타</div>
+		<c:forEach items="${sports_list }" var="list">
+			<div class="swiper-slide p-2" id="${list.cd_id }" data-sports="${list.cd_id }">${list.cd_etc}${list.cd_name }</div>
+		</c:forEach>
 	</div>
 </div>
 <input type="hidden" name="key" id="key" value="${sgroup.key}">
@@ -64,16 +56,16 @@
 	<tr class="tr ${sg.sg_num}">
 		<td class="td1">
 			<p class="content p1">
-			<c:choose>
-				<c:when test="${sg.sports1_cd == 'S01'}"><i class="fas fa-basketball-ball pr-2"></i></c:when>
-				<c:when test="${sg.sports1_cd == 'S02'}"><i class="fas fa-running pr-2"></i></c:when>
-				<c:when test="${sg.sports1_cd == 'S03'}"><i class="fas fa-hiking pr-2"></i></c:when>
-				<c:when test="${sg.sports1_cd == 'S04'}"><img src="../resources/images/mihy/badminton-black.png" width="32px"></c:when>
-				<c:when test="${sg.sports1_cd == 'S05'}"><i class="fas fa-bowling-ball pr-2"></i></c:when>
-				<c:when test="${sg.sports1_cd == 'S06'}"><i class="fas fa-swimmer pr-2"></i></c:when>
-				<c:when test="${sg.sports1_cd == 'S07'}"><i class="fas fa-bicycle pr-2"></i></c:when>
-				<c:otherwise><i class="fas fa-feather-alt pr-2"></i></c:otherwise>
-			</c:choose>
+				<c:forEach items="${sports_list }" var="list">
+				<c:choose>
+				<c:when test="${sg.sports1_cd == list.cd_id}">
+					<c:if test="${list.cd_etc != null}">${list.cd_etc}</c:if>
+					<c:if test="${list.cd_etc == null}">
+						<img src="../resources/images/mihy/badminton-black.png" width="32px">
+					</c:if>
+				</c:when>
+				</c:choose>
+				</c:forEach>
 			</p>
 			<p class="content p2"><span class="badge badge-dark">${sg.skill_cd }▲</span></p>
 		</td>
