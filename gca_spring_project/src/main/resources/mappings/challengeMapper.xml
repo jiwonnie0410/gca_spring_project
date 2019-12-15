@@ -84,19 +84,19 @@
 	<!-- 5. 챌린지 참가시 챌린지 히스토리에 정보 저장 -->
 	<insert id="insertChallenge">
 		INSERT INTO CHALLENGE_HIST (
-		CL_NUM,
-		M_ID,
-		CLH_START_DTTM,
-		CLH_CNT,
-		CLH_STATUS_CD
-		)
-		VALUES (
-		#{cl_num},
-		#{m_id},
-		sysdate,
-		0,
-		'C01'
-		)
+					CL_NUM,
+					M_ID,
+					CLH_START_DTTM,
+					CLH_CNT,
+					CLH_STATUS_CD
+					)
+					VALUES (
+					#{cl_num},
+					#{m_id},
+					sysdate,
+					0,
+					'C01'
+					)
 	</insert>
 
 

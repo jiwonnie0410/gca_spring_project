@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yedam.gca.admin.vo.MoneyVO;
 import com.yedam.gca.challenge.service.ChallengeService;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.history.vo.ChallengeHistVO;
@@ -63,9 +64,11 @@ public class ChallengeController {
 	@RequestMapping("challenge/payment")
 	public String challengePayment(@RequestParam(value="num", defaultValue="", required = true) 
 	int num, Model model, ChallengeVO vo) {
+		// 결제페이지 출력용
 		vo.setCl_num(num);
 		model.addAttribute("challenge", service.getChallenge(vo)); 
 		
 	 return "/user/challenge/challengePayment";
 	}
+	
 }

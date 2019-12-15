@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.yedam.gca.admin.dao.AdminDAO;
 import com.yedam.gca.admin.service.AdminService;
 import com.yedam.gca.admin.vo.ChallengeSearchVO;
+import com.yedam.gca.admin.vo.MoneyVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.common.Paging;
 import com.yedam.gca.member.vo.MembersVO;
@@ -88,6 +89,24 @@ public class AdminServiceImpl implements AdminService {
 		map.put("people", dao.challengePeople(cl_id));
 		return map;
 	}
+	
+	
+	
+	
+	
+	// *************** 수림 ****************** //
+	@Override
+	// 1. 스페셜챌린지 결제완료시 머니 테이블에 이력 남김
+	public void insertMoney(MoneyVO vo) {
+		dao.insertMoney(vo);
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 
 	// 진영

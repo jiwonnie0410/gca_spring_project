@@ -28,7 +28,7 @@
 
 <!-- 수림 개인 js/css -->
 <script src="${pageContext.request.contextPath }/resources/js/surim/default.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/surim/addOption.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/surim/challengePayment.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/addOption.css">
@@ -112,19 +112,27 @@ function payGoGo() {
 			//비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
 			
 			// 아작스 시작; ChallengeHist 테이블에 참가이력 추가
-	    	var param = JSON.stringify($("#frm").serializeObject());; //디비에 넣을값; 해당 챌린지정보
-	    	console.log(param + "sdfsd");
-	    	
+	    	var historyParam = JSON.stringify($("#historyForm").serializeObject());; //디비에 넣을값; 해당 챌린지정보
 	    	$.ajax({
 	    		url: "ajax/insertChallenge.json",
 	    		method: "post",
 	    		dataType: "json",
-	    		data: param,
+	    		data: historyParam,
 	    		contentType: "application/json"
 	    	});
+	    	
+	    	var moneyParam = JSON.stringify($("#moneyForm").serializeObject());; //디비에 넣을값; 해당 챌린지정보
+	    	$.ajax({
+	    		url: "ajax/insertMoney.json",
+	    		method: "post",
+	    		dataType: "json",
+	    		data: moneyParam,
+	    		contentType: "application/json"
+	    	});
+	    	
+	    	moneyForm
 			
 			
-			console.log(data);
 			alert("결제완료! 챌린지 목록으로 이동합니다");
 			location.href="list";
 		});
@@ -234,9 +242,15 @@ function payGoGo() {
 				</div>
 			</div>
 		</div>
-		<form id="frm">
+		<form id="historyForm">
 			<input name="cl_num" type="hidden" value="${challenge.cl_num }">
 			<input name="m_id" type="hidden" value=${id }>
+		</form>
+		
+		<form id="moneyForm">
+			<input name="cl_num" type="hidden" value="${challenge.cl_num }">
+			<input name="m_id" type="hidden" value=${id }>
+			<input name="money_deposit" id="money_deposit">
 		</form>
 	<!-- 결제버튼, 금액 주입은 addOption JS 참조 -->
 	<button id="payBtn" class="pay-btn"><p id="paynow"></p></button>

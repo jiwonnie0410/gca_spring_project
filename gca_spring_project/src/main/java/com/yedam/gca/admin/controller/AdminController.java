@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yedam.gca.admin.service.AdminService;
 import com.yedam.gca.admin.vo.ChallengeSearchVO;
+import com.yedam.gca.admin.vo.MoneyVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.common.Paging;
 import com.yedam.gca.member.controller.MembersController;
@@ -115,51 +116,12 @@ public class AdminController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// ******************* 수림 **********************//
+	@RequestMapping(value="/ajax/insertMoney.json", consumes ="application/json" )
+	@ResponseBody
+	public void insertMoney(@RequestBody MoneyVO vo) {
+		adminService.insertMoney(vo);
+	}
 	
 	
 	
