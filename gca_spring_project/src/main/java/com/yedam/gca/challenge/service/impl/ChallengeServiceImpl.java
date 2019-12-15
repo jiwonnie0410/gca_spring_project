@@ -27,15 +27,22 @@ public class ChallengeServiceImpl implements ChallengeService{
 	}
 	// 3. 챌린지 참여 조회
 	@Override
-	public List<ChallengeVO> checkChallengeHistory(ChallengeHistVO vo) {
+	public List<ChallengeVO> checkChallengeHistoryList(ChallengeHistVO vo) {
+		return dao.checkChallengeHistoryList(vo);
+	}
+	
+	// 4. 챌린지 단건조회 (목록에서 클릭시 이동)
+	@Override
+	public ChallengeHistVO checkChallengeHistory(ChallengeHistVO vo) {
 		return dao.checkChallengeHistory(vo);
 	}
-	// 4. 챌린지 참여입력
+	
+	// 5. 챌린지 참여입력
 	@Override
 	public void insertChallenge(ChallengeHistVO vo) {
 		dao.insertChallenge(vo);
 	}
-	//5. 챌린지 결제페이지 조회
+	// 6. 챌린지 결제페이지 조회
 	@Override
 	public ChallengeVO challengePayment(ChallengeVO vo) {
 		return dao.challengePayment(vo);

@@ -121,30 +121,28 @@ $(function(){
 							<img src="${pageContext.request.contextPath }/resources/images/sports/${challenge.sports1_cd }.jpg" width="100%" height="200px"> 
 						</div>
 							<!-- 유저가 참가중인 챌린지는 참여중 마크 띄움 -->
-	              			<c:forEach items="${myHistory}" var ="myList">
-	              			<c:if test="${challenge.cl_num == myList.cl_num }">
+	              			<c:if test="${challenge.cl_num == myHistory.cl_num }">
 		              			<div class="join-mark">
 									<img src="${pageContext.request.contextPath }/resources/images/icon/join.png">
 		              			</div>
 	              			</c:if>         
-							</c:forEach>
 							<!-- 유저 참가중 마크 끝 -->
 					</div>
-					<span><fmt:formatDate
+					<span class="pinkText"><fmt:formatDate
 							value="${challenge.cl_start_dttm }" type="date" /> ~ <fmt:formatDate
 							value="${challenge.cl_end_dttm }" type="date" />
 						(D-${challenge.gap_day })</span>
 						
-					<span>${challenge.cl_name }</span> 
-					<span>기간내 | ${challenge.cl_cnt }회 참여</span> 
+					<span class="mediumText">${challenge.cl_name }</span> 
+					<span class="mediumText">기간내 | ${challenge.cl_cnt }회 참여</span> 
 					<c:if test="${challenge.cl_status != 'basic' }">
-					<span>
+					<span class="mediumText">
 						<img src="${pageContext.request.contextPath }/resources/images/icon/money.png" width="25px">1천원~5천원
 					</span>
-					<span> 
+					</c:if>
+					<span class="mediumText"> 
 						<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px"> ${challenge.cl_score }점
 					</span>
-					</c:if>
 					<!-- 챌린지 기본옵션 끝 -->
 					<hr>
 					<!-- 챌린지 세부설명 -->
@@ -152,13 +150,13 @@ $(function(){
 					<hr>
 					<!-- 보증금/포인트 설명 -->
 					<c:if test="${challenge.cl_status != 'basic' }">
-					<span>
+					<span class="mediumText">
 						<img src="${pageContext.request.contextPath }/resources/images/icon/money.png" width="25px">
 						보증금
 						<br>스페셜 챌린지 참가시 보증금이 필요하며 챌린지 성공 퍼센트에 따라 환급비율이 달라집니다.
 					</span>
 					</c:if>
-					<span style="padding-bottom: 50px">
+					<span class="mediumText" style="padding-bottom: 50px">
 						<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px">
 						포인트 
 						<br>획득시 회원등급 결정에 사용됩니다.
@@ -166,23 +164,21 @@ $(function(){
 					<!-- 보증금설명/포인트 설명 끝 -->
 					
 					<!-- 기본/스페셜챌린지버튼 시작 -->
-	              	<c:forEach items="${myHistory}" var ="myList">
-						<c:if test="${challenge.cl_num == myList.cl_num}">
+						<c:if test="${challenge.cl_num == myHistory.cl_num}">
 							<button class="join-btn start-challenge">참가중</button>
-							<!--챌린지 참가용 버튼 시작 -->
-							<c:if test="${challenge.cl_num != myList.cl_num}">
-								<c:choose>
-									<c:when test="${challenge.cl_status == 'basic' }">
-										<button class="join-btn" id="basic-btn">참가하기</button>
-									</c:when>
-									<c:when test="${challenge.cl_status == 'special' }">
-										<button class="join-btn" id="special-btn">참가하기</button>
-									</c:when>
-								</c:choose>
-							</c:if>
-							<!--챌린지 참가용 버튼 끝 -->
 						</c:if>
-					</c:forEach>
+						<!-- 챌린지 참가용 버튼 시작 -->
+						<c:if test="${challenge.cl_num != myHistory.cl_num}">
+							<c:choose>
+								<c:when test="${challenge.cl_status == 'basic' }">
+									<button class="join-btn" id="basic-btn">참가하기</button>
+								</c:when>
+								<c:when test="${challenge.cl_status == 'special' }">
+									<button class="join-btn" id="special-btn">참가하기</button>
+								</c:when>
+							</c:choose>
+						</c:if>
+						<!--챌린지 참가용 버튼 끝  -->
 					<!-- 기본/스페셜챌린지버튼 끝 -->
 				</div>
 			</div>   

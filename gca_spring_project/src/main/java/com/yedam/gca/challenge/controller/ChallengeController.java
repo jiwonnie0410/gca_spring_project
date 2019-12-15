@@ -28,7 +28,7 @@ public class ChallengeController {
 		UserDetails userDetails = (UserDetails) auth.getPrincipal();	//로그인한 유저 정보 담음
 		String id = userDetails.getUsername(); 	//로그인한 유저 id 담음
 		vo.setM_id(id);
-		model.addAttribute("myHistory", service.checkChallengeHistory(vo));
+		model.addAttribute("myHistory", service.checkChallengeHistoryList(vo));
 		
 		return "/user/challenge/challenge";
 	}
@@ -45,6 +45,7 @@ public class ChallengeController {
 		UserDetails userDetails = (UserDetails) auth.getPrincipal();	//로그인한 유저 정보 담음
 		String id = userDetails.getUsername(); 	//로그인한 유저 id 담음
 		hvo.setM_id(id);
+		hvo.setCl_num(num);
 		model.addAttribute("myHistory", service.checkChallengeHistory(hvo));
 		
 		return "/user/challenge/challengeContents";
