@@ -26,6 +26,7 @@
 		WHERE		SG_NUM = #{sg_num}
 	</select>
 	
+	<!-- 신고 시 trouble 테이블에 insert -->
 	<insert id="doReport" parameterType="trouble">
 		<selectKey order="BEFORE" resultType="int" keyProperty="tr_num"> <!-- 시퀀스 구하는 쿼리 실행하여 시퀀스 뽑아내서 담기. -->
   			<!-- ORDER : 실행순서. BEFORE는 먼저실행.(이 셀렉트가 먼저 실행되어 vo에 담김.) -->
@@ -50,30 +51,21 @@
 	
 	</insert>
 	
-	<!-- <update id="updateWhenJoin" parameterType="sgroup">
-		UPDATE		SGROUP
-		SET			SG_NOW_CNT = #{sg_now_cnt}
-					<if test="searchCondition == 'title' ">
-					STATUS_CD = ?
-					</if>
-		WHERE		SG_NUM = #{sg_num}
-	
-	</update> -->
-	
-	
-	
-	
-	
-	
-	
-<!-- ************ 미현 ********************* -->
-
-<!-- 반짝 방 참여 전 인원수 1 증가시키는 맵퍼 -->
-	<update id="updateCnt" parameterType="sgroup">
-		UPDATE 	SGROUP
-		SET		SG_NOW_CNT = #{sg_now_cnt}
-		WHERE	SG_NUM = #{sg_num}
+	<!-- 참가 취소 시 sgroup테이블 sg_now_cnt -1 -->
+	<update id="minusNowCnt" parameterType="allhistory">
+		UPDATE	SGROUP
+		SET		SG_NOW_CNT = SG_NOW_CNT-1
+		WHERE	SG_NUM = ${sg_num}   <!-- $는 값, #은 따옴표 붙음. int값 하나 받아왔을때는 value로 쓰면 됨.-->
 	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+<!-- ******************* 미현 ********************* -->
 	
 <!-- SGroup 전체 조회 -->
 	<select id="getSgList" resultType="sgroup">
@@ -91,10 +83,38 @@
 				AGE_RANGE,
 				get_code_name(GENDER_CD) GENDER_CD,
 				get_code_name(STATUS_CD) STATUS_CD,
-				SG_OPTION
-		FROM	SGROUP
-		ORDER BY 1
+				SG_OPTION,
+				DIS
+		FROM
+			 	(
+			 	SELECT ROWNUM R, A.* 
+				FROM 	(
+						SELECT S.*, CALC_DISTANCE(
+             							SUBSTR(SG_XY, 0, INSTR(SG_XY, ',', 1, 1)-1),
+             							SUBSTR(SG_XY, INSTR(SG_XY, ',', 1, 1)+2, LENGTH(SG_XY)),
+             							SUBSTR(#{m_xy}, 0, INSTR(#{m_xy}, ',', 1, 1)-1),
+             							SUBSTR(#{m_xy}, INSTR(#{m_xy}, ',', 1, 1)+2, LENGTH(#{m_xy}))
+             						 ) DIS
+             			FROM SGROUP S
+             			WHERE SG_END_DTTM <![CDATA[ > ]]> SYSDATE
+			            <if test="keyval != null and keyval !=''">
+							<if test="key == 'sports'">
+								and SPORTS1_CD like '%'||#{keyval}||'%'
+							</if>
+					 	</if>
+             			ORDER BY DIS, SG_END_DTTM, SG_NUM
+             			) A
+					<where>
+					 	<if test="end_dis != null">
+					 		AND LPAD(round(DIS, 3), 8, '0') || to_char(SG_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(SG_NUM, 6, '0')
+					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3), 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
+					 	</if>
+					 </where>
+    			)
+		WHERE R <![CDATA[ <= ]]> #{scroll_rec}
+
 	</select>
+	
 
 <!-- SGroup 방 생성 + 활동 이력 추가 -->
 	<select id="insertSg" statementType="CALLABLE" parameterType="sgroup">
@@ -110,8 +130,76 @@
 			,#{gender_cd}
 			,#{sg_option}
 			,#{m_id}
-			,#{sg_num, mode=OUT, jdbcType=NUMERIC, javaType=Integer }
+			,#{sg_num, mode=OUT, jdbcType=INTEGER}
+		)}
+	</select>
+	
+<!-- SGroup 마감 방 조회 -->
+	<select id="getSgEndList" resultType="sgroup">
+		SELECT 
+				SG_NUM,
+				SG_NAME,
+				SG_START_DTTM,
+				SG_END_DTTM,
+				SG_NOW_CNT,
+				SG_END_CNT,
+				SG_LOCATION,
+				SG_XY,
+				SPORTS1_CD,
+				get_code_name(SKILL_CD) SKILL_CD,
+				AGE_RANGE,
+				get_code_name(GENDER_CD) GENDER_CD,
+				get_code_name(STATUS_CD) STATUS_CD,
+				SG_OPTION,
+				DIS
+		FROM
+			 	(
+			 	SELECT ROWNUM R, A.* 
+				FROM 	(
+						SELECT S.*, CALC_DISTANCE(
+             							SUBSTR(SG_XY, 0, INSTR(SG_XY, ',', 1, 1)-1),
+             							SUBSTR(SG_XY, INSTR(SG_XY, ',', 1, 1)+2, LENGTH(SG_XY)),
+             							SUBSTR(#{m_xy}, 0, INSTR(#{m_xy}, ',', 1, 1)-1),
+             							SUBSTR(#{m_xy}, INSTR(#{m_xy}, ',', 1, 1)+2, LENGTH(#{m_xy}))
+             						 ) DIS
+             			FROM SGROUP S
+						WHERE SG_END_DTTM <![CDATA[ <= ]]> SYSDATE
+			            <if test="keyval != null and keyval !=''">
+							<if test="key == 'sports'">
+								and SPORTS1_CD like '%'||#{keyval}||'%'
+							</if>
+					 	</if>
+             			ORDER BY DIS, SG_END_DTTM, SG_NUM
+             			) A
+					<where>
+					 	<if test="end_dis != null and end_dis != 0">
+					 		AND LPAD(round(DIS, 3), 8, '0') || to_char(SG_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(SG_NUM, 6, '0')
+					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3), 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
+					 	</if>
+					 </where>
+    			)
+		WHERE R <![CDATA[ <= ]]> #{scroll_rec} 
+	</select>
+
+<!-- SGroup 참여 인증 -->
+	<select id="getSgCert" statementType="CALLABLE" parameterType="sgroup">
+			{ CALL GEO_CERT(
+							#{m_id}, 
+							#{sg_num}, 
+							#{cert_x}, 
+							#{cert_y},
+							#{msg, mode=OUT, jdbcType=VARCHAR}
 		)}
 	</select>
 
+
 </mapper>
+
+<!-- ******************** 안 쓰는 맵퍼 갈무리 *********************** -->
+
+<!-- 반짝 방 참여 전 인원수 1 증가시키는 맵퍼 -->
+<!-- 	<update id="updateCnt" parameterType="sgroup">
+		UPDATE 	SGROUP
+		SET		SG_NOW_CNT = #{sg_now_cnt}
+		WHERE	SG_NUM = #{sg_num}
+	</update> -->

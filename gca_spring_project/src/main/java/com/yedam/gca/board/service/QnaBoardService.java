@@ -3,7 +3,12 @@ package com.yedam.gca.board.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.yedam.gca.board.vo.AdBoardVO;
 import com.yedam.gca.board.vo.BoardSearchVO;
 import com.yedam.gca.board.vo.QnaBoardVO;
 import com.yedam.gca.common.Paging;
@@ -26,22 +31,16 @@ public interface QnaBoardService {
 
 	//게시글 삭제
 	int deleteBoard(QnaBoardVO vo);
-
+	
+	// 02. 게시글 상세보기
+		public QnaBoardVO read(int qb_id) throws Exception;
+	
 	// 게시글 작성
-	int insertBoard(QnaBoardVO vo);
+	public int insertBoard(QnaBoardVO vo);
 
 	//  게시글 수정
 	int updateBoard(QnaBoardVO vo);
 
-	// 게시글 상세보기
-	QnaBoardVO getBoard(QnaBoardVO vo);
-
-	
-	//test
-	/*
-	 * List<QnaBoardVO> getContentList2(Map<String, Object> paramMap); int
-	 * getContentCnt(Map<String, Object> paramMap);
-	 */
 	
 
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- resources 안에 있는 css나 js는 security 체크 안 함 -->
+	<security:http pattern="/resources/**" security="none" />
+	
+	<!-- 인가 -->
+	<security:http>
+		<!-- 모두에게 허용 -->
+		<security:intercept-url method="GET" pattern="/" access="permitAll()" />
+   	 	<security:intercept-url method="POST" pattern="/processLogin" access="permitAll()" /> <!-- 스프링이 로그인 페이지에서 체크해 줌 -->
+		<security:intercept-url pattern="/login/naverCallback" access="permitAll()" />
+		<security:intercept-url pattern="/join" access="permitAll()" />
+		<security:intercept-url pattern="/insertJoin" access="permitAll()" />
+		<security:intercept-url pattern="/ajax/checkId" access="permitAll()" />
+		<security:intercept-url pattern="/forgotId" access="permitAll()" />
+		<security:intercept-url pattern="/getId" access="permitAll()" />
+		<security:intercept-url pattern="/forgotPassword" access="permitAll()" />
+		<security:intercept-url pattern="/getTempPassword" access="permitAll()" />
+		
+		
+		<!-- 관리자에게만 허용 -->
+		<security:intercept-url pattern="/admin/**"	access="hasAuthority('ROLE_Admin')" />
+		
+		<!-- 로그인을 해야만 쓸 수 있게 -->
+		<security:intercept-url pattern="/**" access="isAuthenticated()" />
+		
+		<!-- 로그인 체크
+			 login-processing-url: 로그인 페이지의 form 태그 name
+			 default-target-url: 로그인 성공 후 호출 페이지 -> 관리자와 유저 다르게 페이지 이동하기 위해 LoginController의 함수 호출
+			 authentication-failure-url: 로그인 실패 후 호출 페이지
+			 username-parameter: 로그인 페이지에서 넘어오는 사용자 아이디의 name
+			 password-parameter: 로그인 페이지에서 넘어오는 사용자 비밀번호의 name
+		 -->
+		<security:form-login  login-page="/"
+						      login-processing-url="/securityLogin"
+						      default-target-url="/login/callback"
+						      authentication-failure-url="/"
+						      username-parameter="paramLoginId"
+						      password-parameter="paramPassword"/>
+						      
+		<!-- 로그아웃 -->
+		<security:logout logout-url="/logout" logout-success-url="/" />
+		
+		<!-- csrf 보안 사용 안 하기 -->
+		<security:csrf disabled="true" />
+		
+		<!-- 액세스 거부 됐을 때 띄울 페이지 -->
+		<security:access-denied-handler error-page="/error/403error.jsp"/>
+	</security:http>
+	
+	<!-- 로그인 체크해서 정보 넘겨줌 -->
+	<bean id="memberService" class="com.yedam.gca.member.service.CustomUserDetailsService" />
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="memberService" >
+ 			<security:password-encoder hash="bcrypt" /> <!-- 암호화된 비밀번호 체크 -->
+		</security:authentication-provider>
+		
+	</security:authentication-manager>
+
+</beans>

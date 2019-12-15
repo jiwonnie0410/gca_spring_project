@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -24,6 +25,8 @@
 
 <script src="../resources/scripts/json.min.js"></script>
 
+<!-- 미현 : 인증 참여 스크립트 추가 -->
+<script type="text/javascript" src="../resources/js/mihy/part_cert.js"></script>
 
 <style>
 
@@ -107,9 +110,36 @@
 
 </style>
 
+<!-- 로그인한사람의 id,닉네임,캐릭터코드 저장 -->
+<sec:authentication property="principal.username" var="id"/>
+<sec:authentication property="principal.m_nick" var="nick"/>
+<sec:authentication property="principal.m_image_cd" var="image"/>
 
 <script>
-		$(function() { //이 문장이 페이지 로딩 완료 후 실행
+		$(function() { //페이지 로딩 완료 후 실행
+
+			//로딩되자마자 아이디 입력받고 아작스로 세션에 저장.
+			var usrId = "${id}";
+			
+			/* if(usrId==""){ //만약 세션에 id가 없으면 입력받아라.
+				var id={ "id" : prompt("세션에 저장할 id 입력 : ")};
+							
+				$.ajax({
+					url: "saveId",
+					type:'GET',
+					data: id,
+					
+					success: function(){
+						alert("아이디 저장!");
+					},
+					error: function(){
+						alert("아이디 저장 실패!");
+					}
+					
+				});
+			} */
+			
+			console.log("usrId : "+usrId);
 			
 			//채팅 전송버튼 눌렀을때
 			$("body").on("click", "[id^=chat]", function() {
@@ -173,6 +203,36 @@
 			});
 			
 			
+			//참가취소 버튼 눌렀을때
+			$("body").on("click", "[id^=cancelJoin]", function() {
+
+				//웹소켓으로 방정보 업데이트(인원수,방상태), 본인프로필 화면에서 삭제, 활동히스토리 DELETE, 본인은 목록으로 돌아가게.
+				var confirmStatus = confirm("정말로 반짝 참여를 취소 하시겠습니까?");
+
+				if (confirmStatus) {
+					
+					var sgNum = ${sgroup.sg_num};
+					var sgCnt = ${sgroup.sg_now_cnt};
+					
+					alert(usrId);
+					
+					deleteProfile();
+					
+					//if(sgCnt>1){ //일단 sgCnt가 1이상인 방만 카운트 - 되게 여기다 해놓음.
+						location.href='cancelJoin?m_id='+usrId+'&sg_num='+sgNum;
+					//}
+					
+					alert("참가 취소 완료.");
+					
+				} else {
+					console.log("참가취소 취소함");
+				}
+				//그리고 방장이 빠져나가면 방 삭제되게.
+
+			});
+			
+			$('#btn_cert').on('click', getLocation); //참가인증
+			
 		});
 </script>
 
@@ -180,6 +240,11 @@
 <body>
 <!-- 버튼영역 위(프로필까지)의 div 시작 -->
     <div style="padding-top:0px;">
+    
+    <input type="hidden" id="s_id" value='${id}'>
+    <input type="hidden" id="s_nick" value='${nick}'>
+    <input type="hidden" id="s_character" value='${image}'>
+    <input type="hidden" id="sg_num_search" value="${sgroup.sg_num }">
     
 	<!-- 방제 -->
     	<div style="background-color: #FE9191; text-align: left; padding-left:20px; color: #fff;"> 
@@ -195,7 +260,7 @@
     	<div style="padding-top:0px; padding-bottom:20px">
     		<div>
       			<textarea id="messageWindow" style="font-size:15px; background-color:#FE9191;border-radius:5px;border:3px double #FFF;
-      							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly"><000님이 참가하셨습니다.></textarea>
+      							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly"></textarea>
       			<div style="padding-top:10px;">
       				<span style="padding-left:5px; padding-right:3px; vertical-align: middle;">
       					<textarea id="inputMessage" style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; ">입력하세요</textarea>
@@ -209,31 +274,22 @@
     	
     	
 	<!-- 참여자 프로필 -->
-     	<div style="border-top: thick double #FE9191; border-bottom: thick double #FE9191; padding-top:15px; padding-bottom:15px;">
-
-        		<span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
+     	<div id="profileList" style="border-top: thick double #FE9191; border-bottom: thick double #FE9191; padding-top:15px; padding-bottom:15px;">
+				<!-- foreach로 프로필 읽어와서 붙이기(memlist.어쩌구) -->
+        		<%-- <span id="cancel" data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
           			<img style="padding-bottom:5px;" width="65px" height="65px"
           							src="${pageContext.request.contextPath }/resources/images/jey/trainer-1.jpg" class="rounded-circle">
         			<br />사람1
-        		</span>
-        	
-          		<span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;">
-          			<img style="padding-bottom:5px;" width="65px" height="65px"
-          							src="${pageContext.request.contextPath }/resources/images/jey/trainer-2.jpg" class="rounded-circle">
-        			<br />사람2
-        		</span>
-        	
-          		<span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;">
-          			<img style="padding-bottom:5px;" width="65px" height="65px"
-          							src="${pageContext.request.contextPath }/resources/images/jey/trainer-3.jpg" class="rounded-circle">
-        			<br />사람3
-        		</span>
-        	
-          		<span data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;">
-          			<img style="padding-bottom:5px;" width="65px" height="65px"
-          							src="${pageContext.request.contextPath }/resources/images/jey/trainer-4.jpg" class="rounded-circle">
-        			<br />사람4
-        		</span>
+        		</span> --%>
+        		<!-- 참여 멤버 프로필사진 불러오기(캐릭터, 닉네임) -->
+        		<c:forEach var="member" items="${memlist}">
+				    <span id="${member.m_id}" data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
+	          			<img style="padding-bottom:5px;" width="65px" height="65px"
+	          							src="${pageContext.request.contextPath }/resources/images/Characters/${member.m_image_cd}.gif" class="rounded-circle">
+	        			<br />${member.m_nick}
+        			</span>
+				
+				</c:forEach>
 
     	</div>
     			
@@ -242,7 +298,7 @@
 
 <!-- 버튼영역 시작(아직 아무 기능 없음) -->														
     <div style="padding-bottom:30px">
-      	<button class="button-general">참가인증</button>&nbsp;<button class="button-general">참가취소</button>&nbsp;
+      	<button id="btn_cert" class="button-general">참가인증</button>&nbsp;<button id="cancelJoin" class="button-general">참가취소</button>&nbsp;
       	<button class="button-general">공유</button>&nbsp;<button class="button-general">목록</button>
     </div>
 <!-- 버튼영역 끝 -->
@@ -271,7 +327,7 @@
 <!-- Modal footer -->
 				<div class="modal-footer">
 					<button type="button" class="button-general" data-toggle="modal" data-target="#report-user">신고</button>
-					<button id="kickOut" type="button" class="button-general">강퇴</button> <!-- 얘는 방장만 보이게 -->
+					<button style="background: crimson;" id="kickOut" type="button" class="button-general">강퇴</button> <!-- 얘는 방장만 보이게 -->
 				</div>
         
 			</div>
@@ -336,7 +392,14 @@
 								<th>옵션 </th><td> ${sgroup.sg_option}</td>
 							</tr>
 						</c:if>
+				<!-- 미현언니 지도부분 -->
+						<tr style="text-align: center">
+							<td>
+								<div id="meetLocation">지도</div>
+							</td>
+						</tr>
 					</table>
+					
 				</div>
         
 <!-- Modal footer -->
@@ -398,99 +461,121 @@
 	</div>
 </div>
 
-
-
-<!-- 옆으로 슬라이드 되는 모달 쓰고싶은ㄷ데 안써짐 ㅠ -->
-        <!-- <a href="#costumModal21" role="button" class="btn btn-default" data-toggle="modal">
-            slideLeftBigIn
-        </a> -->
-        <!-- <div id="costumModal21" class="modal" data-easein="slideLeftBigIn"  tabindex="-1" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            ×
-                        </button>
-                        <h4 class="modal-title">
-                            Modal Header
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">
-                            Close
-                        </button>
-                        <button class="btn btn-primary">
-                            Save changes
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-
-
-
 <!-- 웹소켓 채팅 -->
 <script type="text/javascript">
 
  var textarea = document.getElementById("messageWindow"); 
- var webSocket = new WebSocket('ws://localhost/gca/broadcast.do'); 
+ 
  var inputMessage = document.getElementById('inputMessage');
  
- webSocket.onerror = function(event) { onError(event) };
- webSocket.onopen = function(event) { onOpen(event) };
- webSocket.onmessage = function(event) { onMessage(event) };
  
  function onMessage(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
-	 var result = JSON.parse(event.data);
-	 if(result.cmd == "msg") {
-		 textarea.value += result.msg + "\n";		 
-	 }
-	 /* else if( result.cmd = "board") {
-		 var list = JSON.parse(result.msg);
-		 for(i=0; i< list.length; i++) {
-			 textarea.value += list[i].CONTENT + "\n";		
-		 }
-	 } */
+	var result = JSON.parse(event.data);
+ 	var sg_num = ${sgroup.sg_num};
+	if(result.cmd == "join" && ( sg_num == result.sg_num )) { //해당 방에 들어온경우
+		
+		var img = result.character;
+		var nick = result.nick;
+		var id = result.id;
+		
+		//var param = {"img":img};
+		
+		console.log("id : "+id);
+		console.log("nick : "+nick);
+		console.log("img : "+img);
+		
+		//이미지 영어이름 갖고오는 ajax(웹소켓에서 처리하는 방향 알아보기.)
+		/* $.ajax({
+			url: "returnImage",
+			type:'GET',
+			async:false,
+			data: param,
+			//dataType: "Json",
+			
+			success: function(data){
+				console.log(data);
+				img=data;
+			},
+			error: function(){
+				
+			}
+			
+		}); */
+		
+		//프로필 붙여주기~~
+		$span = $("<span data-toggle='modal' data-target='#profile' style='font-size:13px; padding:10px; display:inline-block;'>");
+		$span.attr("id",id);
+		$img = $("<img style='padding-bottom:5px;' width='65px' height='65px'>");
+		$img.attr({"src": "${pageContext.request.contextPath }/resources/images/Characters/"+img+".gif"});
+		$text = nick;
+		
+		$span.append($img);
+		$span.append('<br />');
+		$span.append($text);
+		
+		textarea.value += result.msg + "\n";
+		$('#profileList').append($span);
+	 	
+	}
+	else if( result.cmd == "msg" && ( sg_num == result.sg_num )) { //메세지 전송하는 경우
+		textarea.value += result.id + " : " + result.msg + "\n";
+	}
+	else if( result.cmd == "cancelJoin" && ( sg_num == result.sg_num )) { //참가취소 누르고 웹소켓 거쳐왔을때.
+		var person = result.id;
+		console.log("person:"+result.id);
+		//프로필 삭제
+		$('#'+person).remove();
+		textarea.value += result.msg + "\n"; //채팅방에 나갔다고 표시.
+	}
 	  
-	 chatAreaScroll(); 
+	chatAreaScroll(); 
  }
  
- function onOpen(event) { textarea.value += "연결 성공\n"; }
- function onError(event) { 
-	 console.log(event); 
- 	alert(event.data); 
- }
+ //function onOpen(event) { //이미 참여된방에 참여인지 새로 참여인지 구분해서 새로참여만 참가하셨습니다 띄우고 프로필 붙이기.
+	 //console.log("first_in : "+"${param.first_in}");
+ 
+	 /* if("${param.first_in}" == "first_in"){
+		msg = {
+			cmd : "join",
+			id : "${id}",
+			msg : "<"+"${id}"+"님이 참가하셨습니다.>"
+			//여기에 아이디 붙여서 추가하면 될듯. 근데 새로고침해도 이게 뜨는것은 막아야함.
+		}
+		webSocket.send(  JSON.stringify( msg )   );
+	 } */
+ //}
+
+ 
+ //메세지 전송
  function send() { 
+	 var sg_num = ${sgroup.sg_num};
 	 msg = {
 		 cmd : "msg",
-		 id : "test",
-		 msg : inputMessage.value
+		 id : "${id}",
+		 msg : inputMessage.value,
+		 sg_num : sg_num
 	 }
 	//textarea.value += "나 : " + inputMessage.value + "\n"; 
 	webSocket.send(  JSON.stringify( msg )   ); 
 	inputMessage.value = ""; 
  } 
  
- /* function getBoard() { 
+ //나갔을때 참여자 칸에서 프로필 삭제
+ function deleteProfile() { 
+	 var sg_num = ${sgroup.sg_num};
 	 msg = {
-		 cmd : "board",
-		 id : "",
-		 msg : ""
+		 cmd : "cancelJoin",
+		 id : "${id}",
+		 msg : "<"+"${id}"+"님이 나가셨습니다.>",
+		 sg_num : sg_num
 	 }
-	webSocket.send(  JSON.stringify( msg )   ); 
- }  */
+	webSocket.send(  JSON.stringify( msg )   );
+	
+	
+ }
+
  
+ //채팅치면 스크롤바 내려가게 하기.
  function chatAreaScroll() {
 	//using jquery
 	/* var textArea = $('#messageWindow');

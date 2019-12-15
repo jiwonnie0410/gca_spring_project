@@ -6,9 +6,12 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.yedam.gca.admin.vo.TroubleVO;
+import com.yedam.gca.common.code.vo.CodeVO;
 import com.yedam.gca.group_s.dao.SGroupDAO;
 import com.yedam.gca.group_s.service.SGroupService;
 import com.yedam.gca.group_s.vo.SGroupVO;
+import com.yedam.gca.history.vo.ActiveHistVO;
+import com.yedam.gca.member.vo.MembersVO;
 
 @Service("sGroupService")
 public class SGroupServiceImpl implements SGroupService {
@@ -25,6 +28,17 @@ public class SGroupServiceImpl implements SGroupService {
 	public int doReport(TroubleVO vo) {
 		return sgroupDAO.doReport(vo);
 	}
+	public void cancelJoin(ActiveHistVO vo) {
+		sgroupDAO.cancelJoin(vo);
+		sgroupDAO.minusNowCnt(vo);
+	}
+	public String returnImage(MembersVO vo) {
+		return sgroupDAO.returnImage(vo);
+	}
+	public MembersVO getOneMem(MembersVO vo) {
+		return sgroupDAO.getOneMem(vo);
+	}
+	
 
 	
 	//미현
@@ -33,15 +47,17 @@ public class SGroupServiceImpl implements SGroupService {
 		return sgroupDAO.getSgList(vo);
 	}
 
-
 	@Override
-	public int updateCnt(SGroupVO vo) {
-		return sgroupDAO.updateCnt(vo);
+	public void insertSg(SGroupVO vo) {
+		sgroupDAO.insertSg(vo);
 	}
-
 	@Override
-	public int insertSg(SGroupVO vo) {
-		return sgroupDAO.insertSg(vo);
+	public List<SGroupVO> getSgEndList(SGroupVO vo) {
+		return sgroupDAO.getSgEndList(vo);
+	}
+	@Override
+	public SGroupVO getSgCert(SGroupVO vo) {
+		return sgroupDAO.getSgCert(vo);
 	}
 
 }

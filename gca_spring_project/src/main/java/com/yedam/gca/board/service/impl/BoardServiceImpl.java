@@ -7,6 +7,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,8 +49,7 @@ public class BoardServiceImpl implements BoardService {
 		vo.setAd_count(ad_count);
 		vo.setAd_date(ad_date);
 		vo.setAd_content(ad_content);
-		/* vo.setM_id(m_id); */ //로그인 완성후 주석풀기
-		vo.setM_id("rr99999");
+		vo.setM_id(m_id); //로그인 완성후 주석풀기
 		// 게시물 등록
 		boardDao.create(vo);
 	
@@ -99,9 +100,10 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 	// 07. 게시글 레코드 갯수
-	@Override
-	public int countArticle(String searchOption, String keyword) throws Exception {
-		return boardDao.countArticle(searchOption, keyword);
-	}
+	// 07. 게시글 레코드 갯수
+		@Override
+		public int countArticle(String searchOption, String keyword) throws Exception {
+			return boardDao.countArticle(searchOption, keyword);
+		}
 
-}
+	}

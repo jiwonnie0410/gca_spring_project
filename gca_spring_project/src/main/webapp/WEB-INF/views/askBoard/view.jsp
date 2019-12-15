@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
+	<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,9 +19,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <!--json할때 필요  -->
 <script src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
-
+<sec:authentication property="principal.m_id" var="m_id"/>
 <title>게시글 작성</title>
 
 <script>
@@ -47,14 +49,10 @@
 			
 			document.form1.action="${pageContext.request.contextPath}/board/update"
 			
-			// 첨부파일 이름을 form에 추가
 			var that = $("#form1");
 			var str = "";
 			// 태그들.each(함수)
 			// id가 uploadedList인 태그 내부에 있는 hidden태그들
-			$("#uploadedList .file").each(function(i){
-				str += "<input type='hidden' name='files["+i+"]' value='"+$(this).val()+"'>";
-			});
 			// form에 hidden태그들을 추가
 			$("#form1").append(str);
 			// 폼에 입력한 데이터를 서버로 전송
@@ -92,6 +90,7 @@
 			replyJson(); // json 형식으로 입력
 		});
 		
+		
 		// 2. 댓글 목록
 		//listReply("1"); // 댓글 목록 불러오기
 		//listReply2(); // json 리턴방식
@@ -117,6 +116,7 @@
 		if( $("#adr_hidden").is(":checked") ){
 			adr_hidden = "y";
 		}
+		
 		// 비밀댓글 파라미터 추가
 		var param="adr_content="+adr_content+"&ad_num="+ad_num+"&adr_hidden="+adr_hidden;
 		$.ajax({				
@@ -142,11 +142,9 @@
 			adr_hidden = "y";
 		}
 		$.ajax({				
-			type: "post",
+			method: "post",
 			url: "${pageContext.request.contextPath}/reply/insertRest",
-			headers: {
-				"Content-Type" : "application/json"
-			},
+			contentType : "application/json",
 			dataType: "text",
 			// param형식보다 간편
 			data: JSON.stringify({
@@ -157,9 +155,9 @@
 			success: function(){
 				alert("댓글이 등록되었습니다.");
 				// 댓글 입력 완료후 댓글 목록 불러오기 함수 호출
-				listReply("1"); 	// 전통적인 Controller방식 //@RequestParam
+				//listReply("1"); 	// 전통적인 Controller방식 //@RequestParam
 				//listReply2(); 	// json리턴 방식
-				//listReplyRest("1"); // Rest 방식 --pathvariable
+				listReplyRest("1"); // Rest 방식 --pathvariable
 			}
 		});
 	}
@@ -237,6 +235,8 @@
 		})
 	}
 </script>
+
+
 <style>
 	#modifyReply {
 		width: 600px;
@@ -270,6 +270,7 @@ textarea {
 <body>
 	<h2>게시글 보기</h2>
 	<!-- 게시물 상세보기 영역 -->
+	<input type="hidden" value="${dto.ad_num}">
 	<form name="form1" id="form1" method="post">
 	<div align="center">
 		<div>
@@ -291,7 +292,7 @@ textarea {
 			<!-- 게시물번호를 hidden으로 처리 -->
 			<input type="hidden" name="ad_num" value="${dto.ad_num}">
 			<!-- 본인이 쓴 게시물만 수정, 삭제가 가능하도록 처리 -->
-			<c:if test="${sessionScope.m_id == dto.m_id}"> 
+			<c:if test="${m_id == dto.m_id}"> 
 				<button type="button" class="btn btn-primary px-5 py-3 mt-3" id="btnUpdete">수정</button>
 				<button type="button" class="btn btn-primary px-5 py-3 mt-3" id="btnDelete">삭제</button>
 			</c:if> 
@@ -302,17 +303,18 @@ textarea {
 	</form>
 	<!-- 게시물 상세보기 영역 -->
 
+
 	<!-- 댓글 작성 영역 -->
 	<div style="width: 650px; text-align: center;">
 		<br>
 		<!-- 로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
-		<c:if test="${sessionScope.m_id != null}">
+		<%-- <c:if test="${sessionScope.m_id != null}"> --%>
 			<textarea rows="5" cols="80" id="adr_content" placeholder="댓글을 작성해주세요"></textarea>
 			<br>
 			<!-- 비밀댓글 체크박스 -->
 			<input type="checkbox" id="adr_hidden">비밀 댓글
 		 <button type="button" class="btn btn-primary px-5 py-3 mt-3" id="btnReply">댓글 작성</button>
-		</c:if>
+	<%-- 	</c:if> --%>
 	</div>
 	<!-- 댓글 작성 영역 -->
 	<!-- 댓글 목록 영역 -->

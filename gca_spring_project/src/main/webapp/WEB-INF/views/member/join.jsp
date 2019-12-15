@@ -21,9 +21,17 @@
 		
 		<!-- 자바스크립트 회원가입 및 다음주소API -->
 		<script type="text/javascript" src="./resources/js/member/joinjs.js"></script>
-		<script type="text/javascript" src="./resources/js/member/daumAddress.js"></script>
-		<script	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9e415eb9e7187154cd9c6308c036f0a6&libraries=services,clusterer"></script>
+		<!-- <script type="text/javascript" src="./resources/js/member/daumAddress.js"></script> -->
+		<!-- <script	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
 		
+		<script>
+			// 확인 메시지 띄우기
+			if('${joinMessage}' != ''){
+				alert('${joinMessage}');
+			}
+	</script>
 </head>
 
 <body>
@@ -47,7 +55,7 @@
 
 				<tr>
 					<td height="30"></td>
-					<td colspan="3" id="idConfirmMsg"><font size="2">*아이디는 영문자, 숫자를 혼합하여 6-8자리 </font></td>
+					<td colspan="3" id="idConfirmMsg"><font size="2">*아이디는 영문자, 숫자를 혼합하여 6-12자리 </font></td>
 				</tr>
 
 				<tr>	<!-- 비밀번호 -->
@@ -57,7 +65,7 @@
 
 				<tr>
 					<td></td>
-					<td colspan="3" id="conditionPw"><font size="2">*비밀번호는 숫자, 특수문자를 혼합하여 6-8자리</font></td>
+					<td colspan="3" id="conditionPw"><font size="2">*비밀번호는 숫자, 특수문자를 혼합하여 6-10자리</font></td>
 				</tr>
 
 				<tr>
@@ -101,11 +109,12 @@
 				<tr>	<!-- 주소 및 주소찾기 버튼 -->
 					<th> Address </th>
 					<td align="left" colspan="3">
-						<input type="button" onclick="orderDaumPostcode()" class="button-title" style="height: 30px;" value="주소 찾기"></td>
+						<input type="button" id="mAddress1" class="button-title" style="height: 30px;" value="주소 찾기"></td>
 				</tr>
 				<tr>
 					<th></th>
 					<td colspan="3"><input type="text" id="address" value="${param.mAddress1 }" name="mAddress" class="form-control form-control-sm" /></td>
+					<input type="hidden" id="xy" name="mXy">
 				</tr>
 
 				<tr>

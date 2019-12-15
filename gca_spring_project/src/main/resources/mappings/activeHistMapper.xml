@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ActiveHistDAO" >
+
+	<!--  *********수림************* 
+		VIEW_ACTIVE_HIST 뷰를 사용합니다. 컬럼 조회시에 큰따옴표 필수! 없으면 에러남! 아래 셀렉 예시 확인바람	
+	-->        	
+	<select id="getActiveHistList" resultType="map">   
+		<![CDATA[
+		SELECT 		"ach_num",
+ 					"m_id", 
+ 					"real_start"
+					"start",
+ 					"sg_num",
+					"six_num",
+					"bg_num",
+					"ach_confirm",
+					"title",
+					"now_cnt",
+					"end_cnt",
+					"location",
+					"xy",
+					"sports_cd",
+					"skill_cd",
+					"age_range",
+					"gender_cd",
+					"sg_option",
+					"bg_team_cnt",
+					"color",
+					(case
+					when "start" > SYSDATE then '진행중'
+					when "start" <= SYSDATE and "now_cnt" >= "end_cnt" then '성공'
+					when "start" <= SYSDATE and "now_cnt" < "end_cnt" then '실패'
+					end) as "status"
+
+
+		FROM 		V_ACTIVE_HIST 
+		WHERE 		"m_id" = #{m_id}
+		]]>
+	
+	</select>
+	
+
+	<!--  *********************** 미현  ***********************  -->
+	
+	<!-- SGroup+BGroup+Sixman 참여 전 참여 여부 확인 + 마감 인원 파악 -->
+	<select id="validIn" statementType="CALLABLE" parameterType="allhistory">
+		{ CALL valid_in(
+			#{in_type}
+			,#{pk_num}
+			,#{m_id}
+			,#{result_msg, mode=OUT, jdbcType=VARCHAR}
+		)}
+	</select>
+	
+	<!-- SGroup+BGroup+Sixman 방 참여 -->
+	<select id="roomInsert" statementType="CALLABLE" parameterType="allhistory">
+		{ CALL room_insert(
+			#{in_type}
+			,#{pk_num}
+			,#{m_id}
+			,#{result_msg, mode=OUT, jdbcType=VARCHAR}
+		)}
+	</select>
+	
+	<!-- 참여하면서 SGroup+BGroup+Sixman 방에 참여한 인물의 정보 가져오기 -->
+	<select id="getActMemList" resultType="members" parameterType="allhistory">
+		SELECT 		a.M_ID,
+					M_EMAIL,
+					M_NAME,
+					M_NICK,
+					get_code_name(M_IMAGE_CD) "m_image_cd",
+					M_LOCATION,
+					M_XY,
+					M_AGE,
+					GENDER_CD,
+					M_GRANT,
+					M_STATUS_CD,
+					M_RADIUS,
+					M_NOTICE1,
+					M_NOTICE2,
+					M_NOTICE3,
+					get_code_name(M_LEVEL_CD) "m_level_cd"
+		FROM 		MEMBERS M 
+				JOIN 
+					ACTIVE_HIST A 
+				ON (M.M_ID = A.M_ID) 
+		<if test="sg_num != null and sg_num != ''">
+		WHERE 		A.SG_NUM	=	#{sg_num}
+		</if>
+		<if test="bg_num != null and bg_num != ''">
+		WHERE 		A.BG_NUM	=	#{bg_num}
+		</if>
+		<if test="six_num != null and six_num != ''">
+		WHERE 		A.SIX_NUM	=	#{six_num}
+		</if>
+		ORDER BY 	A.ACH_DTTM
+	</select>
+
+	
+<!--  *********은영************* -->
+	<!-- 반짝방 참가취소 시 활동이력 delete -->
+	<delete id="cancelJoin" parameterType="allhistory">
+		DELETE FROM active_hist
+				WHERE M_ID = #{m_id} AND SG_NUM=#{sg_num}
+	</delete>
+</mapper>

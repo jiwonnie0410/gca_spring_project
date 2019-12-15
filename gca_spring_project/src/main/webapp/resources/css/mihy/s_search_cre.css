@@ -1,7 +1,18 @@
 body{ padding: 10px; }
 
-.btn { border-color: #FE9191; color: #FE9191; }
-.btn:hover { background-color: #FE9191; color: #FFF; }
+#sg_name {
+	border: 1px solid #FE9191;
+}
+
+/*기본 버튼*/
+.btn {
+	border-color: #FE9191;
+	color: #FE9191;
+}
+.btn:hover {
+	background-color: #FE9191;
+	color: #FFF;
+}
 .btn:focus {
 	color: #fff;
 	background-color: #FE9191;
@@ -10,8 +21,18 @@ body{ padding: 10px; }
 	box-shadow: none;
 }
 
-.btn2 { background-color: #FE9191;	border-color: #FE9191;	color: #FFF; }
-.btn2:hover {	background-color: #FFFFFF;	border-color: #FE9191;	color: #FE9191; }
+/*방 생성 버튼*/
+.btn2 { 
+	background-color: #FE9191;
+	border-color: #FE9191;
+	color: #FFF;
+	width:100%;
+}
+.btn2:hover {
+	background-color: #FFFFFF;
+	border-color: #FE9191;
+	color: #FE9191;
+}
 .btn2:focus {
 	color: #FE9191;
 	background-color: #FFF;
@@ -20,17 +41,32 @@ body{ padding: 10px; }
 	box-shadow: none;
 }
 
-.dropdown-menu > li {	color: gray;	font-weight: lighter;	padding: 5px 0 5px 10px;}
+/*드롭다운 메뉴*/
+.dropdown-menu > li {
+	color: gray;
+	font-weight: lighter;
+	padding: 5px 0 5px 10px;
+}
 li:hover {	background-color: #FAF0F0 !important;}
 
-.sg_valid { color: #FE9191; font-size: 14px; }
+/*유효성 체크 시 메시지*/
+.sg_valid {
+	color: #FE9191;
+	font-size: 14px;
+	display:none;
+}
+
+/*마감시간 박스*/
 .d_day {
 	border: 1px solid #FE9191;
 	color: #FE9191;
 	padding: 5px;
 	border-radius: 5px;
 }
+.d_day > span {	margin-top: 2px; }
 
+/*주소 박스*/
+.location {	padding: 0px;}
 #map {
 	width: 93%;
 	height: 250px;
@@ -40,23 +76,21 @@ li:hover {	background-color: #FAF0F0 !important;}
 	border-radius: 5px;
 }
 
+/*이중 슬라이더*/
 #sg_age_bar .noUi-handle {	padding: 0 17px;}
 #age_text {
 	color: gray;
 	border-style: dashed;
 	border-color: #FE9191;
 	border-radius: 5px;
+	text-align: center;
 }
 #age_title {
 	color: #FE9191;
 	font-size: 15px;
 }
 
-#btn_cre {	width:100%;}
-
-#sg_name {
-	border: 1px solid #FE9191;
-}
+/* 체크 박스 */
 .check-box {
 	display: inline-block;
 	width: 20px;
@@ -67,7 +101,6 @@ li:hover {	background-color: #FAF0F0 !important;}
 }
 
 /* 라디오 버튼 */
-/* The container */
 .radio_label {
   display: block;
   position: relative;
@@ -129,3 +162,9 @@ li:hover {	background-color: #FAF0F0 !important;}
 	border-radius: 50%;
 	background: white;
 }
+
+/* 옵션 */
+.collapse { margin: 0 10px 15px 10px; }
+.check-box { margin:7px 0 0 0; }
+.check-box-text { padding:0 0 0 8px; }
+.check-box-text:last-child { font-size:14px; color:gray; }

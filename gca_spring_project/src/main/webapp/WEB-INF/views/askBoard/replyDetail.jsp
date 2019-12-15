@@ -31,10 +31,12 @@
 		});
 	});
 	
+	
 	// 4. 댓글 상세화면 닫기
 	$("#btnReplyClose").click(function(){
 		$("#modifyReply").css("visibility", "hidden");
 	});
+	
 	
 	// 5. 댓글 삭제
 	$("#btnReplyDelete").click(function(){
@@ -54,9 +56,11 @@
 	});
 </script>
 </head>
+
+
 <body>
 	댓글 번호 : ${vo.adr_num}<br>
-	<textarea id="detailReplytext" rows="5" cols="82">${vo.adr_contents}</textarea>
+	<textarea id="detailReplytext" rows="5" cols="82">${vo.adr_content}</textarea>
 	<div style="text-align: center;">
 		<!-- 본인 댓글만 수정, 삭제가 가능하도록 처리 -->
 		<c:if test="${sessionScope.m_id == vo.m_id}"> 

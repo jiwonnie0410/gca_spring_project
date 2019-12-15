@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="BGroupDAO">
+
+<!-- 은영 -->
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+<!-- ******************* 미현 ********************* -->
+
+<!-- 방정보 한건 조회 -->
+	<select id="getRoomInfo" parameterType="bgroup" resultType="bgroup">
+		SELECT		BG_NUM,
+					BG_NAME,
+					BG_START_DTTM,
+					BG_END_DTTM,
+					BG_NOW_CNT,
+					BG_END_CNT,
+					BG_LOCATION,
+					BG_XY,
+					get_code_name(SPORTS2_CD) SPORTS2_CD,
+					get_code_name(SKILL_CD) SKILL_CD,
+					AGE_RANGE,
+					get_code_name(GENDER_CD) GENDER_CD,
+					get_code_name(STATUS_CD) STATUS_CD,
+					BG_TEAM_CNT
+		FROM 		BGROUP
+		WHERE		BG_NUM = #{bg_num}
+	</select>
+	
+<!-- BGroup 전체 조회 -->
+	<select id="getBgList" resultType="bgroup">
+		SELECT 
+				BG_NUM,
+				BG_NAME,
+				BG_START_DTTM,
+				BG_END_DTTM,
+				BG_NOW_CNT,
+				BG_END_CNT,
+				BG_LOCATION,
+				BG_XY,
+				SPORTS2_CD,
+				get_code_name(SKILL_CD) SKILL_CD,
+				AGE_RANGE,
+				get_code_name(GENDER_CD) GENDER_CD,
+				get_code_name(STATUS_CD) STATUS_CD,
+				BG_TEAM_CNT,
+				DIS
+		FROM
+			 	(
+			 	SELECT ROWNUM R, A.* 
+				FROM 	(
+						SELECT B.*, CALC_DISTANCE(
+             							SUBSTR(BG_XY, 0, INSTR(BG_XY, ',', 1, 1)-1),
+             							SUBSTR(BG_XY, INSTR(BG_XY, ',', 1, 1)+2, LENGTH(BG_XY)),
+             							SUBSTR(#{m_xy}, 0, INSTR(#{m_xy}, ',', 1, 1)-1),
+             							SUBSTR(#{m_xy}, INSTR(#{m_xy}, ',', 1, 1)+2, LENGTH(#{m_xy}))
+             						 ) DIS
+             			FROM BGROUP B
+             			WHERE BG_END_DTTM <![CDATA[ > ]]> SYSDATE
+			            <if test="keyval != null and keyval !=''">
+							<if test="key == 'sports'">
+								and SPORTS2_CD like '%'||#{keyval}||'%'
+							</if>
+					 	</if>
+             			ORDER BY DIS, BG_END_DTTM, BG_NUM
+             			) A
+					<where>
+					 	<if test="end_dis != null">
+					 		AND LPAD(round(DIS, 3), 8, '0') || to_char(BG_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(BG_NUM, 6, '0')
+					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3), 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
+					 	</if>
+					 </where>
+    			)
+		WHERE R <![CDATA[ <= ]]> #{scroll_rec}
+
+	</select>
+	
+
+<!-- BGroup 방 생성 + 활동 이력 추가 -->
+	<select id="insertBg" statementType="CALLABLE" parameterType="bgroup">
+		{ CALL bg_room_create(
+			#{bg_name}
+			,#{bg_end_dttm}
+			,#{bg_end_cnt}
+			,#{bg_location}
+			,#{bg_xy}
+			,#{sports2_cd}
+			,#{skill_cd}
+			,#{age_range}
+			,#{gender_cd}
+			,#{bg_team_cnt}
+			,#{m_id}
+			,#{bg_num, mode=OUT, jdbcType=INTEGER}
+		)}
+	</select>
+	
+<!-- BGroup 마감 방 조회 -->
+	<select id="getBgEndList" resultType="bgroup">
+		SELECT 
+				BG_NUM,
+				BG_NAME,
+				BG_START_DTTM,
+				BG_END_DTTM,
+				BG_NOW_CNT,
+				BG_END_CNT,
+				BG_LOCATION,
+				BG_XY,
+				SPORTS2_CD,
+				get_code_name(SKILL_CD) SKILL_CD,
+				AGE_RANGE,
+				get_code_name(GENDER_CD) GENDER_CD,
+				get_code_name(STATUS_CD) STATUS_CD,
+				BG_TEAM_CNT,
+				DIS
+		FROM
+			 	(
+			 	SELECT ROWNUM R, A.* 
+				FROM 	(
+						SELECT B.*, CALC_DISTANCE(
+             							SUBSTR(BG_XY, 0, INSTR(BG_XY, ',', 1, 1)-1),
+             							SUBSTR(BG_XY, INSTR(BG_XY, ',', 1, 1)+2, LENGTH(BG_XY)),
+             							SUBSTR(#{m_xy}, 0, INSTR(#{m_xy}, ',', 1, 1)-1),
+             							SUBSTR(#{m_xy}, INSTR(#{m_xy}, ',', 1, 1)+2, LENGTH(#{m_xy}))
+             						 ) DIS
+             			FROM BGROUP B
+						WHERE BG_END_DTTM <![CDATA[ <= ]]> SYSDATE
+			            <if test="keyval != null and keyval !=''">
+							<if test="key == 'sports'">
+								and SPORTS2_CD like '%'||#{keyval}||'%'
+							</if>
+					 	</if>
+             			ORDER BY DIS, BG_END_DTTM, BG_NUM
+             			) A
+					<where>
+					 	<if test="end_dis != null and end_dis != 0">
+					 		AND LPAD(round(DIS, 3), 8, '0') || to_char(BG_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(BG_NUM, 6, '0')
+					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3), 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
+					 	</if>
+					 </where>
+    			)
+		WHERE R <![CDATA[ <= ]]> #{scroll_rec} 
+	</select>
+
+<!-- BGroup 참여 인증 -->
+	<select id="getBgCert" statementType="CALLABLE" parameterType="bgroup">
+			{ CALL GEO_CERT(
+							#{m_id}, 
+							#{bg_num}, 
+							#{cert_x}, 
+							#{cert_y},
+							#{msg, mode=OUT, jdbcType=VARCHAR}
+		)}
+	</select>
+
+
+</mapper>
+
+<!-- ******************** 안 쓰는 맵퍼 갈무리 *********************** -->
+

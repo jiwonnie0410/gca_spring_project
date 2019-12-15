@@ -20,7 +20,7 @@
 		<typeAlias type="com.yedam.gca.history.vo.ChallengeHistVO" alias="challengehistory" />
 		<typeAlias type="com.yedam.gca.history.vo.ScoreHistVO" alias="scorehistory" />
 		<typeAlias type="com.yedam.gca.member.vo.MembersVO" alias="members" />
-		<typeAlias type="com.yedam.gca.common.vo.CodeVO" alias="code" />
+		<typeAlias type="com.yedam.gca.common.code.vo.CodeVO" alias="code" />
 		<typeAlias type="com.yedam.gca.board.vo.AdReplyVO" alias="adreply" />
 		<typeAlias type="com.yedam.gca.admin.vo.PenaltyVO" alias="penalty" />
 	</typeAliases>

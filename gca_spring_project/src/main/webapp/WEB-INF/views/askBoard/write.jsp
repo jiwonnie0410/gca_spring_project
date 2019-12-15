@@ -37,14 +37,13 @@
 				return;
 			}
 			
-			// 첨부파일 이름을 form에 추가
 			var that = $("#form1");
 			var str = "";
 			// 태그들.each(함수)
 			// id가 uploadedList인 태그 내부에 있는 hidden태그들
-			$("#uploadedList .file").each(function(i){
+			/* $("#uploadedList .file").each(function(i){
 				str += "<input type='hidden' name='files["+i+"]' value='"+$(this).val()+"'>";
-			});
+			}); */
 			// form에 hidden태그들을 추가
 			$("#form1").append(str);
 			// 폼에 입력한 데이터를 서버로 전송
@@ -60,6 +59,7 @@
 	<div align="center">
 		<h1>홍보게시판 작성</h1>
 		<form name="form1" id="form1" method="post" action="${pageContext.request.contextPath }/board/insert.do">
+		<input type="hidden" id="m_id" name="m_id" value="${id }">
 	<div>
 		제목
 		<input name="ad_title" id="ad_title" size="80" placeholder="제목을 입력해주세요">
@@ -69,12 +69,12 @@
 		<textarea name="ad_content" id="ad_content" rows="4" cols="80" placeholder="내용을 입력해주세요"></textarea>
 	</div>
 	<div>
-		내용
+		도시
 		<textarea name="ad_city" id="ad_city" rows="4" cols="80" placeholder="내용을 ad_city"></textarea>
 	</div>
 	<div>
 		작성날짜
-		<input type="date" name="ad_date" id="ad_date">
+		<input type="date" name="ad_date" id="ad_date " value = "new Date().toISOString().substring(0, 10)">
 	</div>
 	
 	

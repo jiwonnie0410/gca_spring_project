@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.yedam.gca.board.dao.QnaBoardDao;
 import com.yedam.gca.board.service.QnaBoardService;
+import com.yedam.gca.board.vo.AdBoardVO;
 import com.yedam.gca.board.vo.BoardSearchVO;
 import com.yedam.gca.board.vo.QnaBoardVO;
 import com.yedam.gca.common.Paging;
@@ -29,19 +30,23 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	@Override
 	public List<QnaBoardVO> getBoardList(BoardSearchVO svo, Paging paging) {
 		// 출력건수
-		paging.setPageUnit(3);
+		paging.setPageUnit(10);
+		
 		// 페이지번호가 없으면 1로 초기화
 		if (paging.getPage() == null) {
 			paging.setPage(1);
 		}
+		
 		// 시작/마지막 레코드 번호
 		svo.setStart(paging.getFirst());
 		svo.setEnd(paging.getLast());
+		
 		// 전체 건수
 		paging.setTotalRecord(dao.getBoardCount(svo));
-
 		return dao.getBoardList(svo);
 	}
+	
+	
 	//관리자 조회
 	@Override
 	public List<QnaBoardVO> getBoardList2(BoardSearchVO svo, Paging paging) {
@@ -72,7 +77,8 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 
 	@Override
 	public int insertBoard(QnaBoardVO vo) {
-		return dao.insertBoard(vo);
+		int result = dao.insertBoard(vo);
+		return result;
 	}
 
 	@Override
@@ -80,18 +86,11 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 		return dao.updateBoard(vo);
 	}
 
+	//단건조회
 	@Override
-	public QnaBoardVO getBoard(QnaBoardVO vo) {
-		return dao.getBoard(vo);
+	public QnaBoardVO read(int qb_id) throws Exception {
+		return dao.read(qb_id);
 	}
-//test
-	/*
-	 * @Override public int getContentCnt(Map<String, Object> paramMap) { return
-	 * dao.getContentCnt(paramMap); }
-	 * 
-	 * @Override public List<QnaBoardVO> getContentList2(Map<String, Object>
-	 * paramMap) { return dao.getContentList(paramMap); }
-	 */
 
 	
 }

@@ -1,63 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ChallengeDAO" >
+<mapper namespace="ChallengeDAO">
 
-<!--  *********수림************* -->
+	<!-- *********수림************* 
+		1. 챌린지 목록 전체 불러오기 
+		2. 챌린지 1건 상세정보 불러오기
+		3. 로그인 유저의 챌린지 히스토리 목록 불러오기
+		4. 챌린지 참가시 챌린지 히스토리에 정보 저장 
+		-->
+
+	<!-- 1. 챌린지 목록 전체 불러오기 -->
 	<select id="getChallengeList" resultType="challenge">
-		SELECT	CL_NUM,
-				CL_STATUS,
-				CL_NAME,
-				CL_CONTENT,
-				LOWER(SPORTS1_CD) AS SPORTS1_CD,
-				CL_CNT,
-				CL_START_DTTM,
-				CL_END_DTTM,
-				CL_SCORE,
-				
-				CASE trunc(CL_END_DTTM) - trunc(SYSDATE) 
-					WHEN 0 THEN 'DAY'
-				ELSE TO_CHAR(trunc(CL_END_DTTM) - trunc(sysdate))
-				END AS GAP_DAY
-		FROM	CHALLENGE
+		SELECT CL_NUM,
+		CL_STATUS,
+		CL_NAME,
+		CL_CONTENT,
+		LOWER(SPORTS1_CD) AS SPORTS1_CD,
+		CL_CNT,
+		CL_START_DTTM,
+		CL_END_DTTM,
+		CL_SCORE,
+
+		CASE trunc(CL_END_DTTM) -
+		trunc(SYSDATE)
+		WHEN 0 THEN 'DAY'
+		ELSE TO_CHAR(trunc(CL_END_DTTM) -
+		trunc(sysdate))
+		END AS GAP_DAY
+		FROM CHALLENGE
 		WHERE CL_END_DTTM > SYSDATE
-		
-		ORDER BY CL_END_DTTM 
+
+		ORDER BY CL_END_DTTM
 	</select>
 	
+	<!-- 2. 챌린지 1건 상세정보 불러오기 -->
 	<select id="getChallenge" resultType="challenge">
-			SELECT	CL_NUM,
-					CL_STATUS,
-					CL_NAME,
-					CL_CONTENT,
-					LOWER(SPORTS1_CD) AS SPORTS1_CD,
-					CL_CNT,
-					CL_START_DTTM,
-					CL_END_DTTM,
-					CL_SCORE,
-					CASE trunc(CL_END_DTTM) - trunc(sysdate) 
-					WHEN 0 THEN 'DAY'
-				ELSE TO_CHAR(trunc(CL_END_DTTM) - trunc(sysdate))
-				END AS GAP_DAY
-		FROM	CHALLENGE
-		WHERE 	CL_NUM = #{cl_num}
+		SELECT CL_NUM,
+		CL_STATUS,
+		CL_NAME,
+		CL_CONTENT,
+		LOWER(SPORTS1_CD) AS SPORTS1_CD,
+		CL_CNT,
+		CL_START_DTTM,
+		CL_END_DTTM,
+		CL_SCORE,
+		CASE trunc(CL_END_DTTM) -
+		trunc(sysdate)
+		WHEN 0 THEN 'DAY'
+		ELSE TO_CHAR(trunc(CL_END_DTTM) -
+		trunc(sysdate))
+		END AS GAP_DAY
+		FROM CHALLENGE
+		WHERE CL_NUM = #{cl_num}
 	</select>
 	
+	<!-- 3. 로그인 유저의 챌린지 히스토리 목록 불러오기 -->
+	<select id="checkChallengeHistory" resultType="challengehistory">
+		SELECT		CL_NUM, 
+					M_ID, 
+					CLH_START_DTTM,
+					CLH_CNT, 
+					GET_CODE_NAME(CLH_STATUS_CD) AS "clh_status_cd"
+		FROM 		CHALLENGE_HIST 
+		WHERE 		M_ID = #{m_id}
+	
+	</select>
+
+	<!-- 4. 챌린지 참가시 챌린지 히스토리에 정보 저장 -->
 	<insert id="insertChallenge">
 		INSERT INTO CHALLENGE_HIST (
-							CL_NUM,
-							M_ID,
-							CLH_START_DTTM,
-							CLH_CNT,
-							CLH_STATUS_CD
-							)
-				VALUES (
-						#{cl_num},
-						#{m_id},
-						sysdate,
-						0,
-						'C01'
-						)			
+		CL_NUM,
+		M_ID,
+		CLH_START_DTTM,
+		CLH_CNT,
+		CLH_STATUS_CD
+		)
+		VALUES (
+		#{cl_num},
+		#{m_id},
+		sysdate,
+		0,
+		'C01'
+		)
 	</insert>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- //진영 -->
+
+	<!-- 1. 챌린지 목록 전체 불러오기 -->
+	<!-- <select id="getChallengehtList" resultType="challenge"> SELECT cl_num, 
+		c.clh_cnt, c.clh_start_dttm, c.m_id FROM challenge_hist c, members m WHERE 
+		c.m_id = m.m_id </select> -->
+
+
+
+
+
+
+
+	<select id="getChallengehtList" resultType="challenge">
+		select get_code_name(ch.clh_status_cd),
+		c.cl_name ,
+		ch.m_id ,
+		c.cl_status ,
+		c.cl_score 
+		from challenge_hist ch, challenge c, members m
+		where ch.cl_num = c.cl_num and m.m_id = ch.m_id;
+	</select>
 </mapper>

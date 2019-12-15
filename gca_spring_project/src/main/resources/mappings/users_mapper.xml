@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- Members_mapper.xml -->
+<!-- resultType : 결과반환 Object
+parameterType : 조회결과 Object -->
+<mapper namespace="MembersDAO">
+	<select id="getUserList" resultType="members" parameterType="members">
+		select M_ID, M_PASSWORD, M_NAME, M_NICK,M_IMAGE_CD,
+			M_XY,M_LOCATION,M_AGE,GENDER_CD,M_GRANT,
+			M_LEVEL_CD,M_STATUS_CD,M_RADIUS,M_NOTICE1,M_NOTICE2,M_NOTICE3,M_EMAIL
+		from MEMBERS
+		<where>
+			<if test="m_id != null and m_id != '' ">
+				m_id like '%' || #{m_id} || '%'
+			</if>
+			<if test="m_name != null and m_name != '' ">
+				and m_name like '%' || #{m_name} || '%'
+			</if>
+		</where>
+	</select>
+<!--단건조회  -->
+	<select id="getUser" parameterType="members" resultType="members">
+		select M_ID, M_PASSWORD, M_NAME, M_NICK,M_IMAGE_CD,
+			M_XY,M_LOCATION,M_AGE,GENDER_CD,M_GRANT,
+			M_LEVEL_CD,M_STATUS_CD,M_RADIUS, M_NOTICE1, M_NOTICE2, M_NOTICE3, M_EMAIL
+		from MEMBERS
+		where m_id=#{m_id}
+	</select>
+
+	<select id="getUserListMap" parameterType="members" resultType="map">
+		select M_ID, M_PASSWORD, M_NAME, M_NICK,M_IMAGE_CD,
+			M_XY,M_LOCATION,M_AGE,GENDER_CD,M_GRANT,
+			M_LEVEL_CD,M_STATUS_CD,M_RADIUS, M_NOTICE1, M_NOTICE2, M_NOTICE3, M_EMAIL
+		from MEMBERS
+	</select>
+
+<!-- 
+
+	수정
+	<update id="updateUser" parameterType="members">
+		update MEMBERS set
+		m_password = #{m_password},
+		m_name = #{m_name}
+		M_LOCATION = #{m_location}
+		where m_id = #m_{id}
+	</update> -->
+
+	<!-- 삭제 -->
+	<delete id="deleteUser" parameterType="members">
+		delete from MEMBERS 
+		where m_id = #{m_id}
+	</delete>
+
+</mapper>

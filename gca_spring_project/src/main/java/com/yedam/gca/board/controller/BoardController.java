@@ -9,6 +9,9 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +42,7 @@ public class BoardController {
 							@RequestParam(defaultValue="") String keyword,
 							@RequestParam(defaultValue="1") int curPage) throws Exception{
 		// 레코드의 갯수 계산
-		int count = boardService.countArticle(searchOption, keyword);
+				int count = boardService.countArticle(searchOption, keyword);
 		// 페이지 나누기 관련 처리
 		BoardPager boardPager = new BoardPager(count, curPage);
 		int start = boardPager.getPageBegin();
@@ -57,7 +60,7 @@ public class BoardController {
 		// ModelAndView - 모델과 뷰
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("map", map); // 맵에 저장된 데이터를 mav에 저장
-		mav.setViewName("askBoard/list"); // 뷰를 list.jsp로 설정
+		mav.setViewName("/user/askBoard/list"); // 뷰를 list.jsp로 설정
 		return mav; // list.jsp로 List가 전달된다.
 	}
 	
@@ -68,16 +71,14 @@ public class BoardController {
 	// value="", method="전송방식"
 	@RequestMapping(value="write.do", method=RequestMethod.GET)
 	public String write(){
-		return "askBoard/write"; // write.jsp로 이동
+		return "/user/askBoard/write"; // write.jsp로 이동
 	}
 	
 	// 02_02. 게시글 작성처리
 	@RequestMapping(value="insert.do", method=RequestMethod.POST)
-	public String insert(@ModelAttribute AdBoardVO vo, HttpSession session) throws Exception{
-		// session에 저장된m_id
-		/* String m_id = (String) session.getAttribute("m_id"); */ //로그인 완성하면 주석 풀기
-		//vo.setM_id(m_id); //로그인 완성하면 주석 풀기
-		vo.setM_id("rr99999");
+	public String insert(@ModelAttribute AdBoardVO vo) throws Exception{
+		UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		vo.setM_id(user.getUsername()); 
 		boardService.create(vo);
 		return "redirect:adlist";
 	}
@@ -93,7 +94,7 @@ public class BoardController {
 		// 모델(데이터)+뷰(화면)를 함께 전달하는 객체
 		ModelAndView mav = new ModelAndView();
 		// 뷰의 이름
-		mav.setViewName("askBoard/view");
+		mav.setViewName("/user/askBoard/view");
 		// 뷰에 전달할 데이터
 		// 댓글의 수 : 댓글이 존재하는 게시물의 삭제처리 방지하기 위해
 		mav.addObject("count", replyService.count(ad_num)); 
