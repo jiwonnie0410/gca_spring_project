@@ -60,7 +60,7 @@
 회원랭킹:  ${list.rank}
 
 랭킹 10등 넘어가면 순위권외로 출력됨,
-나의 랭킹은 현재 세션의 'id' 받아옴
+나의 랭킹은 로그인 정보에서 받아옴
  -->
 <div class="container">
 	<div class="content-div">
@@ -76,10 +76,10 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-				<c:forEach items="${scoreList}" var="list">
+				<c:forEach items="${rankList}" var="list">
 				    <tr>
 				      <th style="text-align: center">${list.rank }</th>
-				      <td style="width: 40px"><img src="${pageContext.request.contextPath }/resources/images/icon/profile1.png"></td>
+				      <td style="width: 40px"><img src="${pageContext.request.contextPath }/resources/images/icon/${list.m_image_cd }.png"></td>
 				      <td>${list.m_nick}</td>
 				      <td><img src="${pageContext.request.contextPath }/resources/images/icon/heart.png">${list.sch_score }</td>
 				    </tr>
@@ -89,13 +89,16 @@
 		<hr>
 		<div class="myRank">
 			<span class="title">나의 랭킹</span>
-			<c:forEach items="${scoreList}" var="list">
-				<c:if test="${list.m_id eq id }">
-					<img src="${pageContext.request.contextPath }/resources/images/icon/profile2.png"> ${list.m_id } 
-					/ <img src="${pageContext.request.contextPath }/resources/images/icon/heart.png">${list.sch_score } 
-					/ ${list.rank}
-				</c:if>
-			</c:forEach>
+<%-- 				<c:choose> --%>
+<%-- 					<c:when test="${myRank.m_id eq id }"> --%>
+<%-- 						<img src="${pageContext.request.contextPath }/resources/images/icon/profile2.png"> ${myRank.m_id }  --%>
+<%-- 						/ <img src="${pageContext.request.contextPath }/resources/images/icon/heart.png">${myRank.sch_score }  --%>
+<%-- 						/ ${myRank.rank} --%>
+<%-- 					</c:when> --%>
+<%-- 					<c:otherwise> --%>
+<!-- 						목록에 없음!! -->
+<%-- 					</c:otherwise> --%>
+<%-- 				</c:choose> --%>
 		</div>
 		</div>
 	</div>

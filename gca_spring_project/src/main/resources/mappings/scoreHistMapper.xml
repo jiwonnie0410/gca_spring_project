@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ChallengeHistDAO" >
+<mapper namespace="ScoreHistDAO" >
 
 <!--  ************** 수림 **************** -->
 
-	<select id="getScoreList" resultType="scorehistory">
-	<![CDATA[     
+	<select id="getRankList" resultType="scorehistory">
 		SELECT		M_ID,
 					M_NICK,
 					M_IMAGE_CD,
 					RANK,
 					SCH_SCORE
 		FROM 		V_USER_RANK
-	]]>
 	</select>
+	
+	<select id="getMyRank" resultType="scorehistory">  
+		SELECT		M_ID,
+					M_NICK,
+					M_IMAGE_CD,
+					RANK,
+					SCH_SCORE
+		FROM 		V_USER_RANK
+		WHERE		M_ID = 'user11'
+
+	</select>
+
+	
+	
 </mapper>

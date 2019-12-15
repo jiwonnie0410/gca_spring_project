@@ -14,5 +14,6 @@ public class ScoreHistVO {
 	
 	// 수림추가
 	private String rank;						// 랭킹순위  !DB에 없음    
-	private String m_nick;						// 랭킹순위  !DB에 없음    
+	private String m_nick;						// 유저 닉네임  !조인용
+	private	String m_image_cd;					// 유저 프로필사진 !조인용
 }

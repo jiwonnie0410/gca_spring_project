@@ -25,20 +25,6 @@ public class ChallengeHistController {
 	
 	@Autowired ChallengeHistService service;
 	
-	///////////////// 수림 ///////////////////////////
-	
-	//스코어 목록 조회(유저 랭킹 페이지)
-	@RequestMapping("history/rank")
-	public String getScoreList(ChallengeHistVO vo, Model model, Authentication auth) {
-		UserDetails userDetails = (UserDetails) auth.getPrincipal();	//로그인한 유저 정보 담음
-		String id = userDetails.getUsername(); 	//로그인한 유저 id 담음
-		vo.setM_id(id);
-		model.addAttribute("scoreList", service.getScoreList());
-		return "/user/history/rank";
-	}
-	
-	
-	
 	/////////진영
 	//챌린지 목록
 	 @RequestMapping(value = "history/challengeList") 

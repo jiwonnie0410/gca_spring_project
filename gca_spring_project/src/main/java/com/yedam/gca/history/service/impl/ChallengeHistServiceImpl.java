@@ -11,21 +11,9 @@ import com.yedam.gca.history.service.ChallengeHistService;
 import com.yedam.gca.history.vo.ChallengeHistVO;
 
 @Service
-public class ChallengeHistServiceImpl implements ChallengeHistService{
+public class ChallengeHistServiceImpl implements ChallengeHistService {
 
 	@Autowired ChallengeHistDAO dao;
-	
-	////////////// 수림 /////////////
-	
-	// 스코어 목록 출력(랭킹)
-	@Override
-	public List<ChallengeHistVO> getScoreList() {
-		return dao.getScoreList();
-	}
-	
-	
-	
-	
 	
 	
 	//진영
@@ -34,5 +22,14 @@ public class ChallengeHistServiceImpl implements ChallengeHistService{
 		public List<ChallengeHistVO> getChallengehtList(ChallengeHistVO vo){
 			return dao.getChallengehtList(vo);
 		}
+
+
+
+
+
+
+
+
+
 	
 }

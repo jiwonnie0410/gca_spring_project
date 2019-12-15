@@ -45,13 +45,7 @@ function checkChallengeHistory() {
 }
 // 챌린지 참가여부에 따라 챌린지목록 출력처리 
 function checkStatusHandler(data) {
-	$("#cl_num").val(data.cl_num);
-	$("#m_id").val(data.m_id);
-	$("#clh_start_dttm").val(data.clh_start_dttm);
-	$("#clh_cnt").val(data.clh_cnt);
-	$("#clh_status_cd").val(data.clh_status_cd);
-	
-	function showJoinIcon();
+	console.log(data);
 }
 
 </script>
@@ -81,14 +75,7 @@ function checkStatusHandler(data) {
 </head>
   
   <body>
-  <form id ="challengeHistForm">
-	<input id="cl_num">
-	<input id="m_id">
-	<input id="clh_start_dttm">
-	<input id="clh_cnt">
-	<input id="clh_status_cd">
-  </form>
-  
+
     <div class="container">
     <span class="title">챌린지 목록</span>
       <div class="row">

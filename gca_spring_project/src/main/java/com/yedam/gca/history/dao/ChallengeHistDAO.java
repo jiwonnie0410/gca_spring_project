@@ -14,14 +14,6 @@ public class ChallengeHistDAO {
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
-	//************* 수림 **************//
-	
-	/// 스코어 목록 조회(랭킹)
-	public List<ChallengeHistVO> getScoreList() {
-		return mybatis.selectList("ChallengeHistDAO.getScoreList");
-	}
-	
-	
 	
 	//진영
 		// 챌린지 히스로리 목록 출력
