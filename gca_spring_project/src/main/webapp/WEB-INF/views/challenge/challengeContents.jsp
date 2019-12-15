@@ -32,23 +32,24 @@
 <script>
 //아작스용
 $(function(){
-	insertChallenge(); //챌린지 참여시 디비에 이력남김
+	insertChallenge(); // 참가하기 버튼 클릭시; 기본챌린지->참가완료, 스페셜챌린지-> 결제하기 창으로 이동
 	
 	function insertChallenge(){
-		//기본 챌린지 참가버튼
+		//기본챌린지 참가버튼
 	    $("#basic-btn").click(function(){
 	    	if ( $(this).attr('class')!='join-btn start-challenge' ) {
-	    		$("#basicModal").modal(); //모달 팡법
+	    		$("#basicModal").modal(); //기본챌린지용 모달 팝업
 	    	}
 	    });
 		
+		// 기본챌린지 모달에서 "join"버튼 클릭 -> 챌린지 참가완료 
 	    $("#basic-join-add").click(function(){
 	    	$("#basic-btn").toggleClass('start-challenge');
 		    $("#basic-btn").hasClass('start-challenge') ?
 			  $("#basic-btn").text('참가중') :
-			  $("#basic-btn").text('참가'); //버튼 클릭시 참가중으로 변경
+			  $("#basic-btn").text('참가하기'); //모달의 "join"버튼 클릭시 페이지상 참가버튼이 참가중으로 변경
 	    	
-			// 아작스 시작
+			// 아작스 시작; ChallengeHist 테이블에 참가이력 추가
 	    	var param = JSON.stringify($("#frm").serializeObject());; //디비에 넣을값; 해당 챌린지정보
 	    	console.log(param + "sdfsd");
 	    	
@@ -58,32 +59,50 @@ $(function(){
 	    		dataType: "json",
 	    		data: param,
 	    		contentType: "application/json"
-	    		//success :  성공시 함수 
 	    	});
-	
 	    });
 	
 	    //스페셜 챌린지 참가버튼
 	    $("#special-btn").click(function(){
 	    	if ( $(this).attr('class')!='join-btn start-challenge' ) {
-	       		 $("#specialModal").modal();
-	       		 console.log("모달출력"); //모달 팝업
+	       		 $("#specialModal").modal();	// 스페셜챌린지 모달팝업
 	       }
 	    });
-	
+		
+	    // 스페셜챌린지 모달에서 "join"클릭 -> 결제페이지로 이동
 	    $("#special-join-add").click(function(){
 	    	$("#special-btn").toggleClass('start-challenge');
 	
 			$("#special-btn").hasClass('start-challenge') ?
 				$("#special-btn").text('참가중') :
-				$("#special-btn").text('참가');
-				
+				$("#special-btn").text('참가하기'); //모달의 "join"버튼 클릭시 페이지상 참가버튼이 참가중으로 변경
 	    });	
 	};
-	
 });
 
 </script>
+
+<style>
+
+.image-div {
+	position : relative;
+}
+
+.sports-div img {
+	border-radius: 10px;
+}
+
+.join-mark {
+	position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+.start-challenge{
+	background: #59b6a3;
+}
+
+</style>
 
 </head>    
 <body>
@@ -97,7 +116,20 @@ $(function(){
 			<div class="col">
 				<div class="content-div">
 					<!-- 챌린지 기본옵션 시작 -->
-					<img src="${pageContext.request.contextPath }/resources/images/sports/${challenge.sports1_cd }.jpg" width="100%" height="200px"> 
+					<div class="image-div">
+						<div class="sports-div">
+							<img src="${pageContext.request.contextPath }/resources/images/sports/${challenge.sports1_cd }.jpg" width="100%" height="200px"> 
+						</div>
+							<!-- 유저가 참가중인 챌린지는 참여중 마크 띄움 -->
+	              			<c:forEach items="${myHistory}" var ="myList">
+	              			<c:if test="${challenge.cl_num == myList.cl_num }">
+		              			<div class="join-mark">
+									<img src="${pageContext.request.contextPath }/resources/images/icon/join.png">
+		              			</div>
+	              			</c:if>         
+							</c:forEach>
+							<!-- 유저 참가중 마크 끝 -->
+					</div>
 					<span><fmt:formatDate
 							value="${challenge.cl_start_dttm }" type="date" /> ~ <fmt:formatDate
 							value="${challenge.cl_end_dttm }" type="date" />
@@ -134,14 +166,23 @@ $(function(){
 					<!-- 보증금설명/포인트 설명 끝 -->
 					
 					<!-- 기본/스페셜챌린지버튼 시작 -->
-					<c:choose>
-						<c:when test="${challenge.cl_status == 'basic' }">
-							<button class="join-btn" id="basic-btn">참가하기</button>
-						</c:when>
-						<c:otherwise>
-							<button class="join-btn" id="special-btn">참가하기</button>
-						</c:otherwise>
-					</c:choose>
+	              	<c:forEach items="${myHistory}" var ="myList">
+						<c:if test="${challenge.cl_num == myList.cl_num}">
+							<button class="join-btn start-challenge">참가중</button>
+							<!--챌린지 참가용 버튼 시작 -->
+							<c:if test="${challenge.cl_num != myList.cl_num}">
+								<c:choose>
+									<c:when test="${challenge.cl_status == 'basic' }">
+										<button class="join-btn" id="basic-btn">참가하기</button>
+									</c:when>
+									<c:when test="${challenge.cl_status == 'special' }">
+										<button class="join-btn" id="special-btn">참가하기</button>
+									</c:when>
+								</c:choose>
+							</c:if>
+							<!--챌린지 참가용 버튼 끝 -->
+						</c:if>
+					</c:forEach>
 					<!-- 기본/스페셜챌린지버튼 끝 -->
 				</div>
 			</div>   

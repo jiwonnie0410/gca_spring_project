@@ -40,16 +40,20 @@
 <script>
   
 $(function() {
+	payGoGo(); // 1. 결제버튼 클릭시 결제창 띄움, 결제완료시 DB에 결제정보, 챌린지 참여정보 입력
 	
+});
+
+// 1. 결제버튼 클릭시 결제창 띄움, 결제완료시 DB에 결제정보, 챌린지 참여정보 입력 
+function payGoGo() {
 	$("#payBtn").on("click", function(){
-		var challengeName = "${challenge.cl_name}";  //챌린지이름
-		var payPrice = $('#checkRange').text()+"000"; //사용자가 정한 보증금
+		var challengeName = "${challenge.cl_name}";  		//챌린지이름
+		var payPrice = $('#checkRange').text()+"000"; 		//사용자가 정한 보증금
 		payPrice *= 1; //형변환용
 		
-		//실제 복사하여 사용시에는 모든 주석을 지운 후 사용하세요
 		BootPay.request({
 			price: payPrice, //실제 결제되는 가격
-			application_id: "5de9c9d85ade160030cc4a87", //사용자고유키 - 수림문의
+			application_id: "5de9c9d85ade160030cc4a87", //부트페이 사용자고유키 - 수림문의
 			name: "${challenge.cl_name}", //결제창에서 보여질 이름
 			pg: '',  
 			method: '', //결제수단, 입력하지 않으면 결제수단 선택부터 화면이 시작합니다.
@@ -106,13 +110,27 @@ $(function() {
 		}).done(function (data) {
 			//결제가 정상적으로 완료되면 수행됩니다
 			//비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
+			
+			// 아작스 시작; ChallengeHist 테이블에 참가이력 추가
+	    	var param = JSON.stringify($("#frm").serializeObject());; //디비에 넣을값; 해당 챌린지정보
+	    	console.log(param + "sdfsd");
+	    	
+	    	$.ajax({
+	    		url: "ajax/insertChallenge.json",
+	    		method: "post",
+	    		dataType: "json",
+	    		data: param,
+	    		contentType: "application/json"
+	    	});
+			
+			
 			console.log(data);
 			alert("결제완료! 챌린지 목록으로 이동합니다");
 			location.href="list";
 		});
 		
 	});
-});
+}
 
 
 </script>
@@ -216,6 +234,10 @@ $(function() {
 				</div>
 			</div>
 		</div>
+		<form id="frm">
+			<input name="cl_num" type="hidden" value="${challenge.cl_num }">
+			<input name="m_id" type="hidden" value=${id }>
+		</form>
 	<!-- 결제버튼, 금액 주입은 addOption JS 참조 -->
 	<button id="payBtn" class="pay-btn"><p id="paynow"></p></button>
 	</div>

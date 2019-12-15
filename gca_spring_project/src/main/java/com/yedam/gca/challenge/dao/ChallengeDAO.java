@@ -27,8 +27,8 @@ public class ChallengeDAO  {
 	}
 	
 	// 3. 사용자 챌린지 참가여부 확인 
-	public ChallengeHistVO checkChallengeHistory(ChallengeHistVO vo) {
-		return mybatis.selectOne("ChallengeDAO.checkChallengeHistory", vo);
+	public List<ChallengeVO> checkChallengeHistory(ChallengeHistVO vo) {
+		return mybatis.selectList("ChallengeDAO.checkChallengeHistory", vo);
 	}
 	
 	// 4. 챌린지 참가등록, (챌린지 히스토리에 내역남김) 

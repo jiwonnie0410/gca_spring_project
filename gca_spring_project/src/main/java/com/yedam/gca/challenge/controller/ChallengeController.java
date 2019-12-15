@@ -19,11 +19,12 @@ public class ChallengeController {
 	@Autowired ChallengeService service;
 	
 	///////////////////////////////수림 ////////////////////////////
-	//챌린지 목록 조회
+	// 1. 챌린지 목록 조회
 	@RequestMapping("challenge/list")
 	public String getChallengeList(Model model, ChallengeHistVO vo, Authentication auth) {		
+		// 챌린지 전체목록 불러오기
 		model.addAttribute("challengeList", service.getChallengeList());
-		
+		// 유저가 참가한 챌린지 기록 불러오기
 		UserDetails userDetails = (UserDetails) auth.getPrincipal();	//로그인한 유저 정보 담음
 		String id = userDetails.getUsername(); 	//로그인한 유저 id 담음
 		vo.setM_id(id);
@@ -32,34 +33,32 @@ public class ChallengeController {
 		return "/user/challenge/challenge";
 	}
 	
-	//챌린지 단건 조회
+	//2. 챌린지 단건 조회
 	@RequestMapping("challenge/contents")
 	public String getChallenge(@RequestParam(value="num", defaultValue = "", required = true) 
-			int num, Model model, ChallengeVO vo ) {
+			int num, Model model, ChallengeVO vo, ChallengeHistVO hvo, Authentication auth ) {
+		// 유저가 클릭한 챌린지 단건의 상세정보 불러옴
 		vo.setCl_num(num);
 		model.addAttribute("challenge", service.getChallenge(vo)); 
+		
+		// 유저가 참가한 챌린지 기록 불러오기
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();	//로그인한 유저 정보 담음
+		String id = userDetails.getUsername(); 	//로그인한 유저 id 담음
+		hvo.setM_id(id);
+		model.addAttribute("myHistory", service.checkChallengeHistory(hvo));
 		
 		return "/user/challenge/challengeContents";
 	}
 	
-//	@RequestMapping("/ajax/checkChallengeHistory.json")  
-//	@ResponseBody
-//	// 사용자 챌린지 참가여부 확인 
-//	public ChallengeHistVO checkChallengeHistory(ChallengeHistVO vo, Authentication auth) {
-//		UserDetails userDetails = (UserDetails) auth.getPrincipal();	//로그인한 유저 정보 담음
-//		String id = userDetails.getUsername(); 	//로그인한 유저 id 담음
-//		vo.setM_id(id);
-//		return service.checkChallengeHistory(vo);
-//	}
 	
-	//챌린지 참가등록, (챌린지 히스토리에 내역남김) 
+	// 3.챌린지 참가등록, (챌린지 히스토리에 내역남김) 
 	@RequestMapping(value="/challenge/ajax/insertChallenge.json", consumes ="application/json")
 	@ResponseBody
 	public void insertChallenge(@RequestBody ChallengeHistVO vo) {
 		service.insertChallenge(vo);
 	}
 	
-	//스페셜챌린지 결제페이지
+	// 4. 스페셜챌린지 결제페이지
 	@RequestMapping("challenge/payment")
 	public String challengePayment(@RequestParam(value="num", defaultValue="", required = true) 
 	int num, Model model, ChallengeVO vo) {
