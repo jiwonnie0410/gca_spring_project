@@ -24,7 +24,7 @@
 	<script src="../resources/js/mihy/swiper.min.js"></script>
 
 	<!-- private : Description Action -->
-	<script type="text/javascript" src="../resources/js/mihy/s_end_room.js"></script>
+	<script type="text/javascript" src="../resources/js/mihy/s_search.js"></script>
 	<link rel="stylesheet" href="../resources/css/mihy/s_search.css">
 
 </head>
@@ -34,6 +34,7 @@
 
 <nav class="fixed-top">
 <div align="center" class="mt-2 mb-2"><h4>마감된 반짝방</h4></div>
+<input type="hidden" id="endroom" value="endroom">
 
 <!-- <nav class="sticky-top"> -->
 <form action="getSgListEnd" name="searchSport" id="searchSport" method="post">
@@ -50,7 +51,7 @@
 </form>
 </nav>
 
-<table class="table table-striped" id="tb1" style="margin-top:95px">
+<table class="table table-striped endroom" id="tb1" style="margin-top:95px">
 	<c:forEach items="${ list }" var="sg">
 	<tr class="tr ${sg.sg_num}">
 		<td class="td1">

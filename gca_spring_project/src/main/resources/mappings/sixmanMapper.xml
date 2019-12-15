@@ -51,7 +51,7 @@
 				get_code_name(SKILL_CD) SKILL_CD,
 				AGE_RANGE,
 				get_code_name(GENDER_CD) GENDER_CD,
-				get_code_name(STATUS_CD) STATUS_CD
+				get_code_name(STATUS_CD) STATUS_CD,
 				DIS
 		FROM
 			 	(
@@ -116,7 +116,7 @@
 				get_code_name(SKILL_CD) SKILL_CD,
 				AGE_RANGE,
 				get_code_name(GENDER_CD) GENDER_CD,
-				get_code_name(STATUS_CD) STATUS_CD
+				get_code_name(STATUS_CD) STATUS_CD,
 				DIS
 		FROM
 			 	(
@@ -124,7 +124,7 @@
 				FROM 	(
 						SELECT B.*, CALC_DISTANCE(
              							SUBSTR(SIX_XY, 0, INSTR(SIX_XY, ',', 1, 1)-1),
-             							SUBSTR(SIX_XY, INSTR(SIX_XY, ',', 1, 1)+2, SIXNGTH(SIX_XY)),
+             							SUBSTR(SIX_XY, INSTR(SIX_XY, ',', 1, 1)+2, LENGTH(SIX_XY)),
              							SUBSTR(#{m_xy}, 0, INSTR(#{m_xy}, ',', 1, 1)-1),
              							SUBSTR(#{m_xy}, INSTR(#{m_xy}, ',', 1, 1)+2, LENGTH(#{m_xy}))
              						 ) DIS

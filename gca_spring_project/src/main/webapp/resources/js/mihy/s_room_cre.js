@@ -5,7 +5,7 @@ $(document).ready(function(){
 	$('#sg_sport_div .dropdown-menu li').bind('click', sport_dropdown); //운동종목 드롭다운
 	$('#sg_skill_div .dropdown-menu li').bind('click', skill_dropdown); //숙련도 드롭다운
 	$('#sg_finish_div .dropdown-menu li').bind('click', end_cnt_dropdown); //마감인원 드롭다운
-	$('#sg_location').on('click', sgAddr); //주소 입력
+	$('#map_location').on('click', addr); //주소 입력
 	
 	$('#btn_cre').on('click', valid); //유효성 검사
 	$('#G03').attr('checked','checked'); //옵션 null값 기본 전송
@@ -191,7 +191,7 @@ function day_valid(){
 //장소 유효성 검사
 function location_valid(){
 	$('#sg_location_valid').show();
-	if( $('#sg_location').val() == "" || $('#sg_location').val() == null){
+	if( $('#map_location').val() == "" || $('#map_location').val() == null){
 		$('#sg_location_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>만날 장소를 입력해 주세요.');
 		return false;
 	}

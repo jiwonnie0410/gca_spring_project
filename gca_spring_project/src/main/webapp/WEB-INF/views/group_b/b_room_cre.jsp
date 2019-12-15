@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>반짝 방 생성하기</title>
+<title>동호회 매치 방 생성하기</title>
 
 	<!-- Bootstrap -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,8 +29,8 @@
 	
 	<!-- private : Description Action -->
 	<script type="text/javascript" src="../resources/js/mihy/kakao_map.js"></script>
-	<script type="text/javascript" src="../resources/js/mihy/s_search_cre.js"></script>
-	<link rel="stylesheet" href="../resources/css/mihy/s_search_cre.css">
+	<script type="text/javascript" src="../resources/js/mihy/b_room_cre.js"></script>
+	<link rel="stylesheet" href="../resources/css/mihy/b_room_cre.css">
 	
 
 	
@@ -39,25 +39,25 @@
 <body>
 
 <nav class="fixed-top">
-	<div align="center" class="mt-2 mb-2"><h4>반짝방 만들기</h4></div>
+	<div align="center" class="mt-2 mb-2"><h4>동호회 매치 방 만들기</h4></div>
 </nav>
 
 <form action="creRoom" method="post" id="frm" style="margin-top:40px">
 
 	<div class="row mr-2 ml-2 mt-3 mb-3">
-		<input type="text" class="form-control sg_name" id="sg_name" placeholder="반짝 방 이름" name="sg_name">
-		<span id="sg_name_valid" class="sg_valid pl-2"></span>
+		<input type="text" class="form-control bg_name" id="bg_name" placeholder="동호회 매치 방 이름" name="bg_name">
+		<span id="bg_name_valid" class="bg_valid pl-2"></span>
 	</div>
 	
 	<div class="row mr-2 ml-2 mt-3 mb-3">
 	<div class="txc-textbox mr-2">
-		<div id="sg_sport_div" class="btn-group">
-			<input type="hidden" name="sports1_cd" id="sg_sport_val">
-			<button type="button" id="sg_sport" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<div id="bg_sport_div" class="btn-group">
+			<input type="hidden" name="sports2_cd" id="bg_sport_val">
+			<button type="button" id="bg_sport" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				운동 종목 
 				<span class="caret"></span>
 			</button>
-			<ul class="dropdown-menu sg_sport_click">
+			<ul class="dropdown-menu bg_sport_click">
 				<c:forEach items="${sports_list }" var="list">
 					<li data-cdid="${list.cd_id }">${list.cd_name }</li>
 				</c:forEach>
@@ -66,9 +66,9 @@
 	</div>
 
 	<div class="txc-textbox">
-		<div id="sg_skill_div" class="btn-group">
-			<input type="hidden"  name="skill_cd" id="sg_skill_val">
-			<button type="button" id="sg_skill" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<div id="bg_skill_div" class="btn-group">
+			<input type="hidden"  name="skill_cd" id="bg_skill_val">
+			<button type="button" id="bg_skill" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				숙련도 
 				<span class="caret"></span>
 			</button>
@@ -79,83 +79,55 @@
 			</ul>
 		</div>
 	</div>
-	<span id="sg_sport_valid" class="sg_valid pl-3"></span>
+	<span id="bg_sport_valid" class="bg_valid pl-3"></span>
 	</div>
 	
 	<div class="row mr-2 ml-2 mt-3 d_day">
 		<span class="ml-2 mr-5">마감 날짜</span>
-		<input type="date" id="sg_end_day"><br>
+		<input type="date" id="bg_end_day"><br>
 		<span class="ml-2 mr-5 mt-2">마감 시간</span>
-		<input class="mt-2" type="time" id="sg_end_time">
-		<input type="hidden" name="sg_end_dttm" id="sg_end">
+		<input class="mt-2" type="time" id="bg_end_time">
+		<input type="hidden" name="bg_end_dttm" id="bg_end">
 	</div>
-	<span id="sg_end_valid" class="sg_valid pl-3"></span>
+	<span id="bg_end_valid" class="bg_valid pl-3"></span>
 
 	<div class="row mr-2 ml-2 mt-3 mb-3 location" style="padding: 0px">
-		<input type="text" class="form-control" id="sg_location" name="sg_location" placeholder="만날 장소를 정해 주세요." readonly>
-		<span id="sg_location_valid" class="sg_valid pl-3"></span>
+		<input type="text" class="form-control" id="map_location" name="bg_location" placeholder="만날 장소를 정해 주세요." readonly>
+		<span id="bg_location_valid" class="bg_valid pl-3"></span>
 	</div>
-	<input type="hidden" name="sg_xy" id="sg_xy">
+	<input type="hidden" name="bg_xy" id="map_xy">
 	<div id="map"></div>
 	
 	
-	<div class="txc-textbox mr-2 ml-2 mt-3">
-		<div id="sg_finish_div" class="btn-group">
-			<input type="hidden"  name="sg_end_cnt" id="sg_finish_val">
-			<button type="button" class="btn btn-default dropdown-toggle" id="sg_finish" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				참여 인원 
-				<span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu">
-				<li>2명</li>
-				<li>3명</li>
-				<li>4명</li>
-			</ul>
-		</div>
-		<span id="sg_finish_valid" class="sg_valid pl-1"></span>
-	</div>
+	<input type="hidden"  name="bg_end_cnt" id="bg_finish_val" value="2">
 	
-	<div class="row mr-2 ml-2 mt-2 mb-2 pt-2 sg_gender">
+	<span class="ml-2" id="pencil_title"><i class="fas fa-pencil-alt mr-2"></i>몇 대 몇으로 시합할 지 입력해 주세요.</span><br>
+	<div class="row mr-2 ml-2 mb-3 d_day">
+		<span class="ml-2 mr-5">구성 인원</span>
+		<input type="text" name="bg_team_cnt" id="bg_team_cnt" class="mr-3"> vs <b><span id="bg_team_cnt_out" class="ml-4 mr-2"></span></b> 매치
+	</div>
+	<span id="bg_teamcnt_valid" class="bg_teamcnt pl-3"></span>
+	
+	<span class="mt-2" id="pencil_title"><i class="fas fa-pencil-alt mr-2"></i>팀 성별 구성을 선택해 주세요.</span><br>
+	<div class="row mr-2 ml-2 mb-2 pt-2 bg_gender">
 		<c:forEach items="${gender_list }" var="list">
 			<label class="radio_label ml-3">&nbsp;&nbsp;&nbsp;${list.cd_name }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input class="sg_gender_val" type="radio" name="gender_cd" id="${list.cd_id }" value="${list.cd_id }">
+				<input class="bg_gender_val" type="radio" name="gender_cd" id="${list.cd_id }" value="${list.cd_id }">
 				<span class="checkmark"></span>
 			</label>
 		</c:forEach>
 	</div>
-	<span id="sg_gender_valid" class="sg_valid pl-3"></span>
+	<span id="bg_gender_valid" class="bg_valid pl-3"></span>
 
 
-	<span class="ml-2" id="age_title"><i class="fas fa-pencil-alt mr-2"></i>연령대를 선택해 주세요.</span><br>
+	<span class="ml-2" id="pencil_title"><i class="fas fa-pencil-alt mr-2"></i>연령대를 선택해 주세요.</span><br>
 	<p class="mr-2 ml-2 mt-1" id="age_text">
 		<span class="age-val mr-1" id="age_lower"></span>
 		<span class="age-val" id="age_upper"></span>
 	</p>
-	<div id="sg_age_bar" class="mr-4 ml-4 mt-2 mb-3"></div>
-	<input type="hidden" id="sg_age" name="age_range">
-	
-	
-	<div id="sg_option1" class="collapse">
-		<table>
-			<tr>
-				<td><input class="check-box" type="checkbox" id="sg_option1_box" name="sg_option" value="도구지참"></td>
-				<td class="check-box-text">개인 도구 지참 <span class="badge badge-warning mr-1 ml-1">예</span><span> 농구공, 라켓, 셔틀콕 등</span></td>
-			</tr>
-		</table>
-	</div>
-	
-	<div id="sg_option2" class="collapse">
-		<table>
-			<tr>
-				<td><input class="check-box" type="checkbox" id="sg_option2_box" name="sg_option" value="반려동물"></td>
-				<td class="check-box-text">반려 동물 동반</td>
-			</tr>
-		</table>
-	</div>
-	
-	<div class="hidden" style="display:none;">
-		<input class="check-box" type="checkbox" id="sg_option3_box" name="sg_option" value="">
-	</div>
+	<div id="bg_age_bar" class="mr-4 ml-4 mt-2 mb-3"></div>
+	<input type="hidden" id="bg_age" name="age_range">
+
 	
 	<input type="button" class="btn btn-default btn2 mt-2" id="btn_cre" value="방 생성">
 	

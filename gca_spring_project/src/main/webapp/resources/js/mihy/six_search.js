@@ -21,16 +21,16 @@ $(document).ready(function(){
 	
 	//방 참여
 	$('.table').on('click', '.tr', function(){
-		var sg_num = $(this).attr("class").substring(3);
-		var sg_dttm = $(this).find('p.p8').text();
+		var six_num = $(this).attr("class").substring(3);
+		var six_dttm = $(this).find('p.p8').text();
 		
 		//선택한 방에 참여하기 전 참여 인원 파악하고 참여 여부 묻기
 		$.ajax({
-			url: "sgValidIn/" + sg_num,
+			url: "sixValidIn/" + six_num,
 			dataType: "json",
 			contentType : "application/json",
 			success: function(result){
-				move_room(result, sg_dttm);
+				move_room(result, six_dttm);
 			} 
 		});
 	});
@@ -82,9 +82,9 @@ function scroll(){
 		
 		var url;
 		if( $('.table').attr('class').substr(-7) != 'endroom'){
-			url = "getSgList/";
+			url = "getSixList/";
 		} else if( $('.table').attr('class').substr(-7) != 'endroom' ){
-			url = "getSgListEnd/";
+			url = "getSixListEnd/";
 		}
 		console.log(url);
 		
@@ -135,27 +135,27 @@ function p8(){
 }
 
 //방 참여
-function move_room(result, sg_dttm){
+function move_room(result, six_dttm){
 
 	if(result.result_msg == 'already'){ //마감이든 아니든 already면 참여
-		location.href='alreadyIn?sg_num='+result.pk_num;
-	} else if(sg_dttm == "마감"){ //마감이면 무조건(full이나 yes나 모두)
+		location.href='alreadyIn?six_num='+result.pk_num;
+	} else if(six_dttm == "마감"){ //마감이면 무조건(full이나 yes나 모두)
 		alert("마감 시간이 초과되어 참여하실 수 없습니다.");
 		return false;
-	} else if(sg_dttm != "마감" && result.result_msg == 'full'){
+	} else if(six_dttm != "마감" && result.result_msg == 'full'){
 		alert("모집 인원이 초과되어 참여하실 수 없습니다. 인원 변동이 발생하면 참여해 주세요.");
 		return false;
-	} else if(sg_dttm != "마감" && result.result_msg == 'yes'){
-		var con = confirm("선택한 반짝에 참여하시겠습니까?");
+	} else if(six_dttm != "마감" && result.result_msg == 'yes'){
+		var con = confirm("선택한 용병 모집에 참여하시겠습니까?");
 		if(con){
 			msg = {
 					cmd : "join",
 					id : result.m_id,
 					msg : "<"+result.m_id+"님이 참가하셨습니다.>",
-					sg_num : result.pk_num
+					six_num : result.pk_num
 				}
 				webSocket.send(  JSON.stringify( msg )   );
-			location.href='roomIn?sg_num='+result.pk_num;
+			location.href='roomIn?six_num='+result.pk_num;
 		}
 	}
 }

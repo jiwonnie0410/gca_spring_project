@@ -131,7 +131,7 @@ public class SixmanController {
 		model.addAttribute("skill_list", codeService.getCodeList(vo));
 		vo.setCd_group("GENDER_CD");
 		model.addAttribute("gender_list", codeService.getCodeList(vo));
-		return "/user/group_b/b_room_cre";
+		return "/user/group_six/six_room_cre";
 	}
 	
 	//방 생성

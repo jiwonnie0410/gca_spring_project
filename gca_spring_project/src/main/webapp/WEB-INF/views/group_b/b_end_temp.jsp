@@ -3,13 +3,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
-	<c:forEach items="${ list }" var="sg">
-	<tr class="tr ${sg.sg_num}">
+	<c:forEach items="${ list }" var="bg">
+	<tr class="tr ${bg.bg_num}">
 		<td class="td1">
 			<p class="content p1">
 				<c:forEach items="${sports_list }" var="list">
 				<c:choose>
-				<c:when test="${sg.sports1_cd == list.cd_id}">
+				<c:when test="${bg.sports2_cd == list.cd_id}">
 					<c:if test="${list.cd_etc != null}">${list.cd_etc}</c:if>
 					<c:if test="${list.cd_etc == null}">
 						<img src="../resources/images/mihy/badminton-black.png" width="32px">
@@ -18,26 +18,29 @@
 				</c:choose>
 				</c:forEach>
 			</p>
-			<p class="content p2"><span class="badge badge-dark">${sg.skill_cd }▲</span></p>
+			<p class="content p2"><span class="badge badge-dark">${bg.skill_cd }▲</span></p>
 		</td>
 		
 		<td class="td2">
 			<p class="content p5 end">
+<%-- 				<span class="badge badge-secondary mr-1 ml-2">
+					<font color="#D8D8D8" class="bg_now_cnt">${bg.bg_now_cnt }</font>
+					&nbsp;/&nbsp;<font color="#D8D8D8" class="bg_end_cnt">${bg.bg_end_cnt }명</font>
+				</span> --%>
 				<span class="badge badge-secondary mr-1 ml-2">
-					<font color="#D8D8D8" class="sg_now_cnt">${sg.sg_now_cnt }</font>
-					&nbsp;/&nbsp;<font color="#D8D8D8" class="sg_end_cnt">${sg.sg_end_cnt }명</font>
+					<font color="#D8D8D8" class="bg_now_cnt">${bg.bg_team_cnt } vs ${bg.bg_team_cnt }</font>
 				</span>
-				<span class="badge badge-secondary mr-2" style="color:#D8D8D8;">${sg.gender_cd }</span>${sg.age_range }
+				<span class="badge badge-secondary mr-2" style="color:#D8D8D8;">${bg.gender_cd }</span>${bg.age_range }
 			</p>
-			<p class="content p4 end">${sg.sg_name }</p>
-			<p class="content p3">${sg.sg_location }</p>
-			<input type="hidden" class="dis" value="${sg.dis }">
+			<p class="content p4 end">${bg.bg_name }</p>
+			<p class="content p3">${bg.bg_location }</p>
+			<input type="hidden" class="dis" value="${bg.dis }">
 		</td>
 		
 		<td class="td3" align="center">
-			<input type="hidden" class="dttm" value="${sg.sg_end_dttm }">
-			<p class="content p6 end"><fmt:formatDate value="${sg.sg_end_dttm }" pattern="yy.MM.dd(E)" /></p>
-			<p class="content p7 end"><fmt:formatDate value="${sg.sg_end_dttm }" pattern="ahh:mm" /></p>
+			<input type="hidden" class="dttm" value="${bg.bg_end_dttm }">
+			<p class="content p6 end"><fmt:formatDate value="${bg.bg_end_dttm }" pattern="yy.MM.dd(E)" /></p>
+			<p class="content p7 end"><fmt:formatDate value="${bg.bg_end_dttm }" pattern="ahh:mm" /></p>
 			<p class="content p8"></p>
 		</td>
 	</tr>

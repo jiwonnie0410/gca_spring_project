@@ -36,7 +36,7 @@ public class BGroupController {
 	
 	
 	//전체 동호회매치 리스트 조회
-	@RequestMapping(value="/bgroup/getbgList")
+	@RequestMapping(value="/bgroup/getBgList")
 	public String search(Model model, BGroupVO vo, CodeVO cvo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
 		vo.setM_xy(memInfo.getM_xy());
@@ -135,7 +135,7 @@ public class BGroupController {
 	}
 	
 	//방 생성
-	@RequestMapping(value="/bgroup/creRoom", method=RequestMethod.POST)
+	@RequestMapping(value="bgroup/creRoom", method=RequestMethod.POST)
 	public String createRoom(@ModelAttribute BGroupVO vo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션 정보 갖고 오기
 		vo.setM_id(memInfo.getM_id());

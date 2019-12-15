@@ -11,24 +11,31 @@ $(document).ready(function(){
 	$('.swiper-wrapper').on('click','.swiper-slide', condition);
 	badminton();
 	
+	//이 조건을 제외하면 s_end_room.js와 똑같음.
+	$('.create_room').on('click', function(){
+		location.href='createRoomForm';
+	});
+	
 	p8();
 	setInterval(p8,1000);
 	
+	//방 참여
 	$('.table').on('click', '.tr', function(){
-		var sg_num = $(this).attr("class").substring(3);
-		var sg_dttm = $(this).find('p.p8').text();
+		var bg_num = $(this).attr("class").substring(3);
+		var bg_dttm = $(this).find('p.p8').text();
 		
 		//선택한 방에 참여하기 전 참여 인원 파악하고 참여 여부 묻기
 		$.ajax({
-			url: "sgValidIn/" + sg_num,
+			url: "bgValidIn/" + bg_num,
 			dataType: "json",
 			contentType : "application/json",
 			success: function(result){
-				move_room(result, sg_dttm);
+				move_room(result, bg_dttm);
 			} 
 		});
-	});	
+	});
 
+	
 });
 
 //배드민턴 이미지 삽입
@@ -52,26 +59,37 @@ function condition(){
 //마지막 페이지에서 다음 정보 로딩
 function scroll(){
 	if(Math.floor($(window).scrollTop()) == $(document).height() - $(window).height()){
-		
+
 		var end_dis = $('.tr').last().find('.dis').val();
-		var end_dttm =  $('.tr').last().find('.dttm').val();
+		var end_dttm = $('.tr').last().find('.dttm').val();
 		var end_num = $('.tr').last().attr('class').substring(3);
 		var key = $('#key').val();
 		var keyval = $('#keyval').val();
+		
 		var form = {
 				end_dis: end_dis,
 				end_dttm: end_dttm,
 				end_num: end_num,
 				key: key,
 				keyval: keyval
+				
 		}
-//		console.log(end_dis);
-//		console.log(end_dttm);
-//		console.log(end_num);
-//		console.log(key);
-//		console.log(keyval);
+		console.log(end_dis);
+		console.log(end_dttm);
+		console.log(end_num);
+		console.log(key);
+		console.log(keyval);
+		
+		var url;
+		if( $('.table').attr('class').substr(-7) != 'endroom'){
+			url = "getbgList/";
+		} else if( $('.table').attr('class').substr(-7) != 'endroom' ){
+			url = "getbgListEnd/";
+		}
+		console.log(url);
+		
 		$.ajax({
-			url: "getSgListEnd/",
+			url: url,
 			type: "POST",
 			dataType:"html",
 			data : form,
@@ -117,15 +135,27 @@ function p8(){
 }
 
 //방 참여
-function move_room(result, sg_dttm){
+function move_room(result, bg_dttm){
 
 	if(result.result_msg == 'already'){ //마감이든 아니든 already면 참여
-		location.href='alreadyIn?sg_num='+result.pk_num;
-	} else if(sg_dttm == "마감"){ //마감이면 무조건(full이나 yes나 모두)
+		location.href='alreadyIn?bg_num='+result.pk_num;
+	} else if(bg_dttm == "마감"){ //마감이면 무조건(full이나 yes나 모두)
 		alert("마감 시간이 초과되어 참여하실 수 없습니다.");
 		return false;
-	} else if(sg_dttm != "마감" && result.result_msg == 'full'){
+	} else if(bg_dttm != "마감" && result.result_msg == 'full'){
 		alert("모집 인원이 초과되어 참여하실 수 없습니다. 인원 변동이 발생하면 참여해 주세요.");
 		return false;
+	} else if(bg_dttm != "마감" && result.result_msg == 'yes'){
+		var con = confirm("선택한 동호회 매치에 참여하시겠습니까?");
+		if(con){
+			msg = {
+					cmd : "join",
+					id : result.m_id,
+					msg : "<"+result.m_id+"님이 참가하셨습니다.>",
+					bg_num : result.pk_num
+				}
+				webSocket.send(  JSON.stringify( msg )   );
+			location.href='roomIn?bg_num='+result.pk_num;
+		}
 	}
 }

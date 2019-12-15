@@ -29,8 +29,8 @@
 	
 	<!-- private : Description Action -->
 	<script type="text/javascript" src="../resources/js/mihy/kakao_map.js"></script>
-	<script type="text/javascript" src="../resources/js/mihy/s_search_cre.js"></script>
-	<link rel="stylesheet" href="../resources/css/mihy/s_search_cre.css">
+	<script type="text/javascript" src="../resources/js/mihy/s_room_cre.js"></script>
+	<link rel="stylesheet" href="../resources/css/mihy/s_room_cre.css">
 	
 
 	
@@ -92,10 +92,10 @@
 	<span id="sg_end_valid" class="sg_valid pl-3"></span>
 
 	<div class="row mr-2 ml-2 mt-3 mb-3 location" style="padding: 0px">
-		<input type="text" class="form-control" id="sg_location" name="sg_location" placeholder="만날 장소를 정해 주세요." readonly>
+		<input type="text" class="form-control" id="map_location" name="sg_location" placeholder="만날 장소를 정해 주세요." readonly>
 		<span id="sg_location_valid" class="sg_valid pl-3"></span>
 	</div>
-	<input type="hidden" name="sg_xy" id="sg_xy">
+	<input type="hidden" name="sa_xy" id="map_xy">
 	<div id="map"></div>
 	
 	

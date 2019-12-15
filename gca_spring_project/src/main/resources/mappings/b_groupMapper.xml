@@ -151,17 +151,6 @@
 		WHERE R <![CDATA[ <= ]]> #{scroll_rec} 
 	</select>
 
-<!-- BGroup 참여 인증 -->
-	<select id="getBgCert" statementType="CALLABLE" parameterType="bgroup">
-			{ CALL GEO_CERT(
-							#{m_id}, 
-							#{bg_num}, 
-							#{cert_x}, 
-							#{cert_y},
-							#{msg, mode=OUT, jdbcType=VARCHAR}
-		)}
-	</select>
-
 
 </mapper>
 
