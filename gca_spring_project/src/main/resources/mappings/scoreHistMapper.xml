@@ -6,12 +6,15 @@
 <!--  ************** 수림 **************** -->
 
 	<select id="getRankList" resultType="scorehistory">
+	<![CDATA[  
 		SELECT		M_ID,
 					M_NICK,
 					M_IMAGE_CD,
 					RANK,
 					SCH_SCORE
 		FROM 		V_USER_RANK
+		WHERE		RANK <= 10 
+	]]>
 	</select>
 	
 	<select id="getMyRank" resultType="scorehistory">  
@@ -21,7 +24,7 @@
 					RANK,
 					SCH_SCORE
 		FROM 		V_USER_RANK
-		WHERE		M_ID = 'user11'
+		WHERE		M_ID = #{m_id}
 
 	</select>
 

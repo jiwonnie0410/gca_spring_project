@@ -24,7 +24,7 @@ public class ScoreHistDAO {
 	
 	// 2. 로그인 유저 1명 랭킹 조회
 	public ScoreHistVO getMyRank(ScoreHistVO vo) {
-		return mybatis.selectOne("ScoreHistDAO.getMyRank");
+		return mybatis.selectOne("ScoreHistDAO.getMyRank", vo);
 	}
 
 }

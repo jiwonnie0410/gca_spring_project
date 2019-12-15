@@ -200,10 +200,9 @@ $(function(){
 				</div>
 			</div>
 		</div>
-	  <% String id = (String)session.getAttribute("id"); %>	
 		<form id="frm">
 			<input name="cl_num" type="hidden" value="${challenge.cl_num }">
-			<input name="m_id" type="hidden" value="<%=id %>">
+			<input name="m_id" type="hidden" value=${id }>
 		</form>
 		
 </body>

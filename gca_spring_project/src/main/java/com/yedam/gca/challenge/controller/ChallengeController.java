@@ -21,8 +21,14 @@ public class ChallengeController {
 	///////////////////////////////수림 ////////////////////////////
 	//챌린지 목록 조회
 	@RequestMapping("challenge/list")
-	public String getChallengeList(Model model) {		
+	public String getChallengeList(Model model, ChallengeHistVO vo, Authentication auth) {		
 		model.addAttribute("challengeList", service.getChallengeList());
+		
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();	//로그인한 유저 정보 담음
+		String id = userDetails.getUsername(); 	//로그인한 유저 id 담음
+		vo.setM_id(id);
+		model.addAttribute("myHistory", service.checkChallengeHistory(vo));
+		
 		return "/user/challenge/challenge";
 	}
 	
@@ -36,15 +42,15 @@ public class ChallengeController {
 		return "/user/challenge/challengeContents";
 	}
 	
-	@RequestMapping("/ajax/checkChallengeHistory.json")  
-	@ResponseBody
-	// 사용자 챌린지 참가여부 확인 
-	public ChallengeHistVO checkChallengeHistory(ChallengeHistVO vo, Authentication auth) {
-		UserDetails userDetails = (UserDetails) auth.getPrincipal();	//로그인한 유저 정보 담음
-		String id = userDetails.getUsername(); 	//로그인한 유저 id 담음
-		vo.setM_id(id);
-		return service.checkChallengeHistory(vo);
-	}
+//	@RequestMapping("/ajax/checkChallengeHistory.json")  
+//	@ResponseBody
+//	// 사용자 챌린지 참가여부 확인 
+//	public ChallengeHistVO checkChallengeHistory(ChallengeHistVO vo, Authentication auth) {
+//		UserDetails userDetails = (UserDetails) auth.getPrincipal();	//로그인한 유저 정보 담음
+//		String id = userDetails.getUsername(); 	//로그인한 유저 id 담음
+//		vo.setM_id(id);
+//		return service.checkChallengeHistory(vo);
+//	}
 	
 	//챌린지 참가등록, (챌린지 히스토리에 내역남김) 
 	@RequestMapping(value="/challenge/ajax/insertChallenge.json", consumes ="application/json")
