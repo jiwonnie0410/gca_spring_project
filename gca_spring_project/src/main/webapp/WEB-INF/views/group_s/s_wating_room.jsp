@@ -118,26 +118,7 @@
 <script>
 		$(function() { //페이지 로딩 완료 후 실행
 
-			//로딩되자마자 아이디 입력받고 아작스로 세션에 저장.
 			var usrId = "${id}";
-			
-			/* if(usrId==""){ //만약 세션에 id가 없으면 입력받아라.
-				var id={ "id" : prompt("세션에 저장할 id 입력 : ")};
-							
-				$.ajax({
-					url: "saveId",
-					type:'GET',
-					data: id,
-					
-					success: function(){
-						alert("아이디 저장!");
-					},
-					error: function(){
-						alert("아이디 저장 실패!");
-					}
-					
-				});
-			} */
 			
 			console.log("usrId : "+usrId);
 			
@@ -148,6 +129,38 @@
 
 			});
 
+			
+			//프로필 눌렀을때
+			$('#profile').on('show.bs.modal', function (event) {
+				var profileId = $(event.relatedTarget).attr('id'); //해당 모달을 띄운 프로필의 id
+				var param = JSON.stringify({"m_id" : profileId});
+				
+				console.log($(event.relatedTarget).children('img').attr('src'));
+				
+				$.ajax({
+					url: "getOneProfile",
+					method:'post',
+					dataType: "json",	//결과타입
+					data: param,		//요청파라미터
+					contentType: "application/json",
+					//컨트롤러로 데이타 보낼때 제이슨이라는 것을 알려줘야함. 컨트롤러에는 담을 vo에@RequestBody붙여주고.
+					success: function(vo){
+						console.log('model.addAttribute 성공');
+						var img = $(event.relatedTarget).children('img').attr('src');
+						console.log(img);
+						$('#profile_image').children('img').attr('src')=img;
+						$('#profile_id').text(vo.m_id);
+						$('#profile_nick').text(vo.m_nick);
+						$('#profile_age').text(vo.m_age);
+						$('#profile_gender').text(vo.gender_cd);
+						$('#profile_level').text(vo.m_level_cd);
+					},
+					error: function(){
+						console.log("model.addAttribute 실패");
+					}
+					
+				});
+			});
 			
 				
 			//신고모달에서 신고하기 버튼 눌렀을 때
@@ -214,13 +227,11 @@
 					var sgNum = ${sgroup.sg_num};
 					var sgCnt = ${sgroup.sg_now_cnt};
 					
-					alert(usrId);
+					//alert(usrId);
 					
 					deleteProfile();
 					
-					//if(sgCnt>1){ //일단 sgCnt가 1이상인 방만 카운트 - 되게 여기다 해놓음.
-						location.href='cancelJoin?m_id='+usrId+'&sg_num='+sgNum;
-					//}
+					location.href='cancelJoin?m_id='+usrId+'&sg_num='+sgNum;
 					
 					alert("참가 취소 완료.");
 					
@@ -232,6 +243,8 @@
 			});
 			
 			$('#btn_cert').on('click', getLocation); //참가인증
+			
+			$('#backToList').on('click', function(){location.href='getSgList';}) //목록으로 돌아가기
 			
 		});
 </script>
@@ -275,17 +288,12 @@
     	
 	<!-- 참여자 프로필 -->
      	<div id="profileList" style="border-top: thick double #FE9191; border-bottom: thick double #FE9191; padding-top:15px; padding-bottom:15px;">
-				<!-- foreach로 프로필 읽어와서 붙이기(memlist.어쩌구) -->
-        		<%-- <span id="cancel" data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
-          			<img style="padding-bottom:5px;" width="65px" height="65px"
-          							src="${pageContext.request.contextPath }/resources/images/jey/trainer-1.jpg" class="rounded-circle">
-        			<br />사람1
-        		</span> --%>
+				
         		<!-- 참여 멤버 프로필사진 불러오기(캐릭터, 닉네임) -->
         		<c:forEach var="member" items="${memlist}">
 				    <span id="${member.m_id}" data-toggle="modal" data-target="#profile" style="font-size:13px; padding:10px; display:inline-block;"> <!-- inline-block : span태그에 꼭맞게 만들어줌 -->
 	          			<img style="padding-bottom:5px;" width="65px" height="65px"
-	          							src="${pageContext.request.contextPath }/resources/images/Characters/${member.m_image_cd}.gif" class="rounded-circle">
+	          							src="${pageContext.request.contextPath }/resources/images/Characters/${member.m_image_cd}.gif">
 	        			<br />${member.m_nick}
         			</span>
 				
@@ -296,10 +304,10 @@
     </div> 													
 <!-- 버튼영역 위(프로필까지)의 div 끝 -->
 
-<!-- 버튼영역 시작(아직 아무 기능 없음) -->														
+<!-- 버튼영역 시작 -->														
     <div style="padding-bottom:30px">
       	<button id="btn_cert" class="button-general">참가인증</button>&nbsp;<button id="cancelJoin" class="button-general">참가취소</button>&nbsp;
-      	<button class="button-general">공유</button>&nbsp;<button class="button-general">목록</button>
+      	<button class="button-general">공유</button>&nbsp;<button id="backToList" class="button-general">목록</button>
     </div>
 <!-- 버튼영역 끝 -->
 
@@ -321,7 +329,31 @@
         
 <!-- Modal body -->
 				<div class="modal-body">
-					해당 회원 정보
+					<table style="padding:10px;">
+						<tr>
+							<td width="60%" id="profile_image" rowspan="4">
+								<img style="padding-bottom:5px;" width="65px" height="65px"
+	          							src=""></td>
+	          				<th colspan="2">id</th>
+						</tr>
+						<tr>
+							<td id="profile_id" colspan="2"></td>
+						</tr>
+						<tr>
+							<th colspan="2">nickname</th>
+						</tr>
+						<tr>
+							<td id="profile_nick" colspan="2"></td>
+						</tr>
+						<tr>
+							<th>age</th><th>gender</th><th>level</th>
+						</tr>
+						<tr>
+							<td id="profile_age"></td>
+							<td id="profile_gender"></td>
+							<td id="profile_level"></td>
+						</tr>
+					</table>
 				</div>
         <!-- data-dismiss="modal" id="report" -->
 <!-- Modal footer -->
@@ -428,6 +460,7 @@
 <!-- Modal body -->
 				<form id="report-frm">
 				<div id="report-div" class="modal-body">
+					<input type="hidden" name="m_id" value='${id}'>
 					<table id="report-table">
 						<tr align="left">
 							<th width="30px" style="padding-left:20px;">id</th><th>신고사유</th>
@@ -513,7 +546,7 @@
 		$span.append('<br />');
 		$span.append($text);
 		
-		textarea.value += result.msg + "\n";
+		textarea.value += result.msg + "\n"; //<00님이 참가하셨습니다>
 		$('#profileList').append($span);
 	 	
 	}

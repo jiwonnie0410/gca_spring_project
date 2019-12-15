@@ -45,7 +45,7 @@
 								sysdate,
 								#{tr_reason_cd},
 								#{tr_mid},
-								'rr99999',
+								#{m_id},
 								#{tr_num}
 											)
 	

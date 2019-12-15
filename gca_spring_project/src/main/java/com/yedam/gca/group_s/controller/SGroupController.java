@@ -50,13 +50,13 @@ public class SGroupController {
 //			System.out.println(model);
 		}
 		
-	//방에 들어갔을때 id입력받아 세션에 저장(임시)
-//		@ResponseBody //얘가 있어야 페이지 리턴을 안한다.(이거 없으면 밑에 mapping된 jsp페이지로 자동으로 찾아감.)
-//		@RequestMapping("/sgroup/saveId")
-//		public String saveId(@RequestParam String id, HttpSession session) {
-//			session.setAttribute("id", id);
-//			return id;
-//		}
+	//프로필 모달 띄울 때 해당 멤버 정보 가져오기
+		@ResponseBody //얘가 있어야 페이지 리턴을 안한다.(이거 없으면 밑에 mapping된 jsp페이지로 자동으로 찾아감.)
+		@RequestMapping(value="/sgroup/getOneProfile", consumes="application/json")
+		public MembersVO getOneProfile(@RequestBody MembersVO vo) {
+			vo = sgroupService.getOneMem(vo);
+			return vo;
+		}
 		
 	//참가취소 시 활동이력에서 빠지고 카운트 -1
 		@RequestMapping("/sgroup/cancelJoin")
@@ -69,16 +69,6 @@ public class SGroupController {
 			return "redirect:getSgList";
 		}
 	
-//	//웹소켓 연결 시(방에 들어갈 시) ajax로 본인 프로필 이미지 가져온다(웹소켓으로 다른사람 화면에도 뿌리기 위해.)
-//		@ResponseBody //얘가 있어야 페이지 리턴을 안한다.(이거 없으면 밑에 mapping된 jsp페이지로 자동으로 찾아감.)
-//		@RequestMapping("/sgroup/returnImage")
-//		public String returnImage(@RequestParam String img, CodeVO vo) {
-//			vo.setCd_id(img);
-//			String data = sgroupService.returnImage(vo);
-//			System.out.println("이미지:"+data);
-//			return data;
-//		}
-
 
 //*****************************************미현************************************
 	
