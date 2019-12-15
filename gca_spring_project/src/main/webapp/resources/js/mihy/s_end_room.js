@@ -8,6 +8,8 @@ $(document).ready(function(){
 		spaceBetween: 30,
 		grabCursor: true
 	});
+	$('.swiper-wrapper').on('click','.swiper-slide', condition);
+	badminton();
 	
 	p8();
 	setInterval(p8,1000);
@@ -25,15 +27,27 @@ $(document).ready(function(){
 				move_room(result, sg_dttm);
 			} 
 		});
-	});
-	
-	$('.swiper-wrapper').on('click','.swiper-slide', function(){
-		$('#key').val("sports");
-		$('#keyval').val($(this).data("sports"));
-		searchSport.submit();
-	});
-	
+	});	
+
 });
+
+//배드민턴 이미지 삽입
+function badminton(){
+	$('#S04').prepend( $('<img>').attr({ class:'pr-3', src:'../resources/images/mihy/badminton-pink.png', style:'width:33px'}) );
+	$('#S04').hover(function(){
+		$(this).children().eq(0).attr({src:'../resources/images/mihy/badminton-white.png'}); 
+	}, function(){
+		$(this).children().eq(0).attr({src:'../resources/images/mihy/badminton-pink.png'}); 
+	});
+}
+
+//검색 조건(운동 종목별)
+function condition(){
+	$('#key').val("sports");
+	$('#keyval').val($(this).data("sports"));
+//	console.log($('#keyval').val())
+	searchSport.submit();
+}
 
 //마지막 페이지에서 다음 정보 로딩
 function scroll(){
@@ -57,7 +71,7 @@ function scroll(){
 //		console.log(key);
 //		console.log(keyval);
 		$.ajax({
-			url: "getSgListEndPlus/",
+			url: "getSgListEnd/",
 			type: "POST",
 			dataType:"html",
 			data : form,
@@ -102,6 +116,7 @@ function p8(){
 	}
 }
 
+//방 참여
 function move_room(result, sg_dttm){
 
 	if(result.result_msg == 'already'){ //마감이든 아니든 already면 참여
@@ -112,10 +127,5 @@ function move_room(result, sg_dttm){
 	} else if(sg_dttm != "마감" && result.result_msg == 'full'){
 		alert("모집 인원이 초과되어 참여하실 수 없습니다. 인원 변동이 발생하면 참여해 주세요.");
 		return false;
-	} else if(sg_dttm != "마감" && result.result_msg == 'yes'){
-		var con = confirm("선택한 반짝에 참여하시겠습니까?");
-		if(con){
-			location.href='roomIn?sg_num='+result.pk_num;
-		}
 	}
 }

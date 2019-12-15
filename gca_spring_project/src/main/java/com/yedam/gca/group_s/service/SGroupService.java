@@ -20,7 +20,6 @@ public interface SGroupService {
 	
 	//미현
 	List<SGroupVO> getSgList(SGroupVO vo);
-	int updateCnt(SGroupVO vo);
 	void insertSg(SGroupVO vo);
 	List<SGroupVO> getSgEndList(SGroupVO vo);
 	SGroupVO getSgCert(SGroupVO vo);
