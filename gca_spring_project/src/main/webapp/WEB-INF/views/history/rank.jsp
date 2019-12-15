@@ -59,13 +59,12 @@
 회원포인트: ${list.sch_score } 
 회원랭킹:  ${list.rank}
 
-랭킹 10등 넘어가면 순위권외로 출력됨,
-나의 랭킹은 로그인 정보에서 받아옴
+사용자가 점수가 0일시 디비에 이력 X 로그인 정보에서 가져옴
  -->
 <div class="container">
 	<div class="content-div">
 		<div class="rankDiv">
-			<span class="title">회원 랭킹</span>
+			<span class="title">RANK TOP 10</span>
 			<br>
 			<table class="rankTable">
 			  <thead>
@@ -78,7 +77,7 @@
 			  <tbody>
 				<c:forEach items="${rankList}" var="list">
 				    <tr>
-				      <th style="text-align: center">${list.rank }</th>
+				      <th style="text-align: center">${list.rank }등</th>
 				      <td style="width: 40px"><img src="${pageContext.request.contextPath }/resources/images/icon/${list.m_image_cd }.png"></td>
 				      <td>${list.m_nick}</td>
 				      <td><img src="${pageContext.request.contextPath }/resources/images/icon/heart.png">${list.sch_score }</td>
@@ -89,16 +88,19 @@
 		<hr>
 		<div class="myRank">
 			<span class="title">나의 랭킹</span>
-<%-- 				<c:choose> --%>
-<%-- 					<c:when test="${myRank.m_id eq id }"> --%>
-<%-- 						<img src="${pageContext.request.contextPath }/resources/images/icon/profile2.png"> ${myRank.m_id }  --%>
-<%-- 						/ <img src="${pageContext.request.contextPath }/resources/images/icon/heart.png">${myRank.sch_score }  --%>
-<%-- 						/ ${myRank.rank} --%>
-<%-- 					</c:when> --%>
-<%-- 					<c:otherwise> --%>
-<!-- 						목록에 없음!! -->
-<%-- 					</c:otherwise> --%>
-<%-- 				</c:choose> --%>
+				<c:choose>
+					<c:when test="${myRank.m_id != null }">
+						<b>${myRank.rank}등</b>&nbsp;
+						<img src="${pageContext.request.contextPath }/resources/images/icon/profile2.png"> ${myRank.m_nick } 
+						<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png">${myRank.sch_score } 
+						
+					</c:when>
+					<c:otherwise>
+						<b>순위권 외</b>&nbsp;
+						<img src="${pageContext.request.contextPath }/resources/images/icon/${image }.png">${nick }&nbsp;
+						<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png">0
+					</c:otherwise>
+				</c:choose>
 		</div>
 		</div>
 	</div>

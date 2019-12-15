@@ -28,7 +28,7 @@
 
 <!-- 수림 개인 js/css -->
 <script src="${pageContext.request.contextPath }/resources/js/surim/default.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/surim/addOption.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/surim/challengePayment.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/addOption.css">
@@ -40,16 +40,20 @@
 <script>
   
 $(function() {
+	payGoGo(); // 1. 결제버튼 클릭시 결제창 띄움, 결제완료시 DB에 결제정보, 챌린지 참여정보 입력
 	
+});
+
+// 1. 결제버튼 클릭시 결제창 띄움, 결제완료시 DB에 결제정보, 챌린지 참여정보 입력 
+function payGoGo() {
 	$("#payBtn").on("click", function(){
-		var challengeName = "${challenge.cl_name}";  //챌린지이름
-		var payPrice = $('#checkRange').text()+"000"; //사용자가 정한 보증금
+		var challengeName = "${challenge.cl_name}";  		//챌린지이름
+		var payPrice = $('#checkRange').text()+"000"; 		//사용자가 정한 보증금
 		payPrice *= 1; //형변환용
 		
-		//실제 복사하여 사용시에는 모든 주석을 지운 후 사용하세요
 		BootPay.request({
 			price: payPrice, //실제 결제되는 가격
-			application_id: "5de9c9d85ade160030cc4a87", //사용자고유키 - 수림문의
+			application_id: "5de9c9d85ade160030cc4a87", //부트페이 사용자고유키 - 수림문의
 			name: "${challenge.cl_name}", //결제창에서 보여질 이름
 			pg: '',  
 			method: '', //결제수단, 입력하지 않으면 결제수단 선택부터 화면이 시작합니다.
@@ -106,13 +110,35 @@ $(function() {
 		}).done(function (data) {
 			//결제가 정상적으로 완료되면 수행됩니다
 			//비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
-			console.log(data);
+			
+			// 아작스 시작; ChallengeHist 테이블에 참가이력 추가
+	    	var historyParam = JSON.stringify($("#historyForm").serializeObject());; //디비에 넣을값; 해당 챌린지정보
+	    	$.ajax({
+	    		url: "ajax/insertChallenge.json",
+	    		method: "post",
+	    		dataType: "json",
+	    		data: historyParam,
+	    		contentType: "application/json"
+	    	});
+	    	
+	    	var moneyParam = JSON.stringify($("#moneyForm").serializeObject());; //디비에 넣을값; 해당 챌린지정보
+	    	$.ajax({
+	    		url: "ajax/insertMoney.json",
+	    		method: "post",
+	    		dataType: "json",
+	    		data: moneyParam,
+	    		contentType: "application/json"
+	    	});
+	    	
+	    	moneyForm
+			
+			
 			alert("결제완료! 챌린지 목록으로 이동합니다");
 			location.href="list";
 		});
 		
 	});
-});
+}
 
 
 </script>
@@ -151,14 +177,13 @@ $(function() {
 			<div class="col">
 				<div class="content-div">
 					<!-- 챌린지 기본옵션 시작 -->
-					<span><fmt:formatDate   
+					<span class="pinkText"><fmt:formatDate   
 							value="${challenge.cl_start_dttm }" type="date" /> ~ <fmt:formatDate
 							value="${challenge.cl_end_dttm }" type="date" />
 						(D-${challenge.gap_day })</span>
-						
-					<span>${challenge.cl_name }</span> 
-					<span>기간내 | ${challenge.cl_cnt }회 참여</span> 
-					<span> 
+					<span class="mediumText">${challenge.cl_name }</span> 
+					<span class="mediumText">기간내 | ${challenge.cl_cnt }회 참여</span> 
+					<span class="mediumText"> 
 						<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px"> ${challenge.cl_score }점
 					</span>
 					<!-- 챌린지 기본옵션 끝 -->
@@ -169,7 +194,10 @@ $(function() {
 							<table class="rangeTable" style="width: 100%">   
 								<thead>
 									<tr>
-										<td><img src="${pageContext.request.contextPath }/resources/images/icon/money.png" width="25px">보증금 선택</td>
+										<td><span class="mediumText">
+												<img src="${pageContext.request.contextPath }/resources/images/icon/money.png" width="25px">보증금 선택
+											</span>
+										</td>
 									</tr>
 								</thead>
 								<tbody>
@@ -216,6 +244,16 @@ $(function() {
 				</div>
 			</div>
 		</div>
+		<form id="historyForm">
+			<input name="cl_num" type="hidden" value="${challenge.cl_num }">
+			<input name="m_id" type="hidden" value=${id }>
+		</form>
+		
+		<form id="moneyForm">
+			<input name="cl_num" type="hidden" value="${challenge.cl_num }">
+			<input name="m_id" type="hidden" value=${id }>
+			<input name="money_deposit" type="hidden" id="money_deposit">
+		</form>
 	<!-- 결제버튼, 금액 주입은 addOption JS 참조 -->
 	<button id="payBtn" class="pay-btn"><p id="paynow"></p></button>
 	</div>

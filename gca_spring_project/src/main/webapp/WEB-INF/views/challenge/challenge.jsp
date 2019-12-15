@@ -30,25 +30,6 @@
 <script src="${pageContext.request.contextPath }/resources/js/surim/default.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
 
-<script>
-$(function(){
-	checkChallengeHistory(); //챌린지 참가여부확인 (챌린지히스토리체크)
-});
-
-//챌린지 참가여부확인
-function checkChallengeHistory() {
-	$.ajax({
-		url: "../ajax/checkChallengeHistory.json",
-		dataType: "json",
-		success: checkStatusHandler
-	});
-}
-// 챌린지 참가여부에 따라 챌린지목록 출력처리 
-function checkStatusHandler(data) {
-	console.log(data);
-}
-
-</script>
 
 <style>
 
@@ -60,16 +41,30 @@ function checkStatusHandler(data) {
 	position : relative;
 }
 
-.joined-div {
-	position: absolute;
-	visibility: hidden;
+.sports-div img {
+	border-radius: 10px;
 }
 
-.joined-div.show {
+
+.join-mark {
 	position: absolute;
     top: 5%;
     right: 5%;
 }
+
+.join-tag {
+    position: absolute;
+	border: none;
+    width: 60px;
+    border-radius: 10px;
+    font-weight: 700;
+    background: #5ab7a5;
+    text-align: center;
+    color: white;
+    font-size: medium;
+    right: 13%;
+}
+
 
 </style>
 </head>
@@ -96,7 +91,6 @@ function checkStatusHandler(data) {
             <div class="tab-content">
               <!-- 기본 챌린지 내용 div 시작 -->
               <div class="tab-pane fade show active" id="basicChallenges">
-              	
               	<c:forEach items="${challengeList}" var="list">
 	              	<c:if test="${list.cl_status == 'basic' }"> 
 	              	<div class="content-div" onclick="location.href='contents?num=${list.cl_num}'">
@@ -104,18 +98,30 @@ function checkStatusHandler(data) {
 	              			<div class="sports-div">
 			              		<img src="${pageContext.request.contextPath }/resources/images/sports/${list.sports1_cd }.jpg" width="100%" height="200px">
 	              			</div>
-	              			<div class="joined-div">
-								<img src="${pageContext.request.contextPath }/resources/images/icon/join.png">
-	              			</div>
+	              			<!-- 유저가 참가중인 챌린지는 참여중 마크 띄움 -->
+	              			<c:forEach items="${myHistory}" var ="myList">
+	              			<c:if test="${list.cl_num == myList.cl_num }">
+		              			<div class="join-mark">
+									<img src="${pageContext.request.contextPath }/resources/images/icon/join.png">
+		              			</div>
+	              			</c:if>         
+							</c:forEach>
+							<!-- 유저 참가중 마크 끝 -->
 	              		</div>
-	              		
 	              		<span class="pinkText"><fmt:formatDate value="${list.cl_start_dttm }" type="date" /> ~
-						<fmt:formatDate value="${list.cl_end_dttm }" type="date" />　　　(D-${list.gap_day })</span>
+						<fmt:formatDate value="${list.cl_end_dttm }" type="date" />(D-${list.gap_day })</span>
 						<span class="mediumText">${list.cl_name }</span>
 						<span class="mediumText">기간내 | ${list.cl_cnt }회 성공</span>
 						<span class="pinkText">
 							<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px">
-							${list.cl_score }점
+							${list.cl_score }점 
+							<!-- 참가중일시 참가중 태그 시작 -->
+	              			<c:forEach items="${myHistory}" var ="myList">
+	              			<c:if test="${list.cl_num == myList.cl_num }">
+									<input class="join-tag" value="참가중">
+	              			</c:if>         
+							</c:forEach>
+							<!-- 참가중 태그 끝 -->
 						</span>
 	              	</div>
 	              	</c:if>
@@ -128,18 +134,39 @@ function checkStatusHandler(data) {
               	<c:forEach items="${challengeList}" var="list">
               		<c:if test="${list.cl_status != 'basic' }"> 
 	              	<div class="content-div" onclick="location.href='contents?num=${list.cl_num}'">
-	              		<img src="${pageContext.request.contextPath }/resources/images/sports/${list.sports1_cd }.jpg" width="100%" height="200px">
-	              		<span><fmt:formatDate value="${list.cl_start_dttm }" type="date" /> ~
-						<fmt:formatDate value="${list.cl_end_dttm }" type="date" />　　(D-${list.gap_day })</span>
-						<span>${list.cl_name }</span>
-						<span>기간내 | ${list.cl_cnt }회 성공</span>
-						<span>
+	                	<div class="image-div">
+	              			<div class="sports-div">
+			              		<img src="${pageContext.request.contextPath }/resources/images/sports/${list.sports1_cd }.jpg" width="100%" height="200px">
+	              			</div>
+	              			<!-- 유저가 참가중인 챌린지는 참여중 마크 띄움 -->
+	              			<c:forEach items="${myHistory}" var ="myList">
+	              			<c:if test="${list.cl_num == myList.cl_num }">
+		              			<div class="join-mark">
+									<img src="${pageContext.request.contextPath }/resources/images/icon/join.png">
+		              			</div>
+	              			</c:if>         
+							</c:forEach>
+							<!-- 유저 참가중 마크 끝 -->
+	              		</div>
+
+	              		<span class="pinkText"><fmt:formatDate value="${list.cl_start_dttm }" type="date" /> ~
+						<fmt:formatDate value="${list.cl_end_dttm }" type="date" />(D-${list.gap_day })</span>
+						<span class="mediumText">${list.cl_name }</span>
+						<span class="mediumText">기간내 | ${list.cl_cnt }회 성공</span>
+						<span class="pinkText">
 							<img src="${pageContext.request.contextPath }/resources/images/icon/money.png" width="25px">
 							1천원~5천원
 						</span>
-						<span> 
+						<span class ="pinkText"> 
 							<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px">
-							${list.cl_score }점   
+							${list.cl_score }점 
+								<!-- 참가중일시 참가중 태그 시작 -->
+		              			<c:forEach items="${myHistory}" var ="myList">
+		              			<c:if test="${list.cl_num == myList.cl_num }">
+										<input class="join-tag" value="참가중">
+		              			</c:if>         
+								</c:forEach>
+								<!-- 참가중 태그 끝 -->  
 						</span>
 	              	</div>
 	              	</c:if>

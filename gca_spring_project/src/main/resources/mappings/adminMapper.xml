@@ -216,10 +216,32 @@
 		  	</select>
 			
 			
+		<!-- *********************** 수림 **************************************** 
+		1. 스페셜챌린지 결제시 머니 테이블에 이력 저장
+		-->	
 			
-			
-			
-			
+		<!-- 1. 스페셜챌린지 결제시 머니 테이블에 이력 저장 -->	
+		<insert id = "insertMoney">
+			INSERT	INTO 		MONEY (
+								M_ID, 
+								MONEY_DEPOSIT, 
+								MONEY_DEPOSIT_DTTM, 
+								MONEY_WITHDRAW, 
+								MONEY_WITHDRAW_DTTM, 
+								MONEY_STATUS, 
+								CL_NUM
+								)
+								VALUES (
+								#{m_id}, 
+								#{money_deposit}, 
+								SYSDATE, 
+								NULL, 
+								NULL, 
+								'입금완료', 
+								#{cl_num} 
+								);
+		
+		</insert>
 			
 			
 			

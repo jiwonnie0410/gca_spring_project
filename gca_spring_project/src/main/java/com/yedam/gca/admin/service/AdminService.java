@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.yedam.gca.admin.vo.ChallengeSearchVO;
+import com.yedam.gca.admin.vo.MoneyVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.common.Paging;
 import com.yedam.gca.member.vo.MembersVO;
@@ -39,4 +40,22 @@ public interface AdminService {
 	public List<MembersVO> getUserList(MembersVO vo);
 	//3.회원강퇴
 	public int deleteUser(MembersVO vo);
+	
+	
+	
+	
+	
+	// ****************** 수림 ********************** //
+	
+	// 1. 스페셜챌린지 결제완료시 머니 테이블에 이력 남김
+	public void insertMoney(MoneyVO vo);
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
