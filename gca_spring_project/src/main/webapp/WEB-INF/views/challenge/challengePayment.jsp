@@ -177,14 +177,13 @@ function payGoGo() {
 			<div class="col">
 				<div class="content-div">
 					<!-- 챌린지 기본옵션 시작 -->
-					<span><fmt:formatDate   
+					<span class="pinkText"><fmt:formatDate   
 							value="${challenge.cl_start_dttm }" type="date" /> ~ <fmt:formatDate
 							value="${challenge.cl_end_dttm }" type="date" />
 						(D-${challenge.gap_day })</span>
-						
-					<span>${challenge.cl_name }</span> 
-					<span>기간내 | ${challenge.cl_cnt }회 참여</span> 
-					<span> 
+					<span class="mediumText">${challenge.cl_name }</span> 
+					<span class="mediumText">기간내 | ${challenge.cl_cnt }회 참여</span> 
+					<span class="mediumText"> 
 						<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px"> ${challenge.cl_score }점
 					</span>
 					<!-- 챌린지 기본옵션 끝 -->
@@ -195,7 +194,10 @@ function payGoGo() {
 							<table class="rangeTable" style="width: 100%">   
 								<thead>
 									<tr>
-										<td><img src="${pageContext.request.contextPath }/resources/images/icon/money.png" width="25px">보증금 선택</td>
+										<td><span class="mediumText">
+												<img src="${pageContext.request.contextPath }/resources/images/icon/money.png" width="25px">보증금 선택
+											</span>
+										</td>
 									</tr>
 								</thead>
 								<tbody>
@@ -250,7 +252,7 @@ function payGoGo() {
 		<form id="moneyForm">
 			<input name="cl_num" type="hidden" value="${challenge.cl_num }">
 			<input name="m_id" type="hidden" value=${id }>
-			<input name="money_deposit" id="money_deposit">
+			<input name="money_deposit" type="hidden" id="money_deposit">
 		</form>
 	<!-- 결제버튼, 금액 주입은 addOption JS 참조 -->
 	<button id="payBtn" class="pay-btn"><p id="paynow"></p></button>
