@@ -293,8 +293,8 @@ textarea {
 			<input type="hidden" name="ad_num" value="${dto.ad_num}">
 			<!-- 본인이 쓴 게시물만 수정, 삭제가 가능하도록 처리 -->
 			<c:if test="${m_id == dto.m_id}"> 
-				<button type="button" class="btn btn-primary px-5 py-3 mt-3" id="btnUpdete">수정</button>
-				<button type="button" class="btn btn-primary px-5 py-3 mt-3" id="btnDelete">삭제</button>
+				<button type="button" class="btn" id="btnUpdete" style="background-color: #FE9191;">수정</button>
+				<button type="button" class="btn " id="btnDelete" style="background-color: #FE9191;">삭제</button>
 			</c:if> 
 			<!-- 상세보기 화면에서 게시글 목록화면으로 이동 -->
 			<button type="button" class="btn btn-primary px-5 py-3  mt-3" id="btnList">목록</button>
