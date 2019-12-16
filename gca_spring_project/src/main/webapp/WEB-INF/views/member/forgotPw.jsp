@@ -21,6 +21,13 @@
 		
 		<!-- 자바스크립트 비밀번호 찾기 -->
 		<script type="text/javascript" src="./resources/js/member/forgotPwJs.js"></script>
+		
+		<script>
+			// 확인 메시지 띄우기
+			if('${pwMessage}' != ''){
+				alert('${pwMessage}');
+			}
+		</script>
 </head>
 
 <body>
@@ -42,17 +49,17 @@
 			<div class="col-md-6">
 				<h6> 해당 아이디 및 회원정보에 등록된 이름과 이메일을 입력하시면 이메일로 임시 비밀번호를 보내드리고 있습니다. <br>임시 비밀번호로 로그인 해 주세요.  </h6><br />
 				<form role="form" id="forgotPwfrm" name="forgotPwfrm" action="getTempPassword">
-					<input type="hidden" id="email" name="mEmail">
+					<input type="hidden" id="m_email" name="m_email">
 					<table>
 						<tr>
 							<th width="120" align="right">ID</th>
 							<td width="200" colspan="3">
-								<input type="text" id="fid"	name="mId" class="form-control form-control-sm"	value="${param.mId }" /></td>
+								<input type="text" id="fid"	name="m_id" class="form-control form-control-sm"	value="${param.mId }" /></td>
 						</tr>
 						<tr>
 							<th height="50">Name</th>
 							<td colspan="5">
-								<input type="text" id="fname" name="mName" class="form-control form-control-sm" value="${param.mName }" /></td>
+								<input type="text" id="fname" name="m_name" class="form-control form-control-sm" value="${param.mName }" /></td>
 						</tr>
 
 						<tr>

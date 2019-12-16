@@ -14,7 +14,7 @@ function sendEmail() {
 	
 	//이메일 한 컬럼에 넣기 위해 합침
 	var m = document.forgotIdfrm.email1.value + "@" + document.forgotIdfrm.email2.value;
-	document.forgotIdfrm.mEmail.value = m;
+	document.forgotIdfrm.m_email.value = m;
 	
 	document.forgotIdfrm.submit();
 }

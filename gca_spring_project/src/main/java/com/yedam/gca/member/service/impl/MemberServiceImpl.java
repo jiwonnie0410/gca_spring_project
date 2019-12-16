@@ -46,7 +46,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 		else {
 			map.put("flag", true);
-			map.put("message", "회원가입이 되신 것을 축하드립니다! 로그인 후 서비스를 이용해 주세요.");
+			map.put("message", "운동하자의 회원이 되신 것을 축하드립니다! 로그인 후 서비스를 이용해 주세요.");
 			return map;
 		}
 	}
@@ -59,7 +59,7 @@ public class MemberServiceImpl implements MemberService {
 
 	// 3. 이름이랑 이메일로 아이디 찾기 -> 이메일 보냄
 	@Override
-	public String forgotId(MembersVO vo) {
+	public Map<String, Object> forgotId(MembersVO vo) {
 		String name = vo.getM_name();
 		String email = vo.getM_email();
 		String getId = null;
@@ -67,9 +67,14 @@ public class MemberServiceImpl implements MemberService {
 		// 아이디 가져옴
 		getId = dao.forgotId(vo);
 
+		// 아이디 찾아서 이메일 보내기 성공 및 실패에 따라 메시지와 리턴 페이지 다르게 넘김
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		// 입력받은 이름과 이메일에 해당하는 아이디가 없음
 		if (getId == null) { 
-			return "해당 정보에 등록된 아이디가 없습니다.";
+			map.put("flag", false);
+			map.put("message", "해당 정보에 등록된 아이디가 없습니다.");
+			return map;
 			
 		// 해당하는 아이디를 찾았음
 		} else {
@@ -105,12 +110,14 @@ public class MemberServiceImpl implements MemberService {
 			} catch (AddressException e) {	e.printStackTrace();	} 
 			catch (MessagingException e) {	e.printStackTrace();	}
 
-			return "이메일로 아이디를 발송했습니다. 로그인 해 주세요.";
+			map.put("flag", true);
+			map.put("message", "이메일로 아이디를 발송했습니다. 로그인 해 주세요.");
+			return map;
 		}
 	}
 
 	// 4. 비밀번호 찾기 -> 이메일로 임시 비밀번호 보내고 디비에 정보 업데이트
-	public String forgotPw(MembersVO vo) {
+	public Map<String, Object> forgotPw(MembersVO vo) {
 		String name = vo.getM_name();
 		String email = vo.getM_email();
 		
@@ -143,9 +150,14 @@ public class MemberServiceImpl implements MemberService {
 		
 		int result = dao.forgotPw(vo); // 입력 받은 정보로 회원 있는지 확인
 		
+		// 회원이 있는지 확인하고 이메일 보내기 성공 및 실패에 따라 메시지와 리턴 페이지 다르게 넘김
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		// 해당하는 정보가 없음
-		if (result == 0) { 
-			return "해당 정보와 일치하는 회원이 없습니다.";
+		if (result == 0) {
+			map.put("flag", false);
+			map.put("message", "해당 정보와 일치하는 회원이 없습니다.");
+			return map;
 			
 		// 해당하는 정보를 찾았음
 		} else {
@@ -184,7 +196,9 @@ public class MemberServiceImpl implements MemberService {
 			} catch (AddressException e) {	e.printStackTrace();	} 
 			catch (MessagingException e) {	e.printStackTrace();	}
 
-			return "이메일로 임시 비밀번호를 발송했습니다. 로그인 해 주세요.";
+			map.put("flag", true);
+			map.put("message", "이메일로 임시 비밀번호를 발송했습니다. 로그인 해 주세요.");
+			return map;
 		}
 	}
 	

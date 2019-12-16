@@ -21,7 +21,7 @@ function resetPw() {
 	
 	//이메일 한 컬럼에 넣기 위해 합침
 	var m = form.femail1.value + "@" + form.femail2.value;
-	form.mEmail.value = m;
+	form.m_email.value = m;
 	
 	document.forgotPwfrm.submit();
 }

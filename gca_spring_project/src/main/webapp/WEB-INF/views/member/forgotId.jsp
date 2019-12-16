@@ -21,6 +21,13 @@
 		
 		<!-- 자바스크립트 아이디 찾기 -->
 		<script type="text/javascript" src="./resources/js/member/forgotIdJs.js"></script>
+		
+		<script>
+			// 확인 메시지 띄우기
+			if('${idMessage}' != ''){
+				alert('${idMessage}');
+			}
+		</script>
 </head>
 
 <body>
@@ -42,11 +49,11 @@
 			<div class="col-md-6">
 				<h6> 회원정보에 등록된 이름과 이메일을 입력하시면 이메일로 아이디를 보내드립니다. </h6><br />
 				<form role="form" id="forgotIdfrm" name="forgotIdfrm" action="getId">
-					<input type="hidden" id="email" name="mEmail">
+					<input type="hidden" id="m_email" name="m_email">
 					<table>
 						<tr>
 							<th width="100" height="50"> Name </th>
-							<td colspan="3"><input type="text" class="form-control" id="name" name="mName" value="${param.name}" /></td>
+							<td colspan="3"><input type="text" class="form-control" id="name" name="m_name" value="${param.name}" /></td>
 						</tr>
 						<tr>
 							<th height="50"> Email </th>
