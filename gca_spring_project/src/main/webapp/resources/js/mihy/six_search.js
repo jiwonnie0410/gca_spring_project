@@ -139,23 +139,29 @@ function move_room(result, six_dttm){
 
 	if(result.result_msg == 'already'){ //마감이든 아니든 already면 참여
 		location.href='alreadyIn?six_num='+result.pk_num;
-	} else if(six_dttm == "마감"){ //마감이면 무조건(full이나 yes나 모두)
-		alert("마감 시간이 초과되어 참여하실 수 없습니다.");
-		return false;
-	} else if(six_dttm != "마감" && result.result_msg == 'full'){
-		alert("모집 인원이 초과되어 참여하실 수 없습니다. 인원 변동이 발생하면 참여해 주세요.");
-		return false;
-	} else if(six_dttm != "마감" && result.result_msg == 'yes'){
-		var con = confirm("선택한 용병 모집에 참여하시겠습니까?");
-		if(con){
-			msg = {
-					cmd : "join",
-					id : result.m_id,
-					msg : "<"+result.m_id+"님이 참가하셨습니다.>",
-					six_num : result.pk_num
+	} else if(mstatus == 'M01'){
+		if(six_dttm == "마감"){ //마감이면 무조건(full이나 yes나 모두)
+			alert("마감 시간이 초과되어 참여하실 수 없습니다.");
+			return false;
+		} else if(six_dttm != "마감" && result.result_msg == 'full'){
+			alert("모집 인원이 초과되어 참여하실 수 없습니다. 인원 변동이 발생하면 참여해 주세요.");
+			return false;
+		} else if(six_dttm != "마감" && result.result_msg == 'yes'){
+			var con = confirm("선택한 용병 모집에 참여하시겠습니까?");
+			if(con){
+				msg = {
+						cmd : "join",
+						id : result.m_id,
+						msg : "<"+result.m_id+"님이 참가하셨습니다.>",
+						six_num : result.pk_num
 				}
 				webSocket.send(  JSON.stringify( msg )   );
-			location.href='roomIn?six_num='+result.pk_num;
+				location.href='roomIn?six_num='+result.pk_num;
+			}
 		}
+	} else {
+		alert("회원님의 계정이 정지되어 새로운 모임에 참여하실 수 없습니다.");
+		return false;
 	}
+	
 }
