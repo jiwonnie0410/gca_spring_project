@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>게시글 목록</title>
+<title>챌린지 이력</title>
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="viewport"
@@ -62,11 +62,12 @@
 								<thead>
 									<tr>
 										<th width="5%">NO</th>
-										<th width="10%">구분</th>
-										<th width="45%">챌린지 이름</th>
+										<th width="10%">챌린지 구분 (기본/스페셜)</th>
+										<th width="45%">챌린지명</th>
+										<th width="12%">챌린지 내용</th>
+										<th width="12%">챌린지 종목</th>
 										<th width="12%">시작 날짜</th>
 										<th width="12%">마감 날짜</th>
-										<th width="10%">리워드</th>
 									</tr>
 								</thead>
 								<tbody id="chtb"></tbody>

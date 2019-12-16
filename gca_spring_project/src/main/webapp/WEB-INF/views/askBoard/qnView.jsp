@@ -8,47 +8,39 @@
 <!-- 게시물 상세보기 영역 -->
 <div class="panel-group">
 	<div class="panel panel-success" style="margin-top: 10px;">
-		<div class="panel-heading"
-			style="background-color: pink; color: black">문의 사항</div>
+		<div class="panel-heading" style="background-color: pink; color: black">문의 사항</div>
 		<div class="panel-body">
 			<%-- form --%>
 			<form action="view?pb_id=${dto.qb_id}" id="frm" method="GET">
-				<input type="hidden" value="${dto.qb_id}">
+				<!-- 게시물번호를 hidden으로 처리 -->
+				<input type="hidden" name="qb_id" value="${dto.qb_id}">
 				<div class="form-group">
 					<div>
 						<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 -->
-						작성일자 :
-						<fmt:formatDate value="${dto.qb_date}"
-							pattern="yyyy-MM-dd a HH:mm:ss" />
+						작성일자 :&nbsp; <fmt:formatDate value="${dto.qb_date}" pattern="yyyy-MM-dd " />
 						<!-- 날짜 형식 => yyyy 4자리연도, MM 월, dd 일, a 오전/오후, HH 24시간제, hh 12시간제, mm 분, ss 초 -->
 					</div>
 				</div>
 				<div class="form-group">
 					<div>
-						제목 <input name="qb_title" id="qb_title" size="80"
-							value="${dto.qb_title}" readonly="readonly">
+						제목  :&nbsp;<input name="qb_title" id="qb_title" value="${dto.qb_title}" readonly="readonly" style="border:none" >
 					</div>
 				</div>
 				<div class="form-group">
 					<div>
-						내용
-						<textarea name="qb_content" id="qb_content" rows="4"
-							readonly="readonly">${dto.qb_content}</textarea>
+						내용  :&nbsp;<input type="text" name="qb_content" id="qb_content"  readonly="readonly" value="${dto.qb_content}" style="border:none"> 
 					</div>
 				</div>
-				<div style="width: 650px; text-align: center;">
-					<!-- 게시물번호를 hidden으로 처리 -->
-					<input type="hidden" name="qb_id" value="${dto.qb_id}">
-					<!-- 본인이 쓴 게시물만 수정, 삭제가 가능하도록 처리 -->
-					
+				<!-- <div style="width: 650px; text-align: center;"> -->
+				
 					<!-- 상세보기 화면에서 게시글 목록화면으로 이동 -->
 					<!-- 	<button type="button" class="btn btn-primary px-5 py-3  mt-3" id="btnList">목록</button> -->
-				</div>
+				<!-- </div> -->
 				
 				
 				
 				
-				
+				<div>
 				<c:if test="${dto.qb_origin}!= null and ${dto.qb_origin} != '' ">
 					<div align="center">
 						<table class="table table-striped"
@@ -64,6 +56,7 @@
 						</table>
 					</div>
 				</c:if>
+				</div>
 			</form>
 		</div>
 	</div>
