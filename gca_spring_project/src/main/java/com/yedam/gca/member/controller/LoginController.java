@@ -48,8 +48,7 @@ public class LoginController {
 		// 권한과 활동 상태에 따라 페이지 다르게 리턴
 		if(request.isUserInRole("ROLE_Admin")) { // 관리자가 로그인 하면 차트 페이지로 넘어감
 			return "redirect:/admin/chart";
-		} else if (request.isUserInRole("ROLE_User") && mStatus.equals("M02")) { // 활동 정지 상태인 유저면 홍보게시판으로 넘어가고 메시지 띄움
-//			model.addAttribute("statusMessage", "3번 이상의 신고가 누적되어 활동이 일시적으로 중지되었습니다. 현재 게시판 이용만 가능한 점 참고바랍니다.");
+		} else if (request.isUserInRole("ROLE_User") && mStatus.equals("M02")) { // 활동 정지 상태인 유저면 메시지 띄우는 페이지로 넘어간 다음 홍보게시판 감
 			return "redirect:/alert/block";
 		} else { // 일반 사용자가 로그인 하면 반짝 목록 페이지로 넘어감
 			return "redirect:/sgroup/getSgList";
