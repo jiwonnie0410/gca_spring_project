@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <%--ContextPath 선언 --%>
 <%String cp = request.getContextPath();%>
 <!DOCTYPE html>
@@ -28,6 +29,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!--json할때 필요  -->
 <script src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
+
+
+<sec:authentication property="principal.m_id" var="m_id"/>
 	
 <script>
 	$(document)
@@ -72,11 +76,11 @@
 			<%--  <sec:authentication property="principal.m_id"/>  --%>
 			<div align="center" style="padding-right: 3%; padding-left: 3%;">
 				<!-- 로그인한 사용자만 글쓰기 버튼을 활성화 -->
-				<%-- <c:if test="${sessionScope.m_id != null}"> --%>
+				<c:if test="${m_id != null}"> 
 					<div align="right">
 						<button class="btn" type="button" id="btnWrite" name="write"  style="margin-right: 10%; background-color: #FE9191; color: white;">Write</button>
 					</div>
-				<%-- </c:if>  --%>
+				</c:if>  
 				
 				<form name="SearchForm">
 				<table>

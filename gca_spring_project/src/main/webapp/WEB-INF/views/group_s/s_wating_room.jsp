@@ -14,6 +14,10 @@
 
 <!-- 미현 : 인증 참여 스크립트 / 지도 스크립트 추가 -->
 <script type="text/javascript" src="../resources/js/mihy/part_cert.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9e415eb9e7187154cd9c6308c036f0a6&libraries=services,clusterer"></script>
+<script type="text/javascript" src="../resources/js/mihy/kakao_map2.js"></script>
+<!-- 미현 끝  -->
+
 
 <style>
 
@@ -259,7 +263,9 @@
 
 			});
 			
+			//미현
 			$('#btn_cert').on('click', getLocation); //참가인증
+			view_map();
 			
 			$('#backToList').on('click', function(){location.href='getSgList';}) //목록으로 돌아가기
 			
@@ -443,8 +449,9 @@
 						</c:if>
 				<!-- 미현언니 지도부분 -->
 						<tr style="text-align: center">
-							<td>
-								<div id="meetLocation">지도</div>
+							<td colspan="2">
+								<div id="map" style="width:300px;height:200px;"></div>
+								<input type="hidden" id="map_xy" value="${sgroup.sg_xy}">
 							</td>
 						</tr>
 					</table>
