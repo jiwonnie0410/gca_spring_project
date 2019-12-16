@@ -84,6 +84,10 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 			System.out.println(svo.getId());
 			msg = (String) message.getPayload();
 		}
+		else if(svo.getCmd().equals("kickOut")) {
+			System.out.println(svo.getId());
+			msg = (String) message.getPayload();
+		}
 		sendMessage(msg, session, svo);
 	}
 

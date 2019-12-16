@@ -222,7 +222,7 @@
 						//컨트롤러로 데이타 보낼때 제이슨이라는 것을 알려줘야함. 컨트롤러에는 담을 vo에@RequestBody붙여주고.
 						success: function(){
 							alert("강퇴 처리 되었습니다.");
-							deleteProfile(kickId); //웹소켓 후 처리에서 해당 아이디만 페이지 이동시켜야함.
+							deleteProfileKO(kickId); //웹소켓 후 처리에서 해당 아이디만 페이지 이동시켜야함.
 						},
 						error: function(){
 							alert("강퇴 실패");
@@ -299,7 +299,7 @@
       							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly"></textarea>
       			<div style="padding-top:10px;">
       				<span style="padding-left:5px; padding-right:3px; vertical-align: middle;">
-      					<textarea id="inputMessage" style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; ">입력하세요</textarea>
+      					<textarea id="inputMessage" style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; " placeholder="입력하세요"></textarea>
       				</span>
       				<span style="vertical-align:middle;">
       					<button id="chat" class="button-general">전송</button>
@@ -585,12 +585,12 @@
 		textarea.value += result.msg + "\n"; //채팅방에 나갔다고 표시.
 	}
 	else if( result.cmd == "kickOut" && ( sg_num == result.sg_num ) ){
-		var id = result.id;
+		var id = "${id}";
 		if(result.id == id){ //강퇴당한놈만 나가게.
 			location.href="getSgList";
-			$('#'+id).remove();
 			textarea.value += result.msg + "\n";
 		}
+		$('#'+result.id).remove();
 		
 	}
 	  
@@ -639,7 +639,7 @@
  }
  
 //강퇴 시 참여자 칸에서 프로필 삭제
- function deleteProfile(id) { 
+ function deleteProfileKO(id) { 
 	 var sg_num = ${sgroup.sg_num};
 	 msg = {
 		 cmd : "kickOut",

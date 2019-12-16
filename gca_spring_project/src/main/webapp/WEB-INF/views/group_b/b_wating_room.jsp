@@ -218,7 +218,7 @@
 						//컨트롤러로 데이타 보낼때 제이슨이라는 것을 알려줘야함. 컨트롤러에는 담을 vo에@RequestBody붙여주고.
 						success: function(){
 							alert("강퇴 처리 되었습니다.");
-							deleteProfile(kickId); //웹소켓 후 처리에서 해당 아이디만 페이지 이동시켜야함.
+							deleteProfileKO(kickId); //웹소켓 후 처리에서 해당 아이디만 페이지 이동시켜야함.
 						},
 						error: function(){
 							alert("강퇴 실패");
@@ -403,7 +403,7 @@
 					
 					<table id="room-info-table">
 						<tr>
-							<th>운동 </th><td> ${bgroup.sports1_cd}</td>
+							<th>운동 </th><td> ${bgroup.sports2_cd}</td>
 						</tr>
 						<tr>
 							<th>일시 </th><td> <fmt:formatDate value="${bgroup.bg_end_dttm }" pattern="yyyy/MM/dd a hh:mm" /></td>
@@ -415,7 +415,7 @@
 							<th>참가정보 </th><td> ${bgroup.gender_cd} ${bgroup.age_range}</td>
 						</tr>
 						<tr>
-							<th>인원 </th><td> ${bgroup.bg_end_cnt} 명중 ${bgroup.bg_now_cnt} 명 참가</td>
+							<th>인원 </th><td> ${bgroup.bg_team_cnt} vs ${bgroup.bg_team_cnt}</td>
 						</tr>
 						<tr>
 							<th>숙련도 </th><td> ${bgroup.skill_cd}</td>
@@ -425,7 +425,6 @@
 							<td>
 								<c:set var="now_cnt" value="${bgroup.bg_now_cnt}" />
 								<c:set var="end_cnt" value="${bgroup.bg_end_cnt}" />
-								<c:set var="sg_option" value="${bgroup.bg_option}" />
 								<c:choose>
 									<c:when test="${now_cnt eq end_cnt}">
 										참가대기
@@ -436,11 +435,7 @@
 								</c:choose>
 							</td>
 						</tr>
-						<c:if test="${not empty bg_option}">
-							<tr>
-								<th>옵션 </th><td> ${bgroup.bg_option}</td>
-							</tr>
-						</c:if>
+						
 				<!-- 미현언니 지도부분 -->
 						<tr style="text-align: center">
 							<td>
@@ -453,6 +448,7 @@
         
 <!-- Modal footer -->
 				<div class="modal-footer">
+					<button type="button" class="button-general" data-dismiss="modal">정보 복사</button>
 					<button type="button" class="button-general" data-dismiss="modal">닫기</button>
 				</div>
         
@@ -554,12 +550,12 @@
 		textarea.value += result.msg + "\n"; //채팅방에 나갔다고 표시.
 	}
 	else if( result.cmd == "kickOut" && ( bg_num == result.bg_num ) ){
-		var id = result.id;
+		var id = "${id}";
 		if(result.id == id){ //강퇴당한놈만 나가게.
 			location.href="getBgList";
-			$('#'+id).remove();
 			textarea.value += result.msg + "\n";
 		}
+		$('#'+result.id).remove();
 		
 	}
 	  
@@ -582,7 +578,7 @@
  
  //나갔을때 참여자 칸에서 프로필 삭제
  function deleteProfile() { 
-	 var bg_num = ${bgroup.sg_num};
+	 var bg_num = ${bgroup.bg_num};
 	 msg = {
 		 cmd : "cancelJoin",
 		 id : "${id}",
