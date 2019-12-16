@@ -112,6 +112,7 @@ function payGoGo() {
 			//비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
 			
 			console.log(data + "결제정보");
+			console.log(data.toString() + "toString");
 			
 			// 아작스 시작; ChallengeHist 테이블에 참가이력 추가
 	    	var historyParam = JSON.stringify($("#historyForm").serializeObject());; //디비에 넣을값; 해당 챌린지정보

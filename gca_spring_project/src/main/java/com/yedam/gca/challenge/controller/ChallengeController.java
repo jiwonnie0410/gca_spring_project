@@ -71,4 +71,12 @@ public class ChallengeController {
 	 return "/user/challenge/challengePayment";
 	}
 	
+	// 5. 스페셜챌린지 결제시 Money테이블에 정보 저장
+	@RequestMapping(value="/challenge/ajax/insertMoney.json", consumes ="application/json" )
+	@ResponseBody
+	public void insertMoney(@RequestBody MoneyVO vo) {
+		service.insertMoney(vo);
+	}
+	
+	
 }

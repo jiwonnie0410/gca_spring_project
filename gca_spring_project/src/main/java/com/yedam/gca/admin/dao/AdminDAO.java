@@ -81,33 +81,7 @@ public class AdminDAO {
 	
 	
 	
-	
-	//*************** 수림 **********************//
-	
-	// 1. 스페셜챌린지 결제완료시 머니 테이블에 이력 남김
-	public void insertMoney(MoneyVO vo) {
-		mybatis.insert("AdminDAO.insertMoney", vo);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	

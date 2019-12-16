@@ -108,28 +108,7 @@ public class AdminController {
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	// ******************* 수림 **********************//
-	@RequestMapping(value="/ajax/insertMoney.json", consumes ="application/json" )
-	@ResponseBody
-	public void insertMoney(@RequestBody MoneyVO vo) {
-		adminService.insertMoney(vo);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	// 진영
