@@ -65,16 +65,16 @@
         <!-- <form class="form-inline" id="frmSearch" action="/board/list"> -->
         <form class="form-inline" id="frmSearch" method="post" action="${pageContext.request.contextPath}/board/adlist">
 		<div align="center">
-			<div class="jumbotron">
-				<h2>홍보</h2>
-				<p>* 홍보.</p>
+			<div class="jumbotron" style="background-color: #FE9191; ">
+				<h2 style="color: white;" >홍보</h2>
+				<!-- <p style="color: white;">* 홍보.</p> -->
 			 </div>
-			 <sec:authentication property="principal.m_id"/> 
+			<%--  <sec:authentication property="principal.m_id"/>  --%>
 			<div align="center" style="padding-right: 3%; padding-left: 3%;">
 				<!-- 로그인한 사용자만 글쓰기 버튼을 활성화 -->
 				<%-- <c:if test="${sessionScope.userId != null}"> --%>
 					<div align="right">
-						<button class="btn btn-primary px-5 py-3"   type="button" id="btnWrite" name="write"  style="margin-right: 10%">Write</button>
+						<button class="btn" type="button" id="btnWrite" name="write"  style="margin-right: 10%; background-color: #FE9191; color: white;">Write</button>
 						<!-- data-target="#myModal" -->
 					</div>
 				<%-- </c:if> --%>
