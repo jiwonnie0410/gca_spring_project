@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -26,7 +27,6 @@
 	<!-- private : Description Action -->
 	<script type="text/javascript" src="../resources/js/mihy/b_search.js"></script>
 	<link rel="stylesheet" href="../resources/css/mihy/b_search.css">
-
 </head>
 
 
@@ -34,8 +34,12 @@
 
 <nav class="fixed-top">
 <div align="center" class="mt-2 mb-2"><h4>함께 시합할 동호회 찾기</h4></div>
-<c:if test=" <sec:authentication property='principal.m_status_cd' /> == 'M01' &&  "></c:if>
-<button class="btn btn-info create_room mt-3 ml-3 mr-3" style="width:90%;">동호회 매치 방 생성하기</button>
+
+<!-- 계정 상태가 활동중인 사람들만 버튼 보임 -->
+<sec:authentication property='principal.m_status_cd' var='mStatus'/> <!-- 변수에 이 회원의 계정상태 대입 -->
+<c:if test="${mStatus == 'M01'}"> <!-- 계정상태가 활동중이라면 버튼 띄움 -->
+	<button class="btn btn-info create_room mt-3 ml-3 mr-3" style="width:90%;">동호회 매치 방 생성하기</button>
+</c:if>
 
 <form action="getBgList" name="searchSport" id="searchSport" method="post">
 <div class="swiper-container">
