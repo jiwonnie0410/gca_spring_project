@@ -108,7 +108,7 @@ function checkForm() {
 
 	// 이메일 한 컬럼에 넣기 위해 합침
 	var m = form.email1.value + "@" + form.email2.value;
-	form.mEmail.value = m;
+	form.m_email.value = m;
 
 	form.submit();
 }

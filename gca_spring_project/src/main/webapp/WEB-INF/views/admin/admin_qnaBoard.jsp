@@ -50,7 +50,7 @@
 			<div class="modal-content">
 <!-- Modal Header -->			
 				<div class="modal-header">
-				문의 답변=====================
+				문의 답변
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 <!-- Modal body -->

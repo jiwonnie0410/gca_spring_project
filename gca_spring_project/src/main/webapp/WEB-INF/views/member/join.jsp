@@ -31,7 +31,7 @@
 			if('${joinMessage}' != ''){
 				alert('${joinMessage}');
 			}
-	</script>
+		</script>
 </head>
 
 <body>
@@ -43,12 +43,12 @@
 
 		<!-- 회원가입 폼 -->
 		<form role="form" id="joinfrm" name="joinfrm" action="insertJoin" method="post">
-			<input type="hidden" id="email" name="mEmail">
+			<input type="hidden" id="email" name="m_email">
 			<table>
 				<tr>	<!-- 아이디 및 중복확인 버튼 -->
 					<th width="50" align="right"> ID </th>
 					<td colspan="2">
-						<input type="text" id="joinId" name="mId" class="form-control form-control-sm" onkeyup="idCondition()" value="${param.mId }" /></td>
+						<input type="text" id="joinId" name="m_id" class="form-control form-control-sm" onkeyup="idCondition()" value="${param.mId }" /></td>
 					<td width="10" align="center">
 						<input disabled id="idButton" type="button" class="btn button-title" style="height: 30px;" onclick="idCheck()" value="중복확인" /></td>
 				</tr>
@@ -60,7 +60,7 @@
 
 				<tr>	<!-- 비밀번호 -->
 					<th> Password </th>
-					<td colspan="3"><input type="password" id="password1" name="mPw" class="form-control form-control-sm" onkeyup="pwCheck()" placeholder="비밀번호" /></td>
+					<td colspan="3"><input type="password" id="password1" name="m_password" class="form-control form-control-sm" onkeyup="pwCheck()" placeholder="비밀번호" /></td>
 				</tr>
 
 				<tr>
@@ -80,17 +80,17 @@
 
 				<tr>	<!-- 이름 -->
 					<th height="50"> Name </th>
-					<td colspan="3"><input type="text" id="name" name="mName" class="form-control form-control-sm" value="${param.mName }" /></td>
+					<td colspan="3"><input type="text" id="name" name="m_name" class="form-control form-control-sm" value="${param.mName }" /></td>
 				</tr>
 				
 				<tr>	<!-- 닉넴 -->
 					<th height="50"> Nickname </th>
-					<td colspan="3"><input type="text" id="nick" name="mNick" class="form-control form-control-sm" value="${param.mNick }" /></td>
+					<td colspan="3"><input type="text" id="nick" name="m_nick" class="form-control form-control-sm" value="${param.mNick }" /></td>
 				</tr>
 				
 				<tr>	<!-- 나이 및 성별-->
 					<td height="50"></td>
-					<td width="50"><input type="text" id="age" name="mAge" class="form-control form-control-sm" placeholder="나이"></td>
+					<td width="50"><input type="text" id="age" name="m_age" class="form-control form-control-sm" placeholder="나이"></td>
 					<td colspan="2"><b>세</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="checkbox" value="G01" name="checkbox1" onclick="oneCheckbox(this)" class="check-box" checked> 여성
 							<input type="checkbox" value="G02" name="checkbox1" onclick="oneCheckbox(this)" class="check-box"> 남성 </td>
@@ -113,8 +113,8 @@
 				</tr>
 				<tr>
 					<th></th>
-					<td colspan="3"><input type="text" id="address" value="${param.mAddress1 }" name="mAddress" class="form-control form-control-sm" /></td>
-					<input type="hidden" id="xy" name="mXy">
+					<td colspan="3"><input type="text" id="address" value="${param.mAddress1 }" name="m_location" class="form-control form-control-sm" /></td>
+					<input type="hidden" id="xy" name="m_xy">
 				</tr>
 
 				<tr>
