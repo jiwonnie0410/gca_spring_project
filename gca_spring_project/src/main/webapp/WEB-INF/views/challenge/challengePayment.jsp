@@ -115,7 +115,7 @@ function payGoGo() {
 // 				console.log("attr: " + i + ", value: " + data[i]);
 // 				$("#money_moid").val(data[2]);
 // 				$('#money_moid').val(2);
-			}
+// 			}
 			
 			// 아작스 시작; ChallengeHist 테이블에 참가이력 추가
 	    	var historyParam = JSON.stringify($("#historyForm").serializeObject());; //디비에 넣을값; 해당 챌린지정보
