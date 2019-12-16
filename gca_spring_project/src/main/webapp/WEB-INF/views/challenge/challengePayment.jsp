@@ -70,33 +70,32 @@ function payGoGo() {
 				}
 			],
 			user_info: {
-				username: 'test',
+				username: '${id}',
 				email: 'email@naver.com',
 				addr: '사용자 주소',
 				phone: '010-1234-4567'
 			},
 			order_id: 'order_id_1234', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
 			params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
-			account_expire_at: '2018-05-25', // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. )
-			extra: {
-			    start_at: '2019-05-10', // 정기 결제 시작일 - 시작일을 지정하지 않으면 그 날 당일로부터 결제가 가능한 Billing key 지급
-				end_at: '2022-05-10', // 정기결제 만료일 -  기간 없음 - 무제한
-		        vbank_result: 1, // 가상계좌 사용시 사용, 가상계좌 결과창을 볼지(1), 말지(0), 미설정시 봄(1)
-		        quota: '0,2,3' // 결제금액이 5만원 이상시 할부개월 허용범위를 설정할 수 있음, [0(일시불), 2개월, 3개월] 허용, 미설정시 12개월까지 허용
-			}
+// 			account_expire_at: '2018-05-25', // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. )
+// 			extra: {
+// 			    start_at: '2019-05-10', // 정기 결제 시작일 - 시작일을 지정하지 않으면 그 날 당일로부터 결제가 가능한 Billing key 지급
+// 				end_at: '2022-05-10', // 정기결제 만료일 -  기간 없음 - 무제한
+// 		        vbank_result: 1, // 가상계좌 사용시 사용, 가상계좌 결과창을 볼지(1), 말지(0), 미설정시 봄(1)
+// 		        quota: '0,2,3' // 결제금액이 5만원 이상시 할부개월 허용범위를 설정할 수 있음, [0(일시불), 2개월, 3개월] 허용, 미설정시 12개월까지 허용
+// 			}
 		}).error(function (data) {
 			//결제 진행시 에러가 발생하면 수행됩니다.
-			console.log(data);
+			//console.log(data);
 		}).cancel(function (data) {
 			//결제가 취소되면 수행됩니다.
 			console.log(data);
 		}).ready(function (data) {
 			// 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
-			console.log(data);
+			//console.log(data);
 		}).confirm(function (data) {
 			//결제가 실행되기 전에 수행되며, 주로 재고를 확인하는 로직이 들어갑니다.
 			//주의 - 카드 수기결제일 경우 이 부분이 실행되지 않습니다.
-			console.log(data);
 			var enable = true; // 재고 수량 관리 로직 혹은 다른 처리
 			if (enable) {
 				BootPay.transactionConfirm(data); // 조건이 맞으면 승인 처리를 한다.
@@ -105,14 +104,18 @@ function payGoGo() {
 			}
 		}).close(function (data) {
 		    // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
-		    console.log(data);
+		    //console.log(data);
 			
 		}).done(function (data) {
 			//결제가 정상적으로 완료되면 수행됩니다
 			//비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
 			
-			console.log(data + "결제정보");
-			console.log(data.toString() + "toString");
+			
+// 				for(var i in data) {
+// 				console.log("attr: " + i + ", value: " + data[i]);
+// 				$("#money_moid").val(data[2]);
+// 				$('#money_moid').val(2);
+			}
 			
 			// 아작스 시작; ChallengeHist 테이블에 참가이력 추가
 	    	var historyParam = JSON.stringify($("#historyForm").serializeObject());; //디비에 넣을값; 해당 챌린지정보
@@ -134,8 +137,8 @@ function payGoGo() {
 	    	});
 	    				
 			
-			alert("결제완료! 챌린지 목록으로 이동합니다");
-			location.href="list";
+			//alert("결제완료! 챌린지 목록으로 이동합니다");
+			//location.href="list";
 		});
 		
 	});
@@ -245,6 +248,7 @@ function payGoGo() {
 				</div>
 			</div>
 		</div>
+		
 		<form id="historyForm">
 			<input name="cl_num" type="hidden" value="${challenge.cl_num }">
 			<input name="m_id" type="hidden" value=${id }>
@@ -254,6 +258,7 @@ function payGoGo() {
 			<input name="cl_num" type="hidden" value="${challenge.cl_num }">
 			<input name="m_id" type="hidden" value=${id }>
 			<input name="money_deposit" type="hidden" id="money_deposit">
+			<input name="money_moid" id="money_moid">
 		</form>
 	<!-- 결제버튼, 금액 주입은 addOption JS 참조 -->
 	<button id="payBtn" class="pay-btn"><p id="paynow"></p></button>
