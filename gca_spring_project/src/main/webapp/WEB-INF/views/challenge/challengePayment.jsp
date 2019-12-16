@@ -111,6 +111,8 @@ function payGoGo() {
 			//결제가 정상적으로 완료되면 수행됩니다
 			//비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
 			
+			console.log(data + "결제정보");
+			
 			// 아작스 시작; ChallengeHist 테이블에 참가이력 추가
 	    	var historyParam = JSON.stringify($("#historyForm").serializeObject());; //디비에 넣을값; 해당 챌린지정보
 	    	$.ajax({
@@ -129,9 +131,7 @@ function payGoGo() {
 	    		data: moneyParam,
 	    		contentType: "application/json"
 	    	});
-	    	
-	    	moneyForm
-			
+	    				
 			
 			alert("결제완료! 챌린지 목록으로 이동합니다");
 			location.href="list";
