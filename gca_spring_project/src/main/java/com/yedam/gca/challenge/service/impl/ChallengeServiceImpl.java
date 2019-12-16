@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yedam.gca.admin.vo.MoneyVO;
 import com.yedam.gca.challenge.dao.ChallengeDAO;
 import com.yedam.gca.challenge.service.ChallengeService;
 import com.yedam.gca.challenge.vo.ChallengeVO;
@@ -46,6 +47,12 @@ public class ChallengeServiceImpl implements ChallengeService{
 	@Override
 	public ChallengeVO challengePayment(ChallengeVO vo) {
 		return dao.challengePayment(vo);
+	}
+	
+	// 7. 스페셜챌린지 결제완료시 머니 테이블에 이력 남김
+	@Override
+	public void insertMoney(MoneyVO vo) {
+		dao.insertMoney(vo);
 	}
 
 

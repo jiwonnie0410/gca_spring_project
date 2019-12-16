@@ -2,6 +2,7 @@ package com.yedam.gca.challenge.service;
 
 import java.util.List;
 
+import com.yedam.gca.admin.vo.MoneyVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.history.vo.ChallengeHistVO;
 
@@ -26,5 +27,9 @@ public interface ChallengeService {
 	
 	// 6. 스페셜챌린지 결제페이지
 	public ChallengeVO challengePayment(ChallengeVO vo);
+	
+	// 7. 스페셜챌린지 결제완료시 머니 테이블에 이력 남김
+	public void insertMoney(MoneyVO vo);
+	
 
 }

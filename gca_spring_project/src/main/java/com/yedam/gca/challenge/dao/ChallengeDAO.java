@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yedam.gca.admin.vo.MoneyVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.history.vo.ChallengeHistVO;
 
@@ -44,6 +45,11 @@ public class ChallengeDAO  {
 	// 6. 스페셜챌린지 결제페이지 조회
 	public ChallengeVO challengePayment(ChallengeVO vo) {
 		return mybatis.selectOne("ChallengeDAO.challengePayment", vo);
+	}
+	
+	// 7. 스페셜챌린지 결제완료시 머니 테이블에 이력 남김
+	public void insertMoney(MoneyVO vo) {
+		mybatis.insert("ChallengeDAO.insertMoney", vo);
 	}
 
 }
