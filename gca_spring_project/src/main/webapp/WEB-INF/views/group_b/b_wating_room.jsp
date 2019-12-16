@@ -415,7 +415,7 @@
 							<th>참가정보 </th><td> ${bgroup.gender_cd} ${bgroup.age_range}</td>
 						</tr>
 						<tr>
-							<th>인원 </th><td> ${bgroup.bg_team_cnt}</td>
+							<th>인원 </th><td> ${bgroup.bg_team_cnt} vs ${bgroup.bg_team_cnt}</td>
 						</tr>
 						<tr>
 							<th>숙련도 </th><td> ${bgroup.skill_cd}</td>
@@ -453,6 +453,7 @@
         
 <!-- Modal footer -->
 				<div class="modal-footer">
+					<button type="button" class="button-general" data-dismiss="modal">정보 복사</button>
 					<button type="button" class="button-general" data-dismiss="modal">닫기</button>
 				</div>
         
