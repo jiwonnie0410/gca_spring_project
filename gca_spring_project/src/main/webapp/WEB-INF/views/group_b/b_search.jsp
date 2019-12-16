@@ -24,6 +24,11 @@
 	<link rel="stylesheet" href="../resources/css/mihy/swiper.min.css">
 	<script src="../resources/js/mihy/swiper.min.js"></script>
 
+<script>
+	var mstatus = "<sec:authentication property='principal.m_status_cd'/>";
+</script>
+
+
 	<!-- private : Description Action -->
 	<script type="text/javascript" src="../resources/js/mihy/b_search.js"></script>
 	<link rel="stylesheet" href="../resources/css/mihy/b_search.css">
