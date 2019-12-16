@@ -44,6 +44,7 @@
 		<!-- 회원가입 폼 -->
 		<form role="form" id="joinfrm" name="joinfrm" action="insertJoin" method="post">
 			<input type="hidden" id="email" name="m_email">
+			<input type="hidden" id="xy" name="m_xy">
 			<table>
 				<tr>	<!-- 아이디 및 중복확인 버튼 -->
 					<th width="50" align="right"> ID </th>
@@ -114,7 +115,6 @@
 				<tr>
 					<th></th>
 					<td colspan="3"><input type="text" id="address" value="${param.mAddress1 }" name="m_location" class="form-control form-control-sm" /></td>
-					<input type="hidden" id="xy" name="m_xy">
 				</tr>
 
 				<tr>
