@@ -425,7 +425,6 @@
 							<td>
 								<c:set var="now_cnt" value="${bgroup.bg_now_cnt}" />
 								<c:set var="end_cnt" value="${bgroup.bg_end_cnt}" />
-								<c:set var="bg_option" value="${bgroup.bg_option}" />
 								<c:choose>
 									<c:when test="${now_cnt eq end_cnt}">
 										참가대기
@@ -436,11 +435,7 @@
 								</c:choose>
 							</td>
 						</tr>
-						<c:if test="${not empty bg_option}">
-							<tr>
-								<th>옵션 </th><td> ${bgroup.bg_option}</td>
-							</tr>
-						</c:if>
+						
 				<!-- 미현언니 지도부분 -->
 						<tr style="text-align: center">
 							<td>
@@ -454,7 +449,7 @@
 <!-- Modal footer -->
 				<div class="modal-footer">
 					<button type="button" class="button-general" data-dismiss="modal">정보 복사</button>
-					<button type="button" class="button-general" data-dismiss="modal">닫기</button>
+					<button type="button" class="button-general" data-dismiss="modal">닫기1</button>
 				</div>
         
 			</div>
