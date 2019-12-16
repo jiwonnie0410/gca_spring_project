@@ -11,7 +11,7 @@ public class BGroupVO {
 	private int bg_num;				// *PK* // 매치 번호
 	private String bg_name;					// 방 이름
 	private Date bg_start_dttm;				// 개설 날짜
-	private Date bg_end_dttm;				// 마감 날짜
+	private Timestamp bg_end_dttm;				// 마감 날짜
 	private int bg_now_cnt;					// 현재 인원
 	private int bg_end_cnt;					// 마감 인원
 	private int bg_team_cnt;				// 선수 인원

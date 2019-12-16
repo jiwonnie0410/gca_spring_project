@@ -175,7 +175,7 @@ public class BGroupController {
 	
 	//방 생성
 	@RequestMapping(value="bgroup/creRoom", method=RequestMethod.POST)
-	public String createRoom(@ModelAttribute BGroupVO vo) {
+	public String createRoom(BGroupVO vo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션 정보 갖고 오기
 		vo.setM_id(memInfo.getM_id());
 		

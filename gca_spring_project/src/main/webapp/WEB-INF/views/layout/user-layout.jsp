@@ -14,7 +14,7 @@
 		<!-- json-serializeObject js -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
 		
-<title>유저 레이아웃</title>
+<title>운동하자!</title>
 <script>
 	var webSocket = new WebSocket('ws://localhost/gca/broadcast.do'); 
 	
