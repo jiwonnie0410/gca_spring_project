@@ -210,14 +210,22 @@ public class LoginController {
 	// 비밀번호 변경 페이지
 	@RequestMapping("/member/changePassword")
 	public String changePassword() {
-		return "/notiles/member/changePassword";
+		return "/user/member/changePassword";
 	}
 
 	// 비밀번호 변경
 	@RequestMapping("/member/updatePassword")
 	public String updatePassword(MembersVO vo, Model model) {
-		model.addAttribute("pwChangeMessage", memberService.changePw(vo)); // jsp 페이지에서 alert로 띄울 메시지 넘기기
-		return "/notiles/member/member_view";
+		// 비밀번호 변경 성공 및 실패에 따라 각각 다른 페이지로 리턴
+		Map<String, Object> map = memberService.changePw(vo);
+		boolean flag = (boolean) map.get("flag");
+		if (flag == false) { // 실패했을 때
+			model.addAttribute("pwMessage", map.get("message")); // jsp 페이지에서 alert로 띄울 메시지 넘기기
+			return "/user/member/changePassword";
+		} else { // 성공했을 때
+			model.addAttribute("pwMessage", map.get("message"));
+			return "/user/member/member_view";
+		}
 	}
 	// 지원 끝
 

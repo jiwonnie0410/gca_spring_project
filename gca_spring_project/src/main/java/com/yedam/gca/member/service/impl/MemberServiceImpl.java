@@ -204,18 +204,25 @@ public class MemberServiceImpl implements MemberService {
 	
 	// 비밀번호 변경
 	@Override
-	public String changePw(MembersVO vo) {
+	public Map<String, Object> changePw(MembersVO vo) {
 		// 비밀번호 암호화
 		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 		String password = scpwd.encode(vo.getM_password());
 		vo.setM_password(password);
 		
 		int result = dao.changePassword(vo);
+		
+		// 비밀번호 변경 성공 및 실패에 따라 메시지와 리턴 페이지 다르게 넘김
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		if(result == 0) {
-			return "비밀번호 변경에 실패했습니다. 다시 시도해 주세요.";
+			map.put("flag", false);
+			map.put("message", "비밀번호 변경에 실패했습니다. 다시 시도해 주세요.");
 		} else {
-			return "비밀번호 변경 완료!";
+			map.put("flag", true);
+			map.put("message", "비밀번호 변경 완료!");
 		}
+		return map;
 	}
 	
 	
