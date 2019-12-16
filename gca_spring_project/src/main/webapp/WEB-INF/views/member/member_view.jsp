@@ -71,8 +71,7 @@
 							<tr>
 								<td>아이디</td>
 								<!-- id는 수정이 불가능하도록 readonly속성 추가 -->
-								<td><input name="m_id" value="${dto.m_id}"
-									readonly="readonly" style="border: none"></td>
+								<td><input name="m_id" value="${dto.m_id}" readonly="readonly" style="border: none"></td>
 							</tr>
 							<tr>
 								<td>비밀번호</td>
@@ -91,18 +90,7 @@
 									style="border: none"></td>
 							</tr>
 							<!-- 누락된 부분 -->
-							<tr>
-								<%--      <td>회원가입일자</td>
-                <td>
-                    <fmt:formatDate value="${dto.userRegdate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-                </td>
-            </tr>
-            <tr>
-                <td>회원정보 수정일자</td>
-                <td>
-                    <fmt:formatDate value="${dto.userUpdatedate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-                </td>
-            </tr> --%>
+
 							<tr>
 								<td colspan="2" align="center"></td>
 							</tr>
@@ -118,8 +106,8 @@
 							<!--이모티콘이로 대체  -->
 							<span aria-hidden="true" class="li_settings fs1"></span> <span
 								aria-hidden="true" class="li_lock fs1"></span>
-							<i class="fas fa-user-edit"  aria-hidden="true" style="color:black; font-size:100px;" ></i> 
-							 <i class="fa fa-lock fa-2x" aria-hidden="true" style="color:black; font-size:100px;"> </i> 
+							<i class="fas fa-user-edit  fa-lg"  aria-hidden="true" style="color:black; font-size:100px;" ></i> 
+							 <i class="fa fa-lock fa-lgx" aria-hidden="true" style="color:black; font-size:100px;"> </i> 
 							 
 							 <a href="changePassword"> 비밀번호 변경 </a>
 							 

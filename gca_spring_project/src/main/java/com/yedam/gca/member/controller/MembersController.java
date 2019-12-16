@@ -24,7 +24,7 @@ public class MembersController {
 	MemberService memberService;
 	
 // 03 회원 상세정보 조회
-    @RequestMapping("member/member_view.do")
+    @RequestMapping("member/member_view")
     public String memberView(Model model)throws Exception{
 		UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         // 회원 정보를 model에 저장
