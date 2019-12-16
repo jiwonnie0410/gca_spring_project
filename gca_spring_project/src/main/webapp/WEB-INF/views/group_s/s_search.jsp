@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -35,7 +36,11 @@
 <nav class="fixed-top">
 <div align="center" class="mt-2 mb-2"><h4>함께 할 반짝 찾기</h4></div>
 
-<button class="btn btn-info create_room mt-3 ml-3 mr-3" style="width:90%;">반짝 방 생성하기</button>
+<!-- 계정 상태가 활동중인 사람들만 버튼 보임 -->
+<sec:authentication property='principal.m_status_cd' var='mStatus'/> <!-- 변수에 이 회원의 계정상태 대입 -->
+<c:if test="${mStatus == 'M01'}"> <!-- 계정상태가 활동중이라면 버튼 띄움 -->
+	<button class="btn btn-info create_room mt-3 ml-3 mr-3" style="width:90%;">반짝 방 생성하기</button>
+</c:if>
 
 <form action="getSgList" name="searchSport" id="searchSport" method="post">
 <div class="swiper-container">
