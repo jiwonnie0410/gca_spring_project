@@ -3,8 +3,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ScoreHistDAO" >
 
-<!--  ************** 수림 **************** -->
+<!--  ************** 수림 **************** 
+! V_USER_RANK 뷰 사용
+1. 랭킹을 매긴 후 탑 10명만 출력
+2. 사용자의 랭킹을 출력(점수가 없어서 테이블에 이력이 없을 경우, JSP단에서 처리)
 
+-->
+	<!-- 1. 랭킹을 매긴 후 탑 10명만 출력 -->
 	<select id="getRankList" resultType="scorehistory">
 	<![CDATA[  
 		SELECT		M_ID,
@@ -17,6 +22,7 @@
 	]]>
 	</select>
 	
+	<!-- 2. 사용자의 랭킹을 출력(점수가 없어서 테이블에 이력이 없을 경우, JSP단에서 처리) -->
 	<select id="getMyRank" resultType="scorehistory">  
 		SELECT		M_ID,
 					M_NICK,
