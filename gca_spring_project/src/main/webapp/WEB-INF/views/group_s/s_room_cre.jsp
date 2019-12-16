@@ -95,7 +95,7 @@
 		<input type="text" class="form-control" id="map_location" name="sg_location" placeholder="만날 장소를 정해 주세요." readonly>
 		<span id="sg_location_valid" class="sg_valid pl-3"></span>
 	</div>
-	<input type="hidden" name="sa_xy" id="map_xy">
+	<input type="hidden" name="sg_xy" id="map_xy">
 	<div id="map"></div>
 	
 	

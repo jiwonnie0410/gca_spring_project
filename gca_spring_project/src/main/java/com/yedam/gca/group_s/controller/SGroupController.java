@@ -87,7 +87,7 @@ public class SGroupController {
 		model.addAttribute("sports_list", codeService.getCodeList(cvo));
 		
 		if(vo.getEnd_dis() == null) {
-			return "/user/group_s/s_search";			
+			return "/notiles/group_s/s_search";	//추후 notiles를 user로 바꾸기	
 		} else {
 			return "/notiles/group_s/s_search_temp";
 		}
@@ -108,7 +108,7 @@ public class SGroupController {
 		model.addAttribute("sports_list", codeService.getCodeList(cvo));
 		
 		if(vo.getEnd_dis() == null) {
-			return "/user/group_s/s_end_room";
+			return "/notiles/group_s/s_end_room";	//추후 notiles를 user로 바꾸기	
 		} else {
 			return "/notiles/group_s/s_end_temp";
 		}
@@ -180,7 +180,7 @@ public class SGroupController {
 		model.addAttribute("skill_list", codeService.getCodeList(vo));
 		vo.setCd_group("GENDER_CD");
 		model.addAttribute("gender_list", codeService.getCodeList(vo));
-		return "/user/group_s/s_room_cre";
+		return "/notiles/group_s/s_room_cre"; //추후 notiles를 user로 바꾸기	
 	}
 	
 	//방 생성
@@ -205,7 +205,7 @@ public class SGroupController {
 	}
 	
 	//전체 반짝+마감 반짝 리스트 조회(미사용중)
-	@RequestMapping(value="/sgroup/getSgList/{whatroom}")
+	@RequestMapping(value= {"/sgroup/getSgList","/sgroup/getSgListEnd"} )
 		//모든 getSgList 호출 주소 변경 필요. default는 전체 반짝, end는 마감 반짝
 		//s_search, s_end_room jsp, js getSg로 검색하여 getSgList/default(end) 로 변경
 		//getSgList를 변경하지 않고 전체메서드와 마감메서드를 구분할 다른 방법은 없을까..
