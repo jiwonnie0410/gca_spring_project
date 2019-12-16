@@ -157,6 +157,6 @@
 		c.cl_status ,
 		c.cl_score 
 		from challenge_hist ch, challenge c, members m
-		where ch.cl_num = c.cl_num and m.m_id = ch.m_id;
+		where ch.cl_num = c.cl_num and m.m_id = ch.m_id
 	</select>
 </mapper>

@@ -68,6 +68,16 @@ public class SGroupController {
 			//sgroupService.minusNowCnt(sgNum);
 			return "redirect:getSgList";
 		}
+		
+	//강퇴 시 활동이력에서 빠지고 count-1
+		@ResponseBody
+		@RequestMapping(value="/sgroup/kickOut", consumes="application/json")
+			public int kickOut(@RequestBody ActiveHistVO avo) {
+				avo.setM_id(avo.getM_id());
+				avo.setSg_num(avo.getSg_num());
+				sgroupService.cancelJoin(avo);
+				return 0;
+			}
 	
 
 //*****************************************미현************************************
@@ -165,9 +175,7 @@ public class SGroupController {
 //		SpringSocketHandler socket = new SpringSocketHandler();
 //		socket.sendMessage(socketVO);
 		
-		return "redirect:alreadyIn?sg_num="+avo.getSg_num()
-								+ "&first_in=first_in"; //새로 참여하는 경우임을 구분하기 위해 보내는 잉여값. 
-									//alreadyIn에서 다른 처리작업을 할 필요 없이 값이 그대로 넘어감
+		return "redirect:alreadyIn?sg_num="+avo.getSg_num();
 	}
 
 	

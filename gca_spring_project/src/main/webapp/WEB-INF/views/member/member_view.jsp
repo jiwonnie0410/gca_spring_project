@@ -31,6 +31,12 @@
 <script
 	src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
 <title>회원정보 상세 페이지</title>
+		<script>
+			// 확인 메시지 띄우기
+			if('${pwMessage}' != ''){
+				alert('${pwMessage}');
+			}
+		</script>
 <script>
 	$(document)
 			.ready(

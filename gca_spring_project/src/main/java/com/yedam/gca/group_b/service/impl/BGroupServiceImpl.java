@@ -5,9 +5,12 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.group_b.dao.BGroupDAO;
 import com.yedam.gca.group_b.service.BGroupService;
 import com.yedam.gca.group_b.vo.BGroupVO;
+import com.yedam.gca.history.vo.ActiveHistVO;
+import com.yedam.gca.member.vo.MembersVO;
 
 @Service("bGroupService")
 public class BGroupServiceImpl implements BGroupService {
@@ -16,7 +19,20 @@ public class BGroupServiceImpl implements BGroupService {
 
 	
 	//은영	
-
+	
+	public int doReport(TroubleVO vo) {
+		return bgroupDAO.doReport(vo);
+	}
+	public void cancelJoin(ActiveHistVO vo) {
+		bgroupDAO.cancelJoin(vo);
+		bgroupDAO.minusNowCnt(vo);
+	}
+	public String returnImage(MembersVO vo) {
+		return bgroupDAO.returnImage(vo);
+	}
+	public MembersVO getOneMem(MembersVO vo) {
+		return bgroupDAO.getOneMem(vo);
+	}
 	
 	
 	

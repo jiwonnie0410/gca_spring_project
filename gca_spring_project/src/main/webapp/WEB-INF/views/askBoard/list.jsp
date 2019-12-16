@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <%--ContextPath 선언 --%>
 <%String cp = request.getContextPath();%>
 <!DOCTYPE html>
@@ -28,6 +29,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!--json할때 필요  -->
 <script src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
+
+
+<sec:authentication property="principal.m_id" var="m_id"/>
 	
 <script>
 	$(document)
@@ -72,37 +76,40 @@
 			<%--  <sec:authentication property="principal.m_id"/>  --%>
 			<div align="center" style="padding-right: 3%; padding-left: 3%;">
 				<!-- 로그인한 사용자만 글쓰기 버튼을 활성화 -->
-				<%-- <c:if test="${sessionScope.userId != null}"> --%>
+				<c:if test="${m_id != null}"> 
 					<div align="right">
 						<button class="btn" type="button" id="btnWrite" name="write"  style="margin-right: 10%; background-color: #FE9191; color: white;">Write</button>
-						<!-- data-target="#myModal" -->
 					</div>
-				<%-- </c:if> --%>
-				<br> <select name="searchOption">
-					<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
-					<option value="all"
-						<c:out value="${map.searchOption == 'all'?'selected':''}"/>>제목+아이디+제목</option>
-					<option value="m_id"
-						<c:out value="${map.searchOption == 'm_id'?'selected':''}"/>>아이디</option>
-					<option value="ad_content"
-						<c:out value="${map.searchOption == 'ad_content'?'selected':''}"/>>내용</option>
-					<option value="title"
-						<c:out value="${map.searchOption == 'title'?'selected':''}"/>>제목</option>
-				</select> 
-				<input name="keyword" value="${map.keyword}"> 
-				<input type="submit" value="조회">
+				</c:if>  
+				
+				<form name="SearchForm">
+				<table>
+						<tr>
+							<td><select id="searchCondition" name="searchCondition" class="btn btn-outline-warning btn-sm dropdown-toggle" style="">
+									<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
+									<option value="all"<c:out value="${map.searchOption == 'all'?'selected':''}"/>>제목+아이디+제목</option>
+									<option value="m_id"<c:out value="${map.searchOption == 'm_id'?'selected':''}"/>>아이디</option>
+									<option value="ad_content"<c:out value="${map.searchOption == 'ad_content'?'selected':''}"/>>내용</option>
+									<option value="title"<c:out value="${map.searchOption == 'title'?'selected':''}"/>>제목</option>
+							</select></td>
+							<td><input name="keyword" value="${map.keyword}" class="form-control"> </td>
+							<td><button type="submit" class="btn btn-outline-warning btn-sm"
+									style="border-color: #FAF0F0; color: #ffc0cb;">검색</button></td>
+						</tr>
+					</table>
+			</form>	
 			</div>
 		</div>
 	</form>
 	<!-- 레코드의 갯수를 출력 -->
-	<table class="table" width="1200px">
+	<table class="table" >
 		<thead>
 			<tr>
-				<th width="30">번호</th>
-				<th>아이디</th>
-				<th>제목</th>
-				<th >내용</th>
-				<th>조회수</th>
+				<th width="20%" align="center"><center> 번호</center></th>
+				<!-- <th>아이디</th> -->
+				<th width="30%" align="center"><center>제목</center></th>
+				<th width="30%" align="center" ><center>내용</center></th>
+				<th width="20%" align="center"><center>조회수</center></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -117,7 +124,7 @@
 								<!-- db 목록을 가져와서 뿌려주는 곳 -->
 						<c:forEach var="row" items="${map.list}">
 								<tr>
-									<td align="center" width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${row.ad_num}</td>
+									<%-- <td align="center" width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${row.ad_num}</td> --%>
 									<td align="center">${row.m_id}</td>
 									<!-- 게시글 상세보기 페이지로 이동시 게시글 목록페이지에 있는 검색조건, 키워드, 현재페이지 값을 유지하기 위해 -->
 									<td align="center" width="10" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" align="center">

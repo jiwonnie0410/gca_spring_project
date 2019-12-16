@@ -16,14 +16,23 @@
 		<!-- Latest compiled JavaScript -->
 		<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+		
 		<!-- JS & CSS -->
 		<script	src="${pageContext.request.contextPath }/resources/js/member/changePasswordJs.js"></script>
 		<link href="${pageContext.request.contextPath }/resources/css/admin/logincss.css" rel="stylesheet">
 		<title> 비밀번호 변경 </title>
+		
+		<script>
+			// 확인 메시지 띄우기
+			if('${pwMessage}' != ''){
+				alert('${pwMessage}');
+			}
+		</script>
 </head>
 <body>
-  <div class="row">
-        <div class="col-4">
+        <div class="col-50">
           <div class="card">
             <div class="card-header" style="background-color: #FEBABA;"><b> 비밀번호 변경 </b></div>
             <div class="card-body" align="center">
@@ -54,6 +63,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
 </body>
 </html>

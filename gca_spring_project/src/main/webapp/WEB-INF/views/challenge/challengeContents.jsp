@@ -164,21 +164,25 @@ $(function(){
 					<!-- 보증금설명/포인트 설명 끝 -->
 					
 					<!-- 기본/스페셜챌린지버튼 시작 -->
-						<c:if test="${challenge.cl_num == myHistory.cl_num}">
-							<button class="join-btn start-challenge">참가중</button>
-						</c:if>
-						<!-- 챌린지 참가용 버튼 시작 -->
-						<c:if test="${challenge.cl_num != myHistory.cl_num}">
-							<c:choose>
-								<c:when test="${challenge.cl_status == 'basic' }">
-									<button class="join-btn" id="basic-btn">참가하기</button>
-								</c:when>
-								<c:when test="${challenge.cl_status == 'special' }">
-									<button class="join-btn" id="special-btn">참가하기</button>
-								</c:when>
-							</c:choose>
-						</c:if>
-						<!--챌린지 참가용 버튼 끝  -->
+						<!-- 계정 상태가 활동중인 사람들만 버튼 보임 -->
+						<sec:authentication property='principal.m_status_cd' var='mStatus'/> <!-- 변수에 이 회원의 계정상태 대입 -->
+						<c:if test="${mStatus == 'M01'}"> <!-- 계정상태가 활동중이라면 아래의 버튼 띄움 -->
+								<c:if test="${challenge.cl_num == myHistory.cl_num}">
+									<button class="join-btn start-challenge">참가중</button>
+								</c:if>
+								<!-- 챌린지 참가용 버튼 시작 -->
+								<c:if test="${challenge.cl_num != myHistory.cl_num}">
+									<c:choose>
+										<c:when test="${challenge.cl_status == 'basic' }">
+											<button class="join-btn" id="basic-btn">참가하기</button>
+										</c:when>
+										<c:when test="${challenge.cl_status == 'special' }">
+											<button class="join-btn" id="special-btn">참가하기</button>
+										</c:when>
+									</c:choose>
+								</c:if>
+								<!--챌린지 참가용 버튼 끝  -->
+						</c:if> <!-- 활동 상태 체크 끝 -->
 					<!-- 기본/스페셜챌린지버튼 끝 -->
 				</div>
 			</div>   

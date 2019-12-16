@@ -11,22 +11,13 @@
 <title>반짝 대기방s</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0, user-scalable=no, target-densitydpi=medium-dpi" />
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<script src="../resources/scripts/json.min.js"></script>
-
-<!-- 미현 : 인증 참여 스크립트 추가 -->
+<!-- 미현 : 인증 참여 스크립트 / 지도 스크립트 추가 -->
 <script type="text/javascript" src="../resources/js/mihy/part_cert.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9e415eb9e7187154cd9c6308c036f0a6&libraries=services,clusterer"></script>
+<script type="text/javascript" src="../resources/js/mihy/kakao_map2.js"></script>
+<!-- 미현 끝  -->
+
 
 <style>
 
@@ -107,6 +98,12 @@
 	table#room-info-table td{
 		padding-left: 15px;
 	}
+	
+	table#profile-table{
+		border: 2px solid #FE9191;
+		border-radius: 7px;
+		border-collapse: separate;
+	}
 
 </style>
 
@@ -148,7 +145,7 @@
 						console.log('model.addAttribute 성공');
 						var img = $(event.relatedTarget).children('img').attr('src');
 						console.log(img);
-						$('#profile_image').children('img').attr('src')=img;
+						$('#profile_image').children('img').attr('src',img);
 						$('#profile_id').text(vo.m_id);
 						$('#profile_nick').text(vo.m_nick);
 						$('#profile_age').text(vo.m_age);
@@ -162,7 +159,13 @@
 				});
 			});
 			
-				
+			//신고모달 눌렀을때
+			$('#report-user').on('show.bs.modal', function (event) {
+				var troubleId = $(event.relatedTarget).parent().parent().children('.modal-body')
+						.children('#profile-table').find('#profile_id').html(); //해당 모달을 띄운 프로필의 id
+				$('input[name=tr_mid]').val(troubleId);
+			});
+			
 			//신고모달에서 신고하기 버튼 눌렀을 때
 			$("body").on("click", "[id^=doReport]", function() {
 
@@ -200,12 +203,33 @@
 			//프로필모달에서 강퇴 버튼 눌렀을 때
 			$("body").on("click", "[id^=kickOut]", function() {
 
+				//웹소켓으로 방정보 업데이트(인원수,방상태), 프로필 칸에서 삭제, 활동히스토리 DELETE, 해당 사람은 목록으로 돌아가게.
 				var confirmStatus = confirm("정말로 강퇴 하시겠습니까?");
 
 				if (confirmStatus) {
 					
-					alert("강퇴 완료.");
-					console.log("강퇴했을때 처리할 곳");
+					var kickId = $('#profile_id').html();
+					var sgNum = ${sgroup.sg_num};
+					
+					var param = JSON.stringify({"m_id" : kickId, "sg_num" : sgNum});
+					
+					$.ajax({
+						url: "kickOut",
+						method:'post',
+						dataType: "json",	//결과타입
+						data: param,		//요청파라미터
+						contentType: "application/json",
+						//컨트롤러로 데이타 보낼때 제이슨이라는 것을 알려줘야함. 컨트롤러에는 담을 vo에@RequestBody붙여주고.
+						success: function(){
+							alert("강퇴 처리 되었습니다.");
+							deleteProfileKO(kickId); //웹소켓 후 처리에서 해당 아이디만 페이지 이동시켜야함.
+						},
+						error: function(){
+							alert("강퇴 실패");
+						}
+						
+					});
+					
 					
 					$('#profile').modal('hide'); //프로필 모달창 닫기
 
@@ -225,9 +249,6 @@
 				if (confirmStatus) {
 					
 					var sgNum = ${sgroup.sg_num};
-					var sgCnt = ${sgroup.sg_now_cnt};
-					
-					//alert(usrId);
 					
 					deleteProfile();
 					
@@ -242,7 +263,9 @@
 
 			});
 			
+			//미현
 			$('#btn_cert').on('click', getLocation); //참가인증
+			view_map();
 			
 			$('#backToList').on('click', function(){location.href='getSgList';}) //목록으로 돌아가기
 			
@@ -276,7 +299,7 @@
       							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly"></textarea>
       			<div style="padding-top:10px;">
       				<span style="padding-left:5px; padding-right:3px; vertical-align: middle;">
-      					<textarea id="inputMessage" style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; ">입력하세요</textarea>
+      					<textarea id="inputMessage" style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; " placeholder="입력하세요"></textarea>
       				</span>
       				<span style="vertical-align:middle;">
       					<button id="chat" class="button-general">전송</button>
@@ -329,11 +352,11 @@
         
 <!-- Modal body -->
 				<div class="modal-body">
-					<table style="padding:10px;">
+					<table id="profile-table" style="padding:10px;">
 						<tr>
-							<td width="60%" id="profile_image" rowspan="4">
-								<img style="padding-bottom:5px;" width="65px" height="65px"
-	          							src=""></td>
+							<td width="50%" id="profile_image" rowspan="4">
+								<img style="padding-bottom:5px;" width="65px" height="65px" src="">
+							</td>
 	          				<th colspan="2">id</th>
 						</tr>
 						<tr>
@@ -346,11 +369,11 @@
 							<td id="profile_nick" colspan="2"></td>
 						</tr>
 						<tr>
-							<th>age</th><th>gender</th><th>level</th>
+							<th>gender</th><th>age</th><th width="40%">level</th>
 						</tr>
 						<tr>
-							<td id="profile_age"></td>
 							<td id="profile_gender"></td>
+							<td id="profile_age"></td>
 							<td id="profile_level"></td>
 						</tr>
 					</table>
@@ -358,7 +381,7 @@
         <!-- data-dismiss="modal" id="report" -->
 <!-- Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="button-general" data-toggle="modal" data-target="#report-user">신고</button>
+					<button style="background: crimson;" type="button" class="button-general" data-toggle="modal" data-target="#report-user">신고</button>
 					<button style="background: crimson;" id="kickOut" type="button" class="button-general">강퇴</button> <!-- 얘는 방장만 보이게 -->
 				</div>
         
@@ -426,8 +449,9 @@
 						</c:if>
 				<!-- 미현언니 지도부분 -->
 						<tr style="text-align: center">
-							<td>
-								<div id="meetLocation">지도</div>
+							<td colspan="2">
+								<div id="map" style="width:300px;height:200px;"></div>
+								<input type="hidden" id="map_xy" value="${sgroup.sg_xy}">
 							</td>
 						</tr>
 					</table>
@@ -466,7 +490,7 @@
 							<th width="30px" style="padding-left:20px;">id</th><th>신고사유</th>
 						</tr>
 						<tr>
-							<td width="48%" align="left" style="padding:0 20px;"><input name="tr_mid" style="font-size:15px; border-radius:5px; width:100%;" type="text"></td>
+							<td width="48%" align="left" style="padding:0 20px;"><input name="tr_mid" style="font-size:15px; border-radius:5px; width:100%;" type="text" value="1111" readonly="readonly"></td>
 							<td width="52%">
 								<select name="tr_reason_cd" style="width:92%" class="form-control">
 								  <option value="T01">욕설 및 비방</option>
@@ -513,9 +537,9 @@
 		
 		//var param = {"img":img};
 		
-		console.log("id : "+id);
-		console.log("nick : "+nick);
-		console.log("img : "+img);
+		//console.log("id : "+id);
+		//console.log("nick : "+nick);
+		//console.log("img : "+img);
 		
 		//이미지 영어이름 갖고오는 ajax(웹소켓에서 처리하는 방향 알아보기.)
 		/* $.ajax({
@@ -560,6 +584,15 @@
 		$('#'+person).remove();
 		textarea.value += result.msg + "\n"; //채팅방에 나갔다고 표시.
 	}
+	else if( result.cmd == "kickOut" && ( sg_num == result.sg_num ) ){
+		var id = "${id}";
+		if(result.id == id){ //강퇴당한놈만 나가게.
+			location.href="getSgList";
+			textarea.value += result.msg + "\n";
+		}
+		$('#'+result.id).remove();
+		
+	}
 	  
 	chatAreaScroll(); 
  }
@@ -603,8 +636,18 @@
 		 sg_num : sg_num
 	 }
 	webSocket.send(  JSON.stringify( msg )   );
-	
-	
+ }
+ 
+//강퇴 시 참여자 칸에서 프로필 삭제
+ function deleteProfileKO(id) { 
+	 var sg_num = ${sgroup.sg_num};
+	 msg = {
+		 cmd : "kickOut",
+		 id : id,
+		 msg : "<"+id+"님이 강퇴되었습니다.>",
+		 sg_num : sg_num
+	 }
+	webSocket.send(  JSON.stringify( msg )   );
  }
 
  

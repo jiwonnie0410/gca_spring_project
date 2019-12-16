@@ -6,19 +6,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- Latest compiled and minified CSS -->
+	Latest compiled and minified CSS
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- jQuery library -->
+jQuery library
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Popper JS -->
+Popper JS
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+Latest compiled JavaScript
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
 
 <!--json할때 필요  -->
 <script src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
@@ -293,8 +293,8 @@ textarea {
 			<input type="hidden" name="ad_num" value="${dto.ad_num}">
 			<!-- 본인이 쓴 게시물만 수정, 삭제가 가능하도록 처리 -->
 			<c:if test="${m_id == dto.m_id}"> 
-				<button type="button" class="btn btn-primary px-5 py-3 mt-3" id="btnUpdete">수정</button>
-				<button type="button" class="btn btn-primary px-5 py-3 mt-3" id="btnDelete">삭제</button>
+				<button type="button" class="btn" id="btnUpdete" style="background-color: #FE9191;">수정</button>
+				<button type="button" class="btn " id="btnDelete" style="background-color: #FE9191;">삭제</button>
 			</c:if> 
 			<!-- 상세보기 화면에서 게시글 목록화면으로 이동 -->
 			<button type="button" class="btn btn-primary px-5 py-3  mt-3" id="btnList">목록</button>

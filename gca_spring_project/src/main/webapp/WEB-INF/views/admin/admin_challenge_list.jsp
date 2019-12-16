@@ -19,6 +19,11 @@
 					background-color: #FAF0F0;
 					cursor: pointer
 				}
+				
+				#endTr:hover {
+					background-color: #EAEAEA;
+					cursor: pointer
+				}
 		</style>
 		
 		<!-- 챌린지 자바스크립트 -->
