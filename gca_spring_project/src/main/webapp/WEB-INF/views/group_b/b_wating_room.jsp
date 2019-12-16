@@ -449,7 +449,7 @@
 <!-- Modal footer -->
 				<div class="modal-footer">
 					<button type="button" class="button-general" data-dismiss="modal">정보 복사</button>
-					<button type="button" class="button-general" data-dismiss="modal">닫기1</button>
+					<button type="button" class="button-general" data-dismiss="modal">닫기</button>
 				</div>
         
 			</div>
@@ -578,7 +578,7 @@
  
  //나갔을때 참여자 칸에서 프로필 삭제
  function deleteProfile() { 
-	 var bg_num = ${bgroup.sg_num};
+	 var bg_num = ${bgroup.bg_num};
 	 msg = {
 		 cmd : "cancelJoin",
 		 id : "${id}",
