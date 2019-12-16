@@ -68,6 +68,17 @@ public class SGroupController {
 			//sgroupService.minusNowCnt(sgNum);
 			return "redirect:getSgList";
 		}
+		
+	//강퇴 시 활동이력에서 빠지고 count-1
+		@ResponseBody
+		@RequestMapping(value="/sgroup/kickOut", consumes="application/json")
+			public int kickOut(@RequestBody ActiveHistVO avo) {
+				avo.setM_id(avo.getM_id());
+				avo.setSg_num(avo.getSg_num());
+				sgroupService.cancelJoin(avo);
+				//sgroupService.minusNowCnt(sgNum);
+				return 0;
+			}
 	
 
 //*****************************************미현************************************

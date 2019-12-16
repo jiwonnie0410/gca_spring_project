@@ -6,11 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.common.code.service.CodeService;
 import com.yedam.gca.common.code.vo.CodeVO;
 import com.yedam.gca.group_b.service.BGroupService;
@@ -29,7 +31,44 @@ public class BGroupController {
 	
 //*****************************************은영************************************
 
+	//신고하기 insert
+	@ResponseBody
+	@RequestMapping(value="/bgroup/doReport", consumes="application/json")
+	public int doReport(@RequestBody TroubleVO vo) {
+//		model.addAttribute("report", service.getRoomInfo(vo));
+		return bgroupService.doReport(vo);
+//		System.out.println(model);
+	}
 	
+//프로필 모달 띄울 때 해당 멤버 정보 가져오기
+	@ResponseBody //얘가 있어야 페이지 리턴을 안한다.(이거 없으면 밑에 mapping된 jsp페이지로 자동으로 찾아감.)
+	@RequestMapping(value="/bgroup/getOneProfile", consumes="application/json")
+	public MembersVO getOneProfile(@RequestBody MembersVO vo) {
+		vo = bgroupService.getOneMem(vo);
+		return vo;
+	}
+	
+//참가취소 시 활동이력에서 빠지고 카운트 -1
+	@RequestMapping("/bgroup/cancelJoin")
+	public String cancelJoin(@RequestParam(value="m_id") String id,
+			@RequestParam(value="bg_num") int bg_num, ActiveHistVO vo) {
+		vo.setM_id(id);
+		vo.setBg_num(bg_num);
+		bgroupService.cancelJoin(vo);
+		//sgroupService.minusNowCnt(sgNum);
+		return "redirect:getBgList";
+	}
+	
+//강퇴 시 활동이력에서 빠지고 count-1
+	@ResponseBody
+	@RequestMapping(value="/bgroup/kickOut", consumes="application/json")
+		public int kickOut(@RequestBody ActiveHistVO avo) {
+			avo.setM_id(avo.getM_id());
+			avo.setBg_num(avo.getBg_num());
+			bgroupService.cancelJoin(avo);
+			//sgroupService.minusNowCnt(sgNum);
+			return 0;
+		}
 
 
 //*****************************************미현************************************

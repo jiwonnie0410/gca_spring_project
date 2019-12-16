@@ -12,7 +12,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0, user-scalable=no, target-densitydpi=medium-dpi" />
 
-<!-- 미현 : 인증 참여 스크립트 추가 -->
+<!-- 미현 : 인증 참여 스크립트 / 지도 스크립트 추가 -->
 <script type="text/javascript" src="../resources/js/mihy/part_cert.js"></script>
 
 <style>
@@ -205,12 +205,27 @@
 				if (confirmStatus) {
 					
 					var kickId = $('#profile_id').html();
+					var sgNum = ${sgroup.sg_num};
 					
-					//deleteProfile(kickId);
+					var param = JSON.stringify({"m_id" : kickId, "sg_num" : sgNum});
 					
-					//location.href='cancelJoin?m_id='+usrId+'&sg_num='+sgNum;
+					$.ajax({
+						url: "kickOut",
+						method:'post',
+						dataType: "json",	//결과타입
+						data: param,		//요청파라미터
+						contentType: "application/json",
+						//컨트롤러로 데이타 보낼때 제이슨이라는 것을 알려줘야함. 컨트롤러에는 담을 vo에@RequestBody붙여주고.
+						success: function(){
+							alert("강퇴 처리 되었습니다.");
+							deleteProfile(kickId); //웹소켓 후 처리에서 해당 아이디만 페이지 이동시켜야함.
+						},
+						error: function(){
+							alert("강퇴 실패");
+						}
+						
+					});
 					
-					alert("강퇴 완료.");
 					
 					$('#profile').modal('hide'); //프로필 모달창 닫기
 
@@ -230,9 +245,6 @@
 				if (confirmStatus) {
 					
 					var sgNum = ${sgroup.sg_num};
-					var sgCnt = ${sgroup.sg_now_cnt};
-					
-					//alert(usrId);
 					
 					deleteProfile();
 					
@@ -518,9 +530,9 @@
 		
 		//var param = {"img":img};
 		
-		console.log("id : "+id);
-		console.log("nick : "+nick);
-		console.log("img : "+img);
+		//console.log("id : "+id);
+		//console.log("nick : "+nick);
+		//console.log("img : "+img);
 		
 		//이미지 영어이름 갖고오는 ajax(웹소켓에서 처리하는 방향 알아보기.)
 		/* $.ajax({
@@ -564,6 +576,15 @@
 		//프로필 삭제
 		$('#'+person).remove();
 		textarea.value += result.msg + "\n"; //채팅방에 나갔다고 표시.
+	}
+	else if( result.cmd == "kickOut" && ( sg_num == result.sg_num ) ){
+		var id = result.id;
+		if(result.id == id){ //강퇴당한놈만 나가게.
+			location.href="getSgList";
+			$('#'+id).remove();
+			textarea.value += result.msg + "\n";
+		}
+		
 	}
 	  
 	chatAreaScroll(); 
@@ -614,7 +635,7 @@
  function deleteProfile(id) { 
 	 var sg_num = ${sgroup.sg_num};
 	 msg = {
-		 cmd : "cancelJoin",
+		 cmd : "kickOut",
 		 id : id,
 		 msg : "<"+id+"님이 강퇴되었습니다.>",
 		 sg_num : sg_num

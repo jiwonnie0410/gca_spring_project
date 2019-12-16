@@ -62,7 +62,7 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 		
 		// message.getPayload() : 클라이언트에서 보내온 메세지 값
 		
-		String msg = "join";
+		String msg = "";
 		if(svo.getCmd().equals("join")) {
 			msg = (String) message.getPayload();
 			
