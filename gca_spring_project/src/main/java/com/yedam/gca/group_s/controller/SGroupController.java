@@ -76,7 +76,6 @@ public class SGroupController {
 				avo.setM_id(avo.getM_id());
 				avo.setSg_num(avo.getSg_num());
 				sgroupService.cancelJoin(avo);
-				//sgroupService.minusNowCnt(sgNum);
 				return 0;
 			}
 	

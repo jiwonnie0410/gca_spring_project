@@ -223,8 +223,6 @@
 						success: function(){
 							alert("강퇴 처리 되었습니다.");
 							deleteProfileKO(kickId); //웹소켓 후 처리에서 해당 아이디만 페이지 이동시켜야함.
-							
-							alert("강퇴당한애 페이지이동 왜 안되죠!!");
 						},
 						error: function(){
 							alert("강퇴 실패");
@@ -301,7 +299,7 @@
       							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly"></textarea>
       			<div style="padding-top:10px;">
       				<span style="padding-left:5px; padding-right:3px; vertical-align: middle;">
-      					<textarea id="inputMessage" style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; ">입력하세요</textarea>
+      					<textarea id="inputMessage" style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; " placeholder="입력하세요"></textarea>
       				</span>
       				<span style="vertical-align:middle;">
       					<button id="chat" class="button-general">전송</button>
@@ -590,9 +588,9 @@
 		var id = "${id}";
 		if(result.id == id){ //강퇴당한놈만 나가게.
 			location.href="getSgList";
-			$('#'+id).remove();
 			textarea.value += result.msg + "\n";
 		}
+		$('#'+result.id).remove();
 		
 	}
 	  

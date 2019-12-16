@@ -403,7 +403,7 @@
 					
 					<table id="room-info-table">
 						<tr>
-							<th>운동 </th><td> ${bgroup.sports1_cd}</td>
+							<th>운동 </th><td> ${bgroup.sports2_cd}</td>
 						</tr>
 						<tr>
 							<th>일시 </th><td> <fmt:formatDate value="${bgroup.bg_end_dttm }" pattern="yyyy/MM/dd a hh:mm" /></td>
@@ -415,7 +415,7 @@
 							<th>참가정보 </th><td> ${bgroup.gender_cd} ${bgroup.age_range}</td>
 						</tr>
 						<tr>
-							<th>인원 </th><td> ${bgroup.bg_end_cnt} 명중 ${bgroup.bg_now_cnt} 명 참가</td>
+							<th>인원 </th><td> ${bgroup.bg_team_cnt}</td>
 						</tr>
 						<tr>
 							<th>숙련도 </th><td> ${bgroup.skill_cd}</td>
@@ -425,7 +425,7 @@
 							<td>
 								<c:set var="now_cnt" value="${bgroup.bg_now_cnt}" />
 								<c:set var="end_cnt" value="${bgroup.bg_end_cnt}" />
-								<c:set var="sg_option" value="${bgroup.bg_option}" />
+								<c:set var="bg_option" value="${bgroup.bg_option}" />
 								<c:choose>
 									<c:when test="${now_cnt eq end_cnt}">
 										참가대기
