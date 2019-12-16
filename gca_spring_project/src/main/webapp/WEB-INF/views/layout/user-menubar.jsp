@@ -190,7 +190,8 @@
 	<div class="navbar pr-2 pl-2">
 		<div class="board" align="center">
 			<div class="list">
-			 	
+			
+			 	<!-- 3줄 탭에 들어가는 메뉴 -->
 			 	<table class="list" >
 					<tr>
 						<th>활동 이력</th>
@@ -198,29 +199,30 @@
 						<th>동호회 매치</th>
 					</tr>
 					<tr>
-						<td onClick = " location.href='${pageContext.request.contextPath }/history/activeHistory'">활동 히스토리</td>
-						<td onClick = " location.href='${pageContext.request.contextPath }/sgroup/getSgListEnd'">마감 반짝</td>
-						<td onClick = " location.href='${pageContext.request.contextPath }/'">진행 중 매치</td>
+						<td onClick = "location.href='${pageContext.request.contextPath }/history/activeHistory'">활동 히스토리</td>
+						<td onClick = "location.href='${pageContext.request.contextPath }/sgroup/getSgListEnd'">마감 반짝</td>
+						<td onClick = "location.href='${pageContext.request.contextPath }/'">진행 중 매치</td>
 					</tr>
 					<tr>	
-						<td onClick = " location.href='${pageContext.request.contextPath }/history/challengeList'">챌린지 히스토리</td>
-						<td onClick = " location.href='${pageContext.request.contextPath }/sgroup/getSgList'">진행 중 반짝</td>
-						<td onClick = " location.href='${pageContext.request.contextPath }/board/adlist'">동호회 홍보</td>
+						<td onClick = "location.href='${pageContext.request.contextPath }/history/challengeList'">챌린지 히스토리</td>
+						<td onClick = "location.href='${pageContext.request.contextPath }/sgroup/getSgList'">진행 중 반짝</td>
+						<td onClick = "location.href='${pageContext.request.contextPath }/board/adlist'">동호회 홍보</td>
 					</tr>
 					<tr>	
-						<td onClick = " location.href='${pageContext.request.contextPath }/history/rank'">업적 히스토리</td>
+						<td onClick = "location.href='${pageContext.request.contextPath }/history/rank'">업적 히스토리</td>
 						<td></td>
-						<td onClick = " location.href='${pageContext.request.contextPath }/sixman/getSixList'">용병 구함</td>
+						<td onClick = "location.href='${pageContext.request.contextPath }/sixman/getSixList'">용병 구함</td>
 					</tr>
-				</table> 
+				</table>
+				
 			</div>
 		</div>
 
+		<!-- 메뉴바에 들어가는 아이콘 5개 -->
 		<a class="nav_sgroup" href="${pageContext.request.contextPath }/sgroup/getSgList"><img src="${pageContext.request.contextPath }/resources/images/menubar/sgroup.png" alt="반짝" style="width: 40px;"></a> 
 		<a class="nav_bgroup" href="${pageContext.request.contextPath }/bgroup/getBgList"><img src="${pageContext.request.contextPath }/resources/images/menubar/bgroup.png" alt="동호회" style="width: 40px;"></a> 
 		<a class="nav_challenge" href="${pageContext.request.contextPath }/challenge/list"><img src="${pageContext.request.contextPath }/resources/images/menubar/trophy.png" alt="챌린지" style="width: 40px;"></a>
-		<a class="" href="${pageContext.request.contextPath }/member/member_view.do"><img src="${pageContext.request.contextPath }/resources/images/menubar/profile.png" alt="프로필" style="width: 40px;"></a> 
-		<!-- <a class="more"><span class="blind"><i class="fas fa-align-justify"></i></span> -->
+		<a href="${pageContext.request.contextPath }/member/member_view.do"><img src="${pageContext.request.contextPath }/resources/images/menubar/profile.png" alt="프로필" style="width: 40px;"></a> 
 		<a class="more"><img src="${pageContext.request.contextPath }/resources/images/icon/icon.png" alt="더보기" style="width: 40px;"></a>
 	</div>
 </body>
