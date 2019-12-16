@@ -37,5 +37,7 @@
 				<beans:bean class="com.yedam.gca.chatting.controller.HandshakeInterceptor"/> 
 			</websocket:handshake-interceptors>
 		</websocket:handlers>
-	
+		
+	<beans:bean id="naverLoginBO" class="com.yedam.gca.member.service.NaverLoginBO" />
+
 </beans:beans>
