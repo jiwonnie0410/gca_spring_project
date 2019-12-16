@@ -13,22 +13,8 @@
 <meta name="viewport"
 
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0, user-scalable=no, target-densitydpi=medium-dpi" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 
-<script defer
-
-	src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js"
-
-	integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l"
-
-	crossorigin="anonymous"></script>
-
-<script defer
-
-	src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js"
-
-	integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c"
-
-	crossorigin="anonymous"></script>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
@@ -44,6 +30,18 @@
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+
+
+<!-- 아이콘 꼭있어야함 -->
+<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script> -->
+
+<!--json할때 필요  -->
+<script src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
+
+<!--my page모달  -->
+<script src="${pageContext.request.contextPath }/resources/js/member/mypage.js"></script>
 <title>웹앱 메뉴바</title>
 
  
@@ -496,6 +494,48 @@ padding: 10px;
 
 	</div>
 
+
+
+<!-- Modal 읽기-->	<!-- Modal 읽기-->	<!-- Modal 읽기-->	<!-- Modal 읽기-->	<!-- Modal 읽기-->	<!-- Modal 읽기-->
+	<!-- my page 상세보기 영역 -->
+	<div class="modal fade" id="MyModal" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					My Page
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+				<div align="center">
+							<h2>Choose Your Option</h2>
+						</div>
+						<br>
+						<div class="info-user2">
+							<input type="button" value="수정" id="btnUpdate"> <input
+								type="button" value="삭제" id="btnDelete">
+							<div style="color: red;">${message}</div>
+							<!--이모티콘이로 대체  -->
+							<span aria-hidden="true" class="li_settings fs1"></span> <span
+								aria-hidden="true" class="li_lock fs1"></span>
+							<i class="fas fa-user-edit  fa-lg"  aria-hidden="true" style="color:black; font-size:100px;" ></i> 
+							 <i class="fa fa-lock fa-lgx" aria-hidden="true" style="color:black; font-size:100px;"> </i> 
+							 
+							 <a href="changePassword"> 비밀번호 변경 </a>
+							 
+						</div>
+					</form>
+							 <form action="../logout" method="post">
+							  <button>로그아웃</button>
+							</form>
+					<button type="button" class="btn btn-primary px-4 py-2"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
  
 
  

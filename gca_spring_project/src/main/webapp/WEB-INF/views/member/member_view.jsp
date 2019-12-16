@@ -59,8 +59,8 @@
 </head>
 <body>
 
-  <div class="row">
-        <div class="col-4">
+  <div >
+        <div class="col-50">
           <div class="card">
             <div class="card-header" style="background-color: #FEBABA;">
               my menu
@@ -71,7 +71,8 @@
 							<tr>
 								<td>아이디</td>
 								<!-- id는 수정이 불가능하도록 readonly속성 추가 -->
-								<td><input name="m_id" value="${dto.m_id}" readonly="readonly" style="border: none"></td>
+								<td><input name="m_id" value="${dto.m_id}"
+									readonly="readonly" style="border: none"></td>
 							</tr>
 							<tr>
 								<td>비밀번호</td>
@@ -90,7 +91,8 @@
 									style="border: none"></td>
 							</tr>
 							<!-- 누락된 부분 -->
-
+							<tr>
+					
 							<tr>
 								<td colspan="2" align="center"></td>
 							</tr>
@@ -100,14 +102,13 @@
 						</div>
 						<br>
 						<div class="info-user2">
-							<input type="button" value="수정" id="btnUpdate"> <input
-								type="button" value="삭제" id="btnDelete">
+							<!-- <input type="button" value="수정" id="btnUpdate"> <input
+								type="button" value="삭제" id="btnDelete"> -->
 							<div style="color: red;">${message}</div>
 							<!--이모티콘이로 대체  -->
-							<span aria-hidden="true" class="li_settings fs1"></span> <span
-								aria-hidden="true" class="li_lock fs1"></span>
-							<i class="fas fa-user-edit  fa-lg"  aria-hidden="true" style="color:black; font-size:100px;" ></i> 
-							 <i class="fa fa-lock fa-lgx" aria-hidden="true" style="color:black; font-size:100px;"> </i> 
+							<i class="fas fa-user-edit" id="btnUpdate"  aria-hidden="true" style="color:black; font-size:50px;" ></i>
+							<i class="fas fa-door-open" id="btnDelete" style="color:black; font-size:50px;"></i> 
+							 <i class="fa fa-lock fa-2x"  aria-hidden="true" style="color:black; font-size:50px;"> </i> 
 							 
 							 <a href="changePassword"> 비밀번호 변경 </a>
 							 

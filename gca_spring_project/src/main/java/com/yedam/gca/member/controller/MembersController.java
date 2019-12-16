@@ -24,14 +24,16 @@ public class MembersController {
 	MemberService memberService;
 	
 // 03 회원 상세정보 조회
-    @RequestMapping("member/member_view")
+    @RequestMapping("member/member_view.do")
     public String memberView(Model model)throws Exception{
 		UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         // 회원 정보를 model에 저장
         model.addAttribute("dto", memberService.viewMember(user.getUsername()));
        // member_view.jsp로 포워드
-       return "/notiles/member/member_view";
+       return "/user/member/member_view";
     }
+    
+    
     
     
     // 04. 회원 정보 수정 처리
@@ -49,8 +51,10 @@ public class MembersController {
 //            vo.setUserUpdatedate(vo2.getUserUpdatedate());
            model.addAttribute("dto", vo);
             model.addAttribute("message", "비밀번호 불일치");
-            return "/notiles/member/member_view";
+            return "/user/member/member_view";
        }
+        
+        
         
    }
     // 05. 회원정보 삭제 처리
