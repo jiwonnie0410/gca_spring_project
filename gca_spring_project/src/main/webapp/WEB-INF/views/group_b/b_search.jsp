@@ -34,7 +34,7 @@
 
 <nav class="fixed-top">
 <div align="center" class="mt-2 mb-2"><h4>함께 시합할 동호회 찾기</h4></div>
-
+<c:if test=" <sec:authentication property='principal.m_status_cd' /> == 'M01' &&  "></c:if>
 <button class="btn btn-info create_room mt-3 ml-3 mr-3" style="width:90%;">동호회 매치 방 생성하기</button>
 
 <form action="getBgList" name="searchSport" id="searchSport" method="post">

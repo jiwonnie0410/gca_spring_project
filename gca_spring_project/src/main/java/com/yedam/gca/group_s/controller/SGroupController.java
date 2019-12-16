@@ -87,7 +87,7 @@ public class SGroupController {
 		model.addAttribute("sports_list", codeService.getCodeList(cvo));
 		
 		if(vo.getEnd_dis() == null) {
-			return "/notiles/group_s/s_search";	//추후 notiles를 user로 바꾸기	
+			return "/user/group_s/s_search";
 		} else {
 			return "/notiles/group_s/s_search_temp";
 		}
@@ -108,7 +108,7 @@ public class SGroupController {
 		model.addAttribute("sports_list", codeService.getCodeList(cvo));
 		
 		if(vo.getEnd_dis() == null) {
-			return "/notiles/group_s/s_end_room";	//추후 notiles를 user로 바꾸기	
+			return "/user/group_s/s_end_room";
 		} else {
 			return "/notiles/group_s/s_end_temp";
 		}
@@ -180,7 +180,7 @@ public class SGroupController {
 		model.addAttribute("skill_list", codeService.getCodeList(vo));
 		vo.setCd_group("GENDER_CD");
 		model.addAttribute("gender_list", codeService.getCodeList(vo));
-		return "/notiles/group_s/s_room_cre"; //추후 notiles를 user로 바꾸기	
+		return "/user/group_s/s_room_cre";	
 	}
 	
 	//방 생성
