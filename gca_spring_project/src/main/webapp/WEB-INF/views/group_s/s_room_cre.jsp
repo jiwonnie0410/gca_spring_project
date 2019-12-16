@@ -8,18 +8,16 @@
 <title>반짝 방 생성하기</title>
 
 	<!-- Bootstrap -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
 
 	<!-- private : icon -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 	
 	<!-- private : slider -->
-	<link rel="stylesheet" href="../resources/css/mihy/nouislider.min.css">
-	<script src="../resources/js/mihy/nouislider.min.js"></script>
 	<link rel="stylesheet" href="../resources/css/mihy/nouislider.css">
 	<script src="../resources/js/mihy/nouislider.min.js"></script>
 	
@@ -30,7 +28,7 @@
 	<!-- private : Description Action -->
 	<script type="text/javascript" src="../resources/js/mihy/kakao_map.js"></script>
 	<script type="text/javascript" src="../resources/js/mihy/s_room_cre.js"></script>
-	<link rel="stylesheet" href="../resources/css/mihy/s_room_cre.css">
+
 	
 
 	
@@ -160,6 +158,6 @@
 	<input type="button" class="btn btn-default btn2 mt-2" id="btn_cre" value="방 생성">
 	
 </form>
-
+	<link rel="stylesheet" href="../resources/css/mihy/s_room_cre.css">
 </body>
 </html>
