@@ -5,8 +5,10 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
 		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -29,6 +31,10 @@
 	
 	<context:component-scan base-package="com.yedam.gca" />
 	
+	<!-- 해당 태그들은 크론탭 설정에 필요한 태그들 + 수림추가-->
+	<task:scheduler id="jobScheduler" pool-size="10" />
+	<task:annotation-driven scheduler="jobScheduler" />
+	
 	<!-- 웹소켓 소켓핸들러와 핸드쉐이크인터셉터 -->
 	<beans:bean id="myHandler" class="com.yedam.gca.chatting.controller.SpringSocketHandler"/> 
 		<websocket:handlers>
@@ -37,7 +43,5 @@
 				<beans:bean class="com.yedam.gca.chatting.controller.HandshakeInterceptor"/> 
 			</websocket:handshake-interceptors>
 		</websocket:handlers>
-		
-	<beans:bean id="naverLoginBO" class="com.yedam.gca.member.service.NaverLoginBO" />
-
+	
 </beans:beans>

@@ -67,26 +67,6 @@ function drawChart2() {
 // 성별 연령대 통계 컬럼 차트
 // 성별로 운동, 연령대 나눠서
 function drawChart3() {
-	// Some raw data (not necessarily accurate)
-//	var rowData1 = [
-//			[ 'Age', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua  Guinea',	'Rwanda', 'Average' ],
-//			[ '20대', 165, 938, 522, 998, 450, 114.6 ],
-//			[ '30대', 135, 1120, 599, 1268, 288, 382 ],
-//			[ '40대', 157, 1167, 587, 807, 397, 623 ],
-//			[ '50대 이상', 139, 1110, 615, 968, 215, 409.4 ] ];
-//	var rowData2 = [
-//			[ 'Age', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua  Guinea',	'Rwanda', 'Average' ],
-//			[ '20대', 122, 638, 722, 998, 450, 614.6 ],
-//			[ '30대', 100, 1120, 899, 1268, 288, 682 ],
-//			[ '40대', 183, 167, 487, 207, 397, 623 ],
-//			[ '50대 이상', 200, 510, 315, 1068, 215, 609.4 ] ];
-//
-//	// Create and populate the data tables.
-//	var data = [];
-//	data[0] = google.visualization.arrayToDataTable(rowData1);
-//	data[1] = google.visualization.arrayToDataTable(rowData2);
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
 	$.ajax({
 			url: "../ajax/chart/gender",
 			dataType: "json",
@@ -140,26 +120,6 @@ function drawChart3() {
 					var data = [];
 					data[0] = rowData1;
 					data[1] = rowData2;
-					
-					
-					// 하드코딩
-//					// 여성 데이터
-//					var rowData1 = [ [ '연령대', '농구', '달리기/산책', '등산', '배드민턴',	'볼링', '수영', '자전거' ],
-//									 [ result.female[0].AGE+'대', result.female[0].BASKETBALL, result.female[0].RUNNING, result.female[0].HIKING, result.female[0].BADMINTON, result.female[0].BOWLING, result.female[0].SWIMMING, result.female[0].BICYCLE ],
-//									 [ result.female[1].AGE+'대', result.female[1].BASKETBALL, result.female[1].RUNNING, result.female[1].HIKING, result.female[1].BADMINTON, result.female[1].BOWLING, result.female[1].SWIMMING, result.female[1].BICYCLE ],
-//									 [ result.female[2].AGE+'대', result.female[2].BASKETBALL, result.female[2].RUNNING, result.female[2].HIKING, result.female[2].BADMINTON, result.female[2].BOWLING, result.female[2].SWIMMING, result.female[2].BICYCLE ],
-//									 [ result.female[3].AGE+'대 이상', result.female[3].BASKETBALL, result.female[3].RUNNING, result.female[3].HIKING, result.female[3].BADMINTON, result.female[3].BOWLING, result.female[3].SWIMMING, result.female[3].BICYCLE ]];
-//					// 남성 데이터
-//					var rowData2 = [ [ '연령대', '농구', '달리기/산책', '등산', '배드민턴',	'볼링', '수영', '자전거' ],
-//									 [ result.male[0].AGE+'대', result.male[0].BASKETBALL, result.male[0].RUNNING, result.male[0].HIKING, result.male[0].BADMINTON, result.male[0].BOWLING, result.male[0].SWIMMING, result.male[0].BICYCLE ],
-//									 [ result.male[1].AGE+'대', result.male[1].BASKETBALL, result.male[1].RUNNING, result.male[1].HIKING, result.male[1].BADMINTON, result.male[1].BOWLING, result.male[1].SWIMMING, result.male[1].BICYCLE ],
-//									 [ result.male[2].AGE+'대', result.male[2].BASKETBALL, result.male[2].RUNNING, result.male[2].HIKING, result.male[2].BADMINTON, result.male[2].BOWLING, result.male[2].SWIMMING, result.male[2].BICYCLE ],
-//									 [ result.male[3].AGE+'대 이상', result.male[3].BASKETBALL, result.male[3].RUNNING, result.male[3].HIKING, result.male[3].BADMINTON, result.male[3].BOWLING, result.male[3].SWIMMING, result.male[3].BICYCLE ]];
-//					
-//					// 여성 남성 각각의 두 차트를 생성
-//					var data = [];
-//					data[0] = google.visualization.arrayToDataTable(rowData1);
-//					data[1] = google.visualization.arrayToDataTable(rowData2);
 					
 					// 차트 옵션: 타이틀 없으면 오류 나기 때문에 저렇게라도 넣어줘야 함
 					var options = {

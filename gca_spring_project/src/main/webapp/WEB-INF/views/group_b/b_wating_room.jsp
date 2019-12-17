@@ -589,7 +589,7 @@
  }
  
 //강퇴 시 참여자 칸에서 프로필 삭제
- function deleteProfile(id) { 
+ function deleteProfileKO(id) { 
 	 var bg_num = ${bgroup.bg_num};
 	 msg = {
 		 cmd : "kickOut",

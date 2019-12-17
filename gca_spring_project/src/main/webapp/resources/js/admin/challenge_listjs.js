@@ -98,13 +98,13 @@ function createChallengeButton(){
 	
 	// 챌린지 이름을 위해 컬럼 값 합침
 	var clName;
-	if($('#challengeType').val() == 'nTime') { clName = "반짝 " + $('#howMany').val() + "번 참여"; }
-	if($('#challengeType').val() == 'nKinds') { clName = "반짝 " + $('#howMany').val() + "가지 종목 참여"; }
+	if($('#challengeType').val() == 'nTime') { clName = "1. 반짝 " + $('#howMany').val() + "번 참여"; }
+	if($('#challengeType').val() == 'nKinds') { clName = "3. 반짝 " + $('#howMany').val() + "가지 종목 참여"; }
 	if($('#challengeType').val() == 'mKind_nTime') {
 		// 선택한 운동종목의 value값이 아닌 텍스트 가져오기
 		var target = document.getElementById("selectSports");
 		var sportsText = target.options[target.selectedIndex].text;
-		clName = sportsText + " 종목 반짝 " + $('#howMany').val() + "번 참여"; 
+		clName = "2. " + sportsText + " 종목 반짝 " + $('#howMany').val() + "번 참여"; 
 	}
 	frm.cl_name.value = clName;
 	

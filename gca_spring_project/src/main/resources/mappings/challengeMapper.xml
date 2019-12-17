@@ -118,7 +118,7 @@
 							SYSDATE, 
 							NULL, 
 							NULL, 
-							'입금완료', 
+							'보증금', 
 							#{cl_num},
 							#{money_moid} 
 							)
