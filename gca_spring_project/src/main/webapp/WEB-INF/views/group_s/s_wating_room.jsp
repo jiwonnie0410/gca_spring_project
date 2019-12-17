@@ -140,7 +140,6 @@
 					dataType: "json",	//결과타입
 					data: param,		//요청파라미터
 					contentType: "application/json",
-					//컨트롤러로 데이타 보낼때 제이슨이라는 것을 알려줘야함. 컨트롤러에는 담을 vo에@RequestBody붙여주고.
 					success: function(vo){
 						console.log('model.addAttribute 성공');
 						var img = $(event.relatedTarget).children('img').attr('src');
@@ -149,14 +148,24 @@
 						$('#profile_id').text(vo.m_id);
 						$('#profile_nick').text(vo.m_nick);
 						$('#profile_age').text(vo.m_age);
-						$('#profile_gender').text(vo.gender_cd);
-						$('#profile_level').text(vo.m_level_cd);
+						$('#profile_gender').text(vo.gender_cd); //남여로 표시되게2
+						$('#profile_level').text(vo.m_level_cd); //레벨이미지로 표시되게2
+						
+						//본인 프로필 창이면 버튼 영역(신고,강퇴) 숨기기.
+						if(vo.m_id == "${id}"){
+							$('.modal-footer').hide();
+						}
 					},
 					error: function(){
 						console.log("model.addAttribute 실패");
 					}
 					
 				});
+			});
+			
+			//프로필 모달 닫혔을때
+			$('#profile').on('hidden.bs.modal', function (event) {
+				$('.modal-footer').show();
 			});
 			
 			//신고모달 눌렀을때
