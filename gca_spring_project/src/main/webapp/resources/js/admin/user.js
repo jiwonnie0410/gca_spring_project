@@ -2,7 +2,7 @@
 $(function(){
 		userList();   
 
-		/*userSelect();*/
+		userSelect();
 		
 		userDelete();
 		
@@ -11,8 +11,27 @@ $(function(){
 			$(".modal-body").load("viewMember?m_id="+m_id)
 			console.log(m_id);
 		});
+		
+		
+			$("#btnWrite")
+					.click(
+							function() {
+								// 페이지 주소 변경(이동)
+								location.href = "${pageContext.request.contextPath}/board/write.do";
+							});
+		});
+		
+		
 
-	});
+
+//원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
+function list(page) {
+	location.href = "${pageContext.request.contextPath}/board/adlist?curPage="
+			+ page
+			+ "&searchOption-${map.searchOption}"
+			+ "&keyword=${map.keyword}";
+}
+
 
 //사용자 목록 조회 요청
 	function userList() {
@@ -30,7 +49,7 @@ $(function(){
 	
 	//사용자 목록 조회 응답
 	function userListResult(data) {
-		$("tbody").empty();
+		$("#userlist").empty();
 		$.each(data,function(idx,item){
 			$('<tr>')
 			.append($('<td>').html(item.m_id))
@@ -40,7 +59,7 @@ $(function(){
 			.append($('<td>').html("<button id='btnSelect'  data-toggle='modal' data-target='#Modalread' >조회</button>"))
 			.append($('<td>').html('<button id=\'btnDelete\'>삭제</button>'))
 			.append($('<input type=\'hidden\' id=\'hidden_m_id\'>').val(item.m_id))
-			.appendTo('tbody');
+			.appendTo('#userlist');
 		});//each
 	}//userListResult
 	

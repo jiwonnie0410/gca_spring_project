@@ -8,50 +8,42 @@
 <!-- 게시물 상세보기 영역 -->
 <div class="panel-group">
 	<div class="panel panel-success" style="margin-top: 10px;">
-		<div class="panel-heading"
-			style="background-color: pink; color: black">문의 사항</div>
 		<div class="panel-body">
 			<%-- form --%>
-			<form action="view?pb_id=${dto.qb_id}" id="frm" method="GET">
-				<input type="hidden" value="${dto.qb_id}">
+			<form id="frm" method="GET">
 				<div class="form-group">
 					<div>
 						<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 -->
 						작성일자 :
-						<fmt:formatDate value="${dto.qb_date}"
-							pattern="yyyy-MM-dd a HH:mm:ss" />
+						<fmt:formatDate value="${dto.qb_date}" pattern="yyyy-MM-dd" />
 						<!-- 날짜 형식 => yyyy 4자리연도, MM 월, dd 일, a 오전/오후, HH 24시간제, hh 12시간제, mm 분, ss 초 -->
 					</div>
 				</div>
 				<div class="form-group">
+					제목
 					<div>
-						제목 ${dto.qb_title}
+						 ${dto.qb_title}
 					</div>
 				</div>
 				<div class="form-group">
+				내용
 					<div>
-						내용${dto.qb_content}
+						${dto.qb_content}
 					</div>
 				</div>
 				<div class="form-group">
-					<div>
-						답변${dto.qb_an}
-					</div>
+				답변
+				<span id="qb_an_id" style="display: none;">${dto.qb_an_id}</span>
+					<div id="qb_an">${dto.qb_an}</div>					
 				</div>
 				<div style="width: 650px; text-align: center;">
 					<!-- 게시물번호를 hidden으로 처리 -->
 					<input type="hidden" name="qb_id" value="${dto.qb_id}">
-					<!-- 본인이 쓴 게시물만 수정, 삭제가 가능하도록 처리 -->
-					
-					<!-- 상세보기 화면에서 게시글 목록화면으로 이동 -->
+						
+						<!-- 상세보기 화면에서 게시글 목록화면으로 이동 -->
 					<!-- 	<button type="button" class="btn btn-primary px-5 py-3  mt-3" id="btnList">목록</button> -->
 				</div>
 			</form>
-			
-			
-			
-			
-			
 			
 		</div>
 	</div>

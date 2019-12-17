@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yedam.gca.admin.service.AdminService;
 import com.yedam.gca.admin.vo.ChallengeSearchVO;
-import com.yedam.gca.admin.vo.MoneyVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.common.Paging;
 import com.yedam.gca.member.controller.MembersController;
@@ -30,6 +29,7 @@ public class AdminController {
 // 1-1챌린지 관리 페이지		1-2챌린지 등록
 // 2매출 페이지
 // 3-1통계 페이지 	3-2반짝 운동별 통계 	3-3동호회 매치 운동별 통계 	 3-4연령대 및 운동(반짝)성별 통계 	3-5지역별 반짝 운동 통계
+// 4-1매출 페이지	4-2일별 매출 	4-3월별 매출
 
 	@Autowired
 	AdminService adminService;
@@ -106,7 +106,26 @@ public class AdminController {
 	public List<Map<String, Object>> chartCity() {
 		return adminService.chartCity();
 	}
+	
+	// 4-1. 매출 페이지
+	@RequestMapping("/admin/income")
+	public String adminIncome() {
+		return "/admin/admin_money";
+	}
 
+	// 4-2. 일별 매출
+	@ResponseBody
+	@RequestMapping("/ajax/chart/daily")
+	public List<Map<String, Object>> dailyIncome() {
+		return adminService.chartDaily();
+	}
+	
+	// 4-3. 월별 매출
+	@ResponseBody
+	@RequestMapping("/ajax/chart/monthly")
+	public List<Map<String, Object>> monthlyIncome() {
+		return adminService.chartMonthly();
+	}
 	
 
 	

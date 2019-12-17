@@ -15,6 +15,8 @@
 	8. 챌린지 상세 내용
 	9. 챌린지 참여한 사람들 목록
 	10. 챌린지 총 건수
+	11. 일별 수익현황
+	12. 월별 수익 현황
  -->
 
 <!-- 1. 반짝 운동별 통계 -->
@@ -221,6 +223,27 @@
 		  		
 		  	</select>
 			
+			
+<!-- 11. 일별 수익 현황 -->
+			<select id="dailyIncome" resultType="map">
+					SELECT TO_CHAR(MONEY_DEPOSIT_DTTM, 'DD') "day",
+					        SUM( MONEY_DEPOSIT ) "income",
+					        SUM( MONEY_DEPOSIT ) - SUM( MONEY_WITHDRAW ) "earning"
+					FROM MONEY
+					GROUP BY TO_CHAR(MONEY_DEPOSIT_DTTM, 'DD')
+					ORDER BY TO_CHAR(MONEY_DEPOSIT_DTTM, 'DD')
+			</select>
+			
+
+<!-- 12. 월별 수익 현황 -->
+			<select id="montlyIncome" resultType="map">
+					SELECT TO_CHAR(MONEY_DEPOSIT_DTTM, 'MM') "month",
+					        SUM( MONEY_DEPOSIT ) "income",
+					        SUM( MONEY_DEPOSIT ) - SUM( MONEY_WITHDRAW ) "earning"
+					FROM MONEY
+					GROUP BY TO_CHAR(MONEY_DEPOSIT_DTTM, 'MM')
+					ORDER BY TO_CHAR(MONEY_DEPOSIT_DTTM, 'MM')
+			</select>
 			
 
 	

@@ -9,8 +9,17 @@ $(function() {
 //	 $("body").on("click", "[id^=write]", function() { var qb_id =
 //	  $(this).closest("tr").find("td").eq(0).html();// closest ==조상검색
 //	  console.log(qb_id); });
-	 
+ 
 
+	
+	$("#btnUpdete").click(function() {
+		$('#Modalread').modal('hide')
+		$('[name="qb_id"]').val($('#frm #qb_an_id').html());
+		$('[name="qb_content"]').val($('#frm #qb_an').html());
+		$('#myModal').modal('show')
+	});
+	
+	
 	$("#Modalread").on('show.bs.modal', function() {
 		var qb_id = $(event.target).closest("tr").find("td").eq(0).html();// closest
 		$("#Modalread .modal-body").load("adminQnView?qb_id="+qb_id)
@@ -18,16 +27,6 @@ $(function() {
 		console.log(qb_id);
 	});   
 	
-	/*$("#UserModalread").on('show.bs.modal', function() {
-		var qb_id = $(event.target).closest("tr").find("td").eq(0).html();// closest
-		$("#UserModalread .modal-body").load("adminQnView?qb_id="+qb_id)
-		console.log(qb_id);
-	});*/
-	
-	  $(document).click(function() {
-          $("#Modalread").hide();
-     }) 
-
 });
 
 // 목록 조회요청
@@ -46,16 +45,17 @@ function getBoardListHandler(datas) {
 	$("#asktb").empty();
 	for (var i = 0; i < datas.length; i++) {
 		$('<tr>')
-				.append($('<td>').html(datas[i].qb_id +" " +datas[i].qb_an))
+				.append($('<td>').html(datas[i].qb_id))
+				.append($('<td>').html(datas[i].qb_an))
 				.append($('<td>').html(datas[i].qb_title))
-				.append($('<td>').html(datas[i].qb_content))
+			/*	.append($('<td class="tdcontent">').html(datas[i].qb_content))*/
 				.append($('<td>').html(
-								"<button id='write' data-toggle='modal' data-target='#Modalread' ) >답글</button>"))
+								"<button id='write' data-toggle='modal' data-target='#Modalread' >답글</button>"))
 				.append($('<td>').html('<button id=\'btnDel\'>삭제</button>'))
 				.appendTo('#asktb').attr("data", datas[i].qb_id);
 	}
 }//  
-
+   
 
 
 function insertBoard() {
@@ -79,9 +79,10 @@ function insertBoard() {
 
 // 등록 요청 결과처리
 function insertBoardtHandler(data) {
-	$('<tr>').append($('<td>').html(data.qb_id)).append(
+/*	$('<tr>').append($('<td>').html(data.qb_id)).append(
 			$('<td>').html(data.m_id)).append($('<td>').html(data.qb_title))
-			.append($('<td>').html(data.qb_content)).appendTo('#asktb');
+			.append($('<td>').html(data.qb_content)).appendTo('#asktb');*/
+	getBoardList2();
 	$('#myModal').modal("hide"); // 닫기
 }
 
@@ -99,8 +100,6 @@ function deleteBoard() {
 		});
 	});
 }
-
-
 
 
 // 삭제 요청 결과처리
