@@ -116,6 +116,7 @@
 							 <i class="fa fa-lock fa-2x"  aria-hidden="true" style="color:black; font-size:50px;"> </i> 
 							 
 							 <a href="changePassword"> 비밀번호 변경 </a>
+							 <a href="option">알람 환경설정</a>
 							 
 						</div>
 					</form>

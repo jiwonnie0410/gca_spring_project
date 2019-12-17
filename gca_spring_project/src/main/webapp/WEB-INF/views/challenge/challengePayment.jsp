@@ -25,17 +25,15 @@
 <!-- json-serializeObject js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
 	
-
-<!-- 수림 개인 js/css -->
+<!-- 수림 개인 JS/css -->
 <script src="${pageContext.request.contextPath }/resources/js/surim/default.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/surim/challengePayment.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/addOption.css">
 
-
-<!-- 부트페이 연동 -->
-<script src="https://cdn.bootpay.co.kr/js/bootpay-3.0.2.min.js" type="application/javascript"></script>
+<!-- 부트페이 연동 JS -->
+<script src="https://cdn.bootpay.co.kr/js/bootpay-3.0.2.min.js"></script>
 
 <script>
   
@@ -97,27 +95,26 @@ function payGoGo() {
 			//결제가 실행되기 전에 수행되며, 주로 재고를 확인하는 로직이 들어갑니다.
 			//주의 - 카드 수기결제일 경우 이 부분이 실행되지 않습니다.
 			var enable = true; // 재고 수량 관리 로직 혹은 다른 처리
-			if (enable) {
+			if (enable) {				
 				BootPay.transactionConfirm(data); // 조건이 맞으면 승인 처리를 한다.
 			} else {
 				BootPay.removePaymentWindow(); // 조건이 맞지 않으면 결제 창을 닫고 결제를 승인하지 않는다.
 			}
 		}).close(function (data) {
 		    // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
-		    //console.log(data);
 			
 		}).done(function (data) {
 			//결제가 정상적으로 완료되면 수행됩니다
 			//비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
 			
-				$('#money_moid').val(2);
-				$("#money_moid").val(data[2] + " !id!!");
+				var moid = data.receipt_id;  //결제 고유번호, 환불에 이용
+				$('#money_moid').val(moid);
 			
 // 				for(var i in data) {
 // 				console.log("attr: " + i + ", value: " + data[i]);
 // 			}
 			
-			// 아작스 시작; ChallengeHist 테이블에 참가이력 추가
+			//  결제완료시 ChallengeHist 테이블에 참가이력 추가
 	    	var historyParam = JSON.stringify($("#historyForm").serializeObject());; //디비에 넣을값; 해당 챌린지정보
 	    	$.ajax({
 	    		url: "ajax/insertChallenge.json",
@@ -127,6 +124,7 @@ function payGoGo() {
 	    		contentType: "application/json"
 	    	});
 	    	
+	    	// 셜제완료시 Money 테이블에 결제이력 추가
 	    	var moneyParam = JSON.stringify($("#moneyForm").serializeObject());; //디비에 넣을값; 해당 챌린지정보
 	    	$.ajax({
 	    		url: "ajax/insertMoney.json",
@@ -136,9 +134,8 @@ function payGoGo() {
 	    		contentType: "application/json"
 	    	});
 	    				
-			
-			//alert("결제완료! 챌린지 목록으로 이동합니다");
-			//location.href="list";
+			alert("결제완료! 챌린지 목록으로 이동합니다");
+			location.href="list";
 		});
 		
 	});
@@ -249,16 +246,18 @@ function payGoGo() {
 			</div>
 		</div>
 		
+		<!-- 결제완료시 챌린지 참가정보 전송용 -->
 		<form id="historyForm">
 			<input name="cl_num" type="hidden" value="${challenge.cl_num }">
 			<input name="m_id" type="hidden" value=${id }>
 		</form>
 		
+		<!-- 결제완료시 결제 정보 전송용  -->
 		<form id="moneyForm">
 			<input name="cl_num" type="hidden" value="${challenge.cl_num }">
 			<input name="m_id" type="hidden" value=${id }>
 			<input name="money_deposit" type="hidden" id="money_deposit">
-			<input name="money_moid" id="money_moid">
+			<input name="money_moid" type ="hidden" id="money_moid">
 		</form>
 	<!-- 결제버튼, 금액 주입은 addOption JS 참조 -->
 	<button id="payBtn" class="pay-btn"><p id="paynow"></p></button>
