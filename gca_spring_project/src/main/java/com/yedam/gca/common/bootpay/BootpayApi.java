@@ -1,5 +1,7 @@
-package com.yedam.gca.common;
+package com.yedam.gca.common.bootpay;
 
+
+import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -7,7 +9,9 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import com.google.gson.Gson;
-import com.yedam.gca.common.vo.CancelVO;
+import com.yedam.gca.common.bootpay.request.Cancel;
+import com.yedam.gca.common.bootpay.request.Token;
+import com.yedam.gca.common.bootpay.response.ResToken;
 
 /**
  * Created by ehowlsla on 2018. 5. 29..
@@ -42,26 +46,6 @@ public class BootpayApi {
     public void setToken(String token) {
         this.token = token;
     }
-    
-    
-   public HttpResponse cancel(CancelVO cancel) throws Exception {
-        if(this.token == null || this.token.isEmpty()) throw new Exception("token 값이 비어있습니다.");
-
-        HttpClient client = HttpClientBuilder.create().build();
-        HttpPost post = getPost(URL_CANCEL, new StringEntity(new Gson().toJson(cancel), "UTF-8"));
-        post.setHeader("Authorization", this.token);
-        return client.execute(post);
-    }
-   
-   
-    private HttpPost getPost(String url, StringEntity entity) {
-        HttpPost post = new HttpPost(url);
-        post.setHeader("Accept", "application/json");
-        post.setHeader("Content-Type", "application/json");
-        post.setHeader("Accept-Charset", "utf-8");
-        post.setEntity(entity);
-        return post;
-    }
 
 //    private HttpGet getGet(String url) throws Exception {
 //        HttpGet get = new HttpGet(url);
@@ -80,6 +64,14 @@ public class BootpayApi {
 //        return get;
 //    }
 //
+    private HttpPost getPost(String url, StringEntity entity) {
+        HttpPost post = new HttpPost(url);
+        post.setHeader("Accept", "application/json");
+        post.setHeader("Content-Type", "application/json");
+        post.setHeader("Accept-Charset", "utf-8");
+        post.setEntity(entity);
+        return post;
+    }
 //
 //    private HttpDelete getDelete(String url) {
 //        HttpDelete delete = new HttpDelete(url);
@@ -89,24 +81,24 @@ public class BootpayApi {
 //        return delete;
 //    }
 //
-//    public void getAccessToken() throws Exception {
-//        if(this.application_id == null || this.application_id.isEmpty()) throw new Exception("application_id 값이 비어있습니다.");
-//        if(this.private_key == null || this.private_key.isEmpty()) throw new Exception("private_key 값이 비어있습니다.");
-//
-//        Token token = new Token();
-//        token.application_id = this.application_id;
-//        token.private_key = this.private_key;
-//
-//        HttpClient client = HttpClientBuilder.create().build();
-//        HttpPost post = getPost(URL_ACCESS_TOKEN, new StringEntity(new Gson().toJson(token), "UTF-8"));
-//
-//        HttpResponse res = client.execute(post);
-//        String str = IOUtils.toString(res.getEntity().getContent(), "UTF-8");
-//        ResToken resToken = new Gson().fromJson(str, ResToken.class);
-//
-//        if(resToken.status == 200)
-//            this.token = resToken.data.token;
-//    }
+    public void getAccessToken() throws Exception {
+        if(this.application_id == null || this.application_id.isEmpty()) throw new Exception("application_id 값이 비어있습니다.");
+        if(this.private_key == null || this.private_key.isEmpty()) throw new Exception("private_key 값이 비어있습니다.");
+
+        Token token = new Token();
+        token.application_id = this.application_id;
+        token.private_key = this.private_key;
+
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpPost post = getPost(URL_ACCESS_TOKEN, new StringEntity(new Gson().toJson(token), "UTF-8"));
+
+        HttpResponse res = client.execute(post);
+        String str = IOUtils.toString(res.getEntity().getContent(), "UTF-8");
+        ResToken resToken = new Gson().fromJson(str, ResToken.class);
+
+        if(resToken.status == 200)
+            this.token = resToken.data.token;
+    }
 //
 //    public HttpResponse verify(String receipt_id) throws Exception {
 //        if(this.token == null || this.token.isEmpty()) throw new Exception("token 값이 비어있습니다.");
@@ -117,7 +109,14 @@ public class BootpayApi {
 //        return client.execute(get);
 //    }
 //
-//
+    public HttpResponse cancel(Cancel cancel) throws Exception {
+        if(this.token == null || this.token.isEmpty()) throw new Exception("token 값이 비어있습니다.");
+
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpPost post = getPost(URL_CANCEL, new StringEntity(new Gson().toJson(cancel), "UTF-8"));
+        post.setHeader("Authorization", this.token);
+        return client.execute(post);
+    }
 //
 //    public HttpResponse get_subscribe_billing_key(SubscribeBilling subscribeBilling) throws Exception {
 //        if(this.token == null || this.token.isEmpty()) throw new Exception("token 값이 비어있습니다.");

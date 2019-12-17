@@ -120,9 +120,17 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	// 회원삭제
+	@Override
 	public int deleteUser(MembersVO dto) {
 		return dao.deleteUser(dto);
 	}
-
 	
+	
+	// ****************** 수림  ************************//
+	
+	//1. 부분환불용 고유번호 리스트 조회
+	@Override
+	public List<Map<String, Object>> selectRefund() {
+		return dao.selectRefund();
+	}
 }
