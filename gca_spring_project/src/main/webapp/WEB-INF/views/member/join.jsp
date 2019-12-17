@@ -45,6 +45,7 @@
 		<form role="form" id="joinfrm" name="joinfrm" action="insertJoin" method="post">
 			<input type="hidden" id="email" name="m_email">
 			<input type="hidden" id="xy" name="m_xy">
+			<input type="hidden" id="character" name="m_image_cd" value="P05">
 			<table>
 				<tr>	<!-- 아이디 및 중복확인 버튼 -->
 					<th width="50" align="right"> ID </th>
@@ -63,7 +64,7 @@
 					<th> Password </th>
 					<td colspan="3"><input type="password" id="password1" name="m_password" class="form-control form-control-sm" onkeyup="pwCheck()" placeholder="비밀번호" /></td>
 				</tr>
-
+				
 				<tr>
 					<td></td>
 					<td colspan="3" id="conditionPw"><font size="2">*비밀번호는 숫자, 특수문자를 혼합하여 6-10자리</font></td>
@@ -78,7 +79,33 @@
 					<td></td>
 					<td colspan="3" id="confirmPw"><font size="2">*비밀번호 재확인을 해 주세요.</font></td>
 				</tr>
-
+						
+				<tr>	<!-- 캐릭터 선택 -->
+					<th height="100px"> Characters </th>
+					<td colspan="3">
+						<span class="character">
+							<img id="P01" style="padding-bottom:5px;" width="65px" height="65px"
+	          						src="${pageContext.request.contextPath }/resources/images/Characters/foreigner.gif">
+						</span>
+						<span class="character">
+							<img id="P02" style="padding-bottom:5px;" width="65px" height="65px"
+	          						src="${pageContext.request.contextPath }/resources/images/Characters/team-head.gif">
+						</span>
+						<span class="character">
+							<img id="P03" style="padding-bottom:5px;" width="65px" height="65px"
+	          						src="${pageContext.request.contextPath }/resources/images/Characters/bear.gif">
+						</span>
+						<span class="character">
+							<img id="P04" style="padding-bottom:5px;" width="65px" height="65px"
+	          						src="${pageContext.request.contextPath }/resources/images/Characters/director.gif">
+						</span>
+						<span class="character">
+							<img id="P05" style="border-radius:5px; border: 2px solid #FE9191; padding-bottom:5px;" width="65px" height="65px"
+	          						src="${pageContext.request.contextPath }/resources/images/Characters/bald.gif">
+						</span>
+					</td>
+				</tr>
+				
 				<tr>	<!-- 이름 -->
 					<th height="50"> Name </th>
 					<td colspan="3"><input type="text" id="name" name="m_name" class="form-control form-control-sm" value="${param.mName }" /></td>

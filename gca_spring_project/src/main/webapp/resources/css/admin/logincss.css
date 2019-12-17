@@ -55,3 +55,8 @@
 	background-color: white;
 	cursor: pointer;
 }
+
+span.character img:hover{
+	border-radius:5px;
+	border: 2px solid #FE9191;
+}

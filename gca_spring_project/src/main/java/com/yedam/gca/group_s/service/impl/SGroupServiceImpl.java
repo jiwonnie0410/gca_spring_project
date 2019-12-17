@@ -38,7 +38,9 @@ public class SGroupServiceImpl implements SGroupService {
 	public MembersVO getOneMem(MembersVO vo) {
 		return sgroupDAO.getOneMem(vo);
 	}
-	
+	public ActiveHistVO getOnesAuthority(ActiveHistVO vo) {
+		return sgroupDAO.getOnesAuthority(vo);
+	}
 
 	
 	//미현

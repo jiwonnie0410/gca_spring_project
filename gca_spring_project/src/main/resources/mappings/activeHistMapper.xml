@@ -99,10 +99,41 @@
 	</select>
 
 	
-<!--  *********은영************* -->
-	<!-- 반짝방 참가취소 시 활동이력 delete -->
+<!--  *********은영************* --><!-- BG, SIX랑 통합해야함 -->
+<!-- 반짝방 참가취소 시 활동이력 delete -->
 	<delete id="cancelJoin" parameterType="allhistory">
 		DELETE FROM active_hist
-				WHERE M_ID = #{m_id} AND SG_NUM=#{sg_num}
+			<if test="sg_num != null and sg_num != ''">
+				WHERE 		SG_NUM	=	#{sg_num}
+			</if>
+			<if test="bg_num != null and bg_num != ''">
+				WHERE 		BG_NUM	=	#{bg_num}
+			</if>
+			<if test="six_num != null and six_num != ''">
+				WHERE 		SIX_NUM	=	#{six_num}
+			</if>
 	</delete>
+	
+<!-- id로 반짝방의 방장인지 멤버인지 가져오기 -->
+	<select id="getAuthority" parameterType="allhistory" resultType="allhistory">
+		SELECT	ACH_NUM,
+				M_ID,
+				ACH_DTTM,
+				ACH_GRANT,
+				ACH_CONFIRM,
+				BG_NUM,
+				SIX_NUM,
+				SG_NUM
+		FROM	ACTIVE_HIST
+		<if test="sg_num != null and sg_num != ''">
+		WHERE	M_ID = #{m_id} AND SG_NUM = #{sg_num}
+		</if>
+		<if test="sg_num != null and sg_num != ''">
+		WHERE	M_ID = #{m_id} AND BG_NUM = #{bg_num}
+		</if>
+		<if test="sg_num != null and sg_num != ''">
+		WHERE	M_ID = #{m_id} AND SIX_NUM = #{six_num}
+		</if>
+	</select>
+	
 </mapper>

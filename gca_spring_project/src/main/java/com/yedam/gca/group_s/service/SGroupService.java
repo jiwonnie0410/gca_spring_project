@@ -16,6 +16,7 @@ public interface SGroupService {
 	void cancelJoin(ActiveHistVO vo);
 	String returnImage(MembersVO vo);
 	MembersVO getOneMem(MembersVO vo);
+	ActiveHistVO getOnesAuthority(ActiveHistVO vo);
 			
 	
 	//미현

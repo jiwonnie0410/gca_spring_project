@@ -104,7 +104,7 @@
 		border-radius: 7px;
 		border-collapse: separate;
 	}
-
+	
 </style>
 
 <!-- 로그인한사람의 id,닉네임,캐릭터코드 저장 -->
@@ -130,10 +130,13 @@
 			//프로필 눌렀을때
 			$('#profile').on('show.bs.modal', function (event) {
 				var profileId = $(event.relatedTarget).attr('id'); //해당 모달을 띄운 프로필의 id
+				var sg_num = ${sgroup.sg_num};
 				var param = JSON.stringify({"m_id" : profileId});
+				var param2 = JSON.stringify({"m_id" : usrId, "sg_num" : sg_num });
 				
 				console.log($(event.relatedTarget).children('img').attr('src'));
 				
+				//ajax1. id로 그사람 프로필 가져오기
 				$.ajax({
 					url: "getOneProfile",
 					method:'post',
@@ -141,9 +144,7 @@
 					data: param,		//요청파라미터
 					contentType: "application/json",
 					success: function(vo){
-						console.log('model.addAttribute 성공');
 						var img = $(event.relatedTarget).children('img').attr('src');
-						console.log(img);
 						$('#profile_image').children('img').attr('src',img);
 						$('#profile_id').text(vo.m_id);
 						$('#profile_nick').text(vo.m_nick);
@@ -161,9 +162,30 @@
 					}
 					
 				});
+				
+				//ajax2. id로 그사람이 방장인지 멤버인지 가져오기
+				$.ajax({
+					url: "getOnesAuthority",
+					method:'post',
+					dataType: "json",	//결과타입
+					data: param2,		//요청파라미터
+					contentType: "application/json",
+					success: function(vo){
+						//방장 아니면 강퇴버튼 삭제해버리기.
+						if(vo.ach_grant == "일반"){
+							$('#kickOut').remove();
+						}
+					},
+					error: function(){
+						console.log("getOnesAuthority 실패");
+					}
+					
+				});
+				
+				
 			});
 			
-			//프로필 모달 닫혔을때
+			//프로필 모달 닫혔을때(프로필 모달 열릴때 HIDE했던 modal-footer를 다시 보이게.)
 			$('#profile').on('hidden.bs.modal', function (event) {
 				$('.modal-footer').show();
 			});
@@ -286,9 +308,6 @@
 <!-- 버튼영역 위(프로필까지)의 div 시작 -->
     <div style="padding-top:0px;">
     
-    <input type="hidden" id="s_id" value='${id}'>
-    <input type="hidden" id="s_nick" value='${nick}'>
-    <input type="hidden" id="s_character" value='${image}'>
     <input type="hidden" id="sg_num_search" value="${sgroup.sg_num }">
     
 	<!-- 방제 -->
@@ -516,7 +535,7 @@
 				</div>
         
 <!-- Modal footer -->
-				<div class="modal-footer">
+				<div style="display:inline;" class="modal-footer">
 					<button id="doReport" type="button" class="button-general" data-dismiss="modal">신고하기</button>
 					<button type="button" class="button-general" data-dismiss="modal">취소</button>
 				</div>
