@@ -6,11 +6,6 @@ $(function() {
 	insertBoard(); // 등록 이벤트 클릭 이벤트 지정
 	deleteBoard();// 삭제
 
-//	 $("body").on("click", "[id^=write]", function() { var qb_id =
-//	  $(this).closest("tr").find("td").eq(0).html();// closest ==조상검색
-//	  console.log(qb_id); });
-//	 
-//
 });
 
 //상세보기
@@ -23,10 +18,13 @@ function getQb_id(qb_id) {
 }
 
 
+
+
 //목록 조회요청
 function getBoardList() {
 	$.ajax({
 		url:"ajax/getBoardList.json",
+		data:$("#boardForm").serialize(),
 		dataType:"json",
 		success: getBoardListHandler
 	});
@@ -40,12 +38,12 @@ function getBoardList() {
 					.append($('<td>').html(datas[i].qb_id))
 					 .append($('<td>').html(datas[i].m_id)) 
 					 .append($('<td>').html(datas[i].qb_title))
-					 .append($('<td>').html(datas[i].qb_content))
 					 .appendTo('#asktb')
 					 .attr("data",datas[i].bno);
 			}//for
 		}//  getBoardListHandler
   
+
   
   
   
@@ -73,10 +71,11 @@ function insertBoardtHandler(data) {
 	$('<tr>').append($("<td id='newTr'>").html(data.qb_id))
 			 .append($('<td>').html(data.m_id))
 			 .append($('<td>').html(data.qb_title))
-			 .append($('<td>').html(data.qb_content))
-			 .appendTo('#asktb');
+			 .prependTo('#asktb');
 	$('#myModal').modal("hide"); //닫기 
 }
+
+
 
 
 
@@ -102,7 +101,8 @@ function deleteBoard() {
 	
 	function go_page(paging){
 		document.boardForm.page.value = paging;
-		document.boardForm.submit();
+		getBoardList();
+		//document.boardForm.submit();
 	}
   
   

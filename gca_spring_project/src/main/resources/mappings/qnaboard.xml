@@ -36,18 +36,19 @@ select b.*  from ( select a.*, rownum rn  from(
 		    qb_title,
 		    qb_content,
 		    m_id,
-		    qb_date
-	   from  qna_board
+		    qb_date,  
+		    decode((select count(qb_title) from qna_board where qb_origin =q.qb_id), 1,'yes','no') qb_an   
+	   from  qna_board q
 	   <where>
 	   	<if test="keyword != null and keyword != '' ">
-	   		<if test="searchCondition == 'qb_title '">
+	   		<if test="searchCondition == 'qb_title'">
 	   			and qb_title like '%' || #{keyword}  || '%'
 	   		</if>
 	   		<if test="searchCondition == 'qb_content'">
 	   			and qb_content like '%' || #{keyword}  || '%'
 	   		</if>   		
 	   	</if>
-	   </where>
+	   </where>	
 	  ORDER  BY qb_id DESC
 ) a  ) b where rn between #{start} and #{end} 	  
 </select>
@@ -56,7 +57,7 @@ select b.*  from ( select a.*, rownum rn  from(
 <!-- dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd -->
 
 
-<select id="getBoardReRef" parameterType="qnaboard" resultType="int">
+<!-- <select id="getBoardReRef" parameterType="qnaboard" resultType="int">
 	
 		SELECT IFNULL(MAX(qb_origin), 0) + 1
 		FROM qna_board
@@ -85,7 +86,7 @@ select b.*  from ( select a.*, rownum rn  from(
 			, #{qb_content}
 		)
 	</insert>
-
+ -->
 
 <!-- dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd -->
 
@@ -153,7 +154,7 @@ select b.*  from ( select a.*, rownum rn  from(
 	</selectKey>
 	INSERT INTO qna_board( 
 						qb_id,
-					  <if test="qb_origin != null and qb_origin != ''">
+					  <if test="qb_origin != null and qb_origin >0">
 						  	  qb_origin,
 					 </if>
 						qb_title,
@@ -164,8 +165,8 @@ select b.*  from ( select a.*, rownum rn  from(
 						  )
 			   VALUES(  
 			   			#{qb_id},
-			   			<if test="qb_origin != null and qb_origin != ''">
-					  		#{qb_origin}, 
+			   			<if test="qb_origin != null and qb_origin >0">
+					  	#{qb_origin}, 
 						</if> 
 				        #{qb_title},
 				        <!-- 'test',로그인후 수정  -->
@@ -193,8 +194,9 @@ select b.*  from ( select a.*, rownum rn  from(
 		 m_id,
 		 qb_content,
 		 qb_date,
-		 qb_hit
-   FROM  qna_board
+		 qb_hit,
+		 (select qb_content from qna_board where qb_origin =q.qb_id) qb_an
+   FROM  qna_board q
   WHERE  qb_id = #{qb_id} 
 </select>
 

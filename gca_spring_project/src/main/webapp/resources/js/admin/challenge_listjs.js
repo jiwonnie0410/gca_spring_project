@@ -143,6 +143,15 @@ function getChallengeList(p) {
 		dataType : "json",
 		data: {page:p, searchCondition:$('#searchCondition').val(), keyword:$('#keyword').val()},
 		success : function(dataes) {
+			// 현재 날짜 가져오기
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1;
+			var yyyy = today.getFullYear();
+			if(dd<10) { dd='0'+dd } 
+			if(mm<10) { mm='0'+mm } 
+			today = yyyy+'-'+mm+'-'+dd;
+			
 			var datas = dataes.list;
 			// 테이블 내용 한번 비우기 (이렇게 하지 않으면 내용이 누적돼서 나옴)
 			$("#challenge-table").empty();
@@ -161,14 +170,28 @@ function getChallengeList(p) {
 					status = '기본';
 				else
 					status = '스페셜';
-				$("<tr data-toggle='modal' data-target='#challenge-going' id='newTr' onclick='getKey("+datas[i].cl_num+")'>")
-						  .append("<td align='center'>"+ datas[i].cl_num +"</td>")
-						  .append("<td align='center'>"+ status +"</td>")
-						  .append("<td>"+ datas[i].cl_name +"</td>")
-						  .append("<td align='center'>"+ datas[i].cl_start_dttm +"</td>")
-						  .append("<td align='center'>"+ datas[i].cl_end_dttm +"</td>")
-						  .append("<td align='center'>"+ datas[i].cl_score +"점 </td>")
-						  .appendTo($("#challenge-table"));
+				
+				if(datas[i].cl_end_dttm > today){ // 마감 안 된 챌린지
+					$("<tr data-toggle='modal' data-target='#challenge-going' id='newTr' onclick='getKey("+datas[i].cl_num+")'>")
+					  .append("<td align='center'>"+ datas[i].cl_num +"</td>")
+					  .append("<td align='center'>"+ status +"</td>")
+					  .append("<td>"+ datas[i].cl_name +"</td>")
+					  .append("<td align='center'>"+ datas[i].cl_start_dttm +"</td>")
+					  .append("<td align='center'>"+ datas[i].cl_end_dttm +"</td>")
+					  .append("<td align='center'>"+ datas[i].cl_score +"점 </td>")
+					  .appendTo($("#challenge-table"));
+				}
+				else { // 마감된 챌린지
+					$("<tr data-toggle='modal' data-target='#challenge-going' id='endTr' onclick='getKey("+datas[i].cl_num+")'>")
+					  .append("<td align='center'>"+ datas[i].cl_num +"</td>")
+					  .append("<td align='center'>"+ status +"</td>")
+					  .append("<td><strike>"+ datas[i].cl_name +"</strike></td>")
+					  .append("<td align='center'>"+ datas[i].cl_start_dttm +"</td>")
+					  .append("<td align='center'>"+ datas[i].cl_end_dttm +"</td>")
+					  .append("<td align='center'>"+ datas[i].cl_score +"점 </td>")
+					  .appendTo($("#challenge-table"));
+				}
+				
 			}
 			
 			// 시작하는 페이지가 1보다 크면 이전페이지로 갈 때 -1, 아니면 그냥 1페이지로 남아있음

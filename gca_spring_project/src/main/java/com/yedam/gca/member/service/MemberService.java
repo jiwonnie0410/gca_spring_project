@@ -19,7 +19,7 @@ public interface MemberService {
 	public Map<String, Object> forgotPw(MembersVO vo);
 	
 	// 5. 비밀번호 변경
-	public String changePw(MembersVO vo);
+	public Map<String, Object> changePw(MembersVO vo);
 
 	
 	

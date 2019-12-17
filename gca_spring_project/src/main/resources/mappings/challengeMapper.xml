@@ -109,7 +109,8 @@
 							MONEY_WITHDRAW, 
 							MONEY_WITHDRAW_DTTM, 
 							MONEY_STATUS, 
-							CL_NUM
+							CL_NUM,
+							MONEY_MOID
 							)
 							VALUES (
 							#{m_id}, 
@@ -118,7 +119,8 @@
 							NULL, 
 							NULL, 
 							'입금완료', 
-							#{cl_num} 
+							#{cl_num},
+							#{money_moid} 
 							)
 	</insert>
 

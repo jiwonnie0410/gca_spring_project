@@ -133,7 +133,7 @@
 					<i class="fas fa-fw fa-folder"></i> <span> 통계 관리 </span>
 				</a>
 				<div class="dropdown-menu" aria-labelledby="pagesDropdown">
-					<a class="dropdown-item" href="#"> 매출 </a>
+					<a class="dropdown-item" href="income"> 매출 </a>
 					<a class="dropdown-item" href="chart"> 통계 </a>
 				</div>	
 			</li>

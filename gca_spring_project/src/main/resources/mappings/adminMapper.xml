@@ -43,7 +43,9 @@
 					                                      2, 20,
 					                                      3, 30,
 					                                      4, 40,
-					                                      5, 40) "AGE",
+					                                      5, 40,
+					                                      6, 40,
+					                                      7, 40) "AGE",
 					        COUNT( DECODE(GET_CODE_NAME(S.SPORTS1_CD), '농구', 1, NULL) ) AS "BASKETBALL",
 					        COUNT( DECODE(GET_CODE_NAME(S.SPORTS1_CD), '달리기/산책', 1, NULL) ) AS "RUNNING",
 					        COUNT( DECODE(GET_CODE_NAME(S.SPORTS1_CD), '등산', 1, NULL) ) AS "HIKING",
@@ -61,12 +63,16 @@
 					                                   		2, 20,
 					                                    	3, 30,
 					                                    	4, 40,
-					                                    	5, 40)
+					                                    	5, 40,
+					                                      	6, 40,
+					                                      	7, 40)
 					ORDER BY DECODE(SUBSTR(M.M_AGE, 1, 1),  1, 10,
 					                 						2, 20,
 										                	3, 30,
 										                 	4, 40,
-										                 	5, 40)
+										                 	5, 40,
+					                                      	6, 40,
+					                                      	7, 40)
 			</select>
 
 
@@ -110,7 +116,7 @@
 										</if>
 									</if>
 								</where>
-								ORDER BY CL_NUM
+								ORDER BY CL_NUM DESC
 								
 					)A )B WHERE RN BETWEEN #{start} AND #{end}
 			</select>

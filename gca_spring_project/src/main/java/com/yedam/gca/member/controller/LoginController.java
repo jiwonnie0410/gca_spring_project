@@ -34,73 +34,72 @@ public class LoginController {
 	MemberService memberService;
 
 	// 지원
-	
-//	private NaverLoginBO naverLoginBO;
-//	private String apiResult = null;
-//
-//	@Autowired
-//	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
-//		this.naverLoginBO = naverLoginBO;
-//	}
-	
-	// 첫 로그인 페이지 (홈페이지 열자마자 보이는 화면)
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		return "/notiles/member/login";
+	private NaverLoginBO naverLoginBO;
+	private String apiResult = null;
+
+	@Autowired
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO;
 	}
 	
 //	// 첫 로그인 페이지 (홈페이지 열자마자 보이는 화면)
-//	@RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST })
-//	public String home(Locale locale, Model model, HttpSession session) {
-//		// 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출
-//		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-//		// https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
-//		// redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-//		System.out.println("네이버:" + naverAuthUrl);
-//		// 네이버
-//		model.addAttribute("url", naverAuthUrl);
-//		
+//	@RequestMapping(value = "/", method = RequestMethod.GET)
+//	public String home(Locale locale, Model model) {
 //		return "/notiles/member/login";
 //	}
-
-	// 네이버 아이디로 로그인 성공 시에 돌아올 페이지 -> 반짝 방 리스트로 감
-	@RequestMapping("/login/naverCallback")
-	public String naverCallback() {
-		return "/notiles/member/callback";
-	}
 	
+	// 첫 로그인 페이지 (홈페이지 열자마자 보이는 화면)
+	@RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST })
+	public String home(Locale locale, Model model, HttpSession session) {
+		// 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		// https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
+		// redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
+		System.out.println("네이버:" + naverAuthUrl);
+		// 네이버
+		model.addAttribute("url", naverAuthUrl);
+		
+		return "/notiles/member/login";
+	}
+
 //	// 네이버 아이디로 로그인 성공 시에 돌아올 페이지 -> 반짝 방 리스트로 감
-//	@RequestMapping(value = "/login/naverCallback", method = { RequestMethod.GET, RequestMethod.POST })
-//	public String naverCallback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
-//		System.out.println("여기는 callback");
-//		OAuth2AccessToken oauthToken;
-//		oauthToken = naverLoginBO.getAccessToken(session, code, state);
-//		
-//		// 1. 로그인 사용자 정보를 읽어온다.
-//		apiResult = naverLoginBO.getUserProfile(oauthToken); // String형식의 json데이터
-//		/**
-//		 * apiResult json 구조 {"resultcode":"00", "message":"success",
-//		 * "response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
-//		 **/
-//		
-//		// 2. String형식인 apiResult를 json형태로 바꿈
-//		JSONParser parser = new JSONParser();
-//		Object obj = parser.parse(apiResult);
-//		JSONObject jsonObj = (JSONObject) obj;
-//		
-//		// 3. 데이터 파싱
-//		// Top레벨 단계 _response 파싱
-//		JSONObject response_obj = (JSONObject) jsonObj.get("response");
-//		// response의 nickname값 파싱
-//		String nickname = (String) response_obj.get("nickname");
-//		System.out.println(nickname);
-//		
-//		// 4. 파싱 닉네임 세션으로 저장
-//		session.setAttribute("sessionId", nickname); // 세션 생성
-//		model.addAttribute("result", apiResult);
-//		
+//	@RequestMapping("/login/naverCallback")
+//	public String naverCallback() {
 //		return "/notiles/member/callback";
 //	}
+	
+	// 네이버 아이디로 로그인 성공 시에 돌아올 페이지 -> 반짝 방 리스트로 감
+	@RequestMapping(value = "/login/naverCallback", method = { RequestMethod.GET, RequestMethod.POST })
+	public String naverCallback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
+		System.out.println("여기는 callback");
+		OAuth2AccessToken oauthToken;
+		oauthToken = naverLoginBO.getAccessToken(session, code, state);
+		
+		// 1. 로그인 사용자 정보를 읽어온다.
+		apiResult = naverLoginBO.getUserProfile(oauthToken); // String형식의 json데이터
+		/**
+		 * apiResult json 구조 {"resultcode":"00", "message":"success",
+		 * "response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
+		 **/
+		
+		// 2. String형식인 apiResult를 json형태로 바꿈
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(apiResult);
+		JSONObject jsonObj = (JSONObject) obj;
+		
+		// 3. 데이터 파싱
+		// Top레벨 단계 _response 파싱
+		JSONObject response_obj = (JSONObject) jsonObj.get("response");
+		// response의 nickname값 파싱
+		String nickname = (String) response_obj.get("nickname");
+		System.out.println(nickname);
+		
+		// 4. 파싱 닉네임 세션으로 저장
+		session.setAttribute("sessionId", nickname); // 세션 생성
+		model.addAttribute("result", apiResult);
+		
+		return "/notiles/member/callback";
+	}
 	
 		/*
 		 * // 네이버는 로그아웃이 따로 없기 때문에 세션을 비워줘야 함
@@ -210,14 +209,22 @@ public class LoginController {
 	// 비밀번호 변경 페이지
 	@RequestMapping("/member/changePassword")
 	public String changePassword() {
-		return "/notiles/member/changePassword";
+		return "/user/member/changePassword";
 	}
 
 	// 비밀번호 변경
 	@RequestMapping("/member/updatePassword")
 	public String updatePassword(MembersVO vo, Model model) {
-		model.addAttribute("pwChangeMessage", memberService.changePw(vo)); // jsp 페이지에서 alert로 띄울 메시지 넘기기
-		return "/notiles/member/member_view";
+		// 비밀번호 변경 성공 및 실패에 따라 각각 다른 페이지로 리턴
+		Map<String, Object> map = memberService.changePw(vo);
+		boolean flag = (boolean) map.get("flag");
+		if (flag == false) { // 실패했을 때
+			model.addAttribute("pwMessage", map.get("message")); // jsp 페이지에서 alert로 띄울 메시지 넘기기
+			return "/user/member/changePassword";
+		} else { // 성공했을 때
+			model.addAttribute("pwMessage", map.get("message"));
+			return "/user/member/member_view";
+		}
 	}
 	// 지원 끝
 

@@ -14,5 +14,6 @@ public class MoneyVO {
 	private Date money_withdraw_dttm;			// 출금날짜
 	private String money_status;				// 상태
 	private int cl_num;							// 챌린지 번호
+	private String money_moid;					// 결제시 고유번호(환불에 이용)
 	
 }
