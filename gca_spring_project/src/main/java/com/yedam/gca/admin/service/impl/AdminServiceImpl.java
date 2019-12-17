@@ -90,6 +90,19 @@ public class AdminServiceImpl implements AdminService {
 		return map;
 	}
 	
+	// 8. 일별 수익 현황
+	@Override
+	public List<Map<String, Object>> chartDaily() {
+		return dao.chartDaily();
+	}
+
+	// 9. 월별 수익 현황
+	@Override
+	public List<Map<String, Object>> chartMonthly() {
+		return dao.chartMonthly();
+	}
+
+	
 
 	
 
@@ -111,4 +124,5 @@ public class AdminServiceImpl implements AdminService {
 		return dao.deleteUser(dto);
 	}
 
+	
 }
