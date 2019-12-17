@@ -27,8 +27,6 @@
 		</beans:property>
 	</beans:bean>
 	
-	<beans:bean id="naverLoginBO" class="com.yedam.gca.member.service.NaverLoginBO" />
-
 	<context:component-scan base-package="com.yedam.gca" />
 	
 	<!-- 웹소켓 소켓핸들러와 핸드쉐이크인터셉터 -->
@@ -39,5 +37,7 @@
 				<beans:bean class="com.yedam.gca.chatting.controller.HandshakeInterceptor"/> 
 			</websocket:handshake-interceptors>
 		</websocket:handlers>
-
+	
+	<!-- NaverLoginBO에 대한 bean 설정 추가 -->
+	<!-- <beans:bean id="naverLoginBO" class="com.yedam.gca.member.service.NaverLoginBO" /> -->
 </beans:beans>
