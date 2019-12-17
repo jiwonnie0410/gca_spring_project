@@ -84,12 +84,17 @@ $(function(){
 
 <style>
 
+.container {
+	max-width: 500px;
+}
+
 .image-div {
 	position : relative;
 }
 
 .sports-div img {
 	border-radius: 10px;
+	height: auto;
 }
 
 .join-mark {
