@@ -110,11 +110,11 @@ function payGoGo() {
 			//결제가 정상적으로 완료되면 수행됩니다
 			//비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
 			
+				$('#money_moid').val(2);
+				$("#money_moid").val(data[2] + " !id!!");
 			
 // 				for(var i in data) {
 // 				console.log("attr: " + i + ", value: " + data[i]);
-// 				$("#money_moid").val(data[2]);
-// 				$('#money_moid').val(2);
 // 			}
 			
 			// 아작스 시작; ChallengeHist 테이블에 참가이력 추가
