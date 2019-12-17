@@ -25,15 +25,17 @@
 				</div>
 				<div class="form-group">
 					<div>
-						제목 <input name="qb_title" id="qb_title" size="80"
-							value="${dto.qb_title}" readonly="readonly">
+						제목 ${dto.qb_title}
 					</div>
 				</div>
 				<div class="form-group">
 					<div>
-						내용
-						<textarea name="qb_content" id="qb_content" rows="4"
-							readonly="readonly">${dto.qb_content}</textarea>
+						내용${dto.qb_content}
+					</div>
+				</div>
+				<div class="form-group">
+					<div>
+						답변${dto.qb_an}
 					</div>
 				</div>
 				<div style="width: 650px; text-align: center;">
@@ -45,6 +47,12 @@
 					<!-- 	<button type="button" class="btn btn-primary px-5 py-3  mt-3" id="btnList">목록</button> -->
 				</div>
 			</form>
+			
+			
+			
+			
+			
+			
 		</div>
 	</div>
 </div>
