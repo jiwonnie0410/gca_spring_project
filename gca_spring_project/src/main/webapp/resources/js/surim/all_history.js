@@ -1,6 +1,8 @@
 // https://fullcalendar.io/docs#toc
-     
+
+
 document.addEventListener('DOMContentLoaded', function() {
+
 	  var calendarEl = document.getElementById('calendar');
 
 	  var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -56,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	    
 	    editable: true, //일정 드래그 등 하여 수정가능
 	    selectable: true, // 날짜클릭하여 이벤트 추가 가능(모달)
+	     
 	    
 	    //이벤트 클릭시 모달열기
 	    eventClick: function(info) {
@@ -73,8 +76,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	    	});  
 	    	
 	    	var eventDate = format.toString().split("GMT")
-	    	
-	    	$("#eventModal").modal();   
+	    
+	    	$("#eventModal").modal();
 	    	
 	    	$("#title").html(infoArr.title)
 	    	$("#date").html("마감일자: "+eventDate[0]); //시간을 모달 input에 주입, 분단위까지 출력됨
@@ -87,7 +90,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	    	$("#status").html(dbArr.status);
 	    	$("#sg_option").html("옵션: "+dbArr.sg_option);
 	    	
-	    	
+	    	/* 미현 : 지도  */
+	    	$("#map_xy").val(dbArr.xy);
+	    	view_map();
 	    }//
 	  });
 	  
@@ -95,6 +100,16 @@ document.addEventListener('DOMContentLoaded', function() {
 	  //calendar.setOption('contentHeight', 450);
 	  calendar.setOption('aspectRatio', 0.8);
 	  calendar.render();
+	  
+	  view_map2(); //미현 : 지도 스크립트
+//	  $('#aaa a').on('click', function (e) {
+//		  e.preventDefault()
+//		})
+	  
+	  $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+		  map.relayout();
+		})
+		map.relayout();
 	  
 	});
 
