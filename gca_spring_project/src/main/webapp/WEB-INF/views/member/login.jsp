@@ -74,8 +74,14 @@ ${param.error}
 				<div class="div-login">
 				<!-- 네이버 아이디로 가입하기 버튼 -->
 					<br /><br /><br />
-					<div id="naverIdLogin"></div>
+					<div id="naverIdLogin"><a href="${url}"></a></div>
 				<br /><br />
+				
+				<!-- 네이버 로그인 창으로 이동 -->
+<div id="naver_id_login" style="text-align:center"><a href="${url}">
+<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
+<br>
+
 				
 			
 				<!-- 운동하자로 로그인 및 회원가입 폼 -->
