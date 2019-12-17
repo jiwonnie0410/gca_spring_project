@@ -102,14 +102,14 @@
 		</div>
 	</form>
 	<!-- 레코드의 갯수를 출력 -->
-	<table class="table" >
+	<table class="table">
 		<thead>
 			<tr>
-				<th width="20%" align="center"><center> 번호</center></th>
+				<th width="30%" align="center"><center> 번호</center></th>
 				<!-- <th>아이디</th> -->
-				<th width="30%" align="center"><center>제목</center></th>
-				<th width="30%" align="center" ><center>내용</center></th>
-				<th width="20%" align="center"><center>조회수</center></th>
+				<th width="40%" align="center"><center>제목</center></th>
+			<%-- 	<th width="30%" align="center" ><center>내용</center></th> --%>
+				<th width="30%" align="center"><center>조회수</center></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -124,8 +124,8 @@
 								<!-- db 목록을 가져와서 뿌려주는 곳 -->
 						<c:forEach var="row" items="${map.list}">
 								<tr>
-									<%-- <td align="center" width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${row.ad_num}</td> --%>
-									<td align="center">${row.m_id}</td>
+									 <td align="center" width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${row.ad_num}</td> 
+									<%-- <td align="center">${row.m_id}</td> --%>
 									<!-- 게시글 상세보기 페이지로 이동시 게시글 목록페이지에 있는 검색조건, 키워드, 현재페이지 값을 유지하기 위해 -->
 									<td align="center" width="10" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" align="center">
 										<a href="${pageContext.request.contextPath}/board/view?ad_num=${row.ad_num}&curPage=${map.boardPager.curPage}&searchOption=${map.searchOption}&keyword=${map.keyword}">${row.ad_title}
@@ -136,7 +136,7 @@
 												</c:if>
 										</a>
 									</td>
-									<td class="autocut" width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"align="center">${row.ad_content}<%-- <!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 --> 
+								<%-- 	<td class="autocut" width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"align="center">${row.ad_content}<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 --> 
 										<fmt:formatDate value ="${row.regdate}" pattern="yyyy-MM-dd" /> --%>
 									</td>
 									<td width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"align="center">${row.ad_count}</td>

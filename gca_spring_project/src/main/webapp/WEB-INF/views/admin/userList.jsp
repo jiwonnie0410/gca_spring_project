@@ -9,78 +9,13 @@
 <meta name="author" content="">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-
-<!-- 꼭있어야함 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-
-<!--json할때 필요  -->
-<script
-	src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
 	
 <script src="${pageContext.request.contextPath }/resources/js/admin/user.js"></script>
 
-<!-- <script type="text/javascript" >
-	$(function(){
-
-		userSelect();
-		
-		userDelete();
-	});
-	
-	
-	//사용자 삭제 요청
-	function userDelete() {
-		//삭제 버튼 클릭
-		$('body').on('click','#btnDelete',function(){
-			var m_id = $(this).closest('tr').find('#hidden_m_id').val();
-			var result = confirm(m_id +" 사용자를 정말로 삭제하시겠습니까?");
-			if(result) {
-				$.ajax({
-					url:'ajax/members/'+m_id,  
-					type:'DELETE',
-					contentType:'application/json;charset=utf-8',
-					dataType:'json',
-					error:function(xhr,status,msg){
-						console.log("상태값 :" + status + " Http에러메시지 :"+msg);
-					}, success:function(xhr) {
-						console.log(xhr.result);
-						/* userList(); */
-					}
-				});      }//if
-		}); //삭제 버튼 클릭
-	}//userDelete
-	
-	
-	//사용자 조회 요청
-	function userSelect() {
-		//조회 버튼 클릭
-		$('body').on('click','#btnSelect',function(){
-			var m_id = $(this).closest('tr').find('#hidden_m_id').val();
-			//특정 사용자 조회
-			window.open('${pageContext.request.contextPath }/member/admin_member_view.do?m_id='+m_id , '회원싱세보기' , 'width=500,height=500, menubar=no, status=no, toolbar=no'); 
-		}); //조회 버튼 클릭
-	}//userSelect
-</script>  -->
 </head>
 
 <body id="page-top">
-
-
 		<!------------------------------------------------------------------------------------------------------------  -->
 		<div id="content-wrapper">
 			<div class="container-fluid">
@@ -96,7 +31,8 @@
 											<th class="text-center">아이디</th>
 											<th class="text-center">이름</th>
 											<th class="text-center">성별</th>
-											<th class="text-center">거주지</th>
+											<!-- <th class="text-center">거주지</th> -->
+											<th class="text-center">계정상태</th>
 										</tr>
 									</thead>
 									<tbody></tbody>
@@ -150,8 +86,7 @@
 										<th>Salary</th> -->
 										</tr>
 									</tfoot>
-									<tbody>
-									</tbody>
+									
 								</table>
 							</div>
 						</div>

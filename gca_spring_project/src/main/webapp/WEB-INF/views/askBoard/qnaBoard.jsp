@@ -8,19 +8,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+<style type="text/css">
+.table td{
+	cursor: pointer;   
+}
+</style>
 <script src="${pageContext.request.contextPath }/resources/js/board/user_Qna.js"></script>
-
-<!--json할때 필요  -->
-<script src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
 
 
 <sec:authentication property="principal.m_id" var="m_id"/>
@@ -28,6 +21,7 @@
 <title>boardList_json.jsp</title>
 </head>
 <body>
+${boardSearchVO }
 <div align="center">
 <div class="jumbotron" style="background-color: #FE9191; ">
 				<h2 style="color: white;" >문의</h2>
@@ -35,7 +29,7 @@
 			 </div>
 <!-- -----------------------------------------검색폼 시작------------------------------------------------->
 		<div>
-			<form action="getBoardList" name="boardForm">
+			<form action="qnaboard" name="boardForm"  id="boardForm">
 				<input type="hidden" name="page" value="1" />
 				<table>
 					<tr>
@@ -43,13 +37,13 @@
 							class="btn btn-outline-warning btn-sm dropdown-toggle" style="">
 								<option value="">선택</option>
 								<option value="qb_title"
-									<c:if test="${boardSearchVO.searchCondition=='qb_title'}">selected</c:if>>제목</option>
+									<c:if test="${boardSearchVO.searchCondition=='qb_title'}">selected</c:if>>질문유형</option>
 								<option value="qb_content"
 									<c:if test="${boardSearchVO.searchCondition=='qb_content'}">selected</c:if>>내용</option>
 						</select></td>
 						<td><input name="keyword" value="${boardSearchVO.keyword}"></td>
-						<td><button type="submit" class="btn btn-outline-warning btn-sm"
-									style="border-color: #FAF0F0; color: #ffc0cb;">검색</button></td>
+						<td><button type="button" class="btn btn-outline-warning btn-sm"
+									style="border-color: #FAF0F0; color: #ffc0cb;" onclick="go_page(1)">검색</button></td>
 					</tr>
 				</table>
 			</form>
@@ -66,7 +60,7 @@
 					<th class="text-center">번호</th>
 					<th class="text-center">작성자</th>
 					<th class="text-center">제목</th>
-					<th class="text-center">내용</th>
+					<!-- <th class="text-center">내용</th> -->
 					<!-- <th class="text-center">삭제</th>
 					<th class="text-center">답변</th> -->
 				</tr>
@@ -103,7 +97,6 @@
 
 			<div class="panel-group">
 				<div class="panel panel-success" > 
-					<div class="panel-heading" style="background-color: pink; color: black">문의 사항</div>
 					<div class="panel-body">
 						<%-- form --%>
 						<form role="form" action="../ajax/insertBoard"  id="ad_boardWriteForm" name="ad_boardWriteForm">
@@ -113,17 +106,16 @@
 									제목
 									<select name="qb_title" id="qb_title" class="btn btn-outline btn-sm dropdown-toggle"  >
 										  <option	selected  > 질문 유형 선택 </option>
-										  <option value="qna1" >질문1</option>
-										  <option value="qna2">질문2</option>
-										  <option value="qna3" >질문3</option>
-										  <option value="qna4">질문4</option>
+										  <option value="반짝방 문의" >반짝방 문의</option>
+										  <option value="회원관리 문의">회원관리 문의</option>
+										  <option value="동호희 문의" >동호희 문의</option>
 									 </select>
 								</div>
 							</div> 
 							<div class="form-group">
 								<div>
 									내용
-									<textarea cols="40" name="qb_content" id="qb_content" placeholder="내용을 입력해주세요" ></textarea>
+									<textarea cols="40" rows="10" name="qb_content" id="qb_content" placeholder="내용을 입력해주세요" ></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -137,9 +129,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal-footer">
+		<!-- <div class="modal-footer">
           <button type="button" class="btn " data-dismiss="modal" style="background-color: #FE9191; color: white;">Close</button>
-        </div>
+        </div> -->
 	</div>	
 	</div>
 	</div>
@@ -166,6 +158,7 @@
 					<button type="button" class="btn" data-dismiss="modal" style="background-color: #FE9191; color: white;">Close</button>
 				</div>
 			</div>
+			
 		</div>
 	</div>	
 </body>

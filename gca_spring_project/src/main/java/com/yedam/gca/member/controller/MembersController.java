@@ -23,7 +23,7 @@ public class MembersController {
 	@Autowired
 	MemberService memberService;
 	
-// 03 회원 상세정보 조회
+// 01 회원 상세정보 조회
     @RequestMapping("member/member_view.do")
     public String memberView(Model model)throws Exception{
 		UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -35,21 +35,17 @@ public class MembersController {
     
     
     
-    
-    // 04. 회원 정보 수정 처리
+ 
+    // 02. 회원 정보 수정 처리
     @RequestMapping("member/update.do")
     public String memberUpdate(@ModelAttribute MembersVO vo, Model model){
         // 비밀번호 체크
         boolean result = memberService.checkPw(vo.getM_id(), vo.getM_password());
-        if(result){ // 비밀번호가 일치하면 수정 처리후, 전체 회원 목록으로 리다이렉트
+        if(result){ // 비밀번호가 일치하면 수정 처리후
            memberService.updateMember(vo);
-            return "redirect:/member/member_view";
+            return "redirect:/user/member/member_view";
         } else { // 비밀번호가 일치하지 않는다면, div에 불일치 문구 출력, viwe.jsp로 포워드
-            // 가입일자, 수정일자 저장
-            MembersVO vo2 = memberService.viewMember(vo.getM_id());
-//            vo.setUserRegdate(vo2.get);
-//            vo.setUserUpdatedate(vo2.getUserUpdatedate());
-           model.addAttribute("dto", vo);
+            model.addAttribute("dto", vo);
             model.addAttribute("message", "비밀번호 불일치");
             return "/user/member/member_view";
        }
@@ -57,7 +53,7 @@ public class MembersController {
         
         
    }
-    // 05. 회원정보 삭제 처리
+    // 03. 회원정보 삭제 처리
     // @RequestMapping : url mapping
     // @RequestParam : get or post방식으로 전달된 변수값
     @RequestMapping("member/delete.do")

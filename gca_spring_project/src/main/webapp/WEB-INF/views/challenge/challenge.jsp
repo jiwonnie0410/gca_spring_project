@@ -43,6 +43,7 @@
 
 .sports-div img {
 	border-radius: 10px;
+	height: auto;
 }
 
 

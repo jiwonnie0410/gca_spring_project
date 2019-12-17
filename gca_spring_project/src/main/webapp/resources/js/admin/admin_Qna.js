@@ -14,14 +14,15 @@ $(function() {
 	$("#Modalread").on('show.bs.modal', function() {
 		var qb_id = $(event.target).closest("tr").find("td").eq(0).html();// closest
 		$("#Modalread .modal-body").load("adminQnView?qb_id="+qb_id)
+		$('#qb_origin').val(qb_id)
 		console.log(qb_id);
-	});
+	});   
 	
-	$("#UserModalread").on('show.bs.modal', function() {
+	/*$("#UserModalread").on('show.bs.modal', function() {
 		var qb_id = $(event.target).closest("tr").find("td").eq(0).html();// closest
 		$("#UserModalread .modal-body").load("adminQnView?qb_id="+qb_id)
 		console.log(qb_id);
-	});
+	});*/
 	
 	  $(document).click(function() {
           $("#Modalread").hide();
@@ -45,7 +46,7 @@ function getBoardListHandler(datas) {
 	$("#asktb").empty();
 	for (var i = 0; i < datas.length; i++) {
 		$('<tr>')
-				.append($('<td>').html(datas[i].qb_id))
+				.append($('<td>').html(datas[i].qb_id +" " +datas[i].qb_an))
 				.append($('<td>').html(datas[i].qb_title))
 				.append($('<td>').html(datas[i].qb_content))
 				.append($('<td>').html(
