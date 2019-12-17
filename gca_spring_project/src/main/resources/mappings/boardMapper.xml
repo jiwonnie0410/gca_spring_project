@@ -65,7 +65,7 @@
 					) VALUES (${ad_num}, 
 								#{ad_title}, 
 								#{ad_city},
-								#{ad_date}, 
+								sysdate, 
 								#{ad_content}, 
 								#{m_id}, 
 								0)   

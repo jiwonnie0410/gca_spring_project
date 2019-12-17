@@ -69,20 +69,27 @@
 		<textarea name="ad_content" id="ad_content" rows="4" cols="80" placeholder="내용을 입력해주세요"></textarea>
 	</div>
 	<div>
-		도시
-		<textarea name="ad_city" id="ad_city" rows="4" cols="80" placeholder="내용을 ad_city"></textarea>
+		<div>
+									<select name="ad_city" id="ad_city" class="btn btn-outline btn-sm dropdown-toggle"  >
+										  <option	selected  > 도시 </option>
+										  <option value="qna1" >서울</option>
+										  <option value="qna2">수도권</option>
+										  <option value="qna3" >대구</option>
+										  <option value="qna4">부산</option>
+									 </select>
+								</div>
 	</div>
-	<div>
+	<!--  <div>
 		작성날짜
-		<input type="date" name="ad_date" id="ad_date " value = "new Date().toISOString().substring(0, 10)">
-	</div>
+		<input type="date" name="ad_date" id="ad_date " >
+	</div>  -->
 	
 	
 			<div align="center">
 
-					<button class="btn btn-primary px-5 py-3" type="submit" id="btnSave">확인</button>
-					<button class="btn btn-primary px-5 py-3" type="reset">취소</button>
-					<button class="btn btn-primary px-5 py-3" id="list" name="list">게시판</button>
+					<button class="btn" type="submit" id="btnSave">확인</button>
+					<button class="btn " type="reset">취소</button>
+					<button class="btn " id="list" name="list">게시판</button>
 			</div>
 		</form>
 		</div>

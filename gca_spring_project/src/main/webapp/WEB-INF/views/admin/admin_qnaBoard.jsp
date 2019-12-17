@@ -58,29 +58,29 @@
 
 					<div class="panel-group">
 						<div class="panel panel-success" style="margin-top: 10px;">
-							<div class="panel-heading"
-								style="background-color: pink; color: black">문의 사항</div>
 							<div class="panel-body">
 								<%-- form --%>
 								<form action="insertBoard" id="frm">
 									<div class="form-group"></div>
-									<div class="form-group">
+									
+									<input type="hidden" name=qb_title value="답변">
+									<!-- <div class="form-group">
 										<div>
 											제목 <select name="qb_title">
-												<option value="qna1" selected>답변1</option>
+												<option value="qna1" selected></option>
 												<option value="qna2">답변2</option>
 												<option value="qna3">답변3</option>
 												<option value="qna4">답변4</option>
 											</select>
 										</div>
-									</div>
+									</div> -->
 									<div>
-										<input type="hidden" value="dto.">
+										<input type="hidden" name="qb_origin" id="qb_origin">
 									</div>
 									<div class="form-group">
 										<div>
 											내용
-											<textarea name="qb_content" id="qb_content"
+											<textarea cols="90" name="qb_content" id="qb_content"
 												placeholder="내용을 입력해주세요"></textarea>
 										</div>
 									</div>
