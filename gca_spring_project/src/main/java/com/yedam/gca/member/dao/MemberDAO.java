@@ -59,6 +59,15 @@ public class MemberDAO {
 		return mybatis.update("MemberDAO.changePassword", vo);
 	}
 	
+	// 7. 네이버로 로그인 시 회원가입
+	public int insertNaver(MembersVO vo) {
+		return mybatis.insert("MemberDAO.naverInsert", vo);
+	}
+	
+	// 8. 계정 상태 가져오기(활동중, 활동중지)
+	public String memberStatus(String id) {
+		return mybatis.selectOne("MemberDAO.memberStatus", id);
+	}
 	
 	
 	// **************** 수림 *******************//

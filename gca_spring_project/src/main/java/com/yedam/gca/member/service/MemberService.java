@@ -6,7 +6,7 @@ import com.yedam.gca.member.vo.MembersVO;
 
 public interface MemberService {
 	
-	// 1. 회원가입
+	// 1. 운동하자에서 회원가입
 	public Map<String, Object> insertMember(MembersVO vo);
 	
 	// 2. 아이디 중복 확인
@@ -21,7 +21,8 @@ public interface MemberService {
 	// 5. 비밀번호 변경
 	public Map<String, Object> changePw(MembersVO vo);
 
-	
+	// 6. 네이버로 로그인 시 이미 있는 회원인지 확인 후 회원가입
+	public String insertNaver(MembersVO vo);
 	
 	
 	

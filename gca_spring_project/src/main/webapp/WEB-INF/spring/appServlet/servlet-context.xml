@@ -38,6 +38,4 @@
 			</websocket:handshake-interceptors>
 		</websocket:handlers>
 	
-	<!-- NaverLoginBO에 대한 bean 설정 추가 -->
-	<!-- <beans:bean id="naverLoginBO" class="com.yedam.gca.member.service.NaverLoginBO" /> -->
 </beans:beans>
