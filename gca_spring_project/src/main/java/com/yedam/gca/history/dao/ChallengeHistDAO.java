@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.history.vo.ChallengeHistVO;
 
 @Repository
@@ -21,4 +22,12 @@ public class ChallengeHistDAO {
 	public List<ChallengeHistVO> getChallengehtList(ChallengeHistVO vo) {
 		return mybatis.selectList("ChallengeDAO.getChallengehtList");
 	}
+	
+	
+	
+	
+	//은영
+	public List<ChallengeVO> getMyChallenge(ChallengeHistVO vo){
+		return mybatis.selectList("ChallengeDAO.getChallengeHist", vo);
+	};
 }

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,25 +21,13 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-<!-- <style>
+<sec:authentication property="principal.username" var="id"/>
 
-div.card.bg-warning{
-	border-color: #FE9191;
-}
+<script>
+	
 
-div.card.bg-warning div.card-body.text-center{   card.bg-warning 클래스의 div 밑에 card-body.text-center 클래스의 div 에 적용됨.
-	background-color:#fff;
-	color:#FE9191;
-}
-</style>
+</script>
 
-<div class="card bg-warning"> 위 스타일 적용하였던 html 코드.
-		<div class="card-body text-center">
-			<p class="card-text">Some text inside the second card</p>
-		</div>
-</div>
-
--->
 <style>
 
 .container > div{ /* 컨테이너 내 div(card 하나하나.) */

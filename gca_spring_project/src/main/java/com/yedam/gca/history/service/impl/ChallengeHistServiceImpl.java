@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.common.Paging;
 import com.yedam.gca.history.dao.ChallengeHistDAO;
 import com.yedam.gca.history.service.ChallengeHistService;
@@ -28,6 +29,12 @@ public class ChallengeHistServiceImpl implements ChallengeHistService {
 
 
 
+		
+	//은영
+		@Override
+		public List<ChallengeVO> getMyChallenge(ChallengeHistVO vo){
+			return dao.getMyChallenge(vo);
+		};
 
 
 

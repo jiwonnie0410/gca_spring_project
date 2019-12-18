@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.gca.board.vo.BoardSearchVO;
 import com.yedam.gca.board.vo.QnaBoardVO;
+import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.common.Paging;
 import com.yedam.gca.history.service.ChallengeHistService;
 import com.yedam.gca.history.vo.ChallengeHistVO;
@@ -42,5 +43,20 @@ public class ChallengeHistController {
 	  @RequestMapping("/ajax/getChallengehtList") 
 	  public List<ChallengeHistVO> getChallengehtList(ChallengeHistVO vo) {
 		  return service.getChallengehtList(vo);
-		  }  
+		  }
+	  
+	  
+	  
+	  
+	  
+	  //은영
+	  @RequestMapping(value = "history/myChallengeList") 
+	  public String myChallengeList(Model model,ChallengeHistVO vo)  {
+		 UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 vo.setM_id(user.getUsername());
+		 List<ChallengeVO> cvo = service.getMyChallenge(vo);
+		 System.out.println(cvo);
+		 model.addAttribute("mychallist",service.getMyChallenge(vo)); 
+		 return "/user/history/challenge_history_noTemplet"; 
+		 }
 }
