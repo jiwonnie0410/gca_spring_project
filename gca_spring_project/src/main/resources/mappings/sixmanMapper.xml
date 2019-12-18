@@ -30,8 +30,7 @@
 					get_code_name(SPORTS2_CD) SPORTS2_CD,
 					get_code_name(SKILL_CD) SKILL_CD,
 					AGE_RANGE,
-					get_code_name(GENDER_CD) GENDER_CD,
-					get_code_name(STATUS_CD) STATUS_CD
+					get_code_name(GENDER_CD) GENDER_CD
 		FROM 		SIXMAN
 		WHERE		SIX_NUM = #{six_num}
 	</select>
@@ -51,7 +50,6 @@
 				get_code_name(SKILL_CD) SKILL_CD,
 				AGE_RANGE,
 				get_code_name(GENDER_CD) GENDER_CD,
-				get_code_name(STATUS_CD) STATUS_CD,
 				DIS
 		FROM
 			 	(
@@ -116,7 +114,6 @@
 				get_code_name(SKILL_CD) SKILL_CD,
 				AGE_RANGE,
 				get_code_name(GENDER_CD) GENDER_CD,
-				get_code_name(STATUS_CD) STATUS_CD,
 				DIS
 		FROM
 			 	(

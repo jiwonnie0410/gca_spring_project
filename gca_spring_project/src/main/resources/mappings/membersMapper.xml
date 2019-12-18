@@ -276,7 +276,6 @@
 
 	<select id="getOneMem" parameterType="members" resultType="members">
 		SELECT	M_ID,
-				M_SALT,
 				M_PASSWORD,
 				M_NAME,
 				M_NICK,

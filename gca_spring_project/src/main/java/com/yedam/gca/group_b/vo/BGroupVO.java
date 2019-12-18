@@ -21,7 +21,6 @@ public class BGroupVO {
 	private String skill_cd;				// 숙련도 (입문/초금/중급/고급)
 	private String age_range;				// 연령대
 	private String gender_cd;				// 성별 (여성/남성/혼성)
-	private String status_cd;				// 상태 (참여가능/참여대기/실패/성공)
 
 	//은영
 	
