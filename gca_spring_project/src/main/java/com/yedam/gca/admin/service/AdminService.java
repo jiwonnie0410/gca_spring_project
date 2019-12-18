@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.yedam.gca.admin.vo.ChallengeSearchVO;
 import com.yedam.gca.admin.vo.MoneyVO;
+import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.board.vo.AdBoardVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.common.Paging;
@@ -52,7 +53,7 @@ public interface AdminService {
 
 		public int countArticle(String searchOption, String keyword) throws Exception;
 
-		public List<AdBoardVO> listAll(int start, int end, String searchOption, String keyword) throws Exception;
+		public List<TroubleVO> listAll(int start, int end, String searchOption, String keyword) throws Exception;
 	
 	
 		
