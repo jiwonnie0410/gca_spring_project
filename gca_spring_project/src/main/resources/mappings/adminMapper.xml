@@ -341,10 +341,10 @@
 		from 		v_refund
 		where 		"money_status" = '보증금'
 		and 		"cl_cnt" > "clh_cnt"
+  		and 		"cl_end_dttm" < SYSDATE  
 	]]>
 	
 	</select>
-<!--  		and 		"cl_end_dttm" < SYSDATE  -->
 	
 	
 	<!-- 2. 부분환불 완료후 환불정보를 Money 테이블에 업데이트 -->
@@ -357,10 +357,10 @@
 		            
 		where 		"money_status" = '보증금'
 		and 		"cl_cnt" > "clh_cnt"     
+ 		and 		"cl_end_dttm" < sysdate
 	]]>
 	
 	</update>
-<!-- 		and 		"cl_end_dttm" < sysdate -->
 	
 	
 	

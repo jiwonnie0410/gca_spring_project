@@ -43,6 +43,7 @@ public class ScheduleController {
 		);
 	 	getToken();
 	 	partialRefund();
+	 	fullRefund();
 	}
 	
 	// 1-1. 부트페이 서버 인증용 토큰 받기
