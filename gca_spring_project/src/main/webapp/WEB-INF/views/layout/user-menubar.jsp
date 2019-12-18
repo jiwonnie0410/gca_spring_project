@@ -22,7 +22,7 @@
 		
 		<style>
 			.more {
-				display: block; 
+				display: block; -
 			}
 			
 			.blind {
@@ -215,7 +215,7 @@
 		<a class="nav_challenge" href="${pageContext.request.contextPath }/challenge/list"><img src="${pageContext.request.contextPath }/resources/images/menubar/trophy.png" alt="챌린지" style="width: 40px;"></a>
 		<a href="${pageContext.request.contextPath }/qnaboard"><img src="${pageContext.request.contextPath }/resources/images/menubar/board.png" alt="문의" style="width: 40px;"></a> 
 		<a href="${pageContext.request.contextPath }/member/member_view.do"><img src="${pageContext.request.contextPath }/resources/images/menubar/profile.png" alt="프로필" style="width: 40px;"></a> 
-		<a class="more"><img src="${pageContext.request.contextPath }/resources/images/icon/icon.png" alt="더보기" style="width: 40px;"></a>
+		<a class="more"><img src="${pageContext.request.contextPath }/resources/images/icon/menu-bar.png" alt="더보기" style="width: 40px;"></a>
 	</div>
 </body>
 </html>

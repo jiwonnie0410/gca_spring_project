@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,11 +25,22 @@ public class MembersController {
 	MemberService memberService;
 	
 	
-	// 1. 정보수정 페이지 이동
-		@RequestMapping("member/updateform")
-		public String getAlarmInfo() {
-			return "/user/member/member_update";
-		}
+//	// 1. 정보수정 페이지 이동
+//		@RequestMapping("member/updateform")
+//		public String updateform() {
+//			return "/user/member/member_update";
+//		}
+//		
+		
+		// 정보수정 페이지 이동
+	    @RequestMapping("member/updateform")
+	    public String updateform(Model model)throws Exception{
+			UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	        // 회원 정보를 model에 저장
+	        model.addAttribute("dto", memberService.viewMember(user.getUsername()));
+	       // member_view.jsp로 포워드
+	        return "/user/member/member_update";
+	    }
 	
 	
 	
@@ -49,26 +61,27 @@ public class MembersController {
     @RequestMapping("member/update")
     public String memberUpdate(@ModelAttribute MembersVO vo, Model model){
         // 비밀번호 체크
-        boolean result = memberService.checkPw(vo.getM_id(), vo.getM_password());
-        if(result){ // 비밀번호가 일치하면 수정 처리후
+//		boolean result = memberService.checkPw(vo.getM_id(), vo.getM_password()); 
+//		/* boolean passMatch = passEncoder.matches(vo.getM_id(), vo.getM_password()); */
+//        if(result){ // 비밀번호가 일치하면 수정 처리후
            memberService.updateMember(vo);
-            return "redirect:/user/member/member_view";
-        } else { // 비밀번호가 일치하지 않는다면, div에 불일치 문구 출력, viwe.jsp로 포워드
-            model.addAttribute("dto", vo);
-            model.addAttribute("message", "비밀번호 불일치");
-            return "/user/member/member_update";
-       }
-        
-        
-        
+           return "redirect:/user/member/member_view";
+//        } else { // 비밀번호가 일치하지 않는다면, div에 불일치 문구 출력, viwe.jsp로 포워드
+//            model.addAttribute("dto", vo);
+//            model.addAttribute("message", "비밀번호 불일치");
+//            return "/user/member/member_update";
+//       }
    }
+    
+    
     // 03. 회원정보 삭제 처리
     // @RequestMapping : url mapping
     // @RequestParam : get or post방식으로 전달된 변수값
     @RequestMapping("member/delete")
-    public String memberDelete(@RequestParam String userId, @RequestParam String userPw, Model model){
-        // 비밀번호 체크
-        boolean result = memberService.checkPw(userId, userPw);
+    public String memberDelete(@RequestParam String userId, @RequestParam String userPw, Model model, MembersVO vo){
+    	// 비밀번호 체크
+		boolean result = memberService.checkPw(vo.getM_id(), vo.getM_password()); 
+		/* boolean passMatch = passEncoder.matches(vo.getM_id(), vo.getM_password()); */
         if(result){ // 비밀번호가 맞다면 삭제 처리후, 전체 회원 목록으로 리다이렉트
             memberService.deleteMember(userId);
             return "redirect:/member/list.do";

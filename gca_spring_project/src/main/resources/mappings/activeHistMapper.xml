@@ -86,18 +86,21 @@
 				JOIN 
 					ACTIVE_HIST A 
 				ON (M.M_ID = A.M_ID) 
-		<if test="sg_num != null and sg_num != ''">
-		WHERE 		A.SG_NUM	=	#{sg_num}
-		</if>
-		<if test="bg_num != null and bg_num != ''">
-		WHERE 		A.BG_NUM	=	#{bg_num}
-		</if>
-		<if test="six_num != null and six_num != ''">
-		WHERE 		A.SIX_NUM	=	#{six_num}
-		</if>
+		<where>
+			<choose>
+				<when test="sg_num != null and sg_num != ''">
+					A.SG_NUM	=	#{sg_num}
+				</when>
+				<when test="bg_num != null and bg_num != ''">
+					A.BG_NUM	=	#{bg_num}
+				</when>
+				<when test="six_num != null and six_num != ''">
+					A.SIX_NUM	=	#{six_num}
+				</when>
+			</choose>
+		</where>
 		ORDER BY 	A.ACH_DTTM
 	</select>
-
 	
 <!--  *********은영************* --><!-- BG, SIX랑 통합해야함 -->
 <!-- 반짝방 참가취소 시 활동이력 delete -->

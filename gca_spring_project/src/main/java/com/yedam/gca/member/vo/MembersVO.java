@@ -23,8 +23,10 @@ import com.github.scribejava.core.oauth.OAuth20Service;
 import com.yedam.gca.member.service.NaverLoginApi;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class MembersVO implements UserDetails {
 
 	private String m_id;		// *PK* // 회원 ID

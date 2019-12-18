@@ -255,9 +255,15 @@
 	<!-- 01. 회원정보 상세조회 -->
     <select id="viewMember" resultType="members">
         SELECT 
-          m_id AS m_id, 
-          m_name AS m_name,
-          m_email AS m_email
+	          m_id AS m_id, 
+	          m_name AS m_name,
+	          M_NICK,
+	          get_code_name(GENDER_CD) gender_cd,
+			  M_GRANT,
+			  M_LEVEL_CD,
+			  get_code_name(M_STATUS_CD) m_status_cd,
+          	  m_email AS m_email,
+          	  m_location AS m_location
           <!-- user_regdate AS userRegdate,
           user_regdate AS userUpdatedate -->
         FROM MEMBERS
@@ -341,10 +347,10 @@
 		from 		v_refund
 		where 		"money_status" = '보증금'
 		and 		"cl_cnt" > "clh_cnt"
+  		and 		"cl_end_dttm" < SYSDATE  
 	]]>
 	
 	</select>
-<!--  		and 		"cl_end_dttm" < SYSDATE  -->
 	
 	
 	<!-- 2. 부분환불 완료후 환불정보를 Money 테이블에 업데이트 -->
@@ -357,10 +363,10 @@
 		            
 		where 		"money_status" = '보증금'
 		and 		"cl_cnt" > "clh_cnt"     
+ 		and 		"cl_end_dttm" < sysdate
 	]]>
 	
 	</update>
-<!-- 		and 		"cl_end_dttm" < sysdate -->
 	
 	
 	
