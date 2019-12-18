@@ -75,7 +75,7 @@
 								type="button" value="삭제" id="btnDelete"> -->
 							<div style="color: red;">${message}</div>
 							<!--이모티콘이로 대체  -->
-							<i class="fas fa-user-edit" aria-hidden="true"style="color: black; font-size: 50px;"><a href="update"></a></i>
+							<a href="update"><i class="fas fa-user-edit" aria-hidden="true"style="color: black; font-size: 50px;"></i></a>
 							<i class="fas fa-door-open" id="btnDelete"style="color: black; font-size: 50px;"></i> 
 							<i class="fa fa-lock fa-2x" aria-hidden="true" style="color: black; font-size: 50px;"> </i> 
 							<a href="changePassword"> 비밀번호 변경 </a> 
