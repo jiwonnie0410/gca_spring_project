@@ -44,3 +44,25 @@ function addr() {
 		}
 	}).open();
 }
+
+//주소 및 y 좌표  입력
+function mAddress_find() {
+	
+	//카카오맵 API로 좌표 형성
+	var geo = new kakao.maps.services.Geocoder();
+	
+	//다음 주소 API로 주소 받아 주소 입력
+	new daum.Postcode({
+		oncomplete : function(data) {
+			var addr = data.address;
+			document.getElementById("address").value = addr;
+			geo.addressSearch(data.address, function(results, status) {
+				if (status === daum.maps.services.Status.OK) {
+					var result = results[0];
+					var coords = new daum.maps.LatLng(result.y, result.x); //좌표값 받음
+					$('#xy').val(coords.Ha + ", " + coords.Ga);
+				}
+			});
+		}
+	}).open();
+}

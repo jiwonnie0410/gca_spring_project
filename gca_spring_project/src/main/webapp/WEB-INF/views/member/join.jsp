@@ -23,6 +23,7 @@
 		<script type="text/javascript" src="./resources/js/member/joinjs.js"></script>
 		<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9e415eb9e7187154cd9c6308c036f0a6&libraries=services,clusterer"></script>
+		<script type="text/javascript" src="./resources/js/mihy/kakao_map.js"></script>
 		<!-- <script type="text/javascript" src="./resources/js/member/daumAddress.js"></script> -->
 		<!-- <script	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
 		

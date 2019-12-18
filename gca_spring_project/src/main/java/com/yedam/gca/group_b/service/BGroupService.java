@@ -14,6 +14,7 @@ public interface BGroupService {
 	void cancelJoin(ActiveHistVO vo);
 	String returnImage(MembersVO vo);
 	MembersVO getOneMem(MembersVO vo);
+	ActiveHistVO getOnesAuthority(ActiveHistVO vo);
 	
 	//미현
 	BGroupVO getRoomInfo(BGroupVO vo);

@@ -5,37 +5,12 @@
 <mapper namespace="BGroupDAO">
 
 <!-- 은영 -->
-
-<!-- 신고 시 trouble 테이블에 insert -->
-	<insert id="doReport" parameterType="trouble">
-		<selectKey order="BEFORE" resultType="int" keyProperty="tr_num"> <!-- 시퀀스 구하는 쿼리 실행하여 시퀀스 뽑아내서 담기. -->
-  			<!-- ORDER : 실행순서. BEFORE는 먼저실행.(이 셀렉트가 먼저 실행되어 vo에 담김.) -->
-  			<!-- resultType은 담을 필드명(vo의 필드명) 타입과 맞춰주면 됨 -->
-  			<!-- keyProperty는 필드명이자 밑에 #{?} 이름과 같음. -->
-  			SELECT NVL(MAX(TR_NUM),1000)+1 FROM TROUBLE
-  		</selectKey>
-		INSERT INTO TROUBLE(	
-								TR_DTTM,
-								TR_REASON_CD,
-								TR_MID,
-								M_ID,
-								TR_NUM
-											)
-					VALUES(		
-								sysdate,
-								#{tr_reason_cd},
-								#{tr_mid},
-								#{m_id},
-								#{tr_num}
-											)
-	
-	</insert>
 	
 <!-- 참가 취소 시 bgroup테이블 bg_now_cnt -1 -->
 	<update id="minusNowCnt" parameterType="allhistory">
 		UPDATE	BGROUP
 		SET		BG_NOW_CNT = BG_NOW_CNT-1
-		WHERE	BG_NUM = ${bg_num}   <!-- $는 값, #은 따옴표 붙음. int값 하나 받아왔을때는 value로 쓰면 됨.-->
+		WHERE	BG_NUM = ${bg_num}
 	</update>
 	
 	
@@ -61,7 +36,6 @@
 					get_code_name(SKILL_CD) SKILL_CD,
 					AGE_RANGE,
 					get_code_name(GENDER_CD) GENDER_CD,
-					get_code_name(STATUS_CD) STATUS_CD,
 					BG_TEAM_CNT
 		FROM 		BGROUP
 		WHERE		BG_NUM = #{bg_num}
@@ -82,7 +56,6 @@
 				get_code_name(SKILL_CD) SKILL_CD,
 				AGE_RANGE,
 				get_code_name(GENDER_CD) GENDER_CD,
-				get_code_name(STATUS_CD) STATUS_CD,
 				BG_TEAM_CNT,
 				DIS
 		FROM
@@ -149,7 +122,6 @@
 				get_code_name(SKILL_CD) SKILL_CD,
 				AGE_RANGE,
 				get_code_name(GENDER_CD) GENDER_CD,
-				get_code_name(STATUS_CD) STATUS_CD,
 				BG_TEAM_CNT,
 				DIS
 		FROM

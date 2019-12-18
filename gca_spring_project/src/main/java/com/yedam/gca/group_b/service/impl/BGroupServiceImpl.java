@@ -33,6 +33,9 @@ public class BGroupServiceImpl implements BGroupService {
 	public MembersVO getOneMem(MembersVO vo) {
 		return bgroupDAO.getOneMem(vo);
 	}
+	public ActiveHistVO getOnesAuthority(ActiveHistVO vo) {
+		return bgroupDAO.getOnesAuthority(vo);
+	}
 	
 	
 	

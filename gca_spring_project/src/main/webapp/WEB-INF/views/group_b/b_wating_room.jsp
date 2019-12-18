@@ -8,12 +8,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>매치 대기방s</title>
+<title>용병 대기방s</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0, user-scalable=no, target-densitydpi=medium-dpi" />
 
-<!-- 미현 : 인증 참여 스크립트 추가 -->
+<!-- 미현 : 인증 참여 스크립트 / 지도 스크립트 추가 -->
 <script type="text/javascript" src="../resources/js/mihy/part_cert.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9e415eb9e7187154cd9c6308c036f0a6&libraries=services,clusterer"></script>
+<script type="text/javascript" src="../resources/js/mihy/kakao_map2.js"></script>
+<!-- 미현 끝  -->
+
 
 <style>
 
@@ -100,7 +104,7 @@
 		border-radius: 7px;
 		border-collapse: separate;
 	}
-
+	
 </style>
 
 <!-- 로그인한사람의 id,닉네임,캐릭터코드 저장 -->
@@ -126,33 +130,64 @@
 			//프로필 눌렀을때
 			$('#profile').on('show.bs.modal', function (event) {
 				var profileId = $(event.relatedTarget).attr('id'); //해당 모달을 띄운 프로필의 id
+				var bg_num = ${bgroup.bg_num};
 				var param = JSON.stringify({"m_id" : profileId});
+				var param2 = JSON.stringify({"m_id" : usrId, "bg_num" : bg_num });
 				
 				console.log($(event.relatedTarget).children('img').attr('src'));
 				
+				//ajax1. id로 그사람 프로필 가져오기
 				$.ajax({
 					url: "getOneProfile",
 					method:'post',
 					dataType: "json",	//결과타입
 					data: param,		//요청파라미터
 					contentType: "application/json",
-					//컨트롤러로 데이타 보낼때 제이슨이라는 것을 알려줘야함. 컨트롤러에는 담을 vo에@RequestBody붙여주고.
 					success: function(vo){
-						console.log('model.addAttribute 성공');
 						var img = $(event.relatedTarget).children('img').attr('src');
-						console.log(img);
 						$('#profile_image').children('img').attr('src',img);
 						$('#profile_id').text(vo.m_id);
 						$('#profile_nick').text(vo.m_nick);
 						$('#profile_age').text(vo.m_age);
-						$('#profile_gender').text(vo.gender_cd);
-						$('#profile_level').text(vo.m_level_cd);
+						$('#profile_gender').text(vo.gender_cd); //남여로 표시되게2
+						$('#profile_level').text(vo.m_level_cd); //레벨이미지로 표시되게2
+						
+						//본인 프로필 창이면 버튼 영역(신고,강퇴) 숨기기.
+						if(vo.m_id == "${id}"){
+							$('.modal-footer').hide();
+						}
 					},
 					error: function(){
 						console.log("model.addAttribute 실패");
 					}
 					
 				});
+				
+				//ajax2. id로 그사람이 방장인지 멤버인지 가져오기
+				$.ajax({
+					url: "getOnesAuthority",
+					method:'post',
+					dataType: "json",	//결과타입
+					data: param2,		//요청파라미터
+					contentType: "application/json",
+					success: function(vo){
+						//방장 아니면 강퇴버튼 삭제해버리기.
+						if(vo.ach_grant == "일반"){
+							$('#kickOut').remove();
+						}
+					},
+					error: function(){
+						console.log("getOnesAuthority 실패");
+					}
+					
+				});
+				
+				
+			});
+			
+			//프로필 모달 닫혔을때(프로필 모달 열릴때 HIDE했던 modal-footer를 다시 보이게.)
+			$('#profile').on('hidden.bs.modal', function (event) {
+				$('.modal-footer').show();
 			});
 			
 			//신고모달 눌렀을때
@@ -259,9 +294,11 @@
 
 			});
 			
+			//미현
 			$('#btn_cert').on('click', getLocation); //참가인증
+			view_map();
 			
-			$('#backToList').on('click', function(){location.href='getBgList';}) //목록으로 돌아가기
+			$('#backToList').on('click', function(){location.href='getSgList';}) //목록으로 돌아가기
 			
 		});
 </script>
@@ -271,9 +308,6 @@
 <!-- 버튼영역 위(프로필까지)의 div 시작 -->
     <div style="padding-top:0px;">
     
-    <input type="hidden" id="b_id" value='${id}'>
-    <input type="hidden" id="b_nick" value='${nick}'>
-    <input type="hidden" id="b_character" value='${image}'>
     <input type="hidden" id="bg_num_search" value="${bgroup.bg_num }">
     
 	<!-- 방제 -->
@@ -293,7 +327,7 @@
       							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly"></textarea>
       			<div style="padding-top:10px;">
       				<span style="padding-left:5px; padding-right:3px; vertical-align: middle;">
-      					<textarea id="inputMessage" style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; ">입력하세요</textarea>
+      					<textarea id="inputMessage" style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; " placeholder="입력하세요"></textarea>
       				</span>
       				<span style="vertical-align:middle;">
       					<button id="chat" class="button-general">전송</button>
@@ -415,7 +449,7 @@
 							<th>참가정보 </th><td> ${bgroup.gender_cd} ${bgroup.age_range}</td>
 						</tr>
 						<tr>
-							<th>인원 </th><td> ${bgroup.bg_team_cnt} vs ${bgroup.bg_team_cnt}</td>
+							<th>인원 </th><td> ${bgroup.bg_end_cnt} 명중 ${bgroup.bg_now_cnt} 명 참가</td>
 						</tr>
 						<tr>
 							<th>숙련도 </th><td> ${bgroup.skill_cd}</td>
@@ -438,8 +472,9 @@
 						
 				<!-- 미현언니 지도부분 -->
 						<tr style="text-align: center">
-							<td>
-								<div id="meetLocation">지도</div>
+							<td colspan="2">
+								<div id="map" style="width:300px;height:200px;"></div>
+								<input type="hidden" id="map_xy" value="${bgroup.bg_xy}">
 							</td>
 						</tr>
 					</table>
@@ -448,7 +483,6 @@
         
 <!-- Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="button-general" data-dismiss="modal">정보 복사</button>
 					<button type="button" class="button-general" data-dismiss="modal">닫기</button>
 				</div>
         
@@ -496,7 +530,7 @@
 				</div>
         
 <!-- Modal footer -->
-				<div class="modal-footer">
+				<div style="display:inline;" class="modal-footer">
 					<button id="doReport" type="button" class="button-general" data-dismiss="modal">신고하기</button>
 					<button type="button" class="button-general" data-dismiss="modal">취소</button>
 				</div>
@@ -523,6 +557,30 @@
 		var img = result.character;
 		var nick = result.nick;
 		var id = result.id;
+		
+		//var param = {"img":img};
+		
+		//console.log("id : "+id);
+		//console.log("nick : "+nick);
+		//console.log("img : "+img);
+		
+		//이미지 영어이름 갖고오는 ajax(웹소켓에서 처리하는 방향 알아보기.)
+		/* $.ajax({
+			url: "returnImage",
+			type:'GET',
+			async:false,
+			data: param,
+			//dataType: "Json",
+			
+			success: function(data){
+				console.log(data);
+				img=data;
+			},
+			error: function(){
+				
+			}
+			
+		}); */
 		
 		//프로필 붙여주기~~
 		$span = $("<span data-toggle='modal' data-target='#profile' style='font-size:13px; padding:10px; display:inline-block;'>");
@@ -552,7 +610,7 @@
 	else if( result.cmd == "kickOut" && ( bg_num == result.bg_num ) ){
 		var id = "${id}";
 		if(result.id == id){ //강퇴당한놈만 나가게.
-			location.href="getBgList";
+			location.href="getSgList";
 			textarea.value += result.msg + "\n";
 		}
 		$('#'+result.id).remove();
@@ -561,6 +619,21 @@
 	  
 	chatAreaScroll(); 
  }
+ 
+ //function onOpen(event) { //이미 참여된방에 참여인지 새로 참여인지 구분해서 새로참여만 참가하셨습니다 띄우고 프로필 붙이기.
+	 //console.log("first_in : "+"${param.first_in}");
+ 
+	 /* if("${param.first_in}" == "first_in"){
+		msg = {
+			cmd : "join",
+			id : "${id}",
+			msg : "<"+"${id}"+"님이 참가하셨습니다.>"
+			//여기에 아이디 붙여서 추가하면 될듯. 근데 새로고침해도 이게 뜨는것은 막아야함.
+		}
+		webSocket.send(  JSON.stringify( msg )   );
+	 } */
+ //}
+
  
  //메세지 전송
  function send() { 

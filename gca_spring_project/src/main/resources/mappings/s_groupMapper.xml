@@ -20,7 +20,6 @@
 					get_code_name(SKILL_CD) SKILL_CD,
 					AGE_RANGE,
 					get_code_name(GENDER_CD) GENDER_CD,
-					get_code_name(STATUS_CD) STATUS_CD,
 					SG_OPTION
 		FROM 		SGROUP
 		WHERE		SG_NUM = #{sg_num}
@@ -82,7 +81,6 @@
 				get_code_name(SKILL_CD) SKILL_CD,
 				AGE_RANGE,
 				get_code_name(GENDER_CD) GENDER_CD,
-				get_code_name(STATUS_CD) STATUS_CD,
 				SG_OPTION,
 				DIS
 		FROM
@@ -149,7 +147,6 @@
 				get_code_name(SKILL_CD) SKILL_CD,
 				AGE_RANGE,
 				get_code_name(GENDER_CD) GENDER_CD,
-				get_code_name(STATUS_CD) STATUS_CD,
 				SG_OPTION,
 				DIS
 		FROM

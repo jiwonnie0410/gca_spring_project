@@ -45,21 +45,11 @@
 
 </head>
 <body>
-${param.error}
-
-<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
-  로그인 에러입니다.<br>
-  예외 타입：${SPRING_SECURITY_LAST_EXCEPTION.getClass().name}<br>
-  메시지：${SPRING_SECURITY_LAST_EXCEPTION.message}<br>
-  <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
-</c:if>
-
-
 	<div align="center">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default"><br />
-					<div class="panel-heading text-center" style="padding-top:100px;">
+					<div class="panel-heading text-center" style="padding-top:10px;">
 						
 					</div>
 				</div><br /><br /><br /><br />
@@ -109,7 +99,7 @@ ${param.error}
 	
 	
 <!-- 네이버 아이디로 로그인 초기화 Script -->
-		<script type="text/javascript">
+		<!-- <script type="text/javascript">
 			var naverLogin = new naver.LoginWithNaverId(
 				{
 					clientId: "BJ76vTS9xilyC5p9YXrY",
@@ -122,7 +112,7 @@ ${param.error}
 			/* 설정정보를 초기화하고 연동을 준비 */
 			naverLogin.init();
 			
-		</script>
+		</script> -->
 <!-- // 네이버 아이디로 로그인 초기화 Script -->
 </body>
 </html>

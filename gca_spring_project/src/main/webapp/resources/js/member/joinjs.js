@@ -1,4 +1,5 @@
 $(function() {
+	//미현 주소 클릭 시 다음주소 및 xy좌표 입력
 	$('#mAddress1').on('click', mAddress_find);
 	
 	//은영 클릭시 캐릭터 선택
@@ -189,27 +190,6 @@ function oneCheckbox(a){
     }
 }
 
-
-function mAddress_find() {
-	
-	//카카오맵 API로 좌표 형성
-	var geo = new kakao.maps.services.Geocoder();
-	
-	//다음 주소 API로 주소 받아 주소 입력
-	new daum.Postcode({
-		oncomplete : function(data) {
-			var addr = data.address;
-			document.getElementById("address").value = addr;
-			geo.addressSearch(data.address, function(results, status) {
-				if (status === daum.maps.services.Status.OK) {
-					var result = results[0];
-					var coords = new daum.maps.LatLng(result.y, result.x); //좌표값 받음
-					$('#xy').val(coords.Ha + ", " + coords.Ga);
-				}
-			});
-		}
-	}).open();
-}
 
 //은영 캐릭터 선택 시 선택 마크 되게하기
 function choose_character() {

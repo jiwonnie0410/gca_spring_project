@@ -185,12 +185,12 @@
         SELECT 
           m_id AS m_id, 
           m_name AS m_name,
-          m_email AS m_email
-          <!-- user_regdate AS userRegdate,
-          user_regdate AS userUpdatedate -->
+          m_email AS m_email,
+          m_location AS m_location,
+          m_image_cd AS m_image_cd,
+          m_level_cd AS m_level_cd
         FROM MEMBERS
         WHERE m_id = #{m_id} 
-       <!--  WHERE m_id ='test6' -->
     </select>
     
     
@@ -198,12 +198,11 @@
     <update id="updateMember">
         UPDATE MEMBERS
         SET
-            user_pw = #{m_password},
+             m_password = #{m_password},
             m_name = #{m_name},
             m_email = #{m_email}
-          <!--   user_updatedate = SYSDATE -->
         WHERE
-            user_id = #{userId}    
+            m_id = #{m_id}    
     </update>
     
     
@@ -275,7 +274,6 @@
 
 	<select id="getOneMem" parameterType="members" resultType="members">
 		SELECT	M_ID,
-				M_SALT,
 				M_PASSWORD,
 				M_NAME,
 				M_NICK,
