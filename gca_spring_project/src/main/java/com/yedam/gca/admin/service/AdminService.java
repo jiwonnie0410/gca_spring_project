@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.yedam.gca.admin.vo.ChallengeSearchVO;
 import com.yedam.gca.admin.vo.MoneyVO;
+import com.yedam.gca.board.vo.AdBoardVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.common.Paging;
 import com.yedam.gca.member.vo.MembersVO;
@@ -39,15 +40,19 @@ public interface AdminService {
 	// 9. 월별 수익 현황
 	public List<Map<String, Object>> chartMonthly();
 	
-	//진영
-	 // 1.회원 정보 상세보기
-    public MembersVO viewMember(String m_id);
-    //2.회원전체조회
-	public List<MembersVO> getUserList(MembersVO vo);
-	//3.회원강퇴
-	public int deleteUser(MembersVO vo);
-	
 
+	
+		//진영
+		 // 1.회원 정보 상세보기
+	    public MembersVO viewMember(String m_id);
+	    //2.회원전체조회
+		public List<MembersVO> getUserList(MembersVO vo);
+		//3.회원강퇴
+		public int deleteUser(MembersVO vo);
+
+		int countArticle(String searchOption, String keyword) throws Exception;
+
+		List<AdBoardVO> listAll(int start, int end, String searchOption, String keyword) throws Exception;
 	
 	
 	
