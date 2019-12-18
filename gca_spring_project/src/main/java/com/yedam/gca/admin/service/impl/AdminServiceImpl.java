@@ -15,6 +15,7 @@ import com.yedam.gca.admin.dao.AdminDAO;
 import com.yedam.gca.admin.service.AdminService;
 import com.yedam.gca.admin.vo.ChallengeSearchVO;
 import com.yedam.gca.admin.vo.MoneyVO;
+import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.board.vo.AdBoardVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.common.Paging;
@@ -106,6 +107,16 @@ public class AdminServiceImpl implements AdminService {
 	
 
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// 진영
 		// 01. 회원 정보 상세 조회
@@ -127,7 +138,7 @@ public class AdminServiceImpl implements AdminService {
 
 		// trouble 전체 목록
 		@Override
-		public List<AdBoardVO> listAll(int start, int end, String searchOption, String keyword) throws Exception {
+		public List<TroubleVO> listAll(int start, int end, String searchOption, String keyword) throws Exception {
 			return dao.listAll(start, end, searchOption, keyword);
 		}
 
@@ -137,6 +148,21 @@ public class AdminServiceImpl implements AdminService {
 			return dao.countArticle(searchOption, keyword);
 		}
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 	// ****************** 수림  ************************//
 	

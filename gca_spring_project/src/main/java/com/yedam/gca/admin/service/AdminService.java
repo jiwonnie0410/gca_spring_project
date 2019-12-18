@@ -50,11 +50,40 @@ public interface AdminService {
 		//3.회원강퇴
 		public int deleteUser(MembersVO vo);
 
-		int countArticle(String searchOption, String keyword) throws Exception;
+		public int countArticle(String searchOption, String keyword) throws Exception;
 
-		List<AdBoardVO> listAll(int start, int end, String searchOption, String keyword) throws Exception;
+		public List<AdBoardVO> listAll(int start, int end, String searchOption, String keyword) throws Exception;
 	
-	// ****************** 수림  ************************//
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		// ****************** 수림  ************************//
 	
 	//1. 부분환불용 고유번호 리스트 조회
 	public List<Map<String, Object>> selectRefund();
