@@ -7,7 +7,7 @@
 <!-- 은영 -->
 	
 <!-- 참가 취소 시 bgroup테이블 bg_now_cnt -1 -->
-	<update id="minusNowCnt" parameterType="allhistory">
+	<update id="minusNowCntBg" parameterType="allhistory">
 		UPDATE	BGROUP
 		SET		BG_NOW_CNT = BG_NOW_CNT-1
 		WHERE	BG_NUM = ${bg_num}

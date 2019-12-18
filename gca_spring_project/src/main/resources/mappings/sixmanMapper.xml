@@ -5,11 +5,14 @@
 <mapper namespace="SixmanDAO">
 
 <!-- 은영 -->
+	<!-- 참가 취소 시 sgroup테이블 sg_now_cnt -1 -->
+	<update id="minusNowCntSix" parameterType="allhistory">
+		UPDATE	SIXMAN
+		SET		SIX_NOW_CNT = SIX_NOW_CNT-1
+		WHERE	SIX_NUM = ${six_num}   <!-- $는 값, #은 따옴표 붙음. int값 하나 받아왔을때는 value로 쓰면 됨.-->
+	</update>
 
 
-	
-	
-	
 	
 	
 	

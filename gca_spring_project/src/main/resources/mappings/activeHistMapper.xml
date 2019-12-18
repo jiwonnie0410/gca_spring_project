@@ -107,13 +107,13 @@
 							M_ID	= 	#{m_id}
 			<choose>
 				<when test="sg_num != null and sg_num != ''">
-					and		SG_NUM	=	#{sg_num}
+					AND		SG_NUM	=	#{sg_num}
 				</when>
 				<when test="bg_num != null and bg_num != ''">
-					and 	BG_NUM	=	#{bg_num}
+					AND 	BG_NUM	=	#{bg_num}
 				</when>
 				<when test="six_num != null and six_num != ''">
-					and 	SIX_NUM	=	#{six_num}
+					AND 	SIX_NUM	=	#{six_num}
 				</when>
 			</choose>
 		
@@ -130,15 +130,18 @@
 				SIX_NUM,
 				SG_NUM
 		FROM	ACTIVE_HIST
-		<if test="sg_num != null and sg_num != ''">
-		WHERE	M_ID = #{m_id} AND SG_NUM = #{sg_num}
-		</if>
-		<if test="sg_num != null and sg_num != ''">
-		WHERE	M_ID = #{m_id} AND BG_NUM = #{bg_num}
-		</if>
-		<if test="sg_num != null and sg_num != ''">
-		WHERE	M_ID = #{m_id} AND SIX_NUM = #{six_num}
-		</if>
+		WHERE	M_ID = #{m_id}
+		<choose>
+			<when test="sg_num != null and sg_num != ''">
+				and		SG_NUM	=	#{sg_num}
+			</when>
+			<when test="bg_num != null and bg_num != ''">
+				and 	BG_NUM	=	#{bg_num}
+			</when>
+			<when test="six_num != null and six_num != ''">
+				and 	SIX_NUM	=	#{six_num}
+			</when>
+		</choose>
 	</select>
 	
 </mapper>

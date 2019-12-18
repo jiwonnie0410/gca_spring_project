@@ -28,9 +28,9 @@ public class BGroupDAO {
 	public void cancelJoin(ActiveHistVO vo) {
 		mybatis.delete("ActiveHistDAO.cancelJoin", vo);
 	}
-	//참가 취소 시 반짝방 현재 인원수 -1
-	public void minusNowCnt(ActiveHistVO vo) {
-		mybatis.update("BGroupDAO.minusNowCnt", vo);
+	//참가 취소 시 방 현재 인원수 -1
+	public void minusNowCntBg(ActiveHistVO vo) {
+		mybatis.update("BGroupDAO.minusNowCntBg", vo);
 	}
 	//방 입장 시 웹소켓으로 프로필 이름 반환(입장할때 다른사람들에게 뿌려주기 위해.)
 	public String returnImage(MembersVO vo) {
