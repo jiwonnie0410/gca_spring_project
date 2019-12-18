@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -47,7 +48,7 @@ public class LoginController {
 		return "/notiles/member/login";
 	}
 
-	// 2. 네이버 아이디로 로그인 성공 시에 돌아올 페이지 -> 반짝 방 리스트로 감
+	// 2-1. 네이버 아이디로 로그인 성공 시에 돌아올 페이지 -> 반짝 방 리스트로 감
 	@RequestMapping(value = "/login/naverCallback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String naverCallback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
 		MembersVO vo = new MembersVO();
@@ -99,6 +100,13 @@ public class LoginController {
 		} else {
 			return "/notiles/alert/block";
 		}
+	}
+	
+	// 2-2. 로그아웃
+	@RequestMapping("/logout")
+	public String logout() {
+//		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(null, null, null));
+		return "/notiles/member/login";
 	}
 	
 	// 3. security에서 로그인 후 유저와 관리자가 돌아갈 페이지 따로 설정

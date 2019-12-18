@@ -307,5 +307,51 @@
 	
 	
 		
+	</delete>	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- *********************   수림  ************************************* 
+		1. 부분환불용 고유번호 리스트 조회
+	-->
+	
+	<!-- 1. 부분환불용 고유번호 리스트 조회 -->
+	<select id="getPartialRefundList" resultType="map">
+	<![CDATA[
+		select      "cl_num",
+		            "m_id",
+		            "cl_cnt"
+		            "clh_cnt",
+		            "cl_end_dttm",
+		            "cl_score",
+		            "money_deposit",
+		            "money_withdraw",
+		            "money_withdraw_dttm",
+		            "money_status",
+		            "money_moid" 
+		from 		v_refund
+		where 		"money_status" = '보증금'
+		and 		"cl_end_dttm" > sysdate
+		and 		"cl_cnt" > "clh_cnt"
+	]]>
+	
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
 			
 </mapper>

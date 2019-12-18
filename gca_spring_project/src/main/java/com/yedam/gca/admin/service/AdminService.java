@@ -54,7 +54,10 @@ public interface AdminService {
 
 		List<AdBoardVO> listAll(int start, int end, String searchOption, String keyword) throws Exception;
 	
+	// ****************** 수림  ************************//
 	
+	//1. 부분환불용 고유번호 리스트 조회
+	public List<Map<String, Object>> selectRefund();
 	
 	
 }
