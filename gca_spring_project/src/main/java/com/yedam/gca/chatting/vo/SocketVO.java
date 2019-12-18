@@ -10,4 +10,6 @@ public class SocketVO {
 	private String character;
 	private String nick;
 	private int sg_num;
+	private int bg_num;
+	private int six_num;
 }

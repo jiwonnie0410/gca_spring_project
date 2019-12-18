@@ -35,7 +35,7 @@ public interface MemberService {
     public void updateMember(MembersVO vo);
     //비밀번호 확인
 	boolean checkPw(String m_id, String m_password);
-	
+	//    boolean checkPw(String m_id, String m_password, MembersVO vo);
 	
 	
 	

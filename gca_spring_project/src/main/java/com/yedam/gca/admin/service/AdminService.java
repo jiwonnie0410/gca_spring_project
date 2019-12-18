@@ -90,7 +90,16 @@ public interface AdminService {
 		// ****************** 수림  ************************//
 	
 	//1. 부분환불용 고유번호 리스트 조회
-	public List<Map<String, Object>> selectRefund();
+	public List<Map<String, Object>> getPartialRefundList();
+	
+	// 2. 부분환불 완료후 환불정보를 Money 테이블에 업데이트
+	public void updatePartialRefundList();
+	
+	// 3. 전액환불용 고유번호 리스트 조회
+	public List<Map<String, Object>> getFullRefundList();
+	
+	// 4. 전액환불 완료 후 환불정보를 Money 테이블에 업데이트
+	public void updateFullRefundList();
 	
 	
 }
