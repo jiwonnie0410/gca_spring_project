@@ -191,7 +191,6 @@
           m_level_cd AS m_level_cd
         FROM MEMBERS
         WHERE m_id = #{m_id} 
-       <!--  WHERE m_id ='test6' -->
     </select>
     
     
@@ -202,7 +201,6 @@
             user_pw = #{m_password},
             m_name = #{m_name},
             m_email = #{m_email}
-          <!--   user_updatedate = SYSDATE -->
         WHERE
             user_id = #{userId}    
     </update>
