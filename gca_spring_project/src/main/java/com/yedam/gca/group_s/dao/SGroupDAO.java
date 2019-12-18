@@ -43,6 +43,11 @@ public class SGroupDAO {
 	public MembersVO getOneMem(MembersVO vo) {
 		return mybatis.selectOne("MemberDAO.getOneMem", vo);
 	}
+	//id로 방장인지 멤버인지 조회
+	public ActiveHistVO getOnesAuthority(ActiveHistVO vo) {
+		return mybatis.selectOne("ActiveHistDAO.getAuthority", vo);
+	}
+	
 	
 	
 //-------------미현

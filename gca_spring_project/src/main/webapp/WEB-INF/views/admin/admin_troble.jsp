@@ -67,36 +67,23 @@
     
     <body>
         <!-- <form class="form-inline" id="frmSearch" action="/board/list"> -->
-        <form class="form-inline" id="frmSearch" method="post" action="${pageContext.request.contextPath}/board/adlist">
+        <form class="form-inline" id="frmSearch" method="post" action="${pageContext.request.contextPath}/admin/trouble">
 		<div align="center">
-			<div class="jumbotron" style="background-color: #FE9191; ">
-				<h2 style="color: white;" >홍보</h2>
-				<!-- <p style="color: white;">* 홍보.</p> -->
-			 </div>
-			<%--  <sec:authentication property="principal.m_id"/>  --%>
 			<div align="center" style="padding-right: 3%; padding-left: 3%;">
-				<!-- 로그인한 사용자만 글쓰기 버튼을 활성화 -->
-				<c:if test="${m_id != null}"> 
-					<div align="right">
-						<button class="btn" type="button" id="btnWrite" name="write"  style="margin-right: 10%; background-color: #FE9191; color: white;">Write</button>
-					</div>
-				</c:if>  
-				
-				<form name="SearchForm">
+			<form name="SearchForm" id="SearchForm">
 				<table>
 						<tr>
 							<td><select id="searchCondition" name="searchCondition" class="btn btn-outline-warning btn-sm dropdown-toggle" style="">
 									<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
-									<option value="all"<c:out value="${map.searchOption == 'all'?'selected':''}"/>>제목+아이디+제목</option>
-									<option value="m_id"<c:out value="${map.searchOption == 'm_id'?'selected':''}"/>>아이디</option>
-									<option value="ad_content"<c:out value="${map.searchOption == 'ad_content'?'selected':''}"/>>내용</option>
-									<option value="title"<c:out value="${map.searchOption == 'title'?'selected':''}"/>>제목</option>
+									<option value="all"<c:out value="${map.searchOption == 'all'?'selected':''}"/>>전체</option>
+									<option value="tr_reason_cd"<c:out value="${map.searchOption == 'tr_reason_cd'?'selected':''}"/>>신고유형</option>
+									<option value="tr_mid"<c:out value="${map.searchOption == 'tr_mid'?'selected':''}"/>>피신고자 아이디</option>
+									<option value="m_id"<c:out value="${map.searchOption == 'm_id'?'selected':''}"/>>신고자</option>
 							</select></td>
 							<td><input name="keyword" value="${map.keyword}" class="form-control"> </td>
-							<td><button type="submit" class="btn btn-outline-warning btn-sm"
-									style="border-color: #FAF0F0; color: #ffc0cb;">검색</button></td>
+							<td><button type="submit" class="btn btn-outline-warning btn-sm" style="border-color: #FAF0F0; color: #ffc0cb;">검색</button></td>
 						</tr>
-					</table>
+				</table>
 			</form>	
 			</div>
 		</div>
@@ -106,10 +93,9 @@
 		<thead>
 			<tr>
 				<th width="30%" align="center"><center> 번호</center></th>
-				<!-- <th>아이디</th> -->
-				<th width="40%" align="center"><center>제목</center></th>
-			<%-- 	<th width="30%" align="center" ><center>내용</center></th> --%>
-				<th width="30%" align="center"><center>조회수</center></th>
+				<th width="40%" align="center"><center>신고한  회원</center></th>
+			<th width="30%" align="center" ><center>신고유형</center></th> 
+				<th width="30%" align="center"><center>신고 날짜</center></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -123,26 +109,37 @@
 				<c:otherwise>
 								<!-- db 목록을 가져와서 뿌려주는 곳 -->
 						<c:forEach var="row" items="${map.list}">
-								<tr>
-									 <td align="center" width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${row.ad_num}</td> 
-									<%-- <td align="center">${row.m_id}</td> --%>
-									<!-- 게시글 상세보기 페이지로 이동시 게시글 목록페이지에 있는 검색조건, 키워드, 현재페이지 값을 유지하기 위해 -->
-									<td align="center" width="10" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" align="center">
-										<a href="${pageContext.request.contextPath}/board/view?ad_num=${row.ad_num}&curPage=${map.boardPager.curPage}&searchOption=${map.searchOption}&keyword=${map.keyword}">${row.ad_title}
-												
-												<!-- ** 댓글이 있으면 게시글 이름 옆에 출력하기 --> 
-												<c:if test="${row.recnt > 0}">
-													<span style="color: red;">(${row.recnt}) </span>
-												</c:if>
-										</a>
-									</td>
-								<%-- 	<td class="autocut" width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"align="center">${row.ad_content}<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 --> 
-										<fmt:formatDate value ="${row.regdate}" pattern="yyyy-MM-dd" /> </td>--%>
-									
-									<td width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"align="center">${row.ad_count}</td>
-								</tr>
-								
-						</c:forEach>
+						<tr>
+							<td align="center" width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${row.tr_num}</td>
+							<td align="center">${row.m_id}</td>
+							<td align="center">${row.tr_mid}</td>
+							<td align="center" width="10" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" align="center">${row.ad_title}</td>
+							<td width="10" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" align="center">${row.tr_reason_cd}</td>
+							<c:choose>
+								<c:when test="${row.tr_reason_cd=='tr01'}">
+									<p>욕설 및 비방</p>
+								</c:when>
+
+								<c:when test="${row.tr_reason_cd=='tr02'}">
+									<p>성폭력 및 성희롱</p>
+								</c:when>
+
+								<c:when test="${row.tr_reason_cd=='tr03'}">
+									<p>권리 침해</p>
+								</c:when>
+
+								<c:when test="${row.tr_reason_cd=='tr04'}">
+									<p>폭력적</p>
+								</c:when>
+
+								<c:when test="${row.tr_reason_cd=='tr05'}">
+									<p>테러 조장</p>
+								</c:when>
+							</c:choose>
+							<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 -->
+							<td><fmt:formatDate value="${row.tr_dttm}" pattern="yyyy-MM-dd" />
+						</tr>
+					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 	

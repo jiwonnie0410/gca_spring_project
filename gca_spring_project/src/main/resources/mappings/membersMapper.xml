@@ -40,7 +40,7 @@
 								#{m_password},
 								#{m_name},
 								#{m_nick},
-								'jw',
+								#{m_image_cd},
 								#{m_xy},
 								#{m_location},
 								${m_age},
