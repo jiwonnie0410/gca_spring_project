@@ -196,7 +196,12 @@
 					</tr>
 					<tr>	
 						<td onClick = "location.href='${pageContext.request.contextPath }/history/rank'">업적 히스토리</td>
+						<td></td>
 						<td onClick = "location.href='${pageContext.request.contextPath }'">마감 매치</td><!-- 주소추가-->
+					</tr>
+					<tr>
+					<td onClick = "location.href='${pageContext.request.contextPath }'">문의하기</td>
+					<td></td>
 						<td onClick = "location.href='${pageContext.request.contextPath }/sixman/getSixList'">용병 구함</td>
 					</tr>
 				</table>
