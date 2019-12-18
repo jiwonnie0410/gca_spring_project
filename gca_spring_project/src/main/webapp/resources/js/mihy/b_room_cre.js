@@ -192,7 +192,7 @@ function location_valid(){
 	$('#bg_location_valid').hide();
 }
 
-//인원 유효성 검사
+//인원 유효성 검사 --> 팀 구성인원 숫자 외 입력 시 불가 메시지 출력/미입력시 메시지 출력으로 수정해야 함.
 function cnt_reval(){
 	$('#bg_finish_valid').show();
 	if( $('#bg_finish_val').val() == "" || $('#bg_finish_val').val() == null ){
