@@ -150,7 +150,10 @@
 						$('#profile_nick').text(vo.m_nick);
 						$('#profile_age').text(vo.m_age);
 						$('#profile_gender').text(vo.gender_cd); //남여로 표시되게2
-						$('#profile_level').text(vo.m_level_cd); //레벨이미지로 표시되게2
+						//$('#profile_level').text(vo.m_level_cd);
+						$('#profile_level').children('img').attr('src',
+							"${pageContext.request.contextPath }/resources/images/level/"+vo.m_level_cd+".png"	
+						); //레벨이미지로 표시되게2
 						
 						//본인 프로필 창이면 버튼 영역(신고,강퇴) 숨기기.
 						if(vo.m_id == "${id}"){
@@ -402,7 +405,9 @@
 						<tr>
 							<td id="profile_gender"></td>
 							<td id="profile_age"></td>
-							<td id="profile_level"></td>
+							<td id="profile_level">
+								<img style="padding-bottom:5px;" width="30px" height="30px" src="">
+							</td>
 						</tr>
 					</table>
 				</div>

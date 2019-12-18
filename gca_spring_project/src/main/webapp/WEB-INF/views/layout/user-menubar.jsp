@@ -192,10 +192,10 @@
 						<td onClick = "location.href='${pageContext.request.contextPath }/history/myChallengeList'">챌린지 히스토리</td>
 						<td onClick = "location.href='${pageContext.request.contextPath }/sgroup/getSgList'">진행 중 반짝</td>
 						<td onClick = "location.href='${pageContext.request.contextPath }/board/adlist'">동호회 홍보</td>
-						<td onClick = "location.href='${pageContext.request.contextPath }'">랭킹</td>
+						<td onClick = "location.href='${pageContext.request.contextPath }/history/rank'">랭킹</td>
 					</tr>
 					<tr>	
-						<td onClick = "location.href='${pageContext.request.contextPath }/history/rank'">업적 히스토리</td>
+						<td onClick = "location.href='${pageContext.request.contextPath }/history/score'">업적 히스토리</td>
 						<td></td>
 						<td onClick = "location.href='${pageContext.request.contextPath }'">마감 매치</td><!-- 주소추가-->
 					</tr>
