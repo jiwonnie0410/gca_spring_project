@@ -72,7 +72,7 @@ public class BGroupController {
 	
 //프로필 모달 띄울 때 해당 멤버 정보 가져오기
 	@ResponseBody //얘가 있어야 페이지 리턴을 안한다.(이거 없으면 밑에 mapping된 jsp페이지로 자동으로 찾아감.)
-	@RequestMapping(value="/sgroup/getOnesAuthority", consumes="application/json")
+	@RequestMapping(value="/bgroup/getOnesAuthority", consumes="application/json")
 	public ActiveHistVO getOnesAuthority(@RequestBody ActiveHistVO vo) {
 		vo = bgroupService.getOnesAuthority(vo);
 		return vo;
