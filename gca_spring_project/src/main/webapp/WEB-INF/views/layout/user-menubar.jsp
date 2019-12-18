@@ -189,7 +189,7 @@
 						<td onClick = "location.href='${pageContext.request.contextPath }/challenge/list'">챌린지</td>
 					</tr>
 					<tr>	
-						<td onClick = "location.href='${pageContext.request.contextPath }/history/challengeList'">챌린지 히스토리</td>
+						<td onClick = "location.href='${pageContext.request.contextPath }/history/myChallengeList'">챌린지 히스토리</td>
 						<td onClick = "location.href='${pageContext.request.contextPath }/sgroup/getSgList'">진행 중 반짝</td>
 						<td onClick = "location.href='${pageContext.request.contextPath }/board/adlist'">동호회 홍보</td>
 						<td onClick = "location.href='${pageContext.request.contextPath }'">랭킹</td>
