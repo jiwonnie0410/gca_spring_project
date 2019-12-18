@@ -35,13 +35,14 @@ public class ScheduleController {
 	
 	// 1. 부트페이 서버 전송용 토큰 갱신 (매일 am 0:00) - 토큰 생성 후 30분 후 소멸
 	@Scheduled(cron = "0 0 0 * * * ")
-	//@Scheduled(fixedRate = 10000)
+	//@Scheduled(fixedRate = 120000)
 	public void bootpay() {
 	 api = new BootpayApi(
 				"5de9c9d85ade160030cc4a8a", 						// REST용 Application ID
 				"lgO2Fr/UI3L5QGI97pcPWspPIWozz0MSxndaDlC0s+A=" 		// 프로젝트의 Private KEY
 		);
 	 	getToken();
+	 	partialRefund();
 	}
 	
 	// 1-1. 부트페이 서버 인증용 토큰 받기
@@ -62,7 +63,7 @@ public class ScheduleController {
 	 * 환불완료시, Money 테이블에 부분환불완료 정보 업데이트
 	 */
 	// 2-1 부분환불정보 부트페이 서버로 전송 (매일 am 0:05)
-	@Scheduled(cron = "0 5 0 * * * ")
+	//@Scheduled(cron = "0 5 0 * * * ")
 	public void partialRefund() {
 		
 		List<Map<String, Object>> receipt = service.getPartialRefundList();		
@@ -70,12 +71,16 @@ public class ScheduleController {
 		for (Map<String, Object> list : receipt) {
 			
 			double percent = 0.8;  // 환불받을 비율 (0.1 ~~ 1.0) 기본 80% (0.8)
-			double refund =  ((BigDecimal) list.get("money_deposit")).doubleValue() * percent ;   // 부분환불 받을 금액
+			int refund = (int)(((BigDecimal) list.get("money_deposit")).doubleValue() * percent ) ;   // 부분환불 받을 금액
 			String receiptId = (String) list.get("money_moid");		// 각 결제별 고유번호 
+			
+			System.out.println(refund + "환불얼마?");
 			
 			Cancel cancel = new Cancel();
 			cancel.price = refund;				// api에 환불금액을 싣는다
 			cancel.receipt_id = receiptId;		// api에 결제 고유번호를 싣는다
+			cancel.name = "운영자";
+			cancel.reason = "챌린지 실패 - 부분환불";
 
 			try {
 				HttpResponse res = api.cancel(cancel);
@@ -115,6 +120,8 @@ public class ScheduleController {
 			
 			Cancel cancel = new Cancel();
 			cancel.receipt_id = receiptId;		// api에 결제 고유번호를 싣는다 , 금액지정 없으면 전체환불
+			cancel.name = "운영자";
+			cancel.reason = "챌린지 성공 - 전체환불";
 
 			try {
 				HttpResponse res = api.cancel(cancel);

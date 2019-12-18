@@ -340,26 +340,27 @@
 		            "money_moid" 
 		from 		v_refund
 		where 		"money_status" = '보증금'
-		and 		"cl_end_dttm" < sysdate
 		and 		"cl_cnt" > "clh_cnt"
 	]]>
 	
 	</select>
+<!--  		and 		"cl_end_dttm" < SYSDATE  -->
 	
 	
 	<!-- 2. 부분환불 완료후 환불정보를 Money 테이블에 업데이트 -->
 	<update id="updatePartialRefundList">
 	<![CDATA[
 		update      v_refund 
-		set         "money_status" = '부분환불'
-			        "money_withdraw" = "money_deposit" * 0.8, 
-		            "money_withdraw_dttm" = sysdate,
+		set         "money_status" = '부분환불' ,
+			        "money_withdraw" = "money_deposit" * 0.8 , 
+		            "money_withdraw_dttm" = sysdate
+		            
 		where 		"money_status" = '보증금'
-		and 		"cl_end_dttm" < sysdate
-		and 		"cl_cnt" > "clh_cnt";     
+		and 		"cl_cnt" > "clh_cnt"     
 	]]>
 	
 	</update>
+<!-- 		and 		"cl_end_dttm" < sysdate -->
 	
 	
 	
@@ -393,9 +394,10 @@
 	
 	<![CDATA[
 		update      v_refund 
-		set         "money_status" = '전체환불'
+		set         "money_status" = '전체환불' ,
 			        "money_withdraw" = "money_deposit", 
-		            "money_withdraw_dttm" = sysdate,
+		            "money_withdraw_dttm" = sysdate
+		            
 		where 		"money_status" = '보증금'
 		and 		"cl_cnt" <= "clh_cnt"
 		and 		"money_withdraw" is null

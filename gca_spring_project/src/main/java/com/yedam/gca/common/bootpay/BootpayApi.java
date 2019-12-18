@@ -30,7 +30,7 @@ public class BootpayApi {
     private final String URL_SEND_SMS = BASE_URL + "push/sms.json";
     private final String URL_SEND_LMS = BASE_URL + "push/lms.json";
 
-//    private final String URL_NAVERPAY_ITEM_RESPONSE = BASE_URL + "npay/product.json";
+    private final String URL_NAVERPAY_ITEM_RESPONSE = BASE_URL + "npay/product.json";
     private final String URL_REMOTE_FORM = BASE_URL + "app/rest/remote_form.json";
 
     private String token;
