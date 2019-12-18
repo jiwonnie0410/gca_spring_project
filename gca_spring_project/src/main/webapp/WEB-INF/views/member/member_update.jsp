@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,6 +63,7 @@ $(document).ready(function() {
 	
 });
 </script>
+<sec:authentication property="principal.m_image_cd" var="image"/>
 <title>회원정보 상세 페이지</title>
 		
 </head>
@@ -77,41 +79,40 @@ $(document).ready(function() {
 					<form name="form1" method="post">
 						<table>
 							<tr>
+								<td><img style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/Characters/${dto.m_image_cd}.gif"></td>				
+							</tr>
+							<tr>
 								<td>아이디</td>
 								<!-- id는 수정이 불가능하도록 readonly속성 추가 -->
-								<td><input name="m_id" value="${dto.m_id}"
-									readonly="readonly" style="border: none"></td>
+								<td><input name="m_id" value="${dto.m_id}"readonly="readonly" style="border: none" ></td>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td>비밀번호</td>
-								<td><input type="password" name="m_password"
-									style="border: none"></td>
-							</tr>
+								<td><input type="password" name="m_password"></td>
+							</tr> -->
 							<tr>
-								<td>이름</td>
-								<td><input name=m_name value="${dto.m_name}"
-									style="border: none"></td>
+								<td>닉네임</td>
+								<td><input name=m_name value="${dto.m_nick}"></td>
 							</tr>
 							
 							
 							<!-- 미현 : 주소 및 주소찾기 버튼 -->
 							<tr>
-								<th> 주소 </th>
-								<td align="left">
-									<input type="button" id="mAddress1" class="button-title" style="height: 30px;" value="주소 찾기">
+								<th>주소</th>
+								<td><input type="text" id="address" value="${dto.m_location}" name="m_location" style="border: none" />
+									<input type="hidden" id="xy" name="m_xy">
 								</td>
 							</tr>
 							<tr>
-								<th></th>
-								<td><input type="text" id="address" value="${dto.m_location}" name="m_location" style="border: none" />
-									<input type="hidden" id="xy" name="m_xy">
+								<th>  </th>
+								<td align="left">
+									<input type="button" id="mAddress1" class="button-title" style="height: 30px;" value="주소 찾기">
 								</td>
 							</tr>
 							
 							<tr>
 								<td>이메일주소</td>
-								<td><input name="m_email" value="${dto.m_email}"
-									style="border: none"></td>
+								<td> <input width="90" name="m_email" value="${dto.m_email}"> </td>
 							</tr>
 
 							<tr>
@@ -125,8 +126,6 @@ $(document).ready(function() {
 						</div>
 						<br>
 						<div class="info-user2">
-							<!-- <input type="button" value="수정" id="btnUpdate"> <input
-								type="button" value="삭제" id="btnDelete"> -->
 							<div style="color: red;">${message}</div>
 							<!--이모티콘이로 대체  -->
 							<i class="fas fa-user-edit" id="btnUpdate"  aria-hidden="true" style="color:black; font-size:50px;" ></i>

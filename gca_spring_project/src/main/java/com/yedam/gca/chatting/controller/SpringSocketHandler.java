@@ -1,6 +1,8 @@
 package com.yedam.gca.chatting.controller;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -14,22 +16,21 @@ import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
-import com.yedam.gca.chatting.vo.ChatVO;
+import com.yedam.gca.admin.vo.AlertVO;
 import com.yedam.gca.chatting.vo.SocketVO;
 import com.yedam.gca.group_s.service.SGroupService;
-import com.yedam.gca.member.service.MemberService;
+import com.yedam.gca.history.service.ActiveHistService;
+import com.yedam.gca.history.vo.ActiveHistVO;
 import com.yedam.gca.member.vo.MembersVO;
 
 public class SpringSocketHandler extends TextWebSocketHandler implements InitializingBean {
 	Logger logger = LoggerFactory.getLogger(SpringSocketHandler.class);
 	private Set<WebSocketSession> sessionSet = new HashSet<WebSocketSession>();
 
-	@Resource
-	private SGroupService sgroupService;
-
+	@Resource	private SGroupService sgroupService;
+	@Resource	private ActiveHistService activeService;
+	
 	public SpringSocketHandler (){ 
 		super();
 		this.logger.info("create SocketHandler instance!");
@@ -100,6 +101,17 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 	public boolean supportsPartialMessages() {
 		this.logger.info("call method!"); 
 		return super.supportsPartialMessages();
+	}
+	
+	public void joinSendMessage(String message, SocketVO svo, AlertVO alvo, ActiveHistVO avo) {
+		if(svo.getCmd().equals("join")) {
+			avo.setSg_num(svo.getSg_num());
+			List<MembersVO> list = activeService.getActMemList(avo);
+			for(MembersVO mvo : list) {
+				
+			}
+			
+		}
 	}
 
 	public void sendMessage(String message, WebSocketSession mySession, SocketVO vo) {

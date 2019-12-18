@@ -11,5 +11,7 @@ public class AlertVO {
 	private String alert_contents;			// 알림 내용
 	private Date alert_dttm;				// 보낸 날짜
 	private String m_id;					// 쪽지 받는 회원 ID
+	private	int alert_gnum;					// 알림 그룹
+	private int alert_read;					// 알림 수신 여부
 
 }

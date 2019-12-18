@@ -137,7 +137,7 @@
 								<if test="m_nick != null and m_nick != ''">
 									#{m_nick},
 								</if>
-								'jw',
+								'P05',
 								'35.8706757862181, 128.58944433619843',
 								'대구 중구 국채보상로 537',
 								${m_age},
@@ -188,7 +188,9 @@
           m_email AS m_email,
           m_location AS m_location,
           m_image_cd AS m_image_cd,
-          m_level_cd AS m_level_cd
+          m_level_cd AS m_level_cd,
+          m_level_cd AS m_image_cd,
+          m_nick AS m_nick
         FROM MEMBERS
         WHERE m_id = #{m_id} 
     </select>
@@ -198,9 +200,11 @@
     <update id="updateMember">
         UPDATE MEMBERS
         SET
-             m_password = #{m_password},
-            m_name = #{m_name},
-            m_email = #{m_email}
+            m_password = #{m_password},
+            m_email = #{m_email},
+            M_NAME= #{m_name},
+			M_NICK= #{m_nick},
+			M_IMAGE_CD= #{m_image_cd}	
         WHERE
             m_id = #{m_id}    
     </update>
@@ -218,7 +222,7 @@
         SELECT 
             COUNT(*) 
         FROM MEMBERS
-        WHERE m_id = #{m_id} AND M_PASSWORD = #{m_password}
+        WHERE m_id = #{m_id}
     </select>
     
     
