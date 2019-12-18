@@ -19,5 +19,5 @@ public class ChallengeVO {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd") private Date cl_end_dttm;		// 마감 날짜
 	private int cl_score;					// 리워드 점수
 	private String gap_day; 						// D-day 계산용, DB에 없음
-	
+	private String history_status;			//은영 챌린지 진행중/성공/실패 상태(원래 챌린지 히스토리에 있음)
 }
