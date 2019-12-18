@@ -270,22 +270,39 @@ public class MemberServiceImpl implements MemberService {
     public MembersVO viewMember(String m_id) {
         return dao.viewMember(m_id);
     }
-    // 02. 회원 정보 수정 처리
+    // 02. 회원 정보 삭제 처리
     @Override
     public void deleteMember(String m_id) {
     	dao.deleteMember(m_id);
     }
-    // 03. 회원 정보 삭제 처리
+    // 03. 회원 정보 수정 처리
     @Override
     public void updateMember(MembersVO vo) {
+    	// 비밀번호 암호화
+//		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
+//		String password = scpwd.encode(vo.getM_password());
+//		vo.setM_password(password);
     	dao.updateMember(vo);
     }
     // 04. 회원 정보 수정 및 삭제를 위한 비밀번호 체크
     @Override
     public boolean checkPw(String m_id, String m_password) {
+    	// 비밀번호 암호화
+//    			BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
+//    			String password = scpwd.encode(vo.getM_password());
+//    			vo.setM_password(password);
+    	
         return dao.checkPw(m_id, m_password);
     }
-
+    
+    
+	/*
+	 * public boolean checkPw(String m_id, String m_password, MembersVO vo) { //
+	 * 비밀번호 암호화 BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder(); String
+	 * password = scpwd.encode(vo.getM_password()); vo.setM_password(password);
+	 * 
+	 * return dao.checkPw(m_id, m_password); }
+	 */
 	
 
     
@@ -308,6 +325,8 @@ public class MemberServiceImpl implements MemberService {
 	public void updateRange(MembersVO vo) {
     	dao.updateRange(vo);
     }
+
+	
 
 	
 }

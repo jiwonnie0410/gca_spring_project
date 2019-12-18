@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,8 +28,10 @@
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
+<sec:authentication property="principal.m_image_cd" var="image"/>
+
 <!--json할때 필요  -->
-<title>회원정보 상세 페이지</title>
+<title>My Page</title>
 
 </head>
 <body>
@@ -42,6 +45,9 @@
 					<form name="form1" method="post">
 						<table>
 							<tr>
+								<td rowspan="8"><img style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/Characters/${dto.m_image_cd}.gif"></td>				
+							</tr>
+							<tr>
 								<td>아이디</td>
 								<td>${dto.m_id}</td>
 							</tr>
@@ -49,7 +55,14 @@
 								<td>이름</td>
 								<td>${dto.m_name}</td>
 							</tr>
-
+							<tr>
+								<td>닉네임</td>
+								<td>${dto.m_nick}</td>
+							</tr>
+							<tr>
+								<td>레벨</td>
+								<td>${dto.m_level_cd}</td>
+							</tr>
 
 							<tr>
 								<td>주소</td>
