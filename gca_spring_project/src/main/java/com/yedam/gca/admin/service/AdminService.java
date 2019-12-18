@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.yedam.gca.admin.vo.ChallengeSearchVO;
 import com.yedam.gca.admin.vo.MoneyVO;
+import com.yedam.gca.admin.vo.TroubleVO;
+import com.yedam.gca.board.vo.AdBoardVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.common.Paging;
 import com.yedam.gca.member.vo.MembersVO;
@@ -39,17 +41,50 @@ public interface AdminService {
 	// 9. 월별 수익 현황
 	public List<Map<String, Object>> chartMonthly();
 	
-	//진영
-	 // 1.회원 정보 상세보기
-    public MembersVO viewMember(String m_id);
-    //2.회원전체조회
-	public List<MembersVO> getUserList(MembersVO vo);
-	//3.회원강퇴
-	public int deleteUser(MembersVO vo);
-	
 
 	
-	// ****************** 수림  ************************//
+		//진영
+		 // 1.회원 정보 상세보기
+	    public MembersVO viewMember(String m_id);
+	    //2.회원전체조회
+		public List<MembersVO> getUserList(MembersVO vo);
+		//3.회원강퇴
+		public int deleteUser(MembersVO vo);
+
+		public int countArticle(String searchOption, String keyword) throws Exception;
+
+		public List<TroubleVO> listAll(int start, int end, String searchOption, String keyword) throws Exception;
+	
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		// ****************** 수림  ************************//
 	
 	//1. 부분환불용 고유번호 리스트 조회
 	public List<Map<String, Object>> selectRefund();

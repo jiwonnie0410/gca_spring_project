@@ -149,14 +149,21 @@ function move_room(result, sg_dttm){
 		} else if(sg_dttm != "마감" && result.result_msg == 'yes'){
 			var con = confirm("선택한 반짝에 참여하시겠습니까?");
 			if(con){
-				msg = {
-						cmd : "join",
-						id : result.m_id,
-						msg : "<"+result.m_id+"님이 참가하셨습니다.>",
-						sg_num : result.pk_num
-				}
-				webSocket.send(  JSON.stringify( msg )   );
-				location.href='roomIn?sg_num='+result.pk_num;
+				$.ajax({
+					url:'roomIn?sg_num='+result.pk_num,
+					dataType: "json",
+					success: function(){
+						msg = {
+								cmd : "join",
+								id : result.m_id,
+								msg : "<"+result.m_id+"님이 참가하셨습니다.>",
+								sg_num : result.pk_num
+						}
+						webSocket.send(  JSON.stringify( msg )   );
+//						location.href='roomIn?sg_num='+result.pk_num;
+						location.href='alreadyIn?sg_num='+result.pk_num;
+					}
+				});
 			}
 		}
 	} else {

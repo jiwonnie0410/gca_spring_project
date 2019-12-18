@@ -15,6 +15,8 @@ import com.yedam.gca.admin.dao.AdminDAO;
 import com.yedam.gca.admin.service.AdminService;
 import com.yedam.gca.admin.vo.ChallengeSearchVO;
 import com.yedam.gca.admin.vo.MoneyVO;
+import com.yedam.gca.admin.vo.TroubleVO;
+import com.yedam.gca.board.vo.AdBoardVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.common.Paging;
 import com.yedam.gca.member.vo.MembersVO;
@@ -105,25 +107,104 @@ public class AdminServiceImpl implements AdminService {
 	
 
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// 진영
-	// 01. 회원 정보 상세 조회
-	@Override
-	public MembersVO viewMember(String m_id) {
-		return dao.viewMember(m_id);
-	}
+		// 01. 회원 정보 상세 조회
+		@Override
+		public MembersVO viewMember(String m_id) {
+			return dao.viewMember(m_id);
+		}
 
-	// 전체조회
-	@Override
-	public List<MembersVO> getUserList(MembersVO vo) {
-		return dao.getUserList(vo);
-	}
+		// 전체조회
+		@Override
+		public List<MembersVO> getUserList(MembersVO vo) {
+			return dao.getUserList(vo);
+		}
 
-	// 회원삭제
-	@Override
-	public int deleteUser(MembersVO dto) {
-		return dao.deleteUser(dto);
-	}
+		// 회원삭제
+		public int deleteUser(MembersVO dto) {
+			return dao.deleteUser(dto);
+		}
+
+		// trouble 전체 목록
+		@Override
+		public List<TroubleVO> listAll(int start, int end, String searchOption, String keyword) throws Exception {
+			return dao.listAll(start, end, searchOption, keyword);
+		}
+
+		// trouble 레코드 갯수
+		@Override
+		public int countArticle(String searchOption, String keyword) throws Exception {
+			return dao.countArticle(searchOption, keyword);
+		}
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	// ****************** 수림  ************************//

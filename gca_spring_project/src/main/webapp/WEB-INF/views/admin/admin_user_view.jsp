@@ -9,7 +9,7 @@
 <body>
 
   <div class="row">
-        <div class="col-4">
+        <div class="col-40">
           <div class="card">
             <div class="card-header" style="background-color: #FEBABA;">
               my menu
@@ -39,39 +39,12 @@
 								<td><input name="m_email" value="${dto.m_email}"
 									style="border: none"></td>
 							</tr>
-							<!-- 누락된 부분 -->
-							<tr>
-								<%--      <td>회원가입일자</td>
-                <td>
-                    <fmt:formatDate value="${dto.userRegdate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-                </td>
-            </tr>
-            <tr>
-                <td>회원정보 수정일자</td>
-                <td>
-                    <fmt:formatDate value="${dto.userUpdatedate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-                </td>
-            </tr> --%>
+						
 							<tr>
 								<td colspan="2" align="center"></td>
 							</tr>
 						</table>
-						<div align="center">
-							<h2>Choose Your Option</h2>
-						</div>
 						<br>
-						<div class="info-user2">
-							<input type="button" value="수정" id="btnUpdate"> <input
-								type="button" value="삭제" id="btnDelete">
-							<div style="color: red;">${message}</div>
-							<!--이모티콘이로 대체  -->
-							<span aria-hidden="true" class="li_settings fs1"></span> <span
-								aria-hidden="true" class="li_lock fs1"></span>
-							<i class="fas fa-user-edit"  aria-hidden="true" style="color:black; font-size:100px;" ></i> 
-							 <i class="fa fa-lock fa-2x" aria-hidden="true" style="color:black; font-size:100px;"> </i> 
-							 
-							 <a href="changePassword"> 비밀번호 변경 </a>
-						</div>
 					</form>
 				</div>
 			</div>

@@ -5,15 +5,22 @@ $(function() {
 	getBoardList(); // 목록조회
 	insertBoard(); // 등록 이벤트 클릭 이벤트 지정
 	deleteBoard();// 삭제
+	
+	
+	$("#btnUpdete").click(function() {
+		$('#Modalread').modal('hide')
+		$('[name="qb_id"]').val($('#frm #qb_id').html());
+		$('[name="qb_content"]').val($('#frm #qb_content').html());
+		$('#myModal').modal('show')
+	});
 
 });
 
 //상세보기
 function getQb_id(qb_id) {
-	$("#UserModalread").on('show.bs.modal', function() {
+	$("#Modalread").on('show.bs.modal', function() {
 		console.log(qb_id);
-		/*var qb_id =  $(this).closest("tr").find("td").eq(0).html();// closest
-*/		$(".modal-body").load("qnView?qb_id="+qb_id)
+		$(".modal-body").load("qnView?qb_id="+qb_id)
 	});
 }
 
@@ -31,19 +38,20 @@ function getBoardList() {
 }
 
 //목록 조회 결과처리
-  function getBoardListHandler(datas) {
-		$("#asktb").empty();
+function getBoardListHandler(datas) {
+	$("#asktb").empty();
 	for (var i = 0; i < datas.length; i++) {
-					$("<tr data-toggle='modal' data-target='#UserModalread' id='newTr' onclick='getQb_id("+datas[i].qb_id+")'>")	
-					.append($('<td>').html(datas[i].qb_id))
-					 .append($('<td>').html(datas[i].m_id)) 
-					 .append($('<td>').html(datas[i].qb_title))
-					 .appendTo('#asktb')
-					 .attr("data",datas[i].bno);
-			}//for
-		}//  getBoardListHandler
-  
+		$(
+				"<tr data-toggle='modal' data-target='#Modalread' id='newTr' onclick='getQb_id("
+						+ datas[i].qb_id + ")'>").append(
+				$('<td>').html(datas[i].qb_id)).append(
+				$('<td>').html(datas[i].m_id)).append(
+				$('<td>').html(datas[i].qb_title)).appendTo('#asktb').attr(
+				"data", datas[i].bno);
+	}// for
 
+}// getBoardListHandler
+                    
   
   
   
@@ -68,10 +76,11 @@ $("#btnIns").click(function() {
 	
 //등록 요청 결과처리
 function insertBoardtHandler(data) {
-	$('<tr>').append($("<td id='newTr'>").html(data.qb_id))
+	/*$('<tr>').append($("<td id='newTr'>").html(data.qb_id))
 			 .append($('<td>').html(data.m_id))
 			 .append($('<td>').html(data.qb_title))
-			 .prependTo('#asktb');
+			 .prependTo('#asktb');*/
+	getBoardList();
 	$('#myModal').modal("hide"); //닫기 
 }
 

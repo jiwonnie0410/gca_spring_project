@@ -15,5 +15,6 @@ public class QnaBoardVO {
 	private int qb_origin;				// 부모글
 	private String m_id;				// 작성자 ID
 	private String qb_an;               //답글 여부 
+	private String qb_an_id;			//답글 아이디
 
 }
