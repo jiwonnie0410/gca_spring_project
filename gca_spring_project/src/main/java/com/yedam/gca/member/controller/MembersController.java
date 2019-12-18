@@ -24,11 +24,11 @@ public class MembersController {
 	MemberService memberService;
 	
 	
-//	// 1. 정보수정 페이지 이동
-//		@RequestMapping("member/update")
-//		public String getAlarmInfo() {
-//			return "/user/member/option";
-//		}
+	// 1. 정보수정 페이지 이동
+		@RequestMapping("member/updateform")
+		public String getAlarmInfo() {
+			return "/user/member/member_update";
+		}
 	
 	
 	

@@ -198,11 +198,11 @@
     <update id="updateMember">
         UPDATE MEMBERS
         SET
-            user_pw = #{m_password},
+             m_password = #{m_password},
             m_name = #{m_name},
             m_email = #{m_email}
         WHERE
-            user_id = #{userId}    
+            m_id = #{m_id}    
     </update>
     
     
