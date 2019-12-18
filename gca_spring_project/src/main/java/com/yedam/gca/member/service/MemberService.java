@@ -33,7 +33,7 @@ public interface MemberService {
     public void deleteMember(String m_id);
     // 3.회원정보 수정
     public void updateMember(MembersVO vo);
-
+    //비밀번호 확인
 	boolean checkPw(String m_id, String m_password);
 	
 	

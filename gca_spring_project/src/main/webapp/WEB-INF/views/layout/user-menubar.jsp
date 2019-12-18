@@ -23,9 +23,6 @@
 		<style>
 			.more {
 				display: block; 
-				/* width: 40px;
-				height: 16px; */
-				/*  background-position: 0 78px;  */
 			}
 			
 			.blind {
@@ -43,28 +40,22 @@
 			
 			 .close {
 				display: block; 
-				/* width: 42px;
-				height: 16px; */
-			  	/*   background-position: 200px 500px;  */
 			} 
 			
 			.board {
 				font-family: '돋움';
 				font-size: 13px;
-				/* position: absolute;
-				top: -30px; */
-				width: 500px;
+				width: 600px;
 				height: 200px;
 				background: pink;
 				display:none;
-				padding-right:13px;
+				/* padding-right:10px; */
 				align-content: center;
-				padding-top: 20px;
+				/* padding-top: 20px; */
 			}
 			
 			th,td{
-				/* border:1px solid black; */
-				padding: 10px;
+				padding: 5px;
 			}
 			
 			.navbar {
@@ -189,20 +180,23 @@
 						<th>활동 이력</th>
 						<th>반짝</th>
 						<th>동호회 매치</th>
+						<th>챌린지</th>
 					</tr>
 					<tr>
 						<td onClick = "location.href='${pageContext.request.contextPath }/history/activeHistory'">활동 히스토리</td>
 						<td onClick = "location.href='${pageContext.request.contextPath }/sgroup/getSgListEnd'">마감 반짝</td>
 						<td onClick = "location.href='${pageContext.request.contextPath }/'">진행 중 매치</td>
+						<td onClick = "location.href='${pageContext.request.contextPath }/challenge/list'">챌린지</td>
 					</tr>
 					<tr>	
 						<td onClick = "location.href='${pageContext.request.contextPath }/history/challengeList'">챌린지 히스토리</td>
 						<td onClick = "location.href='${pageContext.request.contextPath }/sgroup/getSgList'">진행 중 반짝</td>
 						<td onClick = "location.href='${pageContext.request.contextPath }/board/adlist'">동호회 홍보</td>
+						<td onClick = "location.href='${pageContext.request.contextPath }'">랭킹</td>
 					</tr>
 					<tr>	
 						<td onClick = "location.href='${pageContext.request.contextPath }/history/rank'">업적 히스토리</td>
-						<td></td>
+						<td onClick = "location.href='${pageContext.request.contextPath }'">마감 매치</td><!-- 주소추가-->
 						<td onClick = "location.href='${pageContext.request.contextPath }/sixman/getSixList'">용병 구함</td>
 					</tr>
 				</table>

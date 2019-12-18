@@ -23,9 +23,18 @@ public class MembersController {
 	@Autowired
 	MemberService memberService;
 	
+	
+//	// 1. 정보수정 페이지 이동
+//		@RequestMapping("member/update")
+//		public String getAlarmInfo() {
+//			return "/user/member/option";
+//		}
+	
+	
+	
 // 01 회원 상세정보 조회
     @RequestMapping("member/member_view.do")
-    public String memberView(Model model)throws Exception{
+    public String viewMember(Model model)throws Exception{
 		UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         // 회원 정보를 model에 저장
         model.addAttribute("dto", memberService.viewMember(user.getUsername()));
@@ -37,7 +46,7 @@ public class MembersController {
     
  
     // 02. 회원 정보 수정 처리
-    @RequestMapping("member/update.do")
+    @RequestMapping("member/update")
     public String memberUpdate(@ModelAttribute MembersVO vo, Model model){
         // 비밀번호 체크
         boolean result = memberService.checkPw(vo.getM_id(), vo.getM_password());
@@ -47,7 +56,7 @@ public class MembersController {
         } else { // 비밀번호가 일치하지 않는다면, div에 불일치 문구 출력, viwe.jsp로 포워드
             model.addAttribute("dto", vo);
             model.addAttribute("message", "비밀번호 불일치");
-            return "/user/member/member_view";
+            return "/user/member/member_update";
        }
         
         
@@ -56,7 +65,7 @@ public class MembersController {
     // 03. 회원정보 삭제 처리
     // @RequestMapping : url mapping
     // @RequestParam : get or post방식으로 전달된 변수값
-    @RequestMapping("member/delete.do")
+    @RequestMapping("member/delete")
     public String memberDelete(@RequestParam String userId, @RequestParam String userPw, Model model){
         // 비밀번호 체크
         boolean result = memberService.checkPw(userId, userPw);

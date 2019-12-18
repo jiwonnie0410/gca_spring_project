@@ -51,6 +51,9 @@ public interface AdminService {
 		//3.회원강퇴
 		public int deleteUser(MembersVO vo);
 
+		
+		
+		
 		public int countArticle(String searchOption, String keyword) throws Exception;
 
 		public List<TroubleVO> listAll(int start, int end, String searchOption, String keyword) throws Exception;
