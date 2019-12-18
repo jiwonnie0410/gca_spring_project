@@ -6,11 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.common.code.service.CodeService;
 import com.yedam.gca.common.code.vo.CodeVO;
 import com.yedam.gca.group_six.service.SixmanService;
@@ -29,7 +31,53 @@ public class SixmanController {
 	
 //*****************************************은영************************************
 
+	//신고하기 insert
+	@ResponseBody
+	@RequestMapping(value="/sixman/doReport", consumes="application/json")
+	public int doReport(@RequestBody TroubleVO vo) {
+//		model.addAttribute("report", service.getRoomInfo(vo));
+		return sixmanService.doReport(vo);
+//		System.out.println(model);
+	}
 	
+//프로필 모달 띄울 때 해당 멤버 정보 가져오기
+	@ResponseBody //얘가 있어야 페이지 리턴을 안한다.(이거 없으면 밑에 mapping된 jsp페이지로 자동으로 찾아감.)
+	@RequestMapping(value="/sixman/getOneProfile", consumes="application/json")
+	public MembersVO getOneProfile(@RequestBody MembersVO vo) {
+		vo = sixmanService.getOneMem(vo);
+		return vo;
+	}
+	
+//참가취소 시 활동이력에서 빠지고 카운트 -1
+	@RequestMapping("/sixman/cancelJoin")
+	public String cancelJoin(@RequestParam(value="m_id") String id,
+			@RequestParam(value="six_num") int six_num, ActiveHistVO vo) {
+		vo.setM_id(id);
+		vo.setSix_num(six_num);
+		sixmanService.cancelJoin(vo);
+		//sgroupService.minusNowCnt(sgNum);
+		return "redirect:getSgList";
+	}
+	
+//강퇴 시 활동이력에서 빠지고 count-1
+	@ResponseBody
+	@RequestMapping(value="/sixman/kickOut", consumes="application/json")
+		public int kickOut(@RequestBody ActiveHistVO avo) {
+			avo.setM_id(avo.getM_id());
+			avo.setSix_num(avo.getSix_num());
+			sixmanService.cancelJoin(avo);
+			return 0;
+		}
+	
+//프로필 모달 띄울 때 해당 멤버 정보 가져오기
+		@ResponseBody //얘가 있어야 페이지 리턴을 안한다.(이거 없으면 밑에 mapping된 jsp페이지로 자동으로 찾아감.)
+		@RequestMapping(value="/sixman/getOnesAuthority", consumes="application/json")
+		public ActiveHistVO getOnesAuthority(@RequestBody ActiveHistVO vo) {
+			vo = sixmanService.getOnesAuthority(vo);
+			return vo;
+		}
+
+
 
 
 //*****************************************미현************************************

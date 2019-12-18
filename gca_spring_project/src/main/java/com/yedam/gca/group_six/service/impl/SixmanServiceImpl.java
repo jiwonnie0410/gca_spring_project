@@ -5,9 +5,12 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.group_six.dao.SixmanDAO;
 import com.yedam.gca.group_six.service.SixmanService;
 import com.yedam.gca.group_six.vo.SixmanVO;
+import com.yedam.gca.history.vo.ActiveHistVO;
+import com.yedam.gca.member.vo.MembersVO;
 
 @Service("sixmanService")
 public class SixmanServiceImpl implements SixmanService {
@@ -17,7 +20,22 @@ public class SixmanServiceImpl implements SixmanService {
 	
 	//은영	
 
-	
+	public int doReport(TroubleVO vo) {
+		return sixmanDAO.doReport(vo);
+	}
+	public void cancelJoin(ActiveHistVO vo) {
+		sixmanDAO.cancelJoin(vo);
+		sixmanDAO.minusNowCntSix(vo);
+	}
+	public String returnImage(MembersVO vo) {
+		return sixmanDAO.returnImage(vo);
+	}
+	public MembersVO getOneMem(MembersVO vo) {
+		return sixmanDAO.getOneMem(vo);
+	}
+	public ActiveHistVO getOnesAuthority(ActiveHistVO vo) {
+		return sixmanDAO.getOnesAuthority(vo);
+	}
 	
 	
 	//미현

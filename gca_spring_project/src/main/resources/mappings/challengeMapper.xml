@@ -159,4 +159,22 @@
 		from challenge_hist ch, challenge c, members m
 		where ch.cl_num = c.cl_num and m.m_id = ch.m_id
 	</select>
+	
+	
+	
+	
+
+<!-- ****** 은영 ****** -->
+	<select id="getChallengeHist" parameterType="challengehistory" resultType="challenge">
+		SELECT 		C.CL_STATUS CL_STATUS,
+					C.CL_NAME CL_NAME,
+					C.CL_START_DTTM CL_START_DTTM,
+					C.CL_END_DTTM CL_END_DTTM,
+        			C.CL_SCORE CL_SCORE,
+        			H.CLH_STATUS_CD CLH_STATUS_CD
+		FROM    	CHALLENGE C, CHALLENGE_HIST H
+		WHERE 		C.CL_NUM=H.CL_NUM	 AND 	H.M_ID = #{m_id}
+	
+	</select>
+
 </mapper>

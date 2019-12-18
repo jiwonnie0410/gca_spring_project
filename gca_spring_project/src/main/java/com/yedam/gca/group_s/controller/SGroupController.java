@@ -34,12 +34,6 @@ public class SGroupController {
 	
 	
 //*****************************************은영************************************
-	@RequestMapping("/sgroup/getRoomInfo")
-	public String getRoomInfo(Model model, SGroupVO vo) {
-		model.addAttribute("sgroup", sgroupService.getRoomInfo(vo));
-		System.out.println(model);
-		return "group_s/s_wating_room";
-	}
 	
 	//신고하기 insert
 		@ResponseBody

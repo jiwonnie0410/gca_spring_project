@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>용병 대기방s</title>
+<title>매치 대기방s</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0, user-scalable=no, target-densitydpi=medium-dpi" />
 
@@ -483,6 +483,7 @@
         
 <!-- Modal footer -->
 				<div class="modal-footer">
+					<button type="button" class="button-general" data-dismiss="modal">정보 복사</button>
 					<button type="button" class="button-general" data-dismiss="modal">닫기</button>
 				</div>
         

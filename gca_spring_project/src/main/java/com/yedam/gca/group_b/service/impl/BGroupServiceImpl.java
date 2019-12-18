@@ -25,7 +25,7 @@ public class BGroupServiceImpl implements BGroupService {
 	}
 	public void cancelJoin(ActiveHistVO vo) {
 		bgroupDAO.cancelJoin(vo);
-		bgroupDAO.minusNowCnt(vo);
+		bgroupDAO.minusNowCntBg(vo);
 	}
 	public String returnImage(MembersVO vo) {
 		return bgroupDAO.returnImage(vo);

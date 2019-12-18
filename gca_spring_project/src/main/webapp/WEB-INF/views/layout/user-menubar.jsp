@@ -22,7 +22,7 @@
 		
 		<style>
 			.more {
-				display: block; -
+				display: block;
 			}
 			
 			.blind {
@@ -189,7 +189,7 @@
 						<td onClick = "location.href='${pageContext.request.contextPath }/challenge/list'">챌린지</td>
 					</tr>
 					<tr>	
-						<td onClick = "location.href='${pageContext.request.contextPath }/history/challengeList'">챌린지 히스토리</td>
+						<td onClick = "location.href='${pageContext.request.contextPath }/history/myChallengeList'">챌린지 히스토리</td>
 						<td onClick = "location.href='${pageContext.request.contextPath }/sgroup/getSgList'">진행 중 반짝</td>
 						<td onClick = "location.href='${pageContext.request.contextPath }/board/adlist'">동호회 홍보</td>
 						<td onClick = "location.href='${pageContext.request.contextPath }'">랭킹</td>
@@ -215,6 +215,7 @@
 		<a class="nav_challenge" href="${pageContext.request.contextPath }/challenge/list"><img src="${pageContext.request.contextPath }/resources/images/menubar/trophy.png" alt="챌린지" style="width: 40px;"></a>
 		<a href="${pageContext.request.contextPath }/qnaboard"><img src="${pageContext.request.contextPath }/resources/images/menubar/board.png" alt="문의" style="width: 40px;"></a> 
 		<a href="${pageContext.request.contextPath }/member/member_view.do"><img src="${pageContext.request.contextPath }/resources/images/menubar/profile.png" alt="프로필" style="width: 40px;"></a> 
+			<span class="badge badge-pill badge-danger" style="position:relative; left:150px;">1</span><!-- 알람이 오면 +1되는 부분 -->
 		<a class="more"><img src="${pageContext.request.contextPath }/resources/images/icon/menu-bar.png" alt="더보기" style="width: 40px;"></a>
 	</div>
 </body>
