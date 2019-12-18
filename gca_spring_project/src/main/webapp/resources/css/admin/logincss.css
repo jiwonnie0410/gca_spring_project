@@ -43,8 +43,8 @@
 
 .div-login {
 	  background-image: url('../../images/login/login_border.PNG');
-	  width: 410px;
-	  height: 500px;
+	  width: 337px;
+	  height: 460px;
 }
 
 .check-box {
@@ -60,3 +60,6 @@ span.character img:hover{
 	border-radius:5px;
 	border: 2px solid #FE9191;
 }
+
+.wrap {width:70%; text-align:center; margin:0px auto;}
+.wrap div{width:100%; height:auto}
