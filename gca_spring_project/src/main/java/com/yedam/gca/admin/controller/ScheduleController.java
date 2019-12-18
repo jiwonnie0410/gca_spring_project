@@ -42,14 +42,14 @@ public class ScheduleController {
 				"lgO2Fr/UI3L5QGI97pcPWspPIWozz0MSxndaDlC0s+A=" 		// 프로젝트의 Private KEY
 		);
 	
-	 	int gap = 1000 * 60 * 5;    //  부분환불과 전액환불 쉬는시간
+	 	int gap = 1000 * 60 * 5;    //  부분환불 - 전액환불 사이 쉬는시간 (디폴트 5분)
 	 	
 	 	getToken();  				// 1. 토큰 갱신
 	 	partialRefund();			// 2. 부분환불
 	 	
-	 	Thread.sleep(gap); 			
+	 	Thread.sleep(gap); 			// 5분 휴식
 	 	
-	 	fullRefund();				// 3. 전액환불처리
+	 	fullRefund();				// 3. 전액환불처리 (am 0:10)
 	}
 	
 	// 1-1. 부트페이 서버 인증용 토큰 받기

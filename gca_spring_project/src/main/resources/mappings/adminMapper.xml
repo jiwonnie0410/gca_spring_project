@@ -400,7 +400,7 @@
 	
 	<![CDATA[
 		update      v_refund 
-		set         "money_status" = '전체환불' ,
+		set         "money_status" = '전액환불' ,
 			        "money_withdraw" = "money_deposit", 
 		            "money_withdraw_dttm" = sysdate
 		            
