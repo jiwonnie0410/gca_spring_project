@@ -160,6 +160,7 @@ public class SGroupController {
 	}
 	
 	//선택한 방에 참여2)- 참여되어 있지 않은 방에 참여
+	@ResponseBody
 	@RequestMapping("/sgroup/roomIn")
 	public String roomIn(
 			@RequestParam(value="sg_num", defaultValue="", required=true) int sg_num,
@@ -171,19 +172,8 @@ public class SGroupController {
 		avo.setPk_num(sg_num);
 		actService.roomInsert(avo);
 		
-		
-		//은영 컨트롤러단에서 socket sendMessage
-//		SocketVO socketVO = new SocketVO();
-//		socketVO.setCmd("join");
-//		socketVO.setId(memInfo.getM_id());
-//		socketVO.setMsg("<"+memInfo.getM_id()+"님이 참가하셨습니다>");
-//		socketVO.setCharacter(sgroupService.returnImage(memInfo));
-//		socketVO.setNick(memInfo.getM_nick());
-		
-//		SpringSocketHandler socket = new SpringSocketHandler();
-//		socket.sendMessage(socketVO);
-		
-		return "redirect:alreadyIn?sg_num="+avo.getSg_num();
+		return "true";
+//		return "redirect:alreadyIn?sg_num="+avo.getSg_num();
 	}
 
 	
