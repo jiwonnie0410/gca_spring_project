@@ -103,15 +103,20 @@
 <!-- 반짝방 참가취소 시 활동이력 delete -->
 	<delete id="cancelJoin" parameterType="allhistory">
 		DELETE FROM active_hist
-			<if test="sg_num != null and sg_num != ''">
-				WHERE 		SG_NUM	=	#{sg_num}
-			</if>
-			<if test="bg_num != null and bg_num != ''">
-				WHERE 		BG_NUM	=	#{bg_num}
-			</if>
-			<if test="six_num != null and six_num != ''">
-				WHERE 		SIX_NUM	=	#{six_num}
-			</if>
+		WHERE
+							M_ID	= 	#{m_id}
+			<choose>
+				<when test="sg_num != null and sg_num != ''">
+					and		SG_NUM	=	#{sg_num}
+				</when>
+				<when test="bg_num != null and bg_num != ''">
+					and 	BG_NUM	=	#{bg_num}
+				</when>
+				<when test="six_num != null and six_num != ''">
+					and 	SIX_NUM	=	#{six_num}
+				</when>
+			</choose>
+		
 	</delete>
 	
 <!-- id로 반짝방의 방장인지 멤버인지 가져오기 -->
