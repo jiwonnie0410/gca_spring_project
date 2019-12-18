@@ -22,7 +22,7 @@
 		
 		<style>
 			.more {
-				display: block; 
+				display: block; -
 			}
 			
 			.blind {

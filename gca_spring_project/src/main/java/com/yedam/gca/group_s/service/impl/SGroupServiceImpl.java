@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.yedam.gca.admin.vo.TroubleVO;
-import com.yedam.gca.common.code.vo.CodeVO;
 import com.yedam.gca.group_s.dao.SGroupDAO;
 import com.yedam.gca.group_s.service.SGroupService;
 import com.yedam.gca.group_s.vo.SGroupVO;
