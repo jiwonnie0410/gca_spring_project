@@ -38,9 +38,9 @@
 <body>
 <div align="center">
 		<!-- 페이지 제목 -->
-		<br /><br /><br />
+		<p />
 		<h4><b> JOIN US </b></h4>
-		<br /><br />
+		<p />
 
 		<!-- 회원가입 폼 -->
 		<form role="form" id="joinfrm" name="joinfrm" action="insertJoin" method="post">
@@ -49,8 +49,8 @@
 			<input type="hidden" id="character" name="m_image_cd" value="P05">
 			<table>
 				<tr>	<!-- 아이디 및 중복확인 버튼 -->
-					<th width="50" align="right"> ID </th>
-					<td colspan="2">
+					<th width="90" align="right"> ID </th>
+					<td>
 						<input type="text" id="joinId" name="m_id" class="form-control form-control-sm" onkeyup="idCondition()" value="${param.mId }" /></td>
 					<td width="10" align="center">
 						<input disabled id="idButton" type="button" class="btn button-title" style="height: 30px;" onclick="idCheck()" value="중복확인" /></td>
@@ -58,96 +58,103 @@
 
 				<tr>
 					<td height="30"></td>
-					<td colspan="3" id="idConfirmMsg"><font size="2">*아이디는 영문자, 숫자를 혼합하여 6-12자리 </font></td>
+					<td colspan="2" id="idConfirmMsg"><font size="2">*아이디는 영문자, 숫자를 혼합하여 6-12자리 </font></td>
 				</tr>
 
 				<tr>	<!-- 비밀번호 -->
 					<th> Password </th>
-					<td colspan="3"><input type="password" id="password1" name="m_password" class="form-control form-control-sm" onkeyup="pwCheck()" placeholder="비밀번호" /></td>
+					<td colspan="2"><input type="password" id="password1" name="m_password" class="form-control form-control-sm" onkeyup="pwCheck()" placeholder="비밀번호" /></td>
 				</tr>
 				
 				<tr>
 					<td></td>
-					<td colspan="3" id="conditionPw"><font size="2">*비밀번호는 숫자, 특수문자를 혼합하여 6-10자리</font></td>
+					<td colspan="2" id="conditionPw"><font size="2">*숫자, 특수문자를 혼합하여 6-10자리</font></td>
 				</tr>
 
 				<tr>
 					<td></td>
-					<td colspan="3"><input type="password" id="password2" class="form-control form-control-sm" onkeyup="pwCheck()" placeholder="비밀번호 확인" /></td>
+					<td colspan="2"><input type="password" id="password2" class="form-control form-control-sm" onkeyup="pwCheck()" placeholder="비밀번호 확인" /></td>
 				</tr>
 
 				<tr>
 					<td></td>
-					<td colspan="3" id="confirmPw"><font size="2">*비밀번호 재확인을 해 주세요.</font></td>
+					<td colspan="2" id="confirmPw"><font size="2">*비밀번호 재확인을 해 주세요.</font></td>
 				</tr>
-						
+					
 				<tr>	<!-- 캐릭터 선택 -->
-					<th height="100px"> Characters </th>
+					<th height="70px"> Characters </th>
 					<td colspan="3">
 						<span class="character">
-							<img id="P01" style="padding-bottom:5px;" width="65px" height="65px"
+							<img id="P01" style="padding-bottom:5px;" width="50px" height="50px"
 	          						src="${pageContext.request.contextPath }/resources/images/Characters/foreigner.gif">
 						</span>
 						<span class="character">
-							<img id="P02" style="padding-bottom:5px;" width="65px" height="65px"
+							<img id="P02" style="padding-bottom:5px;" width="50px" height="50px"
 	          						src="${pageContext.request.contextPath }/resources/images/Characters/team-head.gif">
 						</span>
 						<span class="character">
-							<img id="P03" style="padding-bottom:5px;" width="65px" height="65px"
+							<img id="P03" style="padding-bottom:5px;" width="50px" height="50px"
 	          						src="${pageContext.request.contextPath }/resources/images/Characters/bear.gif">
 						</span>
 						<span class="character">
-							<img id="P04" style="padding-bottom:5px;" width="65px" height="65px"
+							<img id="P04" style="padding-bottom:5px;" width="50px" height="50px"
 	          						src="${pageContext.request.contextPath }/resources/images/Characters/director.gif">
 						</span>
 						<span class="character">
-							<img id="P05" style="border-radius:5px; border: 2px solid #FE9191; padding-bottom:5px;" width="65px" height="65px"
+							<img id="P05" style="border-radius:5px; border: 2px solid #FE9191; padding-bottom:5px;" width="50px" height="50px"
 	          						src="${pageContext.request.contextPath }/resources/images/Characters/bald.gif">
 						</span>
 					</td>
 				</tr>
 				
 				<tr>	<!-- 이름 -->
-					<th height="50"> Name </th>
-					<td colspan="3"><input type="text" id="name" name="m_name" class="form-control form-control-sm" value="${param.mName }" /></td>
+					<th height="40"> Name </th>
+					<td colspan="2"><input type="text" id="name" name="m_name" class="form-control form-control-sm" value="${param.mName }" /></td>
 				</tr>
 				
 				<tr>	<!-- 닉넴 -->
-					<th height="50"> Nickname </th>
-					<td colspan="3"><input type="text" id="nick" name="m_nick" class="form-control form-control-sm" value="${param.mNick }" /></td>
+					<th height="40"> Nickname </th>
+					<td colspan="2"><input type="text" id="nick" name="m_nick" class="form-control form-control-sm" value="${param.mNick }" /></td>
 				</tr>
+			</table>
+			<table>
 				
 				<tr>	<!-- 나이 및 성별-->
-					<td height="50"></td>
-					<td width="50"><input type="text" id="age" name="m_age" class="form-control form-control-sm" placeholder="나이"></td>
-					<td colspan="2"><b>세</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<td width="90" height="30"></td>
+					<td width="90"><input type="text" id="age" name="m_age" class="form-control form-control-sm" placeholder="나이"></td>
+					<td><b>세</b>&nbsp;&nbsp;&nbsp;
 							<input type="checkbox" value="G01" name="checkbox1" onclick="oneCheckbox(this)" class="check-box" checked> 여성
 							<input type="checkbox" value="G02" name="checkbox1" onclick="oneCheckbox(this)" class="check-box"> 남성 </td>
 				</tr>
-				
+			</table>
+			<table>
 				<tr>	<!-- 이메일 -->
-					<th height="50">Email</th>
-					<td align="center" colspan="2">
+					<th height="40" width="90">Email</th>
+					<td align="center">
 						<input type="text" id="email1" name="email1" class="form-control form-control-sm" value="${param.email1 }" /></td>
-					<td>@<select id="email2" name="email2" class="btn btn-secondary btn-sm dropdown-toggle">
+					<td>@</td>
+					<td><select id="email2" name="email2" class="btn btn-secondary btn-sm dropdown-toggle">
 							<option	value="gmail.com" selected>gmail.com</option>
 							<option value="naver.com">naver.com</option>
 							<option value="daum.net">daum.net</option></select></td>
 				</tr>
-				
+			</table>
+			<table>
 				<tr>	<!-- 주소 및 주소찾기 버튼 -->
-					<th> Address </th>
-					<td align="left" colspan="3">
+					<th width="90"> Address </th>
+					<td align="left">
 						<input type="button" id="mAddress1" class="button-title" style="height: 30px;" value="주소 찾기"></td>
 				</tr>
 				<tr>
 					<th></th>
-					<td colspan="3"><input type="text" id="address" value="${param.mAddress1 }" name="m_location" class="form-control form-control-sm" /></td>
+					<td width="290"><input type="text" id="address" value="${param.mAddress1 }" name="m_location" class="form-control form-control-sm" /></td>
 				</tr>
 
+			</table>
+			<table>
 				<tr>
-					<td colspan="2" height="100"><button type="button" onclick="checkForm()" class="button-general" style="width:230px;"> JOIN </button></td>
-					<td colspan="2"><button type="button" onclick="location.href='./'" class="button-general" style="width:230px;"> GO BACK </button></td>
+					<td height="70"><button type="button" onclick="checkForm()" class="button-general" style="width:180px;"> JOIN </button></td>
+					<td><button type="button" onclick="location.href='./'" class="button-general" style="width:180px;"> GO BACK </button></td>
 				</tr>
 			</table>
 		</form>

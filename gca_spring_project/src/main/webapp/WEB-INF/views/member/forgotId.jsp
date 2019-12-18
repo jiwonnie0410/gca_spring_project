@@ -47,7 +47,7 @@
 			<div class="col-md-3"></div>
 
 			<div class="col-md-6">
-				<h6> 회원정보에 등록된 이름과 이메일을 입력하시면 이메일로 아이디를 보내드립니다. </h6><br />
+				<h6> 회원정보에 등록된 이름과 이메일을 입력하시면<br> 이메일로 아이디를 보내드립니다. </h6><br />
 				<form role="form" id="forgotIdfrm" name="forgotIdfrm" action="getId">
 					<input type="hidden" id="m_email" name="m_email">
 					<table>
@@ -68,8 +68,8 @@
 					</table>
 					<table>
 						<tr>
-							<td colspan="2" height="60"><button type="button" onclick="sendEmail()" class="button-general" style="width:215px;"> SEND AN EMAIL </button></td>
-							<td colspan="2"><button type="button" onclick="location.href='./'" class="button-general" style="width:215px;"> GO BACK </button></td>
+							<td colspan="2" height="60"><button type="button" onclick="sendEmail()" class="button-general" style="width:180px;"> SEND AN EMAIL </button></td>
+							<td colspan="2"><button type="button" onclick="location.href='./'" class="button-general" style="width:180px;"> GO BACK </button></td>
 						</tr>
 					</table>
 				</form>
