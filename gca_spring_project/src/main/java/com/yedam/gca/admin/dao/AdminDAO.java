@@ -99,81 +99,100 @@ public class AdminDAO {
 	
 	
 	//진영
-			@Inject
-		    // Inject애노테이션이 없으면 sqlSession은 null상태이지만
-		    // Inject애노테이션이 있으면 외부에서 객체를 주입시켜주게 된다. 
-		    // try catch문, finally문, 객체를 close할 필요가 없어졌다.
-		    SqlSession sqlSession;
-			
-			  // 회원 정보 상세보기
-			  // 03. 회원 정보 상세 조회
-		    public MembersVO viewMember(String m_id) {
-		        return sqlSession.selectOne("AdminDAO.viewMember", m_id);
-		    }
-		    //2.전체조회
-			public List<MembersVO> getUserList(MembersVO user) {
-				return mybatis.selectList("AdminDAO.getUserList", user);
-			}
-
-			// 삭제
-			public int deleteUser(MembersVO dto) {
-				System.out.println("mybatis 사용자 삭제");
-				return mybatis.delete("AdminDAO.deleteUser", dto);
-			}
-			
-			
-			
-			
-			//trouble 목록
-			public List<AdBoardVO> listAll(int start, int end, String searchOption, String keyword) throws Exception {
-				// 검색옵션, 키워드 맵에 저장
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("searchOption", searchOption);
-				map.put("keyword", keyword);
-				// BETWEEN #{start}, #{end}에 입력될 값
-				map.put("start", start);
-				map.put("end", end);
-				return sqlSession.selectList("trouble.listAll", map);
-			}
-			
-			
-			// trouble 레코드 갯수
-				public int countArticle(String searchOption, String keyword) throws Exception {
-					// 검색옵션, 키워드 맵에 저장
-					Map<String, String> map = new HashMap<String, String>();
-					map.put("searchOption", searchOption);
-					map.put("keyword", keyword);
-					return sqlSession.selectOne("board.countArticle", map);
-				}
-
-		
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-		
-		// ****************** 수림  ************************//
-		
-		//1. 부분환불용 고유번호 리스트 조회
-		public List<Map<String, Object>> selectRefund() {
-			return mybatis.selectList("AdminDAO.getPartialRefundList");
-		}
+	@Inject
+    // Inject애노테이션이 없으면 sqlSession은 null상태이지만
+    // Inject애노테이션이 있으면 외부에서 객체를 주입시켜주게 된다. 
+    // try catch문, finally문, 객체를 close할 필요가 없어졌다.
+    SqlSession sqlSession;
+	
+	  // 회원 정보 상세보기
+	  // 03. 회원 정보 상세 조회
+    public MembersVO viewMember(String m_id) {
+        return sqlSession.selectOne("AdminDAO.viewMember", m_id);
+    }
+    //2.전체조회
+	public List<MembersVO> getUserList(MembersVO user) {
+		return mybatis.selectList("AdminDAO.getUserList", user);
 	}
+
+	// 삭제
+	public int deleteUser(MembersVO dto) {
+		System.out.println("mybatis 사용자 삭제");
+		return mybatis.delete("AdminDAO.deleteUser", dto);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// ****************** 수림  ************************//
+	
+	//1. 부분환불용 고유번호 리스트 조회
+	public List<Map<String, Object>> selectRefund() {
+		return mybatis.selectList("AdminDAO.getPartialRefundList");
+	}
+}
 
 

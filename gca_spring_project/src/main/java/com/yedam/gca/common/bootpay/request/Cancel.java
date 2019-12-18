@@ -7,6 +7,6 @@ public class Cancel {
 	public String receipt_id;         // 환불용 고유아이디
     public String name;				  // 환불유저 아이디
     public String reason;			  // 환불사유
-    public int price;				  // 부분환불시 금액 (없으면 전체환불)
+    public double price;				  // 부분환불시 금액 (없으면 전체환불)
 
 }
