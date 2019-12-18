@@ -1,5 +1,8 @@
 $(function() {
 	$('#mAddress1').on('click', mAddress_find);
+	
+	//은영 클릭시 캐릭터 선택
+	$('.character').on('click', choose_character);
 });
 
 // 회원가입 체크
@@ -206,4 +209,20 @@ function mAddress_find() {
 			});
 		}
 	}).open();
+}
+
+//은영 캐릭터 선택 시 선택 마크 되게하기
+function choose_character() {
+	
+	$('.character').children('img').css("border-radius","");
+	$('.character').children('img').css("border","");
+	
+	$img = $(this).children('img');
+	console.log($img);
+	$img.css("border-radius","5px");
+	$img.css("border","2px solid #FE9191");
+	
+	$val = $('#character').val($img.attr('id'));
+	console.log($val);
+	
 }
