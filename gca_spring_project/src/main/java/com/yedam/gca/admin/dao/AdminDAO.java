@@ -212,11 +212,32 @@ public class AdminDAO {
 	
 	
 	
-	// ****************** 수림  ************************//
+	/****************** 수림  *******************
+	 * 
+	 * 	1. 부분환불용 고유번호 리스트 조회
+	 *	2. 부분환불 완료후 환불정보를 Money 테이블에 업데이트
+	 *	3. 전액환불용 고유번호 리스트 조회
+	 *	4. 전액환불 완료 후 환불정보를 Money 테이블에 업데이트
+	 * 
+	 */
 	
 	//1. 부분환불용 고유번호 리스트 조회
-	public List<Map<String, Object>> selectRefund() {
+	public List<Map<String, Object>> getPartialRefundList() {
 		return mybatis.selectList("AdminDAO.getPartialRefundList");
+	}
+	
+	// 2. 부분환불 완료후 환불정보를 Money 테이블에 업데이트
+	public void updatePartialRefundList () {
+		mybatis.update("AdminDAO.updatePartialRefundList");
+	}
+	
+	// 3. 전액환불용 고유번호 리스트 조회
+	public List<Map<String, Object>> getFullRefundList() {
+		return mybatis.selectList("AdminDAO.getFullRefundList");
+	}
+	// 4. 전액환불 완료 후 환불정보를 Money 테이블에 업데이트
+	public void updateFullRefundList() {
+		mybatis.update("AdminDAO.updateFullRefundList");
 	}
 }
 

@@ -211,7 +211,23 @@ public class AdminServiceImpl implements AdminService {
 	
 	//1. 부분환불용 고유번호 리스트 조회
 	@Override
-	public List<Map<String, Object>> selectRefund() {
-		return dao.selectRefund();
+	public List<Map<String, Object>> getPartialRefundList() {
+		return dao.getPartialRefundList();
+	}
+	
+	// 2. 부분환불 완료후 환불정보를 Money 테이블에 업데이트
+	@Override
+	public void updatePartialRefundList() {
+		dao.updatePartialRefundList();
+	}
+		
+	// 3. 전액환불용 고유번호 리스트 조회
+	public List<Map<String, Object>> getFullRefundList() {
+		return dao.getFullRefundList();
+	}
+	
+	// 4. 전액환불 완료 후 환불정보를 Money 테이블에 업데이트
+	public void updateFullRefundList() {
+		dao.updateFullRefundList();
 	}
 }

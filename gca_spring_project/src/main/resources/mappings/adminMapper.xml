@@ -319,6 +319,9 @@
 	
 	<!-- *********************   수림  ************************************* 
 		1. 부분환불용 고유번호 리스트 조회
+		2. 부분환불 완료후 환불정보를 Money 테이블에 업데이트
+		3. 전체환불용 고유번호 리스트 조회
+		4. 전체환불 완료 후 환불정보를 Money 테이블에 업데이트
 	-->
 	
 	<!-- 1. 부분환불용 고유번호 리스트 조회 -->
@@ -337,20 +340,69 @@
 		            "money_moid" 
 		from 		v_refund
 		where 		"money_status" = '보증금'
-		and 		"cl_end_dttm" > sysdate
+		and 		"cl_end_dttm" < sysdate
 		and 		"cl_cnt" > "clh_cnt"
 	]]>
 	
 	</select>
 	
 	
+	<!-- 2. 부분환불 완료후 환불정보를 Money 테이블에 업데이트 -->
+	<update id="updatePartialRefundList">
+	<![CDATA[
+		update      v_refund 
+		set         "money_status" = '부분환불'
+			        "money_withdraw" = "money_deposit" * 0.8, 
+		            "money_withdraw_dttm" = sysdate,
+		where 		"money_status" = '보증금'
+		and 		"cl_end_dttm" < sysdate
+		and 		"cl_cnt" > "clh_cnt";     
+	]]>
+	
+	</update>
 	
 	
 	
+	<!--3. 전체환불용 고유번호 리스트 조회 -->
+	<select id="getFullRefundList" resultType="map">
+	
+	<![CDATA[
+		select      "cl_num",
+		            "m_id",
+		            "cl_cnt"
+		            "clh_cnt",
+		            "cl_end_dttm",
+		            "cl_score",
+		            "money_deposit",
+		            "money_withdraw",
+		            "money_withdraw_dttm",
+		            "money_status",
+		            "money_moid" 
+		from 		v_refund
+		where 		"money_status" = '보증금'
+		and 		"cl_cnt" <= "clh_cnt"
+		and 		"money_withdraw" is null
+		and			"money_withdraw_dttm" is null
+	]]>
+	
+	</select>
 	
 	
+	<!-- 4. 전체환불 완료후 환불정보를 Money 테이블에 업데이트 -->
+	<update id="updateFullRefundList">
 	
+	<![CDATA[
+		update      v_refund 
+		set         "money_status" = '전체환불'
+			        "money_withdraw" = "money_deposit", 
+		            "money_withdraw_dttm" = sysdate,
+		where 		"money_status" = '보증금'
+		and 		"cl_cnt" <= "clh_cnt"
+		and 		"money_withdraw" is null
+		and			"money_withdraw_dttm" is null    
+	]]>
 	
-		
+	</update>
+	
 			
 </mapper>
