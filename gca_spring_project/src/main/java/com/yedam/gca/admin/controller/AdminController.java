@@ -114,8 +114,18 @@ public class AdminController {
 	}
 
 	// 4-2. 일별 매출
+	@ResponseBody
+	@RequestMapping("/ajax/chart/daily")
+	public List<Map<String, Object>> dailyIncome() {
+		return adminService.chartDaily();
+	}
 	
 	// 4-3. 월별 매출
+	@ResponseBody
+	@RequestMapping("/ajax/chart/monthly")
+	public List<Map<String, Object>> monthlyIncome() {
+		return adminService.chartMonthly();
+	}
 	
 
 	

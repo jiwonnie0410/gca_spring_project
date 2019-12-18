@@ -41,6 +41,10 @@
 <script src='${pageContext.request.contextPath }/resources/js/surim/all_history.js'></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
 
+<!-- 미현 : 인증 참여 스크립트 / 지도 스크립트 추가 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9e415eb9e7187154cd9c6308c036f0a6&libraries=services,clusterer"></script>
+<script type="text/javascript" src="../resources/js/mihy/kakao_map2.js"></script>
+
 <style>
 
 .historyDiv {
@@ -142,7 +146,7 @@
 	    <!-- 전체히스토리 div 시작 -->
 	    <div id="allMenu" class="container tab-pane fade"><br>
 	    	  <!-- Nav tabs 시작 반짝/용병/동아리매치 -->
-			  <ul class="nav nav-tabs">
+			  <ul class="nav nav-tabs" id="aaa">
 				    <li class="nav-item">
 				      <a class="nav-link active" data-toggle="tab" href="#sgroup">반짝</a>
 				    </li>
@@ -165,6 +169,12 @@
 							<br>
 							<span class="pinkText">마감일자: <fmt:formatDate value="${list.start }" pattern="YYYY-MM-dd HH:mm"/></span>
 							<span class="mediumText">주소: ${list.location }</span>
+							
+						<!-- 미현 : 지도 출력 부분 시작-->
+							<div class="sg_map" style="width:100%; height:300px">지도</div>
+							<input type="hidden" class="sg_xy" value="${ list.xy }">
+						<!-- 미현 : 지도 출력 부분 끝 -->
+						
 							<span class="mediumText">종목: ${list.sports_cd }</span>
 							<span class="mediumText">숙련도: ${list.skill_cd }</span>
 							<span class="mediumText">나이: ${list.age_range }</span>
@@ -194,6 +204,12 @@
 							<br>
 							<span class="pinkText">마감일자: <fmt:formatDate value="${list.start }" pattern="YYYY-MM-dd HH:mm"/></span>
 							<span class="mediumText">장소: ${list.location }</span>
+							
+						<!-- 미현 : 지도 출력 부분 시작-->
+							<span class="six_map" style="width:100%; height:300px">지도</span>
+							<input type="hidden" class="six_xy" value="${ list.xy }">
+						<!-- 미현 : 지도 출력 부분 끝 -->
+						
 							<span class="mediumText">종목: ${list.sports_cd }</span>
 							<span class="mediumText">숙련도: ${list.skill_cd }</span>
 							<span class="mediumText">나이: ${list.age_range }</span>
@@ -219,6 +235,12 @@
 							<span class="mediumText">나이: ${list.age_range }</span>
 							<span class="mediumText">성별: ${list.gender_cd }</span>
 							<span class="mediumText">팀인원: ${list.bg_team_cnt }</span>
+							
+						<!-- 미현 : 지도 출력 부분 시작-->
+							<div class="bg_map" style="width:100%; height:300px">지도</div>
+							<input type="hidden" class="bg_xy" value="${ list.xy }">
+						<!-- 미현 : 지도 출력 부분 끝 -->
+						
 							<span class="status">${list.status }</span>
 						</div>
 						</c:if>
@@ -243,13 +265,19 @@
 				</div>    
 				<div id="modal-body" class="modal-body">     
 					<span id="date" class="pinkText"></span> 
-					<span id="location" class="mediumText"></span>
+					<span id="location" class="mediumText" style="position: relative;"></span>
 					<span id="end_cnt" class="mediumText"></span>
 					<span id="sports_cd" class="mediumText"></span>
 					<span id="skill_cd" class="mediumText"></span>
 					<span id="age_range" class="mediumText"></span>
 					<span id="gender_cd" class="mediumText"></span>
 					<span id="sg_option" class="mediumText"></span>
+					
+				<!-- 미현 : 지도 출력 부분 시작-->
+					<input type="hidden" id="map_xy">
+					<span id="map" style="position: relative; left:230px; top:-90px;"></span>
+				<!-- 미현 : 지도 출력 부분 끝 -->
+				
 					<span id="status" class="status"></span>
 					
 				</div>
@@ -258,6 +286,6 @@
 				</div>
 			</div>
 		</div>
-	</div>    
+	</div>  
 </body>
 </html>

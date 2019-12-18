@@ -33,6 +33,12 @@ public interface AdminService {
 	// 7. 챌린지 진행 현황
 	public Map<String, Object> challengeGoing(int cl_id);
 	
+	// 8. 일별 수익 현황
+	public List<Map<String, Object>> chartDaily();
+	
+	// 9. 월별 수익 현황
+	public List<Map<String, Object>> chartMonthly();
+	
 	//진영
 	 // 1.회원 정보 상세보기
     public MembersVO viewMember(String m_id);

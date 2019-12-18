@@ -225,7 +225,20 @@ public class MemberServiceImpl implements MemberService {
 		return map;
 	}
 	
-	
+	// 네이버로 로그인 시 이미 있는 회원인지 확인 후 Members 테이블에 데이터 등록
+	@Override
+	public String insertNaver(MembersVO vo) {
+		// 일단 등록된 회원인지 확인: 아이디 중복인지 체크
+		int overlap = dao.checkId(vo.getM_id());
+		
+		// 등록된 회원이 없으면 회원가입
+		if(overlap == 0) {
+			dao.insertNaver(vo);
+		}
+		
+		// 활동정지 상태인지 계정 상태 리턴
+		return dao.memberStatus(vo.getM_id());
+	}
 	
 	
 	
@@ -295,4 +308,6 @@ public class MemberServiceImpl implements MemberService {
 	public void updateRange(MembersVO vo) {
     	dao.updateRange(vo);
     }
+
+	
 }

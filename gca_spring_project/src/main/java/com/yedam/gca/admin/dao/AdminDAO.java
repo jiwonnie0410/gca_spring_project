@@ -78,6 +78,16 @@ public class AdminDAO {
 	    return mybatis.selectList("AdminDAO.chartCity", map);
 	}
 	
+	// 일별 수익 현황
+	public List<Map<String, Object>> chartDaily() {
+		return mybatis.selectList("AdminDAO.dailyIncome");
+	}
+	
+	// 월별 수익 현황
+	public List<Map<String, Object>> chartMonthly()	{
+		return mybatis.selectList("AdminDAO.montlyIncome");
+	}
+	
 	
 	
 	
