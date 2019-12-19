@@ -150,6 +150,7 @@ public class SGroupController {
 		//참여 인원 정보를 채팅방으로 넘김
 		avo.setSg_num(sg_num);
 		model.addAttribute("memlist", actService.getActMemList(avo));
+		
 		return "/user/group_s/s_wating_room";
 	}
 	

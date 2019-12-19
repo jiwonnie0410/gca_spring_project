@@ -559,7 +559,7 @@
  var inputMessage = document.getElementById('inputMessage');
  
  
- function onMessage(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
+ function onMessageChat(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
 	var result = JSON.parse(event.data);
  	var sg_num = ${sgroup.sg_num};
 	if(result.cmd == "join" && ( sg_num == result.sg_num )) { //해당 방에 들어온경우

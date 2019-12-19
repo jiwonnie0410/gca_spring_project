@@ -12,6 +12,9 @@
 	cursor: pointer;
 }
 </style>
+<script>
+	var mid = "<sec:authentication property='principal.m_id'/>";
+</script>
 <script
 	src="${pageContext.request.contextPath }/resources/js/board/user_Qna.js"></script>
 <sec:authentication property="principal.m_id" var="m_id" />

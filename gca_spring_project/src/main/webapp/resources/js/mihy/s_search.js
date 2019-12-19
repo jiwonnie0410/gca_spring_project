@@ -24,7 +24,7 @@ $(document).ready(function(){
 	$('.table').on('click', '.tr', function(){
 		var sg_num = $(this).attr("class").substring(3);
 		var sg_dttm = $(this).find('p.p8').text();
-		console.log(sg_dttm);
+//		console.log(sg_dttm);
 		
 		//선택한 방에 참여하기 전 참여 인원 파악하고 참여 여부 묻기
 		$.ajax({
@@ -76,11 +76,11 @@ function scroll(){
 				keyval: keyval
 				
 		}
-		console.log(end_dis);
-		console.log(end_dttm);
-		console.log(end_num);
-		console.log(key);
-		console.log(keyval);
+//		console.log(end_dis);
+//		console.log(end_dttm);
+//		console.log(end_num);
+//		console.log(key);
+//		console.log(keyval);
 		
 		var url;
 		if( $('.table').attr('class').substr(-7) != 'endroom'){
@@ -88,7 +88,7 @@ function scroll(){
 		} else if( $('.table').attr('class').substr(-7) != 'endroom' ){
 			url = "getSgListEnd/";
 		}
-		console.log(url);
+//		console.log(url);
 		
 		$.ajax({
 			url: url,
@@ -126,7 +126,7 @@ function p8(){
 	
 		var countDownDate = new Date(year, month, day, hour, min, 0, 0).getTime();
 		var distance = countDownDate - now;
-		console.log(distance)
+//		console.log(distance)
 		var d = Math.floor(distance / (1000 * 60 * 60 * 24));
 		var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
 		var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); 
@@ -150,8 +150,8 @@ function p8(){
 function move_room(result, sg_dttm){
 
 	if(result.result_msg == 'already'){ //마감이든 아니든 already면 참여
-		location.href='alreadyIn?sg_num='+result.pk_num;
-	} else if(mstatus == 'M01'){
+		location.href='alreadyIn?sg_num='+result.pk_num+'&endroom='+sg_dttm;
+	} else if(mgrant == 'M01'){
 		if(sg_dttm == "마감"){ //마감이면 무조건(full이나 yes나 모두)
 			alert("마감 시간이 초과되어 참여하실 수 없습니다.");
 			return false;

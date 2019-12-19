@@ -21,6 +21,14 @@
 	var webSocket;
 	var mstatus = "<sec:authentication property='principal.m_id'/>";
 
+	$(function(){
+		msg = {
+				cmd : "alertCnt",
+				id : mstatus
+		}
+		webSocket.send(  JSON.stringify( msg )   );
+	});
+	
 	if(mstatus != null && mstatus != ''){
 		webSocket = new WebSocket('ws://localhost/gca/broadcast.do'); 
 		
@@ -40,8 +48,11 @@
 	
 	function onMessage(event){
 		var result = JSON.parse(event.data);
-		if(result.cmd == "alertCount"){
+		console.log(result + "ㅁㄴㅇㄻㄴㅇㄹ");
+		if(result.cmd == "alertCnt"){
 			$('#alertcnt').text(result.msg);
+		} else {
+			onMessageChat(event);
 		}
 	}
 
