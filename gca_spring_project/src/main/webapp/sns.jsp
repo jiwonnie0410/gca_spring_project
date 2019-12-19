@@ -62,7 +62,7 @@
 				url : 'http://localhost/gca' // 앱 설정의 웹 플랫폼에 등록한 도메인의 URL
 			}
 		});
-	}
+	}*/
 
 
 	// send to SNS
