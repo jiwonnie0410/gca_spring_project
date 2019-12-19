@@ -23,6 +23,7 @@ $(document).ready(function(){
 	$('.table').on('click', '.tr', function(){
 		var sg_num = $(this).attr("class").substring(3);
 		var sg_dttm = $(this).find('p.p8').text();
+		console.log(sg_dttm);
 		
 		//선택한 방에 참여하기 전 참여 인원 파악하고 참여 여부 묻기
 		$.ajax({

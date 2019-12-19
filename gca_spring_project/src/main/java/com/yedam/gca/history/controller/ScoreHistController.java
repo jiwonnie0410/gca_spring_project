@@ -27,4 +27,17 @@ public class ScoreHistController {
 		model.addAttribute("myRank", service.getMyRank(vo));	
 		return "/user/history/rank";
 	}
+
+
+
+
+	///////////////// 은영 ///////////////////////////
+	@RequestMapping("history/score")
+	public String getMyScore(ScoreHistVO vo, Model model, Authentication auth) {
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();	//로그인한 유저 정보 담음
+		String id = userDetails.getUsername(); 							//로그인한 유저 id 담음
+		vo.setM_id(id);
+		model.addAttribute("myscorelist", service.getMyScore(vo));	
+		return "/user/history/score_history";
+	}
 }

@@ -13,5 +13,12 @@ public interface ScoreHistService {
 	
 	// 2. 로그인 유저 1명 랭킹 조회
 	ScoreHistVO getMyRank(ScoreHistVO vo);
+	
+	
+	
+	//////////////은영 //////////////////
+	
+	//본인의 획득 점수, 날짜, 획득경로 조회
+	List<ScoreHistVO> getMyScore(ScoreHistVO vo);
 
 }
