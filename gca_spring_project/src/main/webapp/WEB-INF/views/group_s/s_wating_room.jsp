@@ -311,11 +311,19 @@
 
 			});
 			
+			//목록으로 돌아가기
+			$('#backToList').on('click', function(){
+				
+				if(#{param.endroom} == "마감"){
+					location.href='getSgListEnd';
+				}else{
+					location.href='getSgList';
+				}
+			});
+			
 			//미현
 			$('#btn_cert').on('click', getLocation); //참가인증
 			view_map();
-			
-			$('#backToList').on('click', function(){location.href='getSgList';}) //목록으로 돌아가기
 			
 		});
 </script>
@@ -583,10 +591,6 @@
 		var id = result.id;
 		
 		//var param = {"img":img};
-		
-		//console.log("id : "+id);
-		//console.log("nick : "+nick);
-		//console.log("img : "+img);
 		
 		//이미지 영어이름 갖고오는 ajax(웹소켓에서 처리하는 방향 알아보기.)
 		/* $.ajax({
