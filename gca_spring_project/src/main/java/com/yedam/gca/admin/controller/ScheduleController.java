@@ -37,9 +37,13 @@ public class ScheduleController {
 	// 1. 부트페이 서버 전송용 토큰 갱신 (매일 am 0:05) - 토큰 생성 후 30분 후 소멸
 	@Scheduled(cron = "0 5 0 * * * ")
 	public void bootpay() throws InterruptedException {
-	 api = new BootpayApi(
-				"5de9c9d85ade160030cc4a8a", 						// REST용 Application ID
-				"lgO2Fr/UI3L5QGI97pcPWspPIWozz0MSxndaDlC0s+A=" 		// 프로젝트의 Private KEY
+	Map<String, String> bootpay = service.getBootpayInfo();
+	String id = bootpay.get("id");
+	String key = bootpay.get("key");			
+		
+	 api = new BootpayApi( 
+			 		id, 		// REST용 Application ID
+			 		key 		// 프로젝트의 Private KEY
 		);
 	
 	 	int gap = 1000 * 60 * 5;    //  부분환불 - 전액환불 사이 쉬는시간 (디폴트 5분)
@@ -79,9 +83,7 @@ public class ScheduleController {
 			double percent = 0.8;  // 환불받을 비율 (0.1 ~~ 1.0) 기본 80% (0.8)
 			int refund = (int)(((BigDecimal) list.get("money_deposit")).doubleValue() * percent ) ;   // 부분환불 받을 금액
 			String receiptId = (String) list.get("money_moid");		// 각 결제별 고유번호 
-			
-			System.out.println(refund + "환불얼마?");
-			
+						
 			Cancel cancel = new Cancel();
 			cancel.price = refund;				// api에 환불금액을 싣는다
 			cancel.receipt_id = receiptId;		// api에 결제 고유번호를 싣는다
@@ -92,11 +94,11 @@ public class ScheduleController {
 				HttpResponse res = api.cancel(cancel);
 				String str = IOUtils.toString(res.getEntity().getContent(), "UTF-8");
 				System.out.println(str + "!! 부분환불서버전송 !!");
+				updatePartialRefundList();   // 부분환불완료 대상이 있으면 2-2에서 디비 업데이트
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}//
-		updatePartialRefundList();
 	}
 
 	// 2-2 부분환불 완료시 해당 정보 Money 테이블에 업데이트
@@ -134,11 +136,11 @@ public class ScheduleController {
 				HttpResponse res = api.cancel(cancel);
 				String str = IOUtils.toString(res.getEntity().getContent(), "UTF-8");
 				System.out.println(str + "!! 전체환불서버전송  !!");
+				updateFullRefundList();  // 전체환불완료 대상이 있으면 3-2에서 디비 업데이트
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}//
-		//updateFullRefundList();
 	}
 	
 	//3-2 전액환불 완료시 해당 정보 Money 테이블에 업데이트

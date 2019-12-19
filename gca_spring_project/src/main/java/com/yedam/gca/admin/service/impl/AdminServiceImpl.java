@@ -230,4 +230,10 @@ public class AdminServiceImpl implements AdminService {
 	public void updateFullRefundList() {
 		dao.updateFullRefundList();
 	}
+
+	@Override
+	// 5. 부트페이 App Id, Private key 조회
+	public Map<String, String> getBootpayInfo() {
+		return dao.getBootpayInfo();
+	}
 }

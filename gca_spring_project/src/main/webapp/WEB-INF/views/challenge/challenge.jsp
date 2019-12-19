@@ -63,6 +63,7 @@
 
     <div class="container">
     <span class="title">챌린지 목록</span>
+    <br>
       <div class="row">
         <div class="col">
         	<!-- 상단 nav-tabs 시작 -->
