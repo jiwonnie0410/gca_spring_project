@@ -39,7 +39,8 @@ public class ScheduleController {
 	public void bootpay() throws InterruptedException {
 	Map<String, String> bootpay = service.getBootpayInfo();
 	String id = bootpay.get("id");
-	String key = bootpay.get("key");			
+	String key = bootpay.get("key");		
+	
 		
 	 api = new BootpayApi( 
 			 		id, 		// REST용 Application ID
