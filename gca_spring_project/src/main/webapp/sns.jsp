@@ -19,7 +19,7 @@
 <meta property="og:title" content="운동하자" />
 <meta property="og:url" content="http://39.116.34.40/gca" />
 <meta property="og:description" content="동네 친구와 함꼐 운동하는 gca" />
-<meta property="og:image" content="${pageContext.request.contextPath }/images/bok/sns_logo.png" />
+<meta property="og:image" content="${pageContext.request.contextPath }/resources/images/bok/sns_logo.png" />
 
 
 	
