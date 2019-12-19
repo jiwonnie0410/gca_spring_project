@@ -124,13 +124,13 @@
 <body style="overflow: hidden; background-color: #f0f0f0;">
 	<div class="sns_wrap">
 		<p>SNS 공유하기</p>
-				<a class="ftco-animate" href="javascript:toSNS('facebook','gca제목!','http://localhost/gca')" title="페이스북으로 가져가기">
+				<a class="ftco-animate" href="javascript:toSNS('facebook','gca제목!','http://39.116.34.40/gca')" title="페이스북으로 가져가기">
 				<i class="fab fa-facebook"></i></a></li>
 				
-				<a class="ftco-animate"href="javascript:toSNS('twitter','gca','http://localhost/gca')"title="트위터로 가져가기">
+				<a class="ftco-animate"href="javascript:toSNS('twitter','gca','http://39.116.34.40/gca')"title="트위터로 가져가기">
 				<i class="fab fa-twitter-square"></i></a></li>
 				
-				<a class="ftco-animate" href="javascript:toSNS('line','gca','http://localhost/gca')" title="라인으로 가져가기">
+				<a class="ftco-animate" href="javascript:toSNS('line','gca','http://39.116.34.40/gca')" title="라인으로 가져가기">
 				<i class="fab fa-line"></i></a></li>
 				
 				<a class="ftco-animate" href="javascript:shareKakaotalk();"title="카카오톡으로 가져가기">
@@ -139,8 +139,8 @@
 				<!-- <a href="javascript:toSNS('google','gca','http://localhost/gca')" title="구글플러스로 가져가기"></a>
 				<i class="fab fa-google-plus-g"></i> -->
 		<ul>
-			<li><input type="text" value="http://localhost/gca">
-				<a href="javascript:copy_clip('http://localhost/gca')">
+			<li><input type="text" value="http://39.116.34.40/gca">
+				<a href="javascript:copy_clip('http://39.116.34.40/gca')">
 				<i class="fas fa-reply" aria-hidden="true"></i></a>
 			</li>
 		</ul>
