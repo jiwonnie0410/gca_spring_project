@@ -22,6 +22,8 @@ function getQb_id(qb_id) {
 		console.log(qb_id);
 		$(".modal-body").load("qnView?qb_id="+qb_id)
 	});
+		
+	
 }
 
 
@@ -48,6 +50,7 @@ function getBoardListHandler(datas) {
 				$('<td>').html(datas[i].m_id)).append(
 				$('<td>').html(datas[i].qb_title)).appendTo('#asktb').attr(
 				"data", datas[i].bno);
+		/*$("#userlisttb").dataTable()*/
 	}// for
 
 }// getBoardListHandler
@@ -90,9 +93,9 @@ function insertBoardtHandler(data) {
 
 //삭제 요청(rest방식)
 function deleteBoard() {
-	$("#asktb").on("click","#btnDel", function() {
-		var bno = $(this).parent().find("span").eq(0).html();
-		console.log(bno);
+	$("#btnDel").click(function(){ 
+//		var bno = $(this).parent().find("span").eq(0).html();
+	console.log(qb_id);
 		$.ajax({
 			url:"board/"+qb_id,
 			method:"delete",	
@@ -101,17 +104,33 @@ function deleteBoard() {
 	});
 }
 
-	//삭제 요청 결과처리
-	function deleteBoardHandler(bno) {
-		console.log( qb_id);
-		$("[data = '" + qb_id+ "' ]" ).remove();
-	}
-  
-	
-	function go_page(paging){
-		document.boardForm.page.value = paging;
-		getBoardList();
-		//document.boardForm.submit();
-	}
-  
+
+//삭제 요청 결과처리
+function deleteBoardHandler(qb_id) {
+	 alert("삭제되었습니다.");
+}
+
+
+//삭제 요청(rest방식)
+//$("#btnDel")
+//	.click(function deleteBoard() {
+//		var bno = $(this).parent().find("span").eq(0).html();
+//		console.log(qb_id);
+//		$.ajax({
+//			url:"board/"+qb_id,
+//			method:"delete",	
+//			success: confirm("삭제하시겠습니까?")
+//		});
+//	});
+
+
+/*$(function deleteBoard(){ 
+	$("#btnDel").click(function(){ 
+		$.ajax({
+			url:"board/"+qb_id,
+			method:"delete",	
+			success: confirm("삭제하시겠습니까?")
+		});
+	});
+});*/
   

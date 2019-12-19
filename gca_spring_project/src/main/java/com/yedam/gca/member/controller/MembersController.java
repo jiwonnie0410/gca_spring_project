@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yedam.gca.member.service.MemberService;
 import com.yedam.gca.member.vo.MembersVO;
@@ -60,18 +61,17 @@ public class MembersController {
     // 02. 회원 정보 수정 처리
     @RequestMapping("member/update")
     public String memberUpdate(@ModelAttribute MembersVO vo, Model model){
-        // 비밀번호 체크
-//		boolean result = memberService.checkPw(vo.getM_id(), vo.getM_password()); 
-//		/* boolean passMatch = passEncoder.matches(vo.getM_id(), vo.getM_password()); */
-//        if(result){ // 비밀번호가 일치하면 수정 처리후
            memberService.updateMember(vo);
-           return "redirect:/user/member/member_view";
-//        } else { // 비밀번호가 일치하지 않는다면, div에 불일치 문구 출력, viwe.jsp로 포워드
-//            model.addAttribute("dto", vo);
-//            model.addAttribute("message", "비밀번호 불일치");
-//            return "/user/member/member_update";
-//       }
+           return "/user/member/member_view";
    }
+    
+    
+//    @RequestMapping("member/update")
+//    public String memberUpdate(@ModelAttribute MembersVO vo, Model model, RedirectAttributes rttr) throws Exception{
+//           memberService.updateMember(vo);
+//       	rttr.addFlashAttribute("msg", "회원정보 수정 완료");
+//           return "redirect:/user/member/member_view";
+//   }
     
     
     // 03. 회원정보 삭제 처리
@@ -91,25 +91,4 @@ public class MembersController {
             return "/notiles/member/member_view";
         }
     }
-	
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

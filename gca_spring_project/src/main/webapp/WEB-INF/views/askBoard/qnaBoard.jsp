@@ -162,7 +162,7 @@
 				<div class="modal-body"></div>
 				<div class="modal-footer">
 					<!-- 본인이 쓴 게시물만 수정, 삭제가 가능하도록 처리 -->
-					<button type="button" class="btn " id="btnDelete" style="background-color: #FE9191; color: white;">삭제</button>
+					<button type="button" class="btn " id="btnDel" style="background-color: #FE9191; color: white;">삭제</button>
 					<button type="button" class="btn btn-primary" id="btnUpdete">수정</button>
 					<button type="button" class="btn" data-dismiss="modal" style="background-color: #FE9191; color: white;">Close</button>
 				</div>
