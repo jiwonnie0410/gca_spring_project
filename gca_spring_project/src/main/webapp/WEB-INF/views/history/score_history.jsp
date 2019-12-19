@@ -14,7 +14,7 @@
 	<div align="left" style="background: #FE9191; color: #fff; height: 70px; padding:20px; font-size:20px; font-weight:bold;">
 		점수 획득 내역
 	</div>
-	<div align="center" style="padding:10px; padding-top: 80px;">
+	<div align="center" style="padding:10px; padding-top: 50px;">
 		<table id="scorelist" border="3" style="text-align: center; border: 3px solid #FE9191; border-radius: 7px;">
 			<tr style="background-color: #FE9191; color: #fff;">
 				<th style="border-right-color: #fff">점수</th>

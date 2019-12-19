@@ -314,7 +314,7 @@
 			//목록으로 돌아가기
 			$('#backToList').on('click', function(){
 				
-				if(#{param.endroom} == "마감"){
+				if("${param.endroom}" == "마감"){
 					location.href='getSgListEnd';
 				}else{
 					location.href='getSgList';
@@ -382,8 +382,13 @@
 
 <!-- 버튼영역 시작 -->														
     <div style="padding-bottom:30px">
-      	<button id="btn_cert" class="button-general">참가인증</button>&nbsp;<button id="cancelJoin" class="button-general">참가취소</button>&nbsp;
-      	<button class="button-general">공유</button>&nbsp;<button id="backToList" class="button-general">목록</button>
+      	<button id="btn_cert" class="button-general">참가인증</button>&nbsp;
+      	<c:set var="end" value="마감" />
+      	<c:if test="${param.endroom ne end}">
+      		<button id="cancelJoin" class="button-general">참가취소</button>&nbsp;
+      	</c:if>
+      	<button class="button-general">공유</button>&nbsp;
+      	<button id="backToList" class="button-general">목록</button>
     </div>
 <!-- 버튼영역 끝 -->
 
