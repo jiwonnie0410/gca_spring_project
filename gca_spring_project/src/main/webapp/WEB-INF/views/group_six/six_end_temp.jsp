@@ -6,6 +6,7 @@
 	<c:forEach items="${ list }" var="six">
 	<tr class="tr ${six.six_num}">
 		<td class="td1">
+			<p class="content p9"><span class="badge badge-pill badge-light shadow-sm">${six.dis }</span></p>
 			<p class="content p1">
 				<c:forEach items="${sports_list }" var="list">
 				<c:choose>

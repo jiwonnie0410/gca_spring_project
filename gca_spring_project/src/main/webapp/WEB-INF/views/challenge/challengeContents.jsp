@@ -15,15 +15,6 @@
 <sec:authentication property="principal.username" var="id"/>
 <sec:authentication property="principal.m_nick" var="nick"/>
 <sec:authentication property="principal.m_image_cd" var="image"/>
-
-<!-- jquery js -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- bootstrap -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- json-serializeObject js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
 		
 <!-- 수림 개인 js/css -->
 <script src="${pageContext.request.contextPath }/resources/js/surim/default.js"></script>
@@ -103,9 +94,10 @@ $(function(){
     right: 5%;
 }
 
-.start-challenge{
+.start-challenge {
 	background: #59b6a3;
 }
+
 
 </style>
 
@@ -133,40 +125,54 @@ $(function(){
 	              			</c:if>         
 							<!-- 유저 참가중 마크 끝 -->
 					</div>
-					<span class="pinkText"><fmt:formatDate
-							value="${challenge.cl_start_dttm }" type="date" /> ~ <fmt:formatDate
-							value="${challenge.cl_end_dttm }" type="date" />
-						(D-${challenge.gap_day })</span>
+					<span class="pinkText">
+						<fmt:formatDate value="${challenge.cl_start_dttm }" type="date" /> ~ 
+						<fmt:formatDate value="${challenge.cl_end_dttm }" type="date" />
+					</span>
 						
 					<span class="mediumText">${challenge.cl_name }</span> 
-					<span class="mediumText">기간내 | ${challenge.cl_cnt }회 참여</span> 
+					<span class="mediumText">기간내 | ${challenge.cl_cnt }회 참여
+					
+						<!-- 태그 시작 -->
+						<a class="tags">
+							<!-- D-day 태그 -->
+							<input class="dDay-tag" value="D-${challenge.gap_day }">
+							<!-- 참가중 태그 -->
+	              			<c:if test="${challenge.cl_num == myHistory.cl_num }">
+									<input class="join-tag" value="참가중">
+							</c:if>
+						</a>
+						<!-- 태그 끝 -->
+					
+					</span> 
+					<br>
+					<!-- 점수/보증금 설명 -->
+					<span style="display: flex; color: grey; font-weight: bold; ">
+						<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px"> 
+						성공시 점수 <span class="pinkBold">&nbsp;${challenge.cl_score }점!</span> 
+					</span>
+					<span class="mediumText">획득시 회원레벨과 랭킹에 반영됩니다</span>
+						
 					<c:if test="${challenge.cl_status != 'basic' }">
+					<br>
+					<span style="display: flex; color: grey; font-weight: bold; ">
+						<img src="${pageContext.request.contextPath }/resources/images/icon/money.png" width="25px">
+						보증금 &nbsp;
+						<span class="pinkBold">1천원~5천원</span>
+					</span>
 					<span class="mediumText">
-						<img src="${pageContext.request.contextPath }/resources/images/icon/money.png" width="25px">1천원~5천원
+						스페셜챌린지에 참가하여 더 높은 점수를 획득하세요!
+					</span>
+					<span class="mediumText">
+						성공시 보증금은 전액환불됩니다
 					</span>
 					</c:if>
-					<span class="mediumText"> 
-						<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px"> ${challenge.cl_score }점
-					</span>
+					<!-- 보증금설명/포인트 설명 끝 -->
 					<!-- 챌린지 기본옵션 끝 -->
 					<hr>
 					<!-- 챌린지 세부설명 -->
 					<span>${challenge.cl_content}</span>
-					<hr>
-					<!-- 보증금/포인트 설명 -->
-					<c:if test="${challenge.cl_status != 'basic' }">
-					<span class="mediumText">
-						<img src="${pageContext.request.contextPath }/resources/images/icon/money.png" width="25px">
-						보증금
-						<br>스페셜 챌린지 참가시 보증금이 필요하며 챌린지 성공 퍼센트에 따라 환급비율이 달라집니다.
-					</span>
-					</c:if>
-					<span class="mediumText" style="padding-bottom: 50px">
-						<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px">
-						포인트 
-						<br>획득시 회원등급 결정에 사용됩니다.
-					</span>
-					<!-- 보증금설명/포인트 설명 끝 -->
+
 					
 					<!-- 기본/스페셜챌린지버튼 시작 -->
 						<!-- 계정 상태가 활동중인 사람들만 버튼 보임 -->
@@ -205,11 +211,12 @@ $(function(){
 						<button type="button" class="close" data-dismiss="modal">×</button>
 					</div>
 					<div class="modal-body">
-						<span> 
+						<span class="pinkText"> 
 							<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px"> ${challenge.cl_score }점
 						</span>
-						<p>기본챌린지에 참여하시겠습니까?</p>
-						<p>참가시 취소가 되지 않습니다</p>
+						<br>
+						<span class="mediumText">기본챌린지에 참여하시겠습니까?</span>
+						<span class="mediumText">참가시 취소가 되지 않습니다</span>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="pink-btn"
@@ -231,11 +238,16 @@ $(function(){
 						<button type="button" class="close" data-dismiss="modal">×</button>
 					</div>
 					<div class="modal-body">
-						<span>    
-							<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px"> ${challenge.cl_score }점
+						<span class="pinkText">    
+							<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px">
+							${challenge.cl_score }점
+							<img src="${pageContext.request.contextPath }/resources/images/icon/money.png" width="25px">
+							보증금필요
 						</span>
-						<p>스페셜챌린지에 참여하시겠습니까?</p>
-						<p>참가시 소정의 보증금이 필요하며 결제후 취소가 되지 않습니다</p>
+						<br>
+						<span class="mediumText">스페셜챌린지에 참여하시겠습니까?</span>
+						<span class="mediumText">참가시 소정의 보증금이 필요하며, </span>
+						<span class="mediumText">결제후 취소가 되지 않습니다</span>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="pink-btn"

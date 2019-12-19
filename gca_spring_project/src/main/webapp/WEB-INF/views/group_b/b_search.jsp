@@ -31,7 +31,7 @@
 
 	<!-- private : Description Action -->
 	<script type="text/javascript" src="../resources/js/mihy/b_search.js"></script>
-	<link rel="stylesheet" href="../resources/css/mihy/b_search.css">
+	<link rel="stylesheet" href="../resources/css/mihy/s_search.css">
 </head>
 
 
@@ -64,6 +64,7 @@
 	<c:forEach items="${ list }" var="bg">
 	<tr class="tr ${bg.bg_num}">
 		<td class="td1">
+			<p class="content p9"><span class="badge badge-pill badge-light shadow-sm">${bg.dis }</span></p>
 			<p class="content p1">
 			<c:forEach items="${sports_list }" var="list">
 				<c:choose>

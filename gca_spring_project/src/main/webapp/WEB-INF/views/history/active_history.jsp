@@ -10,19 +10,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>all_history.jsp</title>
+
 <!-- 로그인한사람의 id,닉네임,캐릭터코드 저장 -->
 <sec:authentication property="principal.username" var="id"/>
 <sec:authentication property="principal.m_nick" var="nick"/>
 <sec:authentication property="principal.m_image_cd" var="image"/>
-
-<!-- jquery js -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- bootstrap -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- json-serializeObject js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
 
 <!-- 달력(fullcalendar) css/js파일 -->
 <link href='${pageContext.request.contextPath }/resources/fullcalendar/core/main.css' rel='stylesheet' />
