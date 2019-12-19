@@ -298,7 +298,7 @@
 			$('#btn_cert').on('click', getLocation); //참가인증
 			view_map();
 			
-			$('#backToList').on('click', function(){location.href='getSgList';}) //목록으로 돌아가기
+			$('#backToList').on('click', function(){location.href='getBgList';}) //목록으로 돌아가기
 			
 		});
 </script>
