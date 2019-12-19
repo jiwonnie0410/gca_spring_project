@@ -101,5 +101,8 @@ public interface AdminService {
 	// 4. 전액환불 완료 후 환불정보를 Money 테이블에 업데이트
 	public void updateFullRefundList();
 	
+	// 5. 부트페이 App Id, Private key 조회
+	public Map<String, String> getBootpayInfo();
+	
 	
 }

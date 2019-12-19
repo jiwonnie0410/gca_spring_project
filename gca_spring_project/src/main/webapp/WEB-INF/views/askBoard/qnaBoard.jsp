@@ -12,16 +12,15 @@
 	cursor: pointer;
 }
 </style>
-<<<<<<< HEAD
+
 <script>
 	var mid = "<sec:authentication property='principal.m_id'/>";
 </script>
-=======
+
 <!--데이터 테이블  -->
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 
->>>>>>> branch 'master' of https://github.com/jiwonnie0410/gca_spring_project.git
 <script
 	src="${pageContext.request.contextPath }/resources/js/board/user_Qna.js"></script>
 <sec:authentication property="principal.m_id" var="m_id" />

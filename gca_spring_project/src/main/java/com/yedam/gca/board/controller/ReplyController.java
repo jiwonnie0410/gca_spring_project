@@ -23,14 +23,6 @@ import com.yedam.gca.board.service.ReplyPager;
 import com.yedam.gca.board.service.ReplyService;
 import com.yedam.gca.board.vo.AdReplyVO;
 
-// REST : Representational State Transfer
-// 하나의 URI가 하나의 고유한 리소스를 대표하도록 설계된 개념
-
-// http://localhost/spring02/list?ad_num=1 ==> url+파라미터
-// http://localhost/spring02/list/1 ==> url
-// RestController은 스프링 4.0부터 지원
-// @Controller, @RestController 차이점은 메서드가 종료되면 화면전환의 유무
-
 //@Controller
 @RestController
 @RequestMapping("/reply/*")

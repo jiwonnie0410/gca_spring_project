@@ -30,7 +30,6 @@
 
 
 <select id="getBoardList"  resultType="qnaboard" >
-select b.*  from ( select a.*, rownum rn  from(
 	 select
 		    qb_id,
 		    qb_title,
@@ -40,59 +39,9 @@ select b.*  from ( select a.*, rownum rn  from(
 		    decode((select count(qb_title) from qna_board where qb_origin =q.qb_id), 1,'yes','no') qb_an   
 	   from  qna_board q
 	   where
-	   qb_origin is null
-	   	<if test="keyword != null and keyword != '' ">
-	   		<if test="searchCondition == 'qb_title'">
-	   			and qb_title like '%' || #{keyword}  || '%'
-	   		</if>
-	   		<if test="searchCondition == 'qb_content'">
-	   			and qb_content like '%' || #{keyword}  || '%'
-	   		</if>   		
-	   	</if>
-
-	  ORDER  BY qb_id DESC
-) a  ) b where rn between #{start} and #{end} 	  
+	   		qb_origin is null
+	 	  
 </select>
-
-
-<!-- dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd -->
-
-
-<!-- <select id="getBoardReRef" parameterType="qnaboard" resultType="int">
-	
-		SELECT IFNULL(MAX(qb_origin), 0) + 1
-		FROM qna_board
-	
-	</select>
-
-
-<insert id="insertBoardReply" parameterType="qnaboard">
-	
-		INSERT 
-		INTO qna_board 
-		(
-		<if test="qb_origin != null and qb_origin != ''">
-		  	  qb_origin,
-		</if>  	  
-		  	 m_id
-		  	, qb_title
-		  	, qb_content
-		) 
-		VALUES 
-		(	<if test="qb_origin != null and qb_origin != ''">
-			  #{qb_origin}, 
-			</if>  
-			  #{m_id}
-			, #{qb_title}
-			, #{qb_content}
-		)
-	</insert>
- -->
-
-<!-- dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd -->
-
-
-
 
 
 
@@ -190,6 +139,22 @@ SELECT B.*  FROM ( SELECT A.*, ROWNUM RN  FROM(
 
 <!-- 단건조회 -->
 <select id="view" parameterType="qnaboard"  resultType="qnaboard" >
+ SELECT  qb_id,
+		 qb_title,
+		 m_id,
+		 qb_content,
+		 qb_date,
+		 qb_hit,
+		 (select qb_content from qna_board where qb_origin =q.qb_id) qb_an,
+		 (select qb_id from qna_board where qb_origin =q.qb_id) qb_an_id
+   FROM  qna_board q
+  WHERE  qb_id = #{qb_id} 
+</select>
+
+
+
+<!-- 단건조회 -->
+<select id="view2" parameterType="qnaboard"  resultType="qnaboard" >
  SELECT  qb_id,
 		 qb_title,
 		 m_id,

@@ -46,22 +46,22 @@ $(function(){
 	}//userList
 	
 	
-	
-	//사용자 목록 조회 응답
-	function userListResult(data) {
-		$("#userlist").empty();
-		$.each(data,function(idx,item){
-			$('<tr>')
-			.append($('<td>').html(item.m_id))
-			.append($('<td>').html(item.m_name))
-			.append($('<td>').html(item.gender_cd))
-			.append($('<td>').html(item.m_status_cd))
-			.append($('<td>').html("<button id='btnSelect'  data-toggle='modal' data-target='#Modalread' >조회</button>"))
-			.append($('<td>').html('<button id=\'btnDelete\'>삭제</button>'))
-			.append($('<input type=\'hidden\' id=\'hidden_m_id\'>').val(item.m_id))
-			.appendTo('#userlist');
-		});//each
-	}//userListResult
+
+//사용자 목록 조회 응답
+function userListResult(data) {
+	$("#userlist").empty();
+	$.each(data,function(idx,item){
+		$('<tr>')
+		.append($('<td>').html(item.m_id))
+		.append($('<td>').html(item.m_name))
+		.append($('<td>').html(item.gender_cd))
+		.append($('<td>').html(item.m_status_cd))
+		.append($('<td>').html("<button id='btnSelect'  data-toggle='modal' data-target='#Modalread' >조회</button>"))
+		.append($('<input type=\'hidden\' id=\'hidden_m_id\'>').val(item.m_id))
+		.appendTo('#userlist');
+	});//each
+	$("#userlisttb").dataTable()
+}//userListResult
 	
 	
 	

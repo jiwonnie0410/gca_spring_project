@@ -14,7 +14,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
-<script>
+<!-- <script>
 //페이지맵 이벤트
 //ready이벤트 작성
 
@@ -108,7 +108,7 @@
 		
 		
 
-</script>
+</script> -->
 <title>boardList_json.jsp</title>
 </head>
 <body>

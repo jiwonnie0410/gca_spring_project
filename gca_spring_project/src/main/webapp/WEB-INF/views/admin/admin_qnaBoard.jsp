@@ -15,7 +15,7 @@
 </style>
 <script
 	src="${pageContext.request.contextPath }/resources/js/admin/admin_Qna.js"></script>
-<title>boardList_json.jsp</title>
+<title>질문 관리</title>
 </head>
 <body>
 	<div id="content-wrapper">
@@ -26,13 +26,12 @@
 					<div class="card-header" style="background-color: #FEBABA;">질문관리</div>
 					<div class="card-body">
 						<div class="table-responsive">
-							<table class="table text-center">
+							<table class="table text-center" id="userlisttb" >
 								<thead>
 									<tr>
 										<th class="text-center" width="20%">번호</th>
 										<th class="text-center" width="20%">답변여부</th>
 										<th class="text-center" width="20%">질문유형</th>
-										<!-- <th class="text-center" width="30%">내용</th>-->
 										<th class="text-center" width="20%">답변</th>
 										<th class="text-center" width="20%">삭제</th>
 									</tr>
@@ -43,13 +42,10 @@
 					</div>
 				</div>
 			</section>
-			<!------------------------------------------------------- 목록  끝 ----------------------------------->
-
-			<!-- ---------------------------------------페이징 시작------------------------------------------------- -->
 		</div>
-		<my:paging paging="${paging}"></my:paging>
 	</div>
-	<!-- --------------------------------------------------페이징 끝 ------------------------------------>
+<!------------------------------------------------------- 목록  끝 ----------------------------------->
+
 
 <!----------------------------------Modal 쓰기  ------------------------------------------------------------>
 	<div class="modal fade" id="myModal" role="dialog">
@@ -108,11 +104,20 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body"></div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" id="btnUpdete">답글</button>
+				
+				<%-- <div class="modal-footer">
+					<c:choose>
+						<c:when test="${ dto.qb_an != 'yes'}">
+							<button type="button" class="btn btn-primary" id="btnUpdete">답글</button>
+						</c:when>
+						<c:otherwise>
+							<button type="button" class="btn btn-primary" id="btnUpdete">수정</button>
+						</c:otherwise>
+					</c:choose>
+
 					<button type="button" class="btn btn-danger" id="btnDelete">삭제</button>
 					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-				</div>
+				</div> --%>
 			</div>
 		</div>
 	</div>
