@@ -16,6 +16,7 @@ $(document).ready(function(){
 		location.href='createRoomForm';
 	});
 	
+	p9();
 	p8();
 	setInterval(p8,1000);
 	
@@ -97,6 +98,15 @@ function scroll(){
 				$('#tb1 tbody').append(result);
 			}
 		});
+	}
+}
+
+//조회거리 반올림
+function p9(){
+	for(var i=0; i<$('.p9').length; i++){
+		var p9_dis = $('.p9').eq(i).children();
+		var mathround_dis = Math.round(p9_dis.text() *10) / 10;
+		p9_dis.text(mathround_dis + "km");
 	}
 }
 

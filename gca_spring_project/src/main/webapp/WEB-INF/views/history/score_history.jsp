@@ -11,8 +11,15 @@
 
 </head>
 <body>
-
-
-
+	<div>
+		<table>
+			<tr><th>점수</th><th>획득날짜</th><th>획득</th></tr>
+			<c:forEach var="myscore" items="${myscorelist}">
+				<tr>
+					<td>${myscore.sch_score}</td><td>${myscore.sch_part}</td><td>${myscore.sch_dttm}</td>
+				</tr>	
+			</c:forEach>
+	</table>
+	</div>
 </body>
 </html>

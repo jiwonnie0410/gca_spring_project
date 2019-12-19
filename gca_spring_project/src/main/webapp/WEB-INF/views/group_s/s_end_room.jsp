@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -23,6 +24,10 @@
 	<link rel="stylesheet" href="../resources/css/mihy/swiper.min.css">
 	<script src="../resources/js/mihy/swiper.min.js"></script>
 
+<script>
+	var mstatus = "<sec:authentication property='principal.m_status_cd'/>";
+</script>
+
 	<!-- private : Description Action -->
 	<script type="text/javascript" src="../resources/js/mihy/s_search.js"></script>
 	<link rel="stylesheet" href="../resources/css/mihy/s_search.css">
@@ -32,6 +37,7 @@
 
 <body>
 
+<sec:authentication property='principal.m_status_cd' var='mStatus'/>
 <nav class="fixed-top">
 <div align="center" class="mt-2 mb-2"><h4>마감된 반짝방</h4></div>
 <input type="hidden" id="endroom" value="endroom">
@@ -55,6 +61,7 @@
 	<c:forEach items="${ list }" var="sg">
 	<tr class="tr ${sg.sg_num}">
 		<td class="td1">
+			<p class="content p9"><span class="badge badge-pill badge-light shadow-sm">${sg.dis }</span></p>
 			<p class="content p1">
 				<c:forEach items="${sports_list }" var="list">
 				<c:choose>

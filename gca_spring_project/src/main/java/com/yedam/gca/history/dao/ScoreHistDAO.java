@@ -27,4 +27,11 @@ public class ScoreHistDAO {
 		return mybatis.selectOne("ScoreHistDAO.getMyRank", vo);
 	}
 
+
+
+
+	//************* 은영 **************//
+	public List<ScoreHistVO> getMyScore(ScoreHistVO vo) {
+		return mybatis.selectList("ScoreHistDAO.getMyScore", vo);
+	}
 }

@@ -35,5 +35,15 @@
 	</select>
 
 	
+
+
+<!-- *************************은영************************ -->
+	<select id="getMyScore" resultType="scorehistory" parameterType="scorehistory">
+		SELECT	SCH_SCORE,
+				SCH_DTTM,
+				SCH_PART
+		FROM	SCORE_HIST
+		WHERE	M_ID = #{m_id}
 	
+	</select>
 </mapper>

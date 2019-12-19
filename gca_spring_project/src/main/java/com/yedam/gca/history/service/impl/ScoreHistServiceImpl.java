@@ -26,5 +26,14 @@ public class ScoreHistServiceImpl implements ScoreHistService{
 	public ScoreHistVO getMyRank(ScoreHistVO vo) {
 		return dao.getMyRank(vo);
 	}
+	
+	
+	
+	
+	
+	//////////////은영 /////////////
+	public List<ScoreHistVO> getMyScore(ScoreHistVO vo) {
+		return dao.getMyScore(vo);
+	}
 
 }

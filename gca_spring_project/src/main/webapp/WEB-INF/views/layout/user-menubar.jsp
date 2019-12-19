@@ -192,10 +192,10 @@
 						<td onClick = "location.href='${pageContext.request.contextPath }/history/myChallengeList'">챌린지 히스토리</td>
 						<td onClick = "location.href='${pageContext.request.contextPath }/sgroup/getSgList'">진행 중 반짝</td>
 						<td onClick = "location.href='${pageContext.request.contextPath }/board/adlist'">동호회 홍보</td>
-						<td onClick = "location.href='${pageContext.request.contextPath }'">랭킹</td>
+						<td onClick = "location.href='${pageContext.request.contextPath }/history/rank'">랭킹</td>
 					</tr>
 					<tr>	
-						<td onClick = "location.href='${pageContext.request.contextPath }/history/rank'">업적 히스토리</td>
+						<td onClick = "location.href='${pageContext.request.contextPath }/history/score'">업적 히스토리</td>
 						<td></td>
 						<td onClick = "location.href='${pageContext.request.contextPath }'">마감 매치</td><!-- 주소추가-->
 					</tr>
@@ -210,13 +210,14 @@
 		</div>
 
 		<!-- 메뉴바에 들어가는 아이콘 5개 -->
-		<a class="nav_sgroup" href="${pageContext.request.contextPath }/sgroup/getSgList"><img src="${pageContext.request.contextPath }/resources/images/menubar/sgroup.png" alt="반짝" style="width: 40px;"></a> 
-		<a class="nav_bgroup" href="${pageContext.request.contextPath }/bgroup/getBgList"><img src="${pageContext.request.contextPath }/resources/images/menubar/bgroup.png" alt="동호회" style="width: 40px;"></a> 
-		<a class="nav_challenge" href="${pageContext.request.contextPath }/challenge/list"><img src="${pageContext.request.contextPath }/resources/images/menubar/trophy.png" alt="챌린지" style="width: 40px;"></a>
-		<a href="${pageContext.request.contextPath }/qnaboard"><img src="${pageContext.request.contextPath }/resources/images/menubar/board.png" alt="문의" style="width: 40px;"></a> 
-		<a href="${pageContext.request.contextPath }/member/member_view.do"><img src="${pageContext.request.contextPath }/resources/images/menubar/profile.png" alt="프로필" style="width: 40px;"></a> 
-			<span class="badge badge-pill badge-danger" style="position:relative; left:150px;">1</span><!-- 알람이 오면 +1되는 부분 -->
-		<a class="more"><img src="${pageContext.request.contextPath }/resources/images/icon/menu-bar.png" alt="더보기" style="width: 40px;"></a>
+		<a class="nav_sgroup" href="${pageContext.request.contextPath }/sgroup/getSgList"><img src="${pageContext.request.contextPath }/resources/images/menubar/sgroup.png" alt="반짝" style="width: 40px; position:absolute; left:10px;"></a> 
+		<a class="nav_bgroup" href="${pageContext.request.contextPath }/bgroup/getBgList"><img src="${pageContext.request.contextPath }/resources/images/menubar/bgroup.png" alt="동호회" style="width: 40px; position:absolute; left:70px;"></a> 
+		<a class="nav_challenge" href="${pageContext.request.contextPath }/challenge/list"><img src="${pageContext.request.contextPath }/resources/images/menubar/trophy.png" alt="챌린지" style="width: 40px; position:absolute; left:130px;"></a>
+		<a href="${pageContext.request.contextPath }/qnaboard"><img src="${pageContext.request.contextPath }/resources/images/menubar/board.png" alt="문의" style="width: 40px; position:absolute; margin: 0 0 10px 0; left:190px;"></a> 
+		<a href="${pageContext.request.contextPath }/member/member_view.do"><img src="${pageContext.request.contextPath }/resources/images/menubar/profile.png" alt="프로필" style="width: 40px; position:absolute; margin: 0 0 10px 0; left:250px;"></a> 
+			<span class="badge badge-pill badge-danger" style="position:absolute; left:270px;">1</span><!-- 알람이 오면 +1되는 부분 -->
+		<a class="more"><img src="${pageContext.request.contextPath }/resources/images/icon/menu-bar.png" alt="더보기" style="width: 40px; position:absolute; right:10px;"></a>
+		<br><br><br>
 	</div>
 </body>
 </html>

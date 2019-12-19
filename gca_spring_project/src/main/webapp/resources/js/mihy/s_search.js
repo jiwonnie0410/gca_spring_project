@@ -16,6 +16,7 @@ $(document).ready(function(){
 		location.href='createRoomForm';
 	});
 	
+	p9();
 	p8();
 	setInterval(p8,1000);
 	
@@ -23,6 +24,7 @@ $(document).ready(function(){
 	$('.table').on('click', '.tr', function(){
 		var sg_num = $(this).attr("class").substring(3);
 		var sg_dttm = $(this).find('p.p8').text();
+		console.log(sg_dttm);
 		
 		//선택한 방에 참여하기 전 참여 인원 파악하고 참여 여부 묻기
 		$.ajax({
@@ -99,6 +101,16 @@ function scroll(){
 		});
 	}
 }
+
+//조회거리 반올림
+function p9(){
+	for(var i=0; i<$('.p9').length; i++){
+		var p9_dis = $('.p9').eq(i).children();
+		var mathround_dis = Math.round(p9_dis.text() *10) / 10;
+		p9_dis.text(mathround_dis + "km");
+	}
+}
+
 
 //남은 시간 계산
 function p8(){
