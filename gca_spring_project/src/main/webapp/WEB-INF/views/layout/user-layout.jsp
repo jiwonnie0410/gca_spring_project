@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,11 +17,17 @@
 		
 <title>운동하자!</title>
 <script>
-	var webSocket = new WebSocket('ws://localhost/gca/broadcast.do'); 
-	
-	webSocket.onerror = function(event) { onError(event) };
-	webSocket.onopen = function(event) { onOpen(event) };
-	webSocket.onmessage = function(event) { onMessage(event) };
+
+	var webSocket;
+	var mstatus = "<sec:authentication property='principal.m_id'/>";
+
+	if(mstatus != null && mstatus != ''){
+		webSocket = new WebSocket('ws://localhost/gca/broadcast.do'); 
+		
+		webSocket.onerror = function(event) { onError(event) };
+		webSocket.onopen = function(event) { onOpen(event) };
+		webSocket.onmessage = function(event) { onMessage(event) };
+	}
 	
 	function onError(event) { 
 		console.log(event); 
@@ -31,9 +38,12 @@
 		
 	}
 	
-	/* function onMessage(event){
-		
-	} */
+	function onMessage(event){
+		var result = JSON.parse(event.data);
+		if(result.cmd == "alertCount"){
+			$('#alertcnt').text(result.msg);
+		}
+	}
 
 </script>
 </head>

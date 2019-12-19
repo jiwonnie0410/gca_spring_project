@@ -18,6 +18,8 @@
 						    }
 					  });
 				});
+				
+				
 		</script>
 		
 		<style>
@@ -214,8 +216,8 @@
 		<a class="nav_bgroup" href="${pageContext.request.contextPath }/bgroup/getBgList"><img src="${pageContext.request.contextPath }/resources/images/menubar/bgroup.png" alt="동호회" style="width: 40px; position:absolute; left:70px;"></a> 
 		<a class="nav_challenge" href="${pageContext.request.contextPath }/challenge/list"><img src="${pageContext.request.contextPath }/resources/images/menubar/trophy.png" alt="챌린지" style="width: 40px; position:absolute; left:130px;"></a>
 		<a href="${pageContext.request.contextPath }/qnaboard"><img src="${pageContext.request.contextPath }/resources/images/menubar/board.png" alt="문의" style="width: 40px; position:absolute; margin: 0 0 10px 0; left:190px;"></a> 
-		<a href="${pageContext.request.contextPath }/member/member_view.do"><img src="${pageContext.request.contextPath }/resources/images/menubar/profile.png" alt="프로필" style="width: 40px; position:absolute; margin: 0 0 10px 0; left:250px;"></a> 
-			<span class="badge badge-pill badge-danger" style="position:absolute; left:270px;">1</span><!-- 알람이 오면 +1되는 부분 -->
+		<a href="${pageContext.request.contextPath }/member/member_view.do"><img src="${pageContext.request.contextPath }/resources/images/menubar/profile.png" alt="프로필" style="width: 40px; position:absolute; margin: 0 0 10px 0; left:250px;"></a>
+			<span class="badge badge-pill badge-danger" id="alertcnt" style="position:absolute; left:270px;">0</span><!-- 알람이 오면 +1되는 부분 -->
 		<a class="more"><img src="${pageContext.request.contextPath }/resources/images/icon/menu-bar.png" alt="더보기" style="width: 40px; position:absolute; right:10px;"></a>
 		<br><br><br>
 	</div>
