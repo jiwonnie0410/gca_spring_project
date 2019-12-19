@@ -122,14 +122,18 @@ function createChallengeButton(){
 						status = '기본';
 					else
 						status = '스페셜';
-					$("<tr data-toggle='modal' data-target='#challenge-going' id='newTr'>")
-							  .append("<td align='center'>"+ result.cl_num +"</td>")
-							  .append("<td align='center'>"+ status +"</td>")
-							  .append("<td>"+ result.cl_name +"</td>")
-							  .append("<td align='center'>"+ result.cl_start_dttm +"</td>")
-							  .append("<td align='center'>"+ result.cl_end_dttm +"</td>")
-							  .append("<td align='center'>"+ result.cl_score +"점 </td>")
-							  .appendTo($("#tr"));
+					
+					var clName = result.cl_name.substr(3);
+					
+					var newTd = "<tr data-toggle='modal' data-target='#challenge-going' id='newTr'>"
+								+ "<td align='center'>"+ result.cl_num +"</td>"
+								+ "<td align='center'>"+ status +"</td>"
+								+ "<td>"+ clName +"</td>"
+								+ "<td align='center'>"+ result.cl_start_dttm +"</td>"
+								+ "<td align='center'>"+ result.cl_end_dttm +"</td>"
+								+ "<td align='center'>"+ result.cl_score +"점 </td>";
+					$('#tr').after(newTd);
+					
 			}
 	});
 	
@@ -161,7 +165,7 @@ function getChallengeList(p) {
 						  .append("<th width='45%'> 챌린지 이름 </th>")
 						  .append("<th width='12%'> 시작 날짜 </th>")
 						  .append("<th width='12%'> 마감 날짜 </th>")
-						  .append("<th width='10%'> 리워드 </th>")
+						  .append("<th width='10%'> 리워드 </th></tr>")
 						  .appendTo($("#challenge-table"));
 			// 챌린지 목록 테이블에 붙이기
 			for(i=0; i<datas.length; i++) {

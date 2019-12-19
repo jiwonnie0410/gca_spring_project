@@ -80,13 +80,19 @@ public class AdminDAO {
 	}
 	
 	// 일별 수익 현황
-	public List<Map<String, Object>> chartDaily() {
-		return mybatis.selectList("AdminDAO.dailyIncome");
+	public List<Map<String, Object>> chartDaily(String start, String end) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		return mybatis.selectList("AdminDAO.dailyIncome", map);
 	}
 	
 	// 월별 수익 현황
-	public List<Map<String, Object>> chartMonthly()	{
-		return mybatis.selectList("AdminDAO.montlyIncome");
+	public List<Map<String, Object>> chartMonthly(String start, String end)	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		return mybatis.selectList("AdminDAO.montlyIncome", map);
 	}
 	
 	

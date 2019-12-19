@@ -51,7 +51,7 @@
 								</table>
 							</form>
 						</div><br />
-							
+						
 					<table class="table" id="challenge-table">
 							<!-- 챌린지 목록 들어오는 부분 -->
 					</table>
