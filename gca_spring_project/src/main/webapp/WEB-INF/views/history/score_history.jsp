@@ -11,15 +11,45 @@
 
 </head>
 <body>
-	<div>
-		<table>
-			<tr><th>점수</th><th>획득날짜</th><th>획득</th></tr>
+	<div align="center" style="padding:10px; padding-top: 50px;">
+		<table id="scorelist" border="1" style="text-align: center; border: 2px solid #FE9191; border-radius: 7px;">
+			<tr style="background-color: #FE9191; color: #fff;">
+				<th style="border-right-color: #fff">점수</th>
+				<th width="30%" style="border-right-color: #fff">획득</th>
+				<th width="50%">획득날짜</th>
+			</tr>
+			<c:if test="${myscorelist.isEmpty()}">
+				<tr>
+					<td colspan="3">획득한 점수가 없습니다</td>
+				</tr>
+			</c:if>
+			
+			<!-- forEach로 내용 뿌려주는 부분 -->
 			<c:forEach var="myscore" items="${myscorelist}">
 				<tr>
-					<td>${myscore.sch_score}</td><td>${myscore.sch_part}</td><td>${myscore.sch_dttm}</td>
+					<td style="padding:10px; ">
+						<div>
+							<img style="padding-bottom:5px;" width="55px" height="55px"
+		          				src="${pageContext.request.contextPath }/resources/images/jey/money.png">
+		          		</div>
+		          		<div>+${myscore.sch_score}</div></td>
+					<td>${myscore.sch_part}</td>
+					<td>${myscore.sch_dttm}</td>
 				</tr>	
 			</c:forEach>
-	</table>
+		</table>
+	</div>
+	
+	
+	<div align="center" style="padding-top:50px;">
+		<span style="font-size: 40px; font-style: oblique; color: #FE9191;">
+			<img style="padding-bottom:5px;" width="55px" height="55px"
+			       src="${pageContext.request.contextPath }/resources/images/level/${mylevel.m_level_cd}.png">
+			&nbsp;
+			
+			${mylevel.m_level_cd}
+		</span>
+
 	</div>
 </body>
 </html>

@@ -10,6 +10,7 @@ import com.yedam.gca.group_s.dao.SGroupDAO;
 import com.yedam.gca.group_s.service.SGroupService;
 import com.yedam.gca.group_s.vo.SGroupVO;
 import com.yedam.gca.history.vo.ActiveHistVO;
+import com.yedam.gca.history.vo.ScoreHistVO;
 import com.yedam.gca.member.vo.MembersVO;
 
 @Service("sGroupService")
@@ -39,6 +40,12 @@ public class SGroupServiceImpl implements SGroupService {
 	}
 	public ActiveHistVO getOnesAuthority(ActiveHistVO vo) {
 		return sgroupDAO.getOnesAuthority(vo);
+	}
+	public ScoreHistVO getMyTotalScore(MembersVO vo) {
+		return sgroupDAO.getMyTotalScore(vo);
+	}
+	public int updateLevel(MembersVO vo) {
+		return sgroupDAO.updateLevel(vo);
 	}
 
 	

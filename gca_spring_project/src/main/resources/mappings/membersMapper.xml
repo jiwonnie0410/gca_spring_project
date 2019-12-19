@@ -292,7 +292,14 @@
 				M_NOTICE2,
 				M_NOTICE3
 		FROM	MEMBERS
-		WHERE	M_ID=#{m_id}
+		WHERE	M_ID = #{m_id}
 	</select>
+	
+<!-- 3. 점수 조회 시 level 변동 필요할 경우 level 업데이트.  -->
+	<update id="updateLevel" parameterType="members">
+		UPDATE	MEMBERS
+		SET		M_LEVEL_CD = #{m_level_cd}
+		WHERE	M_ID = #{m_id}
+	</update>
 </mapper>
 
