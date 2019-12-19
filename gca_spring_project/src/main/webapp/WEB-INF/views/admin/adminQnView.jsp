@@ -4,6 +4,8 @@
 <%@taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script
+	src="${pageContext.request.contextPath }/resources/js/admin/admin_Qna.js"></script>
 <!-- Modal 읽기-->
 <!-- 게시물 상세보기 영역 -->
 <div class="panel-group">
@@ -43,6 +45,18 @@
 						<!-- 상세보기 화면에서 게시글 목록화면으로 이동 -->
 					<!-- 	<button type="button" class="btn btn-primary px-5 py-3  mt-3" id="btnList">목록</button> -->
 				</div>
+				<div class="modal-footer">
+				<c:choose>
+						<c:when test="${ empty dto.qb_an}">
+							<button type="button" class="btn btn-primary" id="btnUpdete">답글</button>
+						</c:when>
+						<c:otherwise>
+							<button type="button" class="btn btn-primary" id="btnUpdete">수정</button>
+						</c:otherwise>
+					</c:choose>
+				<!-- <button type="button" class="btn btn-danger" id="btnDel" name="btnDel">삭제</button> -->
+					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+				</div>	
 			</form>
 			
 		</div>

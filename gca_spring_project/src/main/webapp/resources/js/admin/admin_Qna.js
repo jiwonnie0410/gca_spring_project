@@ -48,13 +48,14 @@ function getBoardListHandler(datas) {
 				.append($('<td>').html(datas[i].qb_id))
 				.append($('<td>').html(datas[i].qb_an))
 				.append($('<td>').html(datas[i].qb_title))
-			/*	.append($('<td class="tdcontent">').html(datas[i].qb_content))*/
 				.append($('<td>').html(
 								"<button id='write' data-toggle='modal' data-target='#Modalread' >답글</button>"))
 				.append($('<td>').html('<button id=\'btnDel\'>삭제</button>'))
 				.appendTo('#asktb').attr("data", datas[i].qb_id);
 	}
+	$("#userlisttb").dataTable()
 }//  
+
    
 
 
@@ -79,9 +80,7 @@ function insertBoard() {
 
 // 등록 요청 결과처리
 function insertBoardtHandler(data) {
-/*	$('<tr>').append($('<td>').html(data.qb_id)).append(
-			$('<td>').html(data.m_id)).append($('<td>').html(data.qb_title))
-			.append($('<td>').html(data.qb_content)).appendTo('#asktb');*/
+	alert("저장 하겠습니까?");
 	getBoardList2();
 	$('#myModal').modal("hide"); // 닫기
 }
@@ -91,6 +90,7 @@ function insertBoardtHandler(data) {
 // 삭제 요청
 function deleteBoard() {
 	$('#asktb').on("click", "#btnDel", function() {
+		alert("삭제 하시겠습니까?");
 		var qb_id = $(this).closest("tr").find("td").eq(0).html();// closest// ==조상검색
 		console.log(qb_id);
 		$.ajax({

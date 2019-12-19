@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.http.HttpRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +32,8 @@ import com.yedam.gca.member.vo.MembersVO;
 @Controller
 public class AdminController {
 // 1-1챌린지 관리 페이지		1-2챌린지 등록
-// 2매출 페이지
+// 2-1매출 페이지	2-2일별 매출 	2-3월별 매출
 // 3-1통계 페이지 	3-2반짝 운동별 통계 	3-3동호회 매치 운동별 통계 	 3-4연령대 및 운동(반짝)성별 통계 	3-5지역별 반짝 운동 통계
-// 4-1매출 페이지	4-2일별 매출 	4-3월별 매출
 
 	@Autowired
 	AdminService adminService;
@@ -69,12 +71,26 @@ public class AdminController {
 		return adminService.challengeGoing(num);
 	}
 
-	// 2. 매출 페이지
-	@RequestMapping("/admin/sale")
-	public String adminMoney() {
-		return "/admin/admin_bank";
+	// 2-1. 매출 페이지
+	@RequestMapping("/admin/income")
+	public String adminIncome() {
+		return "/admin/admin_money";
 	}
 
+	// 2-2. 일별 매출
+	@ResponseBody
+	@RequestMapping("/ajax/chart/daily")
+	public List<Map<String, Object>> dailyIncome(String start, String end) {
+		return adminService.chartDaily(start, end);
+	}
+	
+	// 2-3. 월별 매출
+	@ResponseBody
+	@RequestMapping("/ajax/chart/monthly")
+	public List<Map<String, Object>> monthlyIncome(String start, String end) {
+		return adminService.chartMonthly(start, end);
+	}
+	
 	// 3-1. 통계 페이지
 	@RequestMapping("/admin/chart")
 	public String adminChart() {
@@ -109,25 +125,7 @@ public class AdminController {
 		return adminService.chartCity();
 	}
 	
-	// 4-1. 매출 페이지
-	@RequestMapping("/admin/income")
-	public String adminIncome() {
-		return "/admin/admin_money";
-	}
-
-	// 4-2. 일별 매출
-	@ResponseBody
-	@RequestMapping("/ajax/chart/daily")
-	public List<Map<String, Object>> dailyIncome() {
-		return adminService.chartDaily();
-	}
 	
-	// 4-3. 월별 매출
-	@ResponseBody
-	@RequestMapping("/ajax/chart/monthly")
-	public List<Map<String, Object>> monthlyIncome() {
-		return adminService.chartMonthly();
-	}
 	
 
 	

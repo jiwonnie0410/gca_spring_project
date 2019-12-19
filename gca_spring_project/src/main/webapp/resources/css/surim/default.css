@@ -1,14 +1,3 @@
-.container .nav-link.active {
-	background: #FE9191;
-	color: white;
-}
-
-.container .nav-link {
-	border-radius: 3px;
-	color: black;
-	font-size: 22px;
-	font-weight: bold;
-}
 
 .container .nav span {
 	display: block;
@@ -57,6 +46,12 @@
 	display: block;
 }
 
+.pinkBold {
+	color: #FE9191;
+	font-weight: bold;
+}
+
+
 /****** 뒤로가기버튼 div **********/
 .back-div {
 	display: flex;
@@ -102,5 +97,36 @@
 	border: none;
 	width: 48px;
 	height: 48px;   
+}
+
+
+/************** 태그용 **********************/
+
+.tags {
+	position: absolute;
+	right : 10%;
+}
+
+.join-tag {
+	border: none;
+    width: 60px;
+    border-radius: 10px;
+    font-weight: 700;
+    background: #5ab7a5;
+    text-align: center;
+    color: white;
+    font-size: medium;
+}
+
+
+.dDay-tag {
+	border: none;
+    width: 60px;
+    border-radius: 10px;
+    font-weight: 700;
+    background: #FE9191;
+    text-align: center;
+    color: white;
+    font-size: medium;
 }
 

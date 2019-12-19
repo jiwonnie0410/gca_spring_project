@@ -40,7 +40,7 @@
 		<div class="col-50">
 			<div class="card">
 				<div class="card-header" style="background-color: #FEBABA;">
-					my menu</div>
+					회원정보 조회</div>
 				<div class="card-body">
 					<form name="form1" method="post">
 						<table>

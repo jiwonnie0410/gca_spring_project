@@ -15,17 +15,7 @@
 <sec:authentication property="principal.username" var="id"/>
 <sec:authentication property="principal.m_nick" var="nick"/>
 <sec:authentication property="principal.m_image_cd" var="image"/>
-
-<!-- jquery js -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- bootstrap -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- json-serializeObject js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
 	
-
 <!-- 수림 개인 js/css -->
 <script src="${pageContext.request.contextPath }/resources/js/surim/default.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
@@ -34,8 +24,18 @@
 <style>
 
 .container {
-	max-width: 500px;
+	max-width: 500px;	
 }
+
+.container .nav-link {
+    font-weight: bold;
+    color: black;
+}
+
+.container .nav-link.active  {
+	color: #FE9191;
+}
+
 
 .image-div {
 	position : relative;
@@ -53,18 +53,7 @@
     right: 5%;
 }
 
-.join-tag {
-    position: absolute;
-	border: none;
-    width: 60px;
-    border-radius: 10px;
-    font-weight: 700;
-    background: #5ab7a5;
-    text-align: center;
-    color: white;
-    font-size: medium;
-    right: 13%;
-}
+
 
 
 </style>
@@ -77,14 +66,14 @@
       <div class="row">
         <div class="col">
         	<!-- 상단 nav-tabs 시작 -->
-            <ul class="nav nav-fills">
+            <ul class="nav nav-tabs">
               <!-- 기본 챌린지 탭-->
               <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#basicChallenges">기본 챌린지<br><span>Basic Challenges</span></a>
+                <a class="nav-link active" data-toggle="tab" href="#basicChallenges">기본 챌린지</a>
               </li>
               <!-- 스페셜 챌린지 탭-->
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#specialChallenges">스페셜 챌린지<br><span>Special Challenges</span></a>
+                <a class="nav-link" data-toggle="tab" href="#specialChallenges">스페셜 챌린지</a>
               </li>
             </ul>
             <!-- 상단 nav-tabs 끝 -->
@@ -109,21 +98,28 @@
 							</c:forEach>
 							<!-- 유저 참가중 마크 끝 -->
 	              		</div>
-	              		<span class="pinkText"><fmt:formatDate value="${list.cl_start_dttm }" type="date" /> ~
-						<fmt:formatDate value="${list.cl_end_dttm }" type="date" />(D-${list.gap_day })</span>
+	              		<span class="pinkText">
+		              		<fmt:formatDate value="${list.cl_start_dttm }" type="date" /> ~
+							<fmt:formatDate value="${list.cl_end_dttm }" type="date" />
+						</span>
 						<span class="mediumText">${list.cl_name }</span>
 						<span class="mediumText">기간내 | ${list.cl_cnt }회 성공</span>
-						<span class="pinkText">
+						<a style="color: #FE9191; font-weight: bold; font-size: large">
 							<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px">
 							${list.cl_score }점 
-							<!-- 참가중일시 참가중 태그 시작 -->
+						</a>
+						<!-- 태그 시작 -->
+						<a class="tags">
+							<!-- D-day 태그 -->
+							<input class="dDay-tag" value="D-${list.gap_day }">
+							<!-- 참가중 태그 -->
 	              			<c:forEach items="${myHistory}" var ="myList">
 	              			<c:if test="${list.cl_num == myList.cl_num }">
 									<input class="join-tag" value="참가중">
 	              			</c:if>         
 							</c:forEach>
-							<!-- 참가중 태그 끝 -->
-						</span>
+						</a>
+						<!-- 태그 끝 -->
 	              	</div>
 	              	</c:if>
               	</c:forEach>
@@ -150,25 +146,32 @@
 							<!-- 유저 참가중 마크 끝 -->
 	              		</div>
 
-	              		<span class="pinkText"><fmt:formatDate value="${list.cl_start_dttm }" type="date" /> ~
-						<fmt:formatDate value="${list.cl_end_dttm }" type="date" />(D-${list.gap_day })</span>
+	              		<span class="pinkText">
+		              		<fmt:formatDate value="${list.cl_start_dttm }" type="date" /> ~
+							<fmt:formatDate value="${list.cl_end_dttm }" type="date" />
+						</span>
 						<span class="mediumText">${list.cl_name }</span>
 						<span class="mediumText">기간내 | ${list.cl_cnt }회 성공</span>
-						<span class="pinkText">
-							<img src="${pageContext.request.contextPath }/resources/images/icon/money.png" width="25px">
-							1천원~5천원
-						</span>
 						<span class ="pinkText"> 
 							<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px">
 							${list.cl_score }점 
-								<!-- 참가중일시 참가중 태그 시작 -->
-		              			<c:forEach items="${myHistory}" var ="myList">
-		              			<c:if test="${list.cl_num == myList.cl_num }">
-										<input class="join-tag" value="참가중">
-		              			</c:if>         
-								</c:forEach>
-								<!-- 참가중 태그 끝 -->  
 						</span>
+						<a style="color: #FE9191; font-weight: bold; font-size: large">
+							<img src="${pageContext.request.contextPath }/resources/images/icon/money.png" width="25px">
+							보증금 필요
+						</a>
+						<!-- 태그 시작 -->
+						<a class="tags">
+							<!-- D-day 태그 -->
+							<input class="dDay-tag" value="D-${list.gap_day }">
+							<!-- 참가중 태그 -->
+	              			<c:forEach items="${myHistory}" var ="myList">
+	              			<c:if test="${list.cl_num == myList.cl_num }">
+									<input class="join-tag" value="참가중">
+	              			</c:if>         
+							</c:forEach>
+						</a>
+						<!-- 태그 끝 -->
 	              	</div>
 	              	</c:if>
               	</c:forEach>

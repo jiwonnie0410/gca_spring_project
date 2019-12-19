@@ -36,10 +36,10 @@ public interface AdminService {
 	public Map<String, Object> challengeGoing(int cl_id);
 	
 	// 8. 일별 수익 현황
-	public List<Map<String, Object>> chartDaily();
+	public List<Map<String, Object>> chartDaily(String start, String end);
 	
 	// 9. 월별 수익 현황
-	public List<Map<String, Object>> chartMonthly();
+	public List<Map<String, Object>> chartMonthly(String start, String end);
 	
 
 	

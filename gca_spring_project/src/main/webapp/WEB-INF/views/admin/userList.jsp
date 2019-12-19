@@ -38,7 +38,7 @@
 				<div class="card-header" style="background-color: #FEBABA;">회원관리</div>
 				<div class="card-body">
 					<div class="table-responsive">
-						<table class="table text-center">
+						<table class="table text-center" id="userlisttb">
 							<thead>
 								<tr>
 									<th class="text-center">아이디</th>
@@ -47,7 +47,6 @@
 									<!-- <th class="text-center">거주지</th> -->
 									<th class="text-center">계정상태</th>
 									<th class="text-center">조회</th>
-									<th class="text-center">삭제</th>
 								</tr>
 							</thead>
 							<tbody id="userlist"></tbody>
@@ -203,8 +202,6 @@
 				<div class="modal-body">
 				</div>
 				<div class="modal-footer">
-						<button type="button" class="btn btn-primary px-5 py-3 mt-3"
-							id="btnDelete">삭제</button>
 					<button type="button" class="btn btn-primary px-4 py-2"
 						data-dismiss="modal">Close</button>
 				</div>
