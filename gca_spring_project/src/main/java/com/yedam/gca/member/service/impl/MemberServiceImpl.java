@@ -240,6 +240,10 @@ public class MemberServiceImpl implements MemberService {
 		return dao.memberStatus(vo.getM_id());
 	}
 	
+	@Override
+	public int getScore(String mId) {
+		return dao.getScore(mId);
+	}
 	
 	
 	

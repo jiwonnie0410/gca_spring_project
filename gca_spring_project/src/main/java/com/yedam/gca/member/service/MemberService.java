@@ -24,6 +24,9 @@ public interface MemberService {
 	// 6. 네이버로 로그인 시 이미 있는 회원인지 확인 후 회원가입
 	public String insertNaver(MembersVO vo);
 	
+	// 7. 사용자가 현재까지 쌓은 포인트
+	public int getScore(String mId);
+	
 	
 	
 	//진영

@@ -25,7 +25,7 @@
 	<script src="../resources/js/mihy/swiper.min.js"></script>
 
 <script>
-	var mstatus = "<sec:authentication property='principal.m_status_cd'/>";
+	var mgrant = "<sec:authentication property='principal.m_status_cd'/>";
 </script>
 
 	<!-- private : Description Action -->
