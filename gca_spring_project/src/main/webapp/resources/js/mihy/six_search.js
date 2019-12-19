@@ -148,7 +148,7 @@ function p8(){
 function move_room(result, six_dttm){
 
 	if(result.result_msg == 'already'){ //마감이든 아니든 already면 참여
-		location.href='alreadyIn?six_num='+result.pk_num;
+		location.href='alreadyIn?six_num='+result.pk_num+'&endroom='+six_dttm;
 	} else if(mgrant == 'M01'){
 		if(six_dttm == "마감"){ //마감이면 무조건(full이나 yes나 모두)
 			alert("마감 시간이 초과되어 참여하실 수 없습니다.");
