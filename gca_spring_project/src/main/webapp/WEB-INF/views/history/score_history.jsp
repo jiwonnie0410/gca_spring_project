@@ -11,8 +11,11 @@
 
 </head>
 <body>
-	<div align="center" style="padding:10px; padding-top: 50px;">
-		<table id="scorelist" border="1" style="text-align: center; border: 2px solid #FE9191; border-radius: 7px;">
+	<div align="left" style="background: #FE9191; color: #fff; height: 70px; padding:20px; font-size:20px; font-weight:bold;">
+		점수 획득 내역
+	</div>
+	<div align="center" style="padding:10px; padding-top: 80px;">
+		<table id="scorelist" border="3" style="text-align: center; border: 3px solid #FE9191; border-radius: 7px;">
 			<tr style="background-color: #FE9191; color: #fff;">
 				<th style="border-right-color: #fff">점수</th>
 				<th width="30%" style="border-right-color: #fff">획득</th>
@@ -30,7 +33,7 @@
 					<td style="padding:10px; ">
 						<div>
 							<img style="padding-bottom:5px;" width="55px" height="55px"
-		          				src="${pageContext.request.contextPath }/resources/images/jey/money.png">
+		          				src="${pageContext.request.contextPath }/resources/images/jey/money11.png">
 		          		</div>
 		          		<div>+${myscore.sch_score}</div></td>
 					<td>${myscore.sch_part}</td>
