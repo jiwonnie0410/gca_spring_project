@@ -6,6 +6,7 @@ import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.common.code.vo.CodeVO;
 import com.yedam.gca.group_s.vo.SGroupVO;
 import com.yedam.gca.history.vo.ActiveHistVO;
+import com.yedam.gca.history.vo.ScoreHistVO;
 import com.yedam.gca.member.vo.MembersVO;
 
 public interface SGroupService {
@@ -17,6 +18,9 @@ public interface SGroupService {
 	String returnImage(MembersVO vo);
 	MembersVO getOneMem(MembersVO vo);
 	ActiveHistVO getOnesAuthority(ActiveHistVO vo);
+	ScoreHistVO getMyTotalScore(MembersVO vo);
+	int updateLevel(MembersVO vo);
+	
 			
 	
 	//미현

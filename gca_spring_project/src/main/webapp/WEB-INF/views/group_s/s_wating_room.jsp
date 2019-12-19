@@ -151,9 +151,6 @@
 						$('#profile_age').text(vo.m_age);
 						$('#profile_gender').text(vo.gender_cd); //남여로 표시되게2
 						//$('#profile_level').text(vo.m_level_cd);
-						$('#profile_level').children('img').attr('src',
-							"${pageContext.request.contextPath }/resources/images/level/"+vo.m_level_cd+".png"	
-						); //레벨이미지로 표시되게2
 						
 						//본인 프로필 창이면 버튼 영역(신고,강퇴) 숨기기.
 						if(vo.m_id == "${id}"){
@@ -185,6 +182,23 @@
 					
 				});
 				
+				//ajax3. 점수 합계 계산해서 레벨 불러오기
+				$.ajax({
+					url: "getOnesLevel",
+					method:'post',
+					dataType: "json",	//결과타입
+					data: param,		//요청파라미터
+					contentType: "application/json",
+					success: function(vo){
+						$('#profile_level').children('img').attr('src',
+								"${pageContext.request.contextPath }/resources/images/level/"+vo.m_level_cd+".png"	
+						); //레벨 이미지로 표시되게
+					},
+					error: function(){
+						console.log("getOnesLevel 실패");
+					}
+					
+				});
 				
 			});
 			
@@ -621,8 +635,8 @@
 		var id = "${id}";
 		if(result.id == id){ //강퇴당한놈만 나가게.
 			location.href="getSgList";
-			textarea.value += result.msg + "\n";
 		}
+		textarea.value += result.msg + "\n";
 		$('#'+result.id).remove();
 		
 	}
