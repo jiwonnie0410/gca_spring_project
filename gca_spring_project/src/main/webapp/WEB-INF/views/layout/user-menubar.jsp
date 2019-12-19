@@ -213,7 +213,7 @@
 		<a class="nav_sgroup" href="${pageContext.request.contextPath }/sgroup/getSgList"><img src="${pageContext.request.contextPath }/resources/images/menubar/sgroup.png" alt="반짝" style="width: 40px;"></a> 
 		<a class="nav_bgroup" href="${pageContext.request.contextPath }/bgroup/getBgList"><img src="${pageContext.request.contextPath }/resources/images/menubar/bgroup.png" alt="동호회" style="width: 40px;"></a> 
 		<a class="nav_challenge" href="${pageContext.request.contextPath }/challenge/list"><img src="${pageContext.request.contextPath }/resources/images/menubar/trophy.png" alt="챌린지" style="width: 40px;"></a>
-		<a href="${pageContext.request.contextPath }/qnaboard"><img src="${pageContext.request.contextPath }/resources/images/menubar/board.png" alt="문의" style="width: 40px;"></a> 
+		<a href="${pageContext.request.contextPath }/board/adlist"><img src="${pageContext.request.contextPath }/resources/images/menubar/board.png" alt="홍보" style="width: 40px;"></a> 
 		<a href="${pageContext.request.contextPath }/member/member_view.do"><img src="${pageContext.request.contextPath }/resources/images/menubar/profile.png" alt="프로필" style="width: 40px;"></a> 
 			<span class="badge badge-pill badge-danger" style="position:relative; left:150px;">1</span><!-- 알람이 오면 +1되는 부분 -->
 		<a class="more"><img src="${pageContext.request.contextPath }/resources/images/icon/menu-bar.png" alt="더보기" style="width: 40px;"></a>

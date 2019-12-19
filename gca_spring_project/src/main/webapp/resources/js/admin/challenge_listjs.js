@@ -129,7 +129,7 @@ function createChallengeButton(){
 							  .append("<td align='center'>"+ result.cl_start_dttm +"</td>")
 							  .append("<td align='center'>"+ result.cl_end_dttm +"</td>")
 							  .append("<td align='center'>"+ result.cl_score +"점 </td>")
-							  .appendTo($("#challenge-table"));
+							  .appendTo($("#tr"));
 			}
 	});
 	
@@ -224,6 +224,7 @@ function getKey(cl_num) {
 			url: "../ajax/challenge/going",
 			data: num_data,
 			success: function(result) {
+				console.log(result);
 					$("#chGoing").empty();
 					$("#chPeople").empty();
 				
