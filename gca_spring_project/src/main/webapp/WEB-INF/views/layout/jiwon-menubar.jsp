@@ -2,8 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>	
-		<title> 지원 메뉴바 만드는 중임 </title>
+<head>
+		<title> </title>
+		<!-- CSS -->
+		<link href="${pageContext.request.contextPath }/resources/css/menubar/jiwon-menubar.css" rel="stylesheet">
 		
 		<script type="text/javascript">
 				$(document).ready(function(){
@@ -18,9 +20,6 @@
 					  });
 				});
 		</script>
-		
-		<!-- CSS -->
-		<link href="./resources/css/menubar/jiwon-menubar.css" rel="stylesheet">
 </head>
 <body>
 	<div class="navbar pr-2 pl-2">
@@ -63,13 +62,32 @@
 		</div>
 
 		<!-- 메뉴바에 들어가는 아이콘 5개 -->
-		<a class="nav_sgroup" href="${pageContext.request.contextPath }/sgroup/getSgList"><img src="${pageContext.request.contextPath }/resources/images/menubar/sgroup.png" alt="반짝" style="width: 40px;"></a> 
-		<a class="nav_bgroup" href="${pageContext.request.contextPath }/bgroup/getBgList"><img src="${pageContext.request.contextPath }/resources/images/menubar/bgroup.png" alt="동호회" style="width: 40px;"></a> 
-		<a class="nav_challenge" href="${pageContext.request.contextPath }/challenge/list"><img src="${pageContext.request.contextPath }/resources/images/menubar/trophy.png" alt="챌린지" style="width: 40px;"></a>
-		<a href="${pageContext.request.contextPath }/board/adlist"><img src="${pageContext.request.contextPath }/resources/images/menubar/board.png" alt="홍보" style="width: 40px;"></a> 
-		<a href="${pageContext.request.contextPath }/member/member_view.do"><img src="${pageContext.request.contextPath }/resources/images/menubar/profile.png" alt="프로필" style="width: 40px;"></a> 
-			<span class="badge badge-pill badge-danger" style="position:relative; left:150px;">1</span><!-- 알람이 오면 +1되는 부분 -->
-		<a class="more"><img src="${pageContext.request.contextPath }/resources/images/icon/menu-bar.png" alt="더보기" style="width: 40px;"></a>
+		<!-- 반짝으로 가기 -->
+		<a class="nav_sgroup" href="${pageContext.request.contextPath }/sgroup/getSgList">
+				<img src="${pageContext.request.contextPath }/resources/images/menubar/sgroup.png" alt="반짝" style="width: 40px; position:absolute; left:10px;"></a> 
+		
+		<!-- 동호회 매치로 가기 -->
+		<a class="nav_bgroup" href="${pageContext.request.contextPath }/bgroup/getBgList">
+				<img src="${pageContext.request.contextPath }/resources/images/menubar/bgroup.png" alt="동호회" style="width: 40px; position:absolute; left:70px;"></a> 
+				
+		<!-- 챌린지 목록으로 가기 -->
+		<a class="nav_challenge" href="${pageContext.request.contextPath }/challenge/list">
+				<img src="${pageContext.request.contextPath }/resources/images/menubar/trophy.png" alt="챌린지" style="width: 40px; position:absolute; left:130px;"></a>
+				
+		<!-- 동호회 홍보 게시판으로 가기 -->
+		<a href="${pageContext.request.contextPath }/qnaboard">
+				<img src="${pageContext.request.contextPath }/resources/images/menubar/board.png" alt="문의" style="width: 40px; position:absolute; margin: 0 0 10px 0; left:190px;"></a> 
+				
+		<!-- 프로필로 가기 -->
+		<!-- <i class="fas fa-user"></i> -->
+		<a href="${pageContext.request.contextPath }/member/member_view.do">
+				<img src="${pageContext.request.contextPath }/resources/images/menubar/profile.png" alt="프로필" style="width: 40px; position:absolute; margin: 0 0 10px 0; left:250px;"></a>
+			<span class="badge badge-pill badge-danger" id="alertcnt" style="position:absolute; left:270px;">0</span><!-- 알람이 오면 +1되는 부분 -->
+			
+		<!-- 메뉴 전체보기 -->
+		<a class="more">
+				<img src="${pageContext.request.contextPath }/resources/images/icon/menu-bar.png" alt="더보기" style="width: 40px; position:absolute; right:10px;"></a>
+		<br><br><br>
 	</div>
 </body>
 </html>

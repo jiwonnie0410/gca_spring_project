@@ -13,6 +13,7 @@
 	6. 비밀번호 변경
 	7. 네이버로 로그인 시 회원가입
 	8. 계정 활동 상태 체크
+	9. 사용자의 현재까지 포인트
  -->
 
 <!-- 1. 회원가입 -->
@@ -163,7 +164,12 @@
 			</select>
 			
 			
-			
+<!-- 9. 사용자의 현재까지 포인트 -->
+			<select id="getScore" parameterType="string" resultType="int">
+					SELECT NVL(SUM(SCH_SCORE), 0) 
+					FROM SCORE_HIST 
+					WHERE M_ID = #{value}
+			</select>
 			
 			
 			

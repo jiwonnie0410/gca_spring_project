@@ -6,7 +6,7 @@
 	<!-- 기본 모바일 화면용 레이아웃 상세 -->
 	<definition name="mainTemplate"	template="/WEB-INF/views/layout/user-layout.jsp">
 		<put-attribute name="user-content" value="/WEB-INF/views/layout/user-content.jsp" />
-		<put-attribute name="footer-menubar" value="/WEB-INF/views/layout/user-menubar.jsp" />
+		<put-attribute name="footer-menubar" value="/WEB-INF/views/layout/jiwon-menubar.jsp" />
 	</definition>
 	
 	<!-- 관리자 웹페이지용 레이아웃 상세 -->
