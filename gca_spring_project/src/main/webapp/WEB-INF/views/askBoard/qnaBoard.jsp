@@ -95,10 +95,10 @@
 										type="hidden" name="qb_title" value="">
 									<div class="form-group">
 										<div>
-											제목 <select name="qb_title" id="qb_title"
+											질문 유형 <select name="qb_title" id="qb_title"
 												class="btn btn-outline btn-sm dropdown-toggle">
-												<option selected>질문 유형 선택</option>
-												<option value="반짝방 문의">반짝방 문의</option>
+												<option id="qn" selected value="질문 유형 선택" disabled>-질문 유형 선택-</option>
+												<option  value="반짝방 문의">반짝방 문의</option>
 												<option value="회원관리 문의">회원관리 문의</option>
 												<option value="동호희 문의">동호희 문의</option>
 											</select>
