@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,7 @@
 
 <!--json할때 필요  -->
 <script src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
+<sec:authentication property="principal.m_id" var="m_id"/>
 <title>Insert title here</title>
 </head>
 <body>
@@ -26,12 +28,12 @@
 			<td>
 				${row.m_id}
 				${row.m_nick}
-				(<fmt:formatDate value="${row.adr_regdate}" pattern="yyyy-MM-dd HH:mm:ss"/>)
 				${row.adr_content}
+				(<fmt:formatDate value="${row.adr_regdate}" pattern="yyyy-MM-dd"/>)
 				<br>
 				<!-- 본인 댓글만 수정버튼 생성되도록 처리 -->
-				 <c:if test="${sessionScope.m_id == row.m_id}">
-					<input type="button" id="btnModify" value="댓글수정" onclick="showReplyModify('${row.adr_number}')">
+				 <c:if test="${m_id == row.m_id}">
+					<input type="button" id="btnModify" value="댓글수정"  style="background-color: #FE9191;"  onclick="showReplyModify('${row.adr_num}')">
 				</c:if> 
 				<hr>
 			</td>

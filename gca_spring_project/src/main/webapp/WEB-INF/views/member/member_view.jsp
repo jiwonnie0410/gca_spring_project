@@ -50,25 +50,25 @@
 					my menu</div>
 				<div class="card-body">
 					<form name="form1" method="post">
-						<table>
+						<table >
 							<tr>
 								<td rowspan="8"><img style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/Characters/${dto.m_image_cd}.gif"></td>				
 							</tr>
 							<tr>
-								<td>아이디</td>
+								<td >아이디</td>
 								<td>${dto.m_id}</td>
 							</tr>
 							<tr>
-								<td>이름</td>
+								<td >이름</td>
 								<td>${dto.m_name}</td>
 							</tr>
 							<tr>
-								<td>닉네임</td>
+								<td >닉네임</td>
 								<td>${dto.m_nick}</td>
 							</tr>
 							<tr>
-								<td>레벨</td>
-								<td>${dto.m_level_cd}</td>
+								<td >레벨</td>
+								<td><img style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/level/${dto.m_level_cd}.png"></td>
 							</tr>
 
 							<tr>
@@ -96,7 +96,7 @@
 							<div style="color: red;">${message}</div>
 							<!--이모티콘이로 대체  -->
 							<a href="updateform"><i class="fas fa-user-edit" aria-hidden="true"style="color: black; font-size: 50px;"></i></a>
-							<i class="fas fa-door-open" id="btnDelete"style="color: black; font-size: 50px;"></i> 
+							<!-- <i class="fas fa-door-open" id="btnDelete"style="color: black; font-size: 50px;"></i>  -->
 							<i class="fa fa-lock fa-2x" aria-hidden="true" style="color: black; font-size: 50px;"> </i> 
 							<a href="changePassword"> 비밀번호 변경 </a> 
 							<a href="option">알람 환경설정</a>

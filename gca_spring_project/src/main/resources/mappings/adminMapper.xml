@@ -261,9 +261,9 @@
 			  M_LEVEL_CD,
 			  get_code_name(M_STATUS_CD) m_status_cd,
           	  m_email AS m_email,
+          	  get_code_name(M_IMAGE_CD) "m_image_cd",
+              get_code_name(M_LEVEL_CD) "m_level_cd",
           	  m_location AS m_location
-          <!-- user_regdate AS userRegdate,
-          user_regdate AS userUpdatedate -->
         FROM MEMBERS
        <!--  WHERE m_id = #{m_id} -->
         WHERE m_id =#{m_id}

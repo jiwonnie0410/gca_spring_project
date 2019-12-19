@@ -30,7 +30,7 @@ public interface QnaBoardService {
 	List<Map<String,Object>>getBoardListMap();
 
 	//게시글 삭제
-	int deleteBoard(QnaBoardVO vo);
+	public int deleteBoard(QnaBoardVO vo);
 	
 	// 02. 게시글 상세보기
 		public QnaBoardVO read(int qb_id) throws Exception;

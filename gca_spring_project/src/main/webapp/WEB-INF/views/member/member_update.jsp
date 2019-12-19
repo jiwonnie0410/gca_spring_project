@@ -38,9 +38,11 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/mihy/kakao_map.js"></script>
 <script>
  // 확인 메시지 띄우기
-if('${pwMessage}' != ''){
+ if('${pwMessage}' != ''){
 	alert('${pwMessage}');
-} 
+}  
+
+
 $(document).ready(function() {
 	$("#btnUpdate").click(function() {
 		// 확인 대화상자    
@@ -49,19 +51,27 @@ $(document).ready(function() {
 			document.form1.submit();
 		}
 	});
+	
+	/* $(function(){
+		if(${msg ne null}){
+			alert('${msg}');
+		};
+	}); */
 
-	$("#btnDelete").click(function() {
+	/* $("#btnDelete").click(function() {
 		// 확인 대화상자 
 		if (confirm("삭제하시겠습니까?")) {
 			document.form1.action = "${pageContext.request.contextPath}/member/delete";
 			document.form1.submit();
 		}
-	});
+	}); */
 	
 	//미현 주소 클릭 시 다음주소 및 xy좌표 입력
 	$("#mAddress1").on("click", mAddress_find);
 	
 });
+
+
 </script>
 <sec:authentication property="principal.m_image_cd" var="image"/>
 <title>회원정보 상세 페이지</title>
@@ -78,22 +88,22 @@ $(document).ready(function() {
             <div class="card-body">
 					<form name="form1" method="post">
 						<table>
-							<tr>
-								<td><img style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/Characters/${dto.m_image_cd}.gif"></td>				
-							</tr>
+							<%-- <tr>
+								<td><img  style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/Characters/${dto.m_image_cd}.gif"></td>				
+							</tr> --%>
 							<tr>
 								<td>아이디</td>
 								<!-- id는 수정이 불가능하도록 readonly속성 추가 -->
 								<td><input name="m_id" value="${dto.m_id}"readonly="readonly" style="border: none" ></td>
 							</tr>
-							<!-- <tr>
-								<td>비밀번호</td>
-								<td><input type="password" name="m_password"></td>
-							</tr> -->
 							<tr>
+								<td>이름</td>
+								<td><input name=m_name value="${dto.m_name}" style="border: none" readonly="readonly"></td>
+							</tr> 
+							 <tr>
 								<td>닉네임</td>
-								<td><input name=m_name value="${dto.m_nick}"></td>
-							</tr>
+								<td><input name=m_nick value="${dto.m_nick}"></td>
+							</tr> 
 							
 							
 							<!-- 미현 : 주소 및 주소찾기 버튼 -->
@@ -121,19 +131,20 @@ $(document).ready(function() {
 								<td colspan="2" align="center"></td>
 							</tr>
 						</table>
-						<div align="center">
+						<!-- <div align="center">
 							<h2>Choose Your Option</h2>
-						</div>
+						</div> -->
 						<br>
 						<div class="info-user2">
 							<div style="color: red;">${message}</div>
 							<!--이모티콘이로 대체  -->
-							<i class="fas fa-user-edit" id="btnUpdate"  aria-hidden="true" style="color:black; font-size:50px;" ></i>
-							<i class="fas fa-door-open" id="btnDelete" style="color:black; font-size:50px;"></i> 
-							 <i class="fa fa-lock fa-2x"  aria-hidden="true" style="color:black; font-size:50px;"> </i> 
+							<button type="submit" id="btnUpdate" name="btnUpdate" >확인</button>
+							<!-- <i class="fas fa-user-edit" id="btnUpdate"  aria-hidden="true" style="color:black; font-size:50px;" ></i> -->
+							<!-- <i class="fas fa-door-open" id="btnDelete" style="color:black; font-size:50px;"></i>  -->
+							<!--  <i class="fa fa-lock fa-2x"  aria-hidden="true" style="color:black; font-size:50px;"> </i>  -->
 							 
-							 <a href="changePassword"> 비밀번호 변경 </a>
-							 <a href="option">알람 환경설정</a>
+							<!--  <a href="changePassword"> 비밀번호 변경 </a>
+							 <a href="option">알람 환경설정</a> -->
 							 
 						</div>
 					</form>
