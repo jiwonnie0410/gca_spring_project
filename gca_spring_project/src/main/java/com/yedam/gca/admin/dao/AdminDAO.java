@@ -224,6 +224,7 @@ public class AdminDAO {
 	 *	2. 부분환불 완료후 환불정보를 Money 테이블에 업데이트
 	 *	3. 전액환불용 고유번호 리스트 조회
 	 *	4. 전액환불 완료 후 환불정보를 Money 테이블에 업데이트
+	 *	5. 부트페이 App Id, Private key 조회
 	 * 
 	 */
 	
@@ -244,6 +245,10 @@ public class AdminDAO {
 	// 4. 전액환불 완료 후 환불정보를 Money 테이블에 업데이트
 	public void updateFullRefundList() {
 		mybatis.update("AdminDAO.updateFullRefundList");
+	}
+	// 5. 부트페이 App Id, Private key 조회
+	public Map<String, String> getBootpayInfo() {
+		return mybatis.selectOne("AdminDAO.getBootpayInfo");
 	}
 }
 

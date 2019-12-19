@@ -151,9 +151,6 @@
 						$('#profile_age').text(vo.m_age);
 						$('#profile_gender').text(vo.gender_cd); //남여로 표시되게2
 						//$('#profile_level').text(vo.m_level_cd);
-						$('#profile_level').children('img').attr('src',
-							"${pageContext.request.contextPath }/resources/images/level/"+vo.m_level_cd+".png"	
-						); //레벨이미지로 표시되게2
 						
 						//본인 프로필 창이면 버튼 영역(신고,강퇴) 숨기기.
 						if(vo.m_id == "${id}"){
@@ -185,6 +182,23 @@
 					
 				});
 				
+				//ajax3. 점수 합계 계산해서 레벨 불러오기
+				$.ajax({
+					url: "getOnesLevel",
+					method:'post',
+					dataType: "json",	//결과타입
+					data: param,		//요청파라미터
+					contentType: "application/json",
+					success: function(vo){
+						$('#profile_level').children('img').attr('src',
+								"${pageContext.request.contextPath }/resources/images/level/"+vo.m_level_cd+".png"	
+						); //레벨 이미지로 표시되게
+					},
+					error: function(){
+						console.log("getOnesLevel 실패");
+					}
+					
+				});
 				
 			});
 			
@@ -559,7 +573,7 @@
  var inputMessage = document.getElementById('inputMessage');
  
  
- function onMessage(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
+ function onMessageChat(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
 	var result = JSON.parse(event.data);
  	var sg_num = ${sgroup.sg_num};
 	if(result.cmd == "join" && ( sg_num == result.sg_num )) { //해당 방에 들어온경우
@@ -621,8 +635,8 @@
 		var id = "${id}";
 		if(result.id == id){ //강퇴당한놈만 나가게.
 			location.href="getSgList";
-			textarea.value += result.msg + "\n";
 		}
+		textarea.value += result.msg + "\n";
 		$('#'+result.id).remove();
 		
 	}

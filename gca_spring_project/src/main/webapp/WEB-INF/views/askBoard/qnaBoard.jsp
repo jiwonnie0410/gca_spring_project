@@ -12,6 +12,15 @@
 	cursor: pointer;
 }
 </style>
+
+<script>
+	var mid = "<sec:authentication property='principal.m_id'/>";
+</script>
+
+<!--데이터 테이블  -->
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
 <script
 	src="${pageContext.request.contextPath }/resources/js/board/user_Qna.js"></script>
 <sec:authentication property="principal.m_id" var="m_id" />
@@ -25,7 +34,7 @@
 			<!-- <p style="color: white;">* 홍보.</p> -->
 		</div>
 		<!-- -----------------------------------------검색폼 시작------------------------------------------------->
-		<div>
+	<%-- 	<div>
 			<form action="qnaboard" name="boardForm" id="boardForm">
 				<input type="hidden" name="page" value="1" />
 				<table>
@@ -46,14 +55,14 @@
 					</tr>
 				</table>
 			</form>
-		</div>
+		</div> --%>
 		<!-- -----------------------------------------------------검색폼 끝------------------------------------ -->
 
 
 
 		<!------------------------------------------------------- 목록 시작 ----------------------------------->
 		<!-- <h3>게시판 목록</h3> -->
-		<table class="table text-center">
+		<table class="table text-center" id="userlisttb">
 			<thead>
 				<tr>
 					<th class="text-center">번호</th>
@@ -68,29 +77,6 @@
 			style="background-color: #FE9191; color: white;">Write</button>
 	</div>
 	<!------------------------------------------------------- 목록  끝 ----------------------------------->
-
-
-
-
-	<!-- ---------------------------------------페이징 시작------------------------------------------------- -->
-	<!-- 페이징 -->
-	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-center" id="pageButton">
-			<li class="page-item"><a class="page-link"
-				href="javascript:getChallengeList()" aria-label="Previous"
-				style="color: #FE9191;"> <span aria-hidden="true">&laquo;</span>
-			</a></li>
-			<!-- 페이지 번호 들어오는 곳 -->
-			<li class="page-item"><a class="page-link"
-				href="javascript:getChallengeList()" aria-label="Next"
-				style="color: #FE9191;"> <span aria-hidden="true">&raquo;</span>
-			</a></li>
-		</ul>
-	</nav>
-	<!-- --------------------------------------------------페이징 끝 ------------------------------------>
-
-
-
 
 
 	<!----------------------------------게시판 작성  ------------------------------------------------------------>
@@ -114,10 +100,10 @@
 										type="hidden" name="qb_title" value="">
 									<div class="form-group">
 										<div>
-											제목 <select name="qb_title" id="qb_title"
+											질문 유형 <select name="qb_title" id="qb_title"
 												class="btn btn-outline btn-sm dropdown-toggle">
-												<option selected>질문 유형 선택</option>
-												<option value="반짝방 문의">반짝방 문의</option>
+												<option id="qn" selected value="질문 유형 선택" disabled>-질문 유형 선택-</option>
+												<option  value="반짝방 문의">반짝방 문의</option>
 												<option value="회원관리 문의">회원관리 문의</option>
 												<option value="동호희 문의">동호희 문의</option>
 											</select>
