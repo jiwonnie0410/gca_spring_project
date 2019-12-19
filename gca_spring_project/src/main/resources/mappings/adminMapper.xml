@@ -102,10 +102,10 @@
 					
 								SELECT 	CL_NUM, 
 										CL_STATUS, 
-										CL_NAME, 
+										SUBSTR(CL_NAME, 4) "CL_NAME", 
 										CL_CONTENT, 
-										CL_START_DTTM, 
-										CL_END_DTTM, 
+										to_char(CL_START_DTTM, 'yyyy-mm-dd') "CL_START_DTTM", 
+										to_char(CL_END_DTTM, 'yyyy-mm-dd') "CL_END_DTTM", 
 										CL_SCORE
 								FROM CHALLENGE
 								<where>
@@ -162,13 +162,11 @@
 
 <!-- 7. 챌린지 참여 중인 인원 -->
 			<select id="challenegeCount" resultType="map" parameterType="map">
-					SELECT C.CL_NUM, C.CL_STATUS, C.CL_NAME, C.CL_CONTENT, D.CD_NAME, 
+					SELECT C.CL_NUM, C.CL_STATUS, C.CL_NAME, C.CL_CONTENT, 
 							TO_CHAR(C.CL_START_DTTM, 'yyyy/mm/dd') "CL_START_DTTM", 
-							TO_CHAR(C.CL_END_DTTM, 'yyyy/mm/dd') "CL_END_DTTM",
-					        H.M_ID, H.CLH_CNT
-					FROM CHALLENGE C, CODE D, CHALLENGE_HIST H
-					WHERE C.SPORTS1_CD = D.CD_ID AND H.CL_NUM = C.CL_NUM
-							AND C.CL_NUM = ${cl_num}
+							TO_CHAR(C.CL_END_DTTM, 'yyyy/mm/dd') "CL_END_DTTM"
+					FROM CHALLENGE C
+					WHERE C.CL_NUM = ${cl_num}
 			</select>
 			
 			
@@ -178,14 +176,12 @@
 							C.CL_STATUS, 
 							C.CL_NAME, 
 							C.CL_CONTENT, 
-							D.CD_NAME, 
 							C.CL_CNT, 
 							TO_CHAR(C.CL_START_DTTM, 'yyyy/mm/dd') "CL_START_DTTM", 
 							TO_CHAR(C.CL_END_DTTM, 'yyyy/mm/dd') "CL_END_DTTM",
 					        C.CL_SCORE
-					FROM CHALLENGE C, CODE D
-					WHERE C.SPORTS1_CD = D.CD_ID
-							AND C.CL_NUM = #{value}
+					FROM CHALLENGE C
+					WHERE C.CL_NUM = #{value}
 			</select>
 			
 
@@ -225,22 +221,24 @@
 			
 			
 <!-- 11. 일별 수익 현황 -->
-			<select id="dailyIncome" resultType="map">
+			<select id="dailyIncome" resultType="map" parameterType="map">
 					SELECT TO_CHAR(MONEY_DEPOSIT_DTTM, 'DD') "day",
 					        SUM( MONEY_DEPOSIT ) "income",
 					        SUM( MONEY_DEPOSIT ) - SUM( MONEY_WITHDRAW ) "earning"
 					FROM MONEY
+					WHERE MONEY_DEPOSIT_DTTM BETWEEN #{start} AND #{end}
 					GROUP BY TO_CHAR(MONEY_DEPOSIT_DTTM, 'DD')
 					ORDER BY TO_CHAR(MONEY_DEPOSIT_DTTM, 'DD')
 			</select>
 			
 
 <!-- 12. 월별 수익 현황 -->
-			<select id="montlyIncome" resultType="map">
+			<select id="montlyIncome" resultType="map" parameterType="map">
 					SELECT TO_CHAR(MONEY_DEPOSIT_DTTM, 'MM') "month",
 					        SUM( MONEY_DEPOSIT ) "income",
 					        SUM( MONEY_DEPOSIT ) - SUM( MONEY_WITHDRAW ) "earning"
 					FROM MONEY
+					WHERE TO_CHAR(MONEY_DEPOSIT_DTTM, 'yyyy-MM-dd') BETWEEN #{start} AND #{end}
 					GROUP BY TO_CHAR(MONEY_DEPOSIT_DTTM, 'MM')
 					ORDER BY TO_CHAR(MONEY_DEPOSIT_DTTM, 'MM')
 			</select>

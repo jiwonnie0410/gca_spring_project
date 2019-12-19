@@ -33,6 +33,13 @@
 <!--json할때 필요  -->
 <title>My Page</title>
 
+		<script>
+			// 비밀번호 변경 후 확인 메시지 띄우기
+			if('${pwMessage}' != ''){
+				alert('${pwMessage}');
+			}
+		</script>
+
 </head>
 <body>
 

@@ -16,15 +16,6 @@
 <sec:authentication property="principal.m_nick" var="nick"/>
 <sec:authentication property="principal.m_image_cd" var="image"/>
 
-<!-- jquery js -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- bootstrap -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- json-serializeObject js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
-	
 <!-- 수림 개인 JS/css -->
 <script src="${pageContext.request.contextPath }/resources/js/surim/default.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/surim/challengePayment.js"></script>
@@ -181,11 +172,22 @@ function payGoGo() {
 					<span class="pinkText"><fmt:formatDate   
 							value="${challenge.cl_start_dttm }" type="date" /> ~ <fmt:formatDate
 							value="${challenge.cl_end_dttm }" type="date" />
-						(D-${challenge.gap_day })</span>
+					</span>
 					<span class="mediumText">${challenge.cl_name }</span> 
-					<span class="mediumText">기간내 | ${challenge.cl_cnt }회 참여</span> 
-					<span class="mediumText"> 
-						<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px"> ${challenge.cl_score }점
+					<span class="mediumText">기간내 | ${challenge.cl_cnt }회 참여
+					<!-- 태그 시작 -->
+						<a class="tags">
+							<!-- D-day 태그 -->
+							<input class="dDay-tag" value="D-${challenge.gap_day }">
+						</a>
+				   <!-- 태그 끝 -->
+					</span> 
+					<span style="display: flex; color: grey; font-weight: bold; "> 
+						<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="25px"> 
+						성공시 점수 <span class="pinkBold">&nbsp;${challenge.cl_score }점!</span>
+					</span>
+					<span class="mediumText">
+						<img src="${pageContext.request.contextPath }/resources/images/icon/money.png" width="25px">보증금 선택
 					</span>
 					<!-- 챌린지 기본옵션 끝 -->
 					<!-- 결제폼 시작 -->
@@ -194,12 +196,6 @@ function payGoGo() {
 						<div>
 							<table class="rangeTable" style="width: 100%">   
 								<thead>
-									<tr>
-										<td><span class="mediumText">
-												<img src="${pageContext.request.contextPath }/resources/images/icon/money.png" width="25px">보증금 선택
-											</span>
-										</td>
-									</tr>
 								</thead>
 								<tbody>
 									<tr>
@@ -230,12 +226,14 @@ function payGoGo() {
 					    </div>
 					    <div id="collapse" class="collapse" aria-labelledby="heading" data-parent="#payRule">
 					      <div class="card-body">
-					      	<span class="pinkText">챌린지 시작 후, 취소 불가</span>
-					      	<span class="smallText">챌린지는 여러 회원님들이 함께하는 대회인만큼, 챌린지 시작 후에는 환불이 불가능합니다</span>
-					      	<span class="pinkText">챌린지 100% 달성시</span> 
-					      	<span class="smallText">보증금 전액 환급, 기준 포인트 100% 지급</span>
-					      	<span class="pinkText">챌린지 80% 달성시</span>
-					      	<span class="smallText">보증금 전액 환급, 기준 포인트 80% 지급 </span>
+					      	<span class="pinkText">챌린지 참가 후, 취소 불가</span>
+					      	<span class="smallText">챌린지는 여러 회원님들이 함께하는 대회인만큼 취소가 불가능하며, 환불도 되지 않습니다</span>
+					      	<br>
+					      	<span class="pinkText">챌린지 성공시</span> 
+					      	<span class="smallText"><성공 다음날> 보증금 전액 환불, 기준 점수 지급</span>
+					      	<br>
+					      	<span class="pinkText">챌린지 실패시</span>
+					      	<span class="smallText"><챌린지 마감 다음날> 보증금 80% 환불 </span>
 					      </div>
 					    </div>
 					  </div>

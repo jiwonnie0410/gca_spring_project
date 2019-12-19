@@ -94,14 +94,14 @@ public class AdminServiceImpl implements AdminService {
 	
 	// 8. 일별 수익 현황
 	@Override
-	public List<Map<String, Object>> chartDaily() {
-		return dao.chartDaily();
+	public List<Map<String, Object>> chartDaily(String start, String end) {
+		return dao.chartDaily(start, end);
 	}
 
 	// 9. 월별 수익 현황
 	@Override
-	public List<Map<String, Object>> chartMonthly() {
-		return dao.chartMonthly();
+	public List<Map<String, Object>> chartMonthly(String start, String end) {
+		return dao.chartMonthly(start, end);
 	}
 
 	
