@@ -154,6 +154,10 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 			session.sendMessage(new TextMessage(mapper.writeValueAsString(svo)));
 		}
 		
+		//해당 그룹에 속한 회원에게 안 읽은 메시지 카운트 보내기
+		else if(svo.getCmd().equals("groupAlert")) {
+			groupSendMessage(svo);
+		}
 	}
 
 	@Override
@@ -167,6 +171,26 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 		return super.supportsPartialMessages();
 	}
 	
+	public void groupSendMessage(SocketVO svo) throws JsonProcessingException, IOException {
+		//알림 그룹 별로 프로필 +1 하고자 함.
+		List<AlertVO> list = alertService.getAlertGroupId(svo);
+		for(AlertVO avo : list) {
+			int alertCnt = alertService.getAlertCnt(avo);
+			if(alertCnt != 0) {
+				//4-1. 해당 멤버의 아이디로 웹소켓에서 세션 정보를 가져 옴. 
+				WebSocketSession session = sessionMap.get(avo.getM_id());
+				System.out.println( "세션" +session);
+				System.out.println( "겟엠아이디" + avo.getM_id());
+				//4-2. vo에 보낼 내용 담음
+				svo.setCmd("alertCnt");
+				svo.setId(avo.getM_id());
+				svo.setMsg(Integer.toString(alertCnt));
+				//4-3. vo의 형태를 json으로 바꿔서 보내기.
+				ObjectMapper mapper = new ObjectMapper();
+				session.sendMessage( new TextMessage(mapper.writeValueAsString(svo)) );
+			}
+		}
+	}
 	
 	public void joinSendMessage(SocketVO svo) throws JsonProcessingException, IOException {
 		//어떤 사람이 방에 참가했는데 방이 꽉 찼을 경우 실시간으로 메시지를 보내고 프로필에 +1하고자 함
@@ -222,6 +246,7 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 		}
 	}
 	
+	//방 참여, 강퇴, 채팅전송, 참가취소 시 메세지 뿌리기 메서드
 	public void sendMessage(SocketVO vo) {
 		for (WebSocketSession session : this.sessionSet) {
 			if (session.isOpen()) {

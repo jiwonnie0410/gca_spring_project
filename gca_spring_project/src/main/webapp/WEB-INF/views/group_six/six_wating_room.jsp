@@ -150,7 +150,6 @@
 						$('#profile_nick').text(vo.m_nick);
 						$('#profile_age').text(vo.m_age);
 						$('#profile_gender').text(vo.gender_cd); //남여로 표시되게2
-						$('#profile_level').text(vo.m_level_cd); //레벨이미지로 표시되게2
 						
 						//본인 프로필 창이면 버튼 영역(신고,강퇴) 숨기기.
 						if(vo.m_id == "${id}"){
@@ -178,6 +177,24 @@
 					},
 					error: function(){
 						console.log("getOnesAuthority 실패");
+					}
+					
+				});
+				
+				//ajax3. 점수 합계 계산해서 레벨 불러오기
+				$.ajax({
+					url: "getOnesLevel",
+					method:'post',
+					dataType: "json",	//결과타입
+					data: param,		//요청파라미터
+					contentType: "application/json",
+					success: function(vo){
+						$('#profile_level').children('img').attr('src',
+								"${pageContext.request.contextPath }/resources/images/level/"+vo.m_level_cd+".png"	
+						); //레벨 이미지로 표시되게
+					},
+					error: function(){
+						console.log("getOnesLevel 실패");
 					}
 					
 				});
@@ -294,11 +311,19 @@
 
 			});
 			
+			//목록으로 돌아가기
+			$('#backToList').on('click', function(){
+				
+				if("${param.endroom}" == "마감"){
+					location.href='getSixListEnd';
+				}else{
+					location.href='getSixList';
+				}
+			});
+			
 			//미현
 			$('#btn_cert').on('click', getLocation); //참가인증
 			view_map();
-			
-			$('#backToList').on('click', function(){location.href='getSixList';}) //목록으로 돌아가기
 			
 		});
 </script>
@@ -402,7 +427,9 @@
 						<tr>
 							<td id="profile_gender"></td>
 							<td id="profile_age"></td>
-							<td id="profile_level"></td>
+							<td id="profile_level">
+								<img style="padding-bottom:5px;" width="30px" height="30px" src="">
+							</td>
 						</tr>
 					</table>
 				</div>

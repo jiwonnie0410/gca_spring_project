@@ -68,6 +68,7 @@ $(document).ready(function() {
 	
 	//미현 주소 클릭 시 다음주소 및 xy좌표 입력
 	$("#mAddress1").on("click", mAddress_find);
+	console.log(xy);
 	
 });
 

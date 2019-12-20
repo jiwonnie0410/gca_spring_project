@@ -19,6 +19,7 @@ import com.yedam.gca.group_six.service.SixmanService;
 import com.yedam.gca.group_six.vo.SixmanVO;
 import com.yedam.gca.history.service.ActiveHistService;
 import com.yedam.gca.history.vo.ActiveHistVO;
+import com.yedam.gca.history.vo.ScoreHistVO;
 import com.yedam.gca.member.vo.MembersVO;
 
 @Controller
@@ -75,6 +76,41 @@ public class SixmanController {
 		public ActiveHistVO getOnesAuthority(@RequestBody ActiveHistVO vo) {
 			vo = sixmanService.getOnesAuthority(vo);
 			return vo;
+		}
+		
+//프로필 모달 띄울 때 해당 멤버의 레벨 가져오기(점수 조회 후 레벨변동해야하면 업데이트해서 가져오기)
+		@ResponseBody
+		@RequestMapping(value="/sixman/getOnesLevel", consumes="application/json")
+		public MembersVO getOnesLevel(@RequestBody MembersVO vo) {
+		//1)점수 합계 가져오기
+			ScoreHistVO svo = sixmanService.getMyTotalScore(vo);
+			int score = 0;
+			if(svo.getSch_score() != 0) {
+				score = svo.getSch_score();
+			}
+		//2)if 점수가 몇점 이상이면 레벨 업데이트 -> 이거 불러오기만하고 자정마다 업데이트 하는게 좋을듯.....
+			if(isBetween(score, 0, 29)) { //isBetween함수는 바로 밑에..
+				vo.setM_level_cd("LEVEL1");
+			}else if(isBetween(score, 30, 199)) {
+				vo.setM_level_cd("LEVEL2");
+			}else if(isBetween(score, 200, 499)) {
+				vo.setM_level_cd("LEVEL3");
+			}else if(isBetween(score, 500, 2999)) {
+				vo.setM_level_cd("LEVEL4");
+			}else if(isBetween(score, 3000, 9999)) {
+				vo.setM_level_cd("LEVEL5");
+			}else if(isBetween(score, 10000, 49999)) {
+				vo.setM_level_cd("LEVEL6");
+			}else {
+				vo.setM_level_cd("LEVEL7");
+			}
+						
+			return vo;
+		}
+		
+		//between a and b
+		public static boolean isBetween(int x, int lower, int upper) {
+			return lower <= x && x <= upper;
 		}
 
 

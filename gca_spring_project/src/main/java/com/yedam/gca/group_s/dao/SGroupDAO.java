@@ -48,11 +48,11 @@ public class SGroupDAO {
 	public ActiveHistVO getOnesAuthority(ActiveHistVO vo) {
 		return mybatis.selectOne("ActiveHistDAO.getAuthority", vo);
 	}
-	//id로 본인의 점수 합계 조회 --단일행 단일컬럼 int로 리턴이 되나..?
+	//id로 본인의 점수 합계 조회
 	public ScoreHistVO getMyTotalScore(MembersVO vo) {
 		return mybatis.selectOne("ScoreHistDAO.getMyTotalScore", vo);
 	}
-	//레벨 업데이트
+	//레벨 업데이트 --쓸지안쓸지 고민중
 	public int updateLevel(MembersVO vo) {
 		return mybatis.update("MemberDAO.updateLevel", vo);
 	}
@@ -67,8 +67,15 @@ public class SGroupDAO {
 	}
 	 
 	//방 생성
-	public void insertSg(SGroupVO vo){
+	public int insertSg(SGroupVO vo){
 		mybatis.selectOne("SGroupDAO.insertSg", vo);
+		return vo.getSg_num();
+	}
+	
+	//반짝 방 생성 시 알람 보내기
+	public int insertSgAlert(SGroupVO vo) {
+		mybatis.selectOne("SGroupDAO.insertSgAlert", vo);
+		return vo.getAlert_gnum();
 	}
 	
 	//마감 방 조회

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.group_six.vo.SixmanVO;
 import com.yedam.gca.history.vo.ActiveHistVO;
+import com.yedam.gca.history.vo.ScoreHistVO;
 import com.yedam.gca.member.vo.MembersVO;
 
 @Repository("sixmanDAO")
@@ -42,6 +43,10 @@ public class SixmanDAO {
 	public ActiveHistVO getOnesAuthority(ActiveHistVO vo) {
 		return mybatis.selectOne("ActiveHistDAO.getAuthority", vo);
 	}
+	//id로 본인의 점수 합계 조회
+	public ScoreHistVO getMyTotalScore(MembersVO vo) {
+		return mybatis.selectOne("ScoreHistDAO.getMyTotalScore", vo);
+	}
 	
 	
 	
@@ -60,6 +65,11 @@ public class SixmanDAO {
 	//방 생성
 	public void insertSix(SixmanVO vo){
 		mybatis.selectOne("SixmanDAO.insertSix", vo);
+	}
+	
+	//용병 방 생성 시 알람 보내기
+	public int insertSixAlert(SixmanVO vo) {
+		return mybatis.selectOne("AlertDAO.insertSixAlert", vo);
 	}
 	
 	//마감 방 조회

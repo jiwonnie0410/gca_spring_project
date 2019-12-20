@@ -56,13 +56,20 @@ public class SGroupServiceImpl implements SGroupService {
 	}
 
 	@Override
-	public void insertSg(SGroupVO vo) {
-		sgroupDAO.insertSg(vo);
+	public int insertSg(SGroupVO vo) {
+		return sgroupDAO.insertSg(vo);
 	}
+	
+	@Override
+	public int insertSgAlert(SGroupVO vo) {
+		return sgroupDAO.insertSgAlert(vo);
+	}
+	
 	@Override
 	public List<SGroupVO> getSgEndList(SGroupVO vo) {
 		return sgroupDAO.getSgEndList(vo);
 	}
+	
 	@Override
 	public SGroupVO getSgCert(SGroupVO vo) {
 		return sgroupDAO.getSgCert(vo);

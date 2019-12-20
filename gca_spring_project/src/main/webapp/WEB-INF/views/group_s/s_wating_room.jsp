@@ -121,8 +121,33 @@
 			
 			//채팅 전송버튼 눌렀을때
 			$("body").on("click", "[id^=chat]", function() {
-
-				send();
+				
+				send();//웹소켓으로 전송되는 function "send"
+				
+				//채팅메세지
+				var message = document.getElementById('inputMessage');
+				var sg_num = ${sgroup.sg_num};
+				
+				//아작스 전송용 파라미터
+				var param = JSON.stringify(
+						{"m_id" : usrId, "sg_num" : sg_num, "chh_content" : message}
+				);
+				
+				//채팅 히스토리 테이블에 저장
+				$.ajax({
+					url: "insertChatHist",
+					method:'post',
+					dataType: "json",	//결과타입
+					data: param,		//요청파라미터
+					contentType: "application/json",
+					success: function(){
+						
+					},
+					error: function(){
+						console.log("insert실패");
+					}
+					
+				});
 
 			});
 
@@ -395,7 +420,8 @@
 
 
 
-<!-- 모달시작 -->
+<!-- 모달시작 1.프로필모달 2.방정보모달 3.프로필 내 신고모달-->
+
 <!-- 프로필 모달 --><!-- 프로필 모달 --><!-- 프로필 모달 --><!-- 프로필 모달 --><!-- 프로필 모달 --><!-- 프로필 모달 --><!-- 프로필 모달 -->
 <div class="container">
 	<div class="modal fade" id="profile">
@@ -581,142 +607,103 @@
 <!-- 웹소켓 채팅 -->
 <script type="text/javascript">
 
- var textarea = document.getElementById("messageWindow"); 
- 
- var inputMessage = document.getElementById('inputMessage');
- 
- 
- function onMessageChat(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
-	var result = JSON.parse(event.data);
- 	var sg_num = ${sgroup.sg_num};
-	if(result.cmd == "join" && ( sg_num == result.sg_num )) { //해당 방에 들어온경우
-		
-		var img = result.character;
-		var nick = result.nick;
-		var id = result.id;
-		
-		//var param = {"img":img};
-		
-		//이미지 영어이름 갖고오는 ajax(웹소켓에서 처리하는 방향 알아보기.)
-		/* $.ajax({
-			url: "returnImage",
-			type:'GET',
-			async:false,
-			data: param,
-			//dataType: "Json",
-			
-			success: function(data){
-				console.log(data);
-				img=data;
-			},
-			error: function(){
+	var textarea = document.getElementById("messageWindow"); 
+	 
+	var inputMessage = document.getElementById('inputMessage');
+	 
+	function onMessageChat(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
+		var result = JSON.parse(event.data);
+		var sg_num = ${sgroup.sg_num};
+		if(result.cmd == "join" && ( sg_num == result.sg_num )) { //해당 방에 들어온경우
 				
-			}
+			var img = result.character;
+			var nick = result.nick;
+			var id = result.id;
 			
-		}); */
-		
-		//프로필 붙여주기~~
-		$span = $("<span data-toggle='modal' data-target='#profile' style='font-size:13px; padding:10px; display:inline-block;'>");
-		$span.attr("id",id);
-		$img = $("<img style='padding-bottom:5px;' width='65px' height='65px'>");
-		$img.attr({"src": "${pageContext.request.contextPath }/resources/images/Characters/"+img+".gif"});
-		$text = nick;
-		
-		$span.append($img);
-		$span.append('<br />');
-		$span.append($text);
-		
-		textarea.value += result.msg + "\n"; //<00님이 참가하셨습니다>
-		$('#profileList').append($span);
-	 	
-	}
-	else if( result.cmd == "msg" && ( sg_num == result.sg_num )) { //메세지 전송하는 경우
-		textarea.value += result.id + " : " + result.msg + "\n";
-	}
-	else if( result.cmd == "cancelJoin" && ( sg_num == result.sg_num )) { //참가취소 누르고 웹소켓 거쳐왔을때.
-		var person = result.id;
-		console.log("person:"+result.id);
-		//프로필 삭제
-		$('#'+person).remove();
-		textarea.value += result.msg + "\n"; //채팅방에 나갔다고 표시.
-	}
-	else if( result.cmd == "kickOut" && ( sg_num == result.sg_num ) ){
-		var id = "${id}";
-		if(result.id == id){ //강퇴당한놈만 나가게.
-			location.href="getSgList";
+			//프로필 붙여주기~~
+			$span = $("<span data-toggle='modal' data-target='#profile' style='font-size:13px; padding:10px; display:inline-block;'>");
+			$span.attr("id",id);
+			$img = $("<img style='padding-bottom:5px;' width='65px' height='65px'>");
+			$img.attr({"src": "${pageContext.request.contextPath }/resources/images/Characters/"+img+".gif"});
+			$text = nick;
+					
+			$span.append($img);
+			$span.append('<br />');
+			$span.append($text);
+			
+			textarea.value += result.msg + "\n"; //<00님이 참가하셨습니다>
+			$('#profileList').append($span);
+		 	
 		}
-		textarea.value += result.msg + "\n";
-		$('#'+result.id).remove();
-		
+		else if( result.cmd == "msg" && ( sg_num == result.sg_num )) { //메세지 전송하는 경우
+			textarea.value += result.id + " : " + result.msg + "\n";
+		}
+		else if( result.cmd == "cancelJoin" && ( sg_num == result.sg_num )) { //참가취소 누르고 웹소켓 거쳐왔을때.
+			var person = result.id;
+			console.log("person:"+result.id);
+			//프로필 삭제
+			$('#'+person).remove();
+			textarea.value += result.msg + "\n"; //채팅방에 나갔다고 표시.
+		}
+		else if( result.cmd == "kickOut" && ( sg_num == result.sg_num ) ){
+			var id = "${id}";
+			if(result.id == id){ //강퇴당한놈만 나가게.
+				location.href="getSgList";
+			}
+			textarea.value += result.msg + "\n";
+			$('#'+result.id).remove();
+				
+		}
+			  
+		chatAreaScroll(); 
 	}
-	  
-	chatAreaScroll(); 
- }
- 
- //function onOpen(event) { //이미 참여된방에 참여인지 새로 참여인지 구분해서 새로참여만 참가하셨습니다 띄우고 프로필 붙이기.
-	 //console.log("first_in : "+"${param.first_in}");
- 
-	 /* if("${param.first_in}" == "first_in"){
+	 
+	//메세지 전송
+	function send() { 
+		var sg_num = ${sgroup.sg_num};
+		//var space = " "; //공백 입력시에도 전송 못하게 해야되는데 안되서 일단 킵
 		msg = {
-			cmd : "join",
+			cmd : "msg",
 			id : "${id}",
-			msg : "<"+"${id}"+"님이 참가하셨습니다.>"
-			//여기에 아이디 붙여서 추가하면 될듯. 근데 새로고침해도 이게 뜨는것은 막아야함.
+			msg : inputMessage.value,
+			sg_num : sg_num
+		}
+		if((inputMessage.value != "")){
+			webSocket.send(  JSON.stringify( msg )   ); 
+			inputMessage.value = ""; 
+		}
+	} 
+	 
+	//참가 취소 시 참여자 칸에서 프로필 삭제
+	function deleteProfile() { 
+		var sg_num = ${sgroup.sg_num};
+		msg = {
+			cmd : "cancelJoin",
+			id : "${id}",
+			msg : "<"+"${id}"+"님이 나가셨습니다.>",
+			sg_num : sg_num
 		}
 		webSocket.send(  JSON.stringify( msg )   );
-	 } */
- //}
-
- 
- //메세지 전송
- function send() { 
-	 var sg_num = ${sgroup.sg_num};
-	 msg = {
-		 cmd : "msg",
-		 id : "${id}",
-		 msg : inputMessage.value,
-		 sg_num : sg_num
-	 }
-	//textarea.value += "나 : " + inputMessage.value + "\n"; 
-	webSocket.send(  JSON.stringify( msg )   ); 
-	inputMessage.value = ""; 
- } 
- 
- //나갔을때 참여자 칸에서 프로필 삭제
- function deleteProfile() { 
-	 var sg_num = ${sgroup.sg_num};
-	 msg = {
-		 cmd : "cancelJoin",
-		 id : "${id}",
-		 msg : "<"+"${id}"+"님이 나가셨습니다.>",
-		 sg_num : sg_num
-	 }
-	webSocket.send(  JSON.stringify( msg )   );
- }
- 
-//강퇴 시 참여자 칸에서 프로필 삭제
- function deleteProfileKO(id) { 
-	 var sg_num = ${sgroup.sg_num};
-	 msg = {
-		 cmd : "kickOut",
-		 id : id,
-		 msg : "<"+id+"님이 강퇴되었습니다.>",
-		 sg_num : sg_num
-	 }
-	webSocket.send(  JSON.stringify( msg )   );
- }
-
- 
- //채팅치면 스크롤바 내려가게 하기.
- function chatAreaScroll() {
-	//using jquery
-	/* var textArea = $('#messageWindow');
-	textArea.scrollTop( textArea[0].scrollHeight - textArea.height() );
-	textArea.scrollTop( textArea[0].scrollHeight); */
-	//using javascript
-	var textarea = document.getElementById('messageWindow');
-	textarea.scrollTop = textarea.scrollHeight;
-}
+	}
+	 
+	//강퇴 시 참여자 칸에서 프로필 삭제
+	function deleteProfileKO(id) { 
+		var sg_num = ${sgroup.sg_num};
+		msg = {
+			cmd : "kickOut",
+			id : id,
+			msg : "<"+id+"님이 강퇴되었습니다.>",
+			sg_num : sg_num
+		}
+		webSocket.send(  JSON.stringify( msg )   );
+	}
+	
+	 
+	//채팅치면 스크롤바 내려가게 하기.
+	function chatAreaScroll() {
+		var textarea = document.getElementById('messageWindow');
+		textarea.scrollTop = textarea.scrollHeight;
+	}
 </script>
     
 </body>
