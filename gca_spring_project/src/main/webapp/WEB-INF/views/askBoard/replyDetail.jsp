@@ -10,7 +10,7 @@
 <script>
 	//3. 댓글 수정
 	$("#btnReplyUpdate").click(function(){
-		var detailReplytext = $("#detailReplytext").val();
+		var adr_content = $("#adr_content").val();
 		$.ajax({
 			type: "put",
 			url: "${pageContext.request.contextPath}/reply/update/${vo.adr_num}",
@@ -20,7 +20,7 @@
 			},
 			// 데이터를 json형태로 변환
 			data: JSON.stringify({
-				adr_contents : detailReplytext
+				adr_content : adr_content
 			}),
 			dataType: "text",
 			success: function(result){
@@ -62,7 +62,7 @@
 
 <body>
 	댓글 번호 : ${vo.adr_num}<br>
-	<textarea id="adr_content" rows="3" cols="5">${vo.adr_content}</textarea>
+	<textarea id="adr_content" name="adr_content" rows="3" cols="5">${vo.adr_content}</textarea>
 	<div style="text-align: center;">
 		<!-- 본인 댓글만 수정, 삭제가 가능하도록 처리 -->
 		<c:if test="${m_id == vo.m_id}">
