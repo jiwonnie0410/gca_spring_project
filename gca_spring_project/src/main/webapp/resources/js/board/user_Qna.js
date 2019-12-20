@@ -7,12 +7,12 @@ $(function() {
 	deleteBoard();// 삭제
 
 	
-	$("#btnUpdete").click(function() {
+/*	$("#btnUpdete").click(function() {
 		$('#Modalread').modal('hide')
 		$('[name="qb_id"]').val($('#frm #qb_id').html());
 		$('[name="qb_content"]').val($('#frm #qb_content').html());
 		$('#myModal').modal('show')
-	});
+	});*/
 	
 	
 //	$(document).on('click', '#userlisttb #asktb tr', function() {
@@ -29,9 +29,6 @@ function getQb_id(qb_id) {
 		console.log(qb_id);
 		$("#Modalread .modal-body").load("qnView?qb_id="+qb_id)
 	//});
-	
-	
-	
 }
 
 
@@ -60,13 +57,15 @@ function getBoardList() {
 function getBoardListHandler(datas) {
 	$("#asktb").empty();
 	for (var i = 0; i < datas.length; i++) {
-		$(
-				"<tr data-toggle='modal' data-target='#Modalread' id='newTr' onclick='getQb_id("
-						+ datas[i].qb_id + ")'>").append(
+		var tr = "<tr data-toggle='modal' data-target='#Modalread' id='newTr' onclick='getQb_id("+ datas[i].qb_id + ")'>";
+		if(m_id != datas[i].m_id) {
+			tr = '<tr>';
+		}
+		$(tr).append(
 				$('<td>').html(datas[i].qb_id)).append(
 				$('<td>').html(datas[i].m_id)).append(
 				$('<td>').html(datas[i].qb_title)).appendTo('#asktb').attr(
-				"data", datas[i].bno);
+						"data", datas[i].bno);
 		$("#userlisttb").dataTable()
 	}// for
 }// getBoardListHandler
@@ -78,7 +77,6 @@ function getBoardListHandler(datas) {
 	//폼의 파라미터를 넘기기 위해 serialize() 함수를 사용한다.필요한 로직 처리를 하고 마찬가지로 @ResponseBody Annotation을 사용하여  Object형태로 넘김
 function insertBoard() {
 	$("#btnIns").click(function() {
-			/*$("select option[value*='질문 유형 선택']").prop('disabled',true);*/
 			var param = JSON.stringify($("#ad_boardWriteForm").serializeObject());// form의 입력데이터를 쿼리스트링으로 만들어준다. 
 			$.ajax({
 				url:"./ajax/insertBoard",
@@ -88,7 +86,7 @@ function insertBoard() {
 				contentType:"application/json",
 				success:	insertBoardtHandler,
 				error: function() {
-					alert("오류");    
+					alert("모두 입력되었는지 확인해주세요");    
 				}
 			});	//ajax	
 			
@@ -98,10 +96,7 @@ function insertBoard() {
 	
 //등록 요청 결과처리
 function insertBoardtHandler(data) {
-	/*$('<tr>').append($("<td id='newTr'>").html(data.qb_id))
-			 .append($('<td>').html(data.m_id))
-			 .append($('<td>').html(data.qb_title))
-			 .prependTo('#asktb');*/
+	alert("저장 하겠습니까?");
 	getBoardList();
 	$('#myModal').modal("hide"); //닫기 
 }

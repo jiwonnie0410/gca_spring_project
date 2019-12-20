@@ -104,20 +104,6 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body"></div>
-				
-				<%-- <div class="modal-footer">
-					<c:choose>
-						<c:when test="${ dto.qb_an != 'yes'}">
-							<button type="button" class="btn btn-primary" id="btnUpdete">답글</button>
-						</c:when>
-						<c:otherwise>
-							<button type="button" class="btn btn-primary" id="btnUpdete">수정</button>
-						</c:otherwise>
-					</c:choose>
-
-					<button type="button" class="btn btn-danger" id="btnDelete">삭제</button>
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-				</div> --%>
 			</div>
 		</div>
 	</div>

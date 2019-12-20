@@ -48,3 +48,13 @@
 		</div>
 	</div>
 </div>
+<script>
+	$("#btnUpdete").click(function() {
+		$('#Modalread').modal('hide')
+		$('[name="qb_id"]').val($('#frm #qb_an_id').html());
+		$('[name="qb_content"]').val($('#frm #qb_an').html());
+		$('#myModal').modal('show')
+	});
+
+</script>
+
