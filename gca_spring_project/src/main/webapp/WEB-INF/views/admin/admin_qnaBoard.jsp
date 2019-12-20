@@ -65,7 +65,7 @@
 								<%-- form --%>
 								<form action="insertBoard" id="ad_boardWriteForm">
 									<div class="form-group"></div>
-									<input type="text" name="qb_id"  id="qb_id"  value=""> 
+									<input type="hidden" name="qb_id"  id="qb_id"  value=""> 
 									<input type="hidden" name="qb_title" value="답변">
 									<div>
 										<input type="hidden" name="qb_origin" id="qb_origin">

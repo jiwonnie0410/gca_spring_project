@@ -96,7 +96,7 @@
 							<div class="panel-body">
 								<%-- form --%>
 								<form role="form" action="../ajax/insertBoard" id="ad_boardWriteForm" name="ad_boardWriteForm">
-									<input type="hidden" name="qb_id" value="">
+									<input type="text" name="qb_id" value="">
 									<div class="form-group">
 										<div>
 											질문 유형 <select name="qb_title" id="qb_title"
