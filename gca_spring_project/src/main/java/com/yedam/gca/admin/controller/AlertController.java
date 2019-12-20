@@ -27,11 +27,12 @@ public class AlertController {
 	vo.setM_id(id);	
 	
 	// 안읽은 알람 메세지 목록
-	model.addAttribute("notReadList", service.getAlertNotRead(vo));
+	model.addAttribute("notReadList", service.getAlertNotRead(vo)); // 안읽은 메세지 목록
+	service.updateAlertRea(vo); //안읽은 메세지를 읽음 처리한다
 	
 	// 모든 알람 메세지 목록
 	model.addAttribute("alertList", service.getAlertList(vo));
-		
+	
 	return "/user/member/alert";
 	}
 }

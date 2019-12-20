@@ -264,9 +264,9 @@ Latest compiled JavaScript
 
 </style>
 <style>
-textarea {
+/* textarea {
 	width: 100%;
-}
+} */
 
 /* .reply_reply {
 	border: 2px solid #FF50CF;
@@ -330,19 +330,20 @@ textarea {
 
 
 	<!-- 댓글 작성 영역 -->
-	<div style="width: 650px; text-align: center;">
+<!-- 	<div style="width: 650px; text-align: center;"> -->
+	<div>
 		<br>
 		<!-- 로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
 		<%-- <c:if test="${sessionScope.m_id != null}"> --%>
-		<textarea rows="3" cols="30" id="adr_content" placeholder="댓글을 작성해주세요"></textarea>
+		<textarea rows="3" cols="40" id="adr_content" placeholder="댓글을 작성해주세요"></textarea>
+		<button type="button" class="btn " id="btnReply" style="background-color: #FE9191;">댓글 작성</button>
 		<br>
 		<!-- 비밀댓글 체크박스 -->
 		<input type="checkbox" id="adr_hidden">비밀 댓글
-		<button type="button" class="btn " id="btnReply"
-			style="background-color: #FE9191;">댓글 작성</button>
+		<!-- <button type="button" class="btn " id="btnReply" style="background-color: #FE9191;">댓글 작성</button> -->
 		<%-- 	</c:if> --%>
 	</div>
-	<!-- 댓글 작성 영역 -->
+	
 	<!-- 댓글 목록 영역 -->
 	<div id="listReply"></div>
 	<!-- 댓글 목록 영역 -->
