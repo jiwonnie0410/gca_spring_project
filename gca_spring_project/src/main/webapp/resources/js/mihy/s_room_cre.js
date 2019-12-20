@@ -101,6 +101,7 @@ function valid(){
 	
     var con=confirm("입력한 내용으로 반짝 방을 생성하시겠습니까?");
     if(con){
+    	//방생성하면서 이 부분에 알람 소켓 보내기
     	$('#frm').submit();
     }
 }

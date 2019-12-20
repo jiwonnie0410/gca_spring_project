@@ -311,11 +311,19 @@
 
 			});
 			
+			//목록으로 돌아가기
+			$('#backToList').on('click', function(){
+				
+				if("${param.endroom}" == "마감"){
+					location.href='getSgListEnd';
+				}else{
+					location.href='getSgList';
+				}
+			});
+			
 			//미현
 			$('#btn_cert').on('click', getLocation); //참가인증
 			view_map();
-			
-			$('#backToList').on('click', function(){location.href='getSgList';}) //목록으로 돌아가기
 			
 		});
 </script>
@@ -374,8 +382,13 @@
 
 <!-- 버튼영역 시작 -->														
     <div style="padding-bottom:30px">
-      	<button id="btn_cert" class="button-general">참가인증</button>&nbsp;<button id="cancelJoin" class="button-general">참가취소</button>&nbsp;
-      	<button class="button-general">공유</button>&nbsp;<button id="backToList" class="button-general">목록</button>
+      	<button id="btn_cert" class="button-general">참가인증</button>&nbsp;
+      	<c:set var="end" value="마감" />
+      	<c:if test="${param.endroom ne end}">
+      		<button id="cancelJoin" class="button-general">참가취소</button>&nbsp;
+      	</c:if>
+      	<button class="button-general">공유</button>&nbsp;
+      	<button id="backToList" class="button-general">목록</button>
     </div>
 <!-- 버튼영역 끝 -->
 
@@ -573,7 +586,7 @@
  var inputMessage = document.getElementById('inputMessage');
  
  
- function onMessage(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
+ function onMessageChat(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
 	var result = JSON.parse(event.data);
  	var sg_num = ${sgroup.sg_num};
 	if(result.cmd == "join" && ( sg_num == result.sg_num )) { //해당 방에 들어온경우
@@ -583,10 +596,6 @@
 		var id = result.id;
 		
 		//var param = {"img":img};
-		
-		//console.log("id : "+id);
-		//console.log("nick : "+nick);
-		//console.log("img : "+img);
 		
 		//이미지 영어이름 갖고오는 ajax(웹소켓에서 처리하는 방향 알아보기.)
 		/* $.ajax({

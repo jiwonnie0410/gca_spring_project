@@ -26,7 +26,7 @@
 				ALERT_READ
 		FROM 	ALERT
 		WHERE	M_ID = #{m_id}
-		ORDER BY ALERT_NUM;
+		ORDER BY ALERT_NUM
 	</select>
 	
 <!-- 시용자의 읽지 않은 알람 메시지 확인하기 -->
@@ -41,7 +41,7 @@
 		FROM 	ALERT
 		WHERE	M_ID = #{m_id}
 		AND 	ALERT_READ = 0
-		ORDER BY ALERT_NUM;
+		ORDER BY ALERT_NUM
 	</select>
 	
 <!-- 사용자의 읽은 알람 메시지 확인하기 -->
@@ -56,7 +56,7 @@
 		FROM 	ALERT
 		WHERE	M_ID = #{m_id}
 		AND 	ALERT_READ = 1
-		ORDER BY ALERT_NUM;
+		ORDER BY ALERT_NUM
 	</select>
 
  <!-- 메시지 확인 후 수신 여부 업데이트

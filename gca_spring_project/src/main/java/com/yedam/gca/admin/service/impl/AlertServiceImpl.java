@@ -3,11 +3,13 @@ package com.yedam.gca.admin.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.yedam.gca.admin.dao.AlertDAO;
 import com.yedam.gca.admin.service.AlertService;
 import com.yedam.gca.admin.vo.AlertVO;
 
+@Service
 public class AlertServiceImpl implements AlertService {
 	
 	@Autowired

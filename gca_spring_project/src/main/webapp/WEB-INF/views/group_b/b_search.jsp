@@ -9,23 +9,13 @@
 <meta charset="UTF-8">
 <title>매치할 동호회를 찾아보세요!</title>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<!-- Popper JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
 	<!-- private : icon 1 & slide 2 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 	<link rel="stylesheet" href="../resources/css/mihy/swiper.min.css">
 	<script src="../resources/js/mihy/swiper.min.js"></script>
 
 <script>
-	var mstatus = "<sec:authentication property='principal.m_status_cd'/>";
+	var mgrant = "<sec:authentication property='principal.m_status_cd'/>";
 </script>
 
 
@@ -41,8 +31,8 @@
 <div align="center" class="mt-2 mb-2"><h4>함께 시합할 동호회 찾기</h4></div>
 
 <!-- 계정 상태가 활동중인 사람들만 버튼 보임 -->
-<sec:authentication property='principal.m_status_cd' var='mStatus'/> <!-- 변수에 이 회원의 계정상태 대입 -->
-<c:if test="${mStatus == 'M01'}"> <!-- 계정상태가 활동중이라면 방생성 버튼 보임 -->
+<sec:authentication property='principal.m_status_cd' var='mgrant'/> <!-- 변수에 이 회원의 계정상태 대입 -->
+<c:if test="${mgrant == 'M01'}"> <!-- 계정상태가 활동중이라면 방생성 버튼 보임 -->
 	<button class="btn btn-info create_room mt-3 ml-3 mr-3" style="width:90%;">동호회 매치 방 생성하기</button>
 </c:if>
 

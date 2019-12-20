@@ -12,13 +12,14 @@
 	cursor: pointer;
 }
 </style>
+
+<script>
+	var mid = "<sec:authentication property='principal.m_id'/>";
+</script>
+
 <!--데이터 테이블  -->
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-
-<script>
-	var m_id = "<sec:authentication property='principal.m_id'/>";
-</script>
 
 <script
 	src="${pageContext.request.contextPath }/resources/js/board/user_Qna.js"></script>

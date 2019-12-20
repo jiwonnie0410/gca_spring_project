@@ -69,6 +69,11 @@ public class MemberDAO {
 		return mybatis.selectOne("MemberDAO.memberStatus", id);
 	}
 	
+	// 9. 사용자의 현재까지 총 포인트
+	public int getScore(String mId) {
+		return mybatis.selectOne("MemberDAO.getScore", mId);
+	}
+	
 	
 	// **************** 수림 *******************//
 	// 1. 유저별 알람 정보 가져오기
