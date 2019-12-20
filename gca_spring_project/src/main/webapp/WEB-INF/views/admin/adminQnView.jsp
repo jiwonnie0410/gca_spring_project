@@ -27,9 +27,7 @@
 				</div>
 				<div class="form-group">
 				내용
-					<div>
-						${dto.qb_content}
-					</div>
+					<div id="qb_content">${dto.qb_content}</div>
 				</div>
 				<div class="form-group">
 				답변
@@ -51,7 +49,7 @@
 						<c:otherwise>
 							<button type="button" class="btn btn-primary" id="btnUpdete">수정</button>
 						</c:otherwise>
-					</c:choose>
+				</c:choose>
 				<!-- <button type="button" class="btn btn-danger" id="btnDel" name="btnDel">삭제</button> -->
 					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
 				</div>	
@@ -60,3 +58,12 @@
 		</div>
 	</div>
 </div>
+
+<script>
+$("#btnUpdete").click(function() {
+	$('#Modalread').modal('hide')
+	$('#ad_boardWriteForm [name="qb_id"]').val($('#frm #qb_an_id').html());
+	$('#ad_boardWriteForm [name="qb_content"]').val($('#frm #qb_an').html());
+	$('#myModal').modal('show')
+});
+</script>

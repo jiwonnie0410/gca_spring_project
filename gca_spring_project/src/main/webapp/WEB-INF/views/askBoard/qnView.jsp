@@ -28,9 +28,7 @@
 				</div>
 				<div class="form-group">
 				내용
-					<div>
-						${dto.qb_content}
-					</div>
+					<div id = "qb_content">${dto.qb_content}</div>
 				</div>
 				<div class="form-group">
 				답변
@@ -51,8 +49,8 @@
 <script>
 	$("#btnUpdete").click(function() {
 		$('#Modalread').modal('hide')
-		$('[name="qb_id"]').val($('#frm #qb_an_id').html());
-		$('[name="qb_content"]').val($('#frm #qb_an').html());
+		$('#ad_boardWriteForm [name="qb_id"]').val($('#frm #qb_id').val());
+		$('#ad_boardWriteForm [name="qb_content"]').val($('#frm #qb_content').html());
 		$('#myModal').modal('show')
 	});
 

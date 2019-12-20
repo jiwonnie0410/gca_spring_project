@@ -38,8 +38,11 @@
 		    qb_date,  
 		    decode((select count(qb_title) from qna_board where qb_origin =q.qb_id), 1,'yes','no') qb_an   
 	   from  qna_board q
+	   
 	   where
 	   		qb_origin is null
+	   		
+	   order by qb_id desc
 	 	  
 </select>
 

@@ -14,16 +14,16 @@
 </style>
 
 <script>
-	var mid = "<sec:authentication property='principal.m_id'/>";
+	var m_id = "<sec:authentication property='principal.m_id'/>";
 </script>
 
 <!--데이터 테이블  -->
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 
+<sec:authentication property="principal.m_id" var="m_id" />
 <script
 	src="${pageContext.request.contextPath }/resources/js/board/user_Qna.js"></script>
-<sec:authentication property="principal.m_id" var="m_id" />
 <title>boardList_json.jsp</title>
 </head>
 <body>
@@ -96,8 +96,7 @@
 							<div class="panel-body">
 								<%-- form --%>
 								<form role="form" action="../ajax/insertBoard" id="ad_boardWriteForm" name="ad_boardWriteForm">
-									<input type="hidden" name="qb_id" value=""> <input
-										type="hidden" name="qb_title" value="">
+									<input type="hidden" name="qb_id" value="">
 									<div class="form-group">
 										<div>
 											질문 유형 <select name="qb_title" id="qb_title"

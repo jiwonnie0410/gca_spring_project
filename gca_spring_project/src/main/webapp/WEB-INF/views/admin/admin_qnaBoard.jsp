@@ -63,9 +63,9 @@
 						<div class="panel panel-success" style="margin-top: 10px;">
 							<div class="panel-body">
 								<%-- form --%>
-								<form action="insertBoard" id="frm">
+								<form action="insertBoard" id="ad_boardWriteForm">
 									<div class="form-group"></div>
-									<input type="hidden" name="qb_id" value=""> 
+									<input type="text" name="qb_id"  id="qb_id"  value=""> 
 									<input type="hidden" name="qb_title" value="답변">
 									<div>
 										<input type="hidden" name="qb_origin" id="qb_origin">

@@ -6,13 +6,13 @@ $(function() {
 	insertBoard(); // 등록 이벤트 클릭 이벤트 지정
 	deleteBoard();// 삭제
 
-	
-/*	$("#btnUpdete").click(function() {
-		$('#Modalread').modal('hide')
-		$('[name="qb_id"]').val($('#frm #qb_id').html());
-		$('[name="qb_content"]').val($('#frm #qb_content').html());
-		$('#myModal').modal('show')
-	});*/
+//	
+//	$("#btnUpdete").click(function() {
+//		$('#Modalread').modal('hide')
+//		$('#ad_boardWriteForm [name="qb_id"]').val($('#frm #qb_id').html());
+//		$('#ad_boardWriteForm [name="qb_content"]').val($('#frm #qb_content').html());
+//		$('#myModal').modal('show')
+//	});
 	
 	
 //	$(document).on('click', '#userlisttb #asktb tr', function() {
