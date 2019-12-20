@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
+<sec:authentication property="principal.m_id" var="m_id"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script>
@@ -60,10 +62,10 @@
 
 <body>
 	댓글 번호 : ${vo.adr_num}<br>
-	<textarea id="detailReplytext" rows="5" cols="82">${vo.adr_content}</textarea>
+	<textarea id="adr_content" rows="3" cols="5">${vo.adr_content}</textarea>
 	<div style="text-align: center;">
 		<!-- 본인 댓글만 수정, 삭제가 가능하도록 처리 -->
-		<c:if test="${sessionScope.m_id == vo.m_id}"> 
+		<c:if test="${m_id == vo.m_id}">
 			<button type="button" id="btnReplyUpdate" >수정</button>
 			<button type="button" id="btnReplyDelete" >삭제</button>
 		 </c:if>
