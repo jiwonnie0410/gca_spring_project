@@ -179,8 +179,6 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 			if(alertCnt != 0) {
 				//4-1. 해당 멤버의 아이디로 웹소켓에서 세션 정보를 가져 옴. 
 				WebSocketSession session = sessionMap.get(avo.getM_id());
-				System.out.println( "세션" +session);
-				System.out.println( "겟엠아이디" + avo.getM_id());
 				//4-2. vo에 보낼 내용 담음
 				svo.setCmd("alertCnt");
 				svo.setId(avo.getM_id());
@@ -210,8 +208,8 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 				if(alertCnt != 0) {
 					//4-1. 해당 멤버의 아이디로 웹소켓에서 세션 정보를 가져 옴. 
 					WebSocketSession session = sessionMap.get(mvo.getM_id());
-					System.out.println( "세션" +session);
-					System.out.println( "겟엠아이디" + mvo.getM_id());
+//					System.out.println( "세션" +session);
+//					System.out.println( "겟엠아이디" + mvo.getM_id());
 					//4-2. vo에 보낼 내용 담음
 					svo.setCmd("alertCnt");
 					svo.setId(mvo.getM_id());

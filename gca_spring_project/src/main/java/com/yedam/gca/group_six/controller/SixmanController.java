@@ -219,13 +219,15 @@ public class SixmanController {
 	}
 	
 	//방 생성
+	@ResponseBody
 	@RequestMapping(value="/sixman/creRoom", method=RequestMethod.POST)
-	public String createRoom(@ModelAttribute SixmanVO vo) {
+	public SixmanVO createRoom(SixmanVO vo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션 정보 갖고 오기
 		vo.setM_id(memInfo.getM_id());
 		
 		sixmanService.insertSix(vo);
-		return "redirect:alreadyIn?six_num="+vo.getSix_num();
+		vo.setAlert_gnum(sixmanService.insertSixAlert(vo));
+		return vo;
 	}
 	
 	//전체 용병 모집+마감 용병 모집 리스트 조회(미사용중)

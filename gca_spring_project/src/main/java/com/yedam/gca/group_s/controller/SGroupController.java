@@ -225,12 +225,9 @@ public class SGroupController {
 	public SGroupVO createRoom(SGroupVO vo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션 정보 갖고 오기
 		vo.setM_id(memInfo.getM_id());
-//		System.out.println( "★★★★방 이름 : " + vo.getSg_name());
 		
 		sgroupService.insertSg(vo); //방 생성 맵퍼
-//		System.out.println( "★★★★방 번호 : " + vo.getSg_num());
 		vo.setAlert_gnum(sgroupService.insertSgAlert(vo)); // alert테이블 인서트 맵퍼 : result값은 메시지 그룹 번호
-//		System.out.println( "★★★★그룹 번호 : " + vo.getAlert_gnum());
 		return vo;
 //		return "redirect:alreadyIn?sg_num="+vo.getSg_num();
 	}
@@ -245,34 +242,5 @@ public class SGroupController {
 		sgroupService.getSgCert(vo);
 		return vo;
 	}
-	
-	//전체 반짝+마감 반짝 리스트 조회(미사용중)
-//	@RequestMapping(value="/sgroup/getSgList/{whatroom}" )
-//		//모든 getSgList 호출 주소 변경 필요. default는 전체 반짝, end는 마감 반짝
-//		//s_search, s_end_room jsp, js getSg로 검색하여 getSgList/default(end) 로 변경
-//		//getSgList를 변경하지 않고 전체메서드와 마감메서드를 구분할 다른 방법은 없을까..
-//	public String search(@PathVariable String whatroom, Model model, SGroupVO vo, CodeVO cvo) {
-//		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
-//		vo.setM_xy(memInfo.getM_xy());
-//		
-//		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
-//		model.addAttribute("sgroup", vo);
-//		if(whatroom == "default") 	model.addAttribute("list", sgroupService.getSgList(vo));
-//		else if(whatroom == "end") 	model.addAttribute("list", sgroupService.getSgEndList(vo));
-//		
-//		//sports1과 관련된 code정보 모두 보내기
-//		cvo.setCd_group("SPORTS1_CD");
-//		model.addAttribute("sports_list", codeService.getCodeList(cvo));
-//		
-//		String viewsrc = null;
-//		if(whatroom == "default") {
-//			if(vo.getEnd_dis() == null) viewsrc = "/user/group_s/s_search";
-//			else viewsrc = "/notiles/group_s/s_search_temp";
-//		} else if(whatroom == "end") {
-//			if(vo.getEnd_dis() == null) viewsrc = "/user/group_s/s_end_room";
-//			else viewsrc = "/notiles/group_s/s_end_temp";
-//		}
-//		return viewsrc;
-//	}
 	
 }

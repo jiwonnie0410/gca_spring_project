@@ -75,11 +75,11 @@ function scroll(){
 				keyval: keyval
 				
 		}
-		console.log(end_dis);
-		console.log(end_dttm);
-		console.log(end_num);
-		console.log(key);
-		console.log(keyval);
+//		console.log(end_dis);
+//		console.log(end_dttm);
+//		console.log(end_num);
+//		console.log(key);
+//		console.log(keyval);
 		
 		var url;
 		if( $('.table').attr('class').substr(-7) != 'endroom'){

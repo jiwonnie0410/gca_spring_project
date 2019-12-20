@@ -107,9 +107,7 @@ function valid(){
     	$.ajax({
     		url : "creRoom",
     		method : "post",
-//    		dataType : "json",
     		data : param,
-//    		contentType : "application/json",
     		success : function(result){
     			msg = {
     					cmd : "groupAlert",

@@ -218,13 +218,15 @@ public class BGroupController {
 	}
 	
 	//방 생성
+	@ResponseBody
 	@RequestMapping(value="bgroup/creRoom", method=RequestMethod.POST)
-	public String createRoom(BGroupVO vo) {
+	public BGroupVO createRoom(BGroupVO vo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션 정보 갖고 오기
 		vo.setM_id(memInfo.getM_id());
 		
-		bgroupService.insertBg(vo);
-		return "redirect:alreadyIn?bg_num="+vo.getBg_num();
+		bgroupService.insertBg(vo); 
+		vo.setAlert_gnum(bgroupService.insertBgAlert(vo));
+		return vo;
 	}
 	
 	//전체 동호회매치+마감 동호회매치 리스트 조회(미사용중)

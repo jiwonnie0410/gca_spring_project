@@ -34,5 +34,6 @@ public class SixmanVO {
 	private int scroll_rec;	//스크롤 조회 시 가져올 레코드 건 수
 	private String key;		//검색 조건(운동명 등등)
 	private String keyval;	//검색 내용(배드민턴 등등)
+	private int alert_gnum;	//거리 알림 그룹
 
 }
