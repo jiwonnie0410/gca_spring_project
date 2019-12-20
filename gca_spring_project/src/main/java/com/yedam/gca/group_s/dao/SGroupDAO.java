@@ -67,8 +67,15 @@ public class SGroupDAO {
 	}
 	 
 	//방 생성
-	public void insertSg(SGroupVO vo){
+	public int insertSg(SGroupVO vo){
 		mybatis.selectOne("SGroupDAO.insertSg", vo);
+		return vo.getSg_num();
+	}
+	
+	//반짝 방 생성 시 알람 보내기
+	public int insertSgAlert(SGroupVO vo) {
+		mybatis.selectOne("SGroupDAO.insertSgAlert", vo);
+		return vo.getAlert_gnum();
 	}
 	
 	//마감 방 조회

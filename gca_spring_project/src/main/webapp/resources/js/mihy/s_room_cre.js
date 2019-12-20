@@ -101,8 +101,24 @@ function valid(){
 	
     var con=confirm("입력한 내용으로 반짝 방을 생성하시겠습니까?");
     if(con){
-    	//방생성하면서 이 부분에 알람 소켓 보내기
-    	$('#frm').submit();
+    	
+    	var param = $('#frm').serialize();
+    	
+    	$.ajax({
+    		url : "creRoom",
+    		method : "post",
+//    		dataType : "json",
+    		data : param,
+//    		contentType : "application/json",
+    		success : function(result){
+    			msg = {
+    					cmd : "groupAlert",
+    					alert_gnum : result.alert_gnum
+    			}
+    			webSocket.send( JSON.stringify( msg ) );
+    			location.href = 'alreadyIn?sg_num='+result.sg_num;
+    		}
+    	});
     }
 }
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.yedam.gca.admin.dao.AlertDAO;
 import com.yedam.gca.admin.service.AlertService;
 import com.yedam.gca.admin.vo.AlertVO;
+import com.yedam.gca.chatting.vo.SocketVO;
 
 @Service
 public class AlertServiceImpl implements AlertService {
@@ -18,6 +19,11 @@ public class AlertServiceImpl implements AlertService {
 	@Override
 	public int getAlertCnt(AlertVO vo) {
 		return alertDAO.getAlertCnt(vo);
+	}
+	
+	@Override
+	public List<AlertVO> getAlertGroupId(SocketVO vo) {
+		return alertDAO.getAlertGroupId(vo);
 	}
 
 	@Override

@@ -62,6 +62,11 @@ public class SixmanDAO {
 		mybatis.selectOne("SixmanDAO.insertSix", vo);
 	}
 	
+	//용병 방 생성 시 알람 보내기
+	public int insertSixAlert(SixmanVO vo) {
+		return mybatis.selectOne("AlertDAO.insertSixAlert", vo);
+	}
+	
 	//마감 방 조회
 	public List<SixmanVO> getSixEndList(SixmanVO vo) {
 		return mybatis.selectList("SixmanDAO.getSixEndList", vo);
