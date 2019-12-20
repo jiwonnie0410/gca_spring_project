@@ -36,6 +36,11 @@
 				document.form1.ad_content.focus();
 				return;
 			}
+			else if(ad_city == ""){
+				alert("도시를 선택해주세요");
+				document.form1.ad_city.focus();
+				return;
+			}
 			
 			var that = $("#form1");
 			var str = "";
@@ -71,7 +76,7 @@
 	<div>
 		<div>
 									<select name="ad_city" id="ad_city" class="btn btn-outline btn-sm dropdown-toggle"  >
-										  <option	selected  > 도시 </option>
+										  <option	selected disabled value="도시" > 도시 </option>
 										  <option value="qna1" >서울</option>
 										  <option value="qna2">수도권</option>
 										  <option value="qna3" >대구</option>
@@ -79,12 +84,6 @@
 									 </select>
 								</div>
 	</div>
-	<!--  <div>
-		작성날짜
-		<input type="date" name="ad_date" id="ad_date " >
-	</div>  -->
-	
-	
 			<div align="center">
 
 					<button class="btn" type="submit" id="btnSave">확인</button>

@@ -15,7 +15,8 @@
 				AD_TITLE, 
 				AD_CONTENT, 
 				AD_DATE, 
-				AD_COUNT, 
+				AD_COUNT,
+				AD_city, 
 				b.M_ID,
 				<!-- **댓글숫자표시 --> 
 					(SELECT COUNT(*) 
