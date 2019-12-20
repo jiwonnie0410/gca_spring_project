@@ -195,6 +195,7 @@
           m_location AS m_location,
          get_code_name(M_IMAGE_CD) "m_image_cd",
          get_code_name(M_LEVEL_CD) "m_level_cd",
+        <!--  m_xy as m_xy -->
           m_nick AS m_nick
         FROM MEMBERS
         WHERE m_id = #{m_id} 
@@ -206,7 +207,9 @@
         UPDATE MEMBERS
         SET
             m_email = #{m_email},
-			M_NICK= #{m_nick}
+			M_NICK= #{m_nick},
+			m_location = #{m_location},
+			m_xy =  #{m_xy}
 			<!-- M_IMAGE_CD= #{m_image_cd} -->
         WHERE
             m_id = #{m_id}    
