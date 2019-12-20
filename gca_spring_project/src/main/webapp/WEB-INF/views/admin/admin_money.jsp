@@ -77,11 +77,50 @@
 	    		});
 		      }
 	    </script>
+	    
+	    <style>
+	    
+	    .noticeTime {
+			width: fit-content;
+		    position: relative;
+		    left: 200px;
+		    margin-bottom: 30px;
+		    border-color: #bfacdf;
+		    border-radius: 10px;
+		    border-style: dotted;
+		    padding: 20px;
+	    }
+	    
+	    .bigText {
+		    font-size: 21px;
+		    font-weight: bold;
+		    color: #242424;
+	    }
+	    .smallText {
+	    	font-size: 20px;
+	    	color: #242424;
+	    }
+	    
+	    
+	    </style>
+	    
 </head>
 <body>
 
 		<div id="content-wrapper">
 			<div class="container-row">
+
+				<div class="noticeTime">
+				  	<span class="bigText">― 스페셜 챌린지 환급시간 ―</span><br>
+					<span class="smallText">챌린지 실패: 챌린지 마감 다음날 am 0:05</span><br>
+					<span class="smallText">챌린지 성공: 유저의 성공 다음날 am 0:10</span>
+				</div>
+				
+<!-- 				<div class="noticePercent"> -->
+<!-- 				  	<span class="bigText">― 스페셜 챌린지 환급시간 ―</span><br> -->
+<!-- 					<span class="smallText">챌린지 실패: 챌린지 마감 다음날 am 0:05</span><br> -->
+<!-- 					<span class="smallText">챌린지 성공: 유저의 성공 다음날 am 0:10</span> -->
+<!-- 				</div> -->
 			
 			<!-- 일별 수익 현황 보기 -->
 					<table>
@@ -113,3 +152,6 @@
 		</div>
 </body>
 </html>
+
+
+
