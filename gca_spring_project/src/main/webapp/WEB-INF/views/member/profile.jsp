@@ -55,6 +55,19 @@
 					    width: 300px;
 				}
 				
+				.div-button {
+						background: #F15F5F;
+					    border: 2px solid #F15F5F;
+					    border-radius: 7px;
+					    font-size: 12px;
+					    font-weight: bolder;
+					    margin: 0.3em auto;
+					    padding: 2px 4px;
+					    position: relative;
+					    height: 30px;
+					    width: 130px;
+				}
+				
 				#button-edit:active {
 						color: #FFE08C;
 				}
@@ -78,16 +91,7 @@
 				
 					<!-- 알림, 알림설정, 사용자 캐릭터, 레벨, 랭킹보기, 환경설정 -->
 					<div align="center">
-					<%-- <table border="1">
-						<tr align="right">
-							<td></td>
-							<!-- 알림 쪽지 보기 버튼 -->
-							<td><span onclick="location.href='${pageContext.request.contextPath }/member/alert'"><i id="button-button" class="fas fa-comment"></i></span>
-							<!-- 설정 버튼 -->
-							<span onclick="location.href='location.href='${pageContext.request.contextPath }/option'"><i id="button-button" class="fas fa-bell"></i></span></td>
-						</tr>
-					</table> --%>
-					<table border="1">
+					<table>
 						<tr>
 							<!-- 사용자 캐릭터 표시 -->
 							<td rowspan="3" height="70"><div class="div-frame" align="center">	<p /><p />&nbsp;<p />
@@ -142,34 +146,15 @@
 					</div>
 					
 					
-						<table>
+						<%-- <table>
 							<tr>
 								<td >레벨</td>
 								<td><img style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/level/${dto.m_level_cd}.png"></td>
 							</tr>
-						</table>
+						</table> --%>
 						
 						
-						<div align="center">
-							<h2>Choose Your Option</h2>
-						</div>
-						<br>
-						<div class="info-user2">
-							<!-- <input type="button" value="수정" id="btnUpdate"> <input
-								type="button" value="삭제" id="btnDelete"> -->
 							<div style="color: red;">${message}</div>
-							<!--이모티콘이로 대체  -->
-							<a href="updateform"><i class="fas fa-user-edit" aria-hidden="true"style="color: black; font-size: 50px;"></i></a>
-							<!-- <i class="fas fa-door-open" id="btnDelete"style="color: black; font-size: 50px;"></i>  -->
-							<i class="fa fa-lock fa-2x" aria-hidden="true" style="color: black; font-size: 50px;"> </i> 
-							<a href="changePassword"> 비밀번호 변경 </a> 
-							<a href="option">알람 환경설정</a>
-
-						</div>
-
-					<form action="../logout" method="post">
-						<button>로그아웃</button>
-					</form>
 				</div>
 			</div>
 		</div>
