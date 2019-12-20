@@ -60,13 +60,15 @@ function getBoardList() {
 function getBoardListHandler(datas) {
 	$("#asktb").empty();
 	for (var i = 0; i < datas.length; i++) {
-		$(
-				"<tr data-toggle='modal' data-target='#Modalread' id='newTr' onclick='getQb_id("
-						+ datas[i].qb_id + ")'>").append(
+		var tr = "<tr data-toggle='modal' data-target='#Modalread' id='newTr' onclick='getQb_id("+ datas[i].qb_id + ")'>";
+		if(m_id != datas[i].m_id) {
+			tr = '<tr>';
+		}
+		$(tr).append(
 				$('<td>').html(datas[i].qb_id)).append(
 				$('<td>').html(datas[i].m_id)).append(
 				$('<td>').html(datas[i].qb_title)).appendTo('#asktb').attr(
-				"data", datas[i].bno);
+						"data", datas[i].bno);
 		$("#userlisttb").dataTable()
 	}// for
 }// getBoardListHandler

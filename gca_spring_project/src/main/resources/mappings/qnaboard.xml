@@ -157,13 +157,13 @@ SELECT B.*  FROM ( SELECT A.*, ROWNUM RN  FROM(
 <select id="view2" parameterType="qnaboard"  resultType="qnaboard" >
  SELECT  qb_id,
 		 qb_title,
-		 m_id,
+		 q.m_id,
 		 qb_content,
 		 qb_date,
 		 qb_hit,
 		 (select qb_content from qna_board where qb_origin =q.qb_id) qb_an,
 		 (select qb_id from qna_board where qb_origin =q.qb_id) qb_an_id
-   FROM  qna_board q
+   FROM  qna_board q, MEMBERS m
   WHERE  qb_id = #{qb_id} 
 </select>
 

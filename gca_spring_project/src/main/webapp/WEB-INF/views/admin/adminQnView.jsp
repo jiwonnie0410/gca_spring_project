@@ -4,8 +4,6 @@
 <%@taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script
-	src="${pageContext.request.contextPath }/resources/js/admin/admin_Qna.js"></script>
 <!-- Modal 읽기-->
 <!-- 게시물 상세보기 영역 -->
 <div class="panel-group">
