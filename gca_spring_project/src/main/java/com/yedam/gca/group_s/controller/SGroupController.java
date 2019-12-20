@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.chatting.controller.SpringSocketHandler;
+import com.yedam.gca.chatting.service.ChatService;
+import com.yedam.gca.chatting.vo.ChatHistVO;
 import com.yedam.gca.chatting.vo.SocketVO;
 import com.yedam.gca.common.code.service.CodeService;
 import com.yedam.gca.common.code.vo.CodeVO;
@@ -32,6 +34,7 @@ public class SGroupController {
 	@Autowired	SGroupService sgroupService;
 	@Autowired	CodeService codeService;
 	@Autowired	ActiveHistService actService;
+	@Autowired	ChatService chatService;
 	
 	
 //*****************************************은영************************************
@@ -178,9 +181,13 @@ public class SGroupController {
 	@RequestMapping("/sgroup/alreadyIn")
 	public String alreadyIn(
 			@RequestParam(value="sg_num", defaultValue="", required=true) int sg_num,
-			Model model, SGroupVO vo, ActiveHistVO avo, CodeVO cvo) {
+			Model model, SGroupVO vo, ActiveHistVO avo, CodeVO cvo, ChatHistVO chvo) {
 		vo.setSg_num(sg_num);
 		model.addAttribute("sgroup", sgroupService.getRoomInfo(vo));
+		
+		//해당 방의 채팅내역 채팅방으로 넘김
+		chvo.setSg_num(sg_num);
+		 //채팅내역불러오는 매퍼 쿼리 모델어트리뷰트 하기
 		
 		//참여 인원 정보를 채팅방으로 넘김
 		avo.setSg_num(sg_num);

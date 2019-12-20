@@ -21,7 +21,7 @@ public class ChatController {
 		@RequestMapping(value={"sgroup/insertChatHist","bgroup/insertChatHist","sixman/insertChatHist"}, consumes="application/json")
 		public int insertChatHist(@RequestBody ChatHistVO vo) {
 			chatService.insertChatHist(vo);
-			System.out.println(vo);
+			System.out.println("vo: "+vo);
 			
 			return 0;
 		}

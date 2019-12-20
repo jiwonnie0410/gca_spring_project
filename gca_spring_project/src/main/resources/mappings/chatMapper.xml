@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ChatDAO">
 <!-- 은영 -->
-	<!-- 채팅 전송 시 히스토리에 insert -->
+<!-- 채팅 전송 시 히스토리에 insert -->
 	<insert id="insertChatHist" parameterType="chathistory">
 		<selectKey order="BEFORE" resultType="int" keyProperty="chh_num"> <!-- 시퀀스 구하는 쿼리 실행하여 시퀀스 뽑아내서 담기. -->
   			<!-- ORDER : 실행순서. BEFORE는 먼저실행.(이 셀렉트가 먼저 실행되어 vo에 담김.) -->
@@ -34,6 +34,7 @@
 					VALUES(		
 								#{chh_content},
 								sysdate,
+								#{chh_num},
 								#{m_id}
 						<choose>
 							<when test="sg_num != null and sg_num != ''">
@@ -52,5 +53,38 @@
 											)
 	
 	</insert>
-	
+
+<!-- 채팅내역 불러오기 -->
+	<select id="getChatHist" resultType="chathistory">
+		SELECT	M_ID,
+				CHH_DTTM,
+				CHH_CONTENT
+				<choose>
+					<when test="sg_num != null and sg_num != ''">
+						,
+						SG_NUM
+					</when>
+					<when test="bg_num != null and bg_num != ''">
+						,
+						BG_NUM
+					</when>
+					<when test="six_num != null and six_num != ''">
+						,
+						SIX_NUM
+					</when>
+				</choose>
+		FROM	CHAT_HIST
+		WHERE	M_ID = #{m_id} AND SG_NUM = #{sg_num}
+				<choose>
+					<when test="sg_num != null and sg_num != ''">
+						AND SG_NUM = #{sg_num}
+					</when>
+					<when test="bg_num != null and bg_num != ''">
+						AND BG_NUM = #{bg_num}
+					</when>
+					<when test="six_num != null and six_num != ''">
+						AND SIX_NUM = #{six_num}
+					</when>
+				</choose>
+	</select>
 </mapper>
