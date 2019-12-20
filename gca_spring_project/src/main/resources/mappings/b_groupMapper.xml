@@ -107,6 +107,15 @@
 		)}
 	</select>
 	
+ <!-- 매치 방 생성 시 알람 보내기 -->
+ 	<select id="insertBgAlert" statementType="CALLABLE" parameterType="bgroup">
+		{ CALL sg_room_create(
+			#{bg_num}
+			,#{alert_gnum, mode=OUT, jdbcType=INTEGER}
+		)}
+	</select>
+
+	
 <!-- BGroup 마감 방 조회 -->
 	<select id="getBgEndList" resultType="bgroup">
 		SELECT 

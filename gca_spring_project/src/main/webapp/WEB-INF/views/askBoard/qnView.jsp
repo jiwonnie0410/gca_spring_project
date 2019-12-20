@@ -22,15 +22,11 @@
 				</div>
 				<div class="form-group">
 					제목
-					<div>
-						 ${dto.qb_title}
-					</div>
+					<div id="qb_title">${dto.qb_title}</div>
 				</div>
 				<div class="form-group">
 				내용
-					<div>
-						${dto.qb_content}
-					</div>
+					<div id = "qb_content">${dto.qb_content}</div>
 				</div>
 				<div class="form-group">
 				답변
@@ -39,7 +35,7 @@
 				</div>
 				<div style="width: 650px; text-align: center;">
 					<!-- 게시물번호를 hidden으로 처리 -->
-					<input type="hidden" name="qb_id" value="${dto.qb_id}">
+					<input type="hidden" name="qb_id" id="qb_id" value="${dto.qb_id}">
 						
 						<!-- 상세보기 화면에서 게시글 목록화면으로 이동 -->
 					<!-- 	<button type="button" class="btn btn-primary px-5 py-3  mt-3" id="btnList">목록</button> -->
@@ -48,3 +44,14 @@
 		</div>
 	</div>
 </div>
+<script>
+	$("#btnUpdete").click(function() {
+		$('#Modalread').modal('hide')
+		$('#ad_boardWriteForm [name="qb_id"]').val($('#frm #qb_id').val());
+		$('#ad_boardWriteForm [name="qb_content"]').val($('#frm #qb_content').html());
+		$('#ad_boardWriteForm [name="qb_title"]').val($('#frm #qb_title').html());
+		$('#myModal').modal('show')
+	});
+
+</script>
+

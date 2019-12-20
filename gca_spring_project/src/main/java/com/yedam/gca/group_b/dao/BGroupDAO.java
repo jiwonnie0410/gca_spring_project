@@ -68,6 +68,11 @@ public class BGroupDAO {
 		mybatis.selectOne("BGroupDAO.insertBg", vo);
 	}
 	
+	//매치 방 생성 시 알람 보내기
+	public int insertBgAlert(BGroupVO vo) {
+		return mybatis.selectOne("AlertDAO.insertBgAlert", vo);
+	}
+	
 	//마감 방 조회
 	public List<BGroupVO> getBgEndList(BGroupVO vo) {
 		return mybatis.selectList("BGroupDAO.getBgEndList", vo);

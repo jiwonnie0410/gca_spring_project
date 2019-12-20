@@ -6,13 +6,13 @@ $(function() {
 	insertBoard(); // 등록 이벤트 클릭 이벤트 지정
 	deleteBoard();// 삭제
 
-	
-	$("#btnUpdete").click(function() {
-		$('#Modalread').modal('hide')
-		$('[name="qb_id"]').val($('#frm #qb_id').html());
-		$('[name="qb_content"]').val($('#frm #qb_content').html());
-		$('#myModal').modal('show')
-	});
+//	
+//	$("#btnUpdete").click(function() {
+//		$('#Modalread').modal('hide')
+//		$('#ad_boardWriteForm [name="qb_id"]').val($('#frm #qb_id').html());
+//		$('#ad_boardWriteForm [name="qb_content"]').val($('#frm #qb_content').html());
+//		$('#myModal').modal('show')
+//	});
 	
 	
 //	$(document).on('click', '#userlisttb #asktb tr', function() {
@@ -60,13 +60,15 @@ function getBoardList() {
 function getBoardListHandler(datas) {
 	$("#asktb").empty();
 	for (var i = 0; i < datas.length; i++) {
-		$(
-				"<tr data-toggle='modal' data-target='#Modalread' id='newTr' onclick='getQb_id("
-						+ datas[i].qb_id + ")'>").append(
+		var tr = "<tr data-toggle='modal' data-target='#Modalread' id='newTr' onclick='getQb_id("+ datas[i].qb_id + ")'>";
+		if(m_id != datas[i].m_id) {
+			tr = '<tr>';
+		}
+		$(tr).append(
 				$('<td>').html(datas[i].qb_id)).append(
 				$('<td>').html(datas[i].m_id)).append(
 				$('<td>').html(datas[i].qb_title)).appendTo('#asktb').attr(
-				"data", datas[i].bno);
+						"data", datas[i].bno);
 		$("#userlisttb").dataTable()
 	}// for
 }// getBoardListHandler

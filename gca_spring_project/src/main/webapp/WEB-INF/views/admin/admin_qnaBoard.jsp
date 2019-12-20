@@ -63,9 +63,9 @@
 						<div class="panel panel-success" style="margin-top: 10px;">
 							<div class="panel-body">
 								<%-- form --%>
-								<form action="insertBoard" id="frm">
+								<form action="insertBoard" id="ad_boardWriteForm">
 									<div class="form-group"></div>
-									<input type="hidden" name="qb_id" value=""> 
+									<input type="hidden" name="qb_id"  id="qb_id"  value=""> 
 									<input type="hidden" name="qb_title" value="답변">
 									<div>
 										<input type="hidden" name="qb_origin" id="qb_origin">
@@ -104,20 +104,6 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body"></div>
-				
-				<%-- <div class="modal-footer">
-					<c:choose>
-						<c:when test="${ dto.qb_an != 'yes'}">
-							<button type="button" class="btn btn-primary" id="btnUpdete">답글</button>
-						</c:when>
-						<c:otherwise>
-							<button type="button" class="btn btn-primary" id="btnUpdete">수정</button>
-						</c:otherwise>
-					</c:choose>
-
-					<button type="button" class="btn btn-danger" id="btnDelete">삭제</button>
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-				</div> --%>
 			</div>
 		</div>
 	</div>

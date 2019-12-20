@@ -220,13 +220,19 @@ public class SGroupController {
 	}
 	
 	//방 생성
+	@ResponseBody
 	@RequestMapping(value="/sgroup/creRoom", method=RequestMethod.POST)
-	public String createRoom(@ModelAttribute SGroupVO vo) {
+	public SGroupVO createRoom(SGroupVO vo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션 정보 갖고 오기
 		vo.setM_id(memInfo.getM_id());
+//		System.out.println( "★★★★방 이름 : " + vo.getSg_name());
 		
-		sgroupService.insertSg(vo);
-		return "redirect:alreadyIn?sg_num="+vo.getSg_num();
+		sgroupService.insertSg(vo); //방 생성 맵퍼
+//		System.out.println( "★★★★방 번호 : " + vo.getSg_num());
+		vo.setAlert_gnum(sgroupService.insertSgAlert(vo)); // alert테이블 인서트 맵퍼 : result값은 메시지 그룹 번호
+//		System.out.println( "★★★★그룹 번호 : " + vo.getAlert_gnum());
+		return vo;
+//		return "redirect:alreadyIn?sg_num="+vo.getSg_num();
 	}
 
 	

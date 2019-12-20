@@ -23,6 +23,7 @@ public interface SixmanService {
 	
 	List<SixmanVO> getSixList(SixmanVO vo);
 	void insertSix(SixmanVO vo);
+	int insertSixAlert(SixmanVO vo);
 	List<SixmanVO> getSixEndList(SixmanVO vo);
 
 }

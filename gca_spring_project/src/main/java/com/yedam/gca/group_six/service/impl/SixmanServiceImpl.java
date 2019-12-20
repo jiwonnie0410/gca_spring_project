@@ -57,6 +57,12 @@ public class SixmanServiceImpl implements SixmanService {
 	public void insertSix(SixmanVO vo) {
 		sixmanDAO.insertSix(vo);
 	}
+	
+	@Override
+	public int insertSixAlert(SixmanVO vo) {
+		return sixmanDAO.insertSixAlert(vo);
+	}
+	
 	@Override
 	public List<SixmanVO> getSixEndList(SixmanVO vo) {
 		return sixmanDAO.getSixEndList(vo);

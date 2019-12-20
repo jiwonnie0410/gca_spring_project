@@ -58,6 +58,12 @@ public class BGroupServiceImpl implements BGroupService {
 	public void insertBg(BGroupVO vo) {
 		bgroupDAO.insertBg(vo);
 	}
+	
+	@Override
+	public int insertBgAlert(BGroupVO vo) {
+		return bgroupDAO.insertBgAlert(vo);
+	}
+	
 	@Override
 	public List<BGroupVO> getBgEndList(BGroupVO vo) {
 		return bgroupDAO.getBgEndList(vo);

@@ -21,16 +21,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table style="width:700px">
+	<table style="width: 380px" >
 		<!-- 댓글 목록 -->
 		<c:forEach var="row" items="${list}">
 		<tr>	
 			<td>
-				${row.m_id}
-				${row.m_nick}
+			<%-- 	${row.m_id} --%> ${row.m_nick}&nbsp;&nbsp;(<fmt:formatDate value="${row.adr_regdate}" pattern="yyyy-MM-dd"/>)
+			<td>
+		<tr>
+			<td>		
 				${row.adr_content}
-				(<fmt:formatDate value="${row.adr_regdate}" pattern="yyyy-MM-dd"/>)
-				<br>
 				<!-- 본인 댓글만 수정버튼 생성되도록 처리 -->
 				 <c:if test="${m_id == row.m_id}">
 					<input type="button" id="btnModify" value="댓글수정"  style="background-color: #FE9191;"  onclick="showReplyModify('${row.adr_num}')">

@@ -23,6 +23,7 @@ public interface BGroupService {
 	
 	List<BGroupVO> getBgList(BGroupVO vo);
 	void insertBg(BGroupVO vo);
+	int insertBgAlert(BGroupVO vo);
 	List<BGroupVO> getBgEndList(BGroupVO vo);
 
 }

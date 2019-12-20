@@ -38,4 +38,5 @@ public class SGroupVO {
 	private Double cert_x;	//참여 인증 x좌표
 	private Double cert_y;	//참여 인증 y좌표
 	private String msg;		//참여 인증 메시지
+	private int alert_gnum;	//거리 알림 그룹
 }

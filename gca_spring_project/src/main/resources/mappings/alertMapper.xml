@@ -15,7 +15,14 @@
 		AND		ALERT_READ = 0
 	</select>
 
-<!-- 모든 나의 알람 메시지 확인하기 -->
+	<!-- 알림의 특정 그룹에 속한 아이디 조회 -->
+	<select id="getAlertGroupId" resultType="alert">
+		SELECT 	M_ID
+		FROM 	ALERT
+		WHERE 	ALERT_GNUM = #{alert_gnum}
+	</select>
+
+	<!-- 모든 나의 알람 메시지 확인하기 -->
 	<select id="getAlertList" resultType="alert">
 		SELECT
 				ALERT_NUM,
@@ -29,7 +36,7 @@
 		ORDER BY ALERT_NUM
 	</select>
 	
-<!-- 시용자의 읽지 않은 알람 메시지 확인하기 -->
+	<!-- 시용자의 읽지 않은 알람 메시지 확인하기 -->
 	<select id="getAlertNotRead" resultType="alert">
 		SELECT
 				ALERT_NUM,
@@ -44,7 +51,7 @@
 		ORDER BY ALERT_NUM
 	</select>
 	
-<!-- 사용자의 읽은 알람 메시지 확인하기 -->
+	<!-- 사용자의 읽은 알람 메시지 확인하기 -->
 	<select id="getAlertRead" resultType="alert">
 		SELECT
 				ALERT_NUM,
@@ -59,7 +66,7 @@
 		ORDER BY ALERT_NUM
 	</select>
 
- <!-- 메시지 확인 후 수신 여부 업데이트
+ 	<!-- 메시지 확인 후 수신 여부 업데이트
  	안 읽은 메시지를 한꺼번에 확인하기 때문에 안 읽은 메시지 전부를 읽은 메시지로 변경함 -->
  	<update id="updateAlertRead" parameterType="alert">
  		UPDATE ALERT SET
@@ -67,5 +74,5 @@
  		WHERE M_ID = #{m_id}
  		AND ALERT_READ = 0
  	</update>
- 	
+
 </mapper>

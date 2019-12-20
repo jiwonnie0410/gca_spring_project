@@ -12,12 +12,7 @@ $(function() {
  
 
 	
-	$("#btnUpdete").click(function() {
-		$('#Modalread').modal('hide')
-		$('[name="qb_id"]').val($('#frm #qb_an_id').html());
-		$('[name="qb_content"]').val($('#frm #qb_an').html());
-		$('#myModal').modal('show')
-	});
+	
 	
 	
 	$("#Modalread").on('show.bs.modal', function() {
@@ -60,27 +55,29 @@ function getBoardListHandler(datas) {
 
 
 function insertBoard() {
-	$("#btnIns").click(function() {
-		var param = JSON.stringify($("#frm").serializeObject());// form의 입력데이터를
-		// 쿼리스트링으로
-		// 만들어준다.
-		$.ajax({
-			url : "../ajax/insertBoard.json",
-			method : 'post',
-			dataType : "json",
-			data : param,
-			contentType : "application/json",
-			success : insertBoardtHandler,
-			error : function() {
-				alert("error");
+
+		$("#btnIns").click(function() {
+			if(confirm('저장하시겠습니까?')){
+			var param = JSON.stringify($("#ad_boardWriteForm").serializeObject());// form의 입력데이터를
+			// 쿼리스트링으로
+			// 만들어준다.
+			$.ajax({
+				url : "../ajax/insertBoard.json",
+				method : 'post',
+				dataType : "json",
+				data : param,
+				contentType : "application/json",
+				success : insertBoardtHandler,
+				error : function() {
+					alert("error");
+				}
+			}); // ajax
 			}
-		}); // ajax
-	});// function
+		});// function
 }// insertBoard
 
 // 등록 요청 결과처리
 function insertBoardtHandler(data) {
-	alert("저장 하겠습니까?");
 	getBoardList2();
 	$('#myModal').modal("hide"); // 닫기
 }
