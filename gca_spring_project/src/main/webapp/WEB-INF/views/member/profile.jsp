@@ -4,24 +4,30 @@
 <html>
 <head>
 		<meta charset="UTF-8">
-		<title></title>
+		<!-- 반응형 -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		
 		<!-- Popper JS -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 		
 		<!-- FONT AWESOME 아이콘 가져오기 -->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 		
+		<!-- security에서 캐릭터 이미지 가져오기 -->
 		<sec:authentication property="principal.m_image_cd" var="image" />
+		
 		<script>
 			// 비밀번호 변경 후 확인 메시지 띄우기
 			if('${pwMessage}' != ''){
@@ -76,7 +82,7 @@
 							<!-- 사용자 캐릭터 표시 -->
 							<div class="div-frame" align="center">
 								<p /><p />&nbsp;<p />
-								<img style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/Characters/${dto.m_image_cd}.gif"></td>				
+								<img style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/Characters/${dto.m_image_cd}.gif">				
 							</div>
 						</div>
 						
