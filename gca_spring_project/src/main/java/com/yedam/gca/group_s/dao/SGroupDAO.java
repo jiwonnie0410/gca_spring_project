@@ -48,11 +48,11 @@ public class SGroupDAO {
 	public ActiveHistVO getOnesAuthority(ActiveHistVO vo) {
 		return mybatis.selectOne("ActiveHistDAO.getAuthority", vo);
 	}
-	//id로 본인의 점수 합계 조회 --단일행 단일컬럼 int로 리턴이 되나..?
+	//id로 본인의 점수 합계 조회
 	public ScoreHistVO getMyTotalScore(MembersVO vo) {
 		return mybatis.selectOne("ScoreHistDAO.getMyTotalScore", vo);
 	}
-	//레벨 업데이트
+	//레벨 업데이트 --쓸지안쓸지 고민중
 	public int updateLevel(MembersVO vo) {
 		return mybatis.update("MemberDAO.updateLevel", vo);
 	}

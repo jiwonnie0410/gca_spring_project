@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ChatDAO">
+<!-- 은영 -->
+	<!-- 채팅 전송 시 히스토리에 insert -->
+	<insert id="insertChatHist" parameterType="chathistory">
+		<selectKey order="BEFORE" resultType="int" keyProperty="chh_num"> <!-- 시퀀스 구하는 쿼리 실행하여 시퀀스 뽑아내서 담기. -->
+  			<!-- ORDER : 실행순서. BEFORE는 먼저실행.(이 셀렉트가 먼저 실행되어 vo에 담김.) -->
+  			<!-- resultType은 담을 필드명(vo의 필드명) 타입과 맞춰주면 됨 -->
+  			<!-- keyProperty는 필드명이자 밑에 #{?} 이름과 같음. -->
+  			SELECT NVL(MAX(CHH_NUM),0)+1 FROM CHAT_HIST
+  		</selectKey>
+		INSERT INTO CHAT_HIST(	
+								CHH_CONTENT,
+								CHH_DTTM,
+								CHH_NUM,
+								M_ID
+						<choose>
+							<when test="sg_num != null and sg_num != ''">
+								,
+								SG_NUM
+							</when>
+							<when test="bg_num != null and bg_num != ''">
+								,
+								BG_NUM
+							</when>
+							<when test="six_num != null and six_num != ''">
+								,
+								SIX_NUM
+							</when>
+						</choose>
+											)
+					VALUES(		
+								#{chh_content},
+								sysdate,
+								#{m_id}
+						<choose>
+							<when test="sg_num != null and sg_num != ''">
+								,
+								#{sg_num}
+							</when>
+							<when test="bg_num != null and bg_num != ''">
+								,
+								#{bg_num}
+							</when>
+							<when test="six_num != null and six_num != ''">
+								,
+								#{six_num}
+							</when>
+						</choose>
+											)
+	
+	</insert>
+	
+</mapper>

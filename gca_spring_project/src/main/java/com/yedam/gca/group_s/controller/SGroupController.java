@@ -116,7 +116,7 @@ public class SGroupController {
 				sgroupService.cancelJoin(avo);
 				return 0;
 			}
-
+	
 //*****************************************미현************************************
 	
 	//전체 반짝 리스트 조회

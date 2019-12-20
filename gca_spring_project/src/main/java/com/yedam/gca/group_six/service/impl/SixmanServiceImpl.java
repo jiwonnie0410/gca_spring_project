@@ -10,6 +10,7 @@ import com.yedam.gca.group_six.dao.SixmanDAO;
 import com.yedam.gca.group_six.service.SixmanService;
 import com.yedam.gca.group_six.vo.SixmanVO;
 import com.yedam.gca.history.vo.ActiveHistVO;
+import com.yedam.gca.history.vo.ScoreHistVO;
 import com.yedam.gca.member.vo.MembersVO;
 
 @Service("sixmanService")
@@ -35,6 +36,9 @@ public class SixmanServiceImpl implements SixmanService {
 	}
 	public ActiveHistVO getOnesAuthority(ActiveHistVO vo) {
 		return sixmanDAO.getOnesAuthority(vo);
+	}
+	public ScoreHistVO getMyTotalScore(MembersVO vo) {
+		return sixmanDAO.getMyTotalScore(vo);
 	}
 	
 	

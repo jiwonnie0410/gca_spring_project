@@ -222,6 +222,7 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 		}
 	}
 	
+	//방 참여, 강퇴, 채팅전송, 참가취소 시 메세지 뿌리기 메서드
 	public void sendMessage(SocketVO vo) {
 		for (WebSocketSession session : this.sessionSet) {
 			if (session.isOpen()) {
