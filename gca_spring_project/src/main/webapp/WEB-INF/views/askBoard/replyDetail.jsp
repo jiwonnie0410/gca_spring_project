@@ -10,8 +10,8 @@
 <script>
 	//3. 댓글 수정
 	$("#btnReplyUpdate").click(function(){
+		var adr_content = $("[name='adr_content']").val();
 		if(confirm("수정하시겠습니까?")){
-		var adr_content = $("#adr_content").val();
 		$.ajax({
 			type: "put",
 			url: "${pageContext.request.contextPath}/reply/update/${vo.adr_num}",
@@ -21,7 +21,7 @@
 			},
 			// 데이터를 json형태로 변환
 			data: JSON.stringify({
-				adr_content : $('#adr_content').val(),
+				adr_content :adr_content, /* $('#adr_content').val(), */
 				adr_num : '${vo.adr_num}'
 			}),
 			dataType: "text",

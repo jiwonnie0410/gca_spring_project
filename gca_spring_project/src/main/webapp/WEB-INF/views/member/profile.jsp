@@ -55,6 +55,19 @@
 					    width: 300px;
 				}
 				
+				.div-button {
+						background: #F15F5F;
+					    border: 2px solid #F15F5F;
+					    border-radius: 7px;
+					    font-size: 12px;
+					    font-weight: bolder;
+					    margin: 0.3em auto;
+					    padding: 2px 4px;
+					    position: relative;
+					    height: 30px;
+					    width: 130px;
+				}
+				
 				#button-edit:active {
 						color: #FFE08C;
 				}
@@ -63,8 +76,8 @@
 						color: #FFE08C;
 				}
 				
-				#button-logout {
-						font-size: 50px;
+				#button-button {
+						font-size: 20px;
 						cursor: pointer;
 				}
 		</style>
@@ -76,28 +89,32 @@
 				<div class="card-header" style="background-color: #FEBABA;"> <b>${dto.m_name }</b> 님의 정보 </div>
 				<div class="card-body">
 				
-					<div>
-						<!-- 사용자 캐릭터와 레벨 -->
-						<div>
+					<!-- 알림, 알림설정, 사용자 캐릭터, 레벨, 랭킹보기, 환경설정 -->
+					<div align="center">
+					<table>
+						<tr>
 							<!-- 사용자 캐릭터 표시 -->
-							<div class="div-frame" align="center">
-								<p /><p />&nbsp;<p />
-								<img style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/Characters/${dto.m_image_cd}.gif">				
-							</div>
-						</div>
-						
-						<div style="position:relative; top:-90px; left:150px;">
-							<!-- 레벨 표시 -->
-							<a href="${pageContext.request.contextPath }/history/rank"><font size="2"><b> 나의 랭킹 보기> </b></font></a>
-						</div>
-						<div style="position:relative; top:-70px; left:280px;">
+							<td rowspan="3" height="70"><div class="div-frame" align="center">	<p /><p />&nbsp;<p />
+									<img style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/Characters/${dto.m_image_cd}.gif">				
+								</div></td>
+								<!-- 알림 쪽지 보기 버튼 -->
+							<td align="right" width="170"><span onclick="location.href='${pageContext.request.contextPath }/member/alert'"><i id="button-button" class="fas fa-comment"></i></span>&nbsp;&nbsp;
+								<!-- 설정 버튼 -->
+								<span onclick="location.href='location.href='${pageContext.request.contextPath }/option'"><i id="button-button" class="fas fa-bell"></i></span></td>
+						</tr>
+						<tr>
+							<!-- 랭킹보기 링크 -->	
+							<td><a href="${pageContext.request.contextPath }/history/rank"><font size="2"><b> 나의 랭킹 보기> </b></font></a></td>
+						</tr>
+						<tr>
 							<!-- 환경설정 버튼 -->
-							<span onclick="location.href='${pageContext.request.contextPath }/member/updateform'"><font size="5" color="gray" style="cursor:pointer;"><i id="button-edit" class="fas fa-cog"></i></font></span>
-						</div>
+							<td align="right"><span onclick="location.href='${pageContext.request.contextPath }/member/updateform'"><font size="5" color="gray" style="cursor:pointer;"><i id="button-edit" class="fas fa-cog"></i></font></span></td>
+						</tr>
+					</table>
 					</div>
 					
-					<!-- 사용자 정보 -->
-					<div align="center" style="position:relative; top:-60px;">	
+					<!-- 사용자 기본 정보 -->
+					<div>	
 						<div class="div-info" align="left">
 								&nbsp;&nbsp;<font color="gray">아이디 |</font>&nbsp;&nbsp;&nbsp;${dto.m_id} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;<font color="gray">닉네임 |</font>&nbsp;&nbsp;&nbsp;${dto.m_nick}
@@ -117,50 +134,27 @@
 					<div align="center">
 						<!-- 로그아웃 -->
 						로그아웃
-						<span onclick="location.href='${pageContext.request.contextPath }/logout'"><i id="button-logout" class="fas fa-sign-out-alt"></i></span>
+						<span onclick="location.href='${pageContext.request.contextPath }/logout'"><i id="button-button" class="fas fa-sign-out-alt"></i></span>
 						
 						<!-- 비밀번호 변경 -->
 						비밀번호 변경
-						<span onclick="location.href='${pageContext.request.contextPath }/changePassword'"><i class="fas fa-key"></i></span>
-						
-						<!-- 알림 설정 변경 -->
-						알림 설정 변경
-						<span onclick="location.href='${pageContext.request.contextPath }/option'"><i class="fas fa-envelope-open"></i></span>
+						<span onclick="location.href='${pageContext.request.contextPath }/changePassword'"><i id="button-button" class="fas fa-key"></i></span>
 						
 						<!-- 내가 쓴 글 보기 -->
 						내가 쓴 글 보기
-						<span onclick="location.href='#'"><i class="fas fa-edit"></i></span>
+						<span onclick="location.href='#'"><i id="button-button" class="fas fa-edit"></i></span>
 					</div>
 					
 					
-						<table>
+						<%-- <table>
 							<tr>
 								<td >레벨</td>
 								<td><img style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/level/${dto.m_level_cd}.png"></td>
 							</tr>
-						</table>
+						</table> --%>
 						
 						
-						<div align="center">
-							<h2>Choose Your Option</h2>
-						</div>
-						<br>
-						<div class="info-user2">
-							<!-- <input type="button" value="수정" id="btnUpdate"> <input
-								type="button" value="삭제" id="btnDelete"> -->
 							<div style="color: red;">${message}</div>
-							<!--이모티콘이로 대체  -->
-							<a href="updateform"><i class="fas fa-user-edit" aria-hidden="true"style="color: black; font-size: 50px;"></i></a>
-							<!-- <i class="fas fa-door-open" id="btnDelete"style="color: black; font-size: 50px;"></i>  -->
-							<i class="fa fa-lock fa-2x" aria-hidden="true" style="color: black; font-size: 50px;"> </i> 
-							<a href="changePassword"> 비밀번호 변경 </a> 
-							<a href="option">알람 환경설정</a>
-
-						</div>
-
-					<form action="../logout" method="post">
-						<button>로그아웃</button>
-					</form>
 				</div>
 			</div>
 		</div>
