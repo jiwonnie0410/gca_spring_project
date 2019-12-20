@@ -82,25 +82,25 @@
 					</div>
 				</c:if>  
 				
-				<form name="SearchForm">
-				<table>
-						<tr>
-							<td><select id="searchCondition" name="searchCondition" class="btn btn-outline-warning btn-sm dropdown-toggle" style="">
-									<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
-									<option value="all"<c:out value="${map.searchOption == 'all'?'selected':''}"/>>제목+아이디+제목</option>
-									<option value="m_id"<c:out value="${map.searchOption == 'm_id'?'selected':''}"/>>아이디</option>
-									<option value="ad_content"<c:out value="${map.searchOption == 'ad_content'?'selected':''}"/>>내용</option>
-									<option value="title"<c:out value="${map.searchOption == 'title'?'selected':''}"/>>제목</option>
-							</select></td>
-							<td><input name="keyword" value="${map.keyword}" class="form-control"> </td>
-							<td><button type="submit" class="btn btn-outline-warning btn-sm"
-									style="border-color: #FAF0F0; color: #ffc0cb;">검색</button></td>
-						</tr>
-					</table>
-			</form>	
 			</div>
 		</div>
 	</form>
+	<form name="SearchForm">
+	<table>
+			<tr>
+				<td><select id="searchCondition" name="searchCondition" class="btn btn-outline-warning btn-sm dropdown-toggle" style="">
+						<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
+						<option value="all"<c:out value="${map.searchOption == 'all'?'selected':''}"/>>제목+아이디+제목</option>
+						<option value="m_id"<c:out value="${map.searchOption == 'm_id'?'selected':''}"/>>아이디</option>
+						<option value="ad_content"<c:out value="${map.searchOption == 'ad_content'?'selected':''}"/>>내용</option>
+						<option value="title"<c:out value="${map.searchOption == 'title'?'selected':''}"/>>제목</option>
+				</select></td>
+				<td><input name="keyword" value="${map.keyword}" class="form-control"> </td>
+				<td><button type="submit" class="btn btn-outline-warning btn-sm"
+						style="border-color: #FAF0F0; color: #ffc0cb;">검색</button></td>
+			</tr>
+		</table>
+</form>	
 	<!-- 레코드의 갯수를 출력 -->
 	<table class="table">
 		<thead>
