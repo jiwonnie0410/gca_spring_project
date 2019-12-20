@@ -10,6 +10,7 @@ import com.yedam.gca.group_b.dao.BGroupDAO;
 import com.yedam.gca.group_b.service.BGroupService;
 import com.yedam.gca.group_b.vo.BGroupVO;
 import com.yedam.gca.history.vo.ActiveHistVO;
+import com.yedam.gca.history.vo.ScoreHistVO;
 import com.yedam.gca.member.vo.MembersVO;
 
 @Service("bGroupService")
@@ -36,6 +37,9 @@ public class BGroupServiceImpl implements BGroupService {
 	public ActiveHistVO getOnesAuthority(ActiveHistVO vo) {
 		return bgroupDAO.getOnesAuthority(vo);
 	}
+	public ScoreHistVO getMyTotalScore(MembersVO vo) {
+		return bgroupDAO.getMyTotalScore(vo);
+	}
 	
 	
 	
@@ -54,6 +58,12 @@ public class BGroupServiceImpl implements BGroupService {
 	public void insertBg(BGroupVO vo) {
 		bgroupDAO.insertBg(vo);
 	}
+	
+	@Override
+	public int insertBgAlert(BGroupVO vo) {
+		return bgroupDAO.insertBgAlert(vo);
+	}
+	
 	@Override
 	public List<BGroupVO> getBgEndList(BGroupVO vo) {
 		return bgroupDAO.getBgEndList(vo);

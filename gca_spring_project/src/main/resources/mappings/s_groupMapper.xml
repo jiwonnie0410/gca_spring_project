@@ -132,6 +132,14 @@
 		)}
 	</select>
 	
+ <!-- 반짝 방 생성 시 알람 보내기 -->
+ 	<select id="insertSgAlert" statementType="CALLABLE" parameterType="sgroup">
+		{ CALL sg_dis_mid(
+			#{sg_num}
+			,#{alert_gnum, mode=OUT, jdbcType=INTEGER}
+		)}
+	</select>
+	
 <!-- SGroup 마감 방 조회 -->
 	<select id="getSgEndList" resultType="sgroup">
 		SELECT 

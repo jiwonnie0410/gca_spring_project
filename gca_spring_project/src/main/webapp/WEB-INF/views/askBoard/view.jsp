@@ -33,66 +33,66 @@ Latest compiled JavaScript
 			.ready(
 					function() {
 
-						/* --------------- 게시글 관련 --------------- */
-						// 1. 게시글 수정
-						$("#btnUpdete")
-								.click(
-										function() {
-											/* var title = document.form1.title.value; ==> name속성으로 처리할 경우
-											var content = document.form1.content.value;
-											var writer = document.form1.writer.value; */
-											var title = $("#ad_title").val();
-											var content = $("#ad_content")
-													.val();
-											if (ad_title == "") {
-												alert("제목을 입력하세요");
-												document.form1.ad_title.focus();
-												return;
-											}
-											if (ad_content == "") {
-												alert("내용을 입력하세요");
-												document.form1.ad_content
-														.focus();
-												return;
-											}
+	/* --------------- 게시글 관련 --------------- */
+	// 1. 게시글 수정
+	$("#btnUpdete").click(function() {
+		if(confirm("수정하시겠습니까?")){		
+						/* var title = document.form1.title.value; ==> name속성으로 처리할 경우
+						var content = document.form1.content.value;
+						var writer = document.form1.writer.value; */
+						var title = $("#ad_title").val();
+						var content = $("#ad_content")
+								.val();
+						if (ad_title == "") {
+							alert("제목을 입력하세요");
+							document.form1.ad_title.focus();
+							return;
+						}
+						if (ad_content == "") {
+							alert("내용을 입력하세요");
+							document.form1.ad_content
+									.focus();
+							return;
+						}
 
-											document.form1.action = "${pageContext.request.contextPath}/board/update"
+						document.form1.action = "${pageContext.request.contextPath}/board/update"
 
-											var that = $("#form1");
-											var str = "";
-											// 태그들.each(함수)
-											// id가 uploadedList인 태그 내부에 있는 hidden태그들
-											// form에 hidden태그들을 추가
-											$("#form1").append(str);
-											// 폼에 입력한 데이터를 서버로 전송
-											document.form1.submit();
+						var that = $("#form1");
+						var str = "";
+						// 태그들.each(함수)
+						// id가 uploadedList인 태그 내부에 있는 hidden태그들
+						// form에 hidden태그들을 추가
+						$("#form1").append(str);
+						// 폼에 입력한 데이터를 서버로 전송
+						document.form1.submit();
 
-											// 폼에 입력한 데이터를 서버로 전송
-											document.form1.submit();
-										});
+						// 폼에 입력한 데이터를 서버로 전송
+						document.form1.submit();
+			}	
+		});
 
-						// 2. 게시글 삭제
-						$("#btnDelete")
-								.click(
-										function() {
-											// 댓글이 존재하는 게시물의 삭제처리 방지
-											/* var count = "${count}";
-											if(count > 0) {
-												alert("댓글이 있는 게시물은 삭제할 수 없습니다.")
-												return;
-											} */
-											if (confirm("삭제하시겠습니까?")) {
-												document.form1.action = "${pageContext.request.contextPath}/board/delete.do";
-												document.form1.submit();
-											}
-										});
+	// 2. 게시글 삭제
+	$("#btnDelete")
+			.click(
+					function() {
+						// 댓글이 존재하는 게시물의 삭제처리 방지
+						/* var count = "${count}";
+						if(count > 0) {
+							alert("댓글이 있는 게시물은 삭제할 수 없습니다.")
+							return;
+						} */
+						if (confirm("삭제하시겠습니까?")) {
+							document.form1.action = "${pageContext.request.contextPath}/board/delete.do";
+							document.form1.submit();
+						}
+					});
 
-						// 3. 게시글 목록으로 이동 - 버튼 클릭시 상세보기화면에 있던 페이지, 검색옵션, 키워드 값을 가지로 목록으로 이동
-						$("#btnList")
-								.click(
-										function() {
-											location.href = "${pageContext.request.contextPath}/board/adlist.?curPage=${curPage}&searchOption=${searchOption}&keyword=${keyword}";
-										});
+	// 3. 게시글 목록으로 이동 - 버튼 클릭시 상세보기화면에 있던 페이지, 검색옵션, 키워드 값을 가지로 목록으로 이동
+	$("#btnList")
+			.click(
+					function() {
+						location.href = "${pageContext.request.contextPath}/board/adlist.?curPage=${curPage}&searchOption=${searchOption}&keyword=${keyword}";
+					});
 
 						/* --------------- 댓글 관련 -------------- */
 						// 1. 댓글 입력
@@ -254,33 +254,27 @@ Latest compiled JavaScript
 
 <style>
 #modifyReply {
-	width: 600px;
-	height: 130px;
-	background-color: gray;
+	/* width: 600px;
+	height: 130px; */
+	background-color: pink;
 	padding: 10px;
 	z-index: 10;
 	visibility: hidden;
 }
 
-#fileDrop {
-	width: 600px;
-	height: 80px;
-	border: 1px solid gray;
-	background-color: gray;
-}
 </style>
 <style>
-textarea {
+/* textarea {
 	width: 100%;
-}
+} */
 
-.reply_reply {
+/* .reply_reply {
 	border: 2px solid #FF50CF;
-}
+} */
 
-.reply_modify {
+/* .reply_modify {
 	border: 2px solid #FFBB00;
-}
+} */
 </style>
 </head>
 <body>
@@ -288,57 +282,68 @@ textarea {
 	<!-- 게시물 상세보기 영역 -->
 	<input type="hidden" value="${dto.ad_num}">
 	<form name="form1" id="form1" method="post">
-		<div align="center">
-			<div>
-				<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 -->
-				작성일자 :
-				<fmt:formatDate value="${dto.ad_date}" pattern="yyyy-MM-dd" />
-				<!-- 날짜 형식 => yyyy 4자리연도, MM 월, dd 일, a 오전/오후, HH 24시간제, hh 12시간제, mm 분, ss 초 -->
-			</div>
-			<div>조회수 : ${dto.ad_count}</div>
-			<div>아이디 ${dto.m_id}</div>
-			<div>
-				제목: <input name="ad_title" id="ad_title" size="80"
-					value="${dto.ad_title}" placeholder="제목을 입력해주세요">
-				<div>
-					내용
-					<textarea name="ad_content" id="ad_content" rows="4" cols="80"
-						placeholder="내용을 입력해주세요">${dto.ad_content}</textarea>
-				</div>
+		<div class="panel-group">
+			<div class="panel panel-success" style="margin-top: 10px;">
+				<div class="panel-body">
+					<!-- 날짜 형식 => yyyy 4자리연도, MM 월, dd 일, a 오전/오후, HH 24시간제, hh 12시간제, mm 분, ss 초 -->
+					<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 -->
+					<div class="form-group">
+					작성일자 :<fmt:formatDate value="${dto.ad_date}" pattern="yyyy-MM-dd" />
+					</div>
 
-				<div style="width: 650px; text-align: center;">
-					<!-- 게시물번호를 hidden으로 처리 -->
-					<input type="hidden" name="ad_num" value="${dto.ad_num}">
-					<!-- 본인이 쓴 게시물만 수정, 삭제가 가능하도록 처리 -->
-					<c:if test="${m_id == dto.m_id}">
-						<button type="button" class="btn" id="btnUpdete"
-							style="background-color: #FE9191;">수정</button>
-						<button type="button" class="btn " id="btnDelete"
-							style="background-color: #FE9191;">삭제</button>
-					</c:if>
-					<!-- 상세보기 화면에서 게시글 목록화면으로 이동 -->
-					<button type="button" class="btn " id="btnList"
-						style="background-color: #FE9191;">목록</button>
+					<div class="form-group">
+						<div>조회수 : ${dto.ad_count}</div>
+					</div>
+					
+					<div class="form-group">
+						<div>아이디: ${dto.m_id}</div>
+					</div>
+					
+					<div class="form-group">	
+						<div>제목: <input name="ad_title" id="ad_title"value="${dto.ad_title}" placeholder="제목을 입력해주세요"></div>
+					</div>
+					
+					<div class="form-group">	
+						<div>내용<textarea name="ad_content" cols="40" id="ad_content"  placeholder="내용을 입력해주세요">${dto.ad_content}</textarea></div>
+					</div>
+					<div class="form-group">	
+						<div style="width: 650px; text-align: center;">
+						<!-- 게시물번호를 hidden으로 처리 -->
+						<input type="hidden" name="ad_num" value="${dto.ad_num}">
+						<!-- 본인이 쓴 게시물만 수정, 삭제가 가능하도록 처리 -->
+						<c:if test="${m_id == dto.m_id}">
+							<button type="button" class="btn" id="btnUpdete"
+								style="background-color: #FE9191;">수정</button>
+							<button type="button" class="btn " id="btnDelete"
+								style="background-color: #FE9191;">삭제</button>
+						</c:if>
+						<!-- 상세보기 화면에서 게시글 목록화면으로 이동 -->
+						<button type="button" class="btn " id="btnList"
+							style="background-color: #FE9191;">목록</button>
+						</div>
+					</div>	
 				</div>
 			</div>
+		</div>	
 	</form>
 	<!-- 게시물 상세보기 영역 -->
 
 
 	<!-- 댓글 작성 영역 -->
-	<div style="width: 650px; text-align: center;">
+<!-- 	<div style="width: 650px; text-align: center;"> -->
+	<div>
 		<br>
 		<!-- 로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
 		<%-- <c:if test="${sessionScope.m_id != null}"> --%>
-		<textarea rows="5" cols="80" id="adr_content" placeholder="댓글을 작성해주세요"></textarea>
+		<textarea rows="3" cols="40" id="adr_content" placeholder="댓글을 작성해주세요"></textarea>
+		<button type="button" class="btn " id="btnReply" style="background-color: #FE9191;">댓글 작성</button>
 		<br>
 		<!-- 비밀댓글 체크박스 -->
 		<input type="checkbox" id="adr_hidden">비밀 댓글
-		<button type="button" class="btn " id="btnReply"
-			style="background-color: #FE9191;">댓글 작성</button>
+		<!-- <button type="button" class="btn " id="btnReply" style="background-color: #FE9191;">댓글 작성</button> -->
 		<%-- 	</c:if> --%>
 	</div>
-	<!-- 댓글 작성 영역 -->
+	
 	<!-- 댓글 목록 영역 -->
 	<div id="listReply"></div>
 	<!-- 댓글 목록 영역 -->
