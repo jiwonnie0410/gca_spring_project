@@ -124,31 +124,8 @@
 				
 				send();//웹소켓으로 전송되는 function "send"
 				
-				//채팅메세지
-				var message = document.getElementById('inputMessage');
-				var sg_num = ${sgroup.sg_num};
+				insertChat();
 				
-				//아작스 전송용 파라미터
-				var param = JSON.stringify(
-						{"m_id" : usrId, "sg_num" : sg_num, "chh_content" : message}
-				);
-				
-				//채팅 히스토리 테이블에 저장
-				$.ajax({
-					url: "insertChatHist",
-					method:'post',
-					dataType: "json",	//결과타입
-					data: param,		//요청파라미터
-					contentType: "application/json",
-					success: function(){
-						
-					},
-					error: function(){
-						console.log("insert실패");
-					}
-					
-				});
-
 			});
 
 			
@@ -374,7 +351,10 @@
     	<div style="padding-top:0px; padding-bottom:20px">
     		<div>
       			<textarea id="messageWindow" style="font-size:15px; background-color:#FE9191;border-radius:5px;border:3px double #FFF;
-      							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly"></textarea>
+      							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly">
+      				
+      							
+      			</textarea>
       			<div style="padding-top:10px;">
       				<span style="padding-left:5px; padding-right:3px; vertical-align: middle;">
       					<textarea id="inputMessage" style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; " placeholder="입력하세요"></textarea>
@@ -670,7 +650,6 @@
 		}
 		if((inputMessage.value != "")){
 			webSocket.send(  JSON.stringify( msg )   ); 
-			inputMessage.value = ""; 
 		}
 	} 
 	 
@@ -703,6 +682,39 @@
 	function chatAreaScroll() {
 		var textarea = document.getElementById('messageWindow');
 		textarea.scrollTop = textarea.scrollHeight;
+	}
+
+	
+//채팅내역 insert --웹소켓 아님 아작스임--
+	function insertChat(){
+		var usrId = "${id}";
+		//채팅메세지
+		var message = document.getElementById('inputMessage').value;
+		console.log("message : "+message);
+		var sg_num = ${sgroup.sg_num};
+		
+		//아작스 전송용 파라미터
+		var param = JSON.stringify(
+				{"m_id" : usrId, "sg_num" : sg_num, "chh_content" : message}
+		);
+		
+		//채팅 히스토리 테이블에 저장
+		$.ajax({
+			url: "insertChatHist",
+			method:'post',
+			dataType: "json",	//결과타입
+			data: param,		//요청파라미터
+			contentType: "application/json",
+			success: function(){
+				document.getElementById('inputMessage').value = ""; 
+				console.log("insert성공");
+			},
+			error: function(){
+				console.log("insert실패");
+			}
+			
+		});
+
 	}
 </script>
     

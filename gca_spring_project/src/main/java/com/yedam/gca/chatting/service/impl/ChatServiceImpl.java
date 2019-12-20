@@ -1,5 +1,7 @@
 package com.yedam.gca.chatting.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -18,5 +20,12 @@ public class ChatServiceImpl implements ChatService {
 	public void insertChatHist(ChatHistVO vo) {
 		chatDAO.insertChatHist(vo);
 	}
+
+	@Override
+	public List<ChatHistVO> getChatHist(ChatHistVO vo) {
+		return chatDAO.getChatHist(vo);
+	}
+	
+	
 
 }
