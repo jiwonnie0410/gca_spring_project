@@ -171,6 +171,7 @@
 	
 
 <!-- ****** 은영 ****** -->
+	<!-- 챌린지 히스토리에 뿌릴 본인의 챌린지 내역 조회 -->
 	<select id="getChallengeHist" parameterType="challengehistory" resultType="challenge">
 		SELECT 		C.CL_STATUS CL_STATUS,
 					C.CL_NAME CL_NAME,

@@ -147,4 +147,24 @@
 		</choose>
 	</select>
 	
+<!-- id와 방번호로 참가한 시간 가져오기 -->
+	<select id="getJoinTime" parameterType="allhistory" resultType="chathistory">
+		SELECT
+				ACH_DTTM CHH_DTTM
+		FROM	ACTIVE_HIST
+		WHERE	M_ID = #{m_id}
+		<choose>
+			<when test="sg_num != null and sg_num != ''">
+				and		SG_NUM	=	#{sg_num}
+			</when>
+			<when test="bg_num != null and bg_num != ''">
+				and 	BG_NUM	=	#{bg_num}
+			</when>
+			<when test="six_num != null and six_num != ''">
+				and 	SIX_NUM	=	#{six_num}
+			</when>
+		</choose>
+	</select>
+	
+	
 </mapper>

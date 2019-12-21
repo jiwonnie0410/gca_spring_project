@@ -1,9 +1,12 @@
 package com.yedam.gca.group_s.controller;
 
+import java.sql.Timestamp;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.chatting.controller.SpringSocketHandler;
 import com.yedam.gca.chatting.service.ChatService;
@@ -119,6 +124,7 @@ public class SGroupController {
 				sgroupService.cancelJoin(avo);
 				return 0;
 			}
+	//방에 들어갔을 때, 아작스로 채팅내역 붙이기
 	
 //*****************************************미현************************************
 	
@@ -181,13 +187,23 @@ public class SGroupController {
 	@RequestMapping("/sgroup/alreadyIn")
 	public String alreadyIn(
 			@RequestParam(value="sg_num", defaultValue="", required=true) int sg_num,
-			Model model, SGroupVO vo, ActiveHistVO avo, CodeVO cvo, ChatHistVO chvo) {
+			Model model, SGroupVO vo, ActiveHistVO avo, CodeVO cvo, ChatHistVO chvo) throws JsonProcessingException {
 		vo.setSg_num(sg_num);
 		model.addAttribute("sgroup", sgroupService.getRoomInfo(vo));
 		
 		//해당 방의 채팅내역 채팅방으로 넘김
-		chvo.setSg_num(sg_num);
-		 //채팅내역불러오는 매퍼 쿼리 모델어트리뷰트 하기
+		UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		avo.setM_id(user.getUsername());
+		avo.setSg_num(sg_num);
+		chvo = chatService.getJoinTime(avo); //활동히스토리에서 반짝 참여시간 가져와서 chatVO에 담음.
+		
+		chvo.setSg_num(sg_num);	//본인의방번호 chatVO에담음.
+		
+		ObjectMapper mapper = new ObjectMapper(); //javascript에쓰기위해 jsonString?으로변환
+		String jsonChatList = mapper.writeValueAsString(chatService.getChatHist(chvo));
+		
+		model.addAttribute("chatlist", jsonChatList);
 		
 		//참여 인원 정보를 채팅방으로 넘김
 		avo.setSg_num(sg_num);

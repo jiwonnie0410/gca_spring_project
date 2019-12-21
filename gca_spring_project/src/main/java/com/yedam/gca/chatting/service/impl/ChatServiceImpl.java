@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.yedam.gca.chatting.dao.ChatDAO;
 import com.yedam.gca.chatting.service.ChatService;
 import com.yedam.gca.chatting.vo.ChatHistVO;
+import com.yedam.gca.history.vo.ActiveHistVO;
 
 @Service("chatService")
 public class ChatServiceImpl implements ChatService {
@@ -24,6 +25,11 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public List<ChatHistVO> getChatHist(ChatHistVO vo) {
 		return chatDAO.getChatHist(vo);
+	}
+
+	@Override
+	public ChatHistVO getJoinTime(ActiveHistVO vo) {
+		return chatDAO.getJoinTime(vo);
 	}
 	
 	

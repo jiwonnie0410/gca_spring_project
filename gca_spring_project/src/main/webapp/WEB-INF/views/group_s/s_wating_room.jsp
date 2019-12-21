@@ -117,7 +117,14 @@
 
 			var usrId = "${id}";
 			
-			console.log("usrId : "+usrId);
+			var chatList = ${chatlist} ;
+			console.log(chatList);
+			console.log(chatList.length);
+			var textarea = document.getElementById('messageWindow');
+			for(var i = 0; i< chatList.length; i++){
+				textarea.value += chatList[i].m_id + " : " + chatList[i].chh_content + "\n";
+				console.log(chatList[i].chh_dttm);
+			}
 			
 			//채팅 전송버튼 눌렀을때
 			$("body").on("click", "[id^=chat]", function() {
@@ -352,8 +359,9 @@
     		<div>
       			<textarea id="messageWindow" style="font-size:15px; background-color:#FE9191;border-radius:5px;border:3px double #FFF;
       							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly">
-      				
-      							
+      				<%-- <c:forEach var="chat" items="${chatlist}">
+						${chat.m_id} : ${chat.chh_content}				
+      				</c:forEach> --%>
       			</textarea>
       			<div style="padding-top:10px;">
       				<span style="padding-left:5px; padding-right:3px; vertical-align: middle;">

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yedam.gca.chatting.vo.ChatHistVO;
+import com.yedam.gca.history.vo.ActiveHistVO;
 
 @Repository("chatDAO")
 public class ChatDAO {
@@ -24,4 +25,9 @@ public class ChatDAO {
 	public List<ChatHistVO> getChatHist(ChatHistVO vo) {
 		return mybatis.selectList("ChatDAO.getChatHist", vo);
 	}
+	
+	//채팅 불러오기를 위한 방 참여시간 불러오기
+	public ChatHistVO getJoinTime(ActiveHistVO vo) {
+		return mybatis.selectOne("ActiveHistDAO.getJoinTime", vo);
+	};
 }

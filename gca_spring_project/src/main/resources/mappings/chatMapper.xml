@@ -74,17 +74,21 @@
 					</when>
 				</choose>
 		FROM	CHAT_HIST
-		WHERE	M_ID = #{m_id} AND SG_NUM = #{sg_num}
-				<choose>
-					<when test="sg_num != null and sg_num != ''">
-						AND SG_NUM = #{sg_num}
-					</when>
-					<when test="bg_num != null and bg_num != ''">
-						AND BG_NUM = #{bg_num}
-					</when>
-					<when test="six_num != null and six_num != ''">
-						AND SIX_NUM = #{six_num}
-					</when>
-				</choose>
+				<where>
+					<choose>
+						<when test="sg_num != null and sg_num != ''">
+							SG_NUM = #{sg_num} AND CHH_DTTM >= #{chh_dttm}
+							AND CHH_DTTM > #{chh_dttm}
+						</when>
+						<when test="bg_num != null and bg_num != ''">
+							BG_NUM = #{bg_num} AND CHH_DTTM >= #{chh_dttm}
+							AND CHH_DTTM > #{chh_dttm}
+						</when>
+						<when test="six_num != null and six_num != ''">
+							SIX_NUM = #{six_num} AND CHH_DTTM >= #{chh_dttm}
+							AND CHH_DTTM > #{chh_dttm}
+						</when>
+					</choose>
+				</where>
 	</select>
 </mapper>

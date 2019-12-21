@@ -49,14 +49,14 @@ public class ChallengeHistController {
 	  
 	  
 	  
-	  //은영
+//*********은영
 	  @RequestMapping(value = "history/myChallengeList") 
 	  public String myChallengeList(Model model,ChallengeHistVO vo)  {
-		 UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		 vo.setM_id(user.getUsername());
-		 List<ChallengeVO> cvo = service.getMyChallenge(vo);
-		 System.out.println(cvo);
-		 model.addAttribute("mychallist",service.getMyChallenge(vo)); 
-		 return "/user/history/challenge_history_noTemplet"; 
-		 }
+		  	UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		  	vo.setM_id(user.getUsername());
+		  	List<ChallengeVO> cvo = service.getMyChallenge(vo);
+		  	System.out.println(cvo);
+		  	model.addAttribute("mychallist",service.getMyChallenge(vo)); 
+		  	return "/user/history/challenge_history_noTemplet"; 
+	  }
 }
