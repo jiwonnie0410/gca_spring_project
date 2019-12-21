@@ -46,6 +46,7 @@ public class MembersVO implements UserDetails {
 	private String m_notice1;			// 알림 설정1
 	private String m_notice2;			// 알림 설정2
 	private String m_notice3;			// 알림 설정3 
+	private String m_notice4;			// 알림 설정4 
 	private String m_email;
 	
 	private final static String CLIENT_ID = "BJ76vTS9xilyC5p9YXrY";								// 애플리케이션 아이디

@@ -68,10 +68,10 @@ function toggleSwitch(data) {
 		$('#m_notice3').val(0);
 	} if (data.m_notice4 == 1) {
 		$('#switch4').prop('checked', true);		//스위치3
-		$('#m_notice3').val(1);
+		$('#m_notice4').val(1);
 	} else if (data.m_notice4 == 0) {
 		$('#switch4').prop('checked', false);
-		$('#m_notice3').val(0);
+		$('#m_notice4').val(0);
 	}
 }    
 
@@ -246,11 +246,11 @@ function updateRangeBtn() {
 	</div>
 	
 		<form id="switchForm"> <!-- 스위치1; 스위치2;스위치3; 스위치4;  로그인아이디 -->
-			<input  id="m_notice1" name="m_notice1"><br> 
-			<input  id="m_notice2" name="m_notice2"><br>
-			<input  id="m_notice3" name="m_notice3"><br>
-			<input  id="m_notice4" name="m_notice4"><br>
-			<input  name="m_id" value="${id }">
+			<input type="hidden" id="m_notice1" name="m_notice1"><br> 
+			<input type="hidden" id="m_notice2" name="m_notice2"><br>
+			<input type="hidden" id="m_notice3" name="m_notice3"><br>
+			<input type="hidden" id="m_notice4" name="m_notice4"><br>
+			<input type="hidden" name="m_id" value="${id }">
 		</form>
 		<br>
 		<form id="rangeForm"> <!-- 범위버튼; 로그인아이디 -->

@@ -245,7 +245,7 @@
 					M_NOTICE1,
 					M_NOTICE2,
 					M_NOTICE3,
-					M_NOTICE4,
+					M_NOTICE4
 		FROM 		MEMBERS
 		WHERE		M_ID = #{m_id}    
 	</select>
