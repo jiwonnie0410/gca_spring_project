@@ -100,7 +100,7 @@
 								<!-- 알림 쪽지 보기 버튼 -->
 							<td align="right" width="170"><span onclick="location.href='${pageContext.request.contextPath }/member/alert'"><i id="button-button" class="fas fa-comment"></i></span>&nbsp;&nbsp;
 								<!-- 설정 버튼 -->
-								<span onclick="location.href='location.href='${pageContext.request.contextPath }/option'"><i id="button-button" class="fas fa-bell"></i></span></td>
+								<span onclick="location.href='${pageContext.request.contextPath }/member/option'"><i id="button-button" class="fas fa-bell"></i></span></td>
 						</tr>
 						<tr>
 							<!-- 랭킹보기 링크 -->	
