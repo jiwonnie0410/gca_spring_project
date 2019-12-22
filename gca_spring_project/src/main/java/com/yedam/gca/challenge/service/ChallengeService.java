@@ -31,5 +31,8 @@ public interface ChallengeService {
 	// 7. 스페셜챌린지 결제완료시 머니 테이블에 이력 남김
 	public void insertMoney(MoneyVO vo);
 	
+	// 8. 챌린지 성공시 포인트 증정
+	public void insertChallengeScore();
+	
 
 }

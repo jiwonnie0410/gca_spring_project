@@ -69,6 +69,11 @@
 }
 
 
+.tab-content>.active {
+    display: block;
+    padding-top: 50px;
+}
+
 
 
 </style>
@@ -82,6 +87,7 @@
         <div class="col">
         	<!-- 상단 nav-tabs 시작 -->
 	        <div class="tab" id="tab">
+		        <span><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;챌린지 목록</h4></span>	
 	            <ul class="nav nav-pills">
 	              <!-- 기본 챌린지 탭-->
 	              <li class="nav-item">

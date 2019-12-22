@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yedam.gca.admin.vo.TroubleVO;
+import com.yedam.gca.challenge.service.ChallengeService;
 import com.yedam.gca.chatting.controller.SpringSocketHandler;
 import com.yedam.gca.chatting.service.ChatService;
 import com.yedam.gca.chatting.vo.ChatHistVO;
@@ -40,6 +41,7 @@ public class SGroupController {
 	@Autowired	CodeService codeService;
 	@Autowired	ActiveHistService actService;
 	@Autowired	ChatService chatService;
+	@Autowired	ChallengeService challengeService;
 	
 	
 //*****************************************은영************************************
@@ -262,6 +264,10 @@ public class SGroupController {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
 		vo.setM_id(memInfo.getM_id());
 		sgroupService.getSgCert(vo);
+		
+		//수림추가 + 챌린지 성공시 포인트 증정
+		//challengeService.insertChallengeScore();
+		
 		return vo;
 	}
 	
