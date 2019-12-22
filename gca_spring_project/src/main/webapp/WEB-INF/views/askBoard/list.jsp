@@ -10,23 +10,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>게시글 목록</title>
-<!-- 삭제 -->
-<!-- 삭제 -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!--json할때 필요  -->
 <script src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
 
@@ -61,6 +44,9 @@
      overflow:hidden;
      white-space: nowrap;
      align="center"
+     }
+     .table td {
+	cursor: pointer;
 }
     </style>
     </head>
@@ -69,11 +55,9 @@
         <!-- <form class="form-inline" id="frmSearch" action="/board/list"> -->
         <form class="form-inline" id="frmSearch" method="post" action="${pageContext.request.contextPath}/board/adlist">
 		<div align="center">
-			<div class="jumbotron" style="background-color: #FE9191; ">
-				<h2 style="color: white;" >홍보</h2>
-				<!-- <p style="color: white;">* 홍보.</p> -->
-			 </div>
-			<%--  <sec:authentication property="principal.m_id"/>  --%>
+			<div class="jumbotron" style="background-color: #FE9191;">
+				<h2 style="color: white;">홍보</h2>
+			</div>
 			<div align="center" style="padding-right: 3%; padding-left: 3%;">
 				<!-- 로그인한 사용자만 글쓰기 버튼을 활성화 -->
 				<c:if test="${m_id != null}"> 
@@ -81,7 +65,6 @@
 						<button class="btn" type="button" id="btnWrite" name="write"  style="margin-right: 10%; background-color: #FE9191; color: white;">Write</button>
 					</div>
 				</c:if>  
-				
 			</div>
 		</div>
 	</form>
@@ -114,11 +97,11 @@
 			</tr>
 		</thead>
 		<tbody>
-		<!-- db 목록을 가져와서 뿌려주는 곳 -->
+		<!-- 검색-->
 			<c:choose>
 				<c:when test="${fn:length(map.list) == 0}">
 					<tr>
-						<td colspan="3" align="center">조회결과가 없습니다.</td>
+						<td colspan="4" align="center">조회결과가 없습니다.</td>
 					</tr>
 				</c:when>
 				<c:otherwise>

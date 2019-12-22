@@ -61,37 +61,45 @@
 
 </head>
 <body>
-	<div align="center">
-		<h1>홍보게시판 작성</h1>
-		<form name="form1" id="form1" method="post" action="${pageContext.request.contextPath }/board/insert.do">
-		<input type="hidden" id="m_id" name="m_id" value="${id }">
-	<div>
-		제목
-		<input name="ad_title" id="ad_title" size="80" placeholder="제목을 입력해주세요">
-	</div>
-	<div>
-		내용
-		<textarea name="ad_content" id="ad_content" rows="4" cols="80" placeholder="내용을 입력해주세요"></textarea>
-	</div>
-	<div>
-		<div>
-									<select name="ad_city" id="ad_city" class="btn btn-outline btn-sm dropdown-toggle"  >
-										  <option	selected disabled value="도시" > 도시 </option>
-										  <option value="qna1" >서울</option>
-										  <option value="qna2">수도권</option>
-										  <option value="qna3" >대구</option>
-										  <option value="qna4">부산</option>
-									 </select>
-								</div>
-	</div>
-			<div align="center">
-
-					<button class="btn" type="submit" id="btnSave">확인</button>
-					<button class="btn " type="reset">취소</button>
-					<button class="btn " id="list" name="list">게시판</button>
+	<div class="col-20">
+          <div class="card">
+            <div class="card-header" style="background-color: #FEBABA;">
+          		게시물 작성
+          	</div>
+          	 <div class="card-body">
+				<form name="form1" id="form1" method="post" action="${pageContext.request.contextPath }/board/insert.do">
+				<input type="hidden" id="m_id" name="m_id" value="${id }">
+			<div class="form-group">
+				<div > 
+				<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;"> 제목</label>&nbsp;&nbsp;
+				<input name="ad_title" id="ad_title"  placeholder="제목을 입력해주세요" style="border: 1px solid #FE9191; border-radius: 10px;"></div>
 			</div>
-		</form>
-		</div>
+			<div class="form-group">
+				<div>
+					<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;"> 동호회 지역</label>&nbsp;&nbsp;
+					 <select name="ad_city" id="ad_city" class="btn btn-outline btn-sm dropdown-toggle"  style="border: 1px solid #FE9191; border-radius: 10px;">
+						  <option	selected disabled value="도시" >-도시 선택-</option> 
+						  <option value="qna1" style="border: 1px solid #FE9191;" >서울</option>
+						  <option value="qna2" style="border: 1px solid #FE9191;">수도권</option>
+						  <option value="qna3" style="border: 1px solid #FE9191;" >대구</option>
+						  <option value="qna4" style="border: 1px solid #FE9191;">부산</option>
+					 </select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div>
+					<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">내용</label>&nbsp;&nbsp;
+				&nbsp;<textarea name="ad_content" id="ad_content" rows="4" cols="40" placeholder="내용을 입력해주세요" style="border: 1px solid #FE9191;border-radius: 10px;"></textarea></div>
+			</div>
+			<div class="form-group">
+				<div align="center">
+					<button class="btn" type="submit" id="btnSave" style="background-color: #FE9191; color: white;">확인</button>
+					<button class="btn " type="reset" style="background-color: #FE9191; color: white;">취소</button>
+					<button class="btn " id="list" name="list" style="background-color: #FE9191; color: white;">게시판</button>
+			</div>
+		</div>	
+	</form>
+</div>
 </body>
 
 

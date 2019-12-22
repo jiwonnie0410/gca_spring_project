@@ -69,7 +69,7 @@ public class SGroupController {
 			return vo;
 		}
 		
-	//프로필 모달 띄울 때 해당 멤버의 레벨 가져오기(점수 조회 후 레벨변동해야하면 업데이트해서 가져오기)
+	//프로필 모달 띄울 때 해당 멤버의 레벨 가져오기
 		@ResponseBody
 		@RequestMapping(value="/sgroup/getOnesLevel", consumes="application/json")
 		public MembersVO getOnesLevel(@RequestBody MembersVO vo) {
@@ -124,7 +124,6 @@ public class SGroupController {
 				sgroupService.cancelJoin(avo);
 				return 0;
 			}
-	//방에 들어갔을 때, 아작스로 채팅내역 붙이기
 	
 //*****************************************미현************************************
 	

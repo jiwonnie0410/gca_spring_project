@@ -52,9 +52,21 @@ public class SGroupDAO {
 	public ScoreHistVO getMyTotalScore(MembersVO vo) {
 		return mybatis.selectOne("ScoreHistDAO.getMyTotalScore", vo);
 	}
-	//레벨 업데이트 --쓸지안쓸지 고민중
+	//레벨 업데이트를 위한 아이디별 점수조회 --members dao,service,impl로 옮기기
+	public List<ScoreHistVO> getAllTotalScore(ScoreHistVO vo) {
+		return mybatis.selectList("ScoreHistDAO.getAllTotalScore", vo);
+	}
+	//레벨 업데이트 --members dao,service,impl로 옮기기
 	public int updateLevel(MembersVO vo) {
 		return mybatis.update("MemberDAO.updateLevel", vo);
+	}
+	//회원활동상태 업데이트를 위한 아이디별 신고당한 횟수 조회 --members dao,service,impl로 옮기기
+	public List<TroubleVO> getHowManyTrouble(TroubleVO vo) {
+		return mybatis.selectList("MemberDAO.getHowManyTrouble", vo);
+	}
+	//회원 활동상태 업데이트 --members dao,service,impl로 옮기기
+	public int updateMStatus(MembersVO vo) {
+		return mybatis.update("MemberDAO.updateMStatus", vo);
 	}
 	
 	

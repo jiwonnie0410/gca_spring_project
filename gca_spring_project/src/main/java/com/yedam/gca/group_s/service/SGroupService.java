@@ -19,8 +19,10 @@ public interface SGroupService {
 	MembersVO getOneMem(MembersVO vo);
 	ActiveHistVO getOnesAuthority(ActiveHistVO vo);
 	ScoreHistVO getMyTotalScore(MembersVO vo);
+	List<ScoreHistVO> getAllTotalScore(ScoreHistVO vo);
 	int updateLevel(MembersVO vo);
-	
+	List<TroubleVO> getHowManyTrouble(TroubleVO vo);
+	int updateMStatus(MembersVO vo);
 			
 	
 	//미현

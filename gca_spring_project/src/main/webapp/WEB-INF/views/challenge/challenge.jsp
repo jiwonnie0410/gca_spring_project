@@ -30,10 +30,15 @@
 .container .nav-link {
     font-weight: bold;
     color: black;
+    font-size: 18px;
 }
 
 .container .nav-link.active  {
 	color: #FE9191;
+	text-decoration: underline;
+    text-underline-position: under;
+    background: white;
+    font-size: 18px;
 }
 
 
@@ -53,6 +58,16 @@
     right: 5%;
 }
 
+.tab {
+    overflow: hidden;
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+  
+}
+
 
 
 
@@ -62,21 +77,22 @@
   <body>
 
     <div class="container">
-    <span class="title">챌린지 목록</span>
     <br>
       <div class="row">
         <div class="col">
         	<!-- 상단 nav-tabs 시작 -->
-            <ul class="nav nav-tabs">
-              <!-- 기본 챌린지 탭-->
-              <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#basicChallenges">기본 챌린지</a>
-              </li>
-              <!-- 스페셜 챌린지 탭-->
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#specialChallenges">스페셜 챌린지</a>
-              </li>
-            </ul>
+	        <div class="tab" id="tab">
+	            <ul class="nav nav-pills">
+	              <!-- 기본 챌린지 탭-->
+	              <li class="nav-item">
+	                <a class="nav-link active" data-toggle="tab" href="#basicChallenges">기본 챌린지</a>
+	              </li>
+	              <!-- 스페셜 챌린지 탭-->
+	              <li class="nav-item">
+	                <a class="nav-link" data-toggle="tab" href="#specialChallenges">스페셜 챌린지</a>
+	              </li>
+	            </ul>
+            </div>
             <!-- 상단 nav-tabs 끝 -->
             
             <div class="tab-content">

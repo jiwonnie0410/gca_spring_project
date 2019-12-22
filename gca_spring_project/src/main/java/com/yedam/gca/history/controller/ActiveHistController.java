@@ -3,6 +3,7 @@ package com.yedam.gca.history.controller;
 import java.util.List;
 import java.util.Map;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,7 +39,8 @@ public class ActiveHistController {
 		vo.setM_id(id);
 		return service.getActiveHistList(vo);
 	}
+
 	
 	// *************  수림 끝 **********************//
-
+	
 }

@@ -26,9 +26,9 @@
 	width: 100%;
 }
 
-.container img {
-	width: 40px;
-}
+/* .container img { */
+/* 	width: 40px; */
+/* } */
 
 .rankTable thead {
 	text-align: center;
@@ -62,16 +62,16 @@
 			    <tr style="background-color: #FE9191">
 			      <th scope="col" style="width: 20%">순위</th>
 			      <th scope="col" colspan="2">닉네임</th>
-			      <th scope="col">포인트</th>
+			      <th scope="col">점수</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 				<c:forEach items="${rankList}" var="list">
 				    <tr>
 				      <th style="text-align: center">${list.rank }등</th>
-				      <td style="width: 40px"><img src="${pageContext.request.contextPath }/resources/images/icon/${list.m_image_cd }.png"></td>
+				      <td style="width: 40px"><img src="${pageContext.request.contextPath }/resources/images/icon/${list.m_image_cd }.gif" width="40px" ></td>
 				      <td>${list.m_nick}</td>
-				      <td><img src="${pageContext.request.contextPath }/resources/images/icon/heart.png">${list.sch_score }</td>
+				      <td><img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="30px">${list.sch_score }</td>
 				    </tr>
 				</c:forEach>
 			  </tbody>
@@ -82,14 +82,14 @@
 				<c:choose>
 					<c:when test="${myRank.m_id != null }">
 						<b>${myRank.rank}등</b>&nbsp;
-						<img src="${pageContext.request.contextPath }/resources/images/icon/profile2.png"> ${myRank.m_nick } 
-						<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png">${myRank.sch_score } 
+						<img src="${pageContext.request.contextPath }/resources/images/icon/${myRank.m_image_cd }.gif" width="40px"> ${myRank.m_nick } 
+						<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="30px">${myRank.sch_score } 
 						
 					</c:when>
 					<c:otherwise>
 						<b>순위권 외</b>&nbsp;
-						<img src="${pageContext.request.contextPath }/resources/images/icon/${image }.png">${nick }&nbsp;
-						<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png">0
+						<img src="${pageContext.request.contextPath }/resources/images/icon/${image }.gif" width="40px">${nick }&nbsp;
+						<img src="${pageContext.request.contextPath }/resources/images/icon/heart.png" width="30px">0
 					</c:otherwise>
 				</c:choose>
 		</div>

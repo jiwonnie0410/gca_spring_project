@@ -11,7 +11,7 @@
 		<include refid="pagingHeader"></include>
 			SELECT
           			 TR_NUM,
-                     t.M_ID ",
+                     t.M_ID ,
           			 TR_MID , 
           			 get_code_name(TR_REASON_CD) tr_reason_cd ,
           			 TR_DTTM ,
@@ -19,9 +19,6 @@
           			 p.PN_END_DTTM
        		FROM TROUBLE t, 
        			 PENALTY p
-           <!--   WHERE  t.TR_MID=p.m_id
-             and    p.m_id= #{TR_MID} -->
-				
 				<!-- 검색조건 -->
 			<include refid="search"></include>
 			ORDER BY TR_NUM DESC, 
@@ -31,14 +28,16 @@
 	</select>
 	
 	
-	<!-- 06. 게시글 삭제처리 -->
-	<!-- 게시물을 삭제처리하지 않고, 삭제의 유무 상태만 변경 -->
-	 <delete id="deleteArticle">
-		DELETE FROM TROUBLE
-		WHERE TR_NUM = #{tr_num}
-	</delete>
-
-
+	<!-- 02. 게시글 레코드 갯수 -->
+	<select id="countArticle" resultType="int">
+		SELECT COUNT(*) 
+		FROM TROUBLE t, 
+       			 PENALTY p
+		<!-- WHERE절을 include 태그로 삽입 -->
+	<include refid="search"></include> 
+	</select>
+	
+	
 
 	<!-- sql code 조각 -->
 	<!-- 반복되는 sql의 일부를 sql태그를 이용하여 따로 빼둘수 있다. -->
@@ -50,7 +49,7 @@
 			<!-- 검색옵션이 전체 검색일 경우 -->
 			<when test="searchOption == 'all' ">
 				AND	
-					(m.m_id like '%' || #{keyword} || '%'
+					(p.m_id like '%' || #{keyword} || '%'
 				OR 
 					tr_reason_cd like '%' || #{keyword}|| '%'
 				OR 
@@ -61,7 +60,7 @@
 				<if test="keyword != null and keyword != '' ">
 				
 				<if test="searchOption=='m_id' ">
-					and m.M_ID like '%' || #{keyword} || '%'
+					and p.m_id like '%' || #{keyword} || '%'
 				</if>
 				
 				<if test="searchOption=='tr_reason_cd' ">

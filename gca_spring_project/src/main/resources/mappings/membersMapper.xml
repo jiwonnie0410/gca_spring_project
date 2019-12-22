@@ -321,5 +321,22 @@
 		SET		M_LEVEL_CD = #{m_level_cd}
 		WHERE	M_ID = #{m_id}
 	</update>
+	
+<!-- (trouble mapper로 옮길것)멤버별 신고당한 횟수 조회 -->
+	<select id="getHowManyTrouble" parameterType="trouble" resultType="trouble">
+		SELECT		TR_MID,
+					COUNT(*) TR_HOW_MANY
+		FROM		TROUBLE
+		GROUP BY	TR_MID
+		HAVING		COUNT(*) >= 3
+	</select>
+	
+<!-- 신고횟수 조회 후 멤버별 활동상태 업데이트 -->
+	<update id="updateMStatus" parameterType="members">
+		UPDATE	MEMBERS
+		SET		M_STATUS_CD = #{m_status_cd}
+		WHERE	M_ID = #{m_id}
+	</update>
+
 </mapper>
 

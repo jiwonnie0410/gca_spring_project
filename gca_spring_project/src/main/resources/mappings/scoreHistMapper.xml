@@ -53,4 +53,11 @@
         FROM	SCORE_HIST
         WHERE	M_ID = #{m_id}
 	</select>
+	
+	<!-- 레벨 업데이트를 위한 아이디별 점수합계 조회 -->
+	<select id="getAllTotalScore" parameterType="scorehistory" resultType="scorehistory">
+		SELECT		M_ID, SUM(SCH_SCORE) SCH_SCORE
+		FROM		SCORE_HIST
+		GROUP BY 	M_ID
+	</select>
 </mapper>
