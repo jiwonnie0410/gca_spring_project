@@ -68,16 +68,19 @@
 				}
 				
 				#button-button:active {
-						color: #FFE08C;
+						color: white;
 				}
-				
-				#button-button:hover {
-						color: #FFE08C;
-				}
-				
 				#button-button {
 						font-size: 20px;
 						cursor: pointer;
+				}
+				#button-message {
+						color: #8BBDFF;
+						font-size: 20px;
+						cursor: pointer;
+				}
+				#button-message:active {
+						color: #4375DB;
 				}
 		</style>
 </head>
@@ -97,9 +100,9 @@
 									<img style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/Characters/${dto.m_image_cd}.gif">				
 								</div></td>
 								<!-- 알림 쪽지 보기 버튼 -->
-							<td align="right" width="170"><span onclick="location.href='${pageContext.request.contextPath }/member/alert'"><i id="button-button" class="fas fa-comment"></i></span>&nbsp;&nbsp;
+							<td align="right" width="170"><span onclick="location.href='${pageContext.request.contextPath }/member/alert'"><i id="button-message" class="fas fa-comment"></i></span>&nbsp;&nbsp;
 								<!-- 설정 버튼 -->
-								<span onclick="location.href='${pageContext.request.contextPath }/member/option'"><i id="button-button" class="fas fa-bell"></i></span></td>
+								<span onclick="location.href='${pageContext.request.contextPath }/member/option'"><i id="button-message" class="fas fa-bell"></i></span></td>
 						</tr>
 						<tr>
 							<!-- 랭킹보기 링크 -->	
@@ -126,7 +129,7 @@
 								&nbsp;&nbsp;<font color="gray">현주소 |</font>&nbsp;&nbsp;&nbsp;${dto.m_location}
 						</div>
 						<div class="div-info" style="background:#B2CCFF; border:#B2CCFF;" align="left">
-								&nbsp;&nbsp;<font color="gray">포인트 |</font>&nbsp;&nbsp;&nbsp;${score} 점 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;<font color="gray">포인트 |</font>&nbsp;&nbsp;&nbsp;${score} 점 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<span onclick="location.href='${pageContext.request.contextPath }/history/score'"> 확인하러 가기 <i id="button-button" class="fas fa-coins"></i></span>
 						</div>
 						
