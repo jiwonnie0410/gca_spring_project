@@ -4,6 +4,7 @@
 <mapper namespace="MemberDAO">
 
 <!--
+	지
 	1. 우리 페이지에서 회원가입
 	2. 아이디 중복 확인
 	3. 이름이랑 이메일로 아이디 가져오기
@@ -14,6 +15,7 @@
 	7. 네이버로 로그인 시 회원가입
 	8. 계정 활동 상태 체크
 	9. 사용자의 현재까지 포인트
+	10. 사용자가 현재까지 쓴 글의 갯
  -->
 
 <!-- 1. 회원가입 -->
@@ -172,7 +174,14 @@
 			</select>
 			
 			
-			
+<!-- 10. 사용자가 현재까지 쓴 글의 갯 -->			
+			<select id="getBoardCount" parameterType="string" resultType="int">
+					select count(x.*)+count(y.*)
+					from (select * from ad_board
+							where m_id = #{value} ) x,
+						  (select * from qna_board
+						  	where m_id = #{value} ) y
+			</select>
 			
 			
 			

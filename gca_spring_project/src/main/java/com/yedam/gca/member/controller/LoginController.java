@@ -224,6 +224,12 @@ public class LoginController {
 			return "/user/member/member_view";
 		}
 	}
+	
+	// 14. 메뉴바에서 카테고리 가기
+	@RequestMapping("/menu")
+	public String category() {
+		return "/user/layout/category";
+	}
 	// 지원 끝
 
 	// **************** 수림 *****************

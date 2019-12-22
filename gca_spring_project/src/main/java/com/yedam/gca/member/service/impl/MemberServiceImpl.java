@@ -24,7 +24,9 @@ import com.yedam.gca.member.vo.MembersVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-// 1. 회원가입 	2. 아이디 중복 확인 	3. 아이디 찾기 	4. 비밀번호 찾기
+// 지
+// 1. 회원가입 	2. 아이디 중복 확인 	3. 아이디 찾기 	4. 비밀번호 찾기 	5. 비밀번호 변경 	
+// 6. 네이버로 로그인 시 이미 있는 회원인지 확인 후 Members 테이블에 데이터 등록 	7. 사용자가 현재까지 쓴 글의 갯
 	
 	@Resource MemberDAO dao;
 
@@ -202,7 +204,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 	
-	// 비밀번호 변경
+	// 5. 비밀번호 변경
 	@Override
 	public Map<String, Object> changePw(MembersVO vo) {
 		// 비밀번호 암호화
@@ -225,7 +227,7 @@ public class MemberServiceImpl implements MemberService {
 		return map;
 	}
 	
-	// 네이버로 로그인 시 이미 있는 회원인지 확인 후 Members 테이블에 데이터 등록
+	// 6. 네이버로 로그인 시 이미 있는 회원인지 확인 후 Members 테이블에 데이터 등록
 	@Override
 	public String insertNaver(MembersVO vo) {
 		// 일단 등록된 회원인지 확인: 아이디 중복인지 체크
@@ -246,6 +248,11 @@ public class MemberServiceImpl implements MemberService {
 		return dao.getScore(mId);
 	}
 	
+	// 7. 사용자가 현재까지 쓴 글의 갯수
+	@Override
+	public int getBoardCount(String mId) {
+		return dao.getBoardCount(mId);
+	}
 	
 	
 	
@@ -330,6 +337,8 @@ public class MemberServiceImpl implements MemberService {
 	public void updateRange(MembersVO vo) {
     	dao.updateRange(vo);
     }
+
+	
 
 	
 

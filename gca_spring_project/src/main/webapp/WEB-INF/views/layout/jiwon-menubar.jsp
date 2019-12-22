@@ -78,16 +78,21 @@
 		<a href="${pageContext.request.contextPath }/qnaboard">
 				<img src="${pageContext.request.contextPath }/resources/images/menubar/board.png" alt="문의" style="width: 40px; position:absolute; margin: 0 0 10px 0; left:190px;"></a> 
 				
+		<!-- 전체 메뉴 보기 -->
+		<a href="${pageContext.request.contextPath }/menu"><img src="${pageContext.request.contextPath }/resources/images/icon/menu-bar.png" alt="카테고리" style="width: 40px; position:absolute; left:250px;"></a> 
+		
 		<!-- 프로필로 가기 -->
 		<!-- <i class="fas fa-user"></i> -->
 		<a href="${pageContext.request.contextPath }/member/member_view.do">
-				<img src="${pageContext.request.contextPath }/resources/images/menubar/profile.png" alt="프로필" style="width: 40px; position:absolute; margin: 0 0 10px 0; left:250px;"></a>
-			<span class="badge badge-pill badge-danger" id="alertcnt" style="position:absolute; left:270px;">0</span><!-- 알람이 오면 +1되는 부분 -->
+				<img src="${pageContext.request.contextPath }/resources/images/menubar/profile.png" alt="프로필" style="width: 40px; position:absolute; margin: 0 0 10px 0; left:310px;"></a>
+			<span class="badge badge-pill badge-danger" id="alertcnt" style="position:absolute; left:330px;">0</span><!-- 알람이 오면 +1되는 부분 -->
+			
+			
 			
 		<!-- 메뉴 전체보기 -->
-		<a class="more">
+		<%-- <a class="more">
 				<img src="${pageContext.request.contextPath }/resources/images/icon/menu-bar.png" alt="더보기" style="width: 40px; position:absolute; right:10px;"></a>
-		<br><br><br>
+ --%>		<br><br><br>
 	</div>
 </body>
 </html>
