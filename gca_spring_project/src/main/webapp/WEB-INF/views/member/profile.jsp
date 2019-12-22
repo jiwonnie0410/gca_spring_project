@@ -107,7 +107,7 @@
 						</tr>
 						<tr>
 							<!-- 환경설정 버튼 -->
-							<td align="right"><span onclick="location.href='${pageContext.request.contextPath }/member/updateform'"><font size="5" color="gray" style="cursor:pointer;"><i id="button-edit" class="fas fa-cog"></i></font></span></td>
+							<td align="right"><span onclick="location.href='${pageContext.request.contextPath }/member/updateform'"><font size="5" color="gray" style="cursor:pointer;"><i id="button-edit" class="fas fa-user-edit"></i></font></span></td>
 						</tr>
 					</table>
 					</div>
