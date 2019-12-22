@@ -57,6 +57,6 @@ public class ChallengeHistController {
 		  	List<ChallengeVO> cvo = service.getMyChallenge(vo);
 		  	System.out.println(cvo);
 		  	model.addAttribute("mychallist",service.getMyChallenge(vo)); 
-		  	return "/user/history/challenge_history_noTemplet"; 
+		  	return "/user/history/challenge_history";
 	  }
 }
