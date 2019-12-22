@@ -57,7 +57,6 @@ public class LoginController {
 		
 		// 1. 로그인 사용자 정보를 읽어온다.
 		apiResult = vo.getUserProfile(oauthToken); // String형식의 json데이터
-		System.out.println("여기는 콜백의 apiResult::: " + apiResult);
 		// "id":"76298500","age":"20-29","gender":"F","email":"je708@naver.com","name":"\ubc15\uc9c0\uc6d0","birthday":"04-10"
 		
 		// 2. String형식인 apiResult를 json 형태로 바꿈
