@@ -133,6 +133,7 @@ public class SGroupController {
 	public String search(Model model, SGroupVO vo, CodeVO cvo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
 		vo.setM_xy(memInfo.getM_xy());
+		vo.setM_id(memInfo.getM_id());
 		
 		vo.setScroll_rec(15); //조회할 레코드 수(직접 입력)
 		model.addAttribute("sgroup", vo);
@@ -154,6 +155,7 @@ public class SGroupController {
 	public String searchEnd(SGroupVO vo, CodeVO cvo, Model model) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
 		vo.setM_xy(memInfo.getM_xy());
+		vo.setM_id(memInfo.getM_id());
 		
 		vo.setScroll_rec(15); //조회할 레코드 수(직접 입력)
 		model.addAttribute("sgroup", vo);

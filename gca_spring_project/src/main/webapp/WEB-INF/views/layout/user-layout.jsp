@@ -54,7 +54,7 @@
 			$('#alertcnt').text(result.msg);
 			console.log("알림 웹소켓<" + result.msg + ">");
 		}
- 		if(result.cmd != "groupAlert" && result.cmd != "alertCnt" && 
+		else if(result.cmd != "groupAlert" && result.cmd != "alertCnt" && 
 				(result.cmd == "join" || result.cmd == "msg" || result.cmd == "cancelJoin" || result.cmd == "kickOut") ) {
 			onMessageChat(event);
 			console.log("채팅 웹소켓");

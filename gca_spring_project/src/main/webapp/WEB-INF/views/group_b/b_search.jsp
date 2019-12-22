@@ -21,14 +21,14 @@
 
 	<!-- private : Description Action -->
 	<script type="text/javascript" src="../resources/js/mihy/b_search.js"></script>
-	<link rel="stylesheet" href="../resources/css/mihy/s_search.css">
+	<link rel="stylesheet" href="../resources/css/mihy/search.css">
 </head>
 
 
 <body>
 
 <nav class="fixed-top">
-<div align="center" class="mt-2 mb-2"><h4>함께 시합할 동호회 찾기</h4></div>
+<div align="center" class="nav_title mt-2 mb-2"><h4>함께 시합할 동호회 찾기</h4></div>
 
 <!-- 계정 상태가 활동중인 사람들만 버튼 보임 -->
 <sec:authentication property='principal.m_status_cd' var='mgrant'/> <!-- 변수에 이 회원의 계정상태 대입 -->
@@ -72,7 +72,15 @@
 		
 		<td class="td2">
 			<p class="content p5">
-<%-- 				<span class="badge badge-warning mr-1 ml-2">
+				<c:choose>
+					<c:when test="${bg.bg_now_cnt == bg.bg_end_cnt }">
+						<span class="badge badge-warning ml-2"><font color="gray">대기</font></span>
+					</c:when>
+					<c:otherwise>
+						<span class="badge badge-warning ml-2"><font color="red">모집 중</font></span>
+					</c:otherwise>
+				</c:choose>
+<%-- 				<span class="badge badge-warning ml-2">
 					<font color="red" class="bg_now_cnt">${bg.bg_now_cnt }</font>
 					&nbsp;/&nbsp;<font color="gray" class="bg_end_cnt">${bg.bg_end_cnt }명</font>
 				</span> --%>
@@ -91,7 +99,11 @@
 			<p class="content p6"><fmt:formatDate value="${bg.bg_end_dttm }" pattern="yy.MM.dd(E)" /></p>
 			<p class="content p7"><fmt:formatDate value="${bg.bg_end_dttm }" pattern="ahh:mm" /></p>
 			<p class="content p8"></p>
+			<c:if test="${bg.m_id != null}">
+				<img class="proimg" src="${pageContext.request.contextPath }/resources/images/jey/C01.png">
+			</c:if>
 		</td>
+		
 	</tr>
 	</c:forEach>
 </table>

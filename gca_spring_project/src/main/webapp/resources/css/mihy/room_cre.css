@@ -1,6 +1,13 @@
 body{ padding: 10px; }
+nav { background-color: white;}
 
-#bg_name {
+.nav_title {
+	background-color: #FFF;
+	color: #FE9191;
+	text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+}
+
+#sg_name, #bg_name, #six_name {
 	border: 1px solid #FE9191;
 }
 
@@ -51,7 +58,7 @@ body{ padding: 10px; }
 li:hover {	background-color: #FAF0F0 !important;}
 
 /*유효성 체크 시 메시지*/
-.bg_valid {
+.sg_valid, .bg_valid, .six_valid {
 	color: #FE9191;
 	font-size: 14px;
 	display:none;
@@ -82,7 +89,9 @@ li:hover {	background-color: #FAF0F0 !important;}
 }
 
 /*이중 슬라이더*/
+#sg_age_bar .noUi-handle {	padding: 0 17px;}
 #bg_age_bar .noUi-handle {	padding: 0 17px;}
+#six_age_bar .noUi-handle {	padding: 0 17px;}
 #age_text {
 	color: gray;
 	border-style: dashed;

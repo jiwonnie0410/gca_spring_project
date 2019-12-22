@@ -123,6 +123,7 @@ public class BGroupController {
 	public String search(Model model, BGroupVO vo, CodeVO cvo) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
 		vo.setM_xy(memInfo.getM_xy());
+		vo.setM_id(memInfo.getM_id());
 		
 		vo.setScroll_rec(15); //조회할 레코드 수(직접 입력)
 		model.addAttribute("bgroup", vo);
@@ -144,6 +145,7 @@ public class BGroupController {
 	public String searchEnd(BGroupVO vo, CodeVO cvo, Model model) {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
 		vo.setM_xy(memInfo.getM_xy());
+		vo.setM_id(memInfo.getM_id());
 		
 		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
 		model.addAttribute("bgroup", vo);

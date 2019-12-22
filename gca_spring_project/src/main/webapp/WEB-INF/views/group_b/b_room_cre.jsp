@@ -30,7 +30,7 @@
 	<!-- private : Description Action -->
 	<script type="text/javascript" src="../resources/js/mihy/kakao_map.js"></script>
 	<script type="text/javascript" src="../resources/js/mihy/b_room_cre.js"></script>
-	<link rel="stylesheet" href="../resources/css/mihy/b_room_cre.css">
+	<link rel="stylesheet" href="../resources/css/mihy/room_cre.css">
 	
 
 	
@@ -39,7 +39,7 @@
 <body>
 
 <nav class="fixed-top">
-	<div align="center" class="mt-2 mb-2"><h4>동호회 매치 방 만들기</h4></div>
+	<div align="center" class="nav_title mt-2 mb-2"><h4>동호회 매치 방 만들기</h4></div>
 </nav>
 
 <form action="creRoom" method="post" id="frm" style="margin-top:40px">
@@ -102,17 +102,25 @@
 	<input type="hidden"  name="bg_end_cnt" id="bg_finish_val" value="2">
 	
 	<span class="ml-2" id="pencil_title"><i class="fas fa-pencil-alt mr-2"></i>몇 대 몇으로 시합할 지 입력해 주세요.</span><br>
-	<div class="row mr-2 ml-2 mb-3 d_day">
+	<div class="row mr-2 ml-2 d_day">
 		<span class="ml-2 mr-5">구성 인원</span>
 		<input type="text" name="bg_team_cnt" id="bg_team_cnt" class="mr-3"> vs <b><span id="bg_team_cnt_out" class="ml-4 mr-2"></span></b> 매치
 	</div>
-	<span id="bg_teamcnt_valid" class="bg_teamcnt pl-3"></span>
+	<span id="bg_teamcnt_valid" class="bg_valid pl-3"></span>
 	
+	<br>
 	<span class="mt-2" id="pencil_title"><i class="fas fa-pencil-alt mr-2"></i>팀 성별 구성을 선택해 주세요.</span><br>
 	<div class="row mr-2 ml-2 mb-2 pt-2 bg_gender">
 		<c:forEach items="${gender_list }" var="list">
 			<label class="radio_label ml-3">&nbsp;&nbsp;&nbsp;${list.cd_name }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input class="bg_gender_val" type="radio" name="gender_cd" id="${list.cd_id }" value="${list.cd_id }">
+				<c:choose>
+					<c:when test="${list.cd_id == 'G03' }">
+						<input class="bg_gender_val" type="radio" name="gender_cd" id="${list.cd_id }" value="${list.cd_id }" checked="checked">
+					</c:when>
+					<c:otherwise>
+						<input class="bg_gender_val" type="radio" name="gender_cd" id="${list.cd_id }" value="${list.cd_id }">
+					</c:otherwise>
+				</c:choose>
 				<span class="checkmark"></span>
 			</label>
 		</c:forEach>

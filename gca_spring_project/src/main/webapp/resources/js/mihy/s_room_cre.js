@@ -139,7 +139,7 @@ function name_valid(){
 			if (rbyte <= maxByte) rlen = i + 1; //return할 문자열 갯수
 		}
 		if(rbyte > maxByte) {
-			$('#sg_name_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>한글과 특수문자는 33자, 영문과 숫자는 100자를 초과하여 입력할 수 없습니다.');
+			$('#sg_name_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>한글과 특수문자는 띄어쓰기 포함 33자, 영문과 숫자는 띄어쓰기 포함 100자를 초과하여 입력할 수 없습니다.');
 			return false;
 		} else if(rbyte <= 6){
 			$('#sg_name_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>한글 3자, 영문 9자 이상 입력해 주세요.');
@@ -172,6 +172,7 @@ function sport_valid(){
 
 //마감날짜, 마감시간 유효성 검사
 function day_valid(){
+	var now = new Date();
 	if( $('#sg_end_day').val() == "" || $('#sg_end_day').val() == null ){
 		if( $('#sg_end_time').val() == "" || $('#sg_end_time').val() == null ){
 			$('#sg_end_valid').show();
@@ -199,6 +200,11 @@ function day_valid(){
 		
 		var time = $('#sg_end_time').val() + ":00";
 		var fulldate = year + "-" + month + "-" + day + " " + time;
+		if( now >= new Date(fulldate)){
+			$('#sg_end_valid').show();
+			$('#sg_end_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>현재 날짜/시각 이후로 설정해 주세요.');
+			return false;
+		}
 		$('#sg_end').val(fulldate);
 	}
 }

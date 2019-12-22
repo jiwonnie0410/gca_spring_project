@@ -11,17 +11,17 @@ $(document).ready(function(){
 	$('#map_location').on('click', addr); //주소 입력
 	
 	$('#btn_cre').on('click', valid); //유효성 검사
-	$("#bg_team_cnt").on('keydown', onlyNumber); //매치 인원 입력 시 유효성 검사
-	
 });
 
 function onlyNumber(){
+	$('#bg_teamcnt_valid').show();
 	if( !( (event.keyCode >= 48 && event.keyCode<=57) 
 			|| (event.keyCode >= 96 && event.keyCode <= 105)
 			|| event.keyCode==8 )  ) {
 		$('#bg_teamcnt_valid').text("숫자를 입력해 주세요.");
 		event.returnValue=false;
 	}
+	$('#bg_teamcnt_valid').hide();
 }
 
 //운동종목 드롭다운
@@ -134,7 +134,7 @@ function name_valid(){
 			if (rbyte <= maxByte) rlen = i + 1; //return할 문자열 갯수
 		}
 		if(rbyte > maxByte) {
-			$('#bg_name_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>한글과 특수문자는 33자, 영문과 숫자는 100자를 초과하여 입력할 수 없습니다.');
+			$('#bg_name_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>한글과 특수문자는 띄어쓰기 포함 33자, 영문과 숫자는 띄어쓰기 포함 100자를 초과하여 입력할 수 없습니다.');
 			return false;
 		} else if(rbyte <= 6){
 			$('#bg_name_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>한글 3자, 영문 9자 이상 입력해 주세요.');
@@ -167,6 +167,7 @@ function sport_valid(){
 
 //마감날짜, 마감시간 유효성 검사
 function day_valid(){
+	var now = new Date();
 	if( $('#bg_end_day').val() == "" || $('#bg_end_day').val() == null ){
 		if( $('#bg_end_time').val() == "" || $('#bg_end_time').val() == null ){
 			$('#bg_end_valid').show();
@@ -194,6 +195,11 @@ function day_valid(){
 		
 		var time = $('#bg_end_time').val() + ":00";
 		var fulldate = year + "-" + month + "-" + day + " " + time;
+		if( now >= new Date(fulldate)){
+			$('#bg_end_valid').show();
+			$('#bg_end_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>현재 날짜/시각 이후로 설정해 주세요.');
+			return false;
+		}
 		$('#bg_end').val(fulldate);
 	}
 }
@@ -208,14 +214,18 @@ function location_valid(){
 	$('#bg_location_valid').hide();
 }
 
-//인원 유효성 검사 --> 팀 구성인원 숫자 외 입력 시 불가 메시지 출력/미입력시 메시지 출력으로 수정해야 함.
+//팀 구성인원 숫자 외 입력 시 불가 메시지 출력/미입력시 메시지 출력
 function cnt_reval(){
-	$('#bg_finish_valid').show();
-	if( $('#bg_finish_val').val() == "" || $('#bg_finish_val').val() == null ){
-		$('#bg_finish_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>모집 인원을 선택해 주세요.');
+	$('#bg_teamcnt_valid').show();
+	if( $('#bg_team_cnt').val() == "" || $('#bg_team_cnt').val() == null ){
+		$('#bg_teamcnt_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>팀 인원을 입력해 주세요.<br>');
 		return false;
 	}
-	$('#bg_finish_valid').hide();
+	else if( isNaN($('#bg_team_cnt').val())  ) {
+		$('#bg_teamcnt_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>숫자만 입력할 수 있습니다.<br>');
+		return false;
+	}
+	$('#bg_teamcnt_valid').hide();
 }
 
 //연령대 val값 변경(20대 이상 모든 연령대 -> 20대~ / 30대만 -> 30대 / 20대 이상 ~ 60대 미만 -> 20대~60대)

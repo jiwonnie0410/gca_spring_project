@@ -41,6 +41,9 @@
 			<p class="content p6"><fmt:formatDate value="${sg.sg_end_dttm }" pattern="yy.MM.dd(E)" /></p>
 			<p class="content p7"><fmt:formatDate value="${sg.sg_end_dttm }" pattern="ahh:mm" /></p>
 			<p class="content p8"></p>
+			<c:if test="${sg.m_id != null}">
+				<img class="proimg" src="${pageContext.request.contextPath }/resources/images/jey/C01.png">
+			</c:if>
 		</td>
 	</tr>
 	</c:forEach>

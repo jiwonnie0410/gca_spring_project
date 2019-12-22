@@ -53,30 +53,34 @@
 				get_code_name(SKILL_CD) SKILL_CD,
 				AGE_RANGE,
 				get_code_name(GENDER_CD) GENDER_CD,
-				DIS
+				DIS,
+				M_ID
 		FROM
 			 	(
 			 	SELECT ROWNUM R, A.* 
 				FROM 	(
-						SELECT B.*, CALC_DISTANCE(
+						SELECT B.*, M_ID, CALC_DISTANCE(
              							SUBSTR(SIX_XY, 0, INSTR(SIX_XY, ',', 1, 1)-1),
              							SUBSTR(SIX_XY, INSTR(SIX_XY, ',', 1, 1)+2, LENGTH(SIX_XY)),
              							SUBSTR(#{m_xy}, 0, INSTR(#{m_xy}, ',', 1, 1)-1),
              							SUBSTR(#{m_xy}, INSTR(#{m_xy}, ',', 1, 1)+2, LENGTH(#{m_xy}))
              						 ) DIS
              			FROM SIXMAN B
+             				LEFT OUTER JOIN 
+             				(SELECT M_ID, SIX_NUM FROM ACTIVE_HIST WHERE M_ID = #{m_id} ) AC 
+             				ON B.SIX_NUM = AC.SIX_NUM
              			WHERE SIX_END_DTTM <![CDATA[ > ]]> SYSDATE
 			            <if test="keyval != null and keyval !=''">
 							<if test="key == 'sports'">
 								and SPORTS2_CD like '%'||#{keyval}||'%'
 							</if>
 					 	</if>
-             			ORDER BY DIS, SIX_END_DTTM, SIX_NUM
+             			ORDER BY DIS, SIX_END_DTTM, B.SIX_NUM
              			) A
 					<where>
 					 	<if test="end_dis != null">
-					 		AND LPAD(round(DIS, 3), 8, '0') || to_char(SIX_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(SIX_NUM, 6, '0')
-					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3), 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
+					 		AND LPAD(round(DIS, 3)*1000, 8, '0') || to_char(SIX_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(SIX_NUM, 6, '0')
+					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3)*1000, 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
 					 	</if>
 					 </where>
     			)
@@ -128,30 +132,34 @@
 				get_code_name(SKILL_CD) SKILL_CD,
 				AGE_RANGE,
 				get_code_name(GENDER_CD) GENDER_CD,
-				DIS
+				DIS,
+				M_ID
 		FROM
 			 	(
 			 	SELECT ROWNUM R, A.* 
 				FROM 	(
-						SELECT B.*, CALC_DISTANCE(
+						SELECT B.*, M_ID, CALC_DISTANCE(
              							SUBSTR(SIX_XY, 0, INSTR(SIX_XY, ',', 1, 1)-1),
              							SUBSTR(SIX_XY, INSTR(SIX_XY, ',', 1, 1)+2, LENGTH(SIX_XY)),
              							SUBSTR(#{m_xy}, 0, INSTR(#{m_xy}, ',', 1, 1)-1),
              							SUBSTR(#{m_xy}, INSTR(#{m_xy}, ',', 1, 1)+2, LENGTH(#{m_xy}))
              						 ) DIS
              			FROM SIXMAN B
+             				LEFT OUTER JOIN 
+             				(SELECT M_ID, SIX_NUM FROM ACTIVE_HIST WHERE M_ID = #{m_id} ) AC 
+             				ON B.SIX_NUM = AC.SIX_NUM
 						WHERE SIX_END_DTTM <![CDATA[ <= ]]> SYSDATE
 			            <if test="keyval != null and keyval !=''">
 							<if test="key == 'sports'">
 								and SPORTS2_CD like '%'||#{keyval}||'%'
 							</if>
 					 	</if>
-             			ORDER BY DIS, SIX_END_DTTM, SIX_NUM
+             			ORDER BY DIS, SIX_END_DTTM, B.SIX_NUM
              			) A
 					<where>
 					 	<if test="end_dis != null and end_dis != 0">
-					 		AND LPAD(round(DIS, 3), 8, '0') || to_char(SIX_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(SIX_NUM, 6, '0')
-					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3), 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
+					 		AND LPAD(round(DIS, 3)*1000, 8, '0') || to_char(SIX_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(SIX_NUM, 6, '0')
+					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3)*1000, 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
 					 	</if>
 					 </where>
     			)

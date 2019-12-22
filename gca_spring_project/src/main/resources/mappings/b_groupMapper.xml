@@ -57,30 +57,34 @@
 				AGE_RANGE,
 				get_code_name(GENDER_CD) GENDER_CD,
 				BG_TEAM_CNT,
-				DIS
+				DIS,
+				M_ID
 		FROM
 			 	(
 			 	SELECT ROWNUM R, A.* 
 				FROM 	(
-						SELECT B.*, CALC_DISTANCE(
+						SELECT B.*, M_ID, CALC_DISTANCE(
              							SUBSTR(BG_XY, 0, INSTR(BG_XY, ',', 1, 1)-1),
              							SUBSTR(BG_XY, INSTR(BG_XY, ',', 1, 1)+2, LENGTH(BG_XY)),
              							SUBSTR(#{m_xy}, 0, INSTR(#{m_xy}, ',', 1, 1)-1),
              							SUBSTR(#{m_xy}, INSTR(#{m_xy}, ',', 1, 1)+2, LENGTH(#{m_xy}))
              						 ) DIS
              			FROM BGROUP B
+             				LEFT OUTER JOIN 
+             				(SELECT M_ID, BG_NUM FROM ACTIVE_HIST WHERE M_ID = #{m_id} ) AC 
+             				ON B.BG_NUM = AC.BG_NUM
              			WHERE BG_END_DTTM <![CDATA[ > ]]> SYSDATE
 			            <if test="keyval != null and keyval !=''">
 							<if test="key == 'sports'">
 								and SPORTS2_CD like '%'||#{keyval}||'%'
 							</if>
 					 	</if>
-             			ORDER BY DIS, BG_END_DTTM, BG_NUM
+             			ORDER BY DIS, BG_END_DTTM, B.BG_NUM
              			) A
 					<where>
 					 	<if test="end_dis != null">
-					 		AND LPAD(round(DIS, 3), 8, '0') || to_char(BG_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(BG_NUM, 6, '0')
-					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3), 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
+					 		AND LPAD(round(DIS, 3)*1000, 8, '0') || to_char(BG_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(BG_NUM, 6, '0')
+					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3)*1000, 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
 					 	</if>
 					 </where>
     			)
@@ -132,30 +136,34 @@
 				AGE_RANGE,
 				get_code_name(GENDER_CD) GENDER_CD,
 				BG_TEAM_CNT,
-				DIS
+				DIS,
+				M_ID
 		FROM
 			 	(
 			 	SELECT ROWNUM R, A.* 
 				FROM 	(
-						SELECT B.*, CALC_DISTANCE(
+						SELECT B.*, M_ID, CALC_DISTANCE(
              							SUBSTR(BG_XY, 0, INSTR(BG_XY, ',', 1, 1)-1),
              							SUBSTR(BG_XY, INSTR(BG_XY, ',', 1, 1)+2, LENGTH(BG_XY)),
              							SUBSTR(#{m_xy}, 0, INSTR(#{m_xy}, ',', 1, 1)-1),
              							SUBSTR(#{m_xy}, INSTR(#{m_xy}, ',', 1, 1)+2, LENGTH(#{m_xy}))
              						 ) DIS
              			FROM BGROUP B
+             				LEFT OUTER JOIN 
+             				(SELECT M_ID, BG_NUM FROM ACTIVE_HIST WHERE M_ID = #{m_id} ) AC 
+             				ON B.BG_NUM = AC.BG_NUM
 						WHERE BG_END_DTTM <![CDATA[ <= ]]> SYSDATE
 			            <if test="keyval != null and keyval !=''">
 							<if test="key == 'sports'">
 								and SPORTS2_CD like '%'||#{keyval}||'%'
 							</if>
 					 	</if>
-             			ORDER BY DIS, BG_END_DTTM, BG_NUM
+             			ORDER BY DIS, BG_END_DTTM, B.BG_NUM
              			) A
 					<where>
 					 	<if test="end_dis != null and end_dis != 0">
-					 		AND LPAD(round(DIS, 3), 8, '0') || to_char(BG_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(BG_NUM, 6, '0')
-					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3), 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
+					 		AND LPAD(round(DIS, 3)*1000, 8, '0') || to_char(BG_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(BG_NUM, 6, '0')
+					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3)*1000, 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
 					 	</if>
 					 </where>
     			)

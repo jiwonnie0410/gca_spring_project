@@ -31,7 +31,7 @@ function skill_dropdown(){
 function end_cnt_dropdown(){
 	var html = $(this).html();
 	$('#six_finish').html(html +'<span class="caret pl-2"></span>');
-	$('#six_finish_val').val($('#six_finish').text().substr(0,1));
+	$('#six_finish_val').val($(this).data("cdid"));
 }
 
 //이중 슬라이더
@@ -120,7 +120,7 @@ function name_valid(){
 			if (rbyte <= maxByte) rlen = i + 1; //return할 문자열 갯수
 		}
 		if(rbyte > maxByte) {
-			$('#six_name_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>한글과 특수문자는 33자, 영문과 숫자는 100자를 초과하여 입력할 수 없습니다.');
+			$('#six_name_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>한글과 특수문자는 띄어쓰기 포함 33자, 영문과 숫자는 띄어쓰기 포함 100자를 초과하여 입력할 수 없습니다.');
 			return false;
 		} else if(rbyte <= 6){
 			$('#six_name_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>한글 3자, 영문 9자 이상 입력해 주세요.');
@@ -153,6 +153,7 @@ function sport_valid(){
 
 //마감날짜, 마감시간 유효성 검사
 function day_valid(){
+	var now = new Date();
 	if( $('#six_end_day').val() == "" || $('#six_end_day').val() == null ){
 		if( $('#six_end_time').val() == "" || $('#six_end_time').val() == null ){
 			$('#six_end_valid').show();
@@ -180,6 +181,11 @@ function day_valid(){
 		
 		var time = $('#six_end_time').val() + ":00";
 		var fulldate = year + "-" + month + "-" + day + " " + time;
+		if( now >= new Date(fulldate)){
+			$('#six_end_valid').show();
+			$('#six_end_valid').html('<i class="fas fa-exclamation-circle pr-1"></i>현재 날짜/시각 이후로 설정해 주세요.');
+			return false;
+		}
 		$('#six_end').val(fulldate);
 	}
 }

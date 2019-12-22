@@ -30,7 +30,7 @@
 
 	<!-- private : Description Action -->
 	<script type="text/javascript" src="../resources/js/mihy/b_search.js"></script>
-	<link rel="stylesheet" href="../resources/css/mihy/s_search.css">
+	<link rel="stylesheet" href="../resources/css/mihy/search.css">
 
 </head>
 
@@ -77,10 +77,14 @@
 		
 		<td class="td2">
 			<p class="content p5 end">
-<%-- 				<span class="badge badge-secondary mr-1 ml-2">
-					<font color="#D8D8D8" class="bg_now_cnt">${bg.bg_now_cnt }</font>
-					&nbsp;/&nbsp;<font color="#D8D8D8" class="bg_end_cnt">${bg.bg_end_cnt }명</font>
-				</span> --%>
+				<c:choose>
+					<c:when test="${bg.bg_now_cnt == bg.bg_end_cnt }">
+						<span class="badge badge-secondary ml-2"><font color="#D8D8D8">대기</font></span>
+					</c:when>
+					<c:otherwise>
+						<span class="badge badge-secondary ml-2"><font color="#D8D8D8">모집 중</font></span>
+					</c:otherwise>
+				</c:choose>
 				<span class="badge badge-secondary mr-1 ml-2">
 					<font color="#D8D8D8" class="bg_now_cnt">${bg.bg_team_cnt } vs ${bg.bg_team_cnt }</font>
 				</span>
@@ -96,6 +100,9 @@
 			<p class="content p6 end"><fmt:formatDate value="${bg.bg_end_dttm }" pattern="yy.MM.dd(E)" /></p>
 			<p class="content p7 end"><fmt:formatDate value="${bg.bg_end_dttm }" pattern="ahh:mm" /></p>
 			<p class="content p8"></p>
+			<c:if test="${bg.m_id != null}">
+				<img class="proimg" src="${pageContext.request.contextPath }/resources/images/jey/C01.png">
+			</c:if>
 		</td>
 	</tr>
 	</c:forEach>

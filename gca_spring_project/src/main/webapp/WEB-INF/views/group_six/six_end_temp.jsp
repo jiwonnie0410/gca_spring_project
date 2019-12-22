@@ -24,10 +24,17 @@
 		
 		<td class="td2">
 			<p class="content p5 end">
-				<span class="badge badge-secondary mr-1 ml-2">
-					<font color="#D8D8D8" class="six_now_cnt">${six.six_now_cnt }</font>
-					&nbsp;/&nbsp;<font color="#D8D8D8" class="six_end_cnt">${six.six_end_cnt }명</font>
-				</span>
+				<c:choose>
+					<c:when test="${six.six_now_cnt == six.six_end_cnt }">
+						<span class="badge badge-secondary mr-1 ml-2"><font color="#D8D8D8" class="six_now_cnt">대기</font></span></c:when>
+					<c:otherwise>
+						<span class="badge badge-secondary mr-1 ml-2">
+							<font color="#D8D8D8" class="six_now_cnt">${six.six_now_cnt -1 }</font>
+							&nbsp;/&nbsp;
+							<font color="#D8D8D8" class="six_end_cnt">${six.six_end_cnt -1 }명 모집 중</font>
+						</span>
+					</c:otherwise>
+				</c:choose>
 				<span class="badge badge-secondary mr-2" style="color:#D8D8D8;">${six.gender_cd }</span>${six.age_range }
 			</p>
 			<p class="content p4 end">${six.six_name }</p>
@@ -40,6 +47,9 @@
 			<p class="content p6 end"><fmt:formatDate value="${six.six_end_dttm }" pattern="yy.MM.dd(E)" /></p>
 			<p class="content p7 end"><fmt:formatDate value="${six.six_end_dttm }" pattern="ahh:mm" /></p>
 			<p class="content p8"></p>
+			<c:if test="${six.m_id != null}">
+				<img class="proimg" src="${pageContext.request.contextPath }/resources/images/jey/C01.png">
+			</c:if>
 		</td>
 	</tr>
 	</c:forEach>

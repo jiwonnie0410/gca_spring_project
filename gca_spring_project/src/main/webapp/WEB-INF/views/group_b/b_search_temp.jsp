@@ -24,10 +24,14 @@
 		
 		<td class="td2">
 			<p class="content p5">
-<%-- 				<span class="badge badge-warning mr-1 ml-2">
-					<font color="red" class="bg_now_cnt">${bg.bg_now_cnt }</font>
-					&nbsp;/&nbsp;<font color="gray" class="bg_end_cnt">${bg.bg_end_cnt }명</font>
-				</span> --%>
+				<c:choose>
+					<c:when test="${bg.bg_now_cnt == bg.bg_end_cnt }">
+						<span class="badge badge-warning ml-2"><font color="gray">대기</font></span>
+					</c:when>
+					<c:otherwise>
+						<span class="badge badge-warning ml-2"><font color="red">모집 중</font></span>
+					</c:otherwise>
+				</c:choose>
 				<span class="badge badge-danger mr-1 ml-2">
 					<font color="white" class="bg_now_cnt">${bg.bg_team_cnt } vs ${bg.bg_team_cnt }</font>
 				</span>
@@ -43,6 +47,9 @@
 			<p class="content p6"><fmt:formatDate value="${bg.bg_end_dttm }" pattern="yy.MM.dd(E)" /></p>
 			<p class="content p7"><fmt:formatDate value="${bg.bg_end_dttm }" pattern="ahh:mm" /></p>
 			<p class="content p8"></p>
+			<c:if test="${bg.m_id != null}">
+				<img class="proimg" src="${pageContext.request.contextPath }/resources/images/jey/C01.png">
+			</c:if>
 		</td>
 	</tr>
 	</c:forEach>

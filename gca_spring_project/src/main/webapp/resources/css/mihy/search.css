@@ -1,5 +1,11 @@
 nav { background-color: white;}
 
+.nav_title {
+	background-color: #FFF;
+	color: #FE9191;
+	text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+}
+
 /* 운동종목 메뉴 */
 .swiper-container {
 	width: 100%;
@@ -37,7 +43,7 @@ nav { background-color: white;}
 
 /* 방 생성 버튼 */
 .create_room {
-	border: 2px solid #FE7E7E;
+	border: 3px solid #FE7E7E;
 	background-color: #FE9191;
 	margin: 10px 0 5px 0;
 }
@@ -45,8 +51,8 @@ nav { background-color: white;}
 /* 테이블 각 요소 */
 .tr { height: 90px; }
 .td1 { width: 45px; float: top; position: absolute; }
-.td2 { width: 200px; float: top; position: absolute; left: 45px; }
-.td3 { width: 90px;	white-space: nowrap; float: top; position: absolute; right:20px;}
+.td2 { width: 300px; float: top; position: absolute; left: 50px; }
+.td3 { width: 90px;	white-space: nowrap; float: top; position: absolute; right:5px;}
 /* .content { line-height: 0.3; } */
 .p1 { font-size: 23pt; position: absolute; margin: 0 0 0 5px;}
 .p9	{ position: relative; margin: -10px 0 -10px -5px; }
@@ -61,6 +67,7 @@ nav { background-color: white;}
 .p7.end { color: gray; text-decoration:line-through; }
 .p8 { font-size: 10pt; position: absolute; margin: 47px 0 0 0;}
 .badge {  font-size: 9pt;  }
+.proimg { width: 70px; position: absolute; right: 90px;}
 
 /* #S04 img:last-child {	display:none; }
 #S04:hover img:first-child { display:none }

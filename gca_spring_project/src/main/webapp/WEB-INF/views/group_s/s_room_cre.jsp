@@ -28,8 +28,7 @@
 	<!-- private : Description Action -->
 	<script type="text/javascript" src="../resources/js/mihy/kakao_map.js"></script>
 	<script type="text/javascript" src="../resources/js/mihy/s_room_cre.js"></script>
-
-	
+	<link rel="stylesheet" href="../resources/css/mihy/room_cre.css">
 
 	
 </head>
@@ -124,7 +123,7 @@
 	<span id="sg_gender_valid" class="sg_valid pl-3"></span>
 
 
-	<span class="ml-2" id="age_title"><i class="fas fa-pencil-alt mr-2"></i>연령대를 선택해 주세요.</span><br>
+	<span class="ml-2" id="pencil_title"><i class="fas fa-pencil-alt mr-2"></i>연령대를 선택해 주세요.</span><br>
 	<p class="mr-2 ml-2 mt-1" id="age_text">
 		<span class="age-val mr-1" id="age_lower"></span>
 		<span class="age-val" id="age_upper"></span>
@@ -158,6 +157,6 @@
 	<input type="button" class="btn btn-default btn2 mt-2" id="btn_cre" value="방 생성">
 	
 </form>
-	<link rel="stylesheet" href="../resources/css/mihy/s_room_cre.css">
+
 </body>
 </html>

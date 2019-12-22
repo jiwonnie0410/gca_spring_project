@@ -30,7 +30,7 @@
 	<!-- private : Description Action -->
 	<script type="text/javascript" src="../resources/js/mihy/kakao_map.js"></script>
 	<script type="text/javascript" src="../resources/js/mihy/six_room_cre.js"></script>
-	<link rel="stylesheet" href="../resources/css/mihy/six_room_cre.css">
+	<link rel="stylesheet" href="../resources/css/mihy/room_cre.css">
 	
 
 	
@@ -107,9 +107,9 @@
 				<span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu">
-				<li>2명</li>
-				<li>3명</li>
-				<li>4명</li>
+				<li data-cdid="2">1명 모집</li>
+				<li data-cdid="3">2명 모집</li>
+				<li data-cdid="4">3명 모집</li>
 			</ul>
 		</div>
 		<span id="six_finish_valid" class="six_valid pl-1"></span>
@@ -118,7 +118,14 @@
 	<div class="row mr-2 ml-2 mt-2 mb-2 pt-2 six_gender">
 		<c:forEach items="${gender_list }" var="list">
 			<label class="radio_label ml-3">&nbsp;&nbsp;&nbsp;${list.cd_name }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input class="six_gender_val" type="radio" name="gender_cd" id="${list.cd_id }" value="${list.cd_id }">
+				<c:choose>
+					<c:when test="${list.cd_id == 'G03' }">
+						<input class="bg_gender_val" type="radio" name="gender_cd" id="${list.cd_id }" value="${list.cd_id }" checked="checked">
+					</c:when>
+					<c:otherwise>
+						<input class="bg_gender_val" type="radio" name="gender_cd" id="${list.cd_id }" value="${list.cd_id }">
+					</c:otherwise>
+				</c:choose>
 				<span class="checkmark"></span>
 			</label>
 		</c:forEach>
@@ -126,7 +133,7 @@
 	<span id="six_gender_valid" class="six_valid pl-3"></span>
 
 
-	<span class="ml-2" id="age_title"><i class="fas fa-pencil-alt mr-2"></i>연령대를 선택해 주세요.</span><br>
+	<span class="ml-2" id="pencil_title"><i class="fas fa-pencil-alt mr-2"></i>연령대를 선택해 주세요.</span><br>
 	<p class="mr-2 ml-2 mt-1" id="age_text">
 		<span class="age-val mr-1" id="age_lower"></span>
 		<span class="age-val" id="age_upper"></span>
