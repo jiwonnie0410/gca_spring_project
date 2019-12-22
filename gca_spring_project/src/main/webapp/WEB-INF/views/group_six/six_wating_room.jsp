@@ -436,7 +436,7 @@
 							<td id="profile_gender"></td>
 							<td id="profile_age"></td>
 							<td id="profile_level">
-								<img style="padding-bottom:5px;" width="30px" height="30px" src="">
+								<img style="padding-bottom:5px;" width="40px" height="40px" src="">
 							</td>
 						</tr>
 					</table>
