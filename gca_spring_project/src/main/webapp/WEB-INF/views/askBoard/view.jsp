@@ -263,28 +263,160 @@ Latest compiled JavaScript
 }
 
 </style>
-<style>
-/* textarea {
-	width: 100%;
-} */
 
-/* .reply_reply {
-	border: 2px solid #FF50CF;
-} */
-
-/* .reply_modify {
-	border: 2px solid #FFBB00;
-} */
-</style>
 </head>
 <body>
-	<h2>게시글 보기</h2>
 	<!-- 게시물 상세보기 영역 -->
 	<input type="hidden" value="${dto.ad_num}">
-	<form name="form1" id="form1" method="post">
-		<div class="panel-group">
-			<div class="panel panel-success" style="margin-top: 10px;">
-				<div class="panel-body">
+        <div class="col-20">
+          <div class="card">
+            <div class="card-header" style="background-color: #FEBABA;">
+          		게시물 읽기
+          	</div>
+          	 <div class="card-body">
+				<form name="form1" id="form1" method="post">
+				<!-- 날짜 형식 => yyyy 4자리연도, MM 월, dd 일, a 오전/오후, HH 24시간제, hh 12시간제, mm 분, ss 초 -->
+					<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 -->
+					<div class="form-group">
+					<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;"> 작성 일자</label>&nbsp;&nbsp;
+					 	<fmt:formatDate value="${dto.ad_date}" pattern="yyyy-MM-dd" />&nbsp;&nbsp;&nbsp;&nbsp;
+					<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">조회수</label>&nbsp;&nbsp; 
+						${dto.ad_count}
+					</div>
+					<div class="form-group">
+						<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;"> 작성자</label>&nbsp;&nbsp; &nbsp; 
+							${dto.m_id} 
+						</div>
+							
+					<div class="form-group">
+						<div>
+							<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;"> 도시</label>&nbsp;&nbsp; &nbsp; 
+						 	 ${dto.ad_city}
+					 	</div>
+					</div>
+					
+					<c:choose>
+					    <c:when test="${m_id == dto.m_id}">
+					       <div class="form-group">	
+								<div>
+									<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;"> 제목</label>&nbsp;&nbsp; 
+									<input name="ad_title" id="ad_title"value="${dto.ad_title}" placeholder="제목을 입력해주세요" ></div>
+							</div>
+							
+							<div class="form-group">	
+								  <div>
+								  	<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;"> 내용</label>&nbsp;&nbsp;  
+								  	<textarea name="ad_content" cols="40" id="ad_content"  placeholder="내용을 입력해주세요">${dto.ad_content}</textarea></div>
+							</div>
+							<div class="form-group" align="center">	
+								<!-- 게시물번호를 hidden으로 처리 -->
+								<input type="hidden" name="ad_num" value="${dto.ad_num}">
+								<!-- 본인이 쓴 게시물만 수정, 삭제가 가능하도록 처리 -->
+									<button type="button" class="btn" id="btnUpdete"style="background-color: #FE9191; color: white;">수정</button>
+									<button type="button" class="btn " id="btnDelete"style="background-color: #FE9191; color: white;">삭제</button>
+								<!-- 상세보기 화면에서 게시글 목록화면으로 이동 -->
+								<button type="button" class="btn " id="btnList"style="background-color: #FE9191; color: white;">목록</button>
+							</div>	
+					    </c:when>
+					<c:otherwise>
+						 <div class="form-group">	
+								<div>
+									<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;"> 제목</label>&nbsp;&nbsp; 
+									${dto.ad_title}
+								</div>
+						</div>
+							
+						<div class="form-group">	
+							<div>
+								<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;"> 내용</label>&nbsp;&nbsp; 
+								${dto.ad_content}
+							</div>
+						</div>
+						
+						<div class="form-group" align="center">	
+							<!-- 게시물번호를 hidden으로 처리 -->
+							<input type="hidden" name="ad_num" value="${dto.ad_num}">
+							<button type="button" class="btn " id="btnList" style="background-color: #FE9191; color: white;">목록</button>
+							
+						</div>	
+					</c:otherwise>
+				</c:choose>	
+			</div>
+		</div>
+		<!-- 게시물 상세보기 영역 -->	
+		<table>
+			<tr>
+				<td><textarea rows="3" cols="43" id="adr_content" placeholder="댓글을 작성해주세요"></textarea></td>
+				<td><button type="button" class="btn " id="btnReply" style="background-color: #FE9191;color: white;">댓글<br> 작성</button>
+					<br><!-- 비밀댓글 체크박스 --><input type="checkbox" id="adr_hidden" style="border-color:#FE9191; ">비밀
+				</td>
+			</tr>
+		</table>
+		</div>
+<!-- 댓글 목록 영역 -->
+	<div id="listReply"></div>
+	<!-- 댓글 목록 영역 -->	
+
+ 
+          	<%--   <table style="width: 100px;" border="1">
+				<tr>
+					<td style="width: 30%">작성일자</td>
+					<td><fmt:formatDate value="${dto.ad_date}" pattern="yyyy-MM-dd" /></td>    	 
+          	 	</tr>
+          	 	 <tr>
+          	 		<td>조회수</td>
+          	 		<td>${dto.ad_count}</td>
+        	 	</tr>
+        	 	<tr>
+        	 		<td >작성자 아이디</td>
+        	 		<td>${dto.m_id}</td>
+        	 	</tr>
+        	 	<tr>
+        	 		<td >제목</td>
+        	 		<td><input name="ad_title" id="ad_title"value="${dto.ad_title}" placeholder="제목을 입력해주세요"></td>
+        	 	</tr>
+        	 <tr>
+        	 		<td >내용</td>
+        	 		<td><textarea name="ad_content" cols="35" id="ad_content"  placeholder="내용을 입력해주세요">${dto.ad_content}</textarea></td>
+        	 	</tr>
+        	 	<tr>
+        	 			<td></td>
+						<!-- 게시물번호를 hidden으로 처리 -->
+						<input type="hidden" name="ad_num" value="${dto.ad_num}">
+						<td>
+							<!-- 본인이 쓴 게시물만 수정, 삭제가 가능하도록 처리 -->
+							<c:if test="${m_id == dto.m_id}">
+								<button type="button" class="btn" id="btnUpdete"style="background-color: #FE9191;">수정</button>
+								<!-- 상세보기 화면에서 게시글 목록화면으로 이동 -->
+								<button type="button" class="btn " id="btnDelete"style="background-color: #FE9191;">삭제</button>
+							</c:if>
+								<button type="button" class="btn " id="btnList"style="background-color: #FE9191;">목록</button>
+						</td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td><textarea rows="3" cols="35" id="adr_content" placeholder="댓글을 작성해주세요"></textarea></td>
+					<td><button type="button" class="btn " id="btnReply" style="background-color: #FE9191;">댓글 작성</button>
+						<br><!-- 비밀댓글 체크박스 --><input type="checkbox" id="adr_hidden">비밀
+					</td>
+				
+				</tr>
+				<!-- <tr>
+					<td>
+						
+						비밀댓글 체크박스<input type="checkbox" id="adr_hidden">비밀 댓글	
+					</td> -->	
+          	 </table> 
+          </form>
+        </div>
+      </div>
+    </div>        	 
+    </div>    	 	
+		
+		<!-- <button type="button" class="btn " id="btnReply" style="background-color: #FE9191;">댓글 작성</button> -->
+			</c:if>
+          	 
 					<!-- 날짜 형식 => yyyy 4자리연도, MM 월, dd 일, a 오전/오후, HH 24시간제, hh 12시간제, mm 분, ss 초 -->
 					<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 -->
 					<div class="form-group">
@@ -312,14 +444,11 @@ Latest compiled JavaScript
 						<input type="hidden" name="ad_num" value="${dto.ad_num}">
 						<!-- 본인이 쓴 게시물만 수정, 삭제가 가능하도록 처리 -->
 						<c:if test="${m_id == dto.m_id}">
-							<button type="button" class="btn" id="btnUpdete"
-								style="background-color: #FE9191;">수정</button>
-							<button type="button" class="btn " id="btnDelete"
-								style="background-color: #FE9191;">삭제</button>
+							<button type="button" class="btn" id="btnUpdete"style="background-color: #FE9191;">수정</button>
+							<button type="button" class="btn " id="btnDelete"style="background-color: #FE9191;">삭제</button>
 						</c:if>
 						<!-- 상세보기 화면에서 게시글 목록화면으로 이동 -->
-						<button type="button" class="btn " id="btnList"
-							style="background-color: #FE9191;">목록</button>
+						<button type="button" class="btn " id="btnList"style="background-color: #FE9191;">목록</button>
 						</div>
 					</div>	
 				</div>
@@ -330,23 +459,22 @@ Latest compiled JavaScript
 
 
 	<!-- 댓글 작성 영역 -->
-<!-- 	<div style="width: 650px; text-align: center;"> -->
 	<div>
 		<br>
 		<!-- 로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
-		<%-- <c:if test="${sessionScope.m_id != null}"> --%>
+		<c:if test="${sessionScope.m_id != null}">
 		<textarea rows="3" cols="40" id="adr_content" placeholder="댓글을 작성해주세요"></textarea>
 		<button type="button" class="btn " id="btnReply" style="background-color: #FE9191;">댓글 작성</button>
 		<br>
 		<!-- 비밀댓글 체크박스 -->
 		<input type="checkbox" id="adr_hidden">비밀 댓글
 		<!-- <button type="button" class="btn " id="btnReply" style="background-color: #FE9191;">댓글 작성</button> -->
-		<%-- 	</c:if> --%>
+			</c:if>
 	</div>
 	
 	<!-- 댓글 목록 영역 -->
 	<div id="listReply"></div>
-	<!-- 댓글 목록 영역 -->
+	<!-- 댓글 목록 영역 --> --%>
 </body>
 
 </html>

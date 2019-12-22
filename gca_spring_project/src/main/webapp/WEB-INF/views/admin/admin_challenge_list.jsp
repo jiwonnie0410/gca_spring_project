@@ -24,6 +24,40 @@
 					background-color: #EAEAEA;
 					cursor: pointer
 				}
+				#challenge-title {
+						background: #8BBDFF;
+					    border: 2px solid #8BBDFF;
+					    border-radius: 7px;
+					    font-size: 15px;
+					    font-weight: bolder;
+					    margin: 0.3em auto;
+					    padding: 2px 4px;
+					    position: relative;
+					    height: 30px;
+					    width: 300px;
+				}
+				#challenge-detail {
+						background: #EAEAEA;
+					    border: 2px solid #EAEAEA;
+					    border-radius: 7px;
+					    font-size: 12px;
+					    font-weight: bolder;
+					    margin: auto;
+					    padding: 2px 4px;
+					    position: relative;
+					    height: 30px;
+					    width: 300px;
+				}
+				#challenge-people {
+					    border: 2px solid #EAEAEA;
+					    border-radius: 7px;
+					    font-size: 12px;
+					    margin: auto;
+					    padding: 2px 4px;
+					    position: relative;
+					    height: 30px;
+					    width: 300px;
+				}
 		</style>
 		
 		<!-- 챌린지 자바스크립트 -->
@@ -169,7 +203,7 @@
 				<div class="modal-body" align="center">
 					<table id="chGoing">
 							<!-- 챌린지 상세 내용이 보여질 부분 -->
-					</table><br /><br />
+					</table><p />
 					
 					<table id="chPeople">
 							<!-- 챌린지 참여 중인 사람들이 보여질 부분 -->

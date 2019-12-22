@@ -21,17 +21,23 @@
 					</div>
 				</div>
 				<div class="form-group">
-					제목
-					<div id="qb_title">${dto.qb_title}</div>
+					<div id="qb_title">
+						<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">제목</label>&nbsp;&nbsp;
+						${dto.qb_title}
+					</div>
 				</div>
 				<div class="form-group">
-				내용
-					<div id = "qb_content">${dto.qb_content}</div>
-				</div>
+					<div id = "qb_content">
+						<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">내용</label>&nbsp;&nbsp;
+						${dto.qb_content}
+					</div>
+				</div>		
 				<div class="form-group">
-				답변
-				<span id="qb_an_id" style="display: none;">${dto.qb_an_id}</span>
-					<div id="qb_an">${dto.qb_an}</div>					
+					<div  id="qb_an">
+						<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">답변</label>&nbsp;&nbsp;
+						<span id="qb_an_id" style="display: none;">${dto.qb_an_id}</span>
+						${dto.qb_an}					
+					</div>
 				</div>
 				<div style="width: 650px; text-align: center;">
 					<!-- 게시물번호를 hidden으로 처리 -->

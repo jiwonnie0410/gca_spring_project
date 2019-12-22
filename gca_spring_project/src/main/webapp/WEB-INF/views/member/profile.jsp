@@ -103,7 +103,8 @@
 						</tr>
 						<tr>
 							<!-- 랭킹보기 링크 -->	
-							<td><a href="${pageContext.request.contextPath }/history/rank"><font size="2"><b> 나의 랭킹 보기> </b></font></a></td>
+							<td><img style="padding-bottom:5px;" width="30px" height="30px"src="${pageContext.request.contextPath }/resources/images/level/${dto.m_level_cd}.png">
+							<a href="${pageContext.request.contextPath }/history/rank"><font size="2"><b> 나의 랭킹 보기> </b></font></a></td>
 						</tr>
 						<tr>
 							<!-- 환경설정 버튼 -->
