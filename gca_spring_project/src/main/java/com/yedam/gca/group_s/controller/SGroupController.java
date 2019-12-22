@@ -190,7 +190,7 @@ public class SGroupController {
 		vo.setSg_num(sg_num);
 		model.addAttribute("sgroup", sgroupService.getRoomInfo(vo));
 		
-		//해당 방의 채팅내역 채팅방으로 넘김
+		//은영 - 해당 방의 채팅내역 채팅방으로 넘김
 		UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		avo.setM_id(user.getUsername());
