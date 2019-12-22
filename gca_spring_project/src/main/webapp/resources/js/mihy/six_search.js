@@ -17,7 +17,7 @@ $(document).ready(function(){
 	});
 	
 	p9();
-	p8();
+//	p8();
 	setInterval(p8,1000);
 	
 	//방 참여

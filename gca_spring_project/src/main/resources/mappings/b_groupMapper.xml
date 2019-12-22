@@ -109,7 +109,7 @@
 	
  <!-- 매치 방 생성 시 알람 보내기 -->
  	<select id="insertBgAlert" statementType="CALLABLE" parameterType="bgroup">
-		{ CALL sg_room_create(
+		{ CALL bg_dis_mid(
 			#{bg_num}
 			,#{alert_gnum, mode=OUT, jdbcType=INTEGER}
 		)}

@@ -22,21 +22,18 @@
 	var mstatus = "<sec:authentication property='principal.m_id'/>";
 
 	$(function(){
-		msg = {
-				cmd : "alertCnt",
-				id : mstatus
+		
+		if(mstatus != null && mstatus != ''){
+			webSocket = new WebSocket('ws://localhost/gca/broadcast.do'); 
+			//webSocket = new WebSocket('ws://39.116.34.40/gca/broadcast.do'); 
+			
+			webSocket.onerror = function(event) { onError(event) };
+			webSocket.onopen = function(event) { onOpen(event) };
+			webSocket.onmessage = function(event) { onMessage(event) };
 		}
-		webSocket.send(  JSON.stringify( msg )   );
+		
 	});
 	
-	if(mstatus != null && mstatus != ''){
-		webSocket = new WebSocket('ws://localhost/gca/broadcast.do'); 
-		//webSocket = new WebSocket('ws://39.116.34.40/gca/broadcast.do'); 
-		
-		webSocket.onerror = function(event) { onError(event) };
-		webSocket.onopen = function(event) { onOpen(event) };
-		webSocket.onmessage = function(event) { onMessage(event) };
-	}
 	
 	function onError(event) { 
 		console.log(event); 
@@ -44,16 +41,24 @@
 	}
 	
 	function onOpen(event) {
-		
+		var msg = {
+				cmd : "alertCnt",
+				id : mstatus
+		}
+		webSocket.send(  JSON.stringify( msg )   );
 	}
 	
 	function onMessage(event){
 		var result = JSON.parse(event.data);
-		console.log(result + "ㅁㄴㅇㄻㄴㅇㄹ");
-		if(result.cmd == "alertCnt"){
+		if(result.cmd == "alertCnt" || result.cmd == "groupAlert"){
 			$('#alertcnt').text(result.msg);
-		} else {
+			console.log("알림 웹소켓<" + result.msg + ">");
+		}
+ 		if(result.cmd != "groupAlert" && result.cmd != "alertCnt" && 
+				(result.cmd == "join" || result.cmd == "msg" || result.cmd == "cancelJoin" || result.cmd == "kickOut") ) {
 			onMessageChat(event);
+			console.log("채팅 웹소켓");
+			
 		}
 	}
 

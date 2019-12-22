@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.yedam.gca.admin.vo.TroubleVO;
 import com.yedam.gca.group_b.vo.BGroupVO;
-import com.yedam.gca.group_s.vo.SGroupVO;
 import com.yedam.gca.history.vo.ActiveHistVO;
 import com.yedam.gca.history.vo.ScoreHistVO;
 import com.yedam.gca.member.vo.MembersVO;
@@ -70,7 +69,8 @@ public class BGroupDAO {
 	
 	//매치 방 생성 시 알람 보내기
 	public int insertBgAlert(BGroupVO vo) {
-		return mybatis.selectOne("AlertDAO.insertBgAlert", vo);
+		mybatis.selectOne("BGroupDAO.insertBgAlert", vo);
+		return vo.getAlert_gnum();
 	}
 	
 	//마감 방 조회

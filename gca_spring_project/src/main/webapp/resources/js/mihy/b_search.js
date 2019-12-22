@@ -17,7 +17,7 @@ $(document).ready(function(){
 	});
 	
 	p9();
-	p8();
+//	p8();
 	setInterval(p8,1000);
 	
 	//방 참여
@@ -83,11 +83,11 @@ function scroll(){
 		
 		var url;
 		if( $('.table').attr('class').substr(-7) != 'endroom'){
-			url = "getbgList/";
+			url = "getBgList/";
 		} else if( $('.table').attr('class').substr(-7) != 'endroom' ){
-			url = "getbgListEnd/";
+			url = "getBgListEnd/";
 		}
-		console.log(url);
+//		console.log(url);
 		
 		$.ajax({
 			url: url,
@@ -124,7 +124,7 @@ function p8(){
 	
 		var countDownDate = new Date(year, month, day, hour, min, 0, 0).getTime();
 		var distance = countDownDate - now;
-		console.log(distance)
+//		console.log(distance)
 		var d = Math.floor(distance / (1000 * 60 * 60 * 24));
 		var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
 		var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); 

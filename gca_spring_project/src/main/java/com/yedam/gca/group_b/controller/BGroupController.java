@@ -226,33 +226,9 @@ public class BGroupController {
 		
 		bgroupService.insertBg(vo); 
 		vo.setAlert_gnum(bgroupService.insertBgAlert(vo));
+		System.out.println("★★★★★★"+vo.getBg_num());
+		System.out.println("★★★★★★"+vo.getAlert_gnum());
 		return vo;
-	}
-	
-	//전체 동호회매치+마감 동호회매치 리스트 조회(미사용중)
-	@RequestMapping(value="/bgroup/getBgList/{whatroom}")
-	public String search(@PathVariable String whatroom, Model model, BGroupVO vo, CodeVO cvo) {
-		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
-		vo.setM_xy(memInfo.getM_xy());
-		
-		vo.setScroll_rec(3); //조회할 레코드 수(직접 입력)
-		model.addAttribute("bgroup", vo);
-		if(whatroom == "default") 	model.addAttribute("list", bgroupService.getBgList(vo));
-		else if(whatroom == "end") 	model.addAttribute("list", bgroupService.getBgEndList(vo));
-		
-		//sports2와 관련된 code정보 모두 보내기
-		cvo.setCd_group("SPORTS2_CD");
-		model.addAttribute("sports_list", codeService.getCodeList(cvo));
-		
-		String viewsrc = null;
-		if(whatroom == "default") {
-			if(vo.getEnd_dis() == null) viewsrc = "/user/group_b/b_search";
-			else viewsrc = "/notiles/group_b/b_search_temp";
-		} else if(whatroom == "end") {
-			if(vo.getEnd_dis() == null) viewsrc = "/user/group_b/b_end_room";
-			else viewsrc = "/notiles/group_b/b_end_temp";
-		}
-		return viewsrc;
 	}
 	
 }
