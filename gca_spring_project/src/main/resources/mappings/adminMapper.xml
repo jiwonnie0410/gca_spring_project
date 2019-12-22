@@ -174,7 +174,7 @@
 			<select id="challengeDetail" resultType="map" parameterType="int">
 					SELECT 	C.CL_NUM, 
 							C.CL_STATUS, 
-							C.CL_NAME, 
+							SUBSTR(CL_NAME, 4) "CL_NAME", 
 							C.CL_CONTENT, 
 							C.CL_CNT, 
 							TO_CHAR(C.CL_START_DTTM, 'yyyy/mm/dd') "CL_START_DTTM", 
