@@ -131,90 +131,91 @@ public class AdminController {
 	
 	
 	// 진영
-		 private static final Logger logger = LoggerFactory.getLogger(MembersController.class);
-//		 // **전체조회
-//			@RequestMapping("/admin/getUserList")
-//		   public String getUserList1(Model model, MembersVO vo) {
-//			model.addAttribute("userList", adminService.getUserList(vo));
-//			model.addAttribute("lsit",adminService.listAll(start, end, searchOption, keyword));
-//			return "/admin/userList";
-//		}
+			 private static final Logger logger = LoggerFactory.getLogger(MembersController.class);
+//			 // **전체조회
+//				@RequestMapping("/admin/getUserList")
+//			   public String getUserList1(Model model, MembersVO vo) {
+//				model.addAttribute("userList", adminService.getUserList(vo));
+//				model.addAttribute("lsit",adminService.listAll(start, end, searchOption, keyword));
+//				return "/admin/userList";
+//			}
 
 
-			//03 회원 상세정보 조회
-				  @RequestMapping(value="/admin/viewMember", method=RequestMethod.GET)
-		    public ModelAndView viewMember(@RequestParam String m_id)throws Exception{
-		    	// 모델(데이터)+뷰(화면)를 함께 전달하는 객체
-				ModelAndView mav = new ModelAndView();
-		        // 회원 정보를 model에 저장
-				mav.addObject("dto", adminService.viewMember(m_id));
-		       /// 뷰의 이름
-				mav.setViewName("/notiles/admin/admin_user_view");
-				logger.info("mav:", mav);
-		       // member_view.jsp로 포워드
-				return mav;
-		    }
-				  
-				  
-				  
-				// 단건조회
-				  @ResponseBody  
-				  @RequestMapping(value = "member/{m_id}", method = RequestMethod.GET) public
-				  MembersVO viewMember(@PathVariable String m_id, MembersVO vo) throws Exception {
-					  vo.setM_id(m_id);
-					  return adminService.viewMember(m_id); }
-				  
-		   
+				//03 회원 상세정보 조회
+					  @RequestMapping(value="/admin/viewMember", method=RequestMethod.GET)
+			    public ModelAndView viewMember(@RequestParam String m_id)throws Exception{
+			    	// 모델(데이터)+뷰(화면)를 함께 전달하는 객체
+					ModelAndView mav = new ModelAndView();
+			        // 회원 정보를 model에 저장
+					mav.addObject("dto", adminService.viewMember(m_id));
+			       /// 뷰의 이름
+					mav.setViewName("/notiles/admin/admin_user_view");
+					logger.info("mav:", mav);
+			       // member_view.jsp로 포워드
+					return mav;
+			    }
+					  
+					  
+					  
+					// 단건조회
+					  @ResponseBody  
+					  @RequestMapping(value = "member/{m_id}", method = RequestMethod.GET) public
+					  MembersVO viewMember(@PathVariable String m_id, MembersVO vo) throws Exception {
+						  vo.setM_id(m_id);
+						  return adminService.viewMember(m_id); }
+					  
+			   
 
-		    
+			    
 
-			// **전체조회
-			@ResponseBody
-			@RequestMapping(value = "/ajax/getUserList")
-			public List<MembersVO> getUserList(Model model, MembersVO vo) {
-				return adminService.getUserList(vo);
-			}
+				// **전체조회
+				@ResponseBody
+				@RequestMapping(value = "/ajax/getUserList")
+				public List<MembersVO> getUserList(Model model, MembersVO vo) {
+					return adminService.getUserList(vo);
+				}
 
 
-			
-
-			//**관리자 유저 삭제
-			@ResponseBody
-			@RequestMapping(value = "/ajax/members/{m_id}", method = RequestMethod.DELETE)
-			public String deleteUser(@PathVariable String m_id, MembersVO vo) {
-				vo.setM_id(m_id);
-				adminService.deleteUser(vo);
-				return m_id;
-			}
-			
-			
-			//trouble전체 목록
-			@RequestMapping("/admin/getUserList")//url에서 실행할때 이름 호출
-			public ModelAndView list(@RequestParam(defaultValue="ad_title") String searchOption,
-									@RequestParam(defaultValue="") String keyword,
-									@RequestParam(defaultValue="1") int curPage) throws Exception{
-				// 레코드의 갯수 계산
-						int count = adminService.countArticle(searchOption, keyword);
-				// 페이지 나누기 관련 처리
-				BoardPager boardPager = new BoardPager(count, curPage);
-				int start = boardPager.getPageBegin();
-				int end = boardPager.getPageEnd();		
-				List<TroubleVO> list = adminService.listAll(start, end, searchOption, keyword);		
 				
-				// ModelAndView - 모델과 뷰
-				ModelAndView mav = new ModelAndView();
-//				MembersVO vo = new MembersVO();
-//				mav.addObject("userList", adminService.getUserList(vo));
-				mav.addObject("list", list); // list
-				mav.addObject("count", count); // 레코드의 갯수
-				mav.addObject("searchOption", searchOption); // 검색옵션
-				mav.addObject("keyword", keyword); // 검색키워드
-				mav.addObject("boardPager", boardPager);
+
+				//**관리자 유저 삭제
+				@ResponseBody
+				@RequestMapping(value = "/ajax/members/{m_id}", method = RequestMethod.DELETE)
+				public String deleteUser(@PathVariable String m_id, MembersVO vo) {
+					vo.setM_id(m_id);
+					adminService.deleteUser(vo);
+					return m_id;
+				}
 				
-				mav.setViewName("/admin/userList"); // 뷰를 list.jsp로 설정
-				return mav; // list.jsp로 List가 전달된다.
-			}
-		
+				
+				//trouble전체 목록
+				@RequestMapping("/admin/getUserList")//url에서 실행할때 이름 호출
+				public ModelAndView list(@RequestParam(defaultValue="ad_title") String searchOption,
+										@RequestParam(defaultValue="") String keyword,
+										@RequestParam(defaultValue="1") int curPage) throws Exception{
+					// 레코드의 갯수 계산
+							int count = adminService.countArticle(searchOption, keyword);
+					// 페이지 나누기 관련 처리
+					BoardPager boardPager = new BoardPager(count, curPage);
+					int start = boardPager.getPageBegin();
+					int end = boardPager.getPageEnd();		
+				
+					List<TroubleVO> list = adminService.listAll(start, end, searchOption, keyword);		
+					
+					// 데이터를 맵에 저장
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("list", list); // list
+					map.put("count", count); // 레코드의 갯수
+					map.put("searchOption", searchOption); // 검색옵션
+					map.put("keyword", keyword); // 검색키워드
+					map.put("boardPager", boardPager);
+					// ModelAndView - 모델과 뷰
+					ModelAndView mav = new ModelAndView();
+					mav.addObject("map", map); // 맵에 저장된 데이터를 mav에 저장
+					mav.setViewName("/admin/userList"); // 뷰를 list.jsp로 설정
+					return mav; // list.jsp로 List가 전달된다.
+				}
+			
 
 
-	}
+		}

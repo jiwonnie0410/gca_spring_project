@@ -42,7 +42,7 @@
 	alert('${pwMessage}');
 }  
 
-
+//수정확인
 $(document).ready(function() {
 	$("#btnUpdate").click(function() {
 		// 확인 대화상자    
@@ -58,13 +58,7 @@ $(document).ready(function() {
 		};
 	}); */
 
-	/* $("#btnDelete").click(function() {
-		// 확인 대화상자 
-		if (confirm("삭제하시겠습니까?")) {
-			document.form1.action = "${pageContext.request.contextPath}/member/delete";
-			document.form1.submit();
-		}
-	}); */
+	
 	
 	//미현 주소 클릭 시 다음주소 및 xy좌표 입력
 	$("#mAddress1").on("click", mAddress_find);
@@ -93,23 +87,23 @@ $(document).ready(function() {
 								<td><img  style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/Characters/${dto.m_image_cd}.gif"></td>				
 							</tr> --%>
 							<tr>
-								<td>아이디</td>
+								<td><label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">아이디</label>&nbsp;&nbsp;</td>
 								<!-- id는 수정이 불가능하도록 readonly속성 추가 -->
 								<td><input name="m_id" value="${dto.m_id}"readonly="readonly" style="border: none" ></td>
 							</tr>
 							<tr>
-								<td>이름</td>
+								<td><label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">이름</label>&nbsp;&nbsp;</td>
 								<td><input name=m_name value="${dto.m_name}" style="border: none" readonly="readonly"></td>
 							</tr> 
 							 <tr>
-								<td>닉네임</td>
+								<td><label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">닉네임</label>&nbsp;&nbsp;</td>
 								<td><input name=m_nick value="${dto.m_nick}"></td>
 							</tr> 
 							
 							
 							<!-- 미현 : 주소 및 주소찾기 버튼 -->
 							<tr>
-								<th>주소</th>
+								<td><label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">주소</label>&nbsp;&nbsp;</td>
 								<td><input type="text" id="address" value="${dto.m_location}" name="m_location" style="border: none" />
 									<input type="hidden" id="xy" name="m_xy">
 								</td>
@@ -117,12 +111,12 @@ $(document).ready(function() {
 							<tr>
 								<th>  </th>
 								<td align="left">
-									<input type="button" id="mAddress1" class="button-title" style="height: 30px;" value="주소 찾기">
+									<input type="button" id="mAddress1" class="button-title" style="height: 30px; background-color: #FE9191; color: white;" value="주소 찾기">
 								</td>
 							</tr>
 							
 							<tr>
-								<td>이메일주소</td>
+								<td><label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">이메일 주소</label>&nbsp;&nbsp;</td>
 								<td> <input width="90" name="m_email" value="${dto.m_email}"> </td>
 							</tr>
 
@@ -139,18 +133,11 @@ $(document).ready(function() {
 						<div class="info-user2">
 							<div style="color: red;">${message}</div>
 							<!--이모티콘이로 대체  -->
-							<button type="submit" id="btnUpdate" name="btnUpdate" >확인</button>
-							<!-- <i class="fas fa-user-edit" id="btnUpdate"  aria-hidden="true" style="color:black; font-size:50px;" ></i> -->
-							<!-- <i class="fas fa-door-open" id="btnDelete" style="color:black; font-size:50px;"></i>  -->
-							<!--  <i class="fa fa-lock fa-2x"  aria-hidden="true" style="color:black; font-size:50px;"> </i>  -->
-							 
-							<!--  <a href="changePassword"> 비밀번호 변경 </a>
-							 <a href="option">알람 환경설정</a> -->
-							 
+							<button type="submit" id="btnUpdate" name="btnUpdate" style="background-color: #FE9191; color: white;">확인</button>
 						</div>
 					</form>
 							 <form action="../logout" method="post">
-							  <button>로그아웃</button>
+							  <button style="background-color: #FE9191; color: white;">로그아웃</button>
 							</form>
 				</div>
 			</div>

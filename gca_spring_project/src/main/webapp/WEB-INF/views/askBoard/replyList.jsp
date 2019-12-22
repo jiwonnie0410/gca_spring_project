@@ -33,7 +33,8 @@
 				${row.adr_content}
 				<!-- 본인 댓글만 수정버튼 생성되도록 처리 -->
 				 <c:if test="${m_id == row.m_id}">
-					<input type="button" id="btnModify" value="댓글수정"  style="background-color: #FE9191;"  onclick="showReplyModify('${row.adr_num}')">
+				 	<%-- <button type="button" id="btnModify" style="background-color: #FE9191; color: white;"  onclick="showReplyModify('${row.adr_num}')" >댓글 수정</button> --%>
+					<button type="button" id="btnModify" style="background-color: #FE9191; color: white;"  onclick="showReplyModify('${row.adr_num}')">댓글<br> 수정</button>
 				</c:if> 
 				<hr>
 			</td>
