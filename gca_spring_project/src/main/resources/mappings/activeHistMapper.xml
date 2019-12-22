@@ -8,10 +8,11 @@
 	-->        	
 	<select id="getActiveHistList" resultType="map">   
 		<![CDATA[
+
 		SELECT 		"ach_num",
  					"m_id", 
- 					"real_start"
-					"start",
+ 					"real_start",   
+ 					"start",
  					"sg_num",
 					"six_num",
 					"bg_num",

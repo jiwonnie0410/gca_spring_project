@@ -48,7 +48,6 @@
     position: fixed;
     top: 0;
     width: 100%;
-    height: 7%;
     z-index: 100;
   
 }
@@ -95,9 +94,7 @@ $(".nav-link").on("click", function() {
 					<br>
 					<c:forEach items="${notReadList }" var="notReadList">
 						<div class="alert alert-info" role="alert">
-							<span class="date">${notReadList.alert_num }   
-									<fmt:formatDate value="${notReadList.alert_dttm }" timeStyle="short" pattern="YY.MM.dd a hh:mm"/>
-							</span>
+							<span class="date"> ${notReadList.alert_dttm }</span>
 							<span class="content">${notReadList.alert_content }
 							</span>
 						</div>
@@ -109,9 +106,7 @@ $(".nav-link").on("click", function() {
 					<br>
 					<c:forEach items="${alertList }" var="AllList">
 						<div class="alert alert-secondary" role="alert">
-							<span class="date">${AllList.alert_num }
-									<fmt:formatDate value="${AllList.alert_dttm }" timeStyle="short" pattern="YY.MM.dd a hh:mm"/>
-							</span>
+							<span class="date">${AllList.alert_dttm }</span>
 							<span>${AllList.alert_content }</span>				
 						</div>
 					</c:forEach>

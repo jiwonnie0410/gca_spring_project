@@ -80,28 +80,32 @@
 	    
 	    <style>
 	    
-	    .noticeTime {
-			width: fit-content;
-		    position: relative;
-		    left: 200px;
-		    margin-bottom: 30px;
-		    border-color: #bfacdf;
-		    border-radius: 10px;
-		    border-style: dotted;
-		    padding: 20px;
-	    }
-	    
-	    .bigText {
-		    font-size: 21px;
-		    font-weight: bold;
-		    color: #242424;
-	    }
-	    .smallText {
-	    	font-size: 20px;
-	    	color: #242424;
-	    }
-	    
-	    
+		    .noticeTime {
+				width: fit-content;
+			    position: relative;
+			    left: 200px;
+			    margin-bottom: 30px;
+			    border-color: #bfacdf;
+			    border-radius: 10px;
+			    border-style: dotted;
+			    padding: 20px;
+		    }
+		    
+		    table {
+		    pa
+		    
+		    }
+		    
+			thead {
+				text-align: center;
+    			font-weight: bold;
+			}
+			
+			td {
+				padding-right: 10px;
+			}
+			
+					    
 	    </style>
 	    
 </head>
@@ -111,16 +115,26 @@
 			<div class="container-row">
 
 				<div class="noticeTime">
-				  	<span class="bigText">― 스페셜 챌린지 환급시간 ―</span><br>
-					<span class="smallText">챌린지 실패: 챌린지 마감 다음날 am 0:05</span><br>
-					<span class="smallText">챌린지 성공: 유저의 성공 다음날 am 0:10</span>
+					<table>
+						<thead>
+							<tr>
+								<td colspan="3">- 스페셜 챌린지 보증급 환급정보 -</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>부분환급</td>
+								<td>사용자가 챌린지 실패시</td>
+								<td>챌린지 마감날 익일 (am 0:05)</td>
+							</tr>
+							<tr>
+								<td>전체환급</td>
+								<td>사용자가 챌린지 성공시</td>
+								<td>사용자 성공 익일 (am 0:10)</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				
-<!-- 				<div class="noticePercent"> -->
-<!-- 				  	<span class="bigText">― 스페셜 챌린지 환급시간 ―</span><br> -->
-<!-- 					<span class="smallText">챌린지 실패: 챌린지 마감 다음날 am 0:05</span><br> -->
-<!-- 					<span class="smallText">챌린지 성공: 유저의 성공 다음날 am 0:10</span> -->
-<!-- 				</div> -->
 			
 			<!-- 일별 수익 현황 보기 -->
 					<table>
