@@ -56,23 +56,22 @@
 				}
 				
 				.div-button {
-						background: #F15F5F;
-					    border: 2px solid #F15F5F;
+						background: #BDBDBD;
+					    border: 2px solid #BDBDBD;
 					    border-radius: 7px;
 					    font-size: 12px;
 					    font-weight: bolder;
 					    margin: 0.3em auto;
 					    padding: 2px 4px;
-					    position: relative;
 					    height: 30px;
 					    width: 130px;
 				}
 				
-				#button-edit:active {
+				#button-button:active {
 						color: #FFE08C;
 				}
 				
-				#button-edit:hover {
+				#button-button:hover {
 						color: #FFE08C;
 				}
 				
@@ -126,23 +125,27 @@
 								&nbsp;&nbsp;<font color="gray">현주소 |</font>&nbsp;&nbsp;&nbsp;${dto.m_location}
 						</div>
 						<div class="div-info" style="background:#B2CCFF; border:#B2CCFF;" align="left">
-								&nbsp;&nbsp;<font color="gray">포인트 |</font>&nbsp;&nbsp;&nbsp;${score} 점
+								&nbsp;&nbsp;<font color="gray">포인트 |</font>&nbsp;&nbsp;&nbsp;${score} 점 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<span onclick="location.href='${pageContext.request.contextPath }/history/score'"> 확인하러 가기 <i id="button-button" class="fas fa-coins"></i></span>
 						</div>
+						
+						<%-- <div class="div-info" style="background:#B2CCFF; border:#B2CCFF;" align="left">
+							&nbsp;&nbsp;<font color="gray">내가 쓴 글 |</font> &nbsp;&nbsp;&nbsp;${count } 개 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<span onclick="location.href='#'"> 확인하러 가기 <i id="button-button" class="fas fa-edit"></i></span>
+						</div> --%>
 					</div>
+					<br /><br />
 					
 					<!-- 각종 페이지로 넘어가는 버튼 -->
-					<div align="center">
-						<!-- 로그아웃 -->
-						로그아웃
+					<!-- 비밀번호 변경 -->
+					<div class="div-button" align="left" style="position:relative; left:80px;">
+						비밀번호 변경 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span onclick="location.href='${pageContext.request.contextPath }/member/changePassword'"><i id="button-button" class="fas fa-key"></i></span>
+					</div>
+					<!-- 로그아웃 -->
+					<div class="div-button" align="left" style="position:relative; left:80px;">
+						로그아웃 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<span onclick="location.href='${pageContext.request.contextPath }/logout'"><i id="button-button" class="fas fa-sign-out-alt"></i></span>
-						
-						<!-- 비밀번호 변경 -->
-						비밀번호 변경
-						<span onclick="location.href='${pageContext.request.contextPath }/changePassword'"><i id="button-button" class="fas fa-key"></i></span>
-						
-						<!-- 내가 쓴 글 보기 -->
-						내가 쓴 글 보기
-						<span onclick="location.href='#'"><i id="button-button" class="fas fa-edit"></i></span>
 					</div>
 					
 					

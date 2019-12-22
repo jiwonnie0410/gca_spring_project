@@ -74,6 +74,11 @@ public class MemberDAO {
 		return mybatis.selectOne("MemberDAO.getScore", mId);
 	}
 	
+	// 10. 현재까지 유저가 쓴 글의 갯수
+	public int getBoardCount(String mId) {
+		return mybatis.selectOne("MemberDAO.getBoardCount", mId);
+	}
+	
 	
 	// **************** 수림 *******************//
 	// 1. 유저별 알람 정보 가져오기
