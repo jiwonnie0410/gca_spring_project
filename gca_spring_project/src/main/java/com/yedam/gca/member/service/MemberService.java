@@ -27,6 +27,9 @@ public interface MemberService {
 	// 7. 사용자가 현재까지 쌓은 포인트
 	public int getScore(String mId);
 	
+	// 8. 사용자가 현재까지 쓴 글의 갯수
+	public int getBoardCount(String mId);
+	
 	
 	
 	//진영

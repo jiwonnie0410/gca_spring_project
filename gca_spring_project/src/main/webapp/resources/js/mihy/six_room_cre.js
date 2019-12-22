@@ -84,7 +84,7 @@ function valid(){
 	
     var con=confirm("입력한 내용으로 용병 모집 방을 생성하시겠습니까?");
     if(con){
-    	var param = $('#frm').submit();
+    	var param = $('#frm').serialize();
     	$.ajax({
     		url : "creRoom",
     		method : "post",

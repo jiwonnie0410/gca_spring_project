@@ -105,7 +105,7 @@
 	 
  <!-- 용병 방 생성 시 알람 보내기 -->
  	<select id="insertSixAlert" statementType="CALLABLE" parameterType="sixman">
-		{ CALL sg_room_create(
+		{ CALL six_dis_mid(
 			#{six_num}
 			,#{alert_gnum, mode=OUT, jdbcType=INTEGER}
 		)}

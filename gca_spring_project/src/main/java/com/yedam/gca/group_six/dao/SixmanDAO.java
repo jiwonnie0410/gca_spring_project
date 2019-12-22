@@ -69,7 +69,8 @@ public class SixmanDAO {
 	
 	//용병 방 생성 시 알람 보내기
 	public int insertSixAlert(SixmanVO vo) {
-		return mybatis.selectOne("AlertDAO.insertSixAlert", vo);
+		mybatis.selectOne("SixmanDAO.insertSixAlert", vo);
+		return vo.getAlert_gnum();
 	}
 	
 	//마감 방 조회

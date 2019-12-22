@@ -577,7 +577,7 @@
  var inputMessage = document.getElementById('inputMessage');
  
  
- function onMessage(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
+ function onMessageChat(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
 	var result = JSON.parse(event.data);
  	var bg_num = ${bgroup.bg_num};
 	if(result.cmd == "join" && ( bg_num == result.bg_num )) { //해당 방에 들어온경우
@@ -638,7 +638,7 @@
 	else if( result.cmd == "kickOut" && ( bg_num == result.bg_num ) ){
 		var id = "${id}";
 		if(result.id == id){ //강퇴당한놈만 나가게.
-			location.href="getSgList";
+			location.href="getBgList";
 			textarea.value += result.msg + "\n";
 		}
 		$('#'+result.id).remove();

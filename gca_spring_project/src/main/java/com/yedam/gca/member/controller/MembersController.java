@@ -49,10 +49,14 @@ public class MembersController {
     @RequestMapping("member/member_view.do")
     public String viewMember(Model model)throws Exception{
 		UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        // 회원 정보를 model에 저장
+        
+		// 회원 정보를 model에 저장
         model.addAttribute("dto", memberService.viewMember(user.getUsername()));
         // 현재까지 자신이 쌓은 포인트 (지원 추가)
         model.addAttribute("score", memberService.getScore(user.getUsername()));
+        // 현재까지 자신이 쓴 글 갯수 (지원 추가)
+//        model.addAttribute("count", memberService.getBoardCount(user.getUsername()));
+        
         // member_view.jsp로 포워드
        return "/user/member/profile";
     }

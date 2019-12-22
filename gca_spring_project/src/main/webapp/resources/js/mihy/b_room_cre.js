@@ -96,7 +96,7 @@ function valid(){
     var con=confirm("입력한 내용으로 동호회 매치 방을 생성하시겠습니까?");
     if(con){
     	
-    	var param = $('#frm').submit();
+    	var param = $('#frm').serialize();
     	
     	$.ajax({
     		url : "creRoom",
@@ -107,7 +107,7 @@ function valid(){
     					cmd : "groupAlert",
     					alert_gnum : result.alert_gnum
     			}
-    			webSocket.send( JSON.stringify( msg ) );
+    			webSocket.onopen = () => webSocket.send( JSON.stringify( msg ) );
     			location.href = 'alreadyIn?bg_num='+result.bg_num;
     		}
     	});
