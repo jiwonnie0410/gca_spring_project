@@ -89,6 +89,8 @@
 #allMenu .nav-link.active {
 	background: white;
 	border: none;
+	text-decoration: underline;
+    text-underline-position: under;
 }
 
 #allMenu .nav-tabs {
@@ -265,6 +267,7 @@
 					<span id="gender_cd" class="mediumText"></span>
 					<span id="sg_option" class="mediumText"></span>
 					
+					
 <!-- 				미현 : 지도 출력 부분 시작 -->
 <!-- 					<input type="hidden" id="map_xy"> -->
 <!-- 					<span id="map" style="position: relative; left:230px; top:-90px;"></span> -->
@@ -278,6 +281,7 @@
 				</div>
 			</div>
 		</div>
-	</div>  
+	</div> 
+	 
 </body>
 </html>

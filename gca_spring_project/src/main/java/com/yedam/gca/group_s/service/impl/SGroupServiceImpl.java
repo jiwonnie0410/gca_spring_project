@@ -44,8 +44,17 @@ public class SGroupServiceImpl implements SGroupService {
 	public ScoreHistVO getMyTotalScore(MembersVO vo) {
 		return sgroupDAO.getMyTotalScore(vo);
 	}
+	public List<ScoreHistVO> getAllTotalScore(ScoreHistVO vo){
+		return sgroupDAO.getAllTotalScore(vo);
+	}
 	public int updateLevel(MembersVO vo) {
 		return sgroupDAO.updateLevel(vo);
+	}
+	public List<TroubleVO> getHowManyTrouble(TroubleVO vo) {
+		return sgroupDAO.getHowManyTrouble(vo);
+	}
+	public int updateMStatus(MembersVO vo) {
+		return sgroupDAO.updateMStatus(vo);
 	}
 
 	

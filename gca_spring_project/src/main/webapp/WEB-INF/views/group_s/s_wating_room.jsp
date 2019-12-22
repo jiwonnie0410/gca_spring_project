@@ -359,9 +359,6 @@
     		<div>
       			<textarea id="messageWindow" style="font-size:15px; background-color:#FE9191;border-radius:5px;border:3px double #FFF;
       							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly">
-      				<%-- <c:forEach var="chat" items="${chatlist}">
-						${chat.m_id} : ${chat.chh_content}				
-      				</c:forEach> --%>
       			</textarea>
       			<div style="padding-top:10px;">
       				<span style="padding-left:5px; padding-right:3px; vertical-align: middle;">
@@ -447,7 +444,7 @@
 							<td id="profile_gender"></td>
 							<td id="profile_age"></td>
 							<td id="profile_level">
-								<img style="padding-bottom:5px;" width="30px" height="30px" src="">
+								<img style="padding-bottom:5px;" width="40px" height="40px" src="">
 							</td>
 						</tr>
 					</table>

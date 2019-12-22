@@ -2,6 +2,7 @@ package com.yedam.gca.group_six.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yedam.gca.admin.vo.TroubleVO;
+import com.yedam.gca.chatting.service.ChatService;
+import com.yedam.gca.chatting.vo.ChatHistVO;
 import com.yedam.gca.common.code.service.CodeService;
 import com.yedam.gca.common.code.vo.CodeVO;
 import com.yedam.gca.group_six.service.SixmanService;
@@ -28,6 +33,7 @@ public class SixmanController {
 	@Autowired	SixmanService sixmanService;
 	@Autowired	CodeService codeService;
 	@Autowired	ActiveHistService actService;
+	@Autowired	ChatService chatService;
 	
 	
 //*****************************************은영************************************
@@ -180,9 +186,23 @@ public class SixmanController {
 	@RequestMapping("/sixman/alreadyIn")
 	public String alreadyIn(
 			@RequestParam(value="six_num", defaultValue="", required=true) int six_num,
-			Model model, SixmanVO vo, ActiveHistVO avo, CodeVO cvo) {
+			Model model, SixmanVO vo, ActiveHistVO avo, CodeVO cvo, ChatHistVO chvo) throws JsonProcessingException {
 		vo.setSix_num(six_num);
 		model.addAttribute("sixman", sixmanService.getRoomInfo(vo));
+		
+		//해당 방의 채팅내역 채팅방으로 넘김
+		UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		avo.setM_id(user.getUsername());
+		avo.setSix_num(six_num);
+		chvo = chatService.getJoinTime(avo); //활동히스토리에서 반짝 참여시간 가져와서 chatVO에 담음.
+		
+		chvo.setSix_num(six_num);	//본인의방번호 chatVO에담음.
+		
+		ObjectMapper mapper = new ObjectMapper(); //javascript에쓰기위해 jsonString?으로변환
+		String jsonChatList = mapper.writeValueAsString(chatService.getChatHist(chvo));
+		
+		model.addAttribute("chatlist", jsonChatList);
 		
 		//참여 인원 정보를 채팅방으로 넘김
 		avo.setSix_num(six_num);

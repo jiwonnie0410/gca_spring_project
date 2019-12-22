@@ -18,9 +18,13 @@
 </script>
 
 <!--데이터 테이블  -->
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-
+		<!-- Page level plugin CSS-->
+		<link href="${pageContext.request.contextPath }/resources/css/admin/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+		<!-- Page level plugin JavaScript-->
+		<script src="${pageContext.request.contextPath }/resources/css/admin/vendor/datatables/jquery.dataTables.js"></script>
+		<script src="${pageContext.request.contextPath }/resources/css/admin/vendor/datatables/dataTables.bootstrap4.js"></script>
+		<!-- Demo scripts for this page-->
+		<script src="${pageContext.request.contextPath }/resources/js/admin/demo/datatables-demo.js"></script>
 <sec:authentication property="principal.m_id" var="m_id" />
 <script
 	src="${pageContext.request.contextPath }/resources/js/board/user_Qna.js"></script>
@@ -65,7 +69,8 @@
 		<table class="table text-center" id="userlisttb">
 			<thead>
 				<tr>
-					<th class="text-center">번호</th>
+					<!-- <th class="text-center">번호</th> -->
+					<th>답변 여부</th>
 					<th class="text-center">작성자</th>
 					<th class="text-center">제목</th>
 				</tr>
@@ -96,11 +101,11 @@
 							<div class="panel-body">
 								<%-- form --%>
 								<form role="form" action="../ajax/insertBoard" id="ad_boardWriteForm" name="ad_boardWriteForm">
-									<input type="text" name="qb_id" value="">
+									<input type="hidden" name="qb_id" value="">
 									<div class="form-group">
 										<div>
-											질문 유형 <select name="qb_title" id="qb_title"
-												class="btn btn-outline btn-sm dropdown-toggle">
+											<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">질문 유형</label>&nbsp;&nbsp;
+											 <select name="qb_title" id="qb_title"class="btn btn-outline btn-sm dropdown-toggle" style="border: 1px solid #FE9191; border-radius: 10px;">
 												<option id="qn" selected value="질문 유형 선택" disabled>-질문 유형 선택-</option>
 												<option  value="반짝방 문의">반짝방 문의</option>
 												<option value="회원관리 문의">회원관리 문의</option>
@@ -110,17 +115,16 @@
 									</div>
 									<div class="form-group">
 										<div>
-											내용
-											<textarea cols="40" rows="10" name="qb_content"
-												id="qb_content" placeholder="내용을 입력해주세요"></textarea>
+											<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;" >내용</label>&nbsp;&nbsp;
+											<textarea cols="40" rows="10" name="qb_content" id="qb_content" placeholder="내용을 입력해주세요" style="border: 1px solid #FE9191;"></textarea>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col-sm-offset-2 col-sm-10">
 											<button type="button" id="btnIns"
 												style="background-color: #FE9191; color: white;" class="btn">저장</button>
-											<button type="reset" class="btn btn-danger">초기화</button>
-											<button type="button" class="btn btn-info " data-dismiss="modal">Close</button>
+											<button type="reset" class="btn" style="background-color: #FE9191; color: white;">초기화</button>
+											<button type="button" class="btn btn-info " data-dismiss="modal" style="background-color: #FE9191; color: white;">Close</button>
 										</div>
 									</div>
 								</form>
@@ -148,7 +152,7 @@
 				<div class="modal-footer">
 					<!-- 본인이 쓴 게시물만 수정, 삭제가 가능하도록 처리 -->
 					<button type="button" class="btn " id="btnDel" style="background-color: #FE9191; color: white;">삭제</button>
-					<button type="button" class="btn btn-primary" id="btnUpdete">수정</button>
+					<button type="button" class="btn  id="btnUpdete" style="background-color: #FE9191; color: white;">수정</button>
 					<button type="button" class="btn" data-dismiss="modal" style="background-color: #FE9191; color: white;">Close</button>
 				</div>
 			</div>

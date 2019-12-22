@@ -51,5 +51,10 @@ public class ChallengeDAO  {
 	public void insertMoney(MoneyVO vo) {
 		mybatis.insert("ChallengeDAO.insertMoney", vo);
 	}
+	
+	// 8. 챌린지 성공시 포인트 증정
+	public void insertChallengeScore() {
+		mybatis.selectOne("ChallengeDAO.insertChallengeScore");
+	}
 
 }

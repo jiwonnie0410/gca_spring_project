@@ -162,9 +162,9 @@ function getChallengeList(p) {
 			$("<tr id='tr' align='center' style='background-color:#FEBABA;'>")
 						  .append("<th width='5%'> NO </th>")
 						  .append("<th width='10%'> 구분 </th>")
-						  .append("<th width='45%'> 챌린지 이름 </th>")
-						  .append("<th width='12%'> 시작 날짜 </th>")
-						  .append("<th width='12%'> 마감 날짜 </th>")
+						  .append("<th width='40%'> 챌린지 이름 </th>")
+						  .append("<th width='17%'> 시작 날짜 </th>")
+						  .append("<th width='17%'> 마감 날짜 </th>")
 						  .append("<th width='10%'> 리워드 </th></tr>")
 						  .appendTo($("#challenge-table"));
 			// 챌린지 목록 테이블에 붙이기
@@ -238,39 +238,28 @@ function getKey(cl_num) {
 					else
 						status = '스페셜 챌린지';
 					// 챌린지 상세 정보 띄우기
-					$("<tr>").append("<td align='center' width='13%'><b> No."+ result.detail.CL_NUM +"</b></td>")
-							 .append("<td align='center' width='25%'><b>"+ status +"</b></td>")
-							 .append("<td width='100%'><b>"+ result.detail.CL_NAME +"</b></td>")
+					$("<tr>").append("<td align='center' width='60%'><div id='challenge-title'><b>"+ result.detail.CL_NUM + "번째  " + status + ": " + result.detail.CL_NAME + "하기</b></div></td>")
 							 .appendTo($("#chGoing"));
 					
-					$("<tr>").append("<td></td>")
-							 .append("<td align='center'><b>"+ result.detail.CL_SCORE +"점</b></td>")
-							 .append("<td><b>"+ result.detail.CL_START_DTTM + " ~ " + result.detail.CL_END_DTTM +"</b></td>")
+					$("<tr>").append("<td><div id='challenge-detail'><b>리워드 | &nbsp;&nbsp;&nbsp;"+ result.detail.CL_SCORE +"점</b></div></td>")
 							 .appendTo($("#chGoing"));
 					
-					$("<tr>").append("<td></td>")
-							 .append("<td colspan='2'><b> 내용: "+ result.detail.CL_CONTENT +"</b></td>")
+					$("<tr>").append("<td><div id='challenge-detail'><b>기 간 &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;"+ result.detail.CL_START_DTTM + " ~ " + result.detail.CL_END_DTTM +"</b></div></td>")
+					.appendTo($("#chGoing"));
+					
+					$("<tr>").append("<td><div id='challenge-detail' style='height=45px;'><b>내 용 &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;"+ result.detail.CL_CONTENT +"</b></td>")
 							 .appendTo($("#chGoing"));
 					
 					// 챌린지에 참여 중인 사람들 띄우기
-					// 인덱스를 여기다 달아주는 이유는 모달이 띄워질 때마다 테이블 내용이 비워지기 때문, 그래서 항상 새로 만들어 줘야 함
-					$("<tr id='tr' align='center' style='background-color:#FEBABA;'>")
-							 .append("<th width='20%'> ID </td>")
-							 .append("<th width='19%'> 이름 </td>")
-							 .append("<th width='13%'> 나이 </td>")
-							 .append("<th width='15%'> 성별 </td>")
-							 .append("<th width='15%'> 지역 </td>")
-							 .append("<th width='20%'> 진행 횟수 </td>")
-							 .appendTo($("#chPeople"));
-					
-					for(i=0; i<result.people.length; i++) {
-							$("<tr>").append("<td align='center'>"+ result.people[i].M_ID +"</td>")
-									 .append("<td align='center'>"+ result.people[i].M_NAME +"</td>")
-									 .append("<td align='center'>"+ result.people[i].M_AGE +"</td>")
-									 .append("<td align='center'>"+ result.people[i].CD_NAME +"</td>")
-    								 .append("<td align='center'>"+ result.people[i].M_LOCATION +"</td>")
-									 .append("<td align='center'>"+ result.people[i].CLH_CNT +"</td>")
-									 .appendTo($("#chPeople"));
+					if(result.people.length == 0){
+						$("<tr>").append("<td align='center'><div id='challenge-people'> 참여 중인 회원이 없습니다. </div></td>")
+						.appendTo($("#chPeople"));
+					}
+					else {
+						for(i=0; i<result.people.length; i++) {
+							$("<tr>").append("<td><div id='challenge-people'> ("+ result.people[i].M_ID + ") &nbsp;&nbsp;&nbsp;" + result.people[i].M_NAME + " 님 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + result.people[i].M_AGE +"세 &nbsp;&nbsp;&nbsp;" + result.people[i].CD_NAME + " &nbsp;&nbsp;&nbsp;" + result.people[i].CLH_CNT +"회 참여</td></tr>")
+							.appendTo($("#chPeople"));
+						}
 					}
 			}
 	});

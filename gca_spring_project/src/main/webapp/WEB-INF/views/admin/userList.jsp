@@ -11,6 +11,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<!--json할때 필요  -->
+<script src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
 	
 <script src="${pageContext.request.contextPath }/resources/js/admin/user.js"></script>
 
@@ -58,71 +60,71 @@
 			
 				
 <!-- -------------------------------------------------------------------------------------------------------------------- -->
-		<!-- 처리 상태 선택 -->
-		<div align="right">
-			<button type="button" class="btn button" style="border: 1.5px solid #FEBABA;">전체</button>
-			<button type="button" class="btn button" style="border: 1.5px solid #FEBABA;">처리 중</button>
-			<button type="button" class="btn button" style="border: 1.5px solid #FEBABA;">처리 완료</button>
-			&nbsp;&nbsp;
-		</div>
-
-		<div align="center">
-        <form class="form-inline" id="frmSearch" method="post" action="${pageContext.request.contextPath}/admin/getUserList">
-			<!-- <div align="center" style="padding-right: 3%; padding-left: 3%;"> -->
-				<table>
-						<tr>
-							<td><select id="searchCondition" name="searchCondition" class="btn btn-outline-warning btn-sm dropdown-toggle" style="">
-									<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
-									<option value="all"<c:out value="${map.searchOption == 'all'?'selected':''}"/>>전체</option>
-									<option value="tr_reason_cd"<c:out value="${map.searchOption == 'tr_reason_cd'?'selected':''}"/>>신고유형</option>
-									<option value="tr_mid"<c:out value="${map.searchOption == 'tr_mid'?'selected':''}"/>>피신고자 아이디</option>
-									<option value="m_id"<c:out value="${map.searchOption == 'm_id'?'selected':''}"/>>신고자</option>
-							</select></td>
-							<td><input name="keyword" value="${map.keyword}" class="form-control"> </td>
-							<td><button type="submit" class="btn btn-outline-warning btn-sm" style="border-color: #FAF0F0; color: #ffc0cb;">검색</button></td>
-						</tr>
-				</table>
-		</form>
-		</div>
-		
+		<h1 align="center">신고관리</h1>
+		<section class="userlist">
+		 <form class="form-inline" id="frmSearch" method="post" action="${pageContext.request.contextPath}/admin/adlist">
+			<div class="card mb-3">
+				<div class="card-header" style="background-color: #FEBABA;">신고관리</div>
+				<div class="card-body">
+					<div class="table-responsive" align="right">
+        				<form name="SearchForm">
+							<table>
+								<tr>
+									<td><select id="searchCondition" name="searchCondition" class="btn btn-outline-warning btn-sm dropdown-toggle" style="">
+											<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
+											<option value="all"<c:out value="${map.searchOption == 'all'?'selected':''}"/>>전체 조회</option>
+											<option value="tr_mid"<c:out value="${map.searchOption == 'tr_mid'?'selected':''}"/>>피신고자</option>
+											<option value="m_id"<c:out value="${map.searchOption == 'm_id'?'selected':''}"/>>신고자</option>
+											<option value="tr_reason_cd"<c:out value="${map.searchOption == 'tr_reason_cd'?'selected':''}"/>>신고 사유</option>
+									</select></td>
+									<td><input name="keyword" value="${map.keyword}" class="form-control"> </td>
+									<td><button type="submit" class="btn btn-outline-warning btn-sm" style="border-color: #FAF0F0; color: #ffc0cb;">검색</button></td>
+								</tr>
+							</table>
+					</form>
+				</div>
 		<!-- 레코드의 갯수를 출력 -->
 		<table class="table" >
-		<thead>
-			<tr>
-				<th ><center>번호</center></th>
-				<th  align="center"><center>신고한 회원</center></th>
-				<th align="center"><center>신고당한 회원</center></th>
-				<th align="center"><center>신고유형</center></th>
-				<th align="center"><center>신고 날짜</center></th>
-			</tr>
-		</thead>
-		<tbody>
-		<!-- db 목록을 가져와서 뿌려주는 곳 -->
+			<thead>
+				<tr>
+					<th ><center>번호</center></th>
+					<th  align="center"><center>신고 회원</center></th>
+					<th align="center"><center>피신고 회원</center></th>
+					<th align="center"><center>신고유형</center></th>
+					<th align="center"><center>신고 날짜</center></th>
+					<th align="center"><center>정지 시작</center></th>
+					<th align="center"><center>정지 끝</center></th>
+				</tr>
+			</thead>
+			<tbody>
+			<!-- 검색-->
 			<c:choose>
-				<c:when test="${empty list}">
+				<c:when test="${fn:length(map.list) == 0}">
 					<tr>
-						<td colspan="5" align="center">조회결과가 없습니다.</td>
+						<td colspan="4" align="center">조회결과가 없습니다.</td>
 					</tr>
 				</c:when>
 				<c:otherwise>
 								<!-- db 목록을 가져와서 뿌려주는 곳 -->
-						<c:forEach var="row" items="${list}">
-						<tr>
-							<td align="center" width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${row.tr_num}</td>
-							<td align="center">${row.m_id}</td>
-							<td align="center">${row.tr_mid}</td>
-							<td  align="center">${row.tr_reason_cd}</td>
-							<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 -->
-							<td align="center"><fmt:formatDate value="${row.tr_dttm}" pattern="yyyy-MM-dd" /></td>
-						</tr>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-	
-
-		<!-- 페이징 -->
+						<c:forEach var="row" items="${map.list}">
+								<tr>
+									<td align="center" width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${row.tr_num}</td>
+									<td align="center">${row.m_id}</td>
+									<td align="center">${row.tr_mid}</td>
+									<td  align="center">${row.tr_reason_cd}</td>
+									<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 -->
+									<td align="center"><fmt:formatDate value="${row.tr_dttm}" pattern="yyyy-MM-dd" /></td>
+									<td align="center"><fmt:formatDate value="${row.pn_start_dttm}" pattern="yyyy-MM-dd" /></td>
+									<td align="center"><fmt:formatDate value="${row.pn_end_dttm}" pattern="yyyy-MM-dd" /></td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</tbody>
+			<tfoot>
+					<!-- 페이징 -->
 		<tr>
-			<td colspan="5">
+			<td colspan="8" align="center">
 				<!-- 처음페이지로 이동 : 현재 페이지가 1보다 크면  [처음]하이퍼링크를 화면에 출력--> 
 				<c:if test="${map.boardPager.curBlock > 1}">
 					<a href="javascript:list('1')">[처음]</a>
@@ -145,15 +147,15 @@
 				</c:forEach> <!-- 다음페이지 블록으로 이동 : 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 [다음]하이퍼링크를 화면에 출력 -->
 				<c:if test="${map.boardPager.curBlock <= map.boardPager.totBlock}">
 					<a href="javascript:list('${map.boardPager.nextPage}')">[다음]</a>
-				</c:if> <!-- 끝페이지로 이동 : 현재 페이지가 전체 페이지보다 작거나 같으면 [끝]하이퍼링크를 화면에 출력 --> <c:if
-					test="${map.boardPager.curPage <= map.boardPager.totPage}">
+				</c:if> <!-- 끝페이지로 이동 : 현재 페이지가 전체 페이지보다 작거나 같으면 [끝]하이퍼링크를 화면에 출력 --> 
+				<c:if test="${map.boardPager.curPage <= map.boardPager.totPage}">
 					<a href="javascript:list('${map.boardPager.totPage}')">[끝]</a>
 				</c:if>
 			</td>
 		</tr>
 		<!-- 페이징 -->
-		</tbody>
-		</table>
+	</table>
+
 	</div>
 </div>
 <!-- 	

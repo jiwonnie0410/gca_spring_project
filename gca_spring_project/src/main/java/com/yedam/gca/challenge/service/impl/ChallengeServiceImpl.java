@@ -54,6 +54,12 @@ public class ChallengeServiceImpl implements ChallengeService{
 	public void insertMoney(MoneyVO vo) {
 		dao.insertMoney(vo);
 	}
+	
+	// 8. 챌린지 성공시 포인트 증정
+	@Override
+	public void insertChallengeScore() {
+		dao.insertChallengeScore();
+	}
 
 
 }

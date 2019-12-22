@@ -7,6 +7,7 @@
 ! V_USER_RANK 뷰 사용
 1. 랭킹을 매긴 후 탑 10명만 출력
 2. 사용자의 랭킹을 출력(점수가 없어서 테이블에 이력이 없을 경우, JSP단에서 처리)
+3. 챌린지 성공시 포인트 증정
 
 -->
 	<!-- 1. 랭킹을 매긴 후 탑 10명만 출력 -->
@@ -34,7 +35,10 @@
 
 	</select>
 
-	
+	<!-- 3. 챌린지 성공시 포인트 증정 -->
+	<select id ="insertChallengeScore">
+		{ call p_point }
+	</select>
 
 
 <!-- *************************은영************************ -->
@@ -52,5 +56,12 @@
 		SELECT	NVL(SUM(SCH_SCORE),0) SCH_SCORE
         FROM	SCORE_HIST
         WHERE	M_ID = #{m_id}
+	</select>
+	
+	<!-- 레벨 업데이트를 위한 아이디별 점수합계 조회 -->
+	<select id="getAllTotalScore" parameterType="scorehistory" resultType="scorehistory">
+		SELECT		M_ID, SUM(SCH_SCORE) SCH_SCORE
+		FROM		SCORE_HIST
+		GROUP BY 	M_ID
 	</select>
 </mapper>

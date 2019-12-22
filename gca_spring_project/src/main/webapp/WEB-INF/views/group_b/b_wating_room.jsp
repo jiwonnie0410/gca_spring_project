@@ -116,13 +116,22 @@
 		$(function() { //페이지 로딩 완료 후 실행
 
 			var usrId = "${id}";
-			
-			console.log("usrId : "+usrId);
+
+			var chatList = ${chatlist} ;
+			console.log(chatList);
+			console.log(chatList.length);
+			var textarea = document.getElementById('messageWindow');
+			for(var i = 0; i< chatList.length; i++){
+				textarea.value += chatList[i].m_id + " : " + chatList[i].chh_content + "\n";
+				console.log(chatList[i].chh_dttm);
+			}
 			
 			//채팅 전송버튼 눌렀을때
 			$("body").on("click", "[id^=chat]", function() {
 
 				send();
+				
+				insertChat();
 
 			});
 
@@ -321,6 +330,28 @@
 				}
 			});
 			
+			//방정보 텍스트 복사
+			$('#copy').on('click', function(){
+				var tempText = document.createElement('textarea');
+				var sportName = "${bgroup.sports2_cd}";
+				var verses = ${bgroup.bg_team_cnt};
+				var place = "${bgroup.bg_location}";
+				var beforetime = "${bgroup.bg_end_dttm}";
+				var aftertime = beforetime.substring(0, 16);
+				var age = "${bgroup.age_range}";
+				var gender = "${bgroup.gender_cd}";
+				tempText.value = "<"+sportName + " " + verses + " vs " + verses + ">" + "\n"
+								+ "장소 : " + place + "\n" + "시간 : " + aftertime +"\n"
+								+ "조건 : " + age + " " + gender;
+				document.body.appendChild(tempText);
+				
+				tempText.select();
+				document.execCommand("copy");
+				document.body.removeChild(tempText);
+				
+				alert("복사되었습니다.");
+			});
+			
 			//미현
 			$('#btn_cert').on('click', getLocation); //참가인증
 			view_map();
@@ -349,7 +380,8 @@
     	<div style="padding-top:0px; padding-bottom:20px">
     		<div>
       			<textarea id="messageWindow" style="font-size:15px; background-color:#FE9191;border-radius:5px;border:3px double #FFF;
-      							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly"></textarea>
+      							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly">
+      			</textarea>
       			<div style="padding-top:10px;">
       				<span style="padding-left:5px; padding-right:3px; vertical-align: middle;">
       					<textarea id="inputMessage" style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; " placeholder="입력하세요"></textarea>
@@ -382,7 +414,7 @@
 
 <!-- 버튼영역 시작 -->														
     <div style="padding-bottom:30px">
-      	<button id="btn_cert" class="button-general">참가인증</button>&nbsp;<button id="cancelJoin" class="button-general">참가취소</button>&nbsp;
+      	<button id="cancelJoin" class="button-general">참가취소</button>&nbsp;
       	<button class="button-general">공유</button>&nbsp;<button id="backToList" class="button-general">목록</button>
     </div>
 <!-- 버튼영역 끝 -->
@@ -428,7 +460,7 @@
 							<td id="profile_gender"></td>
 							<td id="profile_age"></td>
 							<td id="profile_level">
-								<img style="padding-bottom:5px;" width="30px" height="30px" src="">
+								<img style="padding-bottom:5px;" width="40px" height="40px" src="">
 							</td>
 						</tr>
 					</table>
@@ -476,7 +508,7 @@
 							<th>참가정보 </th><td> ${bgroup.gender_cd} ${bgroup.age_range}</td>
 						</tr>
 						<tr>
-							<th>인원 </th><td> ${bgroup.bg_end_cnt} 명중 ${bgroup.bg_now_cnt} 명 참가</td>
+							<th>인원 </th><td> ${bgroup.bg_team_cnt} vs ${bgroup.bg_team_cnt}</td>
 						</tr>
 						<tr>
 							<th>숙련도 </th><td> ${bgroup.skill_cd}</td>
@@ -510,7 +542,7 @@
         
 <!-- Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="button-general" data-dismiss="modal">정보 복사</button>
+					<button type="button" class="button-general" data-dismiss="modal" id="copy">정보 복사</button>
 					<button type="button" class="button-general" data-dismiss="modal">닫기</button>
 				</div>
         
@@ -586,30 +618,6 @@
 		var nick = result.nick;
 		var id = result.id;
 		
-		//var param = {"img":img};
-		
-		//console.log("id : "+id);
-		//console.log("nick : "+nick);
-		//console.log("img : "+img);
-		
-		//이미지 영어이름 갖고오는 ajax(웹소켓에서 처리하는 방향 알아보기.)
-		/* $.ajax({
-			url: "returnImage",
-			type:'GET',
-			async:false,
-			data: param,
-			//dataType: "Json",
-			
-			success: function(data){
-				console.log(data);
-				img=data;
-			},
-			error: function(){
-				
-			}
-			
-		}); */
-		
 		//프로필 붙여주기~~
 		$span = $("<span data-toggle='modal' data-target='#profile' style='font-size:13px; padding:10px; display:inline-block;'>");
 		$span.attr("id",id);
@@ -639,42 +647,29 @@
 		var id = "${id}";
 		if(result.id == id){ //강퇴당한놈만 나가게.
 			location.href="getBgList";
-			textarea.value += result.msg + "\n";
 		}
+		textarea.value += result.msg + "\n";
 		$('#'+result.id).remove();
 		
 	}
 	  
 	chatAreaScroll(); 
  }
- 
- //function onOpen(event) { //이미 참여된방에 참여인지 새로 참여인지 구분해서 새로참여만 참가하셨습니다 띄우고 프로필 붙이기.
-	 //console.log("first_in : "+"${param.first_in}");
- 
-	 /* if("${param.first_in}" == "first_in"){
-		msg = {
-			cmd : "join",
-			id : "${id}",
-			msg : "<"+"${id}"+"님이 참가하셨습니다.>"
-			//여기에 아이디 붙여서 추가하면 될듯. 근데 새로고침해도 이게 뜨는것은 막아야함.
-		}
-		webSocket.send(  JSON.stringify( msg )   );
-	 } */
- //}
 
  
  //메세지 전송
  function send() { 
-	 var bg_num = ${bgroup.bg_num};
-	 msg = {
-		 cmd : "msg",
-		 id : "${id}",
-		 msg : inputMessage.value,
-		 bg_num : bg_num
-	 }
-	//textarea.value += "나 : " + inputMessage.value + "\n"; 
-	webSocket.send(  JSON.stringify( msg )   ); 
-	inputMessage.value = ""; 
+	var bg_num = ${bgroup.bg_num};
+	msg = {
+		cmd : "msg",
+		id : "${id}",
+		msg : inputMessage.value,
+		bg_num : bg_num
+	}
+	if((inputMessage.value !="")){
+		 webSocket.send(  JSON.stringify( msg )   );
+	}
+	
  } 
  
  //나갔을때 참여자 칸에서 프로필 삭제
@@ -704,14 +699,40 @@
  
  //채팅치면 스크롤바 내려가게 하기.
  function chatAreaScroll() {
-	//using jquery
-	/* var textArea = $('#messageWindow');
-	textArea.scrollTop( textArea[0].scrollHeight - textArea.height() );
-	textArea.scrollTop( textArea[0].scrollHeight); */
-	//using javascript
 	var textarea = document.getElementById('messageWindow');
 	textarea.scrollTop = textarea.scrollHeight;
-}
+ }
+	//채팅내역 insert --웹소켓 아님 아작스임--
+	function insertChat(){
+		var usrId = "${id}";
+		//채팅메세지
+		var message = document.getElementById('inputMessage').value;
+		console.log("message : "+message);
+		var bg_num = ${bgroup.bg_num};
+		
+		//아작스 전송용 파라미터
+		var param = JSON.stringify(
+				{"m_id" : usrId, "bg_num" : bg_num, "chh_content" : message}
+		);
+		
+		//채팅 히스토리 테이블에 저장
+		$.ajax({
+			url: "insertChatHist",
+			method:'post',
+			dataType: "json",	//결과타입
+			data: param,		//요청파라미터
+			contentType: "application/json",
+			success: function(){
+				document.getElementById('inputMessage').value = ""; 
+				console.log("insert성공");
+			},
+			error: function(){
+				console.log("insert실패");
+			}
+			
+		});
+
+	}
 </script>
     
 </body>

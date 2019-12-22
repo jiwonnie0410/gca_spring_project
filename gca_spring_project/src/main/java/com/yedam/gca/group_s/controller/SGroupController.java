@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yedam.gca.admin.vo.TroubleVO;
+import com.yedam.gca.challenge.service.ChallengeService;
 import com.yedam.gca.chatting.controller.SpringSocketHandler;
 import com.yedam.gca.chatting.service.ChatService;
 import com.yedam.gca.chatting.vo.ChatHistVO;
@@ -40,6 +41,7 @@ public class SGroupController {
 	@Autowired	CodeService codeService;
 	@Autowired	ActiveHistService actService;
 	@Autowired	ChatService chatService;
+	@Autowired	ChallengeService challengeService;
 	
 	
 //*****************************************은영************************************
@@ -69,7 +71,7 @@ public class SGroupController {
 			return vo;
 		}
 		
-	//프로필 모달 띄울 때 해당 멤버의 레벨 가져오기(점수 조회 후 레벨변동해야하면 업데이트해서 가져오기)
+	//프로필 모달 띄울 때 해당 멤버의 레벨 가져오기
 		@ResponseBody
 		@RequestMapping(value="/sgroup/getOnesLevel", consumes="application/json")
 		public MembersVO getOnesLevel(@RequestBody MembersVO vo) {
@@ -124,7 +126,6 @@ public class SGroupController {
 				sgroupService.cancelJoin(avo);
 				return 0;
 			}
-	//방에 들어갔을 때, 아작스로 채팅내역 붙이기
 	
 //*****************************************미현************************************
 	
@@ -193,7 +194,7 @@ public class SGroupController {
 		vo.setSg_num(sg_num);
 		model.addAttribute("sgroup", sgroupService.getRoomInfo(vo));
 		
-		//해당 방의 채팅내역 채팅방으로 넘김
+		//은영 - 해당 방의 채팅내역 채팅방으로 넘김
 		UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		avo.setM_id(user.getUsername());
@@ -265,6 +266,10 @@ public class SGroupController {
 		MembersVO memInfo = (MembersVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//세션 정보 갖고 오기
 		vo.setM_id(memInfo.getM_id());
 		sgroupService.getSgCert(vo);
+		
+		//수림추가 + 챌린지 성공시 포인트 증정
+		//challengeService.insertChallengeScore();
+		
 		return vo;
 	}
 	

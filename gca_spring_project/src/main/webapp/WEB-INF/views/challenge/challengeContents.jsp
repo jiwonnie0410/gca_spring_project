@@ -103,11 +103,11 @@ $(function(){
 
 </head>    
 <body>
-	<!-- 뒤로가기 버튼 -->
-	<div class="back-div">  
-		<input type="button" class="back-btn" id="back-btn">
-		<h3 style="font-weight: bold">챌린지</h3>
-	</div>
+ 		<!-- 뒤로가기 버튼 --> 
+<!-- 	<div class="back-div">   -->
+<!-- 		<input type="button" class="back-btn" id="back-btn"> -->
+<!-- 		<h3 style="font-weight: bold">챌린지</h3> -->
+<!-- 	</div> -->
 	<div class="container">
 		<div class="row">
 			<div class="col">

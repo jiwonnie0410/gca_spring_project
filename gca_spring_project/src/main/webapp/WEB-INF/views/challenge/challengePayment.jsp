@@ -101,10 +101,6 @@ function payGoGo() {
 				var moid = data.receipt_id;  //결제 고유번호, 환불에 이용
 				$('#money_moid').val(moid);
 			
-// 				for(var i in data) {
-// 				console.log("attr: " + i + ", value: " + data[i]);
-// 			}
-			
 			//  결제완료시 ChallengeHist 테이블에 참가이력 추가
 	    	var historyParam = JSON.stringify($("#historyForm").serializeObject());; //디비에 넣을값; 해당 챌린지정보
 	    	$.ajax({
@@ -160,10 +156,10 @@ function payGoGo() {
 </head>
 <body>
 	<!-- 뒤로가기 버튼 -->
-	<div class="back-div">  
-		<input type="button" class="back-btn" id="back-btn">
-		<h3 style="font-weight: bold">챌린지 결제</h3>
-	</div>
+<!-- 	<div class="back-div">   -->
+<!-- 		<input type="button" class="back-btn" id="back-btn"> -->
+<!-- 		<h3 style="font-weight: bold">챌린지 결제</h3> -->
+<!-- 	</div> -->
 	<div class="container">
 		<div class="row">
 			<div class="col">
