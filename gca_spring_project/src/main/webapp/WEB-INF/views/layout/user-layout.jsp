@@ -37,7 +37,7 @@
 	
 	function onError(event) { 
 		console.log(event); 
-		 alert(event.data); 
+		 //alert(event.data); 
 	}
 	
 	function onOpen(event) {
