@@ -39,7 +39,7 @@
 
 <sec:authentication property='principal.m_status_cd' var='mStatus'/>
 <nav class="fixed-top">
-<div align="center" class="mt-2 mb-2"><h4>마감된 반짝방</h4></div>
+<div align="center" class="nav_title mt-2 mb-2"><h4>마감된 반짝방</h4></div>
 <input type="hidden" id="endroom" value="endroom">
 
 <!-- <nav class="sticky-top"> -->

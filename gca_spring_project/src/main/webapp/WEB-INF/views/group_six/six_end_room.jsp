@@ -38,7 +38,7 @@
 <body>
 
 <nav class="fixed-top">
-<div align="center" class="mt-2 mb-2"><h4>마감된 용병 모집</h4></div>
+<div align="center" class="nav_title mt-2 mb-2"><h4>마감된 용병 모집</h4></div>
 
 <!-- <nav class="sticky-top"> -->
 <form action="getSixListEnd" name="searchSport" id="searchSport" method="post">

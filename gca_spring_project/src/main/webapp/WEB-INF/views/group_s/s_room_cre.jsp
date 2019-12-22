@@ -36,7 +36,7 @@
 <body>
 
 <nav class="fixed-top">
-	<div align="center" class="mt-2 mb-2"><h4>반짝방 만들기</h4></div>
+	<div align="center" class="nav_title mt-2 mb-2"><h4>반짝방 만들기</h4></div>
 </nav>
 
 <form action="creRoom" method="post" id="frm" style="margin-top:40px">

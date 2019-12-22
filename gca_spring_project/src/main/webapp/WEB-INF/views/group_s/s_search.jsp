@@ -28,7 +28,7 @@
 <body>
 
 <nav class="fixed-top">
-<div align="center" class="mt-2 mb-2"><h4>함께 할 반짝 찾기</h4></div>
+<div align="center" class="nav_title mt-2 mb-2"><h4>함께 할 반짝 찾기</h4></div>
 
 <!-- 계정 상태가 활동중인 사람들만 버튼 보임 -->
 <sec:authentication property='principal.m_status_cd' var='mgrant'/> <!-- 변수에 이 회원의 계정상태 대입 -->
