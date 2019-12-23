@@ -104,8 +104,8 @@
 				<div class="card-header" style="background-color: #FEBABA;"> <b> 내 정보 수정하기 </b> </div>
             </div>
             <div class="card-body">
-            
 				<form name="form1" method="post">
+						    <div class="form-group">
 							<table>
 								<!-- 변경 못하는 정보 -->
 								<tr>
@@ -128,17 +128,21 @@
 									<td><input name="m_location" value="${dto.m_location}" class="form-control form-control-sm"></td>
 								</tr>
 							</table>
+							</div>
+							
+							<div class="form-group">
 							<!-- xy 좌표 받아오기 -->
 							<input type="hidden" id="xy" name="m_xy" />
+							</div>
 							
 							<br />
-							
+							<div class="form-group">
 							<!-- 수정 버튼 -->
 							<div align="left" style="position:relative; left:80px;">
 								<button type="submit" id="btnUpdate" name="btnUpdate" class="div-button">수정하기 &nbsp;&nbsp;<font size="3"><i class="fas fa-user-edit"></i></font></button>
 							</div>
+							</div>
 				</form>
-				
 			</div>
 </div>
 </body>
