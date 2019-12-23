@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.more {
+/* .more {
 	display: block;
 }
 
@@ -27,9 +27,9 @@
 	height: 200px;
 	background: pink;
 	display:none;
-	/* padding-right:10px; */
+	padding-right:10px;
 	align-content: center;
-	/* padding-top: 20px; */
+	padding-top: 20px;
 }
 
 th,td{
@@ -144,4 +144,71 @@ th,td{
 		width: 100%;
 		text-align: left;
 	}
+} */
+
+
+#nav_sgroup {
+	color: #7176b7;
+	font-size: 40px;
+	text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+}
+#nav_sgroup:active {
+	color: pink;
+	
+}
+
+#nav_bgroup {
+	color: #7176b7;
+	font-size: 40px;
+	text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+}
+#nav_bgroup:active {
+	color: pink;
+	
+}
+
+#nav_challenge {
+	color: #7176b7;
+	font-size: 40px;
+	text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+}
+#nav_challenge:active {
+	color: pink;
+	
+}
+
+#nav_adboard {
+	color: #7176b7;
+	font-size: 40px;
+	text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+}
+#nav_adboard:active {
+	color: pink;
+	
+}
+
+#nav_allmenu {
+	color: #7176b7;
+	font-size: 40px;
+	text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+}
+#nav_allmenu:active {
+	color: pink;
+	
+}
+
+#nav_profile {
+	color: #7176b7;
+	font-size: 40px;
+	text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+}
+#nav_profile:active {
+	color: pink;
+	
+}
+
+#alertcnt {
+	position:absolute; 
+	left: 35px; top:10px;
+	font-size: 13px;
 }
