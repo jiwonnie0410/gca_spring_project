@@ -28,7 +28,8 @@
 	$(function(){
 		
 		if(mstatus != null && mstatus != ''){
-			webSocket = new WebSocket('ws://localhost/gca/broadcast.do'); 
+			//webSocket = new WebSocket('ws://localhost/gca/broadcast.do'); 
+			webSocket = new WebSocket('wss://192.168.0.17:8443/gca/broadcast.do'); 
 			//webSocket = new WebSocket('ws://39.116.34.40/gca/broadcast.do'); 
 			
 			webSocket.onerror = function(event) { onError(event) };
@@ -36,11 +37,16 @@
 			webSocket.onmessage = function(event) { onMessage(event) };
 		}
 		
+		$('.nav_menubar').on('click', function(){
+			$(this).removeClass();
+			$(this).addClass('nav_menubar_click');
+		});
+		
 	});
 	
 	
 	function onError(event) { 
-		console.log(event); 
+		//console.log(event); 
 		 //alert(event.data); 
 	}
 	
@@ -56,12 +62,12 @@
 		var result = JSON.parse(event.data);
 		if(result.cmd == "alertCnt" || result.cmd == "groupAlert"){
 			$('#alertcnt').text(result.msg);
-			console.log("알림 웹소켓<" + result.msg + ">");
+			//console.log("알림 웹소켓<" + result.msg + ">");
 		}
 		else if(result.cmd != "groupAlert" && result.cmd != "alertCnt" && 
 				(result.cmd == "join" || result.cmd == "msg" || result.cmd == "cancelJoin" || result.cmd == "kickOut") ) {
 			onMessageChat(event);
-			console.log("채팅 웹소켓");
+			//console.log("채팅 웹소켓");
 			
 		}
 	}
