@@ -119,9 +119,11 @@
 		</table>
 		<br />
 		
-		<!-- 관리자 페이지 가기 -->
-		<div align="right">
-			<a href="${pageContext.request.contextPath }/admin/chart"> 관리자 모드 바로가기 <i class="fas fa-user-secret"></i> &nbsp;&nbsp;</a>
-		</div>
+		<!-- 관리자 페이지 가기: 관리자만 보임 -->
+		<sec:authorize access="hasRole('ROLE_Admin')">
+			<div align="right">
+				<a href="${pageContext.request.contextPath }/admin/chart"> 관리자 모드 바로가기 <i class="fas fa-user-secret"></i> &nbsp;&nbsp;</a>
+			</div>
+		</sec:authorize>
 </body>
 </html>
