@@ -103,7 +103,7 @@
 				<td class="td-td" width="50%" id="second-td" onClick="location.href='${pageContext.request.contextPath }/history/score'"> 업적 히스토리 </td>
 			</tr>
 			<tr>
-				<td class="td-td" width="50%" id="one-td" onClick="location.href='${pageContext.request.contextPath }/history/challengeList'"> 챌린지 히스토리 </td>
+				<td class="td-td" width="50%" id="one-td" onClick="location.href='${pageContext.request.contextPath }/history/myChallengeList'"> 챌린지 히스토리 </td>
 				<td></td>
 			</tr>
 		</table>
