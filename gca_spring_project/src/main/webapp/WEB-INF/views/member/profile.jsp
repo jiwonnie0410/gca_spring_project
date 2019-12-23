@@ -66,21 +66,21 @@
 					    height: 30px;
 					    width: 130px;
 				}
-				
 				#button-button:active {
 						color: white;
+						cursor: point;
 				}
 				#button-button {
 						font-size: 20px;
 						cursor: pointer;
 				}
 				#button-message {
-						color: #8BBDFF;
-						font-size: 20px;
+						color: gray;
+						font-size: 24px;
 						cursor: pointer;
 				}
 				#button-message:active {
-						color: #4375DB;
+						color: #4374D9;
 				}
 		</style>
 </head>
@@ -99,10 +99,7 @@
 							<td rowspan="3" height="70"><div class="div-frame" align="center">	<p /><p />&nbsp;<p />
 									<img style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/Characters/${dto.m_image_cd}.gif">				
 								</div></td>
-								<!-- 알림 쪽지 보기 버튼 -->
-							<td align="right" width="170"><span onclick="location.href='${pageContext.request.contextPath }/member/alert'"><i id="button-message" class="fas fa-comment"></i></span>&nbsp;&nbsp;
-								<!-- 설정 버튼 -->
-								<span onclick="location.href='${pageContext.request.contextPath }/member/option'"><i id="button-message" class="fas fa-bell"></i></span></td>
+								<td></td>
 						</tr>
 						<tr>
 							<!-- 랭킹보기 링크 -->	
@@ -110,8 +107,13 @@
 							<a href="${pageContext.request.contextPath }/history/rank"><font size="2"><b> 나의 랭킹 보기> </b></font></a></td>
 						</tr>
 						<tr>
-							<!-- 환경설정 버튼 -->
-							<td align="right"><span onclick="location.href='${pageContext.request.contextPath }/member/updateform'"><font size="5" color="gray" style="cursor:pointer;"><i id="button-edit" class="fas fa-user-edit"></i></font></span></td>
+						<td align="right" width="170">
+								<!-- 알림 쪽지 보기 버튼 -->
+								<span onclick="location.href='${pageContext.request.contextPath }/member/alert'"><i id="button-message" class="fas fa-comment"></i></span>&nbsp;&nbsp;
+								<!-- 설정 버튼 -->
+								<span onclick="location.href='${pageContext.request.contextPath }/member/option'"><i id="button-message" class="fas fa-bell"></i></span>&nbsp;&nbsp;
+								<!-- 환경설정 버튼 -->
+								<span onclick="location.href='${pageContext.request.contextPath }/member/updateform'"><i id="button-message" class="fas fa-user-edit"></i></span></td>
 						</tr>
 					</table>
 					</div>
@@ -132,35 +134,21 @@
 								&nbsp;&nbsp;<font color="gray">포인트 |</font>&nbsp;&nbsp;&nbsp;${score} 점 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<span onclick="location.href='${pageContext.request.contextPath }/history/score'"> 확인하러 가기 <i id="button-button" class="fas fa-coins"></i></span>
 						</div>
-						
-						<%-- <div class="div-info" style="background:#B2CCFF; border:#B2CCFF;" align="left">
-							&nbsp;&nbsp;<font color="gray">내가 쓴 글 |</font> &nbsp;&nbsp;&nbsp;${count } 개 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<span onclick="location.href='#'"> 확인하러 가기 <i id="button-button" class="fas fa-edit"></i></span>
-						</div> --%>
 					</div>
 					<br /><br />
 					
 					<!-- 각종 페이지로 넘어가는 버튼 -->
 					<!-- 비밀번호 변경 -->
 					<div class="div-button" align="left" style="position:relative; left:80px;">
-						비밀번호 변경 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						비밀번호 변경 &nbsp;&nbsp;&nbsp;&nbsp;
 						<span onclick="location.href='${pageContext.request.contextPath }/member/changePassword'"><i id="button-button" class="fas fa-key"></i></span>
 					</div>
 					<!-- 로그아웃 -->
 					<div class="div-button" align="left" style="position:relative; left:80px;">
-						로그아웃 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						로그아웃 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<span onclick="location.href='${pageContext.request.contextPath }/logout'"><i id="button-button" class="fas fa-sign-out-alt"></i></span>
 					</div>
 					
-					
-						<%-- <table>
-							<tr>
-								<td >레벨</td>
-								<td><img style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/level/${dto.m_level_cd}.png"></td>
-							</tr>
-						</table> --%>
-						
-						
 							<div style="color: red;">${message}</div>
 				</div>
 			</div>
