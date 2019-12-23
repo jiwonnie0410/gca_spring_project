@@ -15,4 +15,14 @@ public class TroubleVO {
 	
 	//은영
 	private int tr_how_many;		//신고당한횟수(테이블에는 없음)
+	
+	
+	
+	
+	
+	
+	
+	//진영
+	private Date pn_start_dttm;		// 활동정지 시작
+	private Date pn_end_dttm;		// 활동정지 끝
 }
