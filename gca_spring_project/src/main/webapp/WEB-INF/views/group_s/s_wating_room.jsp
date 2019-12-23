@@ -272,24 +272,29 @@
 
 				if (confirmStatus) {
 					var sgNum = ${sgroup.sg_num};
+					var param = JSON.stringify({"m_id" : usrId, "sg_num" : sgNum });
 					
 					//id로 그사람이 방장인지 멤버인지 가져오기
 					$.ajax({
 						url: "getOnesAuthority",
 						method:'post',
 						dataType: "json",	//결과타입
-						data: param2,		//요청파라미터
+						data: param,		//요청파라미터
 						contentType: "application/json",
 						success: function(vo){
 							//방장이면 방이 폭파된다고 confirm창 한번더 띄우기, sgroup 방 삭제, 참가자 활동히스토리에서 삭제
 							if(vo.ach_grant == "방장"){
-								//먼저 sgroup 삭제
-								//웹소켓으로 접속된 사람들 내보내기
+								/* //먼저 sgroup 대기방 삭제 --ajax = roomBoom
+								deleteRoom(sgNum);
+								//웹소켓으로 접속된 사람들 내보내기 --웹소켓으로 location.href = getSgList
 								kickPeople(sgNum);
-								//그 후 컨트롤러에서 활동히스토리 삭제, 방장 본인은 목록으로.
+								//그 후 컨트롤러에서 활동히스토리 삭제, 방장 본인은 목록으로 -- location.href = 
+								deleteActive(); */
+								alert("방장은 참가취소를 할 수 없습니다!");
 							}
 							//웹소켓으로  본인프로필 화면에서 삭제, 방정보 업데이트(인원수,방상태), 활동히스토리 DELETE, 본인은 목록으로 돌아가게.
 							if(vo.ach_grant == "일반"){
+								if()
 								deleteProfile();
 								location.href='cancelJoin?m_id='+usrId+'&sg_num='+sgNum;
 								alert("참가 취소 완료.");
@@ -674,6 +679,8 @@
 		var textarea = document.getElementById('messageWindow');
 		textarea.scrollTop = textarea.scrollHeight;
 	}
+	
+	//웹소켓으로 
 
 	
 //채팅내역 insert --웹소켓 아님 아작스임--

@@ -117,16 +117,12 @@ public class SGroupController {
 			return "redirect:getSgList";
 		}
 		
-	//방장이 참가취소 시 방 삭제, 참가자들 활동이력 삭제
-		@RequestMapping("/sgroup/roomBoom")
-		public String roomBoom(@RequestParam(value="m_id") String id,
-				@RequestParam(value="sg_num") int sg_num, ActiveHistVO vo) {
-//			vo.setM_id(id);
-//			vo.setSg_num(sg_num);
-//			sgroupService.cancelJoin(vo);
-//			//sgroupService.minusNowCnt(sgNum);
-			return "redirect:getSgList";
-		}
+//	//방장이 참가취소 시 참가자들 활동이력 삭제 --시간나면 합시다
+//		@RequestMapping("/sgroup/roomBoom")
+//		public String roomBoom(@RequestParam(value="m_id") String id,
+//				@RequestParam(value="sg_num") int sg_num, ActiveHistVO vo) {
+//			return "redirect:getSgList";
+//		}
 		
 	//강퇴 시 활동이력에서 빠지고 count-1
 		@ResponseBody
