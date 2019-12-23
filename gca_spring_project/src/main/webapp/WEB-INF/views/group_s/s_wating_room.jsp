@@ -16,6 +16,10 @@
 <script type="text/javascript" src="../resources/js/mihy/part_cert.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9e415eb9e7187154cd9c6308c036f0a6&libraries=services,clusterer"></script>
 <script type="text/javascript" src="../resources/js/mihy/kakao_map2.js"></script>
+<!-- 미현 : Toastr -->
+<link href="../resources/css/mihy/toastr.min.css" rel="stylesheet">
+<script src="../resources/js/mihy/toastr.min.js"></script>
+<script src="../resources/js/mihy/bootbox.all.min.js"></script>
 <!-- 미현 끝  -->
 
 
