@@ -107,10 +107,8 @@
 	
 </style>
 
-<!-- 로그인한사람의 id,닉네임,캐릭터코드 저장 -->
+<!-- 로그인한사람의 id저장 -->
 <sec:authentication property="principal.username" var="id"/>
-<sec:authentication property="principal.m_nick" var="nick"/>
-<sec:authentication property="principal.m_image_cd" var="image"/>
 
 <script>
 		$(function() { //페이지 로딩 완료 후 실행
@@ -121,7 +119,6 @@
 			var textarea = document.getElementById('messageWindow');
 			for(var i = 0; i< chatList.length; i++){
 				textarea.value += chatList[i].m_id + " : " + chatList[i].chh_content + "\n";
-				console.log(chatList[i].chh_dttm);
 			}
 			
 			//채팅 전송버튼 눌렀을때
@@ -140,8 +137,6 @@
 				var six_num = ${sixman.six_num};
 				var param = JSON.stringify({"m_id" : profileId});
 				var param2 = JSON.stringify({"m_id" : usrId, "six_num" : six_num });
-				
-				console.log($(event.relatedTarget).children('img').attr('src'));
 				
 				//ajax1. id로 그사람 프로필 가져오기
 				$.ajax({
@@ -162,11 +157,7 @@
 						if(vo.m_id == "${id}"){
 							$('.modal-footer').hide();
 						}
-					},
-					error: function(){
-						console.log("model.addAttribute 실패");
 					}
-					
 				});
 				
 				//ajax2. id로 그사람이 방장인지 멤버인지 가져오기
@@ -181,11 +172,7 @@
 						if(vo.ach_grant == "일반"){
 							$('#kickOut').remove();
 						}
-					},
-					error: function(){
-						console.log("getOnesAuthority 실패");
 					}
-					
 				});
 				
 				//ajax3. 점수 합계 계산해서 레벨 불러오기
@@ -199,11 +186,7 @@
 						$('#profile_level').children('img').attr('src',
 								"${pageContext.request.contextPath }/resources/images/level/"+vo.m_level_cd+".png"	
 						); //레벨 이미지로 표시되게
-					},
-					error: function(){
-						console.log("getOnesLevel 실패");
 					}
-					
 				});
 				
 				
@@ -239,19 +222,11 @@
 						//컨트롤러로 데이타 보낼때 제이슨이라는 것을 알려줘야함. 컨트롤러에는 담을 vo에@RequestBody붙여주고.
 						success: function(){
 							alert("신고 처리 되었습니다.");
-						},
-						error: function(){
-							alert("신고 실패");
 						}
-						
 					});
 					
 					$('#profile').modal('hide'); //프로필 모달창 까지 닫기
-
-				} else {
-					console.log("신고취소함");
 				}
-
 			});
 			
 			
@@ -278,46 +253,52 @@
 						success: function(){
 							alert("강퇴 처리 되었습니다.");
 							deleteProfileKO(kickId); //웹소켓 후 처리에서 해당 아이디만 페이지 이동시켜야함.
-						},
-						error: function(){
-							alert("강퇴 실패");
 						}
-						
 					});
 					
-					
 					$('#profile').modal('hide'); //프로필 모달창 닫기
-
-				} else {
-					console.log("강퇴취소함");
 				}
-
 			});
 			
 			
 			//참가취소 버튼 눌렀을때
 			$("body").on("click", "[id^=cancelJoin]", function() {
-
 				//웹소켓으로 방정보 업데이트(인원수,방상태), 본인프로필 화면에서 삭제, 활동히스토리 DELETE, 본인은 목록으로 돌아가게.
 				var confirmStatus = confirm("정말로 반짝 참여를 취소 하시겠습니까?");
 
 				if (confirmStatus) {
-					
 					var sixNum = ${sixman.six_num};
+					var param = JSON.stringify({"m_id" : usrId, "six_num" : sixNum });
 					
-					deleteProfile();
-					
-					location.href='cancelJoin?m_id='+usrId+'&six_num='+sixNum;
-					
-					alert("참가 취소 완료.");
-					
-				} else {
-					console.log("참가취소 취소함");
+					//id로 그사람이 방장인지 멤버인지 가져오기
+					$.ajax({
+						url: "getOnesAuthority",
+						method:'post',
+						dataType: "json",	//결과타입
+						data: param,		//요청파라미터
+						contentType: "application/json",
+						success: function(vo){
+							if(vo.ach_grant == "방장"){
+								if(vo.ach_confirm != null){
+									alert("인증 후에는 참가 취소를 할 수 없습니다!");
+								}else{
+									alert("방장은 참가취소를 할 수 없습니다!");
+								}
+							}
+							//웹소켓으로  본인프로필 화면에서 삭제, 방정보 업데이트(인원수,방상태), 활동히스토리 DELETE, 본인은 목록으로 돌아가게.
+							if(vo.ach_grant == "일반"){
+								if(vo.ach_confirm != null){
+									alert("인증 후에는 참가 취소를 할 수 없습니다!");
+								}else{
+									deleteProfile();
+									location.href='cancelJoin?m_id='+usrId+'&six_num='+sixNum;
+									alert("참가 취소 완료.");
+								}
+							}
+						}
+					});
 				}
-				//그리고 방장이 빠져나가면 방 삭제되게.
-
 			});
-			
 			//목록으로 돌아가기
 			$('#backToList').on('click', function(){
 				
@@ -329,9 +310,7 @@
 			});
 			
 			//미현
-			$('#btn_cert').on('click', getLocation); //참가인증
 			view_map();
-			
 		});
 </script>
 
@@ -356,8 +335,7 @@
     	<div style="padding-top:0px; padding-bottom:20px">
     		<div>
       			<textarea id="messageWindow" style="font-size:15px; background-color:#FE9191;border-radius:5px;border:3px double #FFF;
-      							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly">
-      			</textarea>
+      							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly"></textarea>
       			<div style="padding-top:10px;">
       				<span style="padding-left:5px; padding-right:3px; vertical-align: middle;">
       					<textarea id="inputMessage" style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; " placeholder="입력하세요"></textarea>
@@ -390,8 +368,8 @@
 
 <!-- 버튼영역 시작 -->														
     <div style="padding-bottom:30px">
-      	<button id="cancelJoin" class="button-general">참가취소</button>&nbsp;
-      	<button class="button-general">공유</button>&nbsp;<button id="backToList" class="button-general">목록</button>
+      	<button id="cancelJoin" class="button-general">참가취소</button>
+      	<button class="button-general">공유</button><button id="backToList" class="button-general">목록</button>
     </div>
 <!-- 버튼영역 끝 -->
 
@@ -579,110 +557,104 @@
 <!-- 웹소켓 채팅 -->
 <script type="text/javascript">
 
- var textarea = document.getElementById("messageWindow"); 
+	var textarea = document.getElementById("messageWindow"); 
  
- var inputMessage = document.getElementById('inputMessage');
+	var inputMessage = document.getElementById('inputMessage');
  
- 
- function onMessageChat(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
-	var result = JSON.parse(event.data);
- 	var six_num = ${sixman.six_num};
-	if(result.cmd == "join" && ( six_num == result.six_num )) { //해당 방에 들어온경우
+	function onMessageChat(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
+		var result = JSON.parse(event.data);
+		var six_num = ${sixman.six_num};
+		if(result.cmd == "join" && ( six_num == result.six_num )) { //해당 방에 들어온경우
 		
-		var img = result.character;
-		var nick = result.nick;
-		var id = result.id;
+			var img = result.character;
+			var nick = result.nick;
+			var id = result.id;
 		
-		//프로필 붙여주기~~
-		$span = $("<span data-toggle='modal' data-target='#profile' style='font-size:13px; padding:10px; display:inline-block;'>");
-		$span.attr("id",id);
-		$img = $("<img style='padding-bottom:5px;' width='65px' height='65px'>");
-		$img.attr({"src": "${pageContext.request.contextPath }/resources/images/Characters/"+img+".gif"});
-		$text = nick;
+			//프로필 붙여주기~~
+			$span = $("<span data-toggle='modal' data-target='#profile' style='font-size:13px; padding:10px; display:inline-block;'>");
+			$span.attr("id",id);
+			$img = $("<img style='padding-bottom:5px;' width='65px' height='65px'>");
+			$img.attr({"src": "${pageContext.request.contextPath }/resources/images/Characters/"+img+".gif"});
+			$text = nick;
 		
-		$span.append($img);
-		$span.append('<br />');
-		$span.append($text);
+			$span.append($img);
+			$span.append('<br />');
+			$span.append($text);
 		
-		textarea.value += result.msg + "\n"; //<00님이 참가하셨습니다>
-		$('#profileList').append($span);
+			textarea.value += result.msg + "\n"; //<00님이 참가하셨습니다>
+			$('#profileList').append($span);
 	 	
-	}
-	else if( result.cmd == "msg" && ( six_num == result.six_num )) { //메세지 전송하는 경우
-		textarea.value += result.id + " : " + result.msg + "\n";
-	}
-	else if( result.cmd == "cancelJoin" && ( six_num == result.six_num )) { //참가취소 누르고 웹소켓 거쳐왔을때.
-		var person = result.id;
-		console.log("person:"+result.id);
-		//프로필 삭제
-		$('#'+person).remove();
-		textarea.value += result.msg + "\n"; //채팅방에 나갔다고 표시.
-	}
-	else if( result.cmd == "kickOut" && ( six_num == result.six_num ) ){
-		var id = "${id}";
-		if(result.id == id){ //강퇴당한놈만 나가게.
-			location.href="getSixList";
-			textarea.value += result.msg + "\n";
 		}
-		$('#'+result.id).remove();
+		else if( result.cmd == "msg" && ( six_num == result.six_num )) { //메세지 전송하는 경우
+			textarea.value += result.id + " : " + result.msg + "\n";
+		}
+		else if( result.cmd == "cancelJoin" && ( six_num == result.six_num )) { //참가취소 누르고 웹소켓 거쳐왔을때.
+			var person = result.id;
+			$('#'+person).remove(); //프로필 삭제
+			textarea.value += result.msg + "\n"; //채팅방에 나갔다고 표시.
+		}
+		else if( result.cmd == "kickOut" && ( six_num == result.six_num ) ){
+			var id = "${id}";
+			if(result.id == id){ //강퇴당한놈만 나가게.
+				location.href="getSixList";
+				textarea.value += result.msg + "\n";
+			}
+			$('#'+result.id).remove();
 		
+		}
+		chatAreaScroll(); //채팅창 스크롤바 맨밑으로 내리기
 	}
-	  
-	chatAreaScroll(); 
- }
 
  
- //메세지 전송
- function send() { 
-	 var six_num = ${sixman.six_num};
-	 msg = {
-		 cmd : "msg",
-		 id : "${id}",
-		 msg : inputMessage.value,
-		 six_num : six_num
-	 }
-	 if((inputMessage.value != "")){
+	//메세지 전송
+	function send() { 
+		var six_num = ${sixman.six_num};
+		msg = {
+				cmd : "msg",
+				id : "${id}",
+				msg : inputMessage.value,
+				six_num : six_num
+		}
+		if((inputMessage.value != "")){
+			webSocket.send(  JSON.stringify( msg )   );
+		}
+	} 
+ 
+	//나갔을때 참여자 칸에서 프로필 삭제
+	function deleteProfile() { 
+		var six_num = ${sixman.six_num};
+		msg = {
+				cmd : "cancelJoin",
+				id : "${id}",
+				msg : "<"+"${id}"+"님이 나가셨습니다.>",
+				six_num : six_num
+		}
 		webSocket.send(  JSON.stringify( msg )   );
-	 }
- } 
+	}
  
- //나갔을때 참여자 칸에서 프로필 삭제
- function deleteProfile() { 
-	 var six_num = ${sixman.six_num};
-	 msg = {
-		 cmd : "cancelJoin",
-		 id : "${id}",
-		 msg : "<"+"${id}"+"님이 나가셨습니다.>",
-		 six_num : six_num
-	 }
-	webSocket.send(  JSON.stringify( msg )   );
- }
- 
-//강퇴 시 참여자 칸에서 프로필 삭제
- function deleteProfileKO(id) { 
-	 var six_num = ${sixman.six_num};
-	 msg = {
-		 cmd : "kickOut",
-		 id : id,
-		 msg : "<"+id+"님이 강퇴되었습니다.>",
-		 six_num : six_num
-	 }
-	webSocket.send(  JSON.stringify( msg )   );
- }
+	//강퇴 시 참여자 칸에서 프로필 삭제
+	function deleteProfileKO(id) { 
+			var six_num = ${sixman.six_num};
+			msg = {
+					cmd : "kickOut",
+					id : id,
+					msg : "<"+id+"님이 강퇴되었습니다.>",
+					six_num : six_num
+			}
+			webSocket.send(  JSON.stringify( msg )   );
+		}
 
  
- //채팅치면 스크롤바 내려가게 하기.
- function chatAreaScroll() {
-	var textarea = document.getElementById('messageWindow');
-	textarea.scrollTop = textarea.scrollHeight;
-}
+	//채팅치면 스크롤바 내려가게 하기.
+	function chatAreaScroll() {
+		var textarea = document.getElementById('messageWindow');
+		textarea.scrollTop = textarea.scrollHeight;
+	}
  
-//채팅내역 insert --웹소켓 아님 아작스임--
+	//채팅내역 insert --이 메서드는 웹소켓이 아니라 아작스--
 	function insertChat(){
 		var usrId = "${id}";
-		//채팅메세지
-		var message = document.getElementById('inputMessage').value;
-		console.log("message : "+message);
+		var message = document.getElementById('inputMessage').value; //채팅메세지
 		var six_num = ${sixman.six_num};
 		
 		//아작스 전송용 파라미터
@@ -699,14 +671,8 @@
 			contentType: "application/json",
 			success: function(){
 				document.getElementById('inputMessage').value = ""; 
-				console.log("insert성공");
-			},
-			error: function(){
-				console.log("insert실패");
 			}
-			
 		});
-
 	}
 </script>
     

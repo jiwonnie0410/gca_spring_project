@@ -117,12 +117,9 @@
 			
 			//본인이 참가한 시간 이후의 채팅 내역 채팅창에 띄우기
 			var chatList = ${chatlist} ;
-			console.log(chatList);
-			console.log(chatList.length);
 			var textarea = document.getElementById('messageWindow');
 			for(var i = 0; i< chatList.length; i++){
 				textarea.value += chatList[i].m_id + " : " + chatList[i].chh_content + "\n";
-				console.log(chatList[i].chh_dttm);
 			}
 			
 			//채팅 전송버튼 눌렀을때
@@ -267,7 +264,6 @@
 			
 			//참가취소 버튼 눌렀을때
 			$("body").on("click", "[id^=cancelJoin]", function() {
-
 				var confirmStatus = confirm("정말로 반짝 참여를 취소 하시겠습니까?");
 
 				if (confirmStatus) {
@@ -308,14 +304,7 @@
 							}
 						}
 					});
-					
-					
-					
-					
-					
 				}
-				//그리고 방장이 빠져나가면 방 삭제되게.
-
 			});
 			
 			//목록으로 돌아가기
@@ -389,12 +378,12 @@
 
 <!-- 버튼영역 시작 -->														
     <div style="padding-bottom:30px">
-      	<button id="btn_cert" class="button-general">참가인증</button>&nbsp;
+      	<button id="btn_cert" class="button-general">참가인증</button>
       	<c:set var="end" value="마감" />
       	<c:if test="${param.endroom ne end}">
-      		<button id="cancelJoin" class="button-general">참가취소</button>&nbsp;
+      		<button id="cancelJoin" class="button-general">참가취소</button>
       	</c:if>
-      	<button class="button-general">공유</button>&nbsp;
+      	<button class="button-general">공유</button>
       	<button id="backToList" class="button-general">목록</button>
     </div>
 <!-- 버튼영역 끝 -->
@@ -687,10 +676,8 @@
 		textarea.scrollTop = textarea.scrollHeight;
 	}
 	
-	//웹소켓으로 
-
 	
-//채팅내역 insert --웹소켓 아님 아작스임--
+	//채팅내역 insert --이 메서드는 웹소켓이 아니라 아작스--
 	function insertChat(){
 		var usrId = "${id}";
 		//채팅메세지
