@@ -13,6 +13,11 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 	<link rel="stylesheet" href="../resources/css/mihy/swiper.min.css">
 	<script src="../resources/js/mihy/swiper.min.js"></script>
+	
+	<!-- Toastr -->
+    <link href="../resources/css/mihy/toastr.min.css" rel="stylesheet">
+    <script src="../resources/js/mihy/toastr.min.js"></script>
+    <script src="../resources/js/mihy/bootbox.all.min.js"></script>
 
 <script>
 	var mgrant = "<sec:authentication property='principal.m_status_cd'/>";
