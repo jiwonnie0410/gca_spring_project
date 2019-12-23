@@ -71,7 +71,7 @@ public class SGroupController {
 			return vo;
 		}
 		
-	//프로필 모달 띄울 때 해당 멤버의 레벨 가져오기
+	//프로필 모달 띄울 때 해당 멤버의 레벨 가져오기 -- 레벨은 매일 새벽 1시에 업데이트됨.
 		@ResponseBody
 		@RequestMapping(value="/sgroup/getOnesLevel", consumes="application/json")
 		public MembersVO getOnesLevel(@RequestBody MembersVO vo) {
@@ -81,7 +81,7 @@ public class SGroupController {
 			if(svo.getSch_score() != 0) {
 				score = svo.getSch_score();
 			}
-		//2)if 점수가 몇점 이상이면 레벨 업데이트 -> 이거 불러오기만하고 자정마다 업데이트 하는게 좋을듯.....
+		//2)점수별로 레벨 set
 			if(isBetween(score, 0, 29)) { //isBetween함수는 바로 밑에..
 				vo.setM_level_cd("LEVEL1");
 			}else if(isBetween(score, 30, 199)) {
@@ -116,6 +116,13 @@ public class SGroupController {
 			//sgroupService.minusNowCnt(sgNum);
 			return "redirect:getSgList";
 		}
+		
+//	//방장이 참가취소 시 참가자들 활동이력 삭제 --시간나면 합시다
+//		@RequestMapping("/sgroup/roomBoom")
+//		public String roomBoom(@RequestParam(value="m_id") String id,
+//				@RequestParam(value="sg_num") int sg_num, ActiveHistVO vo) {
+//			return "redirect:getSgList";
+//		}
 		
 	//강퇴 시 활동이력에서 빠지고 count-1
 		@ResponseBody

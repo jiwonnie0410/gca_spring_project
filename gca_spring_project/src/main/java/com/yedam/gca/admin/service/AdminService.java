@@ -43,21 +43,23 @@ public interface AdminService {
 	
 
 	
-		//진영
-		 // 1.회원 정보 상세보기
-	    public MembersVO viewMember(String m_id);
-	    //2.회원전체조회
-		public List<MembersVO> getUserList(MembersVO vo);
-		//3.회원강퇴
-		public int deleteUser(MembersVO vo);
+	//진영
+	 // 1.회원 정보 상세보기
+   public MembersVO viewMember(String m_id);
+   //2.회원전체조회
+	public List<MembersVO> getUserList(MembersVO vo);
+	//3.회원강퇴
+	public int deleteUser(MembersVO vo);
 
-		
-		
-		
-		public int countArticle(String searchOption, String keyword) throws Exception;
-
-		public List<TroubleVO> listAll(int start, int end, String searchOption, String keyword) throws Exception;
 	
+	
+	
+	// 01. 게시글 레코드 갯수
+	public int countArticle(String searchOption, String keyword ) throws Exception;
+	// 02. 게시글 전체 목록
+	public List<TroubleVO> listAll(int start, int end, String searchOption, String keyword) throws Exception;
+
+
 	
 		
 		

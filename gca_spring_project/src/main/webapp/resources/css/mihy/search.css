@@ -52,7 +52,7 @@ nav { background-color: white;}
 .tr { height: 90px; }
 .td1 { width: 45px; float: top; position: absolute; }
 .td2 { width: 300px; float: top; position: absolute; left: 50px; }
-.td3 { width: 90px;	white-space: nowrap; float: top; position: absolute; right:5px;}
+.td3 { width: 90px;	white-space: nowrap; float: top; position: absolute; right:10px;}
 /* .content { line-height: 0.3; } */
 .p1 { font-size: 23pt; position: absolute; margin: 0 0 0 5px;}
 .p9	{ position: relative; margin: -10px 0 -10px -5px; }

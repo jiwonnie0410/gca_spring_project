@@ -10,7 +10,9 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<script>
+var path ="${pageContext.request.contextPath}"
+</script>
 <!--json할때 필요  -->
 <script src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
 	
@@ -62,15 +64,15 @@
 <!-- -------------------------------------------------------------------------------------------------------------------- -->
 		<h1 align="center">신고관리</h1>
 		<section class="userlist">
-		 <form class="form-inline" id="frmSearch" method="post" action="${pageContext.request.contextPath}/admin/adlist">
+		 <form class="form-inline" id="frmSearch"  name="frmSearch" method="post" action="${pageContext.request.contextPath}/admin/getUserList">
 			<div class="card mb-3">
 				<div class="card-header" style="background-color: #FEBABA;">신고관리</div>
 				<div class="card-body">
 					<div class="table-responsive" align="right">
-        				<form name="SearchForm">
+        				<input type="hidden" id="page" name="page" value="1"> 
 							<table>
 								<tr>
-									<td><select id="searchCondition" name="searchCondition" class="btn btn-outline-warning btn-sm dropdown-toggle" style="">
+									<td><select id="searchCondition" name="searchOption" class="btn btn-outline-warning btn-sm dropdown-toggle" style="">
 											<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
 											<option value="all"<c:out value="${map.searchOption == 'all'?'selected':''}"/>>전체 조회</option>
 											<option value="tr_mid"<c:out value="${map.searchOption == 'tr_mid'?'selected':''}"/>>피신고자</option>
@@ -81,7 +83,6 @@
 									<td><button type="submit" class="btn btn-outline-warning btn-sm" style="border-color: #FAF0F0; color: #ffc0cb;">검색</button></td>
 								</tr>
 							</table>
-					</form>
 				</div>
 		<!-- 레코드의 갯수를 출력 -->
 		<table class="table" >
@@ -155,9 +156,11 @@
 		</tr>
 		<!-- 페이징 -->
 	</table>
-
+</div>
+</div>
 	</div>
 </div>
+</form>
 <!-- 	
 	Modal
 	<div id="myModal" class="modal fade" role="dialog">
@@ -210,14 +213,7 @@
 			</div>
 		</div>
 	</div>
-<!-- ------------------------------------------Modal 읽기 끝------------------------------------------------------------------>				
-				
-				
-				
-				
-				
-				
-	
+<!-- ------------------------------------------Modal 읽기 끝------------------------------------------------------------------>					
 </body>
 
 </html>

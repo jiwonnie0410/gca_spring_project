@@ -71,7 +71,7 @@ public class LoginController {
 		String gender;
 		if(((String) response_obj.get("gender")).equals("F"))	// 성별이 여자면
 			gender = "G01";
-		else	// 성별이 남자면
+		else													// 성별이 남자면
 			gender = "G02";
 		String strangeName = (String) response_obj.get("name");							// 유니코드 이름
 		String normalName = Normalizer.normalize(strangeName, Normalizer.Form.NFC);		// 유니코드를 한글로 변환

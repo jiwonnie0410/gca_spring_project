@@ -48,26 +48,35 @@
      .table td {
 	cursor: pointer;
 }
+h4 {
+    display: block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.nav_title {
+    background-color: #FFF;
+    color: #FE9191;
+    text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+}
     </style>
+    <title>동호회를 홍보해 보세요~</title>
     </head>
     
     <body>
-        <!-- <form class="form-inline" id="frmSearch" action="/board/list"> -->
+	<div class="nav_title mt-2 mb-2" align="center"><h4 align="center">동호회 홍보</h4></div>
         <form class="form-inline" id="frmSearch" method="post" action="${pageContext.request.contextPath}/board/adlist">
-		<div align="center">
-			<div class="jumbotron" style="background-color: #FE9191;">
-				<h2 style="color: white;">홍보</h2>
-			</div>
 			<div align="center" style="padding-right: 3%; padding-left: 3%;">
 				<!-- 로그인한 사용자만 글쓰기 버튼을 활성화 -->
 				<c:if test="${m_id != null}"> 
 					<div align="right">
-						<button class="btn" type="button" id="btnWrite" name="write"  style="margin-right: 10%; background-color: #FE9191; color: white;">Write</button>
+						<button class="btn" type="button" id="btnWrite" name="write"  style="margin-right: 10%; background-color: #FE9191; color: white; width:328px;">Write</button>
 					</div>
 				</c:if>  
 			</div>
-		</div>
-	</form>
+		</form>
 	<form name="SearchForm">
 	<table>
 			<tr>
@@ -134,7 +143,7 @@
 
 		<!-- 페이징 -->
 		<tr>
-			<td colspan="5">
+			<td colspan="5" align="center">
 				<!-- 처음페이지로 이동 : 현재 페이지가 1보다 크면  [처음]하이퍼링크를 화면에 출력--> 
 				<c:if test="${map.boardPager.curBlock > 1}">
 					<a href="javascript:list('1')">[처음]</a>

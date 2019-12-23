@@ -21,23 +21,28 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table style="width: 380px" >
+	<table style="width: 360px" >
 		<!-- 댓글 목록 -->
 		<c:forEach var="row" items="${list}">
 		<tr>	
-			<td>
-			<%-- 	${row.m_id} --%> ${row.m_nick}&nbsp;&nbsp;(<fmt:formatDate value="${row.adr_regdate}" pattern="yyyy-MM-dd"/>)
-			<td>
+			<td  style="width: 290px; " >
+			   ${row.m_nick}&nbsp;&nbsp;(<fmt:formatDate value="${row.adr_regdate}" pattern="yyyy-MM-dd"/>)
+			</tr>
+		</td>
+			
 		<tr>
-			<td>		
+			<td style="word-break:break-all; style="width: 350px; ">		
 				${row.adr_content}
+				<!-- <hr> -->
+			</td>
+			<td>
 				<!-- 본인 댓글만 수정버튼 생성되도록 처리 -->
 				 <c:if test="${m_id == row.m_id}">
-				 	<%-- <button type="button" id="btnModify" style="background-color: #FE9191; color: white;"  onclick="showReplyModify('${row.adr_num}')" >댓글 수정</button> --%>
-					<button type="button" id="btnModify" style="background-color: #FE9191; color: white;"  onclick="showReplyModify('${row.adr_num}')">댓글<br> 수정</button>
+					<button type="button" id="btnModify" style="background-color: #FE9191; color: white; width: 60px;"  onclick="showReplyModify('${row.adr_num}')" >댓글<br>수정</button>
 				</c:if> 
-				<hr>
 			</td>
+			
+			
 		</tr>
 		</c:forEach>
 		

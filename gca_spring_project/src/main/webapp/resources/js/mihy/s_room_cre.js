@@ -112,8 +112,8 @@ function valid(){
     			msg = {
     					cmd : "groupAlert",
     					alert_gnum : result.alert_gnum
-    			}
-    			webSocket.onopen = () => webSocket.send( JSON.stringify( msg ) );
+    			}  
+    			webSocket.send( JSON.stringify( msg ) );
     			location.href = 'alreadyIn?sg_num='+result.sg_num;
     		}
     	});

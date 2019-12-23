@@ -15,6 +15,10 @@
 		<!-- json-serializeObject js -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
 		
+		<!-- CSS -->
+		<link href="${pageContext.request.contextPath }/resources/css/menubar/jiwon-menubar.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+		
 <title>운동하자!</title>
 <script>
 
@@ -65,10 +69,12 @@
 </script>
 </head>
 <body>
-	<div style="padding-bottom: 80px;">
+
 		<tiles:insertAttribute name="user-content" />
-	</div>
+		<br><br><br>
 	
+
 		<tiles:insertAttribute name="footer-menubar" />
+
 </body>
 </html>

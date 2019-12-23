@@ -41,6 +41,13 @@
 			if('${joinMessage}' != ''){
 				alert('${joinMessage}');
 			}
+			
+			if('${SPRING_SECURITY_LAST_EXCEPTION}' != ''){
+				alert('아이디와 비밀번호를 확인해 주세요.');
+			}
+			if('${param.error}' != ''){
+				alert('아이디와 비밀번호를 확인해 주세요.');
+			}
 	</script>
 
 </head>

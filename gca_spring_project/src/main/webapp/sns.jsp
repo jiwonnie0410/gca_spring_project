@@ -19,7 +19,7 @@
 <meta property="og:title" content="운동하자" />
 <meta property="og:url" content="http://39.116.34.40/gca" />
 <meta property="og:description" content="동네 친구와 함꼐 운동하는 gca" />
-<meta property="og:image" content="${pageContext.request.contextPath }/resources/images/bok/sns_logo.png" />
+<meta property="og:image" content="${pageContext.request.contextPath }resources/images/bok/sns_logo.png"" />
 
 
 	
@@ -41,13 +41,13 @@ function sharetwitter(url, text) {
 
 // 카카오톡 공유하기
 function shareKakaotalk() {
-       Kakao.init("ce5d5303904f527a3231bf1760ccfc03");      // 사용할 앱의 JavaScript 키를 설정
+	   Kakao.init('745baffb91878f4a9b947f9134484a4d');      // 사용할 앱의 JavaScript 키를 설정
        Kakao.Link.sendDefault({
              objectType:"feed"
            , content : {
                  title:"gca"   // 콘텐츠의 타이틀
                , description:"동네 친구와 운동을....--설명 추가하기"   // 콘텐츠 상세설명
-               , imageUrl:"${pageContext.request.contextPath }/images/bok/sns_logo.png"   // 썸네일 이미지
+               , imageUrl:"${pageContext.request.contextPath }resources/images/bok/sns_logo.png"   // 썸네일 이미지
                , link : {
                      mobileWebUrl:"http://39.116.34.40/gca/"   // 모바일 카카오톡에서 사용하는 웹 링크 URL
                    , webUrl:"http://39.116.34.40/gca/" // PC버전 카카오톡에서 사용하는 웹 링크 URL
@@ -79,7 +79,7 @@ function shareKakaotalk() {
 function toSNS(sns, strTitle, strURL) {
 	var snsArray = new Array();
 	var strMsg = strTitle + " " + strURL;
-	var image = "${pageContext.request.contextPath }/images/bok/sns_logo.png";  // 썸네일 이미지
+	var image = "${pageContext.request.contextPath }resources/images/bok/sns_logo.png";  // 썸네일 이미지
 
 	/* snsArray['twitter'] = "http://twitter.com/home?status="+ encodeURIComponent(strTitle) + ' '
 			+ encodeURIComponent(strURL); */

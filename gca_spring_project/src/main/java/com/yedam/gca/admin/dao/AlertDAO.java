@@ -25,7 +25,7 @@ public class AlertDAO {
 	
 	//알림의 특정 그룹에 속한 아이디 조회
 	public List<AlertVO> getAlertGroupId(SocketVO vo){
-		return mybatis.selectOne("AlertDAO.getAlertGroupId", vo);
+		return mybatis.selectList("AlertDAO.getAlertGroupId", vo);
 	}
 	
 	//모든 나의 알람 메시지 확인하기

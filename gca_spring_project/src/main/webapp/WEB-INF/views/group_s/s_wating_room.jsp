@@ -107,16 +107,15 @@
 	
 </style>
 
-<!-- 로그인한사람의 id,닉네임,캐릭터코드 저장 -->
+<!-- 로그인한사람의 id 저장 -->
 <sec:authentication property="principal.username" var="id"/>
-<sec:authentication property="principal.m_nick" var="nick"/>
-<sec:authentication property="principal.m_image_cd" var="image"/>
 
 <script>
 		$(function() { //페이지 로딩 완료 후 실행
 
 			var usrId = "${id}";
 			
+			//본인이 참가한 시간 이후의 채팅 내역 채팅창에 띄우기
 			var chatList = ${chatlist} ;
 			console.log(chatList);
 			console.log(chatList.length);
@@ -140,10 +139,9 @@
 			$('#profile').on('show.bs.modal', function (event) {
 				var profileId = $(event.relatedTarget).attr('id'); //해당 모달을 띄운 프로필의 id
 				var sg_num = ${sgroup.sg_num};
+				
 				var param = JSON.stringify({"m_id" : profileId});
 				var param2 = JSON.stringify({"m_id" : usrId, "sg_num" : sg_num });
-				
-				console.log($(event.relatedTarget).children('img').attr('src'));
 				
 				//ajax1. id로 그사람 프로필 가져오기
 				$.ajax({
@@ -158,18 +156,13 @@
 						$('#profile_id').text(vo.m_id);
 						$('#profile_nick').text(vo.m_nick);
 						$('#profile_age').text(vo.m_age);
-						$('#profile_gender').text(vo.gender_cd); //남여로 표시되게2
-						//$('#profile_level').text(vo.m_level_cd);
+						$('#profile_gender').text(vo.gender_cd);
 						
 						//본인 프로필 창이면 버튼 영역(신고,강퇴) 숨기기.
 						if(vo.m_id == "${id}"){
 							$('.modal-footer').hide();
 						}
-					},
-					error: function(){
-						console.log("model.addAttribute 실패");
 					}
-					
 				});
 				
 				//ajax2. id로 그사람이 방장인지 멤버인지 가져오기
@@ -184,11 +177,7 @@
 						if(vo.ach_grant == "일반"){
 							$('#kickOut').remove();
 						}
-					},
-					error: function(){
-						console.log("getOnesAuthority 실패");
 					}
-					
 				});
 				
 				//ajax3. 점수 합계 계산해서 레벨 불러오기
@@ -201,12 +190,8 @@
 					success: function(vo){
 						$('#profile_level').children('img').attr('src',
 								"${pageContext.request.contextPath }/resources/images/level/"+vo.m_level_cd+".png"	
-						); //레벨 이미지로 표시되게
-					},
-					error: function(){
-						console.log("getOnesLevel 실패");
+						); //레벨을 이미지로 표시
 					}
-					
 				});
 				
 			});
@@ -241,19 +226,11 @@
 						//컨트롤러로 데이타 보낼때 제이슨이라는 것을 알려줘야함. 컨트롤러에는 담을 vo에@RequestBody붙여주고.
 						success: function(){
 							alert("신고 처리 되었습니다.");
-						},
-						error: function(){
-							alert("신고 실패");
 						}
-						
 					});
 					
 					$('#profile').modal('hide'); //프로필 모달창 까지 닫기
-
-				} else {
-					console.log("신고취소함");
 				}
-
 			});
 			
 			
@@ -280,41 +257,62 @@
 						success: function(){
 							alert("강퇴 처리 되었습니다.");
 							deleteProfileKO(kickId); //웹소켓 후 처리에서 해당 아이디만 페이지 이동시켜야함.
-						},
-						error: function(){
-							alert("강퇴 실패");
 						}
-						
 					});
 					
-					
 					$('#profile').modal('hide'); //프로필 모달창 닫기
-
-				} else {
-					console.log("강퇴취소함");
 				}
-
 			});
 			
 			
 			//참가취소 버튼 눌렀을때
 			$("body").on("click", "[id^=cancelJoin]", function() {
 
-				//웹소켓으로 방정보 업데이트(인원수,방상태), 본인프로필 화면에서 삭제, 활동히스토리 DELETE, 본인은 목록으로 돌아가게.
 				var confirmStatus = confirm("정말로 반짝 참여를 취소 하시겠습니까?");
 
 				if (confirmStatus) {
-					
 					var sgNum = ${sgroup.sg_num};
+					var param = JSON.stringify({"m_id" : usrId, "sg_num" : sgNum });
 					
-					deleteProfile();
+					//id로 그사람이 방장인지 멤버인지 가져오기
+					$.ajax({
+						url: "getOnesAuthority",
+						method:'post',
+						dataType: "json",	//결과타입
+						data: param,		//요청파라미터
+						contentType: "application/json",
+						success: function(vo){
+							//방장이면 방이 폭파된다고 confirm창 한번더 띄우기, sgroup 방 삭제, 참가자 활동히스토리에서 삭제
+							if(vo.ach_grant == "방장"){
+								/* //먼저 sgroup 대기방 삭제 --ajax = roomBoom
+								deleteRoom(sgNum);
+								//웹소켓으로 접속된 사람들 내보내기 --웹소켓으로 location.href = getSgList
+								kickPeople(sgNum);
+								//그 후 컨트롤러에서 활동히스토리 삭제, 방장 본인은 목록으로 -- location.href = 
+								deleteActive(); */
+								if(vo.ach_confirm != null){
+									alert("인증 후에는 참가 취소를 할 수 없습니다!");
+								}else{
+									alert("방장은 참가취소를 할 수 없습니다!");
+								}
+							}
+							//웹소켓으로  본인프로필 화면에서 삭제, 방정보 업데이트(인원수,방상태), 활동히스토리 DELETE, 본인은 목록으로 돌아가게.
+							if(vo.ach_grant == "일반"){
+								if(vo.ach_confirm != null){
+									alert("인증 후에는 참가 취소를 할 수 없습니다!");
+								}else{
+									deleteProfile();
+									location.href='cancelJoin?m_id='+usrId+'&sg_num='+sgNum;
+									alert("참가 취소 완료.");
+								}
+							}
+						}
+					});
 					
-					location.href='cancelJoin?m_id='+usrId+'&sg_num='+sgNum;
 					
-					alert("참가 취소 완료.");
 					
-				} else {
-					console.log("참가취소 취소함");
+					
+					
 				}
 				//그리고 방장이 빠져나가면 방 삭제되게.
 
@@ -358,8 +356,7 @@
     	<div style="padding-top:0px; padding-bottom:20px">
     		<div>
       			<textarea id="messageWindow" style="font-size:15px; background-color:#FE9191;border-radius:5px;border:3px double #FFF;
-      							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly">
-      			</textarea>
+      							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly"></textarea>
       			<div style="padding-top:10px;">
       				<span style="padding-left:5px; padding-right:3px; vertical-align: middle;">
       					<textarea id="inputMessage" style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; " placeholder="입력하세요"></textarea>
@@ -589,7 +586,7 @@
 	</div>
 </div>
 
-<!-- 웹소켓 채팅 -->
+<!-- 웹소켓 대기방 참가,채팅,참가취소,강퇴 -->
 <script type="text/javascript">
 
 	var textarea = document.getElementById("messageWindow"); 
@@ -599,7 +596,8 @@
 	function onMessageChat(event) { //명령어에따라 다른 동작이 되도록 else문으로 명령어 더 추가해서 할 수 있음.(핸들러에도 같이 추가해야함.)
 		var result = JSON.parse(event.data);
 		var sg_num = ${sgroup.sg_num};
-		if(result.cmd == "join" && ( sg_num == result.sg_num )) { //해당 방에 들어온경우
+		//대기방 참가 시
+		if(result.cmd == "join" && ( sg_num == result.sg_num )) {
 				
 			var img = result.character;
 			var nick = result.nick;
@@ -620,16 +618,17 @@
 			$('#profileList').append($span);
 		 	
 		}
-		else if( result.cmd == "msg" && ( sg_num == result.sg_num )) { //메세지 전송하는 경우
+		//메세지 전송
+		else if( result.cmd == "msg" && ( sg_num == result.sg_num )) {
 			textarea.value += result.id + " : " + result.msg + "\n";
 		}
+		//참가 취소
 		else if( result.cmd == "cancelJoin" && ( sg_num == result.sg_num )) { //참가취소 누르고 웹소켓 거쳐왔을때.
 			var person = result.id;
-			console.log("person:"+result.id);
-			//프로필 삭제
-			$('#'+person).remove();
+			$('#'+person).remove(); //프로필 삭제
 			textarea.value += result.msg + "\n"; //채팅방에 나갔다고 표시.
 		}
+		//강퇴
 		else if( result.cmd == "kickOut" && ( sg_num == result.sg_num ) ){
 			var id = "${id}";
 			if(result.id == id){ //강퇴당한놈만 나가게.
@@ -637,7 +636,6 @@
 			}
 			textarea.value += result.msg + "\n";
 			$('#'+result.id).remove();
-				
 		}
 			  
 		chatAreaScroll(); 
@@ -688,6 +686,8 @@
 		var textarea = document.getElementById('messageWindow');
 		textarea.scrollTop = textarea.scrollHeight;
 	}
+	
+	//웹소켓으로 
 
 	
 //채팅내역 insert --웹소켓 아님 아작스임--
@@ -695,7 +695,6 @@
 		var usrId = "${id}";
 		//채팅메세지
 		var message = document.getElementById('inputMessage').value;
-		console.log("message : "+message);
 		var sg_num = ${sgroup.sg_num};
 		
 		//아작스 전송용 파라미터
@@ -712,14 +711,8 @@
 			contentType: "application/json",
 			success: function(){
 				document.getElementById('inputMessage').value = ""; 
-				console.log("insert성공");
-			},
-			error: function(){
-				console.log("insert실패");
 			}
-			
 		});
-
 	}
 </script>
     

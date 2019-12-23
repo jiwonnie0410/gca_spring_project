@@ -12,4 +12,5 @@ public class SocketVO {
 	private int sg_num;
 	private int bg_num;
 	private int six_num;
+	private int alert_gnum;
 }

@@ -107,7 +107,7 @@ function valid(){
     					cmd : "groupAlert",
     					alert_gnum : result.alert_gnum
     			}
-    			webSocket.onopen = () => webSocket.send( JSON.stringify( msg ) );
+    			webSocket.send( JSON.stringify( msg ) );
     			location.href = 'alreadyIn?bg_num='+result.bg_num;
     		}
     	});

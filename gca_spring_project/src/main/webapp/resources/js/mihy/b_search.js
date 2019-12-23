@@ -17,7 +17,6 @@ $(document).ready(function(){
 	});
 	
 	p9();
-//	p8();
 	setInterval(p8,1000);
 	
 	//방 참여
@@ -95,7 +94,14 @@ function scroll(){
 			dataType:"html",
 			data : form,
 			success: function(result){
+				var tr_last = $('#tb1 tbody tr').length-1;
 				$('#tb1 tbody').append(result);
+				var tr_gt = $('#tb1 tbody tr:gt(' + tr_last + ')');
+				for(var i=0; i<tr_gt.length; i++){
+					var p9_dis = tr_gt.eq(i).find('.p9 span');
+					var mathround_dis = Math.round(p9_dis.text() *10) / 10;
+					p9_dis.text(mathround_dis + "km");
+				}
 			}
 		});
 	}

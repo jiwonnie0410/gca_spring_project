@@ -19,7 +19,6 @@ $(document).ready(function(){
 	
 	
 	p9();
-//	p8();
 	setInterval(p8,1000);
 	
 	//방 참여
@@ -98,7 +97,14 @@ function scroll(){
 			dataType:"html",
 			data : form,
 			success: function(result){
+				var tr_last = $('#tb1 tbody tr').length-1;
 				$('#tb1 tbody').append(result);
+				var tr_gt = $('#tb1 tbody tr:gt(' + tr_last + ')');
+				for(var i=0; i<tr_gt.length; i++){
+					var p9_dis = tr_gt.eq(i).find('.p9 span');
+					var mathround_dis = Math.round(p9_dis.text() *10) / 10;
+					p9_dis.text(mathround_dis + "km");
+				}
 			}
 		});
 	}
@@ -139,7 +145,7 @@ function p8(){
 		} else if(d<1 && h<1 && m<1){
 			$('.p8').eq(i).html("<span class='badge badge-pill badge-danger'><font color='white'><b>"+s+"초 남음</b></font></span>");
 		} else if(d<1 && h<1){
-			$('.p8').eq(i).html("<span class='badge badge-pill badge-danger'><font color='white'><b>"+m+"분"+s+"초 남음</b></font></span>");
+			$('.p8').eq(i).html("<span class='badge badge-pill badge-danger'><font color='white'><b>"+m+"분"+s+"초</b></font></span>");
 		} else if(d<1){
 			$('.p8').eq(i).html("<span class='badge badge-pill badge-danger'><font color='white'><b>"+h+"시간 남음</b></font></span>");
 		} else {
