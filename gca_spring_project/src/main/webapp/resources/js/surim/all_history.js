@@ -91,8 +91,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	    	$("#sg_option").html("옵션: "+dbArr.sg_option);
 	    	
 	    	/* 미현 : 지도  */
-	    	$("#map_xy").val(dbArr.xy);
-	    	view_map();
+//	    	$("#map_xy").val(dbArr.xy);
+//	    	view_map();
 	    }//
 	  });
 	  
@@ -105,11 +105,11 @@ document.addEventListener('DOMContentLoaded', function() {
 //	  $('#aaa a').on('click', function (e) {
 //		  e.preventDefault()
 //		})
-	  
-	  $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-		  map.relayout();
-		})
-		map.relayout();
+//	  
+//	  $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+//		  map.relayout();
+//		})
+//		map.relayout();
 	  
 	});
 
