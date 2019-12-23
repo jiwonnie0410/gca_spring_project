@@ -290,7 +290,11 @@
 								kickPeople(sgNum);
 								//그 후 컨트롤러에서 활동히스토리 삭제, 방장 본인은 목록으로 -- location.href = 
 								deleteActive(); */
-								alert("방장은 참가취소를 할 수 없습니다!");
+								if(vo.ach_confirm != null){
+									alert("인증 후에는 참가 취소를 할 수 없습니다!");
+								}else{
+									alert("방장은 참가취소를 할 수 없습니다!");
+								}
 							}
 							//웹소켓으로  본인프로필 화면에서 삭제, 방정보 업데이트(인원수,방상태), 활동히스토리 DELETE, 본인은 목록으로 돌아가게.
 							if(vo.ach_grant == "일반"){
