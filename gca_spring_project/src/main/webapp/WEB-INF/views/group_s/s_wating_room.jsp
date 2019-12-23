@@ -294,10 +294,13 @@
 							}
 							//웹소켓으로  본인프로필 화면에서 삭제, 방정보 업데이트(인원수,방상태), 활동히스토리 DELETE, 본인은 목록으로 돌아가게.
 							if(vo.ach_grant == "일반"){
-								if()
-								deleteProfile();
-								location.href='cancelJoin?m_id='+usrId+'&sg_num='+sgNum;
-								alert("참가 취소 완료.");
+								if(vo.ach_confirm != null){
+									alert("인증 후에는 참가 취소를 할 수 없습니다!");
+								}else{
+									deleteProfile();
+									location.href='cancelJoin?m_id='+usrId+'&sg_num='+sgNum;
+									alert("참가 취소 완료.");
+								}
 							}
 						}
 					});
