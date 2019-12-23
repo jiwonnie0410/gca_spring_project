@@ -36,7 +36,7 @@
 	</select>
 
 	<!-- 3. 챌린지 성공시 포인트 증정 -->
-	<select id ="insertChallengeScore">
+	<select id ="insertChallengeScore" statementType="CALLABLE">
 		{ call p_point }
 	</select>
 

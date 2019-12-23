@@ -74,6 +74,10 @@
     padding-top: 50px;
 }
 
+#title {
+    color: #FE9191;
+	text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+}
 
 
 </style>
@@ -87,7 +91,7 @@
         <div class="col">
         	<!-- 상단 nav-tabs 시작 -->
 	        <div class="tab" id="tab">
-		        <span><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;챌린지 목록</h4></span>	
+		        <span id="title"><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;챌린지 목록</h4></span>	
 	            <ul class="nav nav-pills">
 	              <!-- 기본 챌린지 탭-->
 	              <li class="nav-item">

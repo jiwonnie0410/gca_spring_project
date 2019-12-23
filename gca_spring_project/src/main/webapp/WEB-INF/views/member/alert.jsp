@@ -69,25 +69,22 @@
 
 $(function() {
 	$(document).scrollTop($(document).height()); 	//화면 로딩했을때 스크롤바 제일 아래로 내려감
-	$(".nav-link").on("click", function() {				
-		$(document).scrollTop($(document).height()); //탭 클릭시 스크롤바 제일 아래로 내려감
-		
-		// 1. 알람메세지 문자열 분석하여 input에 (반짝/용병/동호회) 중 1개 넣어줌
-		var content = $("[name=content]");			// 알람메세지 span
-		var category = $("[name=category]");		// 반짝/용병/동호회 글자찾아서 넣어줄 input
-		for (i = 0; i < content.length; i++) {
-			var check = $("[name=content]")[i].innerText; // 각 알람메세지 내용
-			if (check.match('반짝') == '반짝') {
-				category[i].value = '반짝';
-			} else if (check.match('용병') == '용병') {
-				category[i].value = '용병';
-			} else if (check.match('동호회') == '동호회') {
-				category[i].value = '동호회';
-			}
-		}
-	});
 	
-		//2. 각 메세지 div 클릭시 input값에 따라 (반짝/용병/동호회)로 이동
+	// 1. 알람메세지 문자열 분석하여 input에 (반짝/용병/동호회) 중 1개 넣어줌
+	var content = $("[name=content]");			// 알람메세지 span
+	var category = $("[name=category]");		// 반짝/용병/동호회 글자찾아서 넣어줄 input
+	for (i = 0; i < content.length; i++) {
+		var check = $("[name=content]")[i].innerText; // 각 알람메세지 내용
+		if (check.match('반짝') == '반짝') {
+			category[i].value = '반짝';
+		} else if (check.match('용병') == '용병') {
+			category[i].value = '용병';
+		} else if (check.match('동호회') == '동호회') {
+			category[i].value = '동호회';
+		}
+	}
+	
+	//2. 각 메세지 div 클릭시 input값에 따라 (반짝/용병/동호회)로 이동
 	$('[name=message-div').on("click", function() {
 		var index = ($(this).index() - 1);			// 알람메세지div의 index -1해야 input이랑 매치됨
 		var category = $("[name=category]"); 		// 알람메세지의 카테고리 (반짝/용병/동호회)
@@ -99,6 +96,12 @@ $(function() {
 				location.href='../bgroup/getBgList';
 		}
 	});
+	
+	$(".nav-link").on("click", function() {				
+		$(document).scrollTop($(document).height()); //탭 클릭시 스크롤바 제일 아래로 내려감
+
+	});
+
 });
 </script>
 
@@ -135,7 +138,7 @@ $(function() {
 				<div class="tab-pane fade show active" id="notReadTab" style="padding-bottom: 10px;">
 					<br>
 					<c:forEach items="${notReadList }" var="notReadList">
-						<div name="message-div" class="alert alert-info" role="alert" style="cursor:pointer;>
+						<div name="message-div" class="alert alert-info" role="alert" style="cursor:pointer;">
 							<span class="date"> ${notReadList.alert_dttm }</span>
 							<span class="content">${notReadList.alert_content }
 							<input name="category" type="hidden">	
@@ -148,7 +151,7 @@ $(function() {
 				<div class="tab-pane fade" id="allReadTab" style="padding-bottom: 10px;">
 					<br>
 					<c:forEach items="${alertList }" var="AllList">
-						<div name="message-div" class="alert alert-secondary" role="alert" style="cursor:pointer;>
+						<div name="message-div" class="alert alert-secondary" role="alert" style="cursor:pointer;">
 							<span class="date">${AllList.alert_dttm }</span>
 							<span name="content">${AllList.alert_content }</span>	
 							<input name="category" type="hidden">			
