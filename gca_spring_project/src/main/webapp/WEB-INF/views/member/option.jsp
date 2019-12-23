@@ -191,7 +191,7 @@ function updateRangeBtn() {
     box-shadow: 0 0 0 2px #FE9191;
 }
 
-.title{
+.title {
     text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
     color: #FE9191;
 }    
