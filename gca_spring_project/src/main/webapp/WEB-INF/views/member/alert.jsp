@@ -90,10 +90,6 @@ $(function() {
     font-size: 20px;
 }
 
-.alert.alert {
-	margin: 5px;
-	border-radius: 10px;
-}
 .date {
 	display: block;
 	font-size: small;
@@ -108,14 +104,36 @@ $(function() {
     z-index: 100;
 }
     
-.fa-check:before {
-	content: "\f00c";
-	position: absolute;
-	top: 80%;
-	right: 2%;
+
+.checkMessage {
+    position: absolute;
+    bottom: -10px;
+    right: 1%;
+}
+
+.checkMessage img {
+	width: 22px;
 }
   
+.notRead-div {
+    position: relative;
+	color: #0c5460;
+    border-color: #bee5eb;
+    background-image: linear-gradient(45deg, #d1ecf1, #d1f1db);
+    margin: 5px;
+	border-radius: 10px;
+	padding: 15px;
+}
 
+.allRead-div {
+    position: relative;
+    color: #383d41;
+    border-color: #bee5eb;
+    background-image: linear-gradient(20deg, #ffecd2, #fcb69f);
+    margin: 5px;
+	border-radius: 10px;
+	padding: 15px;       
+}
 
 </style>
 
@@ -152,11 +170,12 @@ $(function() {
 				<div class="tab-pane fade show active" id="notReadTab" style="padding-bottom: 10px;">
 					<br>
 					<c:forEach items="${notReadList }" var="notReadList">
-						<div name="message-div" class="alert alert-info" role="alert" style="cursor:pointer;">
+						<div name="message-div" class="notRead-div" role="alert" style="cursor:pointer;">
 							<span class="date"> ${notReadList.alert_dttm }</span>
 							<span class="content">${notReadList.alert_content }
 							<input name="category" type="hidden">	
 							</span>
+							<p class="checkMessage"><img src="${pageContext.request.contextPath }/resources/images/icon/fire.png"></p>
 						</div>
 					</c:forEach>
 				</div>
@@ -165,9 +184,10 @@ $(function() {
 				<div class="tab-pane fade" id="allReadTab" style="padding-bottom: 10px;">
 					<br>
 					<c:forEach items="${alertList }" var="AllList">
-						<div name="message-div" class="alert alert-secondary" role="alert" style="cursor:pointer;">
-							<span class="date">${AllList.alert_dttm } <i class="fas fa-check"></i></span>
+						<div name="message-div" class="allRead-div" role="alert" style="cursor:pointer;">
+							<span class="date">${AllList.alert_dttm }</span>
 							<span name="content">${AllList.alert_content }</span>
+							<p class="checkMessage"><img src="${pageContext.request.contextPath }/resources/images/icon/check.png"></p>
 							<input name="category" type="hidden">			
 						</div>
 					</c:forEach>
