@@ -27,20 +27,29 @@
 		<tr>	
 			<td  style="width: 290px; " >
 			   ${row.m_nick}&nbsp;&nbsp;(<fmt:formatDate value="${row.adr_regdate}" pattern="yyyy-MM-dd"/>)
-			</tr>
-		</td>
+			</td>
+			<td colspan="2">
+				<!-- 본인 댓글만 수정버튼 생성되도록 처리 -->
+				 <c:if test="${m_id == row.m_id}">
+					<button type="button" id="btnModify" style="background-color: #FE9191; color: white; width: 60px;"  onclick="showReplyModify('${row.adr_num}')" >댓글<br>수정</button>
+				</c:if>
+			</td>
+			
+		</tr>
+		
+		
 			
 		<tr>
 			<td style="word-break:break-all; style="width: 350px; ">		
 				${row.adr_content}
-				<!-- <hr> -->
+				 <hr> 
 			</td>
-			<td>
+			<%-- <td colspan="2">
 				<!-- 본인 댓글만 수정버튼 생성되도록 처리 -->
 				 <c:if test="${m_id == row.m_id}">
 					<button type="button" id="btnModify" style="background-color: #FE9191; color: white; width: 60px;"  onclick="showReplyModify('${row.adr_num}')" >댓글<br>수정</button>
-				</c:if> 
-			</td>
+				</c:if>
+			</td> --%>
 			
 			
 		</tr>

@@ -67,7 +67,7 @@
 <body>
 	댓글 번호 : ${vo.adr_num}<br>
 	<input type="hidden" id="adr_num" name="adr_num" value="${vo.adr_num}">
-	<textarea id="adr_content" name="adr_content" rows="3" cols="47">${vo.adr_content}</textarea>
+	<textarea id="adr_content" name="adr_content" rows="3" cols="35">${vo.adr_content}</textarea>
 	<div style="text-align: center;">
 		<!-- 본인 댓글만 수정, 삭제가 가능하도록 처리 -->
 		<c:if test="${m_id == vo.m_id}">

@@ -11,6 +11,9 @@
 .table td {
 	cursor: pointer;
 }
+.table tr{
+	position: fixed;
+}
 </style>
 
 <script>
@@ -31,25 +34,27 @@
 <title>문제가 있을 경우 관리자에게 문의 하세요~</title>
 <style type="text/css">
 
-h4 {
+/* h4 {
     display: block;
-    margin-block-start: 1.33em;
+  /*  margin-block-start: 1.33em;
     margin-block-end: 1.33em;
     margin-inline-start: 0px;
-    margin-inline-end: 0px;
+    margin-inline-end: 0px;  */
     font-weight: bold;
-}
+} */
 .nav_title {
     background-color: #FFF;
     color: #FE9191;
-  
+}  
 </style>
 </head>
 <body>
 	<%-- ${boardSearchVO } --%>
-	<div align="center">
-		<div class="nav_title mt-2 mb-2" align="center"><h4 align="center">문의 하기</h4></div>
-		</div>
+	<nav class="fixed-top">
+		<div class="nav_title mt-2 mb-2 " align="center">
+			<h4 align="center "style=" position: fixed-top;">문의 하기</h4></div>
+	</nav>
+	<div align="center" style="margin-top:100px; margin-bottom:100px;">
 		<!-- -----------------------------------------검색폼 시작------------------------------------------------->
 	<%-- 	<div>
 			<form action="qnaboard" name="boardForm" id="boardForm">
@@ -79,7 +84,7 @@ h4 {
 
 		<!------------------------------------------------------- 목록 시작 ----------------------------------->
 		<!-- <h3>게시판 목록</h3> -->
-		<table class="table text-center" id="userlisttb">
+		<table  id="userlisttb" >
 			<thead>
 				<tr>
 					<!-- <th class="text-center">번호</th> -->

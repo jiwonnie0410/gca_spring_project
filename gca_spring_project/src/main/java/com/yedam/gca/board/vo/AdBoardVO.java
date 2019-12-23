@@ -16,4 +16,7 @@ public class AdBoardVO {
 	private int ad_count;				// 조회수
 	private int ad_origin;				// 부모글
 	private int recnt;					// 게시글 댓글의 수
+	
+	private String m_image_cd;			// 캐릭터
+	private String m_nick;				// 닉네임
 }

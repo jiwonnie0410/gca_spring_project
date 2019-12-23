@@ -71,7 +71,8 @@ function getBoardListHandler(datas) {
 				$('<td>').html(datas[i].qb_title)).appendTo('#asktb').attr(
 						"data", datas[i].bno);
 	}// for
-	$("#userlisttb").dataTable()
+	$("#userlisttb").dataTable({"scrollY": "300px",   
+        "paging": false})
 }// getBoardListHandler
                     
   

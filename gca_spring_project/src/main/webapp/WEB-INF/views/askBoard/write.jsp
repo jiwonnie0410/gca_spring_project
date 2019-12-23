@@ -79,10 +79,11 @@
 					<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;"> 동호회 지역</label>&nbsp;&nbsp;
 					 <select name="ad_city" id="ad_city" class="btn btn-outline btn-sm dropdown-toggle"  style="border: 1px solid #FE9191; border-radius: 10px;">
 						  <option	selected disabled value="도시" >-도시 선택-</option> 
-						  <option value="qna1" style="border: 1px solid #FE9191;" >서울</option>
-						  <option value="qna2" style="border: 1px solid #FE9191;">수도권</option>
-						  <option value="qna3" style="border: 1px solid #FE9191;" >대구</option>
-						  <option value="qna4" style="border: 1px solid #FE9191;">부산</option>
+						  <option value="서울" style="border: 1px solid #FE9191;" >서울</option>
+						  <option value="수도권" style="border: 1px solid #FE9191;">수도권</option>
+						  <option value="대구" style="border: 1px solid #FE9191;" >대구</option>
+						  <option value="부산" style="border: 1px solid #FE9191;">부산</option>
+						  <option value="기타 지역" style="border: 1px solid #FE9191;">기타 지역</option>
 					 </select>
 				</div>
 			</div>

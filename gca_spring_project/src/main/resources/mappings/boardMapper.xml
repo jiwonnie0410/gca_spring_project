@@ -84,7 +84,10 @@
 			AD_CONTENT, 
 			b.AD_DATE, 
 			b.m_id, 
-			AD_COUNT, 
+			AD_city,
+			AD_COUNT,
+			get_code_name(M_IMAGE_CD) "m_image_cd",
+			m_nick, 
 			b.m_id<!--  AS userName -->
 		FROM 
 			AD_BOARD b, 
