@@ -2,9 +2,10 @@ body{ padding: 10px; }
 nav { background-color: white;}
 
 .nav_title {
+	padding: 5px 0 0 0;
 	background-color: #FFF;
-	color: #FE9191;
-	text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+	color: #3B3B3B;
+	text-shadow: 1px 1px 1px #A3C4D1;
 }
 
 #sg_name, #bg_name, #six_name {
