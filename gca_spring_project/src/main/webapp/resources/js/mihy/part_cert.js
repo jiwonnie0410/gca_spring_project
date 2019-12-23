@@ -10,7 +10,7 @@ function getLocation(){ //참가 인증 스크립트
 			navigator.geolocation.getCurrentPosition(showPosition, showError);
 			//성공하면 매개 변수(showPosition)에 지정된 함수에 좌표 오브젝트를 리턴
 			//실패하면 두 번째 매개 변수(showError)로 오류 처리
-			console.log('geo 메소드: '+ showPosition +", " + showError);
+//			console.log('geo 메소드: '+ showPosition +", " + showError);
 			
 		} else {
 			alert("이 브라우저에서는 GPS를 사용하실 수 없습니다.");
@@ -21,7 +21,7 @@ function getLocation(){ //참가 인증 스크립트
 //showPosition() : 위도와 경도를 출력
 function showPosition(position) {
 	
-	console.log('geo 메소드 > showPosition: '+position.coords.latitude+", "+position.coords.longitude);
+//	console.log('geo 메소드 > showPosition: '+position.coords.latitude+", "+position.coords.longitude);
 	var sg_num_search = $('#sg_num_search').val();
 	
 	var form = { 

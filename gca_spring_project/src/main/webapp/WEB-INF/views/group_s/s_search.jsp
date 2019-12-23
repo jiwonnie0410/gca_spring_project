@@ -33,7 +33,7 @@
 <!-- 계정 상태가 활동중인 사람들만 버튼 보임 -->
 <sec:authentication property='principal.m_status_cd' var='mgrant'/> <!-- 변수에 이 회원의 계정상태 대입 -->
 <c:if test="${mgrant == 'M01'}"> <!-- 계정상태가 활동중이라면 버튼 띄움 -->
-	<button class="btn btn-info create_room mt-3 ml-3 mr-3 shadow-sm" style="width:90%;">반짝 방 생성하기</button>
+	<button class="btn btn-info create_room mt-1 ml-3 mr-3 shadow-sm" style="width:90%;">반짝 방 생성하기</button>
 </c:if>
 
 <form action="getSgList" name="searchSport" id="searchSport" method="post">

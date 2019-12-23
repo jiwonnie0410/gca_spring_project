@@ -1,9 +1,10 @@
 nav { background-color: white;}
 
 .nav_title {
+	padding: 5px 0 0 0;
 	background-color: #FFF;
-	color: #FE9191;
-	text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+	color: #3B3B3B;
+	text-shadow: 1px 1px 1px #A3C4D1;
 }
 
 /* 운동종목 메뉴 */
@@ -45,14 +46,14 @@ nav { background-color: white;}
 .create_room {
 	border: 3px solid #FE7E7E;
 	background-color: #FE9191;
-	margin: 10px 0 5px 0;
+	margin: 5px 0 5px 0;
 }
 
 /* 테이블 각 요소 */
 .tr { height: 90px; }
-.td1 { width: 45px; float: top; position: absolute; }
+.td1 { width: 50px; float: top; position: absolute; }
 .td2 { width: 300px; float: top; position: absolute; left: 50px; }
-.td3 { width: 90px;	white-space: nowrap; float: top; position: absolute; right:10px;}
+.td3 { width: 100px; white-space: nowrap; float: top; position: absolute; right:10px;}
 /* .content { line-height: 0.3; } */
 .p1 { font-size: 23pt; position: absolute; margin: 0 0 0 5px;}
 .p9	{ position: relative; margin: -10px 0 -10px -5px; }
