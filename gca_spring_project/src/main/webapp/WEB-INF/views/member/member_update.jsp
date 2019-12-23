@@ -73,68 +73,52 @@ $(document).ready(function() {
 		
 </head>
 <body>
-
-  <div >
-        <div class="col-50">
-          <div class="card">
-            <div class="card-header" style="background-color: #FEBABA;">
-              my menu
+<div class="col-50">
+			<div class="card">
+				<div class="card-header" style="background-color: #FEBABA;">
+              		정보수정
             </div>
             <div class="card-body">
-					<form name="form1" method="post">
-						<table>
-							<%-- <tr>
-								<td><img  style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/Characters/${dto.m_image_cd}.gif"></td>				
-							</tr> --%>
-							<tr>
-								<td><label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">아이디</label>&nbsp;&nbsp;</td>
-								<!-- id는 수정이 불가능하도록 readonly속성 추가 -->
-								<td><input name="m_id" value="${dto.m_id}"readonly="readonly" style="border: none" ></td>
-							</tr>
-							<tr>
-								<td><label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">이름</label>&nbsp;&nbsp;</td>
-								<td><input name=m_name value="${dto.m_name}" style="border: none" readonly="readonly"></td>
-							</tr> 
-							 <tr>
-								<td><label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">닉네임</label>&nbsp;&nbsp;</td>
-								<td><input name=m_nick value="${dto.m_nick}"></td>
-							</tr> 
+				<form name="form1" method="post">
+					<div class="form-group">
+						<div>
+							<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">아이디</label>&nbsp;&nbsp;  
+							<!-- id는 수정이 불가능하도록 readonly속성 추가 -->
+							<input name="m_id" value="${dto.m_id}"readonly="readonly" style="border: none" >
+						</div>
+					 </div>	
+					 <div class="form-group">
+						<div>
+							<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">이름</label>&nbsp;&nbsp;  
+						    <input name=m_name value="${dto.m_name}" style="border: none" readonly="readonly">  
+						</div>
+					 </div>	
+					  <div class="form-group">
+						<div>	
+							 <label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">닉네임</label>&nbsp;&nbsp;  
+								  <input name=m_nick value="${dto.m_nick}">  
+					     </div>
+					 	</div>
 							
-							
-							<!-- 미현 : 주소 및 주소찾기 버튼 -->
-							<tr>
-								<td><label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">주소</label>&nbsp;&nbsp;</td>
-								<td><input type="text" id="address" value="${dto.m_location}" name="m_location" style="border: none" />
-									<input type="hidden" id="xy" name="m_xy">
-								</td>
-							</tr>
-							<tr>
-								<th>  </th>
-								<td align="left">
-									<input type="button" id="mAddress1" class="button-title" style="height: 30px; background-color: #FE9191; color: white;" value="주소 찾기">
-								</td>
-							</tr>
-							
-							<tr>
-								<td><label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">이메일 주소</label>&nbsp;&nbsp;</td>
-								<td> <input width="90" name="m_email" value="${dto.m_email}"> </td>
-							</tr>
-
-							<tr>
-					
-							<tr>
-								<td colspan="2" align="center"></td>
-							</tr>
-						</table>
-						<!-- <div align="center">
-							<h2>Choose Your Option</h2>
-						</div> -->
-						<br>
-						<div class="info-user2">
-							<div style="color: red;">${message}</div>
+						<div class="form-group">
+						   <div>		
+						<!-- 미현 : 주소 및 주소찾기 버튼 -->
+							  <label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">주소</label>&nbsp;&nbsp;  
+							   <input type="button" id="mAddress1" class="button-title" style="height: 30px; background-color: #FE9191; color: white;" value="주소 찾기">
+							  <input type="hidden" id="xy" name="m_xy">  
+							  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="address" value="${dto.m_location}" name="m_location"  style="border: none;"  size="25"/>
+							</div>
+						 </div>		  
+						 <div class="form-group">
+						   <div>
+								  <label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">이메일 주소</label>&nbsp;&nbsp;  
+								   <input width="90" name="m_email" value="${dto.m_email}" size="25"> 
+						 <div class="form-group">
+						   <div>
 							<!--이모티콘이로 대체  -->
 							<button type="submit" id="btnUpdate" name="btnUpdate" style="background-color: #FE9191; color: white;">확인</button>
-						</div>
+							</div>
+						 </div>	
 					</form>
 							 <form action="../logout" method="post">
 							  <button style="background-color: #FE9191; color: white;">로그아웃</button>

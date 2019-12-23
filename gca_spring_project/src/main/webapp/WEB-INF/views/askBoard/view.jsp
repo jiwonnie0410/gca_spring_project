@@ -268,7 +268,7 @@ Latest compiled JavaScript
 <body>
 	<!-- 게시물 상세보기 영역 -->
 	<input type="hidden" value="${dto.ad_num}">
-        <div class="col-20">
+        <div class="col-35">
           <div class="card">
             <div class="card-header" style="background-color: #FEBABA;">
           		게시물 읽기
@@ -280,8 +280,10 @@ Latest compiled JavaScript
 					<div class="form-group">
 					<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;"> 작성 일자</label>&nbsp;&nbsp;
 					 	<fmt:formatDate value="${dto.ad_date}" pattern="yyyy-MM-dd" />&nbsp;&nbsp;&nbsp;&nbsp;
-					<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">조회수</label>&nbsp;&nbsp; 
-						${dto.ad_count}
+					</div>
+					<div class="form-group">
+						<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">조회수</label>&nbsp;&nbsp; 
+							${dto.ad_count}
 					</div>
 					<div class="form-group">
 						<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;"> 작성자</label>&nbsp;&nbsp; &nbsp; 
@@ -346,7 +348,7 @@ Latest compiled JavaScript
 		<!-- 게시물 상세보기 영역 -->	
 		<table>
 			<tr>
-				<td><textarea rows="3" cols="43" id="adr_content" placeholder="댓글을 작성해주세요"></textarea></td>
+				<td><textarea rows="3" cols="38" id="adr_content" placeholder="댓글을 작성해주세요"></textarea></td>
 				<td><button type="button" class="btn " id="btnReply" style="background-color: #FE9191;color: white;">댓글<br> 작성</button>
 					<br><!-- 비밀댓글 체크박스 --><input type="checkbox" id="adr_hidden" style="border-color:#FE9191; ">비밀
 				</td>

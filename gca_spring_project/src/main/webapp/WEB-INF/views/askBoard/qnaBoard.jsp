@@ -28,14 +28,27 @@
 <sec:authentication property="principal.m_id" var="m_id" />
 <script
 	src="${pageContext.request.contextPath }/resources/js/board/user_Qna.js"></script>
-<title>boardList_json.jsp</title>
+<title>문제가 있을 경우 관리자에게 문의 하세요~</title>
+<style type="text/css">
+
+h4 {
+    display: block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.nav_title {
+    background-color: #FFF;
+    color: #FE9191;
+  
+</style>
 </head>
 <body>
 	<%-- ${boardSearchVO } --%>
 	<div align="center">
-		<div class="jumbotron" style="background-color: #FE9191;">
-			<h2 style="color: white;">문의</h2>
-			<!-- <p style="color: white;">* 홍보.</p> -->
+		<div class="nav_title mt-2 mb-2" align="center"><h4 align="center">문의 하기</h4></div>
 		</div>
 		<!-- -----------------------------------------검색폼 시작------------------------------------------------->
 	<%-- 	<div>

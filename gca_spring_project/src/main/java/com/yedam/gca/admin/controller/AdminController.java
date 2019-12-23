@@ -215,7 +215,4 @@ public class AdminController {
 					mav.setViewName("/admin/userList"); // 뷰를 list.jsp로 설정
 					return mav; // list.jsp로 List가 전달된다.
 				}
-			
-
-
 		}

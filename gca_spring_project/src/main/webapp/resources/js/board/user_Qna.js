@@ -65,12 +65,13 @@ function getBoardListHandler(datas) {
 			tr = '<tr>';
 		}
 		$(tr).append(
-				$('<td>').html(datas[i].qb_id)).append(
+				$('<td>').html(datas[i].qb_an)).append(
 				$('<td>').html(datas[i].m_id)).append(
+				/*$('<td>').html(datas[i].qb_an)).append(*/
 				$('<td>').html(datas[i].qb_title)).appendTo('#asktb').attr(
 						"data", datas[i].bno);
-		$("#userlisttb").dataTable()
 	}// for
+	$("#userlisttb").dataTable()
 }// getBoardListHandler
                     
   

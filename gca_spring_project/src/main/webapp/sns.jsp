@@ -41,7 +41,7 @@ function sharetwitter(url, text) {
 
 // 카카오톡 공유하기
 function shareKakaotalk() {
-       Kakao.init("ce5d5303904f527a3231bf1760ccfc03");      // 사용할 앱의 JavaScript 키를 설정
+	   Kakao.init('745baffb91878f4a9b947f9134484a4d');      // 사용할 앱의 JavaScript 키를 설정
        Kakao.Link.sendDefault({
              objectType:"feed"
            , content : {

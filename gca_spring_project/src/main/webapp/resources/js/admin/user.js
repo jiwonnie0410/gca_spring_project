@@ -11,26 +11,20 @@ $(function(){
 			$(".modal-body").load("viewMember?m_id="+m_id)
 			console.log(m_id);
 		});
-		
-		
-			$("#btnWrite")
-					.click(
-							function() {
-								// 페이지 주소 변경(이동)
-								location.href = "${pageContext.request.contextPath}/board/write.do";
-							});
-		});
+	});
 		
 		
 
-
-//원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
-//function list(page) {
-//	location.href = "${pageContext.request.contextPath}/admin/getUserList?curPage="
-//			+ page
-//			+ "&searchOption-${mav.searchOption}"
-//			+ "&keyword=${mav.keyword}";
-//}
+// 원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
+function list(page) {
+	$('#page').val(page)
+	document.frmSearch.submit()
+	
+/*	location.href = path+"/admin/getUserList?curPage="
+			+ page
+			+ "&searchOption=${map.searchOption}"
+			+ "&keyword=${map.keyword}";*/
+}
 
 
 //사용자 목록 조회 요청
