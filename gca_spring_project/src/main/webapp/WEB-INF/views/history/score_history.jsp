@@ -14,6 +14,18 @@
 	<div align="left" style="background: #FE9191; color: #fff; height: 70px; padding:20px; font-size:20px; font-weight:bold;">
 		점수 획득 내역
 	</div>
+<!-- 레벨 표시 -->
+	<div align="center" style="padding-top:50px;">
+		<span style="font-size: 40px; font-style: oblique; color: #FE9191;">
+			<img style="padding-bottom:5px;" width="55px" height="55px"
+			       src="${pageContext.request.contextPath }/resources/images/level/${mylevel.m_level_cd}.png">
+			&nbsp;
+			
+			${mylevel.m_level_cd}
+		</span>
+	</div>
+	
+<!-- 점수 획득 내역 -->	
 	<div align="center" style="padding:10px; padding-top: 50px;">
 		<table id="scorelist" border="3" style="text-align: center; border: 3px solid #FE9191; border-radius: 7px;">
 			<tr style="background-color: #FE9191; color: #fff;">
@@ -43,16 +55,5 @@
 		</table>
 	</div>
 	
-	
-	<div align="center" style="padding-top:50px;">
-		<span style="font-size: 40px; font-style: oblique; color: #FE9191;">
-			<img style="padding-bottom:5px;" width="55px" height="55px"
-			       src="${pageContext.request.contextPath }/resources/images/level/${mylevel.m_level_cd}.png">
-			&nbsp;
-			
-			${mylevel.m_level_cd}
-		</span>
-
-	</div>
 </body>
 </html>

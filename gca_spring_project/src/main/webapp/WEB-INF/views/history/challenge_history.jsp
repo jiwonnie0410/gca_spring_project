@@ -63,13 +63,16 @@
 	<!-- 컨테이너 안에는 각각 챌린지 카드 div들. -->
 	
 	<!-- 챌린지 리스트 불러오기 -->
+	<c:set var="special" value="special" />
+	<c:set var="basic" value="basic" />
 	<c:set var="chall_id" value="${1}"/>
     <c:forEach var="mychall" items="${mychallist}">
+		<c:set var="chalStatus" value="${mychall.cl_status}" />
 		<div id="card_${chall_id}" style="position:relative;">
 			<span style="float:left;">
 				&nbsp;<span style="padding:0 5px; border-radius:8px; background-color: #FE9191; color:#fff;
 					font-weight:500; font-size:15px; font-style: oblique;">~${mychall.cl_status}~</span>
-				&nbsp;<span style="text-align:center; border:2px dotted #FE9191; border-radius:5px;	padding:2px 15px;
+				&nbsp;<span style="text-align:center; border:2px dotted #FE9191; border-radius:5px;	padding:3px 10px;
 					font-weight: bold; font-size:17px;">${mychall.cl_name}<br /></span>
 				<span style="padding-top:10px; color:blue; font-size:12px; font-weight:bold;">
 					${mychall.cl_start_dttm}
@@ -78,53 +81,44 @@
 				<span style="padding-top:10px; color:blue; font-size:12px; font-weight:bold;">
 					${mychall.cl_end_dttm}<br />
 				</span>
-				
-				<img style="padding-bottom:5px;" width="25px" height="28px"
-		          				src="${pageContext.request.contextPath }/resources/images/icon/heart.png">
-				
-				${mychall.cl_score}점<br />
-				
-				<img style="padding-bottom:5px;" width="25px" height="28px"
-		          				src="${pageContext.request.contextPath }/resources/images/jey/money11.png">
-				보증금 1000~5000
+				<c:if test="${chalStatus eq special}">
+					<img style="padding-bottom:5px;" width="25px" height="28px"
+			          				src="${pageContext.request.contextPath }/resources/images/icon/heart.png">
+					
+					${mychall.cl_score}점&nbsp;&nbsp;
+					<span style="font-size:14px;font-weight:bold;">총 ${mychall.clh_cnt}번 참여</span>
+					
+					<br />
+					
+					<img style="padding-bottom:5px;" width="25px" height="28px"
+			          			src="${pageContext.request.contextPath }/resources/images/jey/money11.png">
+					보증금
+					<span style="padding:0 5px;background-color:black;color:yellow;">
+						<c:forEach var="money" items="${money}">
+							<c:if test="${money.cl_num == mychall.cl_num}">
+								${money.money_deposit}원
+							</c:if>
+						</c:forEach>
+					</span>
+				</c:if>
+				<c:if test="${chalStatus eq basic}">
+					<span style="font-size:1px;"> <br /></span>
+					<img style="padding-bottom:5px;" width="25px" height="28px"
+			          				src="${pageContext.request.contextPath }/resources/images/icon/heart.png">
+					${mychall.cl_score}점&nbsp;&nbsp;
+					<span style="font-size:14px;font-weight:bold;">총 ${mychall.clh_cnt}번 참여</span>
+					
+					<br />
+				</c:if>
 			</span>
-			<span style="position:absolute; left:65%; top:18.5%; float: right;">
-				<img width="140px" height="112px" src="${pageContext.request.contextPath }/resources/images/jey/${mychall.clh_status_cd}.png">
+			<span style="position:absolute; left:65%; top:28.5%; float: right;">
+				<img width="120px" height="96px" src="${pageContext.request.contextPath }/resources/images/jey/${mychall.clh_status_cd}.png">
 			</span>
 		</div>
 		<c:set var="chall_id" value="${chall_id + 1}"/>
 				
 	</c:forEach>
 	
-	
-	
-	<%-- <div id="card_2" style="clear: both; position:relative;">
-		<span style="float:left;"><기본>반짝 2회<br />2019.10.27 ~ 2019.11.2<br />점수 100점</span> <!-- 참여한 챌린지 정보 -->
-		<span style="float: right; position:absolute; left:63%; top:0.5%;">
-			<img width="140px" height="112px" src="${pageContext.request.contextPath }/resources/images/jey/challenge_fail.png"> <!-- 진행/성공/실패여부 도장 -->
-		</span>
-	</div>
-	
-	<div id="card_3" style="clear: both; position:relative;">
-		<span style="float:left;"><기본>반짝 3회<br />2019.10.13 ~ 2019.10.19<br />점수 150점</span>
-		<span style="float: right; position:absolute; left:63%; top:0.5%;">
-			<img width="140px" height="112px" src="${pageContext.request.contextPath }/resources/images/jey/challenge_success.png">
-		</span>
-	</div>
-	
-	<div id="card_4" style="clear: both; position:relative;">
-		<span style="float:left;"><기본>러닝 반짝 2회<br />2019.11.3 ~ 2019.11.9<br />점수 120점</span>
-		<span style="float: right; position:absolute; left:63%; top:0.5%;">
-			<img width="140px" height="112px" src="${pageContext.request.contextPath }/resources/images/jey/challenge_ing.png">
-		</span>
-	</div>
-	
-	<div id="card_5" style="clear: both; position:relative;">
-		<span style="float:left;"><스페셜>배드민턴 반짝 2회<br />2019.9.29 ~ 2019.10.5<br />점수 800점<br />보증금 1000원~10000원</span>
-		<span style="float: right; position:absolute; left:63%; top:0.5%;">
-			<img width="140px" height="112px" src="${pageContext.request.contextPath }/resoures/images/jey/challenge_success.png">
-		</span>
-	</div> --%>
 </div>
 	
 </body>

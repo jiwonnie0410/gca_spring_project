@@ -20,4 +20,5 @@ public class ChallengeVO {
 	private int cl_score;					// 리워드 점수
 	private String gap_day; 						// D-day 계산용, DB에 없음
 	private String clh_status_cd;			//은영 챌린지 진행중/성공/실패 상태(원래 챌린지 히스토리에 있음)
+	private int clh_cnt;					//은영 챌린지 진행 횟수(원래 챌린지 히스토리에 있음)
 }

@@ -2,24 +2,13 @@ package com.yedam.gca.history.service;
 
 import java.util.List;
 
+import com.yedam.gca.admin.vo.MoneyVO;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.history.vo.ChallengeHistVO;
 
 public interface ChallengeHistService {
 
-
-	
-	//진영
-		// 챌린지 히스로리 목록 출력
-
-	List<ChallengeHistVO> getChallengehtList(ChallengeHistVO vo);
-
-
-
-
-
-
-
 	//은영
 	List<ChallengeVO> getMyChallenge(ChallengeHistVO vo);
+	List<MoneyVO> getPaidMoney(MoneyVO vo);
 }

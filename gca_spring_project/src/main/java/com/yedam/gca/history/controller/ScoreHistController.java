@@ -42,7 +42,7 @@ public class ScoreHistController {
 		UserDetails userDetails = (UserDetails) auth.getPrincipal();	//로그인한 유저 정보 담음
 		String id = userDetails.getUsername(); 							//로그인한 유저 id 담음
 		svo.setM_id(id);
-		model.addAttribute("myscorelist", service.getMyScore(svo));	
+		model.addAttribute("myscorelist", service.getMyScore(svo));
 		
 		//레벨이미지 model.addAttribute
 		//1)점수 합계 가져오기

@@ -510,7 +510,7 @@
 						<tr style="text-align: center">
 							<td colspan="2">
 								<div id="map" style="width:300px;height:200px;"></div>
-								<input type="hidden" id="map_xy" value="${bgroup.bg_xy}">
+								<%-- <input type="hidden" id="map_xy" value="${bgroup.bg_xy}"> --%>
 							</td>
 						</tr>
 					</table>

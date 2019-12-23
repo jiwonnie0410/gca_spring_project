@@ -173,15 +173,24 @@
 <!-- ****** 은영 ****** -->
 	<!-- 챌린지 히스토리에 뿌릴 본인의 챌린지 내역 조회 -->
 	<select id="getChallengeHist" parameterType="challengehistory" resultType="challenge">
-		SELECT 		C.CL_STATUS CL_STATUS,
+		SELECT 		C.CL_NUM CL_NUM,
+					C.CL_STATUS CL_STATUS,
 					C.CL_NAME CL_NAME,
 					C.CL_START_DTTM CL_START_DTTM,
 					C.CL_END_DTTM CL_END_DTTM,
         			C.CL_SCORE CL_SCORE,
-        			H.CLH_STATUS_CD CLH_STATUS_CD
+        			H.CLH_STATUS_CD CLH_STATUS_CD,
+        			H.CLH_CNT CLH_CNT
 		FROM    	CHALLENGE C, CHALLENGE_HIST H
 		WHERE 		C.CL_NUM=H.CL_NUM	 AND 	H.M_ID = #{m_id}
 	
 	</select>
-
+	
+	<!-- 참여한 챌린지가 스페셜일때 낸 보증금 조회 -->
+	<select id="getPaidMoney" parameterType="money" resultType="money">
+		SELECT		CL_NUM,
+					MONEY_DEPOSIT
+		FROM		MONEY
+		WHERE		MONEY_STATUS = '보증금' AND M_ID = #{m_id}
+	</select>
 </mapper>

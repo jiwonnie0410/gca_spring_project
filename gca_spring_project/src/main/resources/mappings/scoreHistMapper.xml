@@ -44,11 +44,12 @@
 <!-- *************************은영************************ -->
 	<!-- 아이디로 얻은점수, 점수 얻은 날짜, 점수 얻은곳 조회. -->
 	<select id="getMyScore" resultType="scorehistory" parameterType="scorehistory">
-		SELECT	SCH_SCORE,
-				SCH_DTTM,
-				SCH_PART
-		FROM	SCORE_HIST
-		WHERE	M_ID = #{m_id}
+		SELECT		SCH_SCORE,
+					SCH_DTTM,
+					SCH_PART
+		FROM		SCORE_HIST
+		WHERE		M_ID = #{m_id}
+		ORDER BY	SCH_DTTM DESC
 	</select>
 	
 	<!-- 해당 id의 점수 합계 조회 -->
@@ -64,4 +65,5 @@
 		FROM		SCORE_HIST
 		GROUP BY 	M_ID
 	</select>
+	
 </mapper>
