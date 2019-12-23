@@ -267,9 +267,6 @@ public class SGroupController {
 		vo.setM_id(memInfo.getM_id());
 		sgroupService.getSgCert(vo);
 		
-		//수림추가 + 챌린지 성공시 포인트 증정
-		//challengeService.insertChallengeScore();
-		
 		return vo;
 	}
 	

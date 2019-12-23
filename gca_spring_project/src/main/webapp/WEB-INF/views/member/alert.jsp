@@ -19,45 +19,9 @@
 <script src="${pageContext.request.contextPath }/resources/js/surim/default.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
 
-<style>
+<!-- FONT AWESOME 아이콘 가져오기 -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 
-.container {
-	max-width: 500px;	
-}
-
-.container .nav-link {
-    font-weight: bold;
-    color: black;
-    font-size: 20px;
-}
-
-.container .nav-link.active  {
-	color: #FE9191;
-	text-decoration: underline;
-    text-underline-position: under;
-    background: white;
-    font-size: 20px;
-}
-
-.alert.alert {
-	margin: 2px;
-}
-.date {
-	display: block;
-	font-size: small;
-}
-
-.tab {
-    overflow: hidden;
-    background-color: #ffffff;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-  
-}
-
-</style>
 
 <script>
 /* 각 알람메세지 클릭시 카테고리별 분류에 따라 (반짝/용병/동호회)목록으로 이동시킴
@@ -104,6 +68,56 @@ $(function() {
 
 });
 </script>
+
+
+<style>
+
+.container {
+	max-width: 500px;	
+}
+
+.container .nav-link {
+    font-weight: bold;
+    color: black;
+    font-size: 20px;
+}
+
+.container .nav-link.active  {
+	color: #FE9191;
+	text-decoration: underline;
+    text-underline-position: under;
+    background: white;
+    font-size: 20px;
+}
+
+.alert.alert {
+	margin: 5px;
+	border-radius: 10px;
+}
+.date {
+	display: block;
+	font-size: small;
+}
+
+.tab {
+    overflow: hidden;
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
+    
+.fa-check:before {
+	content: "\f00c";
+	position: absolute;
+	top: 80%;
+	right: 2%;
+}
+  
+
+
+</style>
 
 <style>
 
@@ -152,8 +166,8 @@ $(function() {
 					<br>
 					<c:forEach items="${alertList }" var="AllList">
 						<div name="message-div" class="alert alert-secondary" role="alert" style="cursor:pointer;">
-							<span class="date">${AllList.alert_dttm }</span>
-							<span name="content">${AllList.alert_content }</span>	
+							<span class="date">${AllList.alert_dttm } <i class="fas fa-check"></i></span>
+							<span name="content">${AllList.alert_content }</span>
 							<input name="category" type="hidden">			
 						</div>
 					</c:forEach>

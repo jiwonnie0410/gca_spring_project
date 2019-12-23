@@ -100,6 +100,15 @@ function updateOption() {
 function updateSwitch() {                  
 	var switches = $('input:checkbox'); //스위치
 	switches.on('click', function() {
+		
+		//토글스위치 클릭시 토스트 팝업
+		 var x = document.getElementById("snackbar"); // 토글스위치 div
+		 x.className = "show";	// class에 show 추가하면 보임
+		 setTimeout(function() { 
+				 x.className = x.className.replace("show", ""); 
+			 }, 3000);  
+		
+		
 		var index = (switches.index(this) +1 ); //스위치의 순서, 배열이라서 +1 
 		if($(this).is(':checked')) {
 			$("#m_notice" + index).val(1); //클릭한 버튼이 on일시 스위치폼에 1을 담는다
@@ -123,8 +132,22 @@ function updateSwitch() {
 function updateRangeBtn() {
 	var rangeBtn = $("#rangeBtn");   
 	rangeBtn.on("click", function() {
-		rangeBtn.addClass('clicked'); 			// 범위버튼에 .clicked 클래스 동적추가, css 변경
-		rangeBtn.text("적용완료");				// 범위버튼에 "적용완료" 값 주입
+		
+		//토글스위치 클릭시 토스트 팝업
+		 var x = document.getElementById("snackbar"); // 토글스위치 div
+		 x.className = "show";	// class에 show 추가하면 보임
+		 setTimeout(function() { 
+			 	x.className = x.className.replace("show", ""); 
+			 }, 3000);
+		
+		var rangeBtn =document.getElementById("rangeBtn");
+		rangeBtn.className ='pink-btn clicked';
+		rangeBtn.innerText = '적용완료';  
+		setTimeout(function() { 
+			rangeBtn.innerText = '범위적용';
+			rangeBtn.className = rangeBtn.className.replace("pink-btn clicked", "pink-btn"); 
+		}, 3000);
+		
 		
 		var param = JSON.stringify($("#rangeForm").serializeObject()); //범위정보 폼에 담긴 정보
 		$.ajax({
@@ -171,7 +194,51 @@ function updateRangeBtn() {
 .title{
     text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
     color: #FE9191;
-}   
+}    
+          
+#snackbar {
+    visibility: hidden;
+    width: 300px;
+    margin-left: -125px;
+    background-image: linear-gradient(45deg, #fe919199, #ff98007d);
+    color: #666666;
+    text-align: center;
+    border-radius: 10px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 43%;
+    bottom: 100px;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 1px 1px 8px #fff2c494;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 100px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 100px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 100px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}    
+
+@keyframes fadeout {
+  from {bottom: 100px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
 
 </style>
 </head>
@@ -248,6 +315,11 @@ function updateRangeBtn() {
 				</tbody>
 			</table>
 		</div>
+	</div>
+	
+	<div id="snackbar">
+		<img src="${pageContext.request.contextPath }/resources/images/icon/alert.png" width="48px">
+		설정이 저장되었습니다!
 	</div>
 	
 		<form id="switchForm"> <!-- 스위치1; 스위치2;스위치3; 스위치4;  로그인아이디 -->
