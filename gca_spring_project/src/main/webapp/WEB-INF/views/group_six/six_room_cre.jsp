@@ -42,6 +42,7 @@
 	<div align="center" class="nav_title mt-2 mb-2"><h4>용병 모집 방 만들기</h4></div>
 </nav>
 
+<hr/>
 <form action="creRoom" method="post" id="frm" style="margin-top:40px">
 
 	<div class="row mr-2 ml-2 mt-3 mb-3">

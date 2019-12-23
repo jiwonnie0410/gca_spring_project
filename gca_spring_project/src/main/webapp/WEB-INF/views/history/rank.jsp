@@ -21,14 +21,18 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
 
 <style>
+.container .content-div {
+    background-image: linear-gradient(50deg, #ffecd2, #fcb69f);
+    border-radius: 3px;
+    padding: 20px;
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}      
 
 .rankTable {
 	width: 100%;
 }
-
-/* .container img { */
-/* 	width: 40px; */
-/* } */
 
 .rankTable thead {
 	text-align: center;
@@ -36,6 +40,15 @@
 
 .myRank {
 	text-align: center;
+}
+
+.title {
+	color: #5c3232;
+    text-shadow: 1px 3px 11px white;
+}
+
+.container .content-div hr {
+    border-top: 5px solid #ffffff54
 }
 
 
@@ -59,7 +72,7 @@
 			<br>
 			<table class="rankTable">
 			  <thead>
-			    <tr style="background-color: #FE9191">
+			    <tr style="background-color: #ffffff54">
 			      <th scope="col" style="width: 20%">순위</th>
 			      <th scope="col" colspan="2">닉네임</th>
 			      <th scope="col">점수</th>

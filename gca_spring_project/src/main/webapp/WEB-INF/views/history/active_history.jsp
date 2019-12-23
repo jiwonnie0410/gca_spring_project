@@ -137,7 +137,7 @@
 	      		</div>
 	    </div>
 	    <!-- 캘린더 div 끝 -->
-	    <!-- 전체히스토리 div 시작 -->
+	    <!-- 전체히스토리 div 시작 -->     
 	    <div id="allMenu" class="container tab-pane fade"><br>
 	    	  <!-- Nav tabs 시작 반짝/용병/동아리매치 -->
 			  <ul class="nav nav-tabs" id="aaa">
@@ -164,10 +164,10 @@
 							<span class="pinkText">마감일자: <fmt:formatDate value="${list.start }" pattern="YYYY-MM-dd HH:mm"/></span>
 							<span class="mediumText">주소: ${list.location }</span>
 							
-						<!-- 미현 : 지도 출력 부분 시작-->
-							<div class="sg_map" style="width:100%; height:300px">지도</div>
-							<input type="hidden" class="sg_xy" value="${ list.xy }">
-						<!-- 미현 : 지도 출력 부분 끝 -->
+<!-- 						미현 : 지도 출력 부분 시작 -->
+<!-- 							<div class="sg_map" style="width:100%; height:300px">지도</div> -->
+<%-- 							<input type="hidden" class="sg_xy" value="${ list.xy }"> --%>
+<!-- 						미현 : 지도 출력 부분 끝 -->
 						
 							<span class="mediumText">종목: ${list.sports_cd }</span>
 							<span class="mediumText">숙련도: ${list.skill_cd }</span>
@@ -199,10 +199,10 @@
 							<span class="pinkText">마감일자: <fmt:formatDate value="${list.start }" pattern="YYYY-MM-dd HH:mm"/></span>
 							<span class="mediumText">장소: ${list.location }</span>
 							
-						<!-- 미현 : 지도 출력 부분 시작-->
-							<span class="six_map" style="width:100%; height:300px">지도</span>
-							<input type="hidden" class="six_xy" value="${ list.xy }">
-						<!-- 미현 : 지도 출력 부분 끝 -->
+<!-- 						미현 : 지도 출력 부분 시작 -->
+<!-- 							<span class="six_map" style="width:100%; height:300px">지도</span> -->
+<%-- 							<input type="hidden" class="six_xy" value="${ list.xy }"> --%>
+<!-- 						미현 : 지도 출력 부분 끝 -->
 						
 							<span class="mediumText">종목: ${list.sports_cd }</span>
 							<span class="mediumText">숙련도: ${list.skill_cd }</span>
@@ -230,10 +230,10 @@
 							<span class="mediumText">성별: ${list.gender_cd }</span>
 							<span class="mediumText">팀인원: ${list.bg_team_cnt }</span>
 							
-						<!-- 미현 : 지도 출력 부분 시작-->
-							<div class="bg_map" style="width:100%; height:300px">지도</div>
-							<input type="hidden" class="bg_xy" value="${ list.xy }">
-						<!-- 미현 : 지도 출력 부분 끝 -->
+<!-- 						미현 : 지도 출력 부분 시작 -->
+<!-- 							<div class="bg_map" style="width:100%; height:300px">지도</div> -->
+<%-- 							<input type="hidden" class="bg_xy" value="${ list.xy }"> --%>
+<!-- 						미현 : 지도 출력 부분 끝 -->
 						
 							<span class="status">${list.status }</span>
 						</div>
