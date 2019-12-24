@@ -54,7 +54,9 @@ function userListResult(data) {
 		.append($('<input type=\'hidden\' id=\'hidden_m_id\'>').val(item.m_id))
 		.appendTo('#userlist');
 	});//each
-	$("#userlisttb").dataTable()
+	$("#userlisttb").dataTable(
+			{lengthChange: false} // 표시 건수기능 숨기기
+	)
 }//userListResult
 	
 	
