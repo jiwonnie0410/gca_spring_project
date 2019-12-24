@@ -74,11 +74,11 @@ function scroll(){
 				keyval: keyval
 				
 		}
-		console.log(end_dis);
-		console.log(end_dttm);
-		console.log(end_num);
-		console.log(key);
-		console.log(keyval);
+//		console.log(end_dis);
+//		console.log(end_dttm);
+//		console.log(end_num);
+//		console.log(key);
+//		console.log(keyval);
 		
 		var url;
 		if( $('.table').attr('class').substr(-7) != 'endroom'){
@@ -86,7 +86,7 @@ function scroll(){
 		} else if( $('.table').attr('class').substr(-7) != 'endroom' ){
 			url = "getSixListEnd/";
 		}
-		console.log(url);
+//		console.log(url);
 		
 		$.ajax({
 			url: url,
@@ -130,7 +130,7 @@ function p8(){
 	
 		var countDownDate = new Date(year, month, day, hour, min, 0, 0).getTime();
 		var distance = countDownDate - now;
-		console.log(distance)
+//		console.log(distance)
 		var d = Math.floor(distance / (1000 * 60 * 60 * 24));
 		var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
 		var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); 
@@ -153,30 +153,62 @@ function p8(){
 //방 참여
 function move_room(result, six_dttm){
 
+	toastr.options = {
+			  "closeButton": true,
+			  "debug": false,
+			  "newestOnTop": false,
+			  "progressBar": true,
+			  "positionClass": "toast-bottom-center",
+			  "preventDuplicates": true,
+			  "onclick": null,
+			  "showDuration": "300",
+			  "hideDuration": "1000",
+			  "timeOut": "2000",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+			}
+	
 	if(result.result_msg == 'already'){ //마감이든 아니든 already면 참여
 		location.href='alreadyIn?six_num='+result.pk_num+'&endroom='+six_dttm;
 	} else if(mgrant == 'M01'){
 		if(six_dttm == "마감"){ //마감이면 무조건(full이나 yes나 모두)
-			alert("마감 시간이 초과되어 참여하실 수 없습니다.");
+			toastr.warning("마감 시간이 초과되어 참여하실 수 없습니다.");
 			return false;
 		} else if(six_dttm != "마감" && result.result_msg == 'full'){
-			alert("모집 인원이 초과되어 참여하실 수 없습니다. 인원 변동이 발생하면 참여해 주세요.");
+			toastr.warning("모집 인원이 초과되어 참여하실 수 없습니다. 인원 변동이 발생하면 참여해 주세요.");
 			return false;
 		} else if(six_dttm != "마감" && result.result_msg == 'yes'){
-			var con = confirm("선택한 용병 모집에 참여하시겠습니까?");
-			if(con){
-				msg = {
-						cmd : "join",
-						id : result.m_id,
-						msg : "<"+result.m_id+"님이 참가하셨습니다.>",
-						six_num : result.pk_num
-				}
-				webSocket.send(  JSON.stringify( msg )   );
-				location.href='roomIn?six_num='+result.pk_num;
-			}
+			bootbox.confirm({
+			    message: "선택한 반짝에 참여하시겠습니까?",
+			    buttons: {
+			        confirm: {
+			            label: '예',
+			            className: 'btn-success'
+			        },
+			        cancel: {
+			            label: '아니오',
+			            className: 'btn-danger'
+			        }
+			    },
+			    callback: function(con) {
+				    if(con){
+						msg = {
+								cmd : "join",
+								id : result.m_id,
+								msg : "<"+result.m_id+"님이 참가하셨습니다.>",
+								six_num : result.pk_num
+						}
+						webSocket.send(  JSON.stringify( msg )   );
+						location.href='roomIn?six_num='+result.pk_num;
+					}
+			    }
+			});
 		}
 	} else {
-		alert("회원님의 계정이 정지되어 새로운 모임에 참여하실 수 없습니다.");
+		toastr.warning("회원님의 계정이 정지되어 새로운 모임에 참여하실 수 없습니다.");
 		return false;
 	}
 	
