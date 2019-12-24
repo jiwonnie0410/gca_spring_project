@@ -63,7 +63,7 @@ public class SixmanController {
 		vo.setSix_num(six_num);
 		sixmanService.cancelJoin(vo);
 		//sgroupService.minusNowCnt(sgNum);
-		return "redirect:getSgList";
+		return "redirect:getSixList";
 	}
 	
 //강퇴 시 활동이력에서 빠지고 count-1
