@@ -109,7 +109,6 @@
 
 <!-- 로그인한사람의 id,닉네임,캐릭터코드 저장 -->
 <sec:authentication property="principal.username" var="id"/>
-<sec:authentication property="principal.m_image_cd" var="image"/>
 
 <!-- 카카오톡 -->		
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -194,6 +193,7 @@
 
 			var usrId = "${id}";
 			
+			//채팅 내역 로드
 			var chatList = ${chatlist} ;
 			var textarea = document.getElementById('messageWindow');
 			for(var i = 0; i< chatList.length; i++){
@@ -466,9 +466,12 @@
 
 <!-- 버튼영역 시작 -->														
     <div style="padding-bottom:30px">
-
-      	<button id="btn_cert" class="button-general">참가인증</button>
-
+    	<c:if test="${not empty avo.ach_confirm}">
+      		<button class="button-general">참가인증완료</button>
+      	</c:if>
+      	<c:if test="${empty avo.ach_confirm}">
+      		<button id="btn_cert" class="button-general">참가인증</button>
+      	</c:if>
       	<c:set var="end" value="마감" />
       	<c:if test="${param.endroom ne end}">
       		<button id="cancelJoin" class="button-general">참가취소</button>

@@ -25,6 +25,4 @@ public interface ActiveHistService {
 	//참여하면서 SGroup+BGroup+Sixman 방에 참여한 인물의 정보 가져오기
 	List<MembersVO> getActMemList(ActiveHistVO vo);
 	
-	
-	//***************** 은영 *******************//
 }

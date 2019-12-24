@@ -206,8 +206,11 @@ public class SGroupController {
 		
 		avo.setM_id(user.getUsername());
 		avo.setSg_num(sg_num);
-		chvo = chatService.getJoinTime(avo); //활동히스토리에서 반짝 참여시간 가져와서 chatVO에 담음.
 		
+		model.addAttribute("avo", sgroupService.getOnesAuthority(avo) );//본인의 인증시간 jsp로 넘김
+		
+		chvo = chatService.getJoinTime(avo); //활동히스토리에서 반짝 참여시간 가져와서 chatVO에 담음.
+						
 		chvo.setSg_num(sg_num);	//본인의방번호 chatVO에담음.
 		
 		ObjectMapper mapper = new ObjectMapper(); //javascript에쓰기위해 jsonString?으로변환
