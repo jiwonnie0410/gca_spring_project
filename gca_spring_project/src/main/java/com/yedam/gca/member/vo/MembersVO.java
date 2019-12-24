@@ -51,7 +51,7 @@ public class MembersVO implements UserDetails {
 	
 	private final static String CLIENT_ID = "BJ76vTS9xilyC5p9YXrY";								// 애플리케이션 아이디
 	private final static String CLIENT_SECRET = "VIbOx5iXYy";									// 애플리케이션 비밀키
-	private final static String REDIRECT_URI = "http://localhost/gca/login/naverCallback";		// 애플리케이션 등록할 때의 Callback uri
+	private final static String REDIRECT_URI = "https://39.116.34.40:8443/gca/login/naverCallback";		// 애플리케이션 등록할 때의 Callback uri
 	private final static String SESSION_STATE = "oauth_state";  								// 애플리케이션이 생성한 상태 토큰
 	private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me"; 		// 프로필 조회 API URL
 	

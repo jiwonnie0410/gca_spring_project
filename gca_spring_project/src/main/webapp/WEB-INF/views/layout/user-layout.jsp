@@ -28,10 +28,10 @@
 	$(function(){
 		
 		if(mstatus != null && mstatus != ''){
-			webSocket = new WebSocket('ws://localhost/gca/broadcast.do'); 
+			//webSocket = new WebSocket('ws://localhost/gca/broadcast.do'); 
 			//webSocket = new WebSocket('wss://192.168.0.17:8443/gca/broadcast.do'); 
 			//webSocket = new WebSocket('ws://39.116.34.40/gca/broadcast.do');
-			//webSocket = new WebSocket('wss://39.116.34.40:8443/gca/broadcast.do'); 
+			webSocket = new WebSocket('wss://39.116.34.40:8443/gca/broadcast.do'); 
 			
 			webSocket.onerror = function(event) { onError(event) };
 			webSocket.onopen = function(event) { onOpen(event) };
