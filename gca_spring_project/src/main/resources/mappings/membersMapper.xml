@@ -197,17 +197,25 @@
 
  <!-- 01. 회원정보 상세조회 -->
     <select id="viewMember" resultType="members">
-        SELECT 
-          m_id AS m_id, 
-          m_name AS m_name,
-          m_email AS m_email,
-          m_location AS m_location,
-         get_code_name(M_IMAGE_CD) "m_image_cd",
-         get_code_name(M_LEVEL_CD) "m_level_cd",
-        <!--  m_xy as m_xy -->
-          m_nick AS m_nick
-        FROM MEMBERS
-        WHERE m_id = #{m_id} 
+       SELECT	M_ID,
+				M_PASSWORD,
+				M_NAME,
+				M_NICK,
+				get_code_name(M_IMAGE_CD) M_IMAGE_CD,
+				M_XY,
+				M_LOCATION,
+				M_AGE,
+				get_code_name(GENDER_CD) GENDER_CD,
+				M_GRANT,
+				get_code_name(M_LEVEL_CD) M_LEVEL_CD,
+				M_STATUS_CD,
+				M_RADIUS,
+				M_EMAIL,
+				M_NOTICE1,
+				M_NOTICE2,
+				M_NOTICE3
+		FROM	MEMBERS
+		WHERE	M_ID = #{m_id}
     </select>
     
     
@@ -219,18 +227,13 @@
 			M_NICK= #{m_nick},
 			m_location = #{m_location},
 			m_xy =  #{m_xy}
-			<!-- M_IMAGE_CD= #{m_image_cd} -->
         WHERE
             m_id = #{m_id}    
     </update>
     
     
     
-    <!-- 03. 회원정보 삭제 처리 -->
-    <delete id="deleteMember">
-        DELETE FROM MEMBERS
-        WHERE m_id = #{m_id}
-    </delete>
+
    
   <!-- 04. 비밀번호 체크 -->
     <select id="checkPw" resultType="int">

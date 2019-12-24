@@ -108,8 +108,8 @@ public class MemberDAO {
 	
 	  // 회원 정보 상세보기
 	  // 03. 회원 정보 상세 조회
-    public MembersVO viewMember(String m_id) {
-        return sqlSession.selectOne("MemberDAO.viewMember", m_id);
+    public MembersVO viewMember(MembersVO vo) {
+        return sqlSession.selectOne("MemberDAO.viewMember", vo);
     }
     // 04. 회원 정보 수정 처리
     public void deleteMember(String m_id) {

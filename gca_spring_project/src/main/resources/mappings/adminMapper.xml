@@ -255,10 +255,9 @@
         SELECT 
 	          m_id AS m_id, 
 	          m_name AS m_name,
-	          M_NICK,
+	          M_NICK AS M_NICK,
 	          get_code_name(GENDER_CD) gender_cd,
 			  M_GRANT,
-			  M_LEVEL_CD,
 			  get_code_name(M_STATUS_CD) m_status_cd,
           	  m_email AS m_email,
           	  get_code_name(M_IMAGE_CD) "m_image_cd",

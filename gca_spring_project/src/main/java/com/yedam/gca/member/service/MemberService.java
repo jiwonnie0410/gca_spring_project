@@ -34,7 +34,7 @@ public interface MemberService {
 	
 	//진영
 	 // 1.회원 정보 상세보기
-    public MembersVO viewMember(String m_id);
+    public MembersVO viewMember(MembersVO vo);
     //2. 회원삭제
     public void deleteMember(String m_id);
     // 3.회원정보 수정

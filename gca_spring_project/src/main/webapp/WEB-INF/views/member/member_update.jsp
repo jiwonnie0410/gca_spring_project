@@ -5,28 +5,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- Latest compiled and minified CSS -->
+Latest compiled and minified CSS
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- jQuery library -->
+jQuery library
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Popper JS -->
+Popper JS
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
+Latest compiled JavaScript
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-<!-- 꼭있어야함 -->
+꼭있어야함
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script> -->
 
 <!--json할때 필요  -->
 <script
@@ -63,6 +63,7 @@
 						// 미현 주소 클릭 시 다음주소 및 xy좌표 입력
 						$("#mAddress1").on("click", mAddress_find);
 					});
+	console.log($('#m_xy'))
 </script>
 <sec:authentication property="principal.m_image_cd" var="image" />
 <title>정보 수정</title>
@@ -158,16 +159,16 @@
 							</tr>
 						</table>
 						<!-- </div>
-
+						
 						<div class="form-group"> -->
 						<!-- xy 좌표 받아오기 -->
-						<input type="hidden" id="xy" name="m_xy" /> <br />
+						<input type="hidden" id="m_xy" name="m_xy" value="${dto.m_xy}" /> <br />
 						<!-- 	<div class="form-group"> -->
 						<!-- 수정 버튼 -->
 						<div align="left" style="position: relative; left: 80px;">
 							<button type="submit" id="btnUpdate" name="btnUpdate"class="div-button">
 								수정하기 &nbsp;&nbsp;<font size="3">
-								<iclass="fas fa-user-edit"></i></font>
+								<i class="fas fa-user-edit"></i></font>
 							</button>
 							<!-- </div> -->
 						</div>
