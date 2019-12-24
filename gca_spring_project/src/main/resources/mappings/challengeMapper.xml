@@ -183,6 +183,7 @@
         			H.CLH_CNT CLH_CNT
 		FROM    	CHALLENGE C, CHALLENGE_HIST H
 		WHERE 		C.CL_NUM=H.CL_NUM	 AND 	H.M_ID = #{m_id}
+		ORDER BY	H.CLH_START_DTTM DESC
 	
 	</select>
 	
