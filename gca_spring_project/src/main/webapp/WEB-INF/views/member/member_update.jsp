@@ -75,7 +75,6 @@ Latest compiled JavaScript
 	height: 140px;
 	width: 120px;
 } */
-
 .div-info {
 	background: #E7E7E7;
 	border: 2px solid #E7E7E7;
@@ -96,8 +95,8 @@ Latest compiled JavaScript
 	font-size: 15px;
 	font-weight: bolder;
 	text-align: center;
- 	margin: 0.3em auto; 
- 	padding: 2px 4px; 
+	margin: 0.3em auto;
+	padding: 2px 4px;
 	position: relative;
 	height: 30px;
 	width: 80px;
@@ -110,72 +109,69 @@ Latest compiled JavaScript
 	font-size: 12px;
 	font-weight: bolder;
 	/* margin: 0.3em auto; */
-/* 	padding: 2px 4px; */
+	/* 	padding: 2px 4px; */
 	height: 30px;
 	width: 130px;
 }
 </style>
 </head>
 <body>
-<div>
-	<div>
-		<div class="col-50">
-			<div class="card">
-				<div class="card-header" style="background-color: #FEBABA;">
-					<b> 내 정보 수정하기 </b>
-				</div>
+	<div class="container">
+		<div class="row">
+			<div class="card" style="width: 300px;">
+				<div class="card-header" style="background-color: #FEBABA;"></div>
 				<div class="card-body">
-					<form name="form1" method="post">
-						<table>
-							<!-- 변경 못하는 정보 -->
-							<tr>
-								<td colspan="2" class="div-info" align="left">
-										&nbsp;&nbsp;<font color="gray">아이디 |</font>&nbsp;&nbsp;&nbsp;${dto.m_id}
+					<h5 class="card-title">Card title</h5>
+					<div class="card-text">
+						<form name="form1" method="post">
+							<table>
+								<!-- 변경 못하는 정보 -->
+								<tr>
+									<td colspan="2" class="div-info" align="left">&nbsp;&nbsp;<font
+										color="gray">아이디 |</font>&nbsp;&nbsp;&nbsp;${dto.m_id}
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<font
-											color="gray">이 름 |</font>&nbsp;&nbsp;&nbsp;${dto.m_name}
-								</td>
-							</tr>
-							<!-- 변경 가능한 정보 -->
-							<tr>
-								<td class="div-update">
-										<font color="gray">닉네임</font>
-								</td>
-								<td><input name="m_nick" value="${dto.m_nick}"
-									class="form-control form-control-sm"></td>
-							</tr>
-							<tr>
-								<td class="div-update">
-										<font color="gray">이메일</font>
-								</td>
-								<td><input name="m_email" value="${dto.m_email}"
-									class="form-control form-control-sm"></td>
-							</tr>
-							<tr>
-								<td align="center"><input type="button" id="mAddress1"
-									class="div-update" value="주소 찾기"
-									style="color: gray; text-decoration: underline;"></td>
-								<td><input name="m_location" value="${dto.m_location}"
-									class="form-control form-control-sm"></td>
-							</tr>
-						</table>
-						<!-- </div>
-						
-						<div class="form-group"> -->
-						<!-- xy 좌표 받아오기 -->
-						<input type="hidden" id="m_xy" name="m_xy" value="${dto.m_xy}" /> <br />
-						<!-- 	<div class="form-group"> -->
-						<!-- 수정 버튼 -->
-						<div align="left" style="position: relative; left: 80px;">
-							<button type="submit" id="btnUpdate" name="btnUpdate"class="div-button">
-								수정하기 &nbsp;&nbsp;<font size="3">
-								<i class="fas fa-user-edit"></i></font>
-							</button>
-							<!-- </div> -->
-						</div>
-					</form>
+										color="gray">이 름 |</font>&nbsp;&nbsp;&nbsp;${dto.m_name}
+									</td>
+								</tr>
+								<!-- 변경 가능한 정보 -->
+								<tr>
+									<td class="div-update"><font color="gray">닉네임</font></td>
+									<td><input name="m_nick" value="${dto.m_nick}"
+										class="form-control form-control-sm"></td>
+								</tr>
+								<tr>
+									<td class="div-update"><font color="gray">이메일</font></td>
+									<td><input name="m_email" value="${dto.m_email}"
+										class="form-control form-control-sm"></td>
+								</tr>
+								<tr>
+									<td align="center"><input type="button" id="mAddress1"
+										class="div-update" value="주소 찾기"
+										style="color: gray; text-decoration: underline;"></td>
+									<td><input name="m_location" value="${dto.m_location}"
+										class="form-control form-control-sm"></td>
+								</tr>
+							</table>
+							<!-- </div>
+										<!-- xy 좌표 받아오기 -->
+							<input type="hidden" id="m_xy" name="m_xy" value="${dto.m_xy}" />
+							<br />
+
+						</form>
+
+					</div>
+					<!-- 수정 버튼 -->
+					<div align="left" style="position: relative; left: 80px;">
+						<button type="submit" id="btnUpdate" name="btnUpdate"
+							class="div-button">
+							수정하기 &nbsp;&nbsp;<font size="3"> <i
+								class="fas fa-user-edit"></i></font>
+						</button>
+					</div>
+
 				</div>
 			</div>
-	<!-- 	</div>
-	</div> -->
+		</div>
+	</div>
 </body>
 </html>

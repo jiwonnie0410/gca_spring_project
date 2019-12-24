@@ -49,7 +49,9 @@ function getBoardListHandler(datas) {
 				.appendTo('#asktb').attr("data", datas[i].qb_id);
 	}
 	$("#userlisttb").dataTable(
-			{lengthChange: false} // 표시 건수기능 숨기기
+			{lengthChange: false,
+				  "bDestroy": true
+			} // 표시 건수기능 숨기기
 		)
 	}
 

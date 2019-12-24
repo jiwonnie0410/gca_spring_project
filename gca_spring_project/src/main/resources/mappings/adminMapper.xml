@@ -255,7 +255,7 @@
         SELECT 
 	          m_id AS m_id, 
 	          m_name AS m_name,
-	          M_NICK AS M_NICK,
+	          M_NICK AS m_nick,
 	          get_code_name(GENDER_CD) gender_cd,
 			  M_GRANT,
 			  get_code_name(M_STATUS_CD) m_status_cd,
