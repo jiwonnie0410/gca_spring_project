@@ -544,7 +544,7 @@ function copy_clip(url) {
 							</td>
 	          				<th colspan="2">id</th>
 						</tr>
-						<tr>
+						<tr style="padding-top:-1px;">
 							<td id="profile_id" colspan="2"></td>
 						</tr>
 						<tr>
