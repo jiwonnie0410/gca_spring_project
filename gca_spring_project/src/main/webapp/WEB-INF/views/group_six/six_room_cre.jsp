@@ -7,13 +7,6 @@
 <meta charset="UTF-8">
 <title>용병 모집 방 생성하기</title>
 
-	<!-- Bootstrap -->
-<!-- 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
-
 	<!-- private : icon -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 	
@@ -32,7 +25,10 @@
 	<script type="text/javascript" src="../resources/js/mihy/six_room_cre.js"></script>
 	<link rel="stylesheet" href="../resources/css/mihy/room_cre.css">
 	
-
+	<!-- private : toastr2 & bootbox1 -->
+	<link href="../resources/css/mihy/toastr.min.css" rel="stylesheet">
+    <script src="../resources/js/mihy/toastr.min.js"></script>
+    <script src="../resources/js/mihy/bootbox.all.min.js"></script>
 	
 </head>
 

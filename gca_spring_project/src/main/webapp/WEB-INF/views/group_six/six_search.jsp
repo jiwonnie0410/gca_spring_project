@@ -9,10 +9,13 @@
 <meta charset="UTF-8">
 <title>용병을 찾아보세요!</title>
 
-	<!-- private : icon 1 & slide 2 -->
+	<!-- private : icon 1 & slide 2 & toastr2 & bootbox1 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 	<link rel="stylesheet" href="../resources/css/mihy/swiper.min.css">
 	<script src="../resources/js/mihy/swiper.min.js"></script>
+    <link href="../resources/css/mihy/toastr.min.css" rel="stylesheet">
+    <script src="../resources/js/mihy/toastr.min.js"></script>
+    <script src="../resources/js/mihy/bootbox.all.min.js"></script>
 
 <script>
 	var mgrant = "<sec:authentication property='principal.m_status_cd'/>";
