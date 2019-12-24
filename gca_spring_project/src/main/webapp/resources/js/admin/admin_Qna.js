@@ -48,8 +48,11 @@ function getBoardListHandler(datas) {
 				.append($('<td>').html('<button id=\'btnDel\'>삭제</button>'))
 				.appendTo('#asktb').attr("data", datas[i].qb_id);
 	}
-	$("#userlisttb").dataTable()
-}//  
+	$("#userlisttb").dataTable(
+			{lengthChange: false} // 표시 건수기능 숨기기
+		)
+	}
+
 
    
 
