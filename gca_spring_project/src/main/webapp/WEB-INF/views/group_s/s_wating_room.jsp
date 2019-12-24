@@ -136,8 +136,8 @@
 							, description:"동네 친구와 운동을....--설명 추가하기"   // 콘텐츠 상세설명
 							, imageUrl:"${pageContext.request.contextPath }/images/bok/sns_logo.png"   // 썸네일 이미지
 							, link : {
-								mobileWebUrl:"http://39.116.34.40/gca/"   // 모바일 카카오톡에서 사용하는 웹 링크 URL
-								, webUrl:"http://39.116.34.40/gca/" // PC버전 카카오톡에서 사용하는 웹 링크 URL
+								mobileWebUrl:"https://39.116.34.40:8443/gca/"   // 모바일 카카오톡에서 사용하는 웹 링크 URL
+								, webUrl:"https://39.116.34.40:8443/gca/" // PC버전 카카오톡에서 사용하는 웹 링크 URL
 							}
 				}
 				, social : {
@@ -148,8 +148,8 @@
 				, buttons : [{
 							title:"게시글 확인"    // 버튼 제목
 							, link : {
-								mobileWebUrl:"http://39.116.34.40/gca/"   // 모바일 카카오톡에서 사용하는 웹 링크 URL
-								, webUrl:"http://39.116.34.40/gca/" // PC버전 카카오톡에서 사용하는 웹 링크 URL
+								mobileWebUrl:"https://39.116.34.40:8443/gca/"   // 모바일 카카오톡에서 사용하는 웹 링크 URL
+								, webUrl:"https://39.116.34.40:8443/gca/" // PC버전 카카오톡에서 사용하는 웹 링크 URL
 							}
 				}]
 		});
@@ -479,13 +479,13 @@
       	<button id="backToList" class="button-general">목록</button>
       	<div class="sns_wrap">
 	<!--sns 이모티콘 -->	
-			<a class="ftco-animate" href="javascript:sharefacebook('http://39.116.34.40/gca')" title="페이스북으로 가져가기">
+			<a class="ftco-animate" href="javascript:sharefacebook('https://39.116.34.40:8443/gca/')" title="페이스북으로 가져가기">
 			<span style="color:pink"><i class="fab fa-facebook  fa-2x"></i></span></a></li>
 				
-			<a class="ftco-animate" href="javascript:sharetwitter('gca','http://39.116.34.40/gca','힘께 운동 하자')"title="트위터로 가져가기">
+			<a class="ftco-animate" href="javascript:sharetwitter('gca','https://39.116.34.40:8443/gca/','힘께 운동 하자')"title="트위터로 가져가기">
 			<span style="color:pink"><i class="fab fa-twitter-square  fa-2x"></i></span></a></li>
 				
-			<a class="ftco-animate" href="javascript:toSNS('line','gca','http://39.116.34.40/gca')" title="라인으로 가져가기">
+			<a class="ftco-animate" href="javascript:toSNS('line','gca','https://39.116.34.40:8443/gca/')" title="라인으로 가져가기">
 			<span style="color:pink"><i class="fab fa-line  fa-2x"></i></span></a></li>
 				
 			<a class="ftco-animate" href="javascript:shareKakaotalk();"title="카카오톡으로 가져가기">
