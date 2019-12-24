@@ -116,36 +116,34 @@
 </style>
 </head>
 <body>
-	<div class="container" >
-		<div class="col-100" >
-			<div class="card" style="width: 320px">
+<div>
+		<div class="col-50">
+			<div class="card">
 				<div class="card-header" style="background-color: #FEBABA;">
 					<b> 내 정보 수정하기 </b>
 				</div>
 				<div class="card-body">
 					<form name="form1" method="post">
-						<!-- <div class="form-group"> -->
 						<table>
 							<!-- 변경 못하는 정보 -->
 							<tr>
-								<td colspan="2"><div class="div-info" align="left">
+								<td colspan="2" class="div-info" align="left" >
 										&nbsp;&nbsp;<font color="gray">아이디 |</font>&nbsp;&nbsp;&nbsp;${dto.m_id}
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<font
 											color="gray">이 름 |</font>&nbsp;&nbsp;&nbsp;${dto.m_name}
-									</div></td>
+								</td>
 							</tr>
 							<!-- 변경 가능한 정보 -->
 							<tr>
-								<td><div class="div-update">
+								<td class="div-update"> 
 										<font color="gray">닉네임</font>
-									</div></td>
-								<td><input name="m_nick" value="${dto.m_nick}"
-									class="form-control form-control-sm"></td>
+								</td>
+								<td><input name="m_nick" value="${dto.m_nick}"class="form-control form-control-sm"></td>
 							</tr>
 							<tr>
-								<td><div class="div-update">
+								<td class="div-update">
 										<font color="gray">이메일</font>
-									</div></td>
+								</td>
 								<td><input name="m_email" value="${dto.m_email}"
 									class="form-control form-control-sm"></td>
 							</tr>
@@ -175,7 +173,7 @@
 					</form>
 				</div>
 			</div>
-		</div>
-	</div>
+	<!-- 	</div>
+	</div> -->
 </body>
 </html>
