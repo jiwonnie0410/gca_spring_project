@@ -99,40 +99,29 @@ function valid(){
 		$("#sg_option3_box").attr("checked", "checked");
 	}
 	
-    bootbox.confirm({
-	    message: "입력한 내용으로 반짝 방을 생성하시겠습니까?",
-	    buttons: {
-	        confirm: {
-	            label: '예',
-	            className: 'btn-info'
-	        },
-	        cancel: {
-	            label: '아니오',
-	            className: 'btn-danger'
-	        }
-	    },
-	    callback: function(con) {
-		    if(con){
-		    	
-		    	var param = $('#frm').serialize();
-		    	
-		    	$.ajax({
-		    		url : "creRoom",
-		    		method : "post",
-		    		data : param,
-		    		success : function(result){
-		    			msg = {
-		    					cmd : "groupAlert",
-		    					alert_gnum : result.alert_gnum
-		    			}  
-		    			webSocket.send( JSON.stringify( msg ) );
-		    			location.href = 'alreadyIn?sg_num='+result.sg_num;
-		    		}
-		    	});
-		    }
+    Notiflix.Confirm.Show( 
+		'입력한 내용으로 반짝 방을 생성하시겠습니까?'
+		, '생성된 방은 삭제하실 수 없습니다.'
+		, '확인'
+		, '취소'
+		, function() {
+	    	var param = $('#frm').serialize();
+	    	
+	    	$.ajax({
+	    		url : "creRoom",
+	    		method : "post",
+	    		data : param,
+	    		success : function(result){
+	    			msg = {
+	    					cmd : "groupAlert",
+	    					alert_gnum : result.alert_gnum
+	    			}  
+	    			webSocket.send( JSON.stringify( msg ) );
+	    			location.href = 'alreadyIn?sg_num='+result.sg_num;
+	    		}
+	    	});
 	    }
-	}); 
-		    
+	);
 }
 
 //반짝 방 이름 유효성 검사

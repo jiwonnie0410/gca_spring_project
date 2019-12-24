@@ -9,13 +9,12 @@
 <meta charset="UTF-8">
 <title>마감된 용병 모집</title>
 
-	<!-- private : icon 1 & slide 2 & toastr2 & bootbox1 -->
+	<!-- private : icon 1 & slide 2 & alert+confirm -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 	<link rel="stylesheet" href="../resources/css/mihy/swiper.min.css">
 	<script src="../resources/js/mihy/swiper.min.js"></script>
-    <link href="../resources/css/mihy/toastr.min.css" rel="stylesheet">
-    <script src="../resources/js/mihy/toastr.min.js"></script>
-    <script src="../resources/js/mihy/bootbox.all.min.js"></script>
+    <link href="../resources/css/mihy/notiflix-1.9.1.min.css" rel="stylesheet">
+	<script src="../resources/js/mihy/notiflix-1.9.1.min.js"></script>urces/js/mihy/bootbox.all.min.js"></script>
 
 <script>
 	var mgrant = "<sec:authentication property='principal.m_status_cd'/>";

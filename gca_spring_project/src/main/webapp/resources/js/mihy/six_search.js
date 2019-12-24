@@ -52,7 +52,6 @@ function badminton(){
 function condition(){
 	$('#key').val("sports");
 	$('#keyval').val($(this).data("sports"));
-//	console.log($('#keyval').val())
 	searchSport.submit();
 }
 
@@ -74,11 +73,6 @@ function scroll(){
 				keyval: keyval
 				
 		}
-//		console.log(end_dis);
-//		console.log(end_dttm);
-//		console.log(end_num);
-//		console.log(key);
-//		console.log(keyval);
 		
 		var url;
 		if( $('.table').attr('class').substr(-7) != 'endroom'){
@@ -86,7 +80,6 @@ function scroll(){
 		} else if( $('.table').attr('class').substr(-7) != 'endroom' ){
 			url = "getSixListEnd/";
 		}
-//		console.log(url);
 		
 		$.ajax({
 			url: url,
@@ -130,7 +123,6 @@ function p8(){
 	
 		var countDownDate = new Date(year, month, day, hour, min, 0, 0).getTime();
 		var distance = countDownDate - now;
-//		console.log(distance)
 		var d = Math.floor(distance / (1000 * 60 * 60 * 24));
 		var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
 		var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); 
@@ -153,63 +145,49 @@ function p8(){
 //방 참여
 function move_room(result, six_dttm){
 
-	toastr.options = {
-			  "closeButton": true,
-			  "debug": false,
-			  "newestOnTop": false,
-			  "progressBar": true,
-			  "positionClass": "toast-bottom-center",
-			  "preventDuplicates": true,
-			  "onclick": null,
-			  "showDuration": "300",
-			  "hideDuration": "1000",
-			  "timeOut": "2000",
-			  "extendedTimeOut": "1000",
-			  "showEasing": "swing",
-			  "hideEasing": "linear",
-			  "showMethod": "fadeIn",
-			  "hideMethod": "fadeOut"
-			}
+	Notiflix.Report.Init({
+		svgSize:'80px',
+		plainText:'false'	
+	});
 	
 	if(result.result_msg == 'already'){ //마감이든 아니든 already면 참여
 		location.href='alreadyIn?six_num='+result.pk_num+'&endroom='+six_dttm;
 	} else if(mgrant == 'M01'){
 		if(six_dttm == "마감"){ //마감이면 무조건(full이나 yes나 모두)
-			toastr.warning("마감 시간이 초과되어 참여하실 수 없습니다.");
+			Notiflix.Report.Info('모집 마감', '마감 시간이 초과되어 참여하실 수 없습니다.', '확인');
 			return false;
 		} else if(six_dttm != "마감" && result.result_msg == 'full'){
-			toastr.warning("모집 인원이 초과되어 참여하실 수 없습니다. 인원 변동이 발생하면 참여해 주세요.");
+			Notiflix.Report.Info('모집 인원 초과', '모집 인원이 초과되어 참여하실 수 없습니다. 인원 변동이 발생하면 참여해 주세요.', '확인');
 			return false;
 		} else if(six_dttm != "마감" && result.result_msg == 'yes'){
-			bootbox.confirm({
-			    message: "선택한 반짝에 참여하시겠습니까?",
-			    buttons: {
-			        confirm: {
-			            label: '예',
-			            className: 'btn-success'
-			        },
-			        cancel: {
-			            label: '아니오',
-			            className: 'btn-danger'
-			        }
-			    },
-			    callback: function(con) {
-				    if(con){
-						msg = {
-								cmd : "join",
-								id : result.m_id,
-								msg : "<"+result.m_id+"님이 참가하셨습니다.>",
-								six_num : result.pk_num
+			Notiflix.Confirm.Show( 
+				'선택한 용병 모집에 <br>참여하시겠어요?'
+				, '참여 시 바로 그룹 채팅에 참여하시게 됩니다. <br>모임 참여로 건강한 라이프를 즐겨 보세요!'
+				, '확인'
+				, '취소'
+				, function() {
+					$.ajax({
+						url:'roomIn?six_num='+result.pk_num,
+						dataType: "json",
+						success: function(){
+							msg = {
+									cmd : "join",
+									id : result.m_id,
+									msg : "<"+result.m_id+"님이 참가하셨습니다.>",
+									six_num : result.pk_num
+							}
+							webSocket.send(  JSON.stringify( msg )   );
+							location.href='alreadyIn?six_num='+result.pk_num;
 						}
-						webSocket.send(  JSON.stringify( msg )   );
-						location.href='roomIn?six_num='+result.pk_num;
-					}
-			    }
-			});
+					});
+				}
+				, function(){ // No button callback
+					return false;
+				}
+			)
 		}
 	} else {
-		toastr.warning("회원님의 계정이 정지되어 새로운 모임에 참여하실 수 없습니다.");
+		Notiflix.Report.Failure('참여할 수 없습니다.', '회원님의 계정이 정지되어 새로운 모임에 참여하실 수 없습니다.', '확인');
 		return false;
 	}
-	
 }
