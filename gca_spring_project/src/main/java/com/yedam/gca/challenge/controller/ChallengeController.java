@@ -20,7 +20,7 @@ import com.yedam.gca.history.vo.ChallengeHistVO;
  * 
  * @author User
  * @Challenge view challenges list and join challenges
- *
+ *    
  */
 @Controller
 public class ChallengeController {
