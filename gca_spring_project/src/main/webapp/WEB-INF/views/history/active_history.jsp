@@ -26,6 +26,10 @@
 <script src='${pageContext.request.contextPath }/resources/fullcalendar/moment/main.js'></script>
 <script src='${pageContext.request.contextPath }/resources/fullcalendar/moment-timezone/main.js'></script>
 
+<!-- 미현 : 인증 참여 스크립트 / 지도 스크립트 추가 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9e415eb9e7187154cd9c6308c036f0a6&libraries=services,clusterer"></script>
+<!-- <script type="text/javascript" src="../resources/js/mihy/kakao_map2.js"></script> -->
+
 <!-- 수림 개인 js/css -->
 <script src='${pageContext.request.contextPath }/resources/fullcalendar/moment.js'></script>
 <script src='${pageContext.request.contextPath }/resources/fullcalendar/moment_timezone.js'></script>
@@ -33,9 +37,7 @@
 <script src='${pageContext.request.contextPath }/resources/js/surim/all_history.js'></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/surim/default.css">
 
-<!-- 미현 : 인증 참여 스크립트 / 지도 스크립트 추가 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9e415eb9e7187154cd9c6308c036f0a6&libraries=services,clusterer"></script>
-<script type="text/javascript" src="../resources/js/mihy/kakao_map2.js"></script>
+
 
 <style>
 
@@ -164,6 +166,7 @@
 							<span class="pinkText">마감일자: <fmt:formatDate value="${list.start }" pattern="YYYY-MM-dd HH:mm"/></span>
 							<span class="mediumText">주소: ${list.location }</span>
 							
+							
 <!-- 						미현 : 지도 출력 부분 시작 -->
 <!-- 							<div class="sg_map" style="width:100%; height:300px">지도</div> -->
 <%-- 							<input type="hidden" class="sg_xy" value="${ list.xy }"> --%>
@@ -267,7 +270,7 @@
 					<span id="gender_cd" class="mediumText"></span>
 					<span id="sg_option" class="mediumText"></span>
 					
-					
+					<div id="map-div" style="width: 600px; height: 350px;"></div>					
 <!-- 				미현 : 지도 출력 부분 시작 -->
 <!-- 					<input type="hidden" id="map_xy"> -->
 <!-- 					<span id="map" style="position: relative; left:230px; top:-90px;"></span> -->
@@ -281,7 +284,9 @@
 				</div>
 			</div>
 		</div>
-	</div> 
+	</div> 	 
+	
+						
 	 
 </body>
 </html>
