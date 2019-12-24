@@ -36,9 +36,9 @@
 	}
 </script>
    <style>
-/*     table{
+    table{
      table-layout:fixed;
-} */
+}
     .autocut{
      text-overflow:ellipsis;
      overflow:hidden;
@@ -48,47 +48,36 @@
      .table td {
 	cursor: pointer;
 }
-h4 {
-    display: block;
-    margin-block-start: 1.33em;
-    margin-block-end: 1.33em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px; 
-    font-weight: bold;
-}
-.nav_title {
-    background-color: #FFF;
-    color: #FE9191;
-    text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
-}
-</style>
-    <title>동호회를 홍보해 보세요~</title>
+    </style>
     </head>
     
     <body>
-    <nav class="fixed-top" style="margin-bottom:100px;">
-	<div class="nav_title mt-2 mb-2" align="center" style="background-color: white;" ><h4 align="center">동호회 홍보</h4>
+    
+		<nav class="fixed-top">
+		<div align="center"  style="background-color: white; margin-bottom: 50px;">
+			<div align="center" class="mt-2 mb-2" style="background-color: white; " ><h4>홍보</h4></div>
+        <!-- <form class="form-inline" id="frmSearch" action="/board/list"> -->
         <form class="form-inline" id="frmSearch" method="post" action="${pageContext.request.contextPath}/board/adlist">
+		
 			<div align="center" style="padding-right: 3%; padding-left: 3%;">
-				<!-- 로그인한 사용자만 글쓰기 버튼을 활성화 -->
-				<c:if test="${m_id != null}"> 
-					<div >
-						<button class="btn" type="button" id="btnWrite" name="write"  style="margin-right: 10%; background-color: #FE9191; color: white; width:328px;">Write</button>
+					<div  style=" margin-left:35px; align-items: center;">
+						<button  class="btn" type="button" id="btnWrite" name="write"  style="background-color: #FE9191; color: white; width:300px; align-content: center; ">Write</button>
 					</div>
-				</c:if>  
 			</div>
-		</form></div></nav>
+		</div></nav>
+	</form>
+	<br><br><br>
 	<form name="SearchForm">
-	<table >
+	<table>
 			<tr>
-				<td><select id="searchCondition" name="searchCondition" class="btn btn-outline-warning btn-sm dropdown-toggle" >
+				<td><select id="searchCondition" name="searchCondition" class="btn btn-outline-warning btn-sm dropdown-toggle" style="">
 						<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
 						<option value="all"<c:out value="${map.searchOption == 'all'?'selected':''}"/>>제목+아이디+제목</option>
 						<option value="m_id"<c:out value="${map.searchOption == 'm_id'?'selected':''}"/>>아이디</option>
 						<option value="ad_content"<c:out value="${map.searchOption == 'ad_content'?'selected':''}"/>>내용</option>
 						<option value="title"<c:out value="${map.searchOption == 'title'?'selected':''}"/>>제목</option>
 				</select></td>
-				<td><input name="keyword" value="${map.keyword}" class="form-control" size="10"> </td>
+				<td><input name="keyword" value="${map.keyword}" class="form-control"> </td>
 				<td><button type="submit" class="btn btn-outline-warning btn-sm"
 						style="border-color: #FAF0F0; color: #ffc0cb;">검색</button></td>
 			</tr>
@@ -98,11 +87,12 @@ h4 {
 	<table class="table">
 		<thead>
 			<tr>
-				<th width="20%" align="center"><center>작성자</center></th>
-				<th width="30%" align="center"><center>도시</center></th>
-				<th width="30%" align="center"><center>제목</center></th>
+				<th width="30%" align="center"><center>작성자</center></th>
+				<!-- <th>아이디</th> -->
+				<th width="40%" align="center"><center>도시</center></th>
+				<th width="40%" align="center"><center>제목</center></th>
 			<%-- 	<th width="30%" align="center" ><center>내용</center></th> --%>
-				<th width="20%" align="center"><center>조회수</center></th>
+				<th width="30%" align="center"><center>조회수</center></th>
 			</tr>
 		</thead>
 		<tbody>

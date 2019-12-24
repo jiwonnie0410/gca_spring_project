@@ -11,9 +11,6 @@
 .table td {
 	cursor: pointer;
 }
-.table tr{
-	position: fixed;
-}
 </style>
 
 <script>
@@ -31,60 +28,21 @@
 <sec:authentication property="principal.m_id" var="m_id" />
 <script
 	src="${pageContext.request.contextPath }/resources/js/board/user_Qna.js"></script>
-<title>문제가 있을 경우 관리자에게 문의 하세요~</title>
-<style type="text/css">
-
-/* h4 {
-    display: block;
-  /*  margin-block-start: 1.33em;
-    margin-block-end: 1.33em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;  */
-    font-weight: bold;
-} */
-.nav_title {
-    background-color: #FFF;
-    color: #FE9191;
-}  
-</style>
+<title>boardList_json.jsp</title>
 </head>
 <body>
-	<%-- ${boardSearchVO } --%>
-	<nav class="fixed-top">
-		<div class="nav_title mt-2 mb-2 " align="center">
-			<h4 align="center "style=" position: fixed-top;">문의 하기</h4></div>
-	</nav>
-	<div align="center" style="margin-top:100px; margin-bottom:100px;">
-		<!-- -----------------------------------------검색폼 시작------------------------------------------------->
-	<%-- 	<div>
-			<form action="qnaboard" name="boardForm" id="boardForm">
-				<input type="hidden" name="page" value="1" />
-				<table>
-					<tr>
-						<td><select id="searchCondition" name="searchCondition"
-							class="btn btn-outline-warning btn-sm dropdown-toggle" style="">
-								<option value="">선택</option>
-								<option value="qb_title"
-									<c:if test="${boardSearchVO.searchCondition=='qb_title'}">selected</c:if>>질문유형</option>
-								<option value="qb_content"
-									<c:if test="${boardSearchVO.searchCondition=='qb_content'}">selected</c:if>>내용</option>
-						</select></td>
-						<td><input name="keyword" value="${boardSearchVO.keyword}"></td>
-						<td><button type="button"
-								class="btn btn-outline-warning btn-sm"
-								style="border-color: #FAF0F0; color: #ffc0cb;"
-								onclick="go_page(1)">검색</button></td>
-					</tr>
-				</table>
-			</form>
-		</div> --%>
-		<!-- -----------------------------------------------------검색폼 끝------------------------------------ -->
-
+		<nav class="fixed-top">
+		<div align="center"  style="background-color: white;">
+			<div align="center" class="mt-2 mb-2" style="background-color: white; " ><h4>문의</h4>
+			</div>
+		</div>
+		</nav>
+		<br><br>	
 
 
 		<!------------------------------------------------------- 목록 시작 ----------------------------------->
 		<!-- <h3>게시판 목록</h3> -->
-		<table  id="userlisttb" >
+		<table class="table text-center" id="userlisttb" >
 			<thead>
 				<tr>
 					<!-- <th class="text-center">번호</th> -->
