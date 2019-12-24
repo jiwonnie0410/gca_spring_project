@@ -16,9 +16,6 @@
 <div id="map-div" style="width: 600px; height: 350px;">      		
 </div>
 
-fdgfdgfdgfd11
-
-
 <script>
 var staticMapContainer  = document.getElementById('map-div'), // 이미지 지도를 표시할 div  
 staticMapOption = { 
