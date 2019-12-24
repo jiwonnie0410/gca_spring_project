@@ -48,7 +48,16 @@
 		          				src="${pageContext.request.contextPath }/resources/images/jey/money11.png">
 		          		</div>
 		          		<div>+${myscore.sch_score}</div></td>
-					<td>${myscore.sch_part}</td>
+					<td>
+						<c:set var="sg" value="sgroup" />
+						<c:set var="chal" value="challenge" />
+						<c:if test="${myscore.sch_part eq sg}">
+							반짝
+						</c:if>
+						<c:if test="${myscore.sch_part eq chal}">
+							챌린지
+						</c:if>
+					</td>
 					<td>${myscore.sch_dttm}</td>
 				</tr>	
 			</c:forEach>
