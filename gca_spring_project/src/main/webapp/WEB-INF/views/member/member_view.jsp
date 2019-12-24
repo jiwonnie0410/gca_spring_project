@@ -47,10 +47,11 @@
 		<div class="col-50">
 			<div class="card">
 				<div class="card-header" style="background-color: #FEBABA;">
-					my menu</div>
+					my menu
+				</div>
 				<div class="card-body">
 					<form name="form1" method="post">
-						<table >
+						<table>
 							<tr>
 								<td rowspan="8"><img style="padding-bottom:5px;" width="65px" height="65px"src="${pageContext.request.contextPath }/resources/images/Characters/${dto.m_image_cd}.gif"></td>				
 							</tr>

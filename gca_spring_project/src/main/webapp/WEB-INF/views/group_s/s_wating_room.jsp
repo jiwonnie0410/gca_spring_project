@@ -339,8 +339,8 @@
 		
 		
 		//진영sns
-			<!-- 카카오톡 -->
-<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+			<!-- 카카오톡 -->		
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
 
