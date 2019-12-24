@@ -109,8 +109,85 @@
 
 <!-- 로그인한사람의 id,닉네임,캐릭터코드 저장 -->
 <sec:authentication property="principal.username" var="id"/>
-<sec:authentication property="principal.m_nick" var="nick"/>
 <sec:authentication property="principal.m_image_cd" var="image"/>
+
+<!-- 카카오톡 -->		
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+<!-- 진영 sns공유 스크립트 -->
+<script type="text/javascript">
+
+	//페이스북 공유하기
+	function sharefacebook(url) {  
+		window.open("http://www.facebook.com/sharer/sharer.php?u=" + url);  
+	}  
+	
+	function sharetwitter(url, text) {  
+		window.open("https://twitter.com/intent/tweet?text=" + text + "&url=" + url);  
+	} 
+
+	// 카카오톡 공유하기
+	function shareKakaotalk() {
+		Kakao.init("ce5d5303904f527a3231bf1760ccfc03");      // 사용할 앱의 JavaScript 키를 설정
+		Kakao.Link.sendDefault({
+				objectType:"feed"
+				, content : {
+							title:"gca"   // 콘텐츠의 타이틀
+							, description:"동네 친구와 운동을....--설명 추가하기"   // 콘텐츠 상세설명
+							, imageUrl:"${pageContext.request.contextPath }/images/bok/sns_logo.png"   // 썸네일 이미지
+							, link : {
+								mobileWebUrl:"https://39.116.34.40:8443/gca/"   // 모바일 카카오톡에서 사용하는 웹 링크 URL
+								, webUrl:"https://39.116.34.40:8443/gca/" // PC버전 카카오톡에서 사용하는 웹 링크 URL
+							}
+				}
+				, social : {
+							likeCount:0       // LIKE 개수
+							, commentCount:0    // 댓글 개수
+							, sharedCount:0     // 공유 회수
+				}
+				, buttons : [{
+							title:"게시글 확인"    // 버튼 제목
+							, link : {
+								mobileWebUrl:"https://39.116.34.40:8443/gca/"   // 모바일 카카오톡에서 사용하는 웹 링크 URL
+								, webUrl:"https://39.116.34.40:8443/gca/" // PC버전 카카오톡에서 사용하는 웹 링크 URL
+							}
+				}]
+		});
+	}
+
+	// send to SNS
+	function toSNS(sns, strTitle, strURL) {
+		var snsArray = new Array();
+		var strMsg = strTitle + " " + strURL;
+		var image = "${pageContext.request.contextPath }/images/bok/sns_logo.png";  // 썸네일 이미지
+	
+		snsArray['band'] = "http://band.us/plugin/share?body="
+			+ encodeURIComponent(strTitle) + "  "
+			+ encodeURIComponent(strURL) + "&route="
+			+ encodeURIComponent(strURL);
+		snsArray['line'] = "http://line.me/R/msg/text/?"
+			+ encodeURIComponent(strTitle) + " "
+			+ encodeURIComponent(strURL);
+		snsArray['google'] = "https://plus.google.com/share?url="
+			+ encodeURIComponent(strURL) + "&t="
+			+ encodeURIComponent(strTitle);
+			window.open(snsArray[sns]);
+	}
+	
+	
+	/*원하는 sns가 없을 경우 url 복사하여 공유  */
+	function copy_clip(url) {
+		var IE = (document.all) ? true : false;
+		if (IE) {
+			window.clipboardData.setData("Text", url);
+			alert("이 글의 단축url이 클립보드에 복사되었습니다.");
+		} else {
+			temp = prompt("이 글의 단축url입니다. Ctrl+C를 눌러 클립보드로 복사하세요", url);/*기본으로 로그인 화면 연결  */
+		}
+	}
+</script>
+<!-- 진영 sns공유 스크립트 끝 -->
 
 <script>
 		$(function() { //페이지 로딩 완료 후 실행
@@ -118,12 +195,9 @@
 			var usrId = "${id}";
 			
 			var chatList = ${chatlist} ;
-			console.log(chatList);
-			console.log(chatList.length);
 			var textarea = document.getElementById('messageWindow');
 			for(var i = 0; i< chatList.length; i++){
 				textarea.value += chatList[i].m_id + " : " + chatList[i].chh_content + "\n";
-				console.log(chatList[i].chh_dttm);
 			}
 			
 			//채팅 전송버튼 눌렀을때
@@ -335,95 +409,8 @@
 			view_map();
 			
 		});
-		
-		
-		
-		//진영sns
-			<!-- 카카오톡 -->		
-<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script type="text/javascript">
-
-//페이스붓 공유하기
-function sharefacebook(url) {  
-    window.open("http://www.facebook.com/sharer/sharer.php?u=" + url);  
-}  
-	
-function sharetwitter(url, text) {  
-    window.open("https://twitter.com/intent/tweet?text=" + text + "&url=" + url);  
-} 
-
-// 카카오톡 공유하기
-function shareKakaotalk() {
-       Kakao.init("ce5d5303904f527a3231bf1760ccfc03");      // 사용할 앱의 JavaScript 키를 설정
-       Kakao.Link.sendDefault({
-             objectType:"feed"
-           , content : {
-                 title:"gca"   // 콘텐츠의 타이틀
-               , description:"동네 친구와 운동을....--설명 추가하기"   // 콘텐츠 상세설명
-               , imageUrl:"${pageContext.request.contextPath }/images/bok/sns_logo.png"   // 썸네일 이미지
-               , link : {
-                     mobileWebUrl:"http://39.116.34.40/gca/"   // 모바일 카카오톡에서 사용하는 웹 링크 URL
-                   , webUrl:"http://39.116.34.40/gca/" // PC버전 카카오톡에서 사용하는 웹 링크 URL
-               }
-           }
-           , social : {
-                 likeCount:0       // LIKE 개수
-               , commentCount:0    // 댓글 개수
-               , sharedCount:0     // 공유 회수
-           }
-           , buttons : [
-               {
-                     title:"게시글 확인"    // 버튼 제목
-                   , link : {
-                       mobileWebUrl:"http://39.116.34.40/gca/"   // 모바일 카카오톡에서 사용하는 웹 링크 URL
-                     , webUrl:"http://39.116.34.40/gca/" // PC버전 카카오톡에서 사용하는 웹 링크 URL
-                   }
-               }
-           ]
-       });
-   }
-
-
-
-
-
-
-// send to SNS
-function toSNS(sns, strTitle, strURL) {
-	var snsArray = new Array();
-	var strMsg = strTitle + " " + strURL;
-	var image = "${pageContext.request.contextPath }/images/bok/sns_logo.png";  // 썸네일 이미지
-
-	/* snsArray['twitter'] = "http://twitter.com/home?status="+ encodeURIComponent(strTitle) + ' '
-			+ encodeURIComponent(strURL); */
-	/* snsArray['facebook'] = "http://www.facebook.com/share.php?u=" + encodeURIComponent(strURL); */
-	snsArray['band'] = "http://band.us/plugin/share?body="
-			+ encodeURIComponent(strTitle) + "  "
-			+ encodeURIComponent(strURL) + "&route="
-			+ encodeURIComponent(strURL);
-	snsArray['line'] = "http://line.me/R/msg/text/?"
-			+ encodeURIComponent(strTitle) + " "
-			+ encodeURIComponent(strURL);
-	snsArray['google'] = "https://plus.google.com/share?url="
-			+ encodeURIComponent(strURL) + "&t="
-			+ encodeURIComponent(strTitle);
-	window.open(snsArray[sns]);
-}
-
-
-/*원하는 sns가 없을 경우 url 복사하여 공유  */
-function copy_clip(url) {
-	var IE = (document.all) ? true : false;
-	if (IE) {
-		window.clipboardData.setData("Text", url);
-		alert("이 글의 단축url이 클립보드에 복사되었습니다.");
-	} else {
-		temp = prompt("이 글의 단축url입니다. Ctrl+C를 눌러 클립보드로 복사하세요", url);/*기본으로 로그인 화면 연결  */
-	}
-}
 </script>
-
+		
 
 </head>
 <body>
@@ -446,11 +433,7 @@ function copy_clip(url) {
     	<div style="padding-top:0px; padding-bottom:20px">
     		<div>
       			<textarea id="messageWindow" style="font-size:15px; background-color:#FE9191;border-radius:5px;border:3px double #FFF;
-      							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly">
-      				<%-- <c:forEach var="chat" items="${chatlist}">
-						${chat.m_id} : ${chat.chh_content}				
-      				</c:forEach> --%>
-      			</textarea>
+      							padding:10px; resize:none; width:80%; height:300px;" readonly="readonly"></textarea>
       			<div style="padding-top:10px;">
       				<span style="padding-left:5px; padding-right:3px; vertical-align: middle;">
       					<textarea id="inputMessage" style="font-size:15px; border-radius:5px; padding:10px; resize:none; width:65%; height:70px; " placeholder="입력하세요"></textarea>
@@ -483,36 +466,28 @@ function copy_clip(url) {
 
 <!-- 버튼영역 시작 -->														
     <div style="padding-bottom:30px">
-      	<button id="btn_cert" class="button-general">참가인증</button>&nbsp;
+
+      	<button id="btn_cert" class="button-general">참가인증</button>
+
       	<c:set var="end" value="마감" />
       	<c:if test="${param.endroom ne end}">
-      		<button id="cancelJoin" class="button-general">참가취소</button>&nbsp;
+      		<button id="cancelJoin" class="button-general">참가취소</button>
       	</c:if>
       	<button id="backToList" class="button-general">목록</button>
-      	<!-- <button class="button-general">공유</button>&nbsp; -->
-      		<div class="sns_wrap">
-	<!--sns 이모티콘 -->
-		<!-- <p>SNS 공유하기</p> -->
-		
-				<a class="ftco-animate" href="javascript:sharefacebook('http://39.116.34.40/gca')" title="페이스북으로 가져가기">
-				<span style="color:pink"><i class="fab fa-facebook  fa-2x"></i></span></a></li>
+      	<div class="sns_wrap">
+	<!--sns 이모티콘 -->	
+			<a class="ftco-animate" href="javascript:sharefacebook('https://39.116.34.40:8443/gca/')" title="페이스북으로 가져가기">
+			<span style="color:pink"><i class="fab fa-facebook  fa-2x"></i></span></a></li>
 				
-				<a class="ftco-animate" href="javascript:sharetwitter('gca','http://39.116.34.40/gca','힘께 운동 하자')"title="트위터로 가져가기">
-				<span style="color:pink"><i class="fab fa-twitter-square  fa-2x"></i></span></a></li>
+			<a class="ftco-animate" href="javascript:sharetwitter('gca','https://39.116.34.40:8443/gca/','힘께 운동 하자')"title="트위터로 가져가기">
+			<span style="color:pink"><i class="fab fa-twitter-square  fa-2x"></i></span></a></li>
 				
-				<a class="ftco-animate" href="javascript:toSNS('line','gca','http://39.116.34.40/gca')" title="라인으로 가져가기">
-				<span style="color:pink"><i class="fab fa-line  fa-2x"></i></span></a></li>
+			<a class="ftco-animate" href="javascript:toSNS('line','gca','https://39.116.34.40:8443/gca/')" title="라인으로 가져가기">
+			<span style="color:pink"><i class="fab fa-line  fa-2x"></i></span></a></li>
 				
-				<a class="ftco-animate" href="javascript:shareKakaotalk();"title="카카오톡으로 가져가기">
-				<span style="color:pink"><i class="fab fa-korvue  fa-2x"></i></span></a>
-		<!-- <ul>
-			<li><input type="text" value="http://39.116.34.40/gca">
-				<a href="javascript:copy_clip('http://39.116.34.40/gca')">
-				<i class="fas fa-reply" aria-hidden="true"></i></a>
-			</li>
-		</ul> -->
-	</div>
-      	
+			<a class="ftco-animate" href="javascript:shareKakaotalk();"title="카카오톡으로 가져가기">
+			<span style="color:pink"><i class="fab fa-korvue  fa-2x"></i></span></a>
+		</div>
     </div>
 <!-- 버튼영역 끝 -->
 
@@ -544,7 +519,7 @@ function copy_clip(url) {
 							</td>
 	          				<th colspan="2">id</th>
 						</tr>
-						<tr>
+						<tr style="padding-top:-1px;">
 							<td id="profile_id" colspan="2"></td>
 						</tr>
 						<tr>
@@ -649,7 +624,6 @@ function copy_clip(url) {
 				<div class="modal-footer">
 					<button type="button" class="button-general" data-dismiss="modal">닫기</button>
 				</div>
-        
 			</div>
 		</div>
 	</div>
@@ -741,7 +715,6 @@ function copy_clip(url) {
 		}
 		else if( result.cmd == "cancelJoin" && ( sg_num == result.sg_num )) { //참가취소 누르고 웹소켓 거쳐왔을때.
 			var person = result.id;
-			console.log("person:"+result.id);
 			//프로필 삭제
 			$('#'+person).remove();
 			textarea.value += result.msg + "\n"; //채팅방에 나갔다고 표시.
@@ -753,9 +726,7 @@ function copy_clip(url) {
 			}
 			textarea.value += result.msg + "\n";
 			$('#'+result.id).remove();
-				
 		}
-			  
 		chatAreaScroll(); 
 	}
 	 
@@ -811,7 +782,6 @@ function copy_clip(url) {
 		var usrId = "${id}";
 		//채팅메세지
 		var message = document.getElementById('inputMessage').value;
-		console.log("message : "+message);
 		var sg_num = ${sgroup.sg_num};
 		
 		//아작스 전송용 파라미터
@@ -828,12 +798,7 @@ function copy_clip(url) {
 			contentType: "application/json",
 			success: function(){
 				document.getElementById('inputMessage').value = ""; 
-				console.log("insert성공");
-			},
-			error: function(){
-				console.log("insert실패");
 			}
-			
 		});
 
 	}

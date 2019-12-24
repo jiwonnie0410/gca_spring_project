@@ -358,18 +358,30 @@
 	          							src="${pageContext.request.contextPath }/resources/images/Characters/${member.m_image_cd}.gif">
 	        			<br />${member.m_nick}
         			</span>
-				
 				</c:forEach>
-
     	</div>
-    			
     </div> 													
 <!-- 버튼영역 위(프로필까지)의 div 끝 -->
 
 <!-- 버튼영역 시작 -->														
     <div style="padding-bottom:30px">
       	<button id="cancelJoin" class="button-general">참가취소</button>
-      	<button class="button-general">공유</button><button id="backToList" class="button-general">목록</button>
+      	<button id="backToList" class="button-general">목록</button>
+      	
+      	<div class="sns_wrap">
+	<!--sns 이모티콘 -->	
+			<a class="ftco-animate" href="javascript:sharefacebook('http://39.116.34.40/gca')" title="페이스북으로 가져가기">
+			<span style="color:pink"><i class="fab fa-facebook  fa-2x"></i></span></a></li>
+				
+			<a class="ftco-animate" href="javascript:sharetwitter('gca','http://39.116.34.40/gca','힘께 운동 하자')"title="트위터로 가져가기">
+			<span style="color:pink"><i class="fab fa-twitter-square  fa-2x"></i></span></a></li>
+				
+			<a class="ftco-animate" href="javascript:toSNS('line','gca','http://39.116.34.40/gca')" title="라인으로 가져가기">
+			<span style="color:pink"><i class="fab fa-line  fa-2x"></i></span></a></li>
+				
+			<a class="ftco-animate" href="javascript:shareKakaotalk();"title="카카오톡으로 가져가기">
+			<span style="color:pink"><i class="fab fa-korvue  fa-2x"></i></span></a>
+		</div>
     </div>
 <!-- 버튼영역 끝 -->
 

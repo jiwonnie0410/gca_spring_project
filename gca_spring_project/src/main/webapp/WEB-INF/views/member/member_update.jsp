@@ -68,12 +68,12 @@
 <title>정보 수정</title>
 
 <style>
-.div-frame {
+/* .div-frame {
 	background-image:
 		url("${pageContext.request.contextPath }/resources/images/Characters/frame.png");
 	height: 140px;
 	width: 120px;
-}
+} */
 
 .div-info {
 	background: #E7E7E7;
@@ -81,7 +81,7 @@
 	border-radius: 7px;
 	font-size: 15px;
 	font-weight: bolder;
-	/* margin: 0.3em auto; */
+	margin: 0.3em auto;
 	padding: 2px 4px;
 	position: relative;
 	height: 30px;
@@ -95,8 +95,8 @@
 	font-size: 15px;
 	font-weight: bolder;
 	text-align: center;
-/* 	margin: 0.3em auto; */
-/* 	padding: 2px 4px; */
+ 	margin: 0.3em auto; 
+ 	padding: 2px 4px; 
 	position: relative;
 	height: 30px;
 	width: 80px;
@@ -117,6 +117,7 @@
 </head>
 <body>
 <div>
+	<div>
 		<div class="col-50">
 			<div class="card">
 				<div class="card-header" style="background-color: #FEBABA;">
@@ -127,7 +128,7 @@
 						<table>
 							<!-- 변경 못하는 정보 -->
 							<tr>
-								<td colspan="2" class="div-info" align="left" >
+								<td colspan="2" class="div-info" align="left">
 										&nbsp;&nbsp;<font color="gray">아이디 |</font>&nbsp;&nbsp;&nbsp;${dto.m_id}
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<font
 											color="gray">이 름 |</font>&nbsp;&nbsp;&nbsp;${dto.m_name}
@@ -135,10 +136,11 @@
 							</tr>
 							<!-- 변경 가능한 정보 -->
 							<tr>
-								<td class="div-update"> 
+								<td class="div-update">
 										<font color="gray">닉네임</font>
 								</td>
-								<td><input name="m_nick" value="${dto.m_nick}"class="form-control form-control-sm"></td>
+								<td><input name="m_nick" value="${dto.m_nick}"
+									class="form-control form-control-sm"></td>
 							</tr>
 							<tr>
 								<td class="div-update">
@@ -163,10 +165,9 @@
 						<!-- 	<div class="form-group"> -->
 						<!-- 수정 버튼 -->
 						<div align="left" style="position: relative; left: 80px;">
-							<button type="submit" id="btnUpdate" name="btnUpdate"
-								class="div-button">
-								수정하기 &nbsp;&nbsp;<font size="3"><i
-									class="fas fa-user-edit"></i></font>
+							<button type="submit" id="btnUpdate" name="btnUpdate"class="div-button">
+								수정하기 &nbsp;&nbsp;<font size="3">
+								<iclass="fas fa-user-edit"></i></font>
 							</button>
 							<!-- </div> -->
 						</div>
