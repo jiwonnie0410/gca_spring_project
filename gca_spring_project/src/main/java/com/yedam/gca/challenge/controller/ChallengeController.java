@@ -15,6 +15,13 @@ import com.yedam.gca.challenge.service.ChallengeService;
 import com.yedam.gca.challenge.vo.ChallengeVO;
 import com.yedam.gca.history.vo.ChallengeHistVO;
 
+
+/**
+ * 
+ * @author User
+ * @Challenge view challenges list and join challenges
+ *    
+ */
 @Controller
 public class ChallengeController {
 	@Autowired ChallengeService service;

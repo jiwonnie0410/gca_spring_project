@@ -147,7 +147,7 @@
 								<td><input class="form-control" type="date" id="dailyEnd" name="dailyEnd"></td>
 							</tr>
 					</table>
-					<div id="daily_chart" style="width: 100%; height: 370px;"></div> <!-- 차트 그리기 -->
+					<div id="daily_chart" style="width: 100%; height: 330px;"></div> <!-- 차트 그리기 -->
 			
 			<!-- 월별 수익 현황 보기 -->
 					<table>
@@ -160,7 +160,7 @@
 								<td><input class="form-control" type="date" id="monthlyEnd" name="monthlyEnd"></td>
 							</tr>
 					</table>
-					<div id="monthly_chart" style="width: 100%; height: 370px;"></div> <!-- 차트 그리기 -->
+					<div id="monthly_chart" style="width: 100%; height: 330px;"></div> <!-- 차트 그리기 -->
 			
 			</div>
 		</div>

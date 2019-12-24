@@ -44,14 +44,14 @@
 				<div class="modal-footer">
 				<c:choose>
 						<c:when test="${ empty dto.qb_an}">
-							<button type="button" class="btn btn-primary" id="btnUpdete">답글</button>
+							<button type="button" class="btn btn-primary" id="btnUpdete" style="background-color: #FE9191; color: white;">답글</button>
 						</c:when>
 						<c:otherwise>
-							<button type="button" class="btn btn-primary" id="btnUpdete">수정</button>
+							<button type="button" class="btn btn-primary" id="btnUpdete" style="background-color: #FE9191; color: white;">수정</button>
 						</c:otherwise>
 				</c:choose>
 				<!-- <button type="button" class="btn btn-danger" id="btnDel" name="btnDel">삭제</button> -->
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+					<button type="button" class="btn "  data-dismiss="modal" style="background-color: #FE9191; color: white;">Close</button>
 				</div>	
 			</form>
 			
