@@ -201,7 +201,7 @@
 			var chatList = ${chatlist} ;
 			var textarea = document.getElementById('messageWindow');
 			for(var i = 0; i< chatList.length; i++){
-				textarea.value += chatList[i].m_id + " : " + chatList[i].chh_content + "\n";
+				textarea.value += chatList[i].m_id + "  :  " + chatList[i].chh_content + "\n";
 			}
 			
 			//채팅 전송버튼 눌렀을때
@@ -384,18 +384,36 @@
 				if (confirmStatus) {
 					
 					var sgNum = ${sgroup.sg_num};
+					var param = JSON.stringify({"m_id" : usrId, "sg_num" : sgNum });
 					
-					deleteProfile();
-					
-					location.href='cancelJoin?m_id='+usrId+'&sg_num='+sgNum;
-					
-					alert("참가 취소 완료.");
-					
-				} else {
-					console.log("참가취소 취소함");
+					//id로 그사람이 방장인지 멤버인지 가져오기
+					$.ajax({
+						url: "getOnesAuthority",
+						method:'post',
+						dataType: "json",
+						data: param,
+						contentType: "application/json",
+						success: function(vo){
+							if(vo.ach_grant == "방장"){
+								if(vo.ach_confirm != null){
+									alert("인증 후에는 참가 취소를 할 수 없습니다!");
+								}else{
+									alert("방장은 참가취소를 할 수 없습니다!");
+								}
+							}
+							//웹소켓으로  본인프로필 화면에서 삭제, 방정보 업데이트(인원수,방상태), 활동히스토리 DELETE, 본인은 목록으로 돌아가게.
+							if(vo.ach_grant == "일반"){
+								if(vo.ach_confirm != null){
+									alert("인증 후에는 참가 취소를 할 수 없습니다!");
+								}else{
+									deleteProfile();
+									location.href='cancelJoin?m_id='+usrId+'&sg_num='+sgNum;
+									alert("참가 취소 완료.");
+								}
+							}
+						}
+					});
 				}
-				//그리고 방장이 빠져나가면 방 삭제되게.
-
 			});
 			
 			//목록으로 돌아가기
