@@ -89,7 +89,7 @@
 	     white-space:nowrap;
 	   }
 	   
-	div#room-info-div.modal-body{
+	div#room-info-div.modal-body {
 		text-align : left;
 	}
 	
@@ -107,6 +107,12 @@
 		border: 2px solid #FE9191;
 		border-radius: 7px;
 		border-collapse: separate;
+	}
+	
+	#map img {
+		max-width: none;
+		height: auto;
+		border: 0
 	}
 	
 </style>
@@ -619,7 +625,7 @@
 				<!-- 미현언니 지도부분 -->
 						<tr style="text-align: center">
 							<td colspan="2">
-								<div id="map" style="width:300px;height:200px;"></div>
+								<div id="map" style="width:400px;height:200px;"></div>
 								<input type="hidden" id="map_xy" value="${sgroup.sg_xy}">
 							</td>
 						</tr>

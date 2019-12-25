@@ -161,7 +161,7 @@
              			ORDER BY DIS, BG_END_DTTM, B.BG_NUM
              			) A
 					<where>
-					 	<if test="end_dis != null and end_dis != 0">
+					 	<if test="end_dis != null">
 					 		AND LPAD(round(DIS, 3)*1000, 8, '0') || to_char(BG_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(BG_NUM, 6, '0')
 					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3)*1000, 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
 					 	</if>

@@ -16,7 +16,7 @@ function addr() {
 		var latlng = mouseEvent.latLng;
 		marker.setPosition(latlng);
 		$('#map_xy').val(latlng.getLat() + ", " + latlng.getLng());
-//		console.log($('#sg_xy').val());
+		console.log($('#map_xy').val());
 		geo.coord2Address(latlng.getLng(), latlng.getLat(), callAddr);
 	});
 	var callAddr = function(result, status) {
@@ -34,7 +34,7 @@ function addr() {
 					var result = results[0];
 					var coords = new daum.maps.LatLng(result.y, result.x); //좌표값 받음
 					$('#map_xy').val(coords.Ha + ", " + coords.Ga);
-//					console.log($('#sg_xy').val());
+//					console.log($('#map_xy').val());
 					mapContainer.style.display = "block";
 					map.relayout();
 					map.setCenter(coords);
