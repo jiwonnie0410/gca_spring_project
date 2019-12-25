@@ -26,7 +26,7 @@
 			ORDER BY ADR_NUM -->
 			 SELECT
 			  R.ADR_NUM, AD_NUM, R.ADR_CONTENT, R.m_id, R.ADR_HIDDEN AS ADR_HIDDEN, R.adr_regdate, R.ADR_UPDATEDATE,
-			  M.m_name, M.m_nick,
+			  M.m_name, M.m_nick, get_code_name(M_IMAGE_CD) "m_image_cd",
 			  (SELECT R.m_id FROM AD_BOARD WHERE AD_NUM = R.AD_NUM)
 			FROM AD_REPLY R, Members M
 			WHERE
@@ -38,7 +38,15 @@
 	
 	<!-- 3. 댓글 상세보기 -->
 	<select id="detailReply" resultType="com.yedam.gca.board.vo.AdReplyVO">
-		SELECT ADR_NUM, AD_NUM, ADR_CONTENT, m_id, adr_regdate, ADR_UPDATEDATE, ADR_HIDDEN AS adr_hidden FROM AD_REPLY
+		SELECT ADR_NUM,
+			   AD_NUM,
+			   ADR_CONTENT,
+			   m_id,
+			   adr_regdate,
+			   ADR_UPDATEDATE,
+			   ADR_HIDDEN AS adr_hidden
+		FROM 
+				AD_REPLY
 		WHERE ADR_NUM = #{adr_num}
 	</select>
 	

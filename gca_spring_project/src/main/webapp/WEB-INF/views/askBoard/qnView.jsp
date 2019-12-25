@@ -21,14 +21,14 @@
 					</div>
 				</div>
 				<div class="form-group">
+						<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">질문 유형</label>&nbsp;&nbsp;
 					<div id="qb_title">
-						<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">제목</label>&nbsp;&nbsp;
 						${dto.qb_title}
 					</div>
 				</div>
 				<div class="form-group">
-					<div id = "qb_content">
 						<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">내용</label>&nbsp;&nbsp;
+					<div id = "qb_content">
 						${dto.qb_content}
 					</div>
 				</div>		

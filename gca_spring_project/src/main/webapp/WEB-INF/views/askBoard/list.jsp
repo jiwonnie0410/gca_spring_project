@@ -60,7 +60,7 @@
         <form class="form-inline" id="frmSearch" method="post" action="${pageContext.request.contextPath}/board/adlist">
 		
 			<div align="center" style="padding-right: 3%; padding-left: 3%;">
-					<div  style=" margin-left:20px; align-items: center;">
+					<div  style=" margin-left:10px; ">
 						<button  class="btn" type="button" id="btnWrite" name="write"  style="background-color: #FE9191; color: white; width:320px; align-content: center; ">Write</button>
 					</div>
 			</div>
@@ -70,14 +70,14 @@
 	<form name="SearchForm">
 	<table >
 			<tr>
-				<td><select id="searchCondition" name="searchCondition" class="btn btn-outline-warning btn-sm dropdown-toggle" >
+				<td><select id="searchCondition" name="searchCondition" class="btn btn-outline-warning btn-sm dropdown-toggle" style=" margin-left:10px; width:160px;"  >
 						<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
 						<option value="all"<c:out value="${map.searchOption == 'all'?'selected':''}"/>>제목+아이디+제목</option>
 						<option value="m_id"<c:out value="${map.searchOption == 'm_id'?'selected':''}"/>>아이디</option>
 						<option value="ad_content"<c:out value="${map.searchOption == 'ad_content'?'selected':''}"/>>내용</option>
 						<option value="title"<c:out value="${map.searchOption == 'title'?'selected':''}"/>>제목</option>
 				</select></td>
-				<td><input name="keyword" value="${map.keyword}" class="form-control" size="12px;"> </td>
+				<td><input name="keyword" value="${map.keyword}" class="form-control" size="8px;"> </td>
 				<td><button type="submit" class="btn btn-outline-warning btn-sm"
 						style="border-color: #FAF0F0; color: #ffc0cb;">검색</button></td>
 			</tr>
@@ -108,16 +108,16 @@
 						<c:forEach var="row" items="${map.list}">
 								<tr>
 									 <td align="center" width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${row.m_id}</td>
-									 <td align="center" width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${row.ad_city}</td>  
+									 <td align="center" width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${row.ad_city}
+											<!-- ** 댓글이 있으면 게시글 이름 옆에 출력하기 --> 
+												<c:if test="${row.recnt > 0}">
+													<span style="color: red;">(${row.recnt}) </span>
+												</c:if> 
+									 </td>  
 									<%-- <td align="center">${row.m_id}</td> --%>
 									<!-- 게시글 상세보기 페이지로 이동시 게시글 목록페이지에 있는 검색조건, 키워드, 현재페이지 값을 유지하기 위해 -->
 									<td align="center" width="10" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" align="center">
 										<a href="${pageContext.request.contextPath}/board/view?ad_num=${row.ad_num}&curPage=${map.boardPager.curPage}&searchOption=${map.searchOption}&keyword=${map.keyword}">${row.ad_title}
-												
-												<!-- ** 댓글이 있으면 게시글 이름 옆에 출력하기 --> 
-												<c:if test="${row.recnt > 0}">
-													<span style="color: red;">(${row.recnt}) </span>
-												</c:if>
 										</a>
 									</td>
 								<%-- 	<td class="autocut" width="10"style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"align="center">${row.ad_content}<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 --> 
