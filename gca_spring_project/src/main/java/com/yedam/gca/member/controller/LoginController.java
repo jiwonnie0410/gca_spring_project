@@ -220,7 +220,9 @@ public class LoginController {
 			return "/user/member/changePassword";
 		} else { // 성공했을 때
 			model.addAttribute("pwMessage", map.get("message"));
-			return "/user/member/member_view";
+			 // 회원 정보를 model에 저장
+	           model.addAttribute("dto", memberService.viewMember(vo));
+	           return "/user/member/profile";
 		}
 	}
 	

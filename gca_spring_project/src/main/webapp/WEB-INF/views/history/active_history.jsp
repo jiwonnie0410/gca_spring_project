@@ -270,7 +270,7 @@
 					<span id="gender_cd" class="mediumText"></span>
 					<span id="sg_option" class="mediumText"></span>
 					
-					<div id="map-div" style="width: 600px; height: 350px;"></div>					
+<!-- 					<div id="map-div" style="width: 600px; height: 350px;"></div>					 -->
 <!-- 				미현 : 지도 출력 부분 시작 -->
 <!-- 					<input type="hidden" id="map_xy"> -->
 <!-- 					<span id="map" style="position: relative; left:230px; top:-90px;"></span> -->

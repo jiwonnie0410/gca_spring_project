@@ -185,7 +185,7 @@
              			ORDER BY DIS, SG_END_DTTM, S.SG_NUM
              			) A
 					<where>
-					 	<if test="end_dis != null and end_dis != 0">
+					 	<if test="end_dis != null">
 					 		AND LPAD(round(DIS, 3)*1000, 8, '0') || to_char(SG_END_DTTM, 'yyyy/mm/dd hh24:mi')  || LPAD(SG_NUM, 6, '0')
 					 		 <![CDATA[ > ]]> LPAD(round(#{end_dis}, 3)*1000, 8, '0') || to_char(#{end_dttm}, 'yyyy/mm/dd hh24:mi')  || LPAD(#{end_num}, 6, '0') 
 					 	</if>

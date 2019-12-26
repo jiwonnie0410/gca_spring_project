@@ -129,7 +129,7 @@
 			
 					<!-- 챌린지 번호 제일 최근 거 가져오기 -> ChallengeVO(별칭 challenge)의 cl_num 필드에 담은 후 두번째 쿼리에 적용  -->
 					<selectKey order="BEFORE" resultType="int" keyProperty="cl_num">
-							SELECT MAX(CL_NUM)+1
+							SELECT NVL(MAX(CL_NUM), 0) + 1
 							FROM CHALLENGE
 					</selectKey>
 					

@@ -82,37 +82,28 @@ function valid(){
     if(cnt_reval() == false) return; //인원 val값 변경
     age_reval(); //연령대 val값 변경
 	
-    bootbox.confirm({
-	    message: "입력한 내용으로 용병 모집 방을 생성하시겠습니까?",
-	    buttons: {
-	        confirm: {
-	            label: '예',
-	            className: 'btn-info'
-	        },
-	        cancel: {
-	            label: '아니오',
-	            className: 'btn-danger'
-	        }
-	    },
-	    callback: function(con) {
-		    if(con){
-		    	var param = $('#frm').serialize();
-		    	$.ajax({
-		    		url : "creRoom",
-		    		method : "post",
-		    		data : param,
-		    		success : function(result){
-		    			msg = {
-		    					cmd : "groupAlert",
-		    					alert_gnum : result.alert_gnum
-		    			}
-		    			webSocket.send( JSON.stringify( msg ) );
-		    			location.href = 'alreadyIn?six_num='+result.six_num;
-		    		}
-		    	});
-		    }
+    Notiflix.Confirm.Show( 
+		'입력한 내용으로 용병 모집 방을 생성하시겠습니까?'
+		, '생성된 방은 삭제하실 수 없습니다.'
+		, '확인'
+		, '취소'
+		, function() {
+	    	var param = $('#frm').serialize();
+	    	$.ajax({
+	    		url : "creRoom",
+	    		method : "post",
+	    		data : param,
+	    		success : function(result){
+	    			msg = {
+	    					cmd : "groupAlert",
+	    					alert_gnum : result.alert_gnum
+	    			}
+	    			webSocket.send( JSON.stringify( msg ) );
+	    			location.href = 'alreadyIn?six_num='+result.six_num;
+	    		}
+	    	});
 	    }
-    });
+    );
 }
 
 //용병 모집 방 이름 유효성 검사

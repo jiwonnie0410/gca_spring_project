@@ -211,6 +211,7 @@ public class SixmanController {
 	}
 	
 	//선택한 방에 참여2)- 참여되어 있지 않은 방에 참여
+	@ResponseBody
 	@RequestMapping("/sixman/roomIn")
 	public String roomIn(
 			@RequestParam(value="six_num", defaultValue="", required=true) int six_num,
@@ -222,9 +223,7 @@ public class SixmanController {
 		avo.setPk_num(six_num);
 		actService.roomInsert(avo);
 		
-		return "redirect:alreadyIn?six_num="+avo.getSix_num()
-								+ "&first_in=first_in"; //새로 참여하는 경우임을 구분하기 위해 보내는 잉여값. 
-									//alreadyIn에서 다른 처리작업을 할 필요 없이 값이 그대로 넘어감
+		return "true";
 	}
 
 	

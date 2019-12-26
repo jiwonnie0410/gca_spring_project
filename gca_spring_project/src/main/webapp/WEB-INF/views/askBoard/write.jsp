@@ -90,7 +90,7 @@
 			<div class="form-group">
 				<div>
 					<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">내용</label>&nbsp;&nbsp;
-				&nbsp;<textarea name="ad_content" id="ad_content" rows="4" cols="40" placeholder="내용을 입력해주세요" style="border: 1px solid #FE9191;border-radius: 10px;"></textarea></div>
+				&nbsp;<textarea name="ad_content" id="ad_content" rows="4" cols="40" placeholder="내용을 입력해주세요" style="border: 1px solid #FE9191;border-radius: 10px;" wrap="hard"></textarea></div>
 			</div>
 			<div class="form-group">
 				<div align="center">

@@ -65,7 +65,7 @@
 	<div class="modal fade" id="myModal" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="modal-header" style="background-color: #FEBABA; color: white;">
 					문의 사항 작성
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
@@ -80,8 +80,8 @@
 									<input type="hidden" name="qb_id" value="">
 									<div class="form-group">
 										<div>
-											<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">질문 유형</label>&nbsp;&nbsp;
-											 <select name="qb_title" id="qb_title"class="btn btn-outline btn-sm dropdown-toggle" style="border: 1px solid #FE9191; border-radius: 10px;">
+										<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">질문 유형</label>&nbsp;&nbsp;
+											<select name="qb_title" id="qb_title" class="btn btn-outline btn-sm dropdown-toggle">
 												<option id="qn" selected value="질문 유형 선택" disabled>-질문 유형 선택-</option>
 												<option  value="반짝방 문의">반짝방 문의</option>
 												<option value="회원관리 문의">회원관리 문의</option>
@@ -120,7 +120,7 @@
 	<div class="modal fade" id="Modalread" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="modal-header" style="background-color: #FEBABA; color: white;">
 					문의게시판 읽기
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
@@ -128,7 +128,7 @@
 				<div class="modal-footer">
 					<!-- 본인이 쓴 게시물만 수정, 삭제가 가능하도록 처리 -->
 					<button type="button" class="btn " id="btnDel" style="background-color: #FE9191; color: white;">삭제</button>
-					<button type="button" class="btn  id="btnUpdete" style="background-color: #FE9191; color: white;">수정</button>
+					<button type="button" class="btn" id="btnUpdete"  style="background-color: #FE9191; color: white;">수정</button>
 					<button type="button" class="btn" data-dismiss="modal" style="background-color: #FE9191; color: white;">Close</button>
 				</div>
 			</div>
