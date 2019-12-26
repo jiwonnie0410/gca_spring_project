@@ -122,9 +122,10 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 		
 		//채팅
 		else if(svo.getCmd().equals("msg")) {
-			svo.setNick(mvo.getM_nick());
 			msg = (String) message.getPayload();
-			System.out.println("보내는 메세지 : "+msg);
+			mvo.setM_id(svo.getId()); //멤버의 캐릭터,닉네임 등의 정보를 얻기 위한 과정1
+			mvo = sgroupService.getOneMem(mvo); //멤버의 정보를 얻기 위한 과정2
+			svo.setNick(mvo.getM_nick()); //멤버의 닉네임 소켓vo에 담음
 			
 			sendMessage(msg, session, svo);
 		}

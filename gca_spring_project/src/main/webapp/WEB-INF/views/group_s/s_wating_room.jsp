@@ -770,8 +770,7 @@
 			cmd : "msg",
 			id : "${id}",
 			msg : inputMessage.value,
-			sg_num : sg_num,
-			nick : "${nick}"
+			sg_num : sg_num
 		}
 		if((inputMessage.value != "")){
 			webSocket.send(  JSON.stringify( msg )   ); 
