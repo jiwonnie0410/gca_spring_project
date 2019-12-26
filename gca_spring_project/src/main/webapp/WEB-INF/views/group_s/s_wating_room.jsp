@@ -108,6 +108,9 @@
 		border-radius: 7px;
 		border-collapse: separate;
 	}
+	table#profile-table th{
+		color: #FE9191;
+	}
 	
 	#map img {
 		max-width: none;
@@ -119,6 +122,7 @@
 
 <!-- 로그인한사람의 id,닉네임,캐릭터코드 저장 -->
 <sec:authentication property="principal.username" var="id"/>
+<sec:authentication property="principal.m_nick" var="nick"/>
 
 <!-- 카카오톡 -->		
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -515,9 +519,6 @@
 				
 			<a class="ftco-animate" href="javascript:toSNS('line','gca','https://39.116.34.40:8443/gca/')" title="라인으로 가져가기">
 			<span style="color:pink"><i class="fab fa-line  fa-2x"></i></span></a></li>
-				
-			<a class="ftco-animate" href="javascript:shareKakaotalk();"title="카카오톡으로 가져가기">
-			<span style="color:pink"><i class="fab fa-korvue  fa-2x"></i></span></a>
 		</div>
     </div>
 <!-- 버튼영역 끝 -->
@@ -810,14 +811,14 @@
 	
 //채팅내역 insert --웹소켓 아님 아작스임--
 	function insertChat(){
-		var usrId = "${id}";
+		var usrNick = "${nick}";
 		//채팅메세지
 		var message = document.getElementById('inputMessage').value;
 		var sg_num = ${sgroup.sg_num};
 		
 		//아작스 전송용 파라미터
 		var param = JSON.stringify(
-				{"m_id" : usrId, "sg_num" : sg_num, "chh_content" : message}
+				{"m_id" : usrNick, "sg_num" : sg_num, "chh_content" : message}
 		);
 		
 		//채팅 히스토리 테이블에 저장
