@@ -15,6 +15,7 @@
 								CHH_CONTENT,
 								CHH_DTTM,
 								CHH_NUM,
+								M_ID,
 								M_NICK           
 						<choose>
 							<when test="sg_num != null and sg_num != ''">
@@ -35,6 +36,7 @@
 								#{chh_content},
 								sysdate,
 								#{chh_num},
+								#{m_id},
 								#{m_nick}
 						<choose>
 							<when test="sg_num != null and sg_num != ''">
