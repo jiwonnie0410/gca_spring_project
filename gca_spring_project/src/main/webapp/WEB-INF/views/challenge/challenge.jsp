@@ -75,8 +75,8 @@
 }
 
 #title {
-    color: #FE9191;
-	text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+	color: #3f3f3f;
+    text-shadow: 1px 1px 1px #A3C4D1;
 }
 
 
@@ -93,6 +93,7 @@
 	        <div class="tab" id="tab">
 		        <span id="title"><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;챌린지 목록</h4></span>	
 	            <ul class="nav nav-pills">
+	              &nbsp;&nbsp;
 	              <!-- 기본 챌린지 탭-->
 	              <li class="nav-item">
 	                <a class="nav-link active" data-toggle="tab" href="#basicChallenges">기본 챌린지</a>
