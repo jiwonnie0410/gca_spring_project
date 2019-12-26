@@ -122,6 +122,7 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 		
 		//채팅
 		else if(svo.getCmd().equals("msg")) {
+			svo.setNick(mvo.getM_nick());
 			msg = (String) message.getPayload();
 			System.out.println("보내는 메세지 : "+msg);
 			
