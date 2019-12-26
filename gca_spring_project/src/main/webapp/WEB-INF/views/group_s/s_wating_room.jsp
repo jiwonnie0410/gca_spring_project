@@ -821,7 +821,7 @@
 		
 		//아작스 전송용 파라미터
 		var param = JSON.stringify(
-				{"m_nick" : usrNick, "sg_num" : sg_num, "chh_content" : message}
+				{"m_id" : usrNick, "sg_num" : sg_num, "chh_content" : message}
 		);
 		
 		//채팅 히스토리 테이블에 저장
