@@ -519,9 +519,6 @@
 				
 			<a class="ftco-animate" href="javascript:toSNS('line','gca','https://39.116.34.40:8443/gca/')" title="라인으로 가져가기">
 			<span style="color:pink"><i class="fab fa-line  fa-2x"></i></span></a></li>
-				
-			<a class="ftco-animate" href="javascript:shareKakaotalk();"title="카카오톡으로 가져가기">
-			<span style="color:pink"><i class="fab fa-korvue  fa-2x"></i></span></a>
 		</div>
     </div>
 <!-- 버튼영역 끝 -->
