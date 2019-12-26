@@ -743,7 +743,7 @@
 		 	
 		}
 		else if( result.cmd == "msg" && ( sg_num == result.sg_num )) { //메세지 전송하는 경우
-			textarea.value += result.nick + " : " + result.msg + "\n";
+			textarea.value += result.nick + "  :  " + result.msg + "\n";
 		}
 		else if( result.cmd == "cancelJoin" && ( sg_num == result.sg_num )) { //참가취소 누르고 웹소켓 거쳐왔을때.
 			var person = result.id;
@@ -770,8 +770,7 @@
 			cmd : "msg",
 			id : "${id}",
 			msg : inputMessage.value,
-			sg_num : sg_num,
-			nick : "${nick}"
+			sg_num : sg_num
 		}
 		if((inputMessage.value != "")){
 			webSocket.send(  JSON.stringify( msg )   ); 
