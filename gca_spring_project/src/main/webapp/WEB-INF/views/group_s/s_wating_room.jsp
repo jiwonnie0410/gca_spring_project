@@ -211,7 +211,7 @@
 			var chatList = ${chatlist} ;
 			var textarea = document.getElementById('messageWindow');
 			for(var i = 0; i< chatList.length; i++){
-				textarea.value += chatList[i].m_id + "  :  " + chatList[i].chh_content + "\n";
+				textarea.value += chatList[i].m_nick + "  :  " + chatList[i].chh_content + "\n";
 			}
 			
 			//채팅 전송버튼 눌렀을때
