@@ -33,7 +33,6 @@ function showPosition(position) {
 		cert_y: position.coords.longitude,
 		sg_num: sg_num_search
 	}
-	console.log(cert_x  + ", " + cert_y ) ;
 	$.ajax({
 		url: "sgCert",
 		method: "POST",
