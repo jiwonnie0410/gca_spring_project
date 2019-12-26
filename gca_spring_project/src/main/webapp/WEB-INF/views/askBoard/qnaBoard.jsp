@@ -55,7 +55,7 @@
 		</table>
 		<button id="write" class="btn " type="button" data-toggle="modal"
 			data-target="#myModal"
-			style="background-color: #FE9191; color: white;">Write</button>
+			style="background-color: #FE9191; color: white;align-items: center;" >Write</button>
 	</div>
 	<!------------------------------------------------------- 목록  끝 ----------------------------------->
 
@@ -80,7 +80,7 @@
 									<input type="hidden" name="qb_id" value="">
 									<div class="form-group">
 										<div>
-										<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">질문 유형</label>&nbsp;&nbsp;
+										<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">질문 유형</label>
 											<select name="qb_title" id="qb_title" class="btn btn-outline btn-sm dropdown-toggle">
 												<option id="qn" selected value="질문 유형 선택" disabled>-질문 유형 선택-</option>
 												<option  value="반짝방 문의">반짝방 문의</option>
@@ -90,8 +90,8 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<div>
 											<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;" >내용</label>&nbsp;&nbsp;
+										<div>
 											<textarea cols="40" rows="10" name="qb_content" id="qb_content" placeholder="내용을 입력해주세요" style="border: 1px solid #FE9191;"></textarea>
 										</div>
 									</div>
