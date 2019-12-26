@@ -35,7 +35,7 @@
 								#{chh_content},
 								sysdate,
 								#{chh_num},
-								#{m_nick}
+								#{m_id}
 						<choose>
 							<when test="sg_num != null and sg_num != ''">
 								,
