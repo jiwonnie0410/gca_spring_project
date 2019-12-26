@@ -14,4 +14,5 @@ public class ChatHistVO {
 	private int bg_num;						// 동아리매치일경우 매치방번호
 	private int six_num;					// 용병일경우 용병방번호
 	private String m_id;					// 채팅 보낸 회원 ID
+	private String m_nick;				// 채팅한 회원의 닉네임
 }

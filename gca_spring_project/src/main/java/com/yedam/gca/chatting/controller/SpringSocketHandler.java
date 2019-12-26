@@ -122,6 +122,7 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 		
 		//채팅
 		else if(svo.getCmd().equals("msg")) {
+			svo.setNick(mvo.getM_nick());
 			msg = (String) message.getPayload();
 			System.out.println("보내는 메세지 : "+msg);
 			
@@ -251,7 +252,6 @@ public class SpringSocketHandler extends TextWebSocketHandler implements Initial
 		for (WebSocketSession session : this.sessionSet) {
 			if (session.isOpen()) {
 				try {
-					//{"cmd":"join","id":"test","msg":"<test님이 참가하셨습니다.>","character":"foreigner","nick":"개발왕"}
 						String message = "{\"cmd\":\"join\", \"id\":\""+vo.getId()+"\", \"msg\":\""+vo.getMsg()+"\","
 								+ "\"character\":\""+vo.getCharacter()+"\", \"nick\":\""+vo.getNick()+"\"}";
 						

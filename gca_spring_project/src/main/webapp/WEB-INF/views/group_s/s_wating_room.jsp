@@ -211,7 +211,7 @@
 			var chatList = ${chatlist} ;
 			var textarea = document.getElementById('messageWindow');
 			for(var i = 0; i< chatList.length; i++){
-				textarea.value += chatList[i].m_id + "  :  " + chatList[i].chh_content + "\n";
+				textarea.value += chatList[i].m_nick + "  :  " + chatList[i].chh_content + "\n";
 			}
 			
 			//채팅 전송버튼 눌렀을때
@@ -519,9 +519,6 @@
 				
 			<a class="ftco-animate" href="javascript:toSNS('line','gca','https://39.116.34.40:8443/gca/')" title="라인으로 가져가기">
 			<span style="color:pink"><i class="fab fa-line  fa-2x"></i></span></a></li>
-				
-			<a class="ftco-animate" href="javascript:shareKakaotalk();"title="카카오톡으로 가져가기">
-			<span style="color:pink"><i class="fab fa-korvue  fa-2x"></i></span></a>
 		</div>
     </div>
 <!-- 버튼영역 끝 -->
@@ -746,7 +743,7 @@
 		 	
 		}
 		else if( result.cmd == "msg" && ( sg_num == result.sg_num )) { //메세지 전송하는 경우
-			textarea.value += result.id + " : " + result.msg + "\n";
+			textarea.value += result.nick + " : " + result.msg + "\n";
 		}
 		else if( result.cmd == "cancelJoin" && ( sg_num == result.sg_num )) { //참가취소 누르고 웹소켓 거쳐왔을때.
 			var person = result.id;
@@ -773,7 +770,8 @@
 			cmd : "msg",
 			id : "${id}",
 			msg : inputMessage.value,
-			sg_num : sg_num
+			sg_num : sg_num,
+			nick : "${nick}"
 		}
 		if((inputMessage.value != "")){
 			webSocket.send(  JSON.stringify( msg )   ); 
@@ -814,6 +812,7 @@
 	
 //채팅내역 insert --웹소켓 아님 아작스임--
 	function insertChat(){
+		var usrId = "${id}";
 		var usrNick = "${nick}";
 		//채팅메세지
 		var message = document.getElementById('inputMessage').value;
@@ -821,7 +820,7 @@
 		
 		//아작스 전송용 파라미터
 		var param = JSON.stringify(
-				{"m_nick" : usrNick, "sg_num" : sg_num, "chh_content" : message}
+				{"m_id": usrId, "m_nick" : usrNick, "sg_num" : sg_num, "chh_content" : message}
 		);
 		
 		//채팅 히스토리 테이블에 저장
