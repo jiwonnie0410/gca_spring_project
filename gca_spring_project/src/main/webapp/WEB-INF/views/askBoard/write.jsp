@@ -3,18 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!--json할때 필요  -->
 <script src="${pageContext.request.contextPath }/resources/js/json.min.js"></script>
 
@@ -90,7 +78,7 @@
 			<div class="form-group">
 				<div>
 					<label  style="background-color: #FE9191; color: white;  border-radius: 10px; width:100px; text-align: center;">내용</label>&nbsp;&nbsp;
-				&nbsp;<textarea name="ad_content" id="ad_content" rows="4" cols="40" placeholder="내용을 입력해주세요" style="border: 1px solid #FE9191;border-radius: 10px;" wrap="hard"></textarea></div>
+				&nbsp;<textarea name="ad_content" id="ad_content" rows="4" cols="40" placeholder="내용을 입력해주세요" style="border: 1px solid #FE9191;border-radius: 10px; word-break:break-all;'"></textarea></div>
 			</div>
 			<div class="form-group">
 				<div align="center">

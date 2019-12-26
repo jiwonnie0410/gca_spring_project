@@ -72,7 +72,10 @@ function getBoardListHandler(datas) {
 						"data", datas[i].bno);
 	}// for
 	$("#userlisttb").dataTable({"scrollY": "300px",   
-        "paging": false})
+        "paging": false,
+		"bDestroy": true
+		
+	})
 }// getBoardListHandler
                     
   
@@ -92,7 +95,7 @@ function insertBoard() {
 				contentType:"application/json",
 				success:	insertBoardtHandler,
 				error: function() {
-					alert("오류");    
+					alert("내용을 모두 입력하세요");    
 				}
 			});	//ajax	
 			

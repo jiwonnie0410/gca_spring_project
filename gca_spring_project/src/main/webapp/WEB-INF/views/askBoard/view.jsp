@@ -366,7 +366,7 @@ textarea.textarea_size{ min-height: 50px; }
 						<c:otherwise>
 							<div class="form-group">
 									<label style="background-color: #FE9191; color: white; border-radius: 10px; width: 100px; text-align: center;">동호회 소개</label> 
-								<div style="white-space:pre;">
+								<div >
 									<br>${dto.ad_content}
 								</div>
 							</div>
