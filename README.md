@@ -50,7 +50,7 @@ GitHub
 
 ### 4. 주요기능
 
-<img width="80%" src="https://user-images.githubusercontent.com/53467957/72685128-5ccfaa00-3b2a-11ea-9e0c-862ce05f2ea0.jpg"
+<img width="80%" src="https://user-images.githubusercontent.com/53467957/72685128-5ccfaa00-3b2a-11ea-9e0c-862ce05f2ea0.jpg">
 
 #### 반짝모임
 
