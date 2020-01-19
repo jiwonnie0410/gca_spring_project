@@ -54,11 +54,16 @@ GitHub
 #### 반짝모임
 <img width="80%" src="https://user-images.githubusercontent.com/53467957/72685128-5ccfaa00-3b2a-11ea-9e0c-862ce05f2ea0.jpg">
 
+#### 동호회매치 & 용병소개
+<img width="80%" src="https://user-images.githubusercontent.com/53467957/72685333-8f7aa200-3b2c-11ea-8be3-99208a7acd16.jpg">
 
 
 #### 웹소켓 채팅/참가자 신고&강퇴
 <img width="80%" src="https://user-images.githubusercontent.com/53467957/72685129-5d684080-3b2a-11ea-8ce3-ac4dff56128f.jpg">
 
+
+#### SNS 공유
+<img width="80%" src="https://user-images.githubusercontent.com/53467957/72685334-90133880-3b2c-11ea-851c-d2be442223ee.jpg">
 
 
 #### 챌린지
