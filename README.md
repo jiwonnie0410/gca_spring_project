@@ -50,28 +50,30 @@ GitHub
 
 ### 4. 주요기능
 
-<img width="80%" src="https://user-images.githubusercontent.com/53467957/72685128-5ccfaa00-3b2a-11ea-9e0c-862ce05f2ea0.jpg">
 
 #### 반짝모임
+<img width="80%" src="https://user-images.githubusercontent.com/53467957/72685128-5ccfaa00-3b2a-11ea-9e0c-862ce05f2ea0.jpg">
 
-
-<img width="80%" src="https://user-images.githubusercontent.com/53467957/72685129-5d684080-3b2a-11ea-8ce3-ac4dff56128f.jpg">
 
 
 #### 웹소켓 채팅/참가자 신고&강퇴
+<img width="80%" src="https://user-images.githubusercontent.com/53467957/72685129-5d684080-3b2a-11ea-8ce3-ac4dff56128f.jpg">
 
-<img width="80%" src="https://user-images.githubusercontent.com/53467957/72685130-5d684080-3b2a-11ea-9eda-32f36a2763b4.jpg">
+
 
 #### 챌린지
+<img width="80%" src="https://user-images.githubusercontent.com/53467957/72685130-5d684080-3b2a-11ea-9eda-32f36a2763b4.jpg">
 
-<img width="80%" src="https://user-images.githubusercontent.com/53467957/72685180-cc459980-3b2a-11ea-93e8-fd4dcf708f8b.jpg">
 
 #### 홍보게시판 & 문의게시판
+<img width="80%" src="https://user-images.githubusercontent.com/53467957/72685180-cc459980-3b2a-11ea-93e8-fd4dcf708f8b.jpg">
 
-<img width="80%" src="https://user-images.githubusercontent.com/53467957/72685181-cc459980-3b2a-11ea-9425-3fb1f2978319.jpg">
+
 
 #### 랭킹 & 사용자 히스토리
+<img width="80%" src="https://user-images.githubusercontent.com/53467957/72685181-cc459980-3b2a-11ea-9425-3fb1f2978319.jpg">
 
-<img width="80%" src="https://user-images.githubusercontent.com/53467957/72685131-5d684080-3b2a-11ea-8daf-3d25a58bfb63.jpg">
 
 #### 관리자페이지
+<img width="80%" src="https://user-images.githubusercontent.com/53467957/72685131-5d684080-3b2a-11ea-8daf-3d25a58bfb63.jpg">
+
