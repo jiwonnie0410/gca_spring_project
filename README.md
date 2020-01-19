@@ -22,18 +22,12 @@
 ### 3. 개발환경
 본 프로젝트는 스프링 프레임워크를 기반으로 개발하였다. 이에 MVC 패턴을 적용해 모델-화면-컨트롤러를 분리함으로써 코드의 표준화를 도모하였으며 개발시간을 단축하고 유지보수성을 높였다.
 
-#### 개발언어
-BootStrap4, HTML5, Java, JavaScript, jQuery, Ajax, CSS, Srping Framework    
-#### 데이터베이스
-Oracle Database Express Edition 11g Release 2   
-#### IDE
-Eclipse, SQL Developer   
-#### 빌드배포
-Maven, Jenkins   
-#### 테스트 툴
-JUnit, PMD, JMeter   
-#### 형상관리
-GitHub   
+#### [개발언어] BootStrap4, HTML5, Java, JavaScript, jQuery, Ajax, CSS, Srping Framework    
+#### [데이터베이스] Oracle Database Express Edition 11g Release 2   
+#### [IDE] Eclipse, SQL Developer   
+#### [빌드배포] Maven, Jenkins   
+#### [테스트 툴] JUnit, PMD, JMeter   
+#### [형상관리] GitHub   
 
 #### 사용 API
 - Spring Security (https://docs.spring.io/spring-security/site/docs/4.2.12.RELEASE/apidocs/)
