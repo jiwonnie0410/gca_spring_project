@@ -5,8 +5,8 @@
 
 ### [운동하자! 프로젝트 프레젠테이션 링크](https://docs.google.com/presentation/d/1wPR49DZsjyABSsNXX6CgvJAKD5Y-J1yEbhUZS3tzRWQ/edit?usp=sharing)
 
-팀명 : GCA (Girls Can do Anything)   
-팀원 : 박지원, 복진영, 이수림, 전은영, 최미현
+#### GCA (Girls Can do Anything)   
+#### 박지원, 복진영, 이수림, 전은영, 최미현
 
 ### 1. 개발 개요 및 동기
 　운동은 건강한 삶을 영위하기 위해 꼭 필요한 행위이지만 현대인에게 <b>운동 부족</b>은 하나의 고질병으로 자리 잡고 있어 비만, 허리디스크 등 운동 부족으로 인한 다양한 질병에 노출되고 있다. 이는 개발 팀원들을 비롯하여 6개월 간 아침부터 저녁까지 앉아서 수업을 듣는 같은 학원의 학생들에게도 적용되는 이야기이다.    
