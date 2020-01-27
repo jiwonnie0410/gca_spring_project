@@ -24,17 +24,26 @@ public class ScheduleController {
 	
 	
 	/************* 수림 ******************
-	 * 1. 부트페이 서버 전송용 토큰 갱신 (매일 am 0:05) - 토큰 생성 후 30분 이후 소멸
-	 * 2. 부분환불처리 (매일 am 0:05)
-	 * 		2-1  부분환불정보 부트페이 서버로 전송 
-	 * 		2-2  부분환불 완료시 해당 정보 Money 테이블에 업데이트
-	 * 3. 전액환불처리 (매일 am 0:10)
-	 * 		3-1 전액환불정보 부트페이 서버로 전송 
-	 * 		3-2 전액환불 완료시 해당 정보 Money 테이블에 업데이트
+	 * 1. 사용자 실패한 챌린지 상태 '실패'로 변경; 성공은 인증시 디비단에서 적용 (매일 an 0:00) - 2020.01.27 추가
+	 * 
+	 * 2. 부트페이 서버 전송용 토큰 갱신 (매일 am 0:05) - 토큰 생성 후 30분 이후 소멸
+	 * 		2-1. 부트페이 서버 인증용 토큰 받기
+	 * 3. 부분환불처리 (매일 am 0:05)
+	 * 		3-1  부분환불정보 부트페이 서버로 전송 
+	 * 		3-2  부분환불 완료시 해당 정보 Money 테이블에 업데이트
+	 * 4. 전액환불처리 (매일 am 0:10)
+	 * 		4-1 전액환불정보 부트페이 서버로 전송 
+	 * 		4-2 전액환불 완료시 해당 정보 Money 테이블에 업데이트
 	 * 
 	 */
 	
-	// 1. 부트페이 서버 전송용 토큰 갱신 (매일 am 0:05) - 토큰 생성 후 30분 후 소멸
+	// 1. 사용자 실패한 챌린지 상태 '실패'로 변경 (성공은 인증시 디비단에서 적용)
+	@Scheduled(cron = "0 0 0 * * * ")
+	public void updateFailChallengeStatus() {
+		service.updateFailChallengeStatus();
+	}
+	
+	// 2. 부트페이 서버 전송용 토큰 갱신 (매일 am 0:05) - 토큰 생성 후 30분 후 소멸
 	@Scheduled(cron = "0 5 0 * * * ")
 	public void bootpay() throws InterruptedException {
 	Map<String, String> bootpay = service.getBootpayInfo();
@@ -57,7 +66,7 @@ public class ScheduleController {
 	 	fullRefund();				// 3. 전액환불처리 (am 0:10)
 	}
 	
-	// 1-1. 부트페이 서버 인증용 토큰 받기
+	// 2-1. 부트페이 서버 인증용 토큰 받기
 	public void getToken() {
 		
         try {
@@ -68,13 +77,13 @@ public class ScheduleController {
 	}
 	
 	
-	/* 2. 부분환불 진행  
+	/* 3. 부분환불 진행  
 	 * 
 	 * 스페셜챌린지 실패한 사용자의 경우 <마감기간 익일> 전체 결제금액의 일부를 부분환불 받는다 
 	 * 부분환불은 마감기간 익일 진행 (디폴트 am 0:05)
 	 * 환불완료시, Money 테이블에 부분환불완료 정보 업데이트
 	 */
-	// 2-1 부분환불정보 부트페이 서버로 전송 (매일 am 0:05)
+	// 3-1 부분환불정보 부트페이 서버로 전송 (매일 am 0:05)
 	public void partialRefund() {
 		
 		List<Map<String, Object>> receipt = service.getPartialRefundList();		
@@ -102,15 +111,13 @@ public class ScheduleController {
 		}//
 	}
 
-	// 2-2 부분환불 완료시 해당 정보 Money 테이블에 업데이트
+	// 3-2 부분환불 완료시 해당 정보 Money 테이블에 업데이트
 	public void updatePartialRefundList() {
 		service.updatePartialRefundList();
-		System.out.println("==========================");
-		System.out.println("부분환불정보 디비저장!");
 	}
 
 	
-	/* 3. 전액환불 진행  
+	/* 4. 전액환불 진행  
 	 * 
 	 * 스페셜챌린지 성공한 사용자는 <성공 익일> 참가금을 전액환불 받는다
 	 * 부분환불은 마감기간 익일 진행 (디폴트 am 0:10)
@@ -118,7 +125,7 @@ public class ScheduleController {
 	 */
 	
 	
-	// 3-1 전액환불정보 부트페이 서버로 전송 (매일 am 0:10)
+	// 4-1 전액환불정보 부트페이 서버로 전송 (매일 am 0:10)
 	public void fullRefund() {
 		
 		List<Map<String, Object>> receipt = service.getFullRefundList();		
@@ -144,10 +151,8 @@ public class ScheduleController {
 		}//
 	}
 	
-	//3-2 전액환불 완료시 해당 정보 Money 테이블에 업데이트
+	//4-2 전액환불 완료시 해당 정보 Money 테이블에 업데이트
 	public void updateFullRefundList() {
 		service.updateFullRefundList();
-		System.out.println("==========================");
-		System.out.println("전체환불정보 디비저장!");
 	}
 }

@@ -236,4 +236,10 @@ public class AdminServiceImpl implements AdminService {
 	public Map<String, String> getBootpayInfo() {
 		return dao.getBootpayInfo();
 	}
+	
+	// 2020.01.27 추가
+	// 6. 사용자 실패한 챌린지 상태 '실패'로 변경 (성공은 인증시 디비단에서 적용)
+	public void updateFailChallengeStatus() {
+		dao.updateFailChallengeStatus();
+	}
 }

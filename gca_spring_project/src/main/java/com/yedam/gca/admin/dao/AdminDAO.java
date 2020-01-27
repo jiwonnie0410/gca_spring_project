@@ -226,6 +226,9 @@ public class AdminDAO {
 	 *	3. 전액환불용 고유번호 리스트 조회
 	 *	4. 전액환불 완료 후 환불정보를 Money 테이블에 업데이트
 	 *	5. 부트페이 App Id, Private key 조회
+	 *
+	 * 2020.01.27 추가
+	 *  6. 사용자 실패한 챌린지 상태 '실패'로 변경 (성공은 인증시 디비단에서 적용)
 	 * 
 	 */
 	
@@ -250,6 +253,11 @@ public class AdminDAO {
 	// 5. 부트페이 App Id, Private key 조회
 	public Map<String, String> getBootpayInfo() {
 		return mybatis.selectOne("AdminDAO.getBootpayInfo");
+	}
+	
+	// 6. 사용자 실패한 챌린지 상태 '실패'로 변경 (성공은 인증시 디비단에서 적용)
+	public void updateFailChallengeStatus() {
+		mybatis.update("AdminDAO.updateFailChallengeStatus");
 	}
 }
 
