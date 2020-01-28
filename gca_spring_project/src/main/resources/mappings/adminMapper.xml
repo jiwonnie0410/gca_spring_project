@@ -430,7 +430,7 @@
 	<update id="updateFailChallengeStatus">
 	<![CDATA[ 
 		UPDATE		V_CHALLENGE_HIST_STATUS
-		SET 		CLH_STATUS_CD = 'c03'
+		SET 		CLH_STATUS_CD = 'C03'
 		WHERE 		CL_END_DTTM <= SYSDATE
 		AND 		CL_CNT > CLH_CNT;
 	]]>
