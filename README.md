@@ -1,4 +1,4 @@
-# 운동하자! : 우리동네 운동 메이트 매치 
+## 운동하자! :: 우리동네 운동 메이트 매치 서비스
 <div>
 <img width="80%" src="https://user-images.githubusercontent.com/53467957/72684996-e1212d80-3b28-11ea-951e-22fc55f066b9.jpg">
 </div>
